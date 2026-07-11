@@ -65,6 +65,15 @@
       if (target) target.textContent = msg.text;
     });
 
+    // Set a single inline style property, optionally on a descendant. Used by
+    // update_shad_progress (no bound instance) to move the indicator bar.
+    Shiny.addCustomMessageHandler("shadshiny:style", function (msg) {
+      var el = document.getElementById(msg.id);
+      if (!el) { console.warn("[shadshiny] style: no element", msg.id); return; }
+      var target = msg.selector ? el.querySelector(msg.selector) : el;
+      if (target && msg.prop) target.style.setProperty(msg.prop, msg.value);
+    });
+
     Shiny.addCustomMessageHandler("shadshiny:theme", function (msg) {
       var root = document.documentElement;
       if (typeof msg.preset !== "undefined" && msg.preset !== null) {
