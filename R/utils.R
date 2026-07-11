@@ -97,7 +97,8 @@ normalize_choices <- function(choices) {
   labs <- names(choices)
   if (is.null(labs)) labs <- as.character(vals)
   labs[!nzchar(labs)] <- as.character(vals[!nzchar(labs)])
-  Map(function(v, l) list(value = as.character(v), label = l), vals, labs)
+  mapply(function(v, l) list(value = as.character(v), label = l), vals, labs,
+         SIMPLIFY = FALSE, USE.NAMES = FALSE)
 }
 
 #' TRUE if a value looks like an htmltools tag / tagList

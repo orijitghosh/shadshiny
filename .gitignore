@@ -16,6 +16,9 @@ tests/testthat/apps/**/tests/testthat/_snaps/**/*-actual*
 *.Rcheck/
 *.tar.gz
 
+# scratch / build output
+scratch_out.txt
+
 # OS
 .DS_Store
 Thumbs.db
