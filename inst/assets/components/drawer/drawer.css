@@ -1,0 +1,64 @@
+/* FILE: inst/assets/components/drawer/drawer.css */
+/* shadshiny — drawer (bottom, drag-to-dismiss). Vaul-style. */
+
+.shad-drawer__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background-color: var(--shad-overlay);
+}
+.shad-drawer__content {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 1201;
+  display: flex;
+  flex-direction: column;
+  gap: var(--shad-space-4);
+  max-height: 90dvh;
+  border-top: 1px solid var(--shad-border);
+  border-top-left-radius: var(--shad-radius-xl);
+  border-top-right-radius: var(--shad-radius-xl);
+  background-color: var(--shad-background);
+  color: var(--shad-foreground);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  padding: var(--shad-space-4) var(--shad-space-6) var(--shad-space-6);
+  touch-action: none; /* pointer drag owns vertical gestures on the panel */
+}
+/* while dragging, JS sets data-dragging and inline transform; no transition */
+.shad-drawer__content[data-dragging] { transition: none; }
+/* spring-back after a cancelled drag */
+.shad-drawer__content:not([data-dragging]) {
+  transition: transform var(--shad-duration-slow) var(--shad-ease-out);
+}
+.shad-drawer__handle {
+  width: 100px;
+  height: 8px;
+  margin: 0 auto var(--shad-space-2);
+  border-radius: var(--shad-radius-full);
+  background-color: var(--shad-muted);
+  flex-shrink: 0;
+  cursor: grab;
+}
+.shad-drawer__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--shad-space-2);
+  text-align: center;
+}
+.shad-drawer__title {
+  font-size: var(--shad-text-lg);
+  font-weight: var(--shad-font-weight-semibold);
+}
+.shad-drawer__description {
+  color: var(--shad-muted-foreground);
+  font-size: var(--shad-text-sm);
+}
+.shad-drawer__footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--shad-space-2);
+}
+.shad-drawer__body { overflow-y: auto; }

@@ -1,0 +1,19 @@
+<!-- FILE: inst/assets/components/popover/popover.html -->
+<div data-shad="popover" data-side="bottom" data-align="center" style="display:inline-block">
+  <button type="button" class="shad-btn shad-btn--outline shad-popover__trigger">Open popover</button>
+  <div class="shad-popover__content shad-anim-pop" hidden>
+    <div class="shad-popover__arrow" aria-hidden="true"></div>
+    <div style="display:grid;gap:1rem">
+      <div style="display:grid;gap:0.375rem">
+        <div class="shad-large" style="font-size:var(--shad-text-sm)">Dimensions</div>
+        <div class="shad-muted">Set the dimensions for the layer.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 2fr;align-items:center;gap:0.5rem">
+        <label class="shad-label" for="pop-w">Width</label>
+        <input class="shad-input shad-input--sm" id="pop-w" type="text" value="100%" data-shad-autofocus />
+        <label class="shad-label" for="pop-h">Height</label>
+        <input class="shad-input shad-input--sm" id="pop-h" type="text" value="25px" />
+      </div>
+    </div>
+  </div>
+</div>

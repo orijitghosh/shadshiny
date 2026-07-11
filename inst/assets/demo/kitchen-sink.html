@@ -1,0 +1,1689 @@
+<!-- FILE: inst/assets/demo/kitchen-sink.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — kitchen sink</title>
+<link rel="stylesheet" href="../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../core/shad-base.css">
+<link rel="stylesheet" href="../core/shad-animations.css">
+  <link rel="stylesheet" href="../components/accordion/accordion.css">
+  <link rel="stylesheet" href="../components/alert/alert.css">
+  <link rel="stylesheet" href="../components/alert-dialog/alert-dialog.css">
+  <link rel="stylesheet" href="../components/aspect-ratio/aspect-ratio.css">
+  <link rel="stylesheet" href="../components/avatar/avatar.css">
+  <link rel="stylesheet" href="../components/badge/badge.css">
+  <link rel="stylesheet" href="../components/breadcrumb/breadcrumb.css">
+  <link rel="stylesheet" href="../components/button/button.css">
+  <link rel="stylesheet" href="../components/calendar/calendar.css">
+  <link rel="stylesheet" href="../components/card/card.css">
+  <link rel="stylesheet" href="../components/carousel/carousel.css">
+  <link rel="stylesheet" href="../components/checkbox/checkbox.css">
+  <link rel="stylesheet" href="../components/collapsible/collapsible.css">
+  <link rel="stylesheet" href="../components/combobox/combobox.css">
+  <link rel="stylesheet" href="../components/command/command.css">
+  <link rel="stylesheet" href="../components/context-menu/context-menu.css">
+  <link rel="stylesheet" href="../components/date-picker/date-picker.css">
+  <link rel="stylesheet" href="../components/dialog/dialog.css">
+  <link rel="stylesheet" href="../components/drawer/drawer.css">
+  <link rel="stylesheet" href="../components/dropdown-menu/dropdown-menu.css">
+  <link rel="stylesheet" href="../components/form-field/form-field.css">
+  <link rel="stylesheet" href="../components/hover-card/hover-card.css">
+  <link rel="stylesheet" href="../components/input/input.css">
+  <link rel="stylesheet" href="../components/input-otp/input-otp.css">
+  <link rel="stylesheet" href="../components/label/label.css">
+  <link rel="stylesheet" href="../components/menubar/menubar.css">
+  <link rel="stylesheet" href="../components/navigation-menu/navigation-menu.css">
+  <link rel="stylesheet" href="../components/pagination/pagination.css">
+  <link rel="stylesheet" href="../components/popover/popover.css">
+  <link rel="stylesheet" href="../components/progress/progress.css">
+  <link rel="stylesheet" href="../components/radio-group/radio-group.css">
+  <link rel="stylesheet" href="../components/resizable/resizable.css">
+  <link rel="stylesheet" href="../components/scroll-area/scroll-area.css">
+  <link rel="stylesheet" href="../components/select/select.css">
+  <link rel="stylesheet" href="../components/separator/separator.css">
+  <link rel="stylesheet" href="../components/sheet/sheet.css">
+  <link rel="stylesheet" href="../components/sidebar/sidebar.css">
+  <link rel="stylesheet" href="../components/skeleton/skeleton.css">
+  <link rel="stylesheet" href="../components/slider/slider.css">
+  <link rel="stylesheet" href="../components/spinner/spinner.css">
+  <link rel="stylesheet" href="../components/switch/switch.css">
+  <link rel="stylesheet" href="../components/table/table.css">
+  <link rel="stylesheet" href="../components/tabs/tabs.css">
+  <link rel="stylesheet" href="../components/textarea/textarea.css">
+  <link rel="stylesheet" href="../components/toast/toast.css">
+  <link rel="stylesheet" href="../components/toggle/toggle.css">
+  <link rel="stylesheet" href="../components/toggle-group/toggle-group.css">
+  <link rel="stylesheet" href="../components/tooltip/tooltip.css">
+  <link rel="stylesheet" href="../components/typography/typography.css">
+</head>
+<body class="shad-scope">
+<div id="theme-root" style="min-height:100vh;background:var(--shad-background);color:var(--shad-foreground)">
+  <header style="position:sticky;top:0;z-index:1100;display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1.5rem;border-bottom:1px solid var(--shad-border);background:color-mix(in oklab, var(--shad-background) 90%, transparent);backdrop-filter:blur(8px)">
+    <span style="font-weight:var(--shad-font-weight-semibold);font-size:var(--shad-text-sm)">shadshiny</span>
+    <span class="shad-muted">kitchen sink — visual acceptance test</span>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:0.5rem">
+      <label class="shad-label" for="preset">Theme</label>
+      <select id="preset" class="shad-input shad-input--sm" style="width:auto"
+        onchange="document.getElementById('theme-root').setAttribute('data-shad-theme', this.value); if(!this.value) document.getElementById('theme-root').removeAttribute('data-shad-theme');">
+        <option value="">neutral</option>
+        <option value="slate">slate</option>
+        <option value="stone">stone</option>
+        <option value="blue">blue</option>
+        <option value="green">green</option>
+        <option value="rose">rose</option>
+        <option value="violet">violet</option>
+        <option value="orange">orange</option>
+      </select>
+      <button type="button" class="shad-btn shad-btn--outline shad-btn--sm" id="dark-toggle"
+        onclick="var h=document.documentElement; var dark=h.classList.toggle('dark'); h.setAttribute('data-bs-theme', dark ? 'dark' : 'light'); this.textContent = dark ? 'Light' : 'Dark';">Dark</button>
+    </div>
+  </header>
+  <main style="max-width:64rem;margin:0 auto;padding:0 1.5rem 6rem">
+
+<section id="c-accordion" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">accordion</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div data-shad="accordion" data-type="single" data-collapsible style="max-width:28rem">
+  <div class="shad-accordion__item" data-value="item-1" data-open>
+    <button type="button" class="shad-accordion__trigger">
+      Is it accessible?
+      <svg class="shad-accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <div class="shad-accordion__content">
+      <div class="shad-accordion__content-inner">
+        Yes. It adheres to the WAI-ARIA accordion pattern.
+      </div>
+    </div>
+  </div>
+  <div class="shad-accordion__item" data-value="item-2">
+    <button type="button" class="shad-accordion__trigger">
+      Is it styled?
+      <svg class="shad-accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <div class="shad-accordion__content">
+      <div class="shad-accordion__content-inner">
+        Yes. It comes with default styles that match the shadcn aesthetic.
+      </div>
+    </div>
+  </div>
+  <div class="shad-accordion__item" data-value="item-3">
+    <button type="button" class="shad-accordion__trigger">
+      Is it animated?
+      <svg class="shad-accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <div class="shad-accordion__content">
+      <div class="shad-accordion__content-inner">
+        Yes. Height animates smoothly, and the chevron rotates.
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-alert" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">alert</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- default, with icon (lucide terminal) -->
+<div class="shad-alert" role="alert">
+  <svg class="shad-alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
+  <div class="shad-alert__title">Heads up!</div>
+  <div class="shad-alert__description">You can add components to your app using the CLI.</div>
+</div>
+
+<!-- destructive (lucide circle-alert) -->
+<div class="shad-alert shad-alert--destructive" role="alert">
+  <svg class="shad-alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+  <div class="shad-alert__title">Error</div>
+  <div class="shad-alert__description">Your session has expired. Please log in again.</div>
+</div>
+
+<!-- no icon -->
+<div class="shad-alert" role="alert">
+  <div class="shad-alert__title">Title only alert.</div>
+</div>
+  </div>
+</section>
+<section id="c-alert-dialog" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">alert dialog</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-dialog" data-shad="alert-dialog">
+  <button type="button" class="shad-btn shad-btn--destructive shad-dialog__trigger">Delete account</button>
+  <div class="shad-dialog__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-dialog__content shad-anim-dialog" hidden>
+    <div class="shad-dialog__header">
+      <div class="shad-dialog__title">Are you absolutely sure?</div>
+      <div class="shad-dialog__description">This action cannot be undone. This will permanently delete your account and remove your data from our servers.</div>
+    </div>
+    <div class="shad-dialog__footer">
+      <button type="button" class="shad-btn shad-btn--outline" data-shad-dialog-close data-shad-autofocus>Cancel</button>
+      <button type="button" class="shad-btn shad-btn--destructive" data-shad-dialog-close>Continue</button>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-aspect-ratio" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">aspect ratio</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- 16:9 (default) -->
+<div class="shad-aspect-ratio" style="max-width: 28rem; border-radius: var(--shad-radius-lg);">
+  <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80" alt="Landscape photograph by Tobias Tullius" />
+</div>
+
+<!-- square -->
+<div class="shad-aspect-ratio" style="--shad-ratio: 1 / 1; max-width: 12rem; border-radius: var(--shad-radius-lg); background: var(--shad-muted);"></div>
+
+<!-- 4:3 -->
+<div class="shad-aspect-ratio" style="--shad-ratio: 4 / 3; max-width: 16rem; background: var(--shad-muted);"></div>
+  </div>
+</section>
+<section id="c-avatar" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">avatar</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- image with initials fallback (fallback shows if image missing/broken) -->
+<span class="shad-avatar">
+  <span class="shad-avatar__fallback" aria-hidden="true">CN</span>
+  <img class="shad-avatar__image" src="https://github.com/shadcn.png" alt="@shadcn" onerror="this.hidden=true" />
+</span>
+
+<!-- initials only -->
+<span class="shad-avatar"><span class="shad-avatar__fallback">JD</span></span>
+
+<!-- sizes -->
+<span class="shad-avatar shad-avatar--sm"><span class="shad-avatar__fallback">S</span></span>
+<span class="shad-avatar"><span class="shad-avatar__fallback">M</span></span>
+<span class="shad-avatar shad-avatar--lg"><span class="shad-avatar__fallback">L</span></span>
+<span class="shad-avatar shad-avatar--xl"><span class="shad-avatar__fallback">XL</span></span>
+
+<!-- stacked group -->
+<span class="shad-avatar-group">
+  <span class="shad-avatar"><span class="shad-avatar__fallback">AB</span></span>
+  <span class="shad-avatar"><span class="shad-avatar__fallback">CD</span></span>
+  <span class="shad-avatar"><span class="shad-avatar__fallback">EF</span></span>
+  <span class="shad-avatar"><span class="shad-avatar__fallback">+3</span></span>
+</span>
+  </div>
+</section>
+<section id="c-badge" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">badge</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<span class="shad-badge shad-badge--default">Badge</span>
+<span class="shad-badge shad-badge--secondary">Secondary</span>
+<span class="shad-badge shad-badge--destructive">Destructive</span>
+<span class="shad-badge shad-badge--outline">Outline</span>
+
+<!-- with icon (lucide check) -->
+<span class="shad-badge shad-badge--default">
+  <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+  Verified
+</span>
+  </div>
+</section>
+<section id="c-breadcrumb" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">breadcrumb</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<nav class="shad-breadcrumb" aria-label="Breadcrumb">
+  <ol class="shad-breadcrumb__list">
+    <li class="shad-breadcrumb__item">
+      <a class="shad-breadcrumb__link" href="#">Home</a>
+    </li>
+    <li class="shad-breadcrumb__separator" role="presentation" aria-hidden="true">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </li>
+    <li class="shad-breadcrumb__item">
+      <span class="shad-breadcrumb__ellipsis" role="presentation" aria-hidden="true">
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        <span class="shad-sr-only">More pages</span>
+      </span>
+    </li>
+    <li class="shad-breadcrumb__separator" role="presentation" aria-hidden="true">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </li>
+    <li class="shad-breadcrumb__item">
+      <a class="shad-breadcrumb__link" href="#">Components</a>
+    </li>
+    <li class="shad-breadcrumb__separator" role="presentation" aria-hidden="true">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </li>
+    <li class="shad-breadcrumb__item">
+      <span class="shad-breadcrumb__page" role="link" aria-disabled="true" aria-current="page">Breadcrumb</span>
+    </li>
+  </ol>
+</nav>
+  </div>
+</section>
+<section id="c-button" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">button</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- shadshiny button — canonical anatomy: all variants, sizes, states -->
+
+<!-- variants -->
+<button type="button" class="shad-btn shad-btn--default">Button</button>
+<button type="button" class="shad-btn shad-btn--secondary">Secondary</button>
+<button type="button" class="shad-btn shad-btn--destructive">Destructive</button>
+<button type="button" class="shad-btn shad-btn--outline">Outline</button>
+<button type="button" class="shad-btn shad-btn--ghost">Ghost</button>
+<button type="button" class="shad-btn shad-btn--link">Link</button>
+
+<!-- sizes -->
+<button type="button" class="shad-btn shad-btn--default shad-btn--sm">Small</button>
+<button type="button" class="shad-btn shad-btn--default">Default</button>
+<button type="button" class="shad-btn shad-btn--default shad-btn--lg">Large</button>
+
+<!-- icon button (lucide chevron-right) -->
+<button type="button" class="shad-btn shad-btn--outline shad-btn--icon" aria-label="Next">
+  <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+</button>
+
+<!-- with leading icon (lucide mail) -->
+<button type="button" class="shad-btn shad-btn--default">
+  <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+  Login with Email
+</button>
+
+<!-- loading state -->
+<button type="button" class="shad-btn shad-btn--default" data-loading disabled>
+  <span class="shad-btn__spinner" aria-hidden="true">
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+  </span>
+  Please wait
+</button>
+
+<!-- disabled -->
+<button type="button" class="shad-btn shad-btn--default" disabled>Disabled</button>
+
+<!-- link styled as button -->
+<a class="shad-btn shad-btn--outline" href="#">Anchor button</a>
+  </div>
+</section>
+<section id="c-calendar" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">calendar</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- single-select; grid rendered by JS -->
+<div class="shad-calendar" data-shad="calendar" data-mode="single" data-value="2026-07-11"></div>
+
+<!-- range-select, Monday week start, bounded -->
+<div class="shad-calendar" data-shad="calendar" data-mode="range"
+     data-value="2026-07-06" data-value-end="2026-07-10"
+     data-week-start="1" data-min="2026-01-01" data-max="2026-12-31"></div>
+
+<!-- empty single -->
+<div class="shad-calendar" data-shad="calendar" data-mode="single"></div>
+  </div>
+</section>
+<section id="c-card" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">card</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-card" style="max-width: 24rem;">
+  <div class="shad-card__header">
+    <div class="shad-card__title">Create project</div>
+    <div class="shad-card__description">Deploy your new project in one-click.</div>
+    <div class="shad-card__action">
+      <button type="button" class="shad-btn shad-btn--ghost shad-btn--icon shad-btn--sm" aria-label="More options">
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="shad-card__content">
+    Card content goes here. Any markup is valid.
+  </div>
+  <div class="shad-card__footer">
+    <button type="button" class="shad-btn shad-btn--outline">Cancel</button>
+    <button type="button" class="shad-btn shad-btn--default">Deploy</button>
+  </div>
+</div>
+
+<!-- minimal card -->
+<div class="shad-card" style="max-width: 24rem;">
+  <div class="shad-card__content">Content-only card.</div>
+</div>
+  </div>
+</section>
+<section id="c-carousel" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">carousel</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-carousel" data-shad="carousel" style="max-width:20rem;margin-inline:3rem" aria-label="Example carousel">
+  <div class="shad-carousel__viewport">
+    <div class="shad-carousel__track">
+      <div class="shad-carousel__slide">
+        <div class="shad-card"><div class="shad-card__content" style="display:grid;place-items:center;aspect-ratio:1;font-size:2.25rem;font-weight:var(--shad-font-weight-semibold);padding-top:var(--shad-space-6)">1</div></div>
+      </div>
+      <div class="shad-carousel__slide">
+        <div class="shad-card"><div class="shad-card__content" style="display:grid;place-items:center;aspect-ratio:1;font-size:2.25rem;font-weight:var(--shad-font-weight-semibold);padding-top:var(--shad-space-6)">2</div></div>
+      </div>
+      <div class="shad-carousel__slide">
+        <div class="shad-card"><div class="shad-card__content" style="display:grid;place-items:center;aspect-ratio:1;font-size:2.25rem;font-weight:var(--shad-font-weight-semibold);padding-top:var(--shad-space-6)">3</div></div>
+      </div>
+      <div class="shad-carousel__slide">
+        <div class="shad-card"><div class="shad-card__content" style="display:grid;place-items:center;aspect-ratio:1;font-size:2.25rem;font-weight:var(--shad-font-weight-semibold);padding-top:var(--shad-space-6)">4</div></div>
+      </div>
+      <div class="shad-carousel__slide">
+        <div class="shad-card"><div class="shad-card__content" style="display:grid;place-items:center;aspect-ratio:1;font-size:2.25rem;font-weight:var(--shad-font-weight-semibold);padding-top:var(--shad-space-6)">5</div></div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="shad-carousel__prev" aria-label="Previous slide">
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+  </button>
+  <button type="button" class="shad-carousel__next" aria-label="Next slide">
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  </button>
+  <div class="shad-carousel__dots"></div>
+</div>
+  </div>
+</section>
+<section id="c-checkbox" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">checkbox</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- unchecked -->
+<div class="shad-checkbox-row">
+  <button type="button" class="shad-checkbox" data-shad="checkbox" data-state="unchecked" id="cb-terms" aria-labelledby="cb-terms-label">
+    <svg class="shad-checkbox__indicator shad-checkbox__indicator--check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M20 6 9 17l-5-5"/></svg>
+    <svg class="shad-checkbox__indicator shad-checkbox__indicator--minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+  </button>
+  <label class="shad-label" id="cb-terms-label" for="cb-terms">Accept terms and conditions</label>
+</div>
+
+<!-- checked -->
+<div class="shad-checkbox-row">
+  <button type="button" class="shad-checkbox" data-shad="checkbox" data-state="checked" id="cb-news" aria-labelledby="cb-news-label">
+    <svg class="shad-checkbox__indicator shad-checkbox__indicator--check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M20 6 9 17l-5-5"/></svg>
+    <svg class="shad-checkbox__indicator shad-checkbox__indicator--minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+  </button>
+  <label class="shad-label" id="cb-news-label" for="cb-news">Email me updates</label>
+</div>
+
+<!-- indeterminate -->
+<div class="shad-checkbox-row">
+  <button type="button" class="shad-checkbox" data-shad="checkbox" data-state="indeterminate" id="cb-all" aria-labelledby="cb-all-label">
+    <svg class="shad-checkbox__indicator shad-checkbox__indicator--check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M20 6 9 17l-5-5"/></svg>
+    <svg class="shad-checkbox__indicator shad-checkbox__indicator--minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+  </button>
+  <label class="shad-label" id="cb-all-label" for="cb-all">Select all</label>
+</div>
+
+<!-- disabled -->
+<div class="shad-checkbox-row">
+  <button type="button" class="shad-checkbox" data-shad="checkbox" data-state="unchecked" data-disabled disabled id="cb-dis" aria-labelledby="cb-dis-label">
+    <svg class="shad-checkbox__indicator shad-checkbox__indicator--check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M20 6 9 17l-5-5"/></svg>
+    <svg class="shad-checkbox__indicator shad-checkbox__indicator--minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+  </button>
+  <label class="shad-label" id="cb-dis-label" data-disabled for="cb-dis">Disabled</label>
+</div>
+  </div>
+</section>
+<section id="c-collapsible" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">collapsible</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div data-shad="collapsible" data-open style="max-width:22rem;display:grid;gap:0.5rem">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <span class="shad-small">@peduarte starred 3 repositories</span>
+    <button type="button" class="shad-btn shad-btn--ghost shad-btn--icon shad-btn--sm shad-collapsible__trigger" aria-label="Toggle">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+    </button>
+  </div>
+  <div style="padding:0.5rem 1rem;border:1px solid var(--shad-border);border-radius:var(--shad-radius-md);font-family:var(--shad-font-mono);font-size:var(--shad-text-sm)">@radix-ui/primitives</div>
+  <div class="shad-collapsible__content">
+    <div style="display:grid;gap:0.5rem">
+      <div style="padding:0.5rem 1rem;border:1px solid var(--shad-border);border-radius:var(--shad-radius-md);font-family:var(--shad-font-mono);font-size:var(--shad-text-sm)">@radix-ui/colors</div>
+      <div style="padding:0.5rem 1rem;border:1px solid var(--shad-border);border-radius:var(--shad-radius-md);font-family:var(--shad-font-mono);font-size:var(--shad-text-sm)">@stitches/react</div>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-combobox" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">combobox</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- single-select -->
+<div class="shad-combobox" data-shad="combobox" data-state="closed" style="width: 220px;">
+  <button type="button" class="shad-combobox__trigger" data-placeholder>
+    <span class="shad-combobox__value">Select framework…</span>
+    <svg class="shad-combobox__chevrons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+  </button>
+  <div class="shad-combobox__content shad-anim-pop" hidden>
+    <div class="shad-combobox__search">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input class="shad-combobox__input" type="text" placeholder="Search framework…" autocomplete="off" autocorrect="off" spellcheck="false" />
+    </div>
+    <div class="shad-combobox__list">
+      <div class="shad-combobox__item" data-value="next" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Next.js
+      </div>
+      <div class="shad-combobox__item" data-value="svelte" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        SvelteKit
+      </div>
+      <div class="shad-combobox__item" data-value="nuxt" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Nuxt
+      </div>
+      <div class="shad-combobox__item" data-value="remix" data-state="unchecked" data-disabled aria-disabled="true">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Remix (deprecated)
+      </div>
+      <div class="shad-combobox__item" data-value="astro" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Astro
+      </div>
+    </div>
+    <div class="shad-combobox__empty" hidden>No framework found.</div>
+  </div>
+</div>
+
+<!-- multi-select with inline badges -->
+<div class="shad-combobox" data-shad="combobox" data-multiple data-state="closed" style="width: 280px;">
+  <button type="button" class="shad-combobox__trigger" data-placeholder>
+    <span class="shad-combobox__value">Select languages…</span>
+    <svg class="shad-combobox__chevrons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+  </button>
+  <div class="shad-combobox__content shad-anim-pop" hidden>
+    <div class="shad-combobox__search">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input class="shad-combobox__input" type="text" placeholder="Search language…" autocomplete="off" />
+    </div>
+    <div class="shad-combobox__list">
+      <div class="shad-combobox__item" data-value="r" data-state="checked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        R
+      </div>
+      <div class="shad-combobox__item" data-value="python" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Python
+      </div>
+      <div class="shad-combobox__item" data-value="julia" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Julia
+      </div>
+      <div class="shad-combobox__item" data-value="js" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        JavaScript
+      </div>
+    </div>
+    <div class="shad-combobox__empty" hidden>No language found.</div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-command" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">command</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- Inline palette -->
+<div class="shad-command" data-shad="command" style="max-width:28rem">
+  <div class="shad-command__header">
+    <svg class="shad-command__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input class="shad-command__input" type="text" placeholder="Type a command or search…" aria-label="Search commands" />
+  </div>
+  <div class="shad-command__list">
+    <div class="shad-command__empty">No results found.</div>
+    <div class="shad-command__group">
+      <div class="shad-command__group-heading">Suggestions</div>
+      <button type="button" class="shad-command__item" data-value="calendar" data-keywords="date schedule">
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        Calendar
+      </button>
+      <button type="button" class="shad-command__item" data-value="search-emoji">
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+        Search Emoji
+      </button>
+      <button type="button" class="shad-command__item" data-value="calculator" data-disabled>
+        Calculator
+      </button>
+    </div>
+    <div class="shad-command__separator"></div>
+    <div class="shad-command__group">
+      <div class="shad-command__group-heading">Settings</div>
+      <button type="button" class="shad-command__item" data-value="profile">
+        Profile <span class="shad-command__shortcut">⌘P</span>
+      </button>
+      <button type="button" class="shad-command__item" data-value="billing">
+        Billing <span class="shad-command__shortcut">⌘B</span>
+      </button>
+      <button type="button" class="shad-command__item" data-value="settings">
+        Settings <span class="shad-command__shortcut">⌘S</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Dialog palette: hidden until ⌘K / Ctrl+K (or instance.open()) -->
+<div class="shad-command" data-shad="command" data-hotkey="mod+k" aria-label="Command palette">
+  <div class="shad-command__header">
+    <svg class="shad-command__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input class="shad-command__input" type="text" placeholder="Type a command or search…" aria-label="Search commands" />
+  </div>
+  <div class="shad-command__list">
+    <div class="shad-command__empty">No results found.</div>
+    <div class="shad-command__group">
+      <div class="shad-command__group-heading">Quick actions</div>
+      <button type="button" class="shad-command__item" data-value="new-file">New file <span class="shad-command__shortcut">⌘N</span></button>
+      <button type="button" class="shad-command__item" data-value="open-recent">Open recent…</button>
+      <button type="button" class="shad-command__item" data-value="toggle-theme" data-keywords="dark light mode">Toggle theme</button>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-context-menu" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">context menu</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div data-shad="context-menu">
+  <div class="shad-context-menu__zone" style="display:grid;place-items:center;height:150px;width:300px;border:1px dashed var(--shad-border);border-radius:var(--shad-radius-md);font-size:var(--shad-text-sm);color:var(--shad-muted-foreground)">
+    Right click here
+  </div>
+  <div class="shad-menu__content shad-anim-pop" hidden>
+    <button type="button" class="shad-menu__item" data-value="back">
+      Back <span class="shad-menu__shortcut">⌘[</span>
+    </button>
+    <button type="button" class="shad-menu__item" data-value="forward" data-disabled>
+      Forward <span class="shad-menu__shortcut">⌘]</span>
+    </button>
+    <button type="button" class="shad-menu__item" data-value="reload">
+      Reload <span class="shad-menu__shortcut">⌘R</span>
+    </button>
+    <div data-shad-submenu>
+      <button type="button" class="shad-menu__item" data-shad-submenu-trigger aria-haspopup="menu" aria-expanded="false" data-state="closed">
+        More tools
+        <svg class="shad-menu__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+      <div class="shad-menu__content shad-anim-pop" hidden>
+        <button type="button" class="shad-menu__item" data-value="save-page">Save page…</button>
+        <button type="button" class="shad-menu__item" data-value="dev-tools">Developer tools</button>
+      </div>
+    </div>
+    <div class="shad-menu__separator"></div>
+    <button type="button" class="shad-menu__item" data-type="checkbox" data-state="checked" data-value="bookmarks">
+      <span class="shad-menu__indicator">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      Show bookmarks
+    </button>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-date-picker" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">date picker</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- single date -->
+<div class="shad-date-picker" data-shad="date-picker">
+  <button type="button" class="shad-date-picker__trigger" data-placeholder>
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+    <span class="shad-date-picker__value">Pick a date</span>
+  </button>
+  <div class="shad-date-picker__content shad-anim-pop" hidden>
+    <div class="shad-calendar" data-shad="calendar" data-mode="single"></div>
+  </div>
+</div>
+
+<!-- date range -->
+<div class="shad-date-picker" data-shad="date-picker">
+  <button type="button" class="shad-date-picker__trigger" data-placeholder>
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+    <span class="shad-date-picker__value">Pick a date range</span>
+  </button>
+  <div class="shad-date-picker__content shad-anim-pop" hidden>
+    <div class="shad-calendar" data-shad="calendar" data-mode="range" data-week-start="1"></div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-dialog" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">dialog</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-dialog" data-shad="dialog">
+  <button type="button" class="shad-btn shad-btn--outline shad-dialog__trigger">Edit Profile</button>
+  <div class="shad-dialog__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-dialog__content shad-anim-dialog" hidden>
+    <button type="button" class="shad-dialog__close" data-shad-dialog-close aria-label="Close">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="shad-dialog__header">
+      <div class="shad-dialog__title">Edit profile</div>
+      <div class="shad-dialog__description">Make changes to your profile here. Click save when you're done.</div>
+    </div>
+    <div class="shad-form-field">
+      <label class="shad-label" for="dlg-name">Name</label>
+      <input class="shad-input" id="dlg-name" type="text" value="Pedro Duarte" data-shad-autofocus />
+    </div>
+    <div class="shad-form-field">
+      <label class="shad-label" for="dlg-username">Username</label>
+      <input class="shad-input" id="dlg-username" type="text" value="@peduarte" />
+    </div>
+    <div class="shad-dialog__footer">
+      <button type="button" class="shad-btn shad-btn--outline" data-shad-dialog-close>Cancel</button>
+      <button type="button" class="shad-btn shad-btn--default" data-shad-dialog-close>Save changes</button>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-drawer" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">drawer</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div data-shad="drawer">
+  <button type="button" class="shad-btn shad-btn--outline shad-drawer__trigger">Open drawer</button>
+  <div class="shad-drawer__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-drawer__content shad-anim-sheet" hidden>
+    <div class="shad-drawer__handle" aria-hidden="true"></div>
+    <div class="shad-drawer__header">
+      <div class="shad-drawer__title">Move Goal</div>
+      <div class="shad-drawer__description">Set your daily activity goal.</div>
+    </div>
+    <div class="shad-drawer__body">
+      <p class="shad-muted">Drag the handle down to dismiss, or use the buttons.</p>
+    </div>
+    <div class="shad-drawer__footer">
+      <button type="button" class="shad-btn shad-btn--default" data-shad-drawer-close>Submit</button>
+      <button type="button" class="shad-btn shad-btn--outline" data-shad-drawer-close>Cancel</button>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-dropdown-menu" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">dropdown menu</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div data-shad="dropdown-menu" data-align="start" style="display:inline-block">
+  <button type="button" class="shad-btn shad-btn--outline shad-menu__trigger">Open menu</button>
+  <div class="shad-menu__content shad-anim-pop" hidden>
+    <div class="shad-menu__label">My Account</div>
+    <div class="shad-menu__separator"></div>
+    <button type="button" class="shad-menu__item" data-value="profile">
+      Profile <span class="shad-menu__shortcut">⇧⌘P</span>
+    </button>
+    <button type="button" class="shad-menu__item" data-value="billing">
+      Billing <span class="shad-menu__shortcut">⌘B</span>
+    </button>
+    <button type="button" class="shad-menu__item" data-value="settings" data-disabled>
+      Settings <span class="shad-menu__shortcut">⌘S</span>
+    </button>
+    <div class="shad-menu__separator"></div>
+    <button type="button" class="shad-menu__item" data-type="checkbox" data-state="checked" data-value="status-bar">
+      <span class="shad-menu__indicator">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      Status Bar
+    </button>
+    <button type="button" class="shad-menu__item" data-type="checkbox" data-state="unchecked" data-value="activity-bar">
+      <span class="shad-menu__indicator">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      Activity Bar
+    </button>
+    <div class="shad-menu__separator"></div>
+    <div class="shad-menu__label">Position</div>
+    <button type="button" class="shad-menu__item" data-type="radio" data-group="pos" data-state="checked" data-value="top">
+      <span class="shad-menu__indicator">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+      </span>
+      Top
+    </button>
+    <button type="button" class="shad-menu__item" data-type="radio" data-group="pos" data-state="unchecked" data-value="bottom">
+      <span class="shad-menu__indicator">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+      </span>
+      Bottom
+    </button>
+    <div class="shad-menu__separator"></div>
+    <div data-shad-submenu>
+      <button type="button" class="shad-menu__item" data-shad-submenu-trigger aria-haspopup="menu" aria-expanded="false" data-state="closed">
+        Invite users
+        <svg class="shad-menu__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+      <div class="shad-menu__content shad-anim-pop" hidden>
+        <button type="button" class="shad-menu__item" data-value="invite-email">Email</button>
+        <button type="button" class="shad-menu__item" data-value="invite-link">Copy link</button>
+      </div>
+    </div>
+    <div class="shad-menu__separator"></div>
+    <button type="button" class="shad-menu__item shad-menu__item--destructive" data-value="logout">
+      Log out <span class="shad-menu__shortcut">⇧⌘Q</span>
+    </button>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-form-field" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">form field</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-form-field" data-shad="form-field" style="max-width: 20rem;">
+  <label class="shad-label">Username</label>
+  <input class="shad-input" type="text" placeholder="shadcn" />
+  <p class="shad-form-field__description">This is your public display name.</p>
+  <p class="shad-form-field__error" hidden></p>
+</div>
+
+<!-- invalid state (error visible at load) -->
+<div class="shad-form-field" data-shad="form-field" style="max-width: 20rem;">
+  <label class="shad-label">Email</label>
+  <input class="shad-input" type="email" value="not-an-email" />
+  <p class="shad-form-field__description">We never share your email.</p>
+  <p class="shad-form-field__error">Please enter a valid email address.</p>
+</div>
+
+<!-- wrapping a shad component (switch) -->
+<div class="shad-form-field" data-shad="form-field">
+  <div class="shad-switch-row">
+    <button type="button" class="shad-switch" data-shad="switch" role="switch" data-state="unchecked">
+      <span class="shad-switch__thumb" aria-hidden="true"></span>
+    </button>
+    <label class="shad-label">Marketing emails</label>
+  </div>
+  <p class="shad-form-field__description">Receive emails about new products.</p>
+  <p class="shad-form-field__error" hidden></p>
+</div>
+  </div>
+</section>
+<section id="c-hover-card" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">hover card</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div data-shad="hover-card" data-side="bottom" style="display:inline-block">
+  <a href="#" class="shad-hover-card__trigger" style="font-weight:var(--shad-font-weight-medium);text-decoration:underline;text-underline-offset:4px">@nextjs</a>
+  <div class="shad-hover-card__content shad-anim-pop" hidden>
+    <div style="display:flex;gap:1rem">
+      <div class="shad-avatar">
+        <div class="shad-avatar__fallback">VC</div>
+      </div>
+      <div style="display:grid;gap:0.25rem">
+        <div class="shad-small">@nextjs</div>
+        <div style="font-size:var(--shad-text-sm)">The React Framework — created and maintained by Vercel.</div>
+        <div class="shad-muted" style="font-size:var(--shad-text-xs)">Joined December 2021</div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-input" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">input</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<input class="shad-input" type="email" placeholder="Email" />
+<input class="shad-input" type="text" value="With value" />
+<input class="shad-input" type="password" placeholder="Password" />
+<input class="shad-input" type="text" placeholder="Disabled" disabled />
+<input class="shad-input" type="email" aria-invalid="true" value="not-an-email" aria-describedby="email-err" />
+<input class="shad-input" type="file" />
+  </div>
+</section>
+<section id="c-input-otp" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">input otp</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- 6 digits, 3+3 with separator -->
+<div class="shad-otp" data-shad="input-otp" data-length="6" data-pattern="\d">
+  <input class="shad-otp__input" type="text" inputmode="numeric" autocomplete="one-time-code" aria-label="One-time code" />
+  <div class="shad-otp__group">
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+  </div>
+  <div class="shad-otp__separator" aria-hidden="true">
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>
+  </div>
+  <div class="shad-otp__group">
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+  </div>
+</div>
+
+<!-- 4 cells, single group, any character -->
+<div class="shad-otp" data-shad="input-otp" data-length="4">
+  <input class="shad-otp__input" type="text" autocomplete="one-time-code" aria-label="Code" />
+  <div class="shad-otp__group">
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-label" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">label</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<label class="shad-label" for="email-input">Email address</label>
+
+<!-- disabled context -->
+<label class="shad-label" data-disabled for="disabled-input">Disabled field</label>
+  </div>
+</section>
+<section id="c-menubar" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">menubar</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-menubar" data-shad="menubar">
+  <div data-shad-menubar-menu>
+    <button type="button" class="shad-menubar__trigger">File</button>
+    <div class="shad-menu__content shad-anim-pop" hidden>
+      <button type="button" class="shad-menu__item" data-value="new-tab">New tab <span class="shad-menu__shortcut">⌘T</span></button>
+      <button type="button" class="shad-menu__item" data-value="new-window">New window <span class="shad-menu__shortcut">⌘N</span></button>
+      <div class="shad-menu__separator"></div>
+      <div data-shad-submenu>
+        <button type="button" class="shad-menu__item" data-shad-submenu-trigger aria-haspopup="menu" aria-expanded="false" data-state="closed">
+          Share
+          <svg class="shad-menu__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <div class="shad-menu__content shad-anim-pop" hidden>
+          <button type="button" class="shad-menu__item" data-value="share-email">Email link</button>
+          <button type="button" class="shad-menu__item" data-value="share-messages">Messages</button>
+        </div>
+      </div>
+      <div class="shad-menu__separator"></div>
+      <button type="button" class="shad-menu__item" data-value="print">Print… <span class="shad-menu__shortcut">⌘P</span></button>
+    </div>
+  </div>
+  <div data-shad-menubar-menu>
+    <button type="button" class="shad-menubar__trigger">Edit</button>
+    <div class="shad-menu__content shad-anim-pop" hidden>
+      <button type="button" class="shad-menu__item" data-value="undo">Undo <span class="shad-menu__shortcut">⌘Z</span></button>
+      <button type="button" class="shad-menu__item" data-value="redo">Redo <span class="shad-menu__shortcut">⇧⌘Z</span></button>
+    </div>
+  </div>
+  <div data-shad-menubar-menu>
+    <button type="button" class="shad-menubar__trigger">View</button>
+    <div class="shad-menu__content shad-anim-pop" hidden>
+      <button type="button" class="shad-menu__item" data-type="checkbox" data-state="checked" data-value="show-toolbar">
+        <span class="shad-menu__indicator">
+          <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
+        Show toolbar
+      </button>
+      <button type="button" class="shad-menu__item" data-value="reload">Reload <span class="shad-menu__shortcut">⌘R</span></button>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-navigation-menu" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">navigation menu</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<nav class="shad-nav-menu" data-shad="navigation-menu" aria-label="Main">
+  <ul class="shad-nav-menu__list">
+    <li data-shad-nav-item>
+      <button type="button" class="shad-nav-menu__trigger" data-state="closed">
+        Getting started
+        <svg class="shad-nav-menu__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="shad-nav-menu__panel" hidden>
+        <div class="shad-nav-menu__grid">
+          <a href="#" class="shad-nav-menu__card">
+            <div class="shad-nav-menu__card-title">Introduction</div>
+            <div class="shad-nav-menu__card-desc">Re-usable components built with vanilla CSS and JS.</div>
+          </a>
+          <a href="#" class="shad-nav-menu__card">
+            <div class="shad-nav-menu__card-title">Installation</div>
+            <div class="shad-nav-menu__card-desc">How to install dependencies and structure your app.</div>
+          </a>
+          <a href="#" class="shad-nav-menu__card">
+            <div class="shad-nav-menu__card-title">Typography</div>
+            <div class="shad-nav-menu__card-desc">Styles for headings, paragraphs, lists…</div>
+          </a>
+          <a href="#" class="shad-nav-menu__card">
+            <div class="shad-nav-menu__card-title">Theming</div>
+            <div class="shad-nav-menu__card-desc">Using CSS variables to switch palettes.</div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li data-shad-nav-item>
+      <button type="button" class="shad-nav-menu__trigger" data-state="closed">
+        Components
+        <svg class="shad-nav-menu__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="shad-nav-menu__panel" hidden>
+        <div class="shad-nav-menu__grid" style="grid-template-columns:repeat(2,minmax(12rem,1fr));width:28rem">
+          <a href="#" class="shad-nav-menu__card">
+            <div class="shad-nav-menu__card-title">Dialog</div>
+            <div class="shad-nav-menu__card-desc">A modal window overlaid on the page.</div>
+          </a>
+          <a href="#" class="shad-nav-menu__card">
+            <div class="shad-nav-menu__card-title">Tabs</div>
+            <div class="shad-nav-menu__card-desc">Layered sections shown one at a time.</div>
+          </a>
+          <a href="#" class="shad-nav-menu__card">
+            <div class="shad-nav-menu__card-title">Tooltip</div>
+            <div class="shad-nav-menu__card-desc">Popup info on hover or focus.</div>
+          </a>
+          <a href="#" class="shad-nav-menu__card">
+            <div class="shad-nav-menu__card-title">Toast</div>
+            <div class="shad-nav-menu__card-desc">Succinct transient notifications.</div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li>
+      <a href="#" class="shad-nav-menu__link">Documentation</a>
+    </li>
+  </ul>
+  <div class="shad-nav-menu__viewport" hidden></div>
+</nav>
+  </div>
+</section>
+<section id="c-pagination" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">pagination</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- JS-driven: renders the windowed list from data-pages/data-page -->
+<nav class="shad-pagination" data-shad="pagination" data-pages="10" data-page="2">
+  <ul class="shad-pagination__list"></ul>
+</nav>
+
+<!-- Static (no JS): hand-authored anatomy, works as plain links -->
+<nav class="shad-pagination" aria-label="Pagination">
+  <ul class="shad-pagination__list">
+    <li>
+      <a href="#" class="shad-pagination__link shad-pagination__link--nav" aria-label="Go to previous page">
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        Previous
+      </a>
+    </li>
+    <li><a href="#" class="shad-pagination__link">1</a></li>
+    <li><a href="#" class="shad-pagination__link" data-state="active" aria-current="page">2</a></li>
+    <li><a href="#" class="shad-pagination__link">3</a></li>
+    <li>
+      <span class="shad-pagination__ellipsis" aria-hidden="true">
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+      </span>
+    </li>
+    <li><a href="#" class="shad-pagination__link">10</a></li>
+    <li>
+      <a href="#" class="shad-pagination__link shad-pagination__link--nav" aria-label="Go to next page">
+        Next
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </li>
+  </ul>
+</nav>
+  </div>
+</section>
+<section id="c-popover" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">popover</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div data-shad="popover" data-side="bottom" data-align="center" style="display:inline-block">
+  <button type="button" class="shad-btn shad-btn--outline shad-popover__trigger">Open popover</button>
+  <div class="shad-popover__content shad-anim-pop" hidden>
+    <div class="shad-popover__arrow" aria-hidden="true"></div>
+    <div style="display:grid;gap:1rem">
+      <div style="display:grid;gap:0.375rem">
+        <div class="shad-large" style="font-size:var(--shad-text-sm)">Dimensions</div>
+        <div class="shad-muted">Set the dimensions for the layer.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 2fr;align-items:center;gap:0.5rem">
+        <label class="shad-label" for="pop-w">Width</label>
+        <input class="shad-input shad-input--sm" id="pop-w" type="text" value="100%" data-shad-autofocus />
+        <label class="shad-label" for="pop-h">Height</label>
+        <input class="shad-input shad-input--sm" id="pop-h" type="text" value="25px" />
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-progress" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">progress</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- determinate 60%: indicator translated by -(100-60)% -->
+<div class="shad-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" data-state="loading">
+  <div class="shad-progress__indicator" style="transform: translateX(-40%);"></div>
+</div>
+
+<!-- complete -->
+<div class="shad-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" data-state="complete">
+  <div class="shad-progress__indicator" style="transform: translateX(0%);"></div>
+</div>
+
+<!-- indeterminate -->
+<div class="shad-progress" role="progressbar" data-state="indeterminate" aria-label="Loading">
+  <div class="shad-progress__indicator"></div>
+</div>
+  </div>
+</section>
+<section id="c-radio-group" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">radio group</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-radio-group" data-shad="radio-group" role="radiogroup" aria-label="Notification level">
+  <div class="shad-radio-row">
+    <button type="button" class="shad-radio" role="radio" data-value="default" data-state="checked" id="r1">
+      <span class="shad-radio__indicator" aria-hidden="true"></span>
+    </button>
+    <label class="shad-label" for="r1">Default</label>
+  </div>
+  <div class="shad-radio-row">
+    <button type="button" class="shad-radio" role="radio" data-value="comfortable" data-state="unchecked" id="r2">
+      <span class="shad-radio__indicator" aria-hidden="true"></span>
+    </button>
+    <label class="shad-label" for="r2">Comfortable</label>
+  </div>
+  <div class="shad-radio-row">
+    <button type="button" class="shad-radio" role="radio" data-value="compact" data-state="unchecked" id="r3">
+      <span class="shad-radio__indicator" aria-hidden="true"></span>
+    </button>
+    <label class="shad-label" for="r3">Compact</label>
+  </div>
+  <div class="shad-radio-row">
+    <button type="button" class="shad-radio" role="radio" data-value="off" data-state="unchecked" data-disabled disabled id="r4">
+      <span class="shad-radio__indicator" aria-hidden="true"></span>
+    </button>
+    <label class="shad-label" data-disabled for="r4">Off (disabled)</label>
+  </div>
+</div>
+
+<!-- horizontal -->
+<div class="shad-radio-group" data-shad="radio-group" data-orientation="horizontal" role="radiogroup" aria-label="Plan">
+  <div class="shad-radio-row">
+    <button type="button" class="shad-radio" role="radio" data-value="free" data-state="unchecked" id="rp1"><span class="shad-radio__indicator" aria-hidden="true"></span></button>
+    <label class="shad-label" for="rp1">Free</label>
+  </div>
+  <div class="shad-radio-row">
+    <button type="button" class="shad-radio" role="radio" data-value="pro" data-state="checked" id="rp2"><span class="shad-radio__indicator" aria-hidden="true"></span></button>
+    <label class="shad-label" for="rp2">Pro</label>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-resizable" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">resizable</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-resizable" data-shad="resizable" data-orientation="horizontal"
+     style="height:12rem;max-width:28rem;border:1px solid var(--shad-border);border-radius:var(--shad-radius-lg)">
+  <div class="shad-resizable__panel" data-size="50">
+    <div style="display:grid;place-items:center;height:100%;font-size:var(--shad-text-sm);font-weight:var(--shad-font-weight-semibold)">One</div>
+  </div>
+  <div class="shad-resizable__handle">
+    <span class="shad-resizable__grip" aria-hidden="true">
+      <svg width="6" height="10" viewBox="0 0 6 10" fill="currentColor" aria-hidden="true"><circle cx="1.5" cy="2" r="1"/><circle cx="4.5" cy="2" r="1"/><circle cx="1.5" cy="5" r="1"/><circle cx="4.5" cy="5" r="1"/><circle cx="1.5" cy="8" r="1"/><circle cx="4.5" cy="8" r="1"/></svg>
+    </span>
+  </div>
+  <div class="shad-resizable__panel" data-size="50">
+    <div class="shad-resizable" data-shad="resizable" data-orientation="vertical" style="height:100%">
+      <div class="shad-resizable__panel" data-size="40">
+        <div style="display:grid;place-items:center;height:100%;font-size:var(--shad-text-sm);font-weight:var(--shad-font-weight-semibold)">Two</div>
+      </div>
+      <div class="shad-resizable__handle"></div>
+      <div class="shad-resizable__panel" data-size="60">
+        <div style="display:grid;place-items:center;height:100%;font-size:var(--shad-text-sm);font-weight:var(--shad-font-weight-semibold)">Three</div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-scroll-area" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">scroll area</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-scroll-area" data-shad="scroll-area" style="height:12rem;width:18rem;border:1px solid var(--shad-border);border-radius:var(--shad-radius-md)">
+  <div class="shad-scroll-area__viewport">
+    <div style="padding:1rem">
+      <div class="shad-small" style="margin-bottom:0.75rem">Tags</div>
+      <div style="display:grid;gap:0">
+        <div style="padding:0.5rem 0;font-size:var(--shad-text-sm)">v1.2.0-beta.50</div>
+        <div class="shad-separator"></div>
+        <div style="padding:0.5rem 0;font-size:var(--shad-text-sm)">v1.2.0-beta.49</div>
+        <div class="shad-separator"></div>
+        <div style="padding:0.5rem 0;font-size:var(--shad-text-sm)">v1.2.0-beta.48</div>
+        <div class="shad-separator"></div>
+        <div style="padding:0.5rem 0;font-size:var(--shad-text-sm)">v1.2.0-beta.47</div>
+        <div class="shad-separator"></div>
+        <div style="padding:0.5rem 0;font-size:var(--shad-text-sm)">v1.2.0-beta.46</div>
+        <div class="shad-separator"></div>
+        <div style="padding:0.5rem 0;font-size:var(--shad-text-sm)">v1.2.0-beta.45</div>
+        <div class="shad-separator"></div>
+        <div style="padding:0.5rem 0;font-size:var(--shad-text-sm)">v1.2.0-beta.44</div>
+        <div class="shad-separator"></div>
+        <div style="padding:0.5rem 0;font-size:var(--shad-text-sm)">v1.2.0-beta.43</div>
+      </div>
+    </div>
+  </div>
+  <div class="shad-scroll-area__scrollbar" data-orientation="vertical">
+    <div class="shad-scroll-area__thumb"></div>
+  </div>
+  <div class="shad-scroll-area__scrollbar" data-orientation="horizontal">
+    <div class="shad-scroll-area__thumb"></div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-select" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">select</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-select" data-shad="select" style="width: 200px;">
+  <button type="button" class="shad-select__trigger" data-placeholder>
+    <span class="shad-select__value">Select a fruit</span>
+    <svg class="shad-select__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+  <div class="shad-select__content shad-anim-pop" hidden>
+    <button type="button" class="shad-select__scroll-btn" data-dir="up" hidden tabindex="-1" aria-hidden="true">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
+    <div class="shad-select__viewport">
+      <div role="group" aria-labelledby="sel-fruits-label">
+        <div class="shad-select__group-label" id="sel-fruits-label">Fruits</div>
+        <div class="shad-select__item" role="option" data-value="apple" data-state="unchecked">
+          <svg class="shad-select__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Apple
+        </div>
+        <div class="shad-select__item" role="option" data-value="banana" data-state="unchecked">
+          <svg class="shad-select__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Banana
+        </div>
+        <div class="shad-select__item" role="option" data-value="blueberry" data-state="unchecked" data-disabled aria-disabled="true">
+          <svg class="shad-select__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Blueberry (out of stock)
+        </div>
+      </div>
+      <div class="shad-select__separator" role="separator" aria-hidden="true"></div>
+      <div role="group" aria-labelledby="sel-veg-label">
+        <div class="shad-select__group-label" id="sel-veg-label">Vegetables</div>
+        <div class="shad-select__item" role="option" data-value="carrot" data-state="unchecked">
+          <svg class="shad-select__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Carrot
+        </div>
+        <div class="shad-select__item" role="option" data-value="leek" data-state="unchecked">
+          <svg class="shad-select__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Leek
+        </div>
+      </div>
+    </div>
+    <button type="button" class="shad-select__scroll-btn" data-dir="down" hidden tabindex="-1" aria-hidden="true">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-separator" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">separator</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div>Above</div>
+<div class="shad-separator" role="separator" aria-orientation="horizontal" data-orientation="horizontal"></div>
+<div>Below</div>
+
+<div style="display:flex; align-items:center; gap:1rem; height:1.25rem;">
+  <span>Blog</span>
+  <div class="shad-separator" role="separator" aria-orientation="vertical" data-orientation="vertical"></div>
+  <span>Docs</span>
+  <div class="shad-separator" role="separator" aria-orientation="vertical" data-orientation="vertical"></div>
+  <span>Source</span>
+</div>
+
+<!-- decorative (no semantics) -->
+<div class="shad-separator" data-orientation="horizontal" aria-hidden="true"></div>
+  </div>
+</section>
+<section id="c-sheet" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">sheet</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div data-shad="sheet" data-side="right">
+  <button type="button" class="shad-btn shad-btn--outline shad-sheet__trigger">Open right sheet</button>
+  <div class="shad-sheet__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-sheet__content shad-anim-sheet" hidden>
+    <button type="button" class="shad-sheet__close" data-shad-sheet-close aria-label="Close">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="shad-sheet__header">
+      <div class="shad-sheet__title">Edit profile</div>
+      <div class="shad-sheet__description">Make changes to your profile here.</div>
+    </div>
+    <div class="shad-form-field">
+      <label class="shad-label" for="sheet-name">Name</label>
+      <input class="shad-input" id="sheet-name" type="text" data-shad-autofocus />
+    </div>
+    <div class="shad-sheet__footer">
+      <button type="button" class="shad-btn shad-btn--default" data-shad-sheet-close>Save changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- other sides: change data-side (content [data-side] is set by JS from root) -->
+<div data-shad="sheet" data-side="left">
+  <button type="button" class="shad-btn shad-btn--outline shad-sheet__trigger">Left</button>
+  <div class="shad-sheet__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-sheet__content shad-anim-sheet" hidden>
+    <div class="shad-sheet__header"><div class="shad-sheet__title">Left sheet</div></div>
+  </div>
+</div>
+<div data-shad="sheet" data-side="top">
+  <button type="button" class="shad-btn shad-btn--outline shad-sheet__trigger">Top</button>
+  <div class="shad-sheet__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-sheet__content shad-anim-sheet" hidden>
+    <div class="shad-sheet__header"><div class="shad-sheet__title">Top sheet</div></div>
+  </div>
+</div>
+<div data-shad="sheet" data-side="bottom">
+  <button type="button" class="shad-btn shad-btn--outline shad-sheet__trigger">Bottom</button>
+  <div class="shad-sheet__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-sheet__content shad-anim-sheet" hidden>
+    <div class="shad-sheet__header"><div class="shad-sheet__title">Bottom sheet</div></div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="c-sidebar" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">sidebar</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-sidebar-layout" data-shad="sidebar" style="height:24rem;border:1px solid var(--shad-border);border-radius:var(--shad-radius-lg);overflow:hidden">
+  <div class="shad-sidebar__overlay" hidden></div>
+  <aside class="shad-sidebar" aria-label="Sidebar">
+    <div class="shad-sidebar__header">
+      <div style="display:flex;align-items:center;gap:0.5rem;padding:0.25rem 0.5rem">
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+        <span class="shad-sidebar__label" style="font-weight:var(--shad-font-weight-semibold);font-size:var(--shad-text-sm)">Acme Inc</span>
+      </div>
+    </div>
+    <div class="shad-sidebar__content">
+      <div class="shad-sidebar__group">
+        <div class="shad-sidebar__group-label">Platform</div>
+        <ul class="shad-sidebar__menu">
+          <li>
+            <button type="button" class="shad-sidebar__item" data-value="home" data-state="active">
+              <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              <span class="shad-sidebar__label">Home</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="shad-sidebar__item" data-value="inbox">
+              <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+              <span class="shad-sidebar__label">Inbox</span>
+              <span class="shad-sidebar__badge">24</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="shad-sidebar__item" data-value="settings">
+              <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span class="shad-sidebar__label">Settings</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="shad-sidebar__separator"></div>
+      <div class="shad-sidebar__group">
+        <div class="shad-sidebar__group-label">Projects</div>
+        <ul class="shad-sidebar__menu">
+          <li>
+            <button type="button" class="shad-sidebar__item" data-value="design">
+              <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+              <span class="shad-sidebar__label">Design Engineering</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="shad-sidebar__footer">
+      <button type="button" class="shad-sidebar__item" data-value="account">
+        <div class="shad-avatar shad-avatar--sm"><div class="shad-avatar__fallback">SC</div></div>
+        <span class="shad-sidebar__label">shadcn</span>
+      </button>
+    </div>
+  </aside>
+  <main class="shad-sidebar-layout__main">
+    <div style="display:flex;align-items:center;gap:0.5rem;padding:0.75rem;border-bottom:1px solid var(--shad-border)">
+      <button type="button" class="shad-sidebar__trigger">
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+      </button>
+      <span class="shad-small">Dashboard</span>
+    </div>
+    <div style="padding:1rem" class="shad-muted">Main content. Toggle with the button or ⌘/Ctrl+B. Resize below 768px for the mobile sheet.</div>
+  </main>
+</div>
+  </div>
+</section>
+<section id="c-skeleton" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">skeleton</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div style="display:flex; align-items:center; gap:1rem;">
+  <div class="shad-skeleton shad-skeleton--circle" style="width:3rem; height:3rem;" aria-hidden="true"></div>
+  <div style="display:flex; flex-direction:column; gap:0.5rem; flex:1;">
+    <div class="shad-skeleton shad-skeleton--text" style="width:60%;" aria-hidden="true"></div>
+    <div class="shad-skeleton shad-skeleton--text" style="width:40%;" aria-hidden="true"></div>
+  </div>
+</div>
+
+<!-- card skeleton -->
+<div class="shad-skeleton" style="width:100%; height:8rem; border-radius:var(--shad-radius-xl);" aria-hidden="true"></div>
+  </div>
+</section>
+<section id="c-slider" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">slider</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- single -->
+<div class="shad-slider" data-shad="slider" data-min="0" data-max="100" data-step="1" data-value="50" style="max-width: 20rem;">
+  <div class="shad-slider__track"><div class="shad-slider__range"></div></div>
+  <div class="shad-slider__thumb" role="slider" tabindex="0" aria-label="Volume"></div>
+</div>
+
+<!-- range (two thumbs) -->
+<div class="shad-slider" data-shad="slider" data-min="0" data-max="100" data-step="5" data-value="25" data-value2="75" style="max-width: 20rem;">
+  <div class="shad-slider__track"><div class="shad-slider__range"></div></div>
+  <div class="shad-slider__thumb" role="slider" tabindex="0" aria-label="Minimum price"></div>
+  <div class="shad-slider__thumb" role="slider" tabindex="0" aria-label="Maximum price"></div>
+</div>
+
+<!-- with marks + labels -->
+<div class="shad-slider" data-shad="slider" data-min="0" data-max="100" data-step="25" data-value="50" data-marks="0,25,50,75,100" data-marks-labels style="max-width: 20rem; margin-bottom: 1.5rem;">
+  <div class="shad-slider__track"><div class="shad-slider__range"></div></div>
+  <div class="shad-slider__thumb" role="slider" tabindex="0" aria-label="Quality"></div>
+</div>
+
+<!-- disabled -->
+<div class="shad-slider" data-shad="slider" data-disabled data-min="0" data-max="100" data-step="1" data-value="30" style="max-width: 20rem;">
+  <div class="shad-slider__track"><div class="shad-slider__range"></div></div>
+  <div class="shad-slider__thumb" role="slider" tabindex="-1" aria-label="Disabled"></div>
+</div>
+  </div>
+</section>
+<section id="c-spinner" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">spinner</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<svg class="shad-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="status" aria-label="Loading"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+
+<svg class="shad-spinner shad-spinner--lg shad-spinner--muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="status" aria-label="Loading"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+  </div>
+</section>
+<section id="c-switch" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">switch</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-switch-row">
+  <button type="button" class="shad-switch" data-shad="switch" role="switch" data-state="unchecked" id="sw-air">
+    <span class="shad-switch__thumb" aria-hidden="true"></span>
+  </button>
+  <label class="shad-label" for="sw-air">Airplane Mode</label>
+</div>
+
+<div class="shad-switch-row">
+  <button type="button" class="shad-switch" data-shad="switch" role="switch" data-state="checked" id="sw-wifi">
+    <span class="shad-switch__thumb" aria-hidden="true"></span>
+  </button>
+  <label class="shad-label" for="sw-wifi">Wi-Fi</label>
+</div>
+
+<div class="shad-switch-row">
+  <button type="button" class="shad-switch" data-shad="switch" role="switch" data-state="unchecked" data-disabled disabled id="sw-dis">
+    <span class="shad-switch__thumb" aria-hidden="true"></span>
+  </button>
+  <label class="shad-label" data-disabled for="sw-dis">Disabled</label>
+</div>
+  </div>
+</section>
+<section id="c-table" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">table</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div class="shad-table-container">
+  <table class="shad-table shad-table--hover">
+    <caption class="shad-table__caption">A list of your recent invoices.</caption>
+    <thead class="shad-table__header">
+      <tr class="shad-table__row">
+        <th class="shad-table__head" scope="col">Invoice</th>
+        <th class="shad-table__head" scope="col">Status</th>
+        <th class="shad-table__head" scope="col">Method</th>
+        <th class="shad-table__head" scope="col" style="text-align:right;">Amount</th>
+      </tr>
+    </thead>
+    <tbody class="shad-table__body">
+      <tr class="shad-table__row">
+        <td class="shad-table__cell" style="font-weight:var(--shad-font-weight-medium);">INV001</td>
+        <td class="shad-table__cell"><span class="shad-badge shad-badge--outline">Paid</span></td>
+        <td class="shad-table__cell">Credit Card</td>
+        <td class="shad-table__cell" style="text-align:right;">$250.00</td>
+      </tr>
+      <tr class="shad-table__row" data-state="selected">
+        <td class="shad-table__cell" style="font-weight:var(--shad-font-weight-medium);">INV002</td>
+        <td class="shad-table__cell"><span class="shad-badge shad-badge--outline">Pending</span></td>
+        <td class="shad-table__cell">PayPal</td>
+        <td class="shad-table__cell" style="text-align:right;">$150.00</td>
+      </tr>
+      <tr class="shad-table__row">
+        <td class="shad-table__cell" style="font-weight:var(--shad-font-weight-medium);">INV003</td>
+        <td class="shad-table__cell"><span class="shad-badge shad-badge--secondary">Unpaid</span></td>
+        <td class="shad-table__cell">Bank Transfer</td>
+        <td class="shad-table__cell" style="text-align:right;">$350.00</td>
+      </tr>
+    </tbody>
+    <tfoot class="shad-table__footer">
+      <tr class="shad-table__row">
+        <td class="shad-table__cell" colspan="3">Total</td>
+        <td class="shad-table__cell" style="text-align:right;">$750.00</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!-- sticky header: cap the container height -->
+<div class="shad-table-container" style="max-height: 16rem;">
+  <table class="shad-table shad-table--sticky shad-table--striped">
+    <thead class="shad-table__header">
+      <tr class="shad-table__row">
+        <th class="shad-table__head" scope="col">Name</th>
+        <th class="shad-table__head" scope="col">Role</th>
+      </tr>
+    </thead>
+    <tbody class="shad-table__body">
+      <tr class="shad-table__row"><td class="shad-table__cell">Ada</td><td class="shad-table__cell">Engineer</td></tr>
+      <tr class="shad-table__row"><td class="shad-table__cell">Grace</td><td class="shad-table__cell">Admiral</td></tr>
+      <tr class="shad-table__row"><td class="shad-table__cell">Katherine</td><td class="shad-table__cell">Mathematician</td></tr>
+      <tr class="shad-table__row"><td class="shad-table__cell">Margaret</td><td class="shad-table__cell">Director</td></tr>
+      <tr class="shad-table__row"><td class="shad-table__cell">Radia</td><td class="shad-table__cell">Inventor</td></tr>
+      <tr class="shad-table__row"><td class="shad-table__cell">Annie</td><td class="shad-table__cell">Programmer</td></tr>
+    </tbody>
+  </table>
+</div>
+  </div>
+</section>
+<section id="c-tabs" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">tabs</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div data-shad="tabs" data-value="account" style="max-width:24rem">
+  <div class="shad-tabs__list">
+    <div class="shad-tabs__indicator" aria-hidden="true"></div>
+    <button type="button" class="shad-tabs__trigger" data-value="account">Account</button>
+    <button type="button" class="shad-tabs__trigger" data-value="password">Password</button>
+    <button type="button" class="shad-tabs__trigger" data-value="team" data-disabled>Team</button>
+  </div>
+  <div class="shad-tabs__content" data-value="account">
+    <div class="shad-card">
+      <div class="shad-card__header">
+        <div class="shad-card__title">Account</div>
+        <div class="shad-card__description">Make changes to your account here.</div>
+      </div>
+      <div class="shad-card__content">
+        <div class="shad-form-field">
+          <label class="shad-label" for="tabs-name">Name</label>
+          <input class="shad-input" id="tabs-name" type="text" value="Pedro Duarte" />
+        </div>
+      </div>
+      <div class="shad-card__footer">
+        <button type="button" class="shad-btn shad-btn--default">Save changes</button>
+      </div>
+    </div>
+  </div>
+  <div class="shad-tabs__content" data-value="password">
+    <div class="shad-card">
+      <div class="shad-card__header">
+        <div class="shad-card__title">Password</div>
+        <div class="shad-card__description">Change your password here.</div>
+      </div>
+      <div class="shad-card__content">
+        <div class="shad-form-field">
+          <label class="shad-label" for="tabs-pw">New password</label>
+          <input class="shad-input" id="tabs-pw" type="password" />
+        </div>
+      </div>
+      <div class="shad-card__footer">
+        <button type="button" class="shad-btn shad-btn--default">Save password</button>
+      </div>
+    </div>
+  </div>
+  <div class="shad-tabs__content" data-value="team">Team content.</div>
+</div>
+  </div>
+</section>
+<section id="c-textarea" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">textarea</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<textarea class="shad-textarea" placeholder="Type your message here."></textarea>
+<textarea class="shad-textarea" placeholder="Disabled" disabled></textarea>
+<textarea class="shad-textarea" aria-invalid="true">Invalid content</textarea>
+
+<!-- autosize -->
+<textarea class="shad-textarea" data-shad="textarea" data-autosize placeholder="Grows as you type…"></textarea>
+  </div>
+</section>
+<section id="c-toast" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">toast</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- Toasts are imperative (shad.toast API) — no declarative anatomy to place.
+     These buttons demonstrate every entry point. -->
+<div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+  <button type="button" class="shad-btn shad-btn--outline"
+    onclick="shad.toast({title:'Event has been created', description:'Sunday, December 03, 2023 at 9:00 AM', action:{label:'Undo', onClick:function(){shad.toast('Undone')}}})">
+    Default toast
+  </button>
+  <button type="button" class="shad-btn shad-btn--outline"
+    onclick="shad.toast.success('Profile saved')">Success</button>
+  <button type="button" class="shad-btn shad-btn--outline"
+    onclick="shad.toast.error('Something went wrong')">Error</button>
+  <button type="button" class="shad-btn shad-btn--outline"
+    onclick="shad.toast.warning('Storage almost full')">Warning</button>
+  <button type="button" class="shad-btn shad-btn--outline"
+    onclick="shad.toast.promise(new Promise(function(res){setTimeout(res,2000)}), {loading:'Saving…', success:'Saved!', error:'Failed to save'})">
+    Promise toast
+  </button>
+  <button type="button" class="shad-btn shad-btn--ghost"
+    onclick="shad.toast.dismiss()">Dismiss all</button>
+</div>
+  </div>
+</section>
+<section id="c-toggle" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">toggle</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- icon toggle (lucide bold) -->
+<button type="button" class="shad-toggle" data-shad="toggle" data-state="off" aria-label="Toggle bold">
+  <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"/></svg>
+</button>
+
+<!-- on state, with text -->
+<button type="button" class="shad-toggle" data-shad="toggle" data-state="on">
+  <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
+  Italic
+</button>
+
+<!-- outline variant -->
+<button type="button" class="shad-toggle shad-toggle--outline" data-shad="toggle" data-state="off">Outline</button>
+
+<!-- sizes -->
+<button type="button" class="shad-toggle shad-toggle--outline shad-toggle--sm" data-shad="toggle" data-state="off">Small</button>
+<button type="button" class="shad-toggle shad-toggle--outline shad-toggle--lg" data-shad="toggle" data-state="off">Large</button>
+
+<!-- disabled -->
+<button type="button" class="shad-toggle" data-shad="toggle" data-state="off" data-disabled disabled>Disabled</button>
+  </div>
+</section>
+<section id="c-toggle-group" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">toggle group</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<!-- multiple: text formatting -->
+<div class="shad-toggle-group" data-shad="toggle-group" data-type="multiple" role="group" aria-label="Text formatting">
+  <button type="button" class="shad-toggle" data-value="bold" data-state="on" aria-label="Bold">
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"/></svg>
+  </button>
+  <button type="button" class="shad-toggle" data-value="italic" data-state="off" aria-label="Italic">
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
+  </button>
+  <button type="button" class="shad-toggle" data-value="underline" data-state="off" aria-label="Underline">
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4v6a6 6 0 0 0 12 0V4"/><line x1="4" x2="20" y1="20" y2="20"/></svg>
+  </button>
+</div>
+
+<!-- single, outline -->
+<div class="shad-toggle-group shad-toggle-group--outline" data-shad="toggle-group" data-type="single" role="group" aria-label="Alignment">
+  <button type="button" class="shad-toggle" data-value="left" data-state="off">Left</button>
+  <button type="button" class="shad-toggle" data-value="center" data-state="on">Center</button>
+  <button type="button" class="shad-toggle" data-value="right" data-state="off">Right</button>
+</div>
+  </div>
+</section>
+<section id="c-tooltip" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">tooltip</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<div data-shad="tooltip" data-side="top" style="display:inline-block">
+  <button type="button" class="shad-btn shad-btn--outline shad-tooltip__trigger">Hover me</button>
+  <div class="shad-tooltip__content shad-anim-pop" hidden>
+    Add to library
+    <div class="shad-tooltip__arrow" aria-hidden="true"></div>
+  </div>
+</div>
+
+<div data-shad="tooltip" data-side="right" style="display:inline-block">
+  <button type="button" class="shad-btn shad-btn--outline shad-tooltip__trigger">Right</button>
+  <div class="shad-tooltip__content shad-anim-pop" hidden>Opens to the right</div>
+</div>
+
+<div data-shad="tooltip" data-side="bottom" style="display:inline-block">
+  <button type="button" class="shad-btn shad-btn--outline shad-tooltip__trigger">Bottom</button>
+  <div class="shad-tooltip__content shad-anim-pop" hidden>Opens below</div>
+</div>
+  </div>
+</section>
+<section id="c-typography" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
+  <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">typography</h2>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
+<h1 class="shad-h1">Taxing Laughter: The Joke Tax Chronicles</h1>
+<p class="shad-lead">A modest king faces his greatest challenge yet: a kingdom that has stopped laughing.</p>
+<h2 class="shad-h2">The People of the Kingdom</h2>
+<p class="shad-p">The king, seeing how much happier his subjects were, realized the error of his ways and repealed the joke tax.</p>
+<h3 class="shad-h3">The Joke Tax</h3>
+<p class="shad-p">The king thought long and hard, and finally came up with <a href="#">a brilliant plan</a>.</p>
+<blockquote class="shad-blockquote">"After all," he said, "everyone enjoys a good joke, so it's only fair that they should pay for the privilege."</blockquote>
+<h4 class="shad-h4">People stopped telling jokes</h4>
+<ul class="shad-list">
+  <li>1st level of puns: 5 gold coins</li>
+  <li>2nd level of jokes: 10 gold coins</li>
+  <li>3rd level of one-liners: 20 gold coins</li>
+</ul>
+<p class="shad-p">Install it with <code class="shad-code">npm install shadshiny</code> — or press <kbd class="shad-kbd">⌘</kbd> <kbd class="shad-kbd">K</kbd>.</p>
+<p class="shad-large">Are you absolutely sure?</p>
+<p class="shad-small">Email address</p>
+<p class="shad-muted">Enter your email address.</p>
+  </div>
+</section>
+  </main>
+</div>
+<script src="../core/shad-runtime.js"></script>
+  <script src="../components/dialog/dialog.js"></script>
+  <script src="../components/alert-dialog/alert-dialog.js"></script>
+  <script src="../components/dropdown-menu/dropdown-menu.js"></script>
+  <script src="../components/context-menu/context-menu.js"></script>
+  <script src="../components/menubar/menubar.js"></script>
+  <script src="../components/accordion/accordion.js"></script>
+  <script src="../components/calendar/calendar.js"></script>
+  <script src="../components/carousel/carousel.js"></script>
+  <script src="../components/checkbox/checkbox.js"></script>
+  <script src="../components/collapsible/collapsible.js"></script>
+  <script src="../components/combobox/combobox.js"></script>
+  <script src="../components/command/command.js"></script>
+  <script src="../components/date-picker/date-picker.js"></script>
+  <script src="../components/drawer/drawer.js"></script>
+  <script src="../components/form-field/form-field.js"></script>
+  <script src="../components/hover-card/hover-card.js"></script>
+  <script src="../components/input-otp/input-otp.js"></script>
+  <script src="../components/navigation-menu/navigation-menu.js"></script>
+  <script src="../components/pagination/pagination.js"></script>
+  <script src="../components/popover/popover.js"></script>
+  <script src="../components/radio-group/radio-group.js"></script>
+  <script src="../components/resizable/resizable.js"></script>
+  <script src="../components/scroll-area/scroll-area.js"></script>
+  <script src="../components/select/select.js"></script>
+  <script src="../components/sheet/sheet.js"></script>
+  <script src="../components/sidebar/sidebar.js"></script>
+  <script src="../components/slider/slider.js"></script>
+  <script src="../components/switch/switch.js"></script>
+  <script src="../components/tabs/tabs.js"></script>
+  <script src="../components/textarea/textarea.js"></script>
+  <script src="../components/toast/toast.js"></script>
+  <script src="../components/toggle/toggle.js"></script>
+  <script src="../components/toggle-group/toggle-group.js"></script>
+  <script src="../components/tooltip/tooltip.js"></script>
+<script>shad.autoInit();</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+Package: shadshiny
+Title: 'shadcn/ui' Components for 'Shiny'
+Version: 0.1.0
+Authors@R:
+    person("Arijit", "Ghosh", email = "arijitghosh2009@gmail.com",
+           role = c("aut", "cre"))
+Description: A complete port of the 'shadcn/ui' design system for 'Shiny'
+    applications: 49 accessible, themeable components implemented in
+    framework-free CSS and vanilla JavaScript, wrapped as native R functions
+    with 'Shiny' input bindings. Coexists with 'Bootstrap 5' and 'bslib',
+    including automatic dark-mode synchronization.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends:
+    R (>= 4.1.0)
+Imports:
+    htmltools (>= 0.5.7),
+    shiny (>= 1.8.0),
+    jsonlite
+Suggests:
+    bslib,
+    xml2,
+    testthat (>= 3.0.0),
+    shinytest2,
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+URL: https://github.com/orijitghosh/shadshiny
+BugReports: https://github.com/orijitghosh/shadshiny/issues
+Config/roxygen2/version: 8.0.0

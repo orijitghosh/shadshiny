@@ -1,0 +1,23 @@
+<!-- FILE: inst/assets/components/resizable/resizable.html -->
+<div class="shad-resizable" data-shad="resizable" data-orientation="horizontal"
+     style="height:12rem;max-width:28rem;border:1px solid var(--shad-border);border-radius:var(--shad-radius-lg)">
+  <div class="shad-resizable__panel" data-size="50">
+    <div style="display:grid;place-items:center;height:100%;font-size:var(--shad-text-sm);font-weight:var(--shad-font-weight-semibold)">One</div>
+  </div>
+  <div class="shad-resizable__handle">
+    <span class="shad-resizable__grip" aria-hidden="true">
+      <svg width="6" height="10" viewBox="0 0 6 10" fill="currentColor" aria-hidden="true"><circle cx="1.5" cy="2" r="1"/><circle cx="4.5" cy="2" r="1"/><circle cx="1.5" cy="5" r="1"/><circle cx="4.5" cy="5" r="1"/><circle cx="1.5" cy="8" r="1"/><circle cx="4.5" cy="8" r="1"/></svg>
+    </span>
+  </div>
+  <div class="shad-resizable__panel" data-size="50">
+    <div class="shad-resizable" data-shad="resizable" data-orientation="vertical" style="height:100%">
+      <div class="shad-resizable__panel" data-size="40">
+        <div style="display:grid;place-items:center;height:100%;font-size:var(--shad-text-sm);font-weight:var(--shad-font-weight-semibold)">Two</div>
+      </div>
+      <div class="shad-resizable__handle"></div>
+      <div class="shad-resizable__panel" data-size="60">
+        <div style="display:grid;place-items:center;height:100%;font-size:var(--shad-text-sm);font-weight:var(--shad-font-weight-semibold)">Three</div>
+      </div>
+    </div>
+  </div>
+</div>

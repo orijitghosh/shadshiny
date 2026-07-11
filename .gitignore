@@ -1,0 +1,25 @@
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj.user
+.Rprofile
+
+# pkgdown
+docs/
+pkgdown/_site
+
+# testthat / shinytest2 artifacts
+tests/testthat/_snaps/*/*.new.*
+tests/testthat/apps/**/tests/testthat/_snaps/**/*-actual*
+*.Rcheck/
+*.tar.gz
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+*.swp
