@@ -1,0 +1,89 @@
+/* FILE: inst/assets/components/input-group/input-group.css */
+/* shadshiny — input-group. CSS-only. A bordered shell that adopts the focus /
+   invalid chrome so the wrapped control can drop its own. Addons align inline
+   (leading/trailing) or block (stacked toolbars, e.g. above a textarea) via
+   data-align. */
+
+.shad-input-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: fit-content;
+  border-radius: var(--shad-radius-md);
+  border: 1px solid var(--shad-input);
+  background-color: transparent;
+  box-shadow: var(--shad-shadow-xs);
+  transition: color var(--shad-duration-fast) var(--shad-ease-out),
+              border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-input-group--block { width: 100%; }
+
+.shad-input-group:focus-within {
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-shadow-xs), var(--shad-focus-shadow);
+}
+.shad-input-group[data-invalid] { border-color: var(--shad-destructive); }
+.shad-input-group[data-invalid]:focus-within {
+  border-color: var(--shad-destructive);
+  box-shadow: var(--shad-shadow-xs), var(--shad-focus-shadow-destructive);
+}
+
+/* Wrapped control sheds its own border/shadow/background — the shell owns them. */
+.shad-input-group > .shad-input,
+.shad-input-group > .shad-textarea {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+.shad-input-group > .shad-input:focus-visible,
+.shad-input-group > .shad-textarea:focus-visible {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* ---- addons ---- */
+.shad-input-group__addon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  color: var(--shad-muted-foreground);
+  white-space: nowrap;
+}
+.shad-input-group__addon[data-align="inline-start"] { padding-inline-start: var(--shad-space-3); }
+.shad-input-group__addon[data-align="inline-end"]   { padding-inline-end: var(--shad-space-3); }
+
+/* block addons take a full row (toolbar strips) */
+.shad-input-group__addon[data-align="block-start"],
+.shad-input-group__addon[data-align="block-end"] {
+  flex-basis: 100%;
+  padding: var(--shad-space-2) var(--shad-space-3);
+}
+.shad-input-group__addon[data-align="block-start"] {
+  order: -1;
+  border-bottom: 1px solid var(--shad-border);
+}
+.shad-input-group__addon[data-align="block-end"] {
+  order: 99;
+  border-top: 1px solid var(--shad-border);
+}
+
+/* ---- text + inline controls ---- */
+.shad-input-group__text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-1_5);
+  font-size: var(--shad-text-sm);
+  color: var(--shad-muted-foreground);
+}
+.shad-input-group__text .shad-icon,
+.shad-input-group__addon .shad-icon { width: 1rem; height: 1rem; }
+
+/* a button living inside the group: compact, chromeless until hovered */
+.shad-input-group__button {
+  flex: none;
+  height: 1.75rem;
+  padding: 0 var(--shad-space-2);
+}

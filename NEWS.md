@@ -1,3 +1,18 @@
+# shadshiny (development version)
+
+* **New components (chat / AI kit):** `shad_bubble()` (+ group), `shad_message()`
+  (+ group, `shad_message_spinner()`), `shad_attachment()` (+ group,
+  `shad_attachment_action()`), `shad_marker()`, and `shad_message_scroller()`
+  (+ item, and the `shad_message_scroller_to_bottom()` server helper) — a
+  stick-to-bottom streaming transcript.
+* **New components (layout & inputs):** `shad_native_select()` (a styled real
+  `<select>` with `update_shad_native_select()`), `shad_empty()` (empty-state
+  panel), `shad_item()` (+ group, separator) — the flex list-row primitive,
+  `shad_button_group()` (+ text, separator) — segmented button controls, and
+  `shad_input_group()` (+ addon, text, button) — a field shell for
+  icon/prefix/button affixes around `shad_input()` / `shad_textarea()`.
+* **New icons:** `file`, `folder`, `clock`.
+
 # shadshiny 0.1.0
 
 Initial release.

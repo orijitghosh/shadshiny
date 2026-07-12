@@ -16,6 +16,7 @@ test_that("the simple value-setters all round-trip their value", {
     function(s) update_shad_toggle("x", "bold", session = s),
     function(s) update_shad_toggle_group("x", c("a", "b"), session = s),
     function(s) update_shad_select("x", "b", session = s),
+    function(s) update_shad_native_select("x", "b", session = s),
     function(s) update_shad_input_otp("x", "123456", session = s),
     function(s) update_shad_tabs("x", "account", session = s),
     function(s) update_shad_accordion("x", "item-1", session = s)
@@ -71,6 +72,16 @@ test_that("progress emits a style transform plus aria/state attrs", {
 
   attrs <- vapply(s$messages[2:3], function(m) m$message$attr, character(1))
   expect_setequal(attrs, c("aria-valuenow", "data-state"))
+})
+
+test_that("message-scroller to-bottom sends a namespaced invoke", {
+  s <- new_fake_session(ns_prefix = "mod")
+  shad_message_scroller_to_bottom("chat", smooth = FALSE, session = s)
+  m <- one_message(s)
+  expect_identical(m$type, "shadshiny:invoke")
+  expect_identical(m$message$id, "mod-chat")
+  expect_identical(m$message$method, "scrollToBottom")
+  expect_identical(m$message$args, list(FALSE))
 })
 
 test_that("button loading toggles busy/disabled attributes", {

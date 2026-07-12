@@ -62,6 +62,7 @@ Other shadshiny tier-3 components:
 \code{\link[=shad_hover_card]{shad_hover_card()}},
 \code{\link{shad_menu_parts}},
 \code{\link[=shad_menubar]{shad_menubar()}},
+\code{\link[=shad_message_scroller]{shad_message_scroller()}},
 \code{\link[=shad_navigation_menu]{shad_navigation_menu()}},
 \code{\link[=shad_pagination]{shad_pagination()}},
 \code{\link[=shad_popover]{shad_popover()}},

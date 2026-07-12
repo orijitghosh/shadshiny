@@ -51,6 +51,8 @@ Other shadshiny tier-2 components:
 \code{\link[=shad_date_picker]{shad_date_picker()}},
 \code{\link[=shad_form_field]{shad_form_field()}},
 \code{\link[=shad_input]{shad_input()}},
+\code{\link[=shad_input_group]{shad_input_group()}},
+\code{\link[=shad_native_select]{shad_native_select()}},
 \code{\link[=shad_radio_group]{shad_radio_group()}},
 \code{\link[=shad_select]{shad_select()}},
 \code{\link[=shad_slider]{shad_slider()}},

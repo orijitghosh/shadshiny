@@ -11,6 +11,7 @@
 \alias{update_shad_select}
 \alias{update_shad_combobox}
 \alias{update_shad_input_otp}
+\alias{update_shad_native_select}
 \alias{update_shad_calendar}
 \alias{update_shad_date_picker}
 \alias{update_shad_tabs}
@@ -52,6 +53,12 @@ update_shad_combobox(
 )
 
 update_shad_input_otp(id, value, session = shiny::getDefaultReactiveDomain())
+
+update_shad_native_select(
+  id,
+  selected,
+  session = shiny::getDefaultReactiveDomain()
+)
 
 update_shad_calendar(id, value, session = shiny::getDefaultReactiveDomain())
 
@@ -120,6 +127,7 @@ of a component is a non-goal — re-render with \code{\link[shiny:renderUI]{shin
 }
 \seealso{
 Other shadshiny server API:
+\code{\link[=shad_message_scroller_to_bottom]{shad_message_scroller_to_bottom()}},
 \code{\link{shad_overlay_server}},
 \code{\link[=shad_toast]{shad_toast()}}
 }

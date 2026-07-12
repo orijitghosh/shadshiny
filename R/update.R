@@ -130,6 +130,13 @@ update_shad_input_otp <- function(id, value,
 
 #' @rdname update_shad
 #' @export
+update_shad_native_select <- function(id, selected,
+                                       session = shiny::getDefaultReactiveDomain()) {
+  shad_set_value(id, as.character(selected), session)
+}
+
+#' @rdname update_shad
+#' @export
 update_shad_calendar <- function(id, value,
                                  session = shiny::getDefaultReactiveDomain()) {
   val <- if (length(value) >= 2) {

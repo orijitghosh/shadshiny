@@ -31,7 +31,10 @@
   "arrow-left"        = '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
   "arrow-right"       = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
   "menu"              = '<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>',
-  "panel-left"        = '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/>'
+  "panel-left"        = '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/>',
+  "file"              = '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>',
+  "folder"            = '<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
+  "clock"             = '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
 )
 
 #' Inline Lucide icon

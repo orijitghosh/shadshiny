@@ -87,6 +87,7 @@ shad_toast_update(id, message = "Uploaded", variant = "success")
 }
 \seealso{
 Other shadshiny server API:
+\code{\link[=shad_message_scroller_to_bottom]{shad_message_scroller_to_bottom()}},
 \code{\link{shad_overlay_server}},
 \code{\link{update_shad}}
 }

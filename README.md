@@ -9,7 +9,7 @@
 <!-- badges: end -->
 
 **shadshiny** brings the [shadcn/ui](https://ui.shadcn.com) design system to
-[Shiny](https://shiny.posit.co). It is a from-scratch port — 49 accessible,
+[Shiny](https://shiny.posit.co). It is a from-scratch port — 59 accessible,
 themeable components rebuilt in framework-free CSS and vanilla JavaScript, then
 wrapped as ordinary R functions with native Shiny input bindings.
 
@@ -92,6 +92,7 @@ shad_run_example("kitchen-sink")
 | `shad_alert` | `shad_separator` | `shad_skeleton` | `shad_spinner` |
 | `shad_aspect_ratio` | `shad_label` | `shad_progress` | `shad_breadcrumb` |
 | `shad_table` | `shad_kbd` | `shad_code` | typography (`shad_h1`…`shad_p`) |
+| `shad_item` | `shad_empty` | `shad_button_group` | |
 
 **Tier 2 — form inputs**
 
@@ -99,8 +100,8 @@ shad_run_example("kitchen-sink")
 |---|---|---|---|
 | `shad_input` | `shad_textarea` | `shad_checkbox` | `shad_switch` |
 | `shad_radio_group` | `shad_toggle` | `shad_toggle_group` | `shad_slider` |
-| `shad_select` | `shad_combobox` | `shad_input_otp` | `shad_calendar` |
-| `shad_date_picker` | `shad_form_field` | | |
+| `shad_select` | `shad_native_select` | `shad_combobox` | `shad_input_otp` |
+| `shad_calendar` | `shad_date_picker` | `shad_form_field` | `shad_input_group` |
 
 **Tier 3 — overlays**
 
@@ -117,6 +118,13 @@ shad_run_example("kitchen-sink")
 | `shad_tabs` | `shad_accordion` | `shad_collapsible` | `shad_pagination` |
 | `shad_scroll_area` | `shad_resizable` | `shad_carousel` | `shad_navigation_menu` |
 | `shad_sidebar_layout` | | | |
+
+**Chat / AI kit**
+
+| | | | |
+|---|---|---|---|
+| `shad_message` | `shad_bubble` | `shad_attachment` | `shad_marker` |
+| `shad_message_scroller` | | | |
 
 Every stateful component is namespaced-module safe and has a matching
 `update_shad_*()` server helper where it holds a value. Overlays add

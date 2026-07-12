@@ -75,6 +75,13 @@ reference:
       - shad_small
       - shad_muted
       - shad_list
+      - shad_item
+      - shad_item_group
+      - shad_item_separator
+      - shad_empty
+      - shad_button_group
+      - shad_button_group_separator
+      - shad_button_group_text
 
   - title: Tier 2 — form inputs
     desc: Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
@@ -93,11 +100,32 @@ reference:
       - shad_select_item
       - shad_select_group
       - shad_select_separator
+      - shad_native_select
       - shad_combobox
       - shad_input_otp
       - shad_calendar
       - shad_date_picker
       - shad_form_field
+      - shad_input_group
+      - shad_input_group_addon
+      - shad_input_group_text
+      - shad_input_group_button
+
+  - title: Chat & AI kit
+    desc: Streaming transcript primitives — bubbles, messages, attachments,
+      markers, and a stick-to-bottom scroller.
+    contents:
+      - shad_message
+      - shad_message_group
+      - shad_message_spinner
+      - shad_bubble
+      - shad_bubble_group
+      - shad_attachment
+      - shad_attachment_action
+      - shad_attachment_group
+      - shad_marker
+      - shad_message_scroller
+      - shad_message_scroller_item
 
   - title: Tier 3 — overlays
     desc: Dialogs, popovers, menus, command palette, and toasts (UI side).
@@ -164,6 +192,7 @@ reference:
       - update_shad_toggle_group
       - update_shad_slider
       - update_shad_select
+      - update_shad_native_select
       - update_shad_combobox
       - update_shad_calendar
       - update_shad_date_picker
@@ -184,6 +213,7 @@ reference:
       - shad_drawer_open
       - shad_popover_open
       - shad_sidebar_toggle
+      - shad_message_scroller_to_bottom
       - shad_toast
       - shad_toast_success
       - shad_toast_error

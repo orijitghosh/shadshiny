@@ -211,6 +211,7 @@
   makeShadBinding("toggle");
   makeShadBinding("toggle-group");
   makeShadBinding("select");
+  makeShadBinding("native-select");
   makeShadBinding("combobox");
   makeShadBinding("input-otp");
   makeShadBinding("calendar", { type: "shadshiny.date" });
