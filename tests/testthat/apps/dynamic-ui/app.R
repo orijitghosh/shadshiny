@@ -4,9 +4,9 @@ library(shiny)
 library(shadshiny)
 
 ui <- page_shad(
-  shad_button("add", "Add select"),
+  shad_button(inputId = "add", "Add select"),
   uiOutput("holder"),
-  shad_button("set_b", "Set to B"),
+  shad_button(inputId = "set_b", "Set to B"),
   verbatimTextOutput("val")
 )
 

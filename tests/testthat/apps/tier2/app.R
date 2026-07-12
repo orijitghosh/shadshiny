@@ -19,7 +19,7 @@ ui <- page_shad(
   shad_input_otp("otp", length = 4, groups = c(2, 2)),
   shad_date_picker("dp", label = "Date", value = "2026-07-11"),
 
-  shad_button("do_update", "Update all"),
+  shad_button(inputId = "do_update", "Update all"),
   verbatimTextOutput("vals")
 )
 

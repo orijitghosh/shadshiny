@@ -1,7 +1,8 @@
 /* FILE: inst/assets/components/carousel/carousel.js */
 /* shadshiny — carousel behavior. Scroll-snap native scrolling; JS adds
    prev/next paging, generated dots, index tracking via scroll position,
-   and arrow-key support. getValue() -> current slide index (0-based). */
+   and arrow-key support. getValue()/setValue() and the shad:change payload
+   are 1-based slide numbers (the R contract); `index` is 0-based internally. */
 (function () {
   "use strict";
   shad.register("carousel", function (root) {
@@ -12,6 +13,7 @@
     const dotsWrap = root.querySelector(".shad-carousel__dots");
     let index = 0;
     let dots = [];
+    let programmatic = false; // suppress the settle-emit after goTo() self-reports
 
     root.setAttribute("aria-roledescription", "carousel");
     function slides() {
@@ -58,18 +60,32 @@
       dots.forEach((d, i) => {
         d.setAttribute("data-state", i === index ? "active" : "inactive");
       });
-      if (fire && changed) shad.util.emit(root, "shad:change", { value: index });
+      if (fire && changed) shad.util.emit(root, "shad:change", { value: index + 1 });
     }
     function goTo(i) {
       const all = slides();
+      if (!all.length) return;
       i = shad.util.clamp(i, 0, all.length - 1);
+      const changed = i !== index;
+      index = i;
+      dots.forEach((d, j) => {
+        d.setAttribute("data-state", j === index ? "active" : "inactive");
+      });
+      // Report immediately: the smooth scroll settles asynchronously, but the
+      // value is already known — this keeps server-driven navigation and tests
+      // deterministic instead of waiting on the scroll animation.
+      programmatic = true;
       viewport.scrollTo({ left: all[i].offsetLeft, behavior: "smooth" });
+      if (changed) shad.util.emit(root, "shad:change", { value: index + 1 });
     }
 
     let scrollTimer = null;
     function onScroll() {
       clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => sync(true), 80); // settle after snap
+      scrollTimer = setTimeout(() => {
+        // A programmatic goTo() already emitted; just reconcile dots/disabled.
+        if (programmatic) { programmatic = false; sync(false); } else sync(true);
+      }, 80); // settle after snap
     }
     function onPrev() { goTo(index - 1); }
     function onNext() { goTo(index + 1); }
@@ -87,8 +103,8 @@
     sync(false);
 
     return {
-      getValue() { return index; },
-      setValue(i) { goTo(parseInt(i, 10)); },
+      getValue() { return index + 1; },
+      setValue(i) { goTo(parseInt(i, 10) - 1); },
       next: onNext, prev: onPrev,
       refresh() { buildDots(); sync(false); },
       destroy() {

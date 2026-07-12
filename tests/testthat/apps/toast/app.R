@@ -3,10 +3,10 @@ library(shiny)
 library(shadshiny)
 
 ui <- page_shad(
-  shad_button("success", "Success toast"),
-  shad_button("error", "Error toast"),
-  shad_button("dismiss", "Dismiss all"),
-  shad_button("flow", "Loading -> success")
+  shad_button(inputId = "success", "Success toast"),
+  shad_button(inputId = "error", "Error toast"),
+  shad_button(inputId = "dismiss", "Dismiss all"),
+  shad_button(inputId = "flow", "Loading -> success")
 )
 
 server <- function(input, output, session) {

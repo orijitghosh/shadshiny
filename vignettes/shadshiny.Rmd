@@ -64,8 +64,8 @@ ui <- page_shad(
       shad_checkbox("tos", label = "I accept the terms")
     ),
     shad_card_footer(
-      shad_button("submit", "Sign up"),
-      shad_button("reset", "Reset", variant = "outline")
+      shad_button(inputId = "submit", "Sign up"),
+      shad_button(inputId = "reset", "Reset", variant = "outline")
     )
   ),
   verbatimTextOutput("out")

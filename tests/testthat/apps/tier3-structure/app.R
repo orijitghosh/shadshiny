@@ -14,7 +14,7 @@ ui <- page_shad(
     shad_carousel_item(shad_p("Slide 1")),
     shad_carousel_item(shad_p("Slide 2"))),
 
-  shad_button("go", "Advance all"),
+  shad_button(inputId = "go", "Advance all"),
   verbatimTextOutput("state")
 )
 

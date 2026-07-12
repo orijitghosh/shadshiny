@@ -10,7 +10,8 @@ test_that("overlays open/close from the server and report state", {
   app$click("open_dlg")
   app$wait_for_idle()
   expect_true(app$get_value(input = "dlg"))
-  open_count <- app$get_js("document.querySelectorAll('[data-shad=\"dialog\"][data-state=\"open\"]').length")
+  # The content is portaled to <body> and carries data-state when open.
+  open_count <- app$get_js("document.querySelectorAll('.shad-dialog__content[data-state=\"open\"]').length")
   expect_true(open_count >= 1)
 
   app$click("close_dlg")

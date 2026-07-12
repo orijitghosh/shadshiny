@@ -12,8 +12,8 @@ ui <- page_shad(
   shad_sheet("sh", side = "right", trigger = shad_button("Open sheet"),
              title = "Panel", shad_p("Sheet body")),
 
-  shad_button("open_dlg", "Open via server"),
-  shad_button("close_dlg", "Close via server"),
+  shad_button(inputId = "open_dlg", "Open via server"),
+  shad_button(inputId = "close_dlg", "Close via server"),
   verbatimTextOutput("state")
 )
 

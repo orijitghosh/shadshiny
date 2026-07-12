@@ -10,8 +10,8 @@ widgetUI <- function(id) {
                 choices = c(Red = "red", Green = "green"), selected = "red"),
     shad_dialog(ns("dlg"), trigger = shad_button("Open"), title = "Modal",
                 shad_p("Inside a module")),
-    shad_button(ns("set"), "Set green"),
-    shad_button(ns("open"), "Open dialog"),
+    shad_button(inputId = ns("set"), "Set green"),
+    shad_button(inputId = ns("open"), "Open dialog"),
     verbatimTextOutput(ns("out"))
   )
 }

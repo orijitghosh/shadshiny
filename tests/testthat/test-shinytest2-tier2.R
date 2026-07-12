@@ -24,7 +24,8 @@ test_that("tier 2 inputs seed correctly and reflect server updates", {
   expect_equal(app$get_value(input = "tg"), "right")
 
   # DOM state mirrors the value
-  state <- app$get_js("document.querySelector('[data-shad=\"checkbox\"] button').getAttribute('data-state')")
+  # The [data-shad="checkbox"] element is itself the <button> carrying data-state.
+  state <- app$get_js("document.querySelector('[data-shad=\"checkbox\"]').getAttribute('data-state')")
   expect_equal(state, "checked")
 
   expect_no_js_errors(app)
