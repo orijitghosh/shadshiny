@@ -12,7 +12,7 @@ shad_select(
   label = NULL,
   choices,
   selected = NULL,
-  placeholder = "Select…",
+  placeholder = "Select2026",
   disabled = FALSE,
   width = NULL,
   description = NULL,

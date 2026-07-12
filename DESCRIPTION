@@ -16,11 +16,11 @@ Depends:
     R (>= 4.1.0)
 Imports:
     htmltools (>= 0.5.7),
-    shiny (>= 1.8.0),
-    jsonlite
+    shiny (>= 1.8.0)
 Suggests:
     bslib,
     xml2,
+    jsonlite,
     testthat (>= 3.0.0),
     shinytest2,
     chromote,

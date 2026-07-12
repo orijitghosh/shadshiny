@@ -13,3 +13,5 @@
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^\.vscode$
+^scratch_out\.txt$
+^tests/testthat/_snaps$

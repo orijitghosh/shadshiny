@@ -80,7 +80,7 @@
 #'             selected = "banana")
 #' @export
 shad_select <- function(inputId, label = NULL, choices, selected = NULL,
-                        placeholder = "Select…", disabled = FALSE,
+                        placeholder = "Select2026", disabled = FALSE,
                         width = NULL, description = NULL, class = NULL, ...) {
   nodes <- normalize_choices(choices)
   items_markup <- lapply(nodes, .shad_render_select_node, selected = selected)

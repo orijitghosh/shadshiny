@@ -116,6 +116,7 @@ shad_toggle_group <- function(inputId, choices, selected = NULL,
 
 #' @rdname shad_toggle_group
 #' @param value The item's value.
+#' @param label The item's label (defaults to the value).
 #' @param icon Optional icon for the item.
 #' @export
 shad_toggle_group_item <- function(value, label = NULL, icon = NULL,

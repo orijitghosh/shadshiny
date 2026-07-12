@@ -10,7 +10,7 @@
 shad_command(
   inputId,
   ...,
-  placeholder = "Type a command or search…",
+  placeholder = "Type a command or search2026",
   empty_text = "No results found.",
   dialog = FALSE,
   hotkey = dialog,

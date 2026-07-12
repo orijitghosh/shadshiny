@@ -43,6 +43,8 @@ shad_toggle_group_item(value, label = NULL, icon = NULL, disabled = FALSE)
 
 \item{value}{The item's value.}
 
+\item{label}{The item's label (defaults to the value).}
+
 \item{icon}{Optional icon for the item.}
 }
 \value{
