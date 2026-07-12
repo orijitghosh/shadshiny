@@ -634,8 +634,10 @@ server <- function(input, output, session) {
   observeEvent(input$toast_error, shad_toast_error("Something went wrong."))
   observeEvent(input$toast_loading, {
     id <- shad_toast_loading("Uploading…")
+    # later::later() fires outside the reactive domain, so capture `session`
+    # here — getDefaultReactiveDomain() would be NULL inside the callback.
     later::later(function() shad_toast_update(id, message = "Uploaded",
-      variant = "success"), delay = 1.5)
+      variant = "success", session = session), delay = 1.5)
   })
   observeEvent(input$set_slider, update_shad_slider("sld", 80))
   observeEvent(input$open_dialog, shad_dialog_open("dlg"))
