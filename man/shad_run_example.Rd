@@ -7,9 +7,25 @@
 shad_run_example(example = "kitchen-sink")
 }
 \arguments{
-\item{example}{Example app directory name under \code{inst/examples}. One of
-\code{"kitchen-sink"} (default; the full R-built demo) or \code{"00-static-parity"}
-(the hand-written anatomy reference, for visual parity checks).}
+\item{example}{Example app directory name under \code{inst/examples}. One of:
+\describe{
+\item{\code{"kitchen-sink"}}{(default) the full R-built demo of every component.}
+\item{\code{"00-static-parity"}}{hand-written anatomy reference, for visual parity checks.}
+\item{\code{"01-auth-onboarding"}}{sign-in / create-account flow with a 4-step
+onboarding wizard, 2FA (input-OTP) and social sign-in.}
+\item{\code{"02-analytics-dashboard"}}{admin console: sidebar, menubar, command
+palette, KPI cards, resizable chart split and a searchable team directory.}
+\item{\code{"03-support-chat"}}{support inbox with a stick-to-bottom transcript,
+quick replies, attachment popover and a simulated assistant.}
+\item{\code{"04-storefront"}}{product page: carousel, variant pickers, add-to-cart
+sheet, tabbed details and reviews pagination.}
+\item{\code{"05-settings-profile"}}{account settings with live theming, availability
+checks, 2FA and destructive alert-dialogs.}
+\item{\code{"06-docs-reader"}}{documentation site: sidebar nav, ⌘K search, resizable
+article/TOC split, rich typography and tabbed code examples.}
+}
+The six numbered apps are real-world examples that together exercise the whole
+component library.}
 }
 \value{
 Called for its side effect (launches a Shiny app).

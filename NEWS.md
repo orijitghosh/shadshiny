@@ -17,6 +17,15 @@
   initialises instead of erroring on load.
 * **Demo:** the `kitchen-sink` example now exercises the full variant / size /
   state matrix for every component.
+* **Example apps:** six new real-world example apps under `inst/examples`,
+  launchable with `shad_run_example()`, that together exercise the whole
+  component library: `01-auth-onboarding`, `02-analytics-dashboard`,
+  `03-support-chat`, `04-storefront`, `05-settings-profile`, and
+  `06-docs-reader`.
+* **Bug fix:** `shad_toast_update()` called from a deferred (`later::later`)
+  callback now requires the `session` to be passed explicitly; the bundled demos
+  do so, fixing an "attempt to apply non-function" crash on toast loading→update
+  outside the reactive domain.
 
 # shadshiny 0.1.0
 

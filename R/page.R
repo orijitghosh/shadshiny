@@ -94,16 +94,35 @@ update_shad_theme <- function(preset = NULL, dark = NULL,
 
 #' Run a bundled shadshiny example app
 #'
-#' @param example Example app directory name under `inst/examples`. One of
-#'   `"kitchen-sink"` (default; the full R-built demo) or `"00-static-parity"`
-#'   (the hand-written anatomy reference, for visual parity checks).
+#' @param example Example app directory name under `inst/examples`. One of:
+#'   \describe{
+#'     \item{`"kitchen-sink"`}{(default) the full R-built demo of every component.}
+#'     \item{`"00-static-parity"`}{hand-written anatomy reference, for visual parity checks.}
+#'     \item{`"01-auth-onboarding"`}{sign-in / create-account flow with a 4-step
+#'       onboarding wizard, 2FA (input-OTP) and social sign-in.}
+#'     \item{`"02-analytics-dashboard"`}{admin console: sidebar, menubar, command
+#'       palette, KPI cards, resizable chart split and a searchable team directory.}
+#'     \item{`"03-support-chat"`}{support inbox with a stick-to-bottom transcript,
+#'       quick replies, attachment popover and a simulated assistant.}
+#'     \item{`"04-storefront"`}{product page: carousel, variant pickers, add-to-cart
+#'       sheet, tabbed details and reviews pagination.}
+#'     \item{`"05-settings-profile"`}{account settings with live theming, availability
+#'       checks, 2FA and destructive alert-dialogs.}
+#'     \item{`"06-docs-reader"`}{documentation site: sidebar nav, ⌘K search, resizable
+#'       article/TOC split, rich typography and tabbed code examples.}
+#'   }
+#'   The six numbered apps are real-world examples that together exercise the whole
+#'   component library.
 #' @returns Called for its side effect (launches a Shiny app).
 #' @family shadshiny utilities
 #' @export
 shad_run_example <- function(example = "kitchen-sink") {
   dir <- system.file("examples", example, package = "shadshiny")
   if (!nzchar(dir) || !dir.exists(dir)) {
-    stop(sprintf("Example `%s` not found.", example), call. = FALSE)
+    avail <- list.dirs(system.file("examples", package = "shadshiny"),
+      full.names = FALSE, recursive = FALSE)
+    stop(sprintf("Example `%s` not found. Available: %s",
+      example, paste(avail, collapse = ", ")), call. = FALSE)
   }
   shiny::runApp(dir, display.mode = "normal")
 }
