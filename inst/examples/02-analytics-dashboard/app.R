@@ -1,20 +1,23 @@
 # shadshiny example 02 — Analytics dashboard ---------------------------------
-# An admin/analytics console: collapsible sidebar nav, a menubar, a ⌘K command
-# palette, KPI cards, a resizable chart/activity split, and a searchable team
-# directory with per-row menus, hover cards, pagination and an empty state.
+# A working admin/analytics console. Every control does something: the metric
+# select redraws the chart, the date range updates the period, the command
+# palette opens from the server, and the team directory is fully mutable —
+# invite adds a member, remove deletes one, edit changes a role, all through
+# real dialogs and sheets. New reports accumulate in the Reports tab.
 # Run with shadshiny::shad_run_example("02-analytics-dashboard").
 #
-# Components: page_shad, sidebar-layout (+sidebar/group/item/trigger/toggle),
-# menubar, command (⌘K dialog), breadcrumb, tabs, card, progress, badge,
-# tooltip, hover-card, dropdown-menu, context-menu, resizable, scroll-area,
-# slider, select, switch, input, date-picker, calendar, skeleton, empty,
-# accordion, collapsible, table, pagination, avatar (+group), code, kbd, toast.
+# Components: page_shad, sidebar-layout (+group/item/trigger/toggle), menubar,
+# command (⌘K dialog, opened via server invoke), breadcrumb, tabs, card,
+# progress, badge, tooltip, hover-card, dropdown-menu, context-menu, dialog,
+# sheet, resizable, scroll-area, slider, select (+group), switch, input,
+# date-picker, calendar, skeleton, empty, accordion, collapsible, table,
+# pagination, avatar (+group), item (+group), code, kbd, toast.
 
 library(shiny)
 library(shadshiny)
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
-members <- data.frame(
+seed_members <- data.frame(
   id     = paste0("m", 1:8),
   name   = c("Olivia Martin", "Jackson Lee", "Isabella Nguyen", "William Kim",
              "Sofia Davis", "Liam Patel", "Emma Rossi", "Noah Silva"),
@@ -28,30 +31,49 @@ members <- data.frame(
   usage  = c(92, 74, 12, 58, 88, 33, 66, 5),
   stringsAsFactors = FALSE
 )
-members$initials <- vapply(strsplit(members$name, " "),
-  function(p) toupper(paste0(substr(p[1], 1, 1), substr(p[2], 1, 1))), "")
+make_initials <- function(name) vapply(strsplit(name, " "),
+  function(p) toupper(paste0(substr(p[1], 1, 1),
+    if (length(p) > 1) substr(p[2], 1, 1) else "")), "")
+seed_members$initials <- make_initials(seed_members$name)
 
-status_variant <- c(active = "secondary", invited = "outline", away = "default")
+ROLES <- c("Owner", "Admin", "Member", "Viewer")
+status_variant <- c(active = "secondary", invited = "outline",
+  away = "default", inactive = "destructive")
 PAGE_SIZE <- 4L
+
+# Per-metric weekly series that the chart + card react to.
+METRICS <- list(
+  rev    = list(label = "Revenue",      unit = "$",
+    vals = c(32, 28, 41, 37, 48, 44, 39)),
+  arr    = list(label = "ARR",          unit = "$k",
+    vals = c(210, 214, 219, 223, 228, 231, 236)),
+  signup = list(label = "Signups",      unit = "",
+    vals = c(120, 98, 145, 132, 170, 160, 150)),
+  active = list(label = "Active users", unit = "",
+    vals = c(880, 905, 890, 930, 950, 940, 962))
+)
 
 metrics_tbl <- data.frame(
   Metric = c("Revenue", "New signups", "Active users", "Churn"),
   This_period = c("$48,210", "1,204", "8,932", "1.8%"),
   Last_period = c("$43,050", "1,090", "8,410", "2.1%"),
   Change = c("+12.0%", "+10.5%", "+6.2%", "-0.3pp"),
-  check.names = FALSE, stringsAsFactors = FALSE
-)
+  check.names = FALSE, stringsAsFactors = FALSE)
+
+WEEKDAYS <- c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
 # A minimal CSS bar chart from a numeric vector.
-bar_chart <- function(values, labels) {
+bar_chart <- function(values, labels, unit = "") {
   mx <- max(values)
   tags$div(style = "display:flex;align-items:flex-end;gap:0.5rem;height:9rem;padding-top:0.5rem",
     Map(function(v, l) {
       tags$div(style = "flex:1;display:grid;gap:0.35rem;justify-items:center;height:100%",
-        tags$div(style = "flex:1;width:100%;display:flex;align-items:flex-end",
-          tags$div(style = sprintf(paste0("width:100%%;height:%d%%;border-radius:",
-            "var(--shad-radius-sm);background:var(--shad-primary)"),
-            round(v / mx * 100)))),
+        shad_tooltip(
+          tags$div(style = "flex:1;width:100%;display:flex;align-items:flex-end",
+            tags$div(style = sprintf(paste0("width:100%%;height:%d%%;border-radius:",
+              "var(--shad-radius-sm);background:var(--shad-primary)"),
+              round(v / mx * 100)))),
+          paste0(l, ": ", unit, format(v, big.mark = ","))),
         shad_small(class = "shad-muted", l))
     }, values, labels))
 }
@@ -117,7 +139,7 @@ ui <- page_shad(
   title = "Acme Analytics",
   theme_preset = "blue",
 
-  # Command palette (hidden until ⌘K or the Search button).
+  # Command palette (opened by ⌘K, the Search button, or the View menu).
   shad_command("cmdk", dialog = TRUE, placeholder = "Type a command…",
     shad_command_group("Navigation",
       shad_command_item("go_overview", "Go to Overview", keywords = "home"),
@@ -126,7 +148,85 @@ ui <- page_shad(
     shad_command_separator(),
     shad_command_group("Actions",
       shad_command_item("cmd_refresh", "Refresh data", shortcut = "⌘R"),
+      shad_command_item("cmd_invite", "Invite member"),
       shad_command_item("cmd_new", "New report", shortcut = "⌘N"))),
+
+  # Invite dialog.
+  shad_dialog("invite_dlg", title = "Invite a member",
+    description = "They'll get an email invitation.",
+    tags$div(style = "display:grid;gap:1rem",
+      shad_form_field(shad_input("inv_name", placeholder = "Jane Cooper"),
+        label = "Full name", required = TRUE),
+      shad_form_field(
+        shad_input_group(block = TRUE,
+          shad_input_group_addon(shad_icon("mail"), align = "inline-start"),
+          shad_input("inv_email", type = "email", placeholder = "jane@acme.io")),
+        label = "Email", required = TRUE),
+      shad_select("inv_role", label = "Role", choices = ROLES,
+        selected = "Member")),
+    footer = tagList(
+      shad_dialog_close_button("Cancel"),
+      shad_button("Send invite", inputId = "invite_send"))),
+
+  # Edit-role dialog.
+  shad_dialog("edit_dlg", title = "Edit role",
+    description = textOutput("edit_who", inline = TRUE),
+    shad_select("edit_role", label = "Role", choices = ROLES, selected = "Member"),
+    footer = tagList(
+      shad_dialog_close_button("Cancel"),
+      shad_button("Save", inputId = "edit_save"))),
+
+  # New-report dialog.
+  shad_dialog("report_dlg", title = "New report",
+    description = "Give it a name and a primary metric.",
+    tags$div(style = "display:grid;gap:1rem",
+      shad_form_field(shad_input("rep_name", placeholder = "Q3 revenue review"),
+        label = "Report name", required = TRUE),
+      shad_select("rep_metric", label = "Metric",
+        choices = c("Revenue" = "rev", "ARR" = "arr", "Signups" = "signup",
+          "Active users" = "active"), selected = "rev")),
+    footer = tagList(
+      shad_dialog_close_button("Cancel"),
+      shad_button("Create report", inputId = "report_create"))),
+
+  # Profile dialog.
+  shad_dialog("profile_dlg", title = "Your profile",
+    tags$div(style = "display:grid;gap:1rem;justify-items:center;text-align:center",
+      shad_avatar(fallback = "YOU", size = "xl"),
+      tags$div(shad_h4("You", style = "margin:0"),
+        shad_muted("you@acme.io")),
+      shad_badge("Owner", variant = "secondary")),
+    footer = shad_dialog_close_button("Close")),
+
+  # Message sheet (per-member).
+  shad_sheet("msg_sheet", side = "right", title = "New message",
+    description = textOutput("msg_who", inline = TRUE),
+    tags$div(style = "display:grid;gap:1rem;padding:1rem 0",
+      shad_textarea("msg_body", placeholder = "Write a message…", rows = 6)),
+    footer = tagList(
+      shad_button("Cancel", inputId = "msg_cancel", variant = "outline"),
+      shad_button("Send", inputId = "msg_send", icon = "arrow-right",
+        icon_position = "right"))),
+
+  # Billing sheet.
+  shad_sheet("billing_sheet", side = "right", title = "Billing",
+    description = "Manage your plan and invoices.",
+    tags$div(style = "display:grid;gap:1rem;padding:1rem 0",
+      shad_item(tags$span(style = "font-weight:600", "Team plan"),
+        description = "$49 / month · renews Aug 1",
+        footer = shad_badge("Active", variant = "secondary"), variant = "outline"),
+      shad_item("Payment method", description = "Visa •••• 4242",
+        variant = "outline"),
+      shad_h4("Recent invoices"),
+      shad_item_group(
+        shad_item("Jul 2026", description = "$49.00",
+          footer = shad_badge("Paid", variant = "secondary"), size = "sm"),
+        shad_item("Jun 2026", description = "$49.00",
+          footer = shad_badge("Paid", variant = "secondary"), size = "sm"),
+        shad_item("May 2026", description = "$49.00",
+          footer = shad_badge("Paid", variant = "secondary"), size = "sm"))),
+    footer = shad_button("Update plan", inputId = "billing_update",
+      style = "width:100%")),
 
   tags$div(style = "height:100vh",
     shad_sidebar_layout("shell", sidebar = app_sidebar,
@@ -160,8 +260,9 @@ ui <- page_shad(
                   shad_resizable("split", style = "height:20rem",
                     shad_resizable_panel(default_size = 62,
                       shad_card(style = "height:100%;margin-right:0.5rem",
-                        shad_card_header(shad_card_title("Weekly revenue"),
-                          shad_card_description("Last 7 days")),
+                        shad_card_header(
+                          shad_card_title(textOutput("chart_title", inline = TRUE)),
+                          shad_card_description(textOutput("chart_sub", inline = TRUE))),
                         shad_card_content(uiOutput("chart")))),
                     shad_resizable_handle(),
                     shad_resizable_panel(default_size = 38,
@@ -196,6 +297,9 @@ ui <- page_shad(
                         shad_menu_item("exp_csv", "As CSV"),
                         shad_menu_item("exp_json", "As JSON"))),
                     shad_button("Invite", inputId = "invite", icon = "plus")),
+                  tags$div(style = "display:flex;gap:0.75rem;flex-wrap:wrap",
+                    shad_badge(textOutput("team_count", inline = TRUE),
+                      variant = "outline")),
                   shad_context_menu("team_ctx",
                     target = uiOutput("team_list"),
                     shad_menu_item("ctx_refresh", "Refresh"),
@@ -207,6 +311,14 @@ ui <- page_shad(
               # ---- Reports -------------------------------------------
               shad_tab("reports", "Reports",
                 tags$div(style = "display:grid;gap:1.25rem;margin-top:1rem",
+                  tags$div(style = "display:flex;justify-content:space-between;align-items:center",
+                    shad_h3("Reports", style = "margin:0;border:0;padding:0"),
+                    shad_button("New report", inputId = "rep_new_btn",
+                      icon = "plus")),
+                  shad_card(
+                    shad_card_header(shad_card_title("Saved reports")),
+                    shad_card_content(style = "padding:0",
+                      uiOutput("reports_list"))),
                   shad_card(
                     shad_card_header(shad_card_title("Period comparison"),
                       shad_card_description("Current vs. previous period")),
@@ -239,19 +351,36 @@ server <- function(input, output, session) {
   loading <- reactiveVal(FALSE)
   sort_by <- reactiveVal("name")
   invited_only <- reactiveVal(FALSE)
+  members <- reactiveVal(seed_members)
+  reports <- reactiveVal(data.frame(
+    name = c("Weekly revenue", "Signup funnel"),
+    metric = c("rev", "signup"),
+    when = c("Jul 8", "Jul 5"), stringsAsFactors = FALSE))
+  edit_target <- reactiveVal(NULL)
+  msg_target <- reactiveVal(NULL)
+  next_id <- reactiveVal(9L)
+
+  open_palette <- function()
+    session$sendCustomMessage("shadshiny:invoke", list(id = "cmdk", method = "open"))
 
   observeEvent(input$sortmenu, {
     v <- input$sortmenu
     if (v %in% c("name", "usage", "role")) sort_by(v)
     else if (v == "invited_only") invited_only(!invited_only())
-    else if (v %in% c("exp_csv", "exp_json"))
-      shad_toast_loading(paste0("Exporting ", toupper(sub("exp_", "", v)), "…"))
+    else if (v %in% c("exp_csv", "exp_json")) do_export(sub("exp_", "", v))
   }, ignoreInit = TRUE)
 
   output$crumb <- renderText(
     c(overview = "Overview", team = "Team", reports = "Reports")[active_tab()])
 
-  # -- KPI cards -------------------------------------------------------
+  # -- KPI cards + period ---------------------------------------------
+  period_label <- reactive({
+    r <- input$range
+    if (is.null(r) || length(r) < 2 || any(!nzchar(as.character(r))))
+      return("last 7 days")
+    paste(r[[1]], "→", r[[2]])
+  })
+
   output$kpis <- renderUI({
     tagList(
       kpi_card("Revenue", "$48,210", "+12%", TRUE, 72,
@@ -264,14 +393,19 @@ server <- function(input, output, session) {
         "Monthly logo churn."))
   })
 
+  # -- Metric-driven chart --------------------------------------------
+  cur_metric <- reactive(METRICS[[input$metric %||% "rev"]])
+  output$chart_title <- renderText(paste("Weekly", tolower(cur_metric()$label)))
+  output$chart_sub <- renderText(paste("Showing", period_label()))
+
   output$chart <- renderUI({
     if (loading()) {
       return(tags$div(style = "display:flex;gap:0.5rem;align-items:flex-end;height:9rem",
         lapply(c(60, 40, 80, 55, 90, 70, 45), function(h)
           shad_skeleton(width = "100%", height = paste0(h, "%")))))
     }
-    bar_chart(c(32, 28, 41, 37, 48, 44, 39),
-      c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))
+    m <- cur_metric()
+    bar_chart(m$vals, WEEKDAYS, unit = m$unit)
   })
 
   output$activity <- renderUI({
@@ -293,11 +427,9 @@ server <- function(input, output, session) {
           size = "sm")))
   })
 
-  observeEvent(input$refresh, {
+  do_refresh <- function() {
     loading(TRUE)
     id <- shad_toast_loading("Refreshing data…")
-    # Deferred callback runs outside the reactive domain — restore it so the
-    # reactiveVal write flushes to the client.
     later::later(function() {
       shiny::withReactiveDomain(session, {
         loading(FALSE)
@@ -305,11 +437,25 @@ server <- function(input, output, session) {
           session = session)
       })
     }, delay = 1.2)
-  })
+  }
+  observeEvent(input$refresh, do_refresh())
 
-  # -- Team directory --------------------------------------------------
+  # -- Export (shared) -------------------------------------------------
+  do_export <- function(fmt) {
+    id <- shad_toast_loading(paste0("Exporting ", toupper(fmt), "…"))
+    n <- nrow(members())
+    later::later(function() {
+      shiny::withReactiveDomain(session, {
+        shad_toast_update(id,
+          message = paste0(n, " members exported as ", toupper(fmt)),
+          variant = "success", session = session)
+      })
+    }, delay = 1.0)
+  }
+
+  # -- Team directory (mutable) ---------------------------------------
   filtered <- reactive({
-    df <- members
+    df <- members()
     q <- tolower(input$team_q %||% "")
     if (nzchar(q)) {
       df <- df[grepl(q, tolower(df$name)) | grepl(q, tolower(df$email)), ]
@@ -318,12 +464,18 @@ server <- function(input, output, session) {
     if (invited_only()) df <- df[df$status == "invited", , drop = FALSE]
     ord <- switch(sort_by(),
       usage = order(-df$usage),
-      role  = order(df$role, df$name),
+      role  = order(match(df$role, ROLES), df$name),
       order(df$name))
     df[ord, , drop = FALSE]
   })
 
-  # Keep pagination page-count in sync with the filtered result.
+  output$team_count <- renderText({
+    n <- nrow(filtered()); tot <- nrow(members())
+    if (n == tot) paste(tot, "members")
+    else paste(n, "of", tot, "members")
+  })
+  outputOptions(output, "team_count", suspendWhenHidden = FALSE)
+
   observe({
     pages <- max(1L, ceiling(nrow(filtered()) / PAGE_SIZE))
     cur <- input$team_pg %||% 1
@@ -355,7 +507,7 @@ server <- function(input, output, session) {
           media = tags$span(m$initials), media_variant = "icon",
           header = shad_badge(m$role, variant = "outline"),
           footer = shad_badge(m$status,
-            variant = status_variant[[m$status]]),
+            variant = status_variant[[m$status]] %||% "default"),
           actions = shad_dropdown_menu(paste0("rmnu_", m$id), align = "end",
             trigger = shad_button(icon = "more-horizontal", size = "icon",
               variant = "ghost", aria_label = "Actions"),
@@ -366,35 +518,158 @@ server <- function(input, output, session) {
           variant = "outline")
       }))
   })
+  outputOptions(output, "team_list", suspendWhenHidden = FALSE)
 
-  # Pre-register finite per-row action observers (members is fixed).
-  lapply(members$id, function(mid) {
+  # Register a per-row observer for each member id, once. next_id only grows,
+  # so ids are never reused; new invitees get a fresh observer here.
+  registered <- new.env(parent = emptyenv())
+  ensure_row_observer <- function(mid) {
+    if (!is.null(registered[[mid]])) return()
+    registered[[mid]] <- TRUE
     observeEvent(input[[paste0("rmnu_", mid)]], {
-      action <- input[[paste0("rmnu_", mid)]]
-      nm <- members$name[members$id == mid]
-      if (identical(action, "remove")) {
-        shad_toast_error(paste("Removed", nm))
-      } else {
-        shad_toast(paste0(tools::toTitleCase(action), ": ", nm))
-      }
+      handle_row(mid, input[[paste0("rmnu_", mid)]])
     }, ignoreInit = TRUE)
+  }
+  observe(lapply(members()$id, ensure_row_observer))
+
+  handle_row <- function(mid, action) {
+    df <- members(); m <- df[df$id == mid, ]
+    if (nrow(m) == 0) return()
+    if (identical(action, "remove")) {
+      members(df[df$id != mid, , drop = FALSE])
+      shad_toast_error(paste("Removed", m$name))
+    } else if (identical(action, "edit")) {
+      edit_target(mid)
+      update_shad_select("edit_role", m$role)
+      shad_dialog_open("edit_dlg")
+    } else if (identical(action, "message")) {
+      msg_target(mid)
+      updateTextAreaInput(session, "msg_body", value = "")
+      shad_sheet_open("msg_sheet")
+    }
+  }
+
+  # Edit role -----
+  output$edit_who <- renderText({
+    mid <- edit_target()
+    if (is.null(mid)) return("")
+    nm <- members()$name[members()$id == mid]
+    paste("Change the role for", nm)
+  })
+  outputOptions(output, "edit_who", suspendWhenHidden = FALSE)
+  observeEvent(input$edit_save, {
+    mid <- edit_target(); if (is.null(mid)) return()
+    df <- members(); df$role[df$id == mid] <- input$edit_role %||% "Member"
+    members(df)
+    shad_dialog_close("edit_dlg")
+    shad_toast_success(paste0("Role updated to ", input$edit_role, "."))
+  })
+
+  # Message -----
+  output$msg_who <- renderText({
+    mid <- msg_target()
+    if (is.null(mid)) return("")
+    paste("To", members()$name[members()$id == mid])
+  })
+  outputOptions(output, "msg_who", suspendWhenHidden = FALSE)
+  observeEvent(input$msg_cancel, shad_sheet_close("msg_sheet"))
+  observeEvent(input$msg_send, {
+    if (!nzchar(trimws(input$msg_body %||% ""))) {
+      shad_toast_error("Write a message first."); return()
+    }
+    shad_sheet_close("msg_sheet")
+    shad_toast_success(paste("Message sent to",
+      members()$name[members()$id == msg_target()]))
+  })
+
+  # Invite -----
+  open_invite <- function() {
+    updateTextInput(session, "inv_name", value = "")
+    updateTextInput(session, "inv_email", value = "")
+    update_shad_select("inv_role", "Member")
+    shad_dialog_open("invite_dlg")
+  }
+  observeEvent(input$invite, open_invite())
+  observeEvent(input$ctx_invite, open_invite())
+  observeEvent(input$cmd_invite, open_invite())
+  observeEvent(input$invite_send, {
+    name <- trimws(input$inv_name %||% "")
+    email <- trimws(input$inv_email %||% "")
+    if (!nzchar(name) || !nzchar(email)) {
+      shad_toast_error("Name and email are required."); return()
+    }
+    id <- paste0("m", next_id()); next_id(next_id() + 1L)
+    row <- data.frame(id = id, name = name, email = email,
+      role = input$inv_role %||% "Member", status = "invited", usage = 0L,
+      initials = make_initials(name), stringsAsFactors = FALSE)
+    members(rbind(members(), row))
+    shad_dialog_close("invite_dlg")
+    shad_toast_success(paste("Invitation sent to", name))
   })
 
   observeEvent(input$clear_team, {
     update_shad_slider("min_usage", 0)
+    updateTextInput(session, "team_q", value = "")
+    invited_only(FALSE)
     shad_toast("Filters cleared.")
   })
-  observeEvent(input$invite, shad_toast_success("Invitation sent."))
+
+  observeEvent(input$ctx_export, do_export("csv"))
+  observeEvent(input$ctx_refresh, shad_toast("Refreshed team list."))
+
+  # -- Reports (grow the list) ----------------------------------------
+  metric_label <- c(rev = "Revenue", arr = "ARR", signup = "Signups",
+    active = "Active users")
+  output$reports_list <- renderUI({
+    df <- reports()
+    if (nrow(df) == 0)
+      return(shad_empty("No reports yet", media = "file", media_variant = "icon",
+        description = "Create one from the New report button."))
+    shad_item_group(
+      lapply(seq_len(nrow(df)), function(i) {
+        r <- df[i, ]
+        shad_item(tags$span(style = "font-weight:500", r$name),
+          description = paste("Created", r$when),
+          media = "file", media_variant = "icon",
+          footer = shad_badge(metric_label[[r$metric]] %||% r$metric,
+            variant = "secondary"),
+          variant = "outline")
+      }))
+  })
+  outputOptions(output, "reports_list", suspendWhenHidden = FALSE)
+
+  open_report <- function() {
+    updateTextInput(session, "rep_name", value = "")
+    update_shad_select("rep_metric", "rev")
+    shad_dialog_open("report_dlg")
+  }
+  observeEvent(input$mb_new, open_report())
+  observeEvent(input$cmd_new, open_report())
+  observeEvent(input$rep_new_btn, open_report())
+  observeEvent(input$report_create, {
+    nm <- trimws(input$rep_name %||% "")
+    if (!nzchar(nm)) { shad_toast_error("Give the report a name."); return() }
+    row <- data.frame(name = nm, metric = input$rep_metric %||% "rev",
+      when = format(Sys.Date(), "%b %d"), stringsAsFactors = FALSE)
+    reports(rbind(row, reports()))
+    shad_dialog_close("report_dlg")
+    shad_toast_success(paste0("Report “", nm, "” created."))
+  })
+
+  observeEvent(input$deliver,
+    shad_toast_success(paste("Delivery scheduled for", input$deliver)),
+    ignoreInit = TRUE)
 
   # -- Menubar / palette / nav ----------------------------------------
   go <- function(tab) { update_shad_tabs("view", tab); active_tab(tab) }
 
   observeEvent(input$view, active_tab(input$view), ignoreInit = TRUE)
-  observeEvent(input$shell$active, {    # sidebar item click
+  observeEvent(input$shell$active, {
     sel <- input$shell$active
     if (is.null(sel) || !nzchar(sel)) return()
     if (sel %in% c("overview", "team", "reports")) go(sel)
-    else shad_toast(paste0("’", tools::toTitleCase(sel), "’ is not in this demo."))
+    else if (sel == "settings") shad_dialog_open("profile_dlg")
+    else if (sel == "help") open_palette()
   }, ignoreInit = TRUE)
 
   observeEvent(input$cmdk, {
@@ -402,25 +677,22 @@ server <- function(input, output, session) {
       go_overview = go("overview"),
       go_team = go("team"),
       go_reports = go("reports"),
-      cmd_refresh = ,
-      cmd_new = shad_toast(paste0("Command: ", input$cmdk)))
+      cmd_refresh = { go("overview"); do_refresh() },
+      cmd_invite = open_invite(),
+      cmd_new = open_report())
   }, ignoreInit = TRUE)
 
   observeEvent(input$mb_sidebar, shad_sidebar_toggle("shell"))
-  observeEvent(input$mb_palette,
-    shad_toast("Press ⌘K (or Ctrl+K) to open the palette."))
-  observeEvent(input$mb_new, shad_toast_success("New report created."))
-  observeEvent(input$mb_export, shad_toast_loading("Preparing export…"))
-  observeEvent(input$open_palette,
-    shad_toast("Press ⌘K / Ctrl+K to open the command palette."))
+  observeEvent(input$mb_palette, open_palette())
+  observeEvent(input$open_palette, open_palette())
+  observeEvent(input$mb_export, do_export("csv"))
 
+  observeEvent(input$acct_profile, shad_dialog_open("profile_dlg"))
+  observeEvent(input$acct_billing, shad_sheet_open("billing_sheet"))
   observeEvent(input$acct_logout, shad_toast("Logged out."))
-  observeEvent(input$ctx_export, shad_toast_loading("Exporting CSV…"))
-  observeEvent(input$ctx_invite, shad_toast_success("Invitation sent."))
-  observeEvent(input$ctx_refresh, shad_toast("Refreshed team list."))
-
-  # Team tab is inactive at startup; render its list anyway so it's ready.
-  outputOptions(output, "team_list", suspendWhenHidden = FALSE)
+  observeEvent(input$billing_update, {
+    shad_sheet_close("billing_sheet"); shad_toast_success("Plan updated.")
+  })
 }
 
 shinyApp(ui, server)
