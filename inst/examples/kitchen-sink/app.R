@@ -121,7 +121,7 @@ ui <- page_shad(
       shad_dialog("dlg", trigger = shad_button("Dialog", variant = "outline"),
         title = "Edit profile", description = "Make changes here.",
         shad_input("dlg_name", label = "Name", value = "Pedro"),
-        footer = tagList(shad_dialog_close(), shad_button("Save"))),
+        footer = tagList(shad_dialog_close_button(), shad_button("Save"))),
       shad_sheet("sht", trigger = shad_button("Sheet", variant = "outline"),
         side = "right", title = "Sheet", shad_p("Side panel content.")),
       shad_drawer("drw", trigger = shad_button("Drawer", variant = "outline"),

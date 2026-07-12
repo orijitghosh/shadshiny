@@ -28,7 +28,7 @@ shad_dialog(
   trigger = shad_button("Settings", variant = "outline"),
   title = "Settings",
   shad_input("name", label = "Display name"),
-  footer = shad_dialog_close("Done")
+  footer = shad_dialog_close_button("Done")
 )
 ```
 

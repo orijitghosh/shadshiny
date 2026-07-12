@@ -117,7 +117,7 @@ shad_dialog(
   trigger = shad_button("Open"),
   title = "Are you sure?",
   shad_p("This action can be undone."),
-  footer = shad_dialog_close("Close")
+  footer = shad_dialog_close_button("Close")
 )
 ```
 

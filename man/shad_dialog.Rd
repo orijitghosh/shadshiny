@@ -2,7 +2,7 @@
 % Please edit documentation in R/tier3-overlays.R
 \name{shad_dialog}
 \alias{shad_dialog}
-\alias{shad_dialog_close}
+\alias{shad_dialog_close_button}
 \title{Dialog (modal)}
 \usage{
 shad_dialog(
@@ -17,17 +17,18 @@ shad_dialog(
   class = NULL
 )
 
-shad_dialog_close(label = "Cancel", ...)
+shad_dialog_close_button(label = "Cancel", ...)
 }
 \arguments{
 \item{inputId}{Input id.}
 
-\item{...}{Body content of the dialog.}
+\item{...}{For \code{shad_dialog_close_button()}, extra attributes for the
+\verb{<button>}.}
 
 \item{title, description}{Optional header text (auto-wired for a11y).}
 
 \item{footer}{Optional footer content (e.g. buttons); often includes
-\code{\link[=shad_dialog_close]{shad_dialog_close()}}.}
+\code{\link[=shad_dialog_close_button]{shad_dialog_close_button()}}.}
 
 \item{trigger}{Optional tag whose click opens the dialog.}
 

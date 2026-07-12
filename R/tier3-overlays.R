@@ -23,7 +23,7 @@
 #' @param ... Body content of the dialog.
 #' @param title,description Optional header text (auto-wired for a11y).
 #' @param footer Optional footer content (e.g. buttons); often includes
-#'   [shad_dialog_close()].
+#'   [shad_dialog_close_button()].
 #' @param trigger Optional tag whose click opens the dialog.
 #' @param size Optional CSS max-width for the content (e.g. `"40rem"`).
 #' @param show_close If `TRUE` (default), render the top-right close button.
@@ -71,8 +71,10 @@ shad_dialog <- function(inputId, ..., title = NULL, description = NULL,
 
 #' @rdname shad_dialog
 #' @param label Close-button label.
+#' @param ... For `shad_dialog_close_button()`, extra attributes for the
+#'   `<button>`.
 #' @export
-shad_dialog_close <- function(label = "Cancel", ...) {
+shad_dialog_close_button <- function(label = "Cancel", ...) {
   htmltools::tags$button(
     type = "button", class = "shad-btn shad-btn--outline",
     `data-shad-dialog-close` = NA, ..., label

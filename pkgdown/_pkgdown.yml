@@ -103,7 +103,7 @@ reference:
     desc: Dialogs, popovers, menus, command palette, and toasts (UI side).
     contents:
       - shad_dialog
-      - shad_dialog_close
+      - shad_dialog_close_button
       - shad_alert_dialog
       - shad_alert_dialog_close
       - shad_sheet

@@ -26,3 +26,7 @@ Thumbs.db
 # Editors
 .vscode/
 *.swp
+
+# testthat CheckReporter artifacts
+tests/testthat/_problems/
+tests/testthat/testthat-problems.rds

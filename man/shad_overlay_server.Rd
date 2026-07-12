@@ -17,7 +17,7 @@
 \usage{
 shad_dialog_open(id, session = shiny::getDefaultReactiveDomain())
 
-shad_dialog_close(label = "Cancel", ...)
+shad_dialog_close(id, session = shiny::getDefaultReactiveDomain())
 
 shad_alert_dialog_open(id, session = shiny::getDefaultReactiveDomain())
 
