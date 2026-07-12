@@ -1,0 +1,77 @@
+---
+title: "Migrating from base Shiny inputs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Migrating from base Shiny inputs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+shadshiny inputs are drop-in replacements for their base Shiny counterparts:
+same `inputId` in, same `input$id` out. This vignette maps the common ones and
+flags where the value shape differs.
+
+## Mapping table
+
+| base Shiny | shadshiny | Notes |
+|---|---|---|
+| `textInput()` | `shad_input()` | `type=` for email/password/number. |
+| `textAreaInput()` | `shad_textarea()` | `autosize = TRUE` grows with content. |
+| `numericInput()` | `shad_input(type = "number")` | Value returns as entered; coerce server-side. |
+| `checkboxInput()` | `shad_checkbox()` | Adds a tri-state `"indeterminate"` option. |
+| `checkboxGroupInput()` | `shad_toggle_group(type = "multiple")` | Returns a character vector of selected values. |
+| `radioButtons()` | `shad_radio_group()` | Single string value. |
+| `selectInput()` | `shad_select()` | Single value. |
+| `selectInput(multiple = TRUE)` | `shad_combobox(multiple = TRUE)` | Searchable; returns a character vector. |
+| `sliderInput()` | `shad_slider()` | Two-element `value` makes it a range. |
+| `sliderInput()` (range) | `shad_slider(value = c(lo, hi))` | Returns a length-2 numeric. |
+| `dateInput()` | `shad_date_picker()` | Value is an ISO `"YYYY-MM-DD"` string. |
+| `dateRangeInput()` | `shad_date_picker(mode = "range")` | Value is `list(start, end)`. |
+| `actionButton()` | `shad_button()` | Same action-button semantics + `variant`/`size`. |
+| `tabsetPanel()` / `tabPanel()` | `shad_tabs()` / `shad_tab()` | `input$id` is the active tab value. |
+
+## Value-shape differences to watch
+
+- **Multi-value inputs return character vectors.** `shad_combobox(multiple =
+  TRUE)` and `shad_toggle_group(type = "multiple")` give you `c("a", "b")`, not
+  a comma-joined string.
+- **Range inputs return structured values.** `shad_slider(value = c(20, 80))`
+  reports `c(20, 80)`; `shad_date_picker(mode = "range")` reports
+  `list(start = ..., end = ...)`.
+- **Dates are ISO strings.** Convert with `as.Date(input$id)` when you need a
+  `Date`.
+- **Checkbox tri-state.** `shad_checkbox()` can report `"indeterminate"` in
+  addition to `TRUE`/`FALSE`; guard with `isTRUE(input$id)`.
+
+## Updating from the server
+
+Base `updateXxxInput()` calls become `update_shad_*()`:
+
+```{r}
+# base Shiny
+updateSelectInput(session, "plan", selected = "pro")
+updateSliderInput(session, "range", value = c(10, 40))
+
+# shadshiny
+update_shad_select("plan", selected = "pro")
+update_shad_slider("range", value = c(10, 40))
+```
+
+## Components with no base equivalent
+
+Some shadshiny components have no direct Shiny analogue and are worth adopting
+on their own:
+
+- `shad_command()` — a ⌘K command palette with grouped, keyword-searchable
+  items.
+- `shad_input_otp()` — segmented one-time-code entry.
+- `shad_sidebar_layout()` — a full collapsible application sidebar with groups,
+  items, badges, and a server-toggled state.
+- `shad_toast()` — server-raised notifications, including loading→done flows.
+
+See `vignette("shadshiny")` to get started and `shad_run_example("kitchen-sink")`
+for a live tour.

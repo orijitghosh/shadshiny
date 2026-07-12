@@ -1,0 +1,200 @@
+url: https://orijitghosh.github.io/shadshiny/
+
+template:
+  bootstrap: 5
+  light-switch: true
+  bslib:
+    primary: "#7c3aed"
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, github, lightswitch]
+
+articles:
+  - title: Guides
+    navbar: ~
+    contents:
+      - shadshiny
+      - theming
+      - overlays-and-server
+      - migrating-inputs
+
+reference:
+  - title: Page & theming
+    desc: Page wrapper, theme presets, and runtime theme control.
+    contents:
+      - page_shad
+      - shad_theme_preset
+      - update_shad_theme
+      - shad_run_example
+
+  - title: Tier 1 — display & typography
+    desc: Non-interactive display components and typographic helpers.
+    contents:
+      - shad_button
+      - shad_badge
+      - shad_avatar
+      - shad_avatar_group
+      - shad_card
+      - shad_card_header
+      - shad_card_title
+      - shad_card_description
+      - shad_card_action
+      - shad_card_content
+      - shad_card_footer
+      - shad_alert
+      - shad_separator
+      - shad_skeleton
+      - shad_spinner
+      - shad_aspect_ratio
+      - shad_label
+      - shad_progress
+      - shad_breadcrumb
+      - shad_breadcrumb_item
+      - shad_breadcrumb_separator
+      - shad_breadcrumb_ellipsis
+      - shad_table
+      - shad_table_header
+      - shad_table_body
+      - shad_table_footer
+      - shad_table_row
+      - shad_table_head
+      - shad_table_cell
+      - shad_table_caption
+      - shad_kbd
+      - shad_code
+      - shad_h1
+      - shad_h2
+      - shad_h3
+      - shad_h4
+      - shad_p
+      - shad_blockquote
+      - shad_lead
+      - shad_large
+      - shad_small
+      - shad_muted
+      - shad_list
+
+  - title: Tier 2 — form inputs
+    desc: Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
+    contents:
+      - shad_input
+      - shad_textarea
+      - shad_checkbox
+      - shad_switch
+      - shad_radio_group
+      - shad_radio_item
+      - shad_toggle
+      - shad_toggle_group
+      - shad_toggle_group_item
+      - shad_slider
+      - shad_select
+      - shad_select_item
+      - shad_select_group
+      - shad_select_separator
+      - shad_combobox
+      - shad_input_otp
+      - shad_calendar
+      - shad_date_picker
+      - shad_form_field
+
+  - title: Tier 3 — overlays
+    desc: Dialogs, popovers, menus, command palette, and toasts (UI side).
+    contents:
+      - shad_dialog
+      - shad_dialog_close
+      - shad_alert_dialog
+      - shad_alert_dialog_close
+      - shad_sheet
+      - shad_sheet_close
+      - shad_drawer
+      - shad_drawer_close
+      - shad_popover
+      - shad_popover_close
+      - shad_tooltip
+      - shad_hover_card
+      - shad_dropdown_menu
+      - shad_context_menu
+      - shad_menubar
+      - shad_menubar_menu
+      - shad_menu_item
+      - shad_menu_checkbox_item
+      - shad_menu_radio_group
+      - shad_menu_radio_item
+      - shad_menu_label
+      - shad_menu_separator
+      - shad_menu_sub
+      - shad_command
+      - shad_command_group
+      - shad_command_item
+      - shad_command_separator
+
+  - title: Tier 3 — navigation & structure
+    desc: Tabs, accordion, pagination, carousel, and the sidebar layout family.
+    contents:
+      - shad_tabs
+      - shad_tab
+      - shad_accordion
+      - shad_accordion_item
+      - shad_collapsible
+      - shad_pagination
+      - shad_scroll_area
+      - shad_resizable
+      - shad_resizable_panel
+      - shad_resizable_handle
+      - shad_carousel
+      - shad_carousel_item
+      - shad_navigation_menu
+      - shad_navigation_menu_item
+      - shad_sidebar_layout
+      - shad_sidebar
+      - shad_sidebar_group
+      - shad_sidebar_item
+      - shad_sidebar_trigger
+
+  - title: Server — updates
+    desc: Update bound component values from the server.
+    contents:
+      - update_shad_input_otp
+      - update_shad_checkbox
+      - update_shad_switch
+      - update_shad_radio_group
+      - update_shad_toggle
+      - update_shad_toggle_group
+      - update_shad_slider
+      - update_shad_select
+      - update_shad_combobox
+      - update_shad_calendar
+      - update_shad_date_picker
+      - update_shad_tabs
+      - update_shad_accordion
+      - update_shad_pagination
+      - update_shad_carousel
+      - update_shad_sidebar
+      - update_shad_progress
+      - update_shad_button
+
+  - title: Server — overlays & toast
+    desc: Open/close overlays and raise toast notifications from the server.
+    contents:
+      - shad_dialog_open
+      - shad_alert_dialog_open
+      - shad_sheet_open
+      - shad_drawer_open
+      - shad_popover_open
+      - shad_sidebar_toggle
+      - shad_toast
+      - shad_toast_success
+      - shad_toast_error
+      - shad_toast_warning
+      - shad_toast_loading
+      - shad_toast_update
+      - shad_toast_dismiss
+
+  - title: Utilities
+    desc: Icons and the asset dependency.
+    contents:
+      - shad_icon
+      - shad_icon_names
+      - shadshiny_deps

@@ -1,0 +1,124 @@
+---
+title: "Overlays and the server API"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Overlays and the server API}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+This vignette covers the overlay family — dialog, sheet, drawer, alert-dialog —
+and the server-side helpers that open them and raise toasts.
+
+## Trigger-driven vs server-driven
+
+Every overlay accepts a `trigger`: a UI element that opens it on click. Give the
+overlay an `inputId` and its open state is reported as a logical `input$id`.
+
+```{r}
+library(shiny)
+library(shadshiny)
+
+shad_dialog(
+  "settings",
+  trigger = shad_button("Settings", variant = "outline"),
+  title = "Settings",
+  shad_input("name", label = "Display name"),
+  footer = shad_dialog_close("Done")
+)
+```
+
+The same overlay can be opened (or closed) from the server without any trigger,
+using `shad_dialog_open()` / `shad_dialog_close()`. Each overlay has a matching
+pair — `shad_sheet_open()`, `shad_drawer_open()`, `shad_alert_dialog_open()`,
+`shad_popover_open()`, and so on.
+
+```{r}
+server <- function(input, output, session) {
+  observeEvent(input$launch, {
+    shad_dialog_open("settings")
+  })
+  observeEvent(input$settings, {
+    # TRUE when open, FALSE when dismissed
+    message("settings dialog open? ", input$settings)
+  })
+}
+```
+
+## Confirm flows with alert-dialog
+
+`shad_alert_dialog()` is the modal-confirmation pattern. Its action button is a
+Shiny action button with id `<inputId>_confirm`, so you observe the confirm the
+same way you observe any action button:
+
+```{r}
+ui <- shad_alert_dialog(
+  "wipe",
+  trigger = shad_button("Delete account", variant = "destructive"),
+  title = "Delete your account?",
+  description = "This cannot be undone.",
+  cancel = "Keep it",
+  action = "Delete",
+  action_variant = "destructive"
+)
+
+server <- function(input, output, session) {
+  observeEvent(input$wipe_confirm, {
+    # user pressed the destructive action
+    shad_toast_success("Account deleted.")
+  })
+}
+```
+
+## Toasts
+
+Toasts are server-only notifications. `shad_toast()` takes a message plus
+`title`, `description`, `variant`, and `duration`; the shorthands
+`shad_toast_success()`, `shad_toast_error()`, `shad_toast_warning()`, and
+`shad_toast_loading()` set the variant for you.
+
+```{r}
+shad_toast_success("Saved", description = "Your changes are live.")
+shad_toast_error("Upload failed", description = "Check your connection.")
+```
+
+### Loading → done
+
+`shad_toast_loading()` shows an indefinite spinner and returns an id. Feed that
+id to `shad_toast_update()` when the work finishes to morph the same toast into
+a result — no second toast, no flicker.
+
+```{r}
+server <- function(input, output, session) {
+  observeEvent(input$export, {
+    id <- shad_toast_loading("Exporting…")
+    later::later(function() {
+      shad_toast_update(id, variant = "success",
+                        message = "Export ready")
+    }, delay = 2)
+  })
+}
+```
+
+Dismiss programmatically with `shad_toast_dismiss(id)`, or
+`shad_toast_dismiss()` to clear all.
+
+## Dynamic UI and modules
+
+Components self-initialize, so overlays and inputs rendered inside `renderUI()`
+work without manual re-binding:
+
+```{r}
+output$panel <- renderUI({
+  shad_dialog("dyn", trigger = shad_button("Open"),
+              title = "Rendered on demand", shad_p("Hello."))
+})
+```
+
+All `inputId`s pass through `session$ns()`, so components and their
+`update_shad_*()` / `shad_*_open()` helpers are safe inside Shiny modules — use
+the same bare id in UI and server as you would with base inputs.

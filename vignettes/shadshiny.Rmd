@@ -1,0 +1,129 @@
+---
+title: "Get started with shadshiny"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Get started with shadshiny}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+shadshiny is a port of the [shadcn/ui](https://ui.shadcn.com) design system to
+Shiny. Components are plain `htmltools` tags backed by one bundled asset
+dependency — there is no npm step and no React. Bound components behave like
+ordinary Shiny inputs.
+
+## Install
+
+```{r}
+pak::pak("orijitghosh/shadshiny")
+```
+
+## The page wrapper
+
+Every app starts with `page_shad()`. It attaches the shadshiny asset bundle,
+establishes the theme scope, and otherwise behaves like a Shiny page. Pass a
+`theme_preset` to choose one of the seven palettes.
+
+```{r}
+library(shiny)
+library(shadshiny)
+
+page_shad(
+  theme_preset = "violet",
+  # ... UI ...
+)
+```
+
+## A first form
+
+Components take an `inputId` and read back through `input$<inputId>` exactly
+like base Shiny inputs. `shad_input()`, `shad_select()`, and `shad_checkbox()`
+below each contribute one reactive value.
+
+```{r}
+library(shiny)
+library(shadshiny)
+
+ui <- page_shad(
+  theme_preset = "violet",
+  shad_card(
+    shad_card_header(
+      shad_card_title("Create account"),
+      shad_card_description("It only takes a minute.")
+    ),
+    shad_card_content(
+      shad_input("email", label = "Email", type = "email",
+                 placeholder = "you@example.com"),
+      shad_select("plan", label = "Plan",
+                  choices = c(Free = "free", Pro = "pro", Team = "team"),
+                  selected = "pro"),
+      shad_checkbox("tos", label = "I accept the terms")
+    ),
+    shad_card_footer(
+      shad_button("submit", "Sign up"),
+      shad_button("reset", "Reset", variant = "outline")
+    )
+  ),
+  verbatimTextOutput("out")
+)
+
+server <- function(input, output, session) {
+  # Read values straight off `input$`.
+  output$out <- renderPrint(
+    list(email = input$email, plan = input$plan, tos = input$tos)
+  )
+
+  # Update a component from the server with its `update_shad_*()` helper.
+  observeEvent(input$reset, {
+    update_shad_select("plan", selected = "free")
+    update_shad_checkbox("tos", value = FALSE)
+  })
+
+  # Open an overlay and raise a toast.
+  observeEvent(input$submit, {
+    if (!isTRUE(input$tos)) {
+      shad_toast_error("Please accept the terms first.")
+    } else {
+      shad_toast_success(paste("Welcome,", input$email))
+    }
+  })
+}
+
+shinyApp(ui, server)
+```
+
+## Reading and updating values
+
+- **Read:** `input$email`, `input$plan`, `input$tos`. Value shapes match what
+  the component holds — a string, a logical, a vector for multi-selects.
+- **Update:** each valued component has an `update_shad_*()` twin
+  (`update_shad_select()`, `update_shad_checkbox()`, …). They accept the same
+  `inputId` and are Shiny-module safe.
+
+## Overlays and toasts
+
+Overlays such as `shad_dialog()` can be driven by a trigger element in the UI or
+opened from the server with `shad_dialog_open(id)`. Toasts are entirely
+server-side: `shad_toast()` and its `shad_toast_success()` / `_error()` /
+`_warning()` / `_loading()` shorthands.
+
+```{r}
+shad_dialog(
+  "confirm",
+  trigger = shad_button("Open"),
+  title = "Are you sure?",
+  shad_p("This action can be undone."),
+  footer = shad_dialog_close("Close")
+)
+```
+
+## Where to next
+
+- `vignette("theming")` — the token system, presets, and dark mode.
+- `vignette("overlays-and-server")` — dialogs, confirm flows, and toasts.
+- `vignette("migrating-inputs")` — moving from base Shiny inputs.
+- `shad_run_example("kitchen-sink")` — a live tour of every component.
