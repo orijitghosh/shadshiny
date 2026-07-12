@@ -230,8 +230,10 @@ server <- function(input, output, session) {
   })
 
   # Navigation sources: sidebar, command palette, prev/next.
-  observeEvent(input$docs, if (input$docs %in% names(PAGES)) page(input$docs),
-    ignoreInit = TRUE)
+  observeEvent(input$docs$active, {
+    sel <- input$docs$active
+    if (!is.null(sel) && sel %in% names(PAGES)) page(sel)
+  }, ignoreInit = TRUE)
   observeEvent(input$docs_cmd, if (input$docs_cmd %in% names(PAGES))
     page(input$docs_cmd), ignoreInit = TRUE)
   observeEvent(input$prev_pg, {

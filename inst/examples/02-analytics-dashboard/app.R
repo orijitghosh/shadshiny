@@ -390,8 +390,9 @@ server <- function(input, output, session) {
   go <- function(tab) { update_shad_tabs("view", tab); active_tab(tab) }
 
   observeEvent(input$view, active_tab(input$view), ignoreInit = TRUE)
-  observeEvent(input$shell, {           # sidebar item click
-    sel <- input$shell
+  observeEvent(input$shell$active, {    # sidebar item click
+    sel <- input$shell$active
+    if (is.null(sel) || !nzchar(sel)) return()
     if (sel %in% c("overview", "team", "reports")) go(sel)
     else shad_toast(paste0("’", tools::toTitleCase(sel), "’ is not in this demo."))
   }, ignoreInit = TRUE)
