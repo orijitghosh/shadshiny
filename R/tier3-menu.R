@@ -56,7 +56,7 @@ shad_context_menu <- function(inputId, target, ..., class = NULL) {
   with_deps(htmltools::tags$div(
     class = if (!is.null(class)) class else NULL,
     `data-shad` = "context-menu", id = inputId,
-    target,
+    htmltools::tags$div(class = "shad-context-menu__zone", target),
     htmltools::tags$div(class = "shad-menu__content shad-anim-pop", hidden = NA, ...)
   ))
 }

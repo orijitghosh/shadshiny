@@ -12,6 +12,11 @@
   `shad_input_group()` (+ addon, text, button) — a field shell for
   icon/prefix/button affixes around `shad_input()` / `shad_textarea()`.
 * **New icons:** `file`, `folder`, `clock`.
+* **Bug fix:** `shad_context_menu()` now wraps its `target` in the
+  `.shad-context-menu__zone` element the JS binds to, so the right-click zone
+  initialises instead of erroring on load.
+* **Demo:** the `kitchen-sink` example now exercises the full variant / size /
+  state matrix for every component.
 
 # shadshiny 0.1.0
 
