@@ -7,8 +7,9 @@
 shad_run_example(example = "kitchen-sink")
 }
 \arguments{
-\item{example}{Example app directory name under \code{inst/examples}. Defaults to
-\code{"kitchen-sink"}.}
+\item{example}{Example app directory name under \code{inst/examples}. One of
+\code{"kitchen-sink"} (default; the full R-built demo) or \code{"00-static-parity"}
+(the hand-written anatomy reference, for visual parity checks).}
 }
 \value{
 Called for its side effect (launches a Shiny app).

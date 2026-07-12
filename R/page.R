@@ -94,8 +94,9 @@ update_shad_theme <- function(preset = NULL, dark = NULL,
 
 #' Run a bundled shadshiny example app
 #'
-#' @param example Example app directory name under `inst/examples`. Defaults to
-#'   `"kitchen-sink"`.
+#' @param example Example app directory name under `inst/examples`. One of
+#'   `"kitchen-sink"` (default; the full R-built demo) or `"00-static-parity"`
+#'   (the hand-written anatomy reference, for visual parity checks).
 #' @returns Called for its side effect (launches a Shiny app).
 #' @family shadshiny utilities
 #' @export
