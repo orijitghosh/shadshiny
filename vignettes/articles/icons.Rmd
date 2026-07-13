@@ -1,0 +1,78 @@
+---
+title: "Icons"
+description: >
+  The full shadshiny icon set, rendered live, and how to use icon names across
+  buttons, badges, menus and items.
+---
+
+```{r setup, include = FALSE}
+for (p in c("_common.R", "../_common.R", "vignettes/_common.R"))
+  if (file.exists(p)) { source(p); break }
+```
+
+shadshiny ships a small, curated icon set drawn from
+[Lucide](https://lucide.dev) — enough to cover the components without pulling in
+a font or an icon package. Reference an icon **by name** anywhere a component
+takes an `icon` argument, or render one directly with `shad_icon()`.
+
+> Icon names are validated. Passing a name that isn't in the set below throws an
+> error rather than rendering nothing, so typos surface immediately.
+
+## Using icons
+
+```{r, echo = TRUE, eval = FALSE}
+shad_icon("search")                                   # a bare 16×16 SVG
+shad_button("Search", icon = "search")                # leading icon
+shad_button(icon = "plus", size = "icon")             # icon-only button
+shad_badge("Verified", icon = "check")                # in a badge
+shad_menu_item("mail", "Send mail", icon = "mail")    # in a menu
+shad_sidebar_item("inbox", "Inbox", icon = "mail")    # in the sidebar
+```
+
+Get the full list programmatically with `shad_icon_names()`.
+
+## The set
+
+Every icon in the package, at its native size. The name under each is exactly
+what you pass to `icon =`.
+
+```{r}
+tags$div(
+  class = "shad-icon-grid",
+  lapply(shad_icon_names(), function(nm) {
+    tags$div(class = "shad-icon-cell",
+      shad_icon(nm),
+      tags$code(nm))
+  })
+)
+```
+
+## Sizing & colour
+
+Icons inherit the current text colour (`currentColor`) and scale with font size,
+so they tint and size themselves to whatever context they sit in. To resize a
+standalone icon, wrap it or set `width`/`height` on the returned SVG via
+`htmltools::tagAppendAttributes()`.
+
+```{r}
+demo({
+  tags$span(style = "color:var(--shad-primary)", shad_icon("circle-check"))
+  tags$span(style = "color:var(--shad-destructive)", shad_icon("triangle-alert"))
+  tags$span(style = "font-size:2rem", shad_icon("loader"))
+})
+```
+
+## Missing an icon?
+
+The set is intentionally minimal. For anything outside it, pass your own SVG (or
+any tag) wherever an `icon` argument is accepted — the constructors take a tag
+just as readily as a name:
+
+```{r, echo = TRUE, eval = FALSE}
+custom <- htmltools::tags$svg(
+  xmlns = "http://www.w3.org/2000/svg", viewBox = "0 0 24 24",
+  width = "16", height = "16", fill = "none", stroke = "currentColor",
+  `stroke-width` = "2", htmltools::tags$path(d = "M12 2v20M2 12h20")
+)
+shad_button("Custom", icon = custom)
+```

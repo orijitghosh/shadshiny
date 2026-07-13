@@ -15,3 +15,5 @@
 ^\.vscode$
 ^scratch_out\.txt$
 ^tests/testthat/_snaps$
+^vignettes/articles$
+^vignettes/_common\.R$

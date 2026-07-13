@@ -1,0 +1,189 @@
+---
+title: "Gallery: form inputs"
+description: >
+  Tier 2 bound inputs — text, select, combobox, checkbox, switch, radio,
+  toggle, slider, OTP and date pickers — rendered live with their source.
+---
+
+```{r setup, include = FALSE}
+for (p in c("_common.R", "../_common.R", "vignettes/_common.R"))
+  if (file.exists(p)) { source(p); break }
+```
+
+Every component here is a **bound Shiny input**: pass an `inputId`, then read the
+value with `input$id` and set it from the server with the matching
+`update_shad_*()` helper. The previews below are live — you can type, toggle and
+open them — but with no Shiny server attached they won't echo values. See
+[Forms & validation](forms.html) for the reactive side, and the
+[Server API](server-api.html) guide for updating inputs.
+
+## Text input
+
+`shad_input()` renders a real `<input>` and uses Shiny's native text binding, so
+`updateTextInput()` works on it. `type` accepts any HTML input type.
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_input("email", label = "Email", type = "email",
+             placeholder = "you@example.com")
+  shad_input("pw", label = "Password", type = "password",
+             description = "At least 8 characters.")
+  shad_input("bad", label = "Username", value = "taken",
+             invalid = TRUE, description = "That name is unavailable.")
+})
+```
+
+## Textarea
+
+`shad_textarea()` with optional `autosize` and a fixed `rows` height.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_textarea("bio", label = "Bio", rows = 3,
+                placeholder = "Tell us about yourself…")
+)
+```
+
+## Checkbox & switch
+
+Both hold a single logical. `shad_checkbox()` also supports an
+`indeterminate` third state.
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_checkbox("tos", label = "I accept the terms", value = TRUE)
+  shad_checkbox("mix", label = "Select all", indeterminate = TRUE)
+  shad_switch("notify", label = "Email notifications", value = TRUE,
+              description = "We'll only email about account activity.")
+})
+```
+
+## Radio group
+
+One value from a set. `choices` is a named vector (label = value) or a list of
+`shad_radio_item()`s when you need per-item descriptions.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_radio_group("plan", label = "Plan",
+    choices = c("Free" = "free", "Pro" = "pro", "Team" = "team"),
+    selected = "pro")
+)
+```
+
+## Toggle & toggle group
+
+A `shad_toggle()` is a two-state button; a `shad_toggle_group()` is a segmented
+control that holds one value (`type = "single"`) or several (`"multiple"`).
+
+```{r}
+demo({
+  shad_toggle("bold", label = "Bold", icon = "plus")
+  shad_toggle_group("align", type = "single", selected = "left",
+    choices = c("Left" = "left", "Center" = "center", "Right" = "right"))
+})
+```
+
+## Slider
+
+A numeric slider with optional `marks`.
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_slider("vol", label = "Volume", min = 0, max = 100, value = 40)
+  shad_slider("price", label = "Max price", min = 0, max = 1000, value = 250,
+              step = 50)
+})
+```
+
+## Select
+
+A styled dropdown that opens a listbox popover. Use `shad_select_item()`s or a
+named vector for `choices`, and `shad_select_group()` to label sections.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_select("fruit", label = "Favourite fruit",
+    choices = c("Apple" = "apple", "Banana" = "banana", "Cherry" = "cherry"),
+    selected = "banana", placeholder = "Pick one")
+)
+```
+
+`shad_native_select()` is the same look over a real `<select>` — better on
+mobile and inside dense forms.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_native_select("country", label = "Country",
+    choices = c("United States" = "us", "India" = "in", "Germany" = "de"))
+)
+```
+
+## Combobox
+
+A searchable select. Set `multiple = TRUE` for tag-style multi-select.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_combobox("lang", label = "Language",
+    choices = c("R", "Python", "Julia", "JavaScript", "Rust"),
+    placeholder = "Search languages…")
+)
+```
+
+## Input OTP
+
+A segmented one-time-code field. `groups` splits the digits with a separator.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_input_otp("code", length = 6, groups = c(3, 3), label = "Verification code")
+)
+```
+
+## Date picker
+
+`shad_date_picker()` opens a calendar popover; `mode = "range"` selects a span.
+`shad_calendar()` embeds the same calendar inline.
+
+```{r}
+demo({
+  shad_date_picker("due", label = "Due date", placeholder = "Pick a date")
+  shad_date_picker("span", label = "Trip", mode = "range",
+                   placeholder = "Start – end")
+})
+```
+
+## Form field & input group
+
+`shad_form_field()` wraps any control with a label, description, required marker
+and error slot. `shad_input_group()` fuses affixes — icons, text, buttons —
+onto an input.
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_form_field(
+    shad_input("site", placeholder = "example.com"),
+    label = "Website", description = "No https:// needed.", required = TRUE
+  )
+  shad_input_group(
+    shad_input_group_addon("$"),
+    shad_input("amount", placeholder = "0.00"),
+    shad_input_group_addon("USD", align = "inline-end")
+  )
+  shad_input_group(
+    shad_input("q", placeholder = "Search…"),
+    shad_input_group_button("Go", variant = "default")
+  )
+})
+```

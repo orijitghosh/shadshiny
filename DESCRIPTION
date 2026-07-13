@@ -29,6 +29,7 @@ Suggests:
     rmarkdown
 Config/testthat/edition: 3
 VignetteBuilder: knitr
-URL: https://github.com/orijitghosh/shadshiny
+URL: https://github.com/orijitghosh/shadshiny,
+    https://orijitghosh.github.io/shadshiny/
 BugReports: https://github.com/orijitghosh/shadshiny/issues
 Config/roxygen2/version: 8.0.0

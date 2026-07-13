@@ -1,0 +1,273 @@
+---
+title: "Gallery: display & typography"
+description: >
+  Every Tier 1 display component — buttons, badges, avatars, cards, alerts,
+  tables, progress, and the typography set — rendered live with its source.
+---
+
+```{r setup, include = FALSE}
+for (p in c("_common.R", "../_common.R", "vignettes/_common.R"))
+  if (file.exists(p)) { source(p); break }
+```
+
+Everything on this page is a **real component**, rendered by the same code you
+see under each preview. Expand *Code* to copy it. The previews recolour with the
+light/dark switch in the navbar, exactly as they would in your app.
+
+These are the non-interactive building blocks — the display layer of Tier 1.
+For inputs see [Gallery: form inputs](gallery-inputs.html); for dialogs and
+menus see [Gallery: overlays](gallery-overlays.html).
+
+## Button
+
+The workhorse. `shad_button()` is an ordinary Shiny action button: give it an
+`inputId` and read clicks with `input$id`. Six variants cover the usual intent
+hierarchy.
+
+```{r}
+demo({
+  shad_button("Default")
+  shad_button("Secondary", variant = "secondary")
+  shad_button("Destructive", variant = "destructive")
+  shad_button("Outline", variant = "outline")
+  shad_button("Ghost", variant = "ghost")
+  shad_button("Link", variant = "link")
+})
+```
+
+Three sizes, plus an icon-only size. Any [icon name](icons.html) can lead or
+trail the label.
+
+```{r}
+demo({
+  shad_button("Small", size = "sm")
+  shad_button("Default")
+  shad_button("Large", size = "lg")
+  shad_button(icon = "plus", size = "icon", aria_label = "Add")
+  shad_button("Continue", icon = "arrow-right", icon_position = "right")
+})
+```
+
+`loading = TRUE` swaps the icon for a spinner and disables the button; toggle it
+from the server around a long task.
+
+```{r}
+demo({
+  shad_button("Saving…", loading = TRUE)
+  shad_button("Disabled", disabled = TRUE)
+})
+```
+
+## Badge
+
+A small status pill. Same variant vocabulary as buttons.
+
+```{r}
+demo({
+  shad_badge("Default")
+  shad_badge("Secondary", variant = "secondary")
+  shad_badge("Destructive", variant = "destructive")
+  shad_badge("Outline", variant = "outline")
+  shad_badge("Verified", icon = "check")
+})
+```
+
+## Avatar
+
+An image with a text fallback shown while (or if) the image fails to load.
+`shad_avatar_group()` overlaps a set and can cap the overflow with `max`.
+
+```{r}
+demo({
+  shad_avatar(fallback = "AG")
+  shad_avatar(fallback = "SK", size = "lg")
+  shad_avatar_group(
+    shad_avatar(fallback = "AG"),
+    shad_avatar(fallback = "SK"),
+    shad_avatar(fallback = "JL"),
+    shad_avatar(fallback = "MC"),
+    max = 3
+  )
+})
+```
+
+## Card
+
+The primary surface for grouping content. Compose it from the header / title /
+description / content / footer parts.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_card(
+    shad_card_header(
+      shad_card_title("Monthly report"),
+      shad_card_description("Revenue and active users, last 30 days.")
+    ),
+    shad_card_content(
+      shad_p("You're up 12.4% month over month.")
+    ),
+    shad_card_footer(
+      shad_button("View report", size = "sm"),
+      shad_button("Dismiss", variant = "ghost", size = "sm")
+    )
+  )
+)
+```
+
+## Alert
+
+An inline callout. Pair a variant with a matching [icon](icons.html).
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_alert(
+    title = "Heads up",
+    "You can add components to your app using the CLI.",
+    icon = "info"
+  )
+  shad_alert(
+    title = "Payment failed",
+    "Your card was declined. Update your billing details.",
+    variant = "destructive",
+    icon = "circle-alert"
+  )
+})
+```
+
+## Progress & spinner
+
+`shad_progress()` shows determinate or indeterminate progress; drive its value
+from the server with `update_shad_progress()`. `shad_spinner()` is a bare
+loading indicator in three sizes.
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_progress(value = 32)
+  shad_progress(value = 72)
+  shad_progress(indeterminate = TRUE)
+})
+```
+
+```{r}
+demo({
+  shad_spinner(size = "sm")
+  shad_spinner()
+  shad_spinner(size = "lg")
+  shad_spinner(label = "Loading…")
+})
+```
+
+## Skeleton
+
+A shimmer placeholder for content that hasn't loaded yet.
+
+```{r}
+demo(
+  columns = TRUE,
+  tags$div(
+    style = "display:flex;gap:0.75rem;align-items:center",
+    shad_skeleton(width = "2.75rem", height = "2.75rem", variant = "circle"),
+    tags$div(
+      style = "display:grid;gap:0.5rem;flex:1",
+      shad_skeleton(width = "60%", height = "0.85rem"),
+      shad_skeleton(width = "40%", height = "0.85rem")
+    )
+  )
+)
+```
+
+## Table
+
+`shad_table()` renders a data frame with optional striping, hover, and a
+sticky header.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_table(
+    data.frame(
+      Invoice = c("INV-001", "INV-002", "INV-003"),
+      Status  = c("Paid", "Pending", "Paid"),
+      Amount  = c("$250.00", "$150.00", "$350.00"),
+      check.names = FALSE
+    ),
+    striped = TRUE,
+    hover = TRUE
+  )
+)
+```
+
+## Item
+
+`shad_item()` is the flexible list row — media, title, description and actions —
+used for settings lists, results, and menus. Group them with
+`shad_item_group()`.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_item_group(
+    shad_item(
+      title = "Design assets",
+      description = "24 files · 128 MB",
+      media = "folder", media_variant = "icon",
+      actions = shad_button("Open", variant = "outline", size = "sm")
+    ),
+    shad_item_separator(),
+    shad_item(
+      title = "brand-guidelines.pdf",
+      description = "2.4 MB",
+      media = "file", media_variant = "icon",
+      actions = shad_button(icon = "more-horizontal", size = "icon",
+                            variant = "ghost", aria_label = "More")
+    )
+  )
+)
+```
+
+## Empty state
+
+`shad_empty()` fills the void when a list or search has no results.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_empty(
+    title = "No results found",
+    description = "Try adjusting your filters or search terms.",
+    media = "search", media_variant = "icon",
+    content = shad_button("Clear filters", variant = "outline", size = "sm")
+  )
+)
+```
+
+## kbd & code
+
+Inline helpers for keyboard shortcuts and code fragments.
+
+```{r}
+demo({
+  shad_kbd("⌘"); shad_kbd("K")
+  shad_code("shad_button()")
+})
+```
+
+## Typography
+
+A tuned type scale. `shad_h1()`–`shad_h4()`, `shad_p()`, `shad_lead()`,
+`shad_large()`, `shad_small()`, `shad_muted()`, `shad_blockquote()`, and
+`shad_list()`.
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_h2("The quick brown fox")
+  shad_lead("A lead paragraph introduces a section with slightly larger, muted text.")
+  shad_p("Body copy sits at a comfortable measure with sensible line height.")
+  shad_blockquote("Design systems shouldn't require a toolchain.")
+  shad_muted("Muted text for captions and secondary detail.")
+})
+```

@@ -1,0 +1,60 @@
+---
+title: "Component gallery"
+description: >
+  A live, visual index of every shadshiny component, grouped by tier. Start here
+  to browse the library.
+---
+
+```{r setup, include = FALSE}
+for (p in c("_common.R", "../_common.R", "vignettes/_common.R"))
+  if (file.exists(p)) { source(p); break }
+```
+
+Every shadshiny component, rendered live on one of the gallery pages below. Each
+preview shows the real component alongside the exact source that produced it —
+these are not screenshots. Previews follow the site's light/dark switch, so you
+can see both modes without leaving the page.
+
+New to the package? Read [Get started](shadshiny.html) first, then browse here.
+
+<div class="shad-gallery-grid">
+<a href="gallery-display.html"><strong>Display &amp; typography</strong><span>Buttons, badges, avatars, cards, alerts, tables, progress, and the type scale.</span></a>
+<a href="gallery-inputs.html"><strong>Form inputs</strong><span>Text, select, combobox, checkbox, switch, radio, toggle, slider, OTP, dates.</span></a>
+<a href="gallery-overlays.html"><strong>Overlays &amp; menus</strong><span>Dialog, sheet, drawer, popover, tooltip, dropdown, context-menu, command.</span></a>
+<a href="gallery-navigation.html"><strong>Navigation &amp; structure</strong><span>Tabs, accordion, pagination, carousel, resizable, and the sidebar shell.</span></a>
+<a href="gallery-chat.html"><strong>Chat &amp; AI kit</strong><span>Bubbles, messages, typing indicator, attachments, and the sticky scroller.</span></a>
+<a href="icons.html"><strong>Icons</strong><span>The full icon set, live, with names you pass to <code>icon =</code>.</span></a>
+</div>
+
+## A taste
+
+A few components, live — expand *Code* under any preview to see how it's built.
+
+```{r}
+demo({
+  shad_button("Get started", icon = "arrow-right", icon_position = "right")
+  shad_badge("New", icon = "check")
+  shad_button("Outline", variant = "outline")
+})
+```
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_alert(
+    title = "It's all live",
+    "Every preview on these pages is the real component, initialised in your browser.",
+    icon = "info"
+  )
+)
+```
+
+## How the previews work
+
+shadshiny components are plain `htmltools` tags that each carry the bundled
+asset dependency. Rendering one in an article embeds the real CSS and JavaScript,
+so the component initialises client-side exactly as it would in a running app —
+dialogs open, tabs switch, carousels slide. Because dark mode keys off
+`[data-bs-theme="dark"]` (which the navbar's light-switch toggles), the previews
+recolour with the rest of the site. The [Theming](theming.html) guide explains
+the token system behind that.

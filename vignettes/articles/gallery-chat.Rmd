@@ -1,0 +1,130 @@
+---
+title: "Gallery: chat & AI kit"
+description: >
+  The streaming-transcript primitives — bubbles, messages, attachments,
+  markers and the stick-to-bottom scroller — rendered live with their source.
+---
+
+```{r setup, include = FALSE}
+for (p in c("_common.R", "../_common.R", "vignettes/_common.R"))
+  if (file.exists(p)) { source(p); break }
+```
+
+The chat kit is a small set of composable pieces for building assistant and
+messaging UIs: **bubbles** carry text, **messages** wrap a bubble with an avatar
+and metadata, **attachments** show files, **markers** annotate the stream, and
+the **scroller** keeps a growing transcript pinned to the bottom. The
+[support-chat example](https://github.com/orijitghosh/shadshiny/tree/main/inst/examples/03-support-chat)
+wires them into a working inbox.
+
+## Bubble
+
+The atom of a conversation. `variant` sets the surface; `align` places it
+left (received) or right (sent).
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_bubble("Hey! Are we still on for 3pm?", align = "start")
+  shad_bubble("Absolutely — see you then.", variant = "tinted", align = "end")
+})
+```
+
+## Message
+
+A bubble with an avatar, sender name and timestamp. Group consecutive turns with
+`shad_message_group()`.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_message_group(
+    shad_message(
+      shad_bubble("Can you summarise the Q3 report?"),
+      align = "start", avatar = shad_avatar(fallback = "You"), sender = "You",
+      meta = "9:41 AM"
+    ),
+    shad_message(
+      shad_bubble("Revenue rose 12% to $4.2M, driven by the new tier."),
+      align = "start", avatar = shad_avatar(fallback = "AI"),
+      sender = "Assistant", meta = "9:41 AM"
+    )
+  )
+)
+```
+
+## Typing indicator
+
+`shad_message_spinner()` is the animated three-dot "typing…" bubble, shown while
+a reply streams in.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_message(
+    shad_message_spinner(),
+    align = "start", avatar = shad_avatar(fallback = "AI"), sender = "Assistant"
+  )
+)
+```
+
+## Marker
+
+A slim inline annotation for the stream — a date break, a "streaming…" cue, or a
+status note.
+
+```{r}
+demo({
+  shad_marker("Today", icon = "calendar")
+  shad_marker("Generating response", icon = "loader", streaming = TRUE)
+})
+```
+
+## Attachment
+
+A file card with title, size, a media thumbnail slot and actions. Group several
+with `shad_attachment_group()`.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_attachment_group(
+    shad_attachment(
+      title = "quarterly-report.pdf", description = "2.4 MB",
+      media = "file", media_variant = "icon",
+      actions = shad_attachment_action(icon = "arrow-right", aria_label = "Download")
+    ),
+    shad_attachment(
+      title = "budget.xlsx", description = "845 KB · uploading",
+      media = "file", media_variant = "icon", state = "uploading"
+    )
+  )
+)
+```
+
+## Message scroller
+
+`shad_message_scroller()` is a fixed-height transcript that sticks to the bottom
+as content arrives, with a "jump to latest" affordance. Append to it and pin it
+from the server with `shad_message_scroller_to_bottom()`.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_message_scroller(
+    "demo_scroller", height = "16rem", auto_scroll = TRUE,
+    shad_message_scroller_item(
+      shad_message(shad_bubble("Welcome to support — how can I help?"),
+        align = "start", avatar = shad_avatar(fallback = "AI"), sender = "Assistant")
+    ),
+    shad_message_scroller_item(
+      shad_message(shad_bubble("My invoice looks wrong.", variant = "tinted"),
+        align = "end", avatar = shad_avatar(fallback = "You"), sender = "You")
+    ),
+    shad_message_scroller_item(
+      shad_message(shad_bubble("I can help with that. What's the invoice number?"),
+        align = "start", avatar = shad_avatar(fallback = "AI"), sender = "Assistant")
+    )
+  )
+)
+```

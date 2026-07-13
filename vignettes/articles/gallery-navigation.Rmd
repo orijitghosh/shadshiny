@@ -1,0 +1,174 @@
+---
+title: "Gallery: navigation & structure"
+description: >
+  Tier 3 layout — tabs, accordion, collapsible, pagination, carousel,
+  scroll-area, resizable panels and the sidebar family — rendered live.
+---
+
+```{r setup, include = FALSE}
+for (p in c("_common.R", "../_common.R", "vignettes/_common.R"))
+  if (file.exists(p)) { source(p); break }
+```
+
+These components arrange the rest. Like the overlays, they run client-side, so
+the tabs switch, the accordion expands and the carousel slides right here. Those
+with an `inputId` also report the active pane through `input$id`. See
+[Layout & composition](layout.html) for putting them together into a full app
+shell.
+
+## Tabs
+
+Switch between panes. The active value is `input$id`; drive it from the server
+with `update_shad_tabs()`.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_tabs(
+    "demo_tabs", selected = "account",
+    shad_tab("account", "Account",
+      tags$div(style = "padding-top:0.75rem",
+        shad_p("Update your account details here."))),
+    shad_tab("password", "Password",
+      tags$div(style = "padding-top:0.75rem",
+        shad_p("Change your password here."))),
+    shad_tab("team", "Team", icon = "circle",
+      tags$div(style = "padding-top:0.75rem",
+        shad_p("Manage your team members.")))
+  )
+)
+```
+
+## Accordion
+
+Vertically stacked, collapsible sections. `type = "single"` keeps one open;
+`"multiple"` allows many.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_accordion(
+    "demo_acc", type = "single", collapsible = TRUE, value = "a1",
+    shad_accordion_item("a1", "Is it accessible?",
+      shad_p("Yes. It follows the WAI-ARIA disclosure pattern.")),
+    shad_accordion_item("a2", "Is it styled?",
+      shad_p("Yes. It comes with sensible defaults you can theme.")),
+    shad_accordion_item("a3", "Is it animated?",
+      shad_p("Yes — height transitions come for free."))
+  )
+)
+```
+
+## Collapsible
+
+A single show/hide region behind any trigger.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_collapsible(
+    "demo_coll", open = FALSE,
+    trigger = shad_button("Show advanced options", variant = "ghost",
+      icon = "chevrons-up-down", icon_position = "right"),
+    tags$div(style = "padding:0.75rem 0;display:grid;gap:0.5rem",
+      shad_muted("These options are hidden until requested."),
+      shad_switch("adv_a", label = "Enable experimental features"))
+  )
+)
+```
+
+## Pagination
+
+Page controls that report the current page as `input$id`.
+
+```{r}
+demo(shad_pagination("demo_pg", pages = 8, selected = 3))
+```
+
+## Carousel
+
+A horizontal slider with optional dots and arrows.
+
+```{r}
+demo(
+  columns = TRUE,
+  tags$div(
+    style = "max-width:22rem;width:100%;margin:0 auto",
+    do.call(shad_carousel, c(
+      list("demo_car", show_dots = TRUE),
+      lapply(1:4, function(i) shad_carousel_item(
+        shad_card(shad_card_content(
+          tags$div(style = "display:grid;place-items:center;height:8rem;font-size:2rem;font-weight:600", i)))))
+    ))
+  )
+)
+```
+
+## Scroll area
+
+A styled, fixed-height scroll container.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_scroll_area(
+    height = "10rem",
+    tags$div(style = "padding-right:1rem",
+      shad_h4("Tags", style = "margin-top:0"),
+      tagList(lapply(1:20, function(i) tagList(
+        shad_p(paste("Item", i), style = "margin:0.35rem 0"),
+        shad_separator()))))
+  )
+)
+```
+
+## Resizable
+
+Draggable split panes. Drag the handle to resize.
+
+```{r}
+demo(
+  columns = TRUE,
+  tags$div(style = "height:12rem",
+    shad_resizable(
+      "demo_rz",
+      shad_resizable_panel(default_size = 40,
+        tags$div(style = "display:grid;place-items:center;height:100%", "Sidebar")),
+      shad_resizable_handle(),
+      shad_resizable_panel(default_size = 60,
+        tags$div(style = "display:grid;place-items:center;height:100%", "Content"))
+    )
+  )
+)
+```
+
+## Sidebar layout
+
+The full app shell: a collapsible sidebar with grouped, badged nav items and a
+main region. `input$id` reports `{collapsed, mobileOpen, active}` — observe
+`input$id$active` for the selected item.
+
+```{r}
+demo(
+  columns = TRUE,
+  tags$div(style = "height:18rem;border-radius:var(--shad-radius-lg);overflow:hidden;border:1px solid var(--shad-border)",
+    shad_sidebar_layout(
+      "demo_shell",
+      sidebar = shad_sidebar(
+        header = tags$div(style = "display:flex;gap:0.5rem;align-items:center;padding:0.25rem",
+          shad_icon("terminal"), tags$strong("Acme")),
+        shad_sidebar_group("Platform",
+          shad_sidebar_item("home", "Home", icon = "circle", active = TRUE),
+          shad_sidebar_item("inbox", "Inbox", icon = "mail", badge = "3"),
+          shad_sidebar_item("search", "Search", icon = "search")),
+        shad_sidebar_group("Account",
+          shad_sidebar_item("settings", "Settings", icon = "more-horizontal"))
+      ),
+      main = tags$div(style = "padding:1rem",
+        tags$div(style = "display:flex;gap:0.5rem;align-items:center;margin-bottom:0.75rem",
+          shad_sidebar_trigger(), shad_h4("Home", style = "margin:0")),
+        shad_p("Toggle the sidebar with the trigger. Resize the window to see it collapse."))
+    )
+  )
+)
+```

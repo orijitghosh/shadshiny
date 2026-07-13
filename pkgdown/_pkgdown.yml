@@ -8,17 +8,54 @@ template:
 
 navbar:
   structure:
-    left: [intro, reference, articles, news]
+    left: [intro, gallery, guides, reference, news]
     right: [search, github, lightswitch]
+  components:
+    gallery:
+      text: Gallery
+      href: articles/components.html
+    guides:
+      text: Guides
+      menu:
+        - text: Installation & setup
+          href: articles/installation.html
+        - text: Get started
+          href: articles/shadshiny.html
+        - text: Theming
+          href: articles/theming.html
+        - text: Forms & validation
+          href: articles/forms.html
+        - text: Layout & composition
+          href: articles/layout.html
+        - text: The server API
+          href: articles/server-api.html
+        - text: Overlays & the server
+          href: articles/overlays-and-server.html
+        - text: Migrating from base Shiny
+          href: articles/migrating-inputs.html
 
 articles:
   - title: Guides
-    navbar: ~
+    navbar: Guides
     contents:
+      - installation
       - shadshiny
       - theming
+      - forms
+      - layout
+      - server-api
       - overlays-and-server
       - migrating-inputs
+  - title: Component gallery
+    navbar: Gallery
+    contents:
+      - articles/components
+      - articles/gallery-display
+      - articles/gallery-inputs
+      - articles/gallery-overlays
+      - articles/gallery-navigation
+      - articles/gallery-chat
+      - articles/icons
 
 reference:
   - title: Page & theming
@@ -131,6 +168,7 @@ reference:
     desc: Dialogs, popovers, menus, command palette, and toasts (UI side).
     contents:
       - shad_dialog
+      - shad_dialog_close
       - shad_dialog_close_button
       - shad_alert_dialog
       - shad_alert_dialog_close

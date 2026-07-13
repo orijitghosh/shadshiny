@@ -1,0 +1,173 @@
+---
+title: "Layout & composition"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Layout & composition}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+shadshiny gives you surfaces and structure — cards, tabs, a sidebar shell,
+resizable panes — but leaves page layout to plain CSS. This guide shows how to
+assemble them into real app shells.
+
+## Cards as the base surface
+
+`shad_card()` is the primary container. Compose it from its parts; each is
+optional:
+
+```{r}
+shad_card(
+  shad_card_header(
+    shad_card_title("Team members"),
+    shad_card_description("Invite your colleagues to collaborate.")
+  ),
+  shad_card_content(
+    # ... body ...
+  ),
+  shad_card_footer(
+    shad_button("Save"), shad_button("Cancel", variant = "outline")
+  )
+)
+```
+
+## Grids and flex
+
+There is no bespoke grid component — use CSS. A responsive card grid is a few
+lines:
+
+```{r}
+tags$div(
+  style = paste(
+    "display:grid;gap:1rem;",
+    "grid-template-columns:repeat(auto-fill, minmax(16rem, 1fr))"
+  ),
+  card_one, card_two, card_three
+)
+```
+
+For a KPI row, the same pattern with fixed columns, or flex with `flex:1`
+children. Because spacing tokens (`--shad-space-*`) and radii (`--shad-radius-*`)
+are shared, hand-written layout stays visually consistent with the components.
+
+## Tabs
+
+`shad_tabs()` splits a region into panes. The active pane is `input$id`; switch
+it from the server with `update_shad_tabs()`.
+
+```{r}
+shad_tabs(
+  "settings_tabs", selected = "profile",
+  shad_tab("profile",  "Profile",  profile_ui),
+  shad_tab("account",  "Account",  account_ui),
+  shad_tab("billing",  "Billing",  billing_ui)
+)
+```
+
+> **Outputs inside an initially-hidden tab are suspended.** A `textOutput()` or
+> `plotOutput()` in a tab that isn't the `selected` one won't render until you
+> switch to it — and sometimes not even then. Force it with
+> `outputOptions(output, "id", suspendWhenHidden = FALSE)`. The same applies to
+> outputs inside a dialog or sheet that opens later.
+
+## The sidebar shell
+
+`shad_sidebar_layout()` is the full application frame: a collapsible sidebar plus
+a main region. Build the sidebar from grouped, icon'd, badgeable items.
+
+```{r}
+sidebar <- shad_sidebar(
+  header = tags$div(
+    style = "display:flex;gap:0.5rem;align-items:center;padding:0.25rem",
+    shad_icon("terminal"), tags$strong("Acme")
+  ),
+  shad_sidebar_group("Platform",
+    shad_sidebar_item("home",   "Home",   icon = "circle", active = TRUE),
+    shad_sidebar_item("inbox",  "Inbox",  icon = "mail", badge = "3"),
+    shad_sidebar_item("search", "Search", icon = "search")
+  ),
+  shad_sidebar_group("Account",
+    shad_sidebar_item("settings", "Settings", icon = "more-horizontal")
+  ),
+  footer = shad_muted(style = "padding:0.25rem", "v1.0.0")
+)
+
+ui <- page_shad(
+  tags$div(style = "height:100vh",
+    shad_sidebar_layout(
+      "shell",
+      sidebar = sidebar,
+      main = tags$div(
+        style = "padding:1.5rem",
+        shad_sidebar_trigger(),        # the collapse toggle
+        uiOutput("page")
+      )
+    )
+  )
+)
+```
+
+**Reading the sidebar.** The layout reports a list, not a scalar. Observe the
+active item specifically:
+
+```{r}
+server <- function(input, output, session) {
+  # input$shell is list(collapsed=, mobileOpen=, active=)
+  observeEvent(input$shell$active, {
+    output$page <- renderUI(switch(input$shell$active,
+      home = home_ui, inbox = inbox_ui, search = search_ui, settings = settings_ui
+    ))
+  }, ignoreInit = TRUE)
+}
+```
+
+Toggle it from the server with `shad_sidebar_toggle("shell")` or
+`update_shad_sidebar("shell", collapsed = TRUE)`.
+
+## Resizable panes
+
+For a two-pane workspace (list + detail, editor + preview), use
+`shad_resizable()`:
+
+```{r}
+shad_resizable(
+  "split",
+  shad_resizable_panel(default_size = 35, list_ui),
+  shad_resizable_handle(),
+  shad_resizable_panel(default_size = 65, detail_ui)
+)
+```
+
+## Scrollable regions
+
+`shad_scroll_area(height = )` gives a fixed-height region a styled scrollbar —
+useful for long lists inside a card or a chat transcript. For a growing
+conversation that should pin to the bottom, reach for
+`shad_message_scroller()` instead (see the
+[chat gallery](../articles/gallery-chat.html)).
+
+## Separators
+
+`shad_separator()` draws a divider. Horizontal separators span the full width by
+default, which overflows inside a flex row — give them `style = "flex:1"` when
+using one as a rule between inline items (for example an "OR" divider).
+
+```{r}
+tags$div(style = "display:flex;align-items:center;gap:0.75rem",
+  shad_separator(style = "flex:1"),
+  shad_muted("OR"),
+  shad_separator(style = "flex:1")
+)
+```
+
+## Where to next
+
+- [Gallery: navigation & structure](../articles/gallery-navigation.html) — these
+  components, live.
+- [Server API](server-api.html) — driving tabs, sidebars and overlays.
+- `shad_run_example("02-analytics-dashboard")` — a full sidebar + menubar shell.
+```

@@ -1,5 +1,13 @@
 # shadshiny (development version)
 
+* **Documentation site.** The pkgdown site is now a full handbook. A new
+  **Component gallery** renders every component *live* — the real component
+  next to the exact source that made it — across pages for display, inputs,
+  overlays, navigation and the chat kit, plus a live **Icons** reference. The
+  previews initialise client-side (dialogs, tabs and carousels work) and follow
+  the site's light/dark switch. New prose guides cover **Installation & setup**,
+  **Forms & validation**, **Layout & composition**, and **The server API**.
+
 * **New components (chat / AI kit):** `shad_bubble()` (+ group), `shad_message()`
   (+ group, `shad_message_spinner()`), `shad_attachment()` (+ group,
   `shad_attachment_action()`), `shad_marker()`, and `shad_message_scroller()`
