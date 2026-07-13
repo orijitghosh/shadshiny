@@ -1,5 +1,10 @@
 # shadshiny (development version)
 
+* **Docs:** the *Migrating from base Shiny* guide is now a **complete**
+  base-Shiny→shadshiny reference — sectioned tables covering inputs, buttons,
+  layout, navigation, overlays, notifications, outputs, and typography, each row
+  tagged drop-in / restyle / keep-base, plus the value-shape gotchas and the
+  full `update_shad_*()` map. (Previously an inputs-only table.)
 * **Bug fix (icons):** `shad_icon()` now carries the shadshiny asset dependency,
   so a standalone icon still loads its `.shad-icon` sizing CSS when it is the
   only shadshiny output on a page (previously such icons rendered size-less /
