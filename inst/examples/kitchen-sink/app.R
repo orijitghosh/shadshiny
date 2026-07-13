@@ -86,6 +86,18 @@ ui <- page_shad(
       shad_badge("Outline", variant = "outline"),
       shad_badge("Verified", icon = "check")),
 
+    section("s-icons", "Icons",
+      tags$div(
+        style = paste("display:grid;width:100%;gap:0.5rem;",
+          "grid-template-columns:repeat(auto-fill, minmax(6.5rem, 1fr))"),
+        lapply(shad_icon_names(), function(nm)
+          tags$div(
+            style = paste("display:flex;flex-direction:column;align-items:center;",
+              "gap:0.35rem;padding:0.75rem 0.4rem;border:1px solid var(--shad-border);",
+              "border-radius:var(--shad-radius-md);font-size:0.68rem;text-align:center"),
+            shad_icon(nm),
+            tags$code(style = "font-size:0.64rem;background:transparent", nm))))),
+
     section("s-avatar", "Avatar",
       cluster("Sizes",
         shad_avatar(fallback = "SM", size = "sm"),
@@ -515,9 +527,9 @@ ui <- page_shad(
           sidebar = shad_sidebar(
             header = shad_small("Acme Inc"),
             shad_sidebar_group("Platform",
-              shad_sidebar_item("home", "Home", active = TRUE),
-              shad_sidebar_item("inbox", "Inbox", badge = "24"),
-              shad_sidebar_item("settings", "Settings"))),
+              shad_sidebar_item("home", "Home", icon = "home", active = TRUE),
+              shad_sidebar_item("inbox", "Inbox", icon = "mail", badge = "24"),
+              shad_sidebar_item("settings", "Settings", icon = "settings"))),
           main = tags$div(
             tags$div(style = "display:flex;gap:0.5rem;align-items:center;padding:0.75rem;border-bottom:1px solid var(--shad-border)",
               shad_sidebar_trigger(), shad_small(textOutput("sbar_title", inline = TRUE))),
