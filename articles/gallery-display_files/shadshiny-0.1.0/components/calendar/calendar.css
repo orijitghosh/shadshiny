@@ -1,0 +1,123 @@
+/* FILE: inst/assets/components/calendar/calendar.css */
+/* shadshiny — calendar. Month grid, APG grid pattern, range selection. */
+
+.shad-calendar {
+  display: inline-block;
+  padding: var(--shad-space-3);
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-lg);
+  background-color: var(--shad-card);
+  color: var(--shad-card-foreground);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  box-shadow: var(--shad-shadow-2xs);
+  user-select: none;
+}
+.shad-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--shad-space-3);
+}
+.shad-calendar__label {
+  font-weight: var(--shad-font-weight-medium);
+  font-size: var(--shad-text-sm);
+}
+.shad-calendar__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--shad-input);
+  border-radius: var(--shad-radius-md);
+  background: transparent;
+  color: var(--shad-foreground);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--shad-duration-fast) var(--shad-ease-out),
+              background-color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-calendar__nav:hover { opacity: 1; background-color: var(--shad-accent); }
+.shad-calendar__nav:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-calendar__grid { border-collapse: collapse; }
+.shad-calendar__weekday {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: var(--shad-text-xs);
+  font-weight: var(--shad-font-weight-normal);
+  color: var(--shad-muted-foreground);
+  text-align: center;
+}
+.shad-calendar__cell {
+  padding: 0;
+  text-align: center;
+  position: relative;
+}
+.shad-calendar__day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: var(--shad-radius-md);
+  background: transparent;
+  color: var(--shad-foreground);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-calendar__day:hover {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-calendar__day:focus-visible {
+  outline: none;
+  box-shadow: var(--shad-focus-shadow);
+  position: relative;
+  z-index: 1;
+}
+.shad-calendar__day[data-outside] { color: var(--shad-muted-foreground); opacity: 0.5; }
+.shad-calendar__day[data-today]:not([data-selected]) {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-calendar__day[data-selected],
+.shad-calendar__day[data-range-start],
+.shad-calendar__day[data-range-end] {
+  background-color: var(--shad-primary);
+  color: var(--shad-primary-foreground);
+}
+.shad-calendar__day[data-disabled] {
+  pointer-events: none;
+  opacity: 0.3;
+  cursor: default;
+}
+/* range middle: soft accent band, square corners */
+.shad-calendar__cell[data-in-range] { background-color: var(--shad-accent); }
+.shad-calendar__cell[data-in-range] .shad-calendar__day {
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--shad-accent-foreground);
+}
+.shad-calendar__cell[data-range-start-cell] {
+  border-top-left-radius: var(--shad-radius-md);
+  border-bottom-left-radius: var(--shad-radius-md);
+}
+.shad-calendar__cell[data-range-end-cell] {
+  border-top-right-radius: var(--shad-radius-md);
+  border-bottom-right-radius: var(--shad-radius-md);
+}
+.shad-calendar__cell[data-range-start-cell],
+.shad-calendar__cell[data-range-end-cell] { background-color: var(--shad-accent); }
+.shad-calendar__cell[data-range-start-cell] .shad-calendar__day,
+.shad-calendar__cell[data-range-end-cell] .shad-calendar__day {
+  background-color: var(--shad-primary);
+  color: var(--shad-primary-foreground);
+  border-radius: var(--shad-radius-md);
+}

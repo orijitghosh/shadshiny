@@ -1,0 +1,23 @@
+<!-- FILE: inst/assets/components/avatar/avatar.html -->
+<!-- image with initials fallback (fallback shows if image missing/broken) -->
+<span class="shad-avatar">
+  <span class="shad-avatar__fallback" aria-hidden="true">CN</span>
+  <img class="shad-avatar__image" src="https://github.com/shadcn.png" alt="@shadcn" onerror="this.hidden=true" />
+</span>
+
+<!-- initials only -->
+<span class="shad-avatar"><span class="shad-avatar__fallback">JD</span></span>
+
+<!-- sizes -->
+<span class="shad-avatar shad-avatar--sm"><span class="shad-avatar__fallback">S</span></span>
+<span class="shad-avatar"><span class="shad-avatar__fallback">M</span></span>
+<span class="shad-avatar shad-avatar--lg"><span class="shad-avatar__fallback">L</span></span>
+<span class="shad-avatar shad-avatar--xl"><span class="shad-avatar__fallback">XL</span></span>
+
+<!-- stacked group -->
+<span class="shad-avatar-group">
+  <span class="shad-avatar"><span class="shad-avatar__fallback">AB</span></span>
+  <span class="shad-avatar"><span class="shad-avatar__fallback">CD</span></span>
+  <span class="shad-avatar"><span class="shad-avatar__fallback">EF</span></span>
+  <span class="shad-avatar"><span class="shad-avatar__fallback">+3</span></span>
+</span>

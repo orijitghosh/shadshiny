@@ -1,0 +1,145 @@
+# Installation & setup
+
+This guide gets shadshiny installed and a first app running, and
+explains how it sits alongside Shiny, Bootstrap and bslib.
+
+## Install
+
+shadshiny is not yet on CRAN. Install the development version from
+GitHub with any of:
+
+``` r
+
+# pak (recommended)
+pak::pak("orijitghosh/shadshiny")
+
+# remotes
+remotes::install_github("orijitghosh/shadshiny")
+```
+
+There is **no build step** — no npm, no Node, no bundler. All CSS and
+JavaScript ship precompiled inside the package as a single
+`htmlDependency()`.
+
+## Your first app
+
+Wrap the UI in
+[`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
+and use components like any other Shiny tag. Bound components take an
+`inputId` and read back through `input$<id>`.
+
+``` r
+
+library(shiny)
+library(shadshiny)
+
+ui <- page_shad(
+  theme_preset = "violet",
+  shad_card(
+    shad_card_header(shad_card_title("Hello, shadshiny")),
+    shad_card_content(
+      shad_input("name", label = "Your name", placeholder = "Ada"),
+      shad_button("greet", "Say hi")
+    ),
+    shad_card_footer(textOutput("out"))
+  )
+)
+
+server <- function(input, output, session) {
+  output$out <- renderText({
+    req(input$greet)
+    paste0("Hi, ", input$name, "!")
+  })
+}
+
+shinyApp(ui, server)
+```
+
+## What `page_shad()` does
+
+[`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
+is the only wrapper you need. It:
+
+- attaches the shadshiny asset bundle (tokens, base CSS, runtime JS,
+  every component’s CSS/JS, and the Shiny binding layer, in the correct
+  order);
+- establishes a `.shad-scope` root and applies your `theme_preset`;
+- sets dark mode when you pass `dark = TRUE`/`FALSE`, or follows
+  bslib/OS when `dark = NULL` (the default).
+
+Under the hood it builds on
+[`bslib::page_fillable()`](https://rstudio.github.io/bslib/reference/page_fillable.html)
+when bslib is installed, and falls back to
+[`shiny::fluidPage()`](https://rdrr.io/pkg/shiny/man/fluidPage.html)
+otherwise. Everything a normal Shiny page accepts still works.
+
+``` r
+
+page_shad(
+  title = "My app",         # browser tab title
+  theme_preset = "blue",    # one of the seven presets
+  dark = NULL,              # NULL = follow bslib/OS; TRUE/FALSE to force
+  # ... your UI ...
+)
+```
+
+## Coexisting with Bootstrap & bslib
+
+shadshiny is designed to **layer on top of** an existing Bootstrap 5 /
+bslib app rather than replace it:
+
+- Every shad rule is class-scoped (`.shad-*`) and unlayered, so it
+  neither leaks into Bootstrap components nor gets overridden by Reboot.
+- Colours are namespaced custom properties (`--shad-*`), so they never
+  collide with Bootstrap variables.
+- Dark mode listens for `[data-bs-theme="dark"]`, which is exactly what
+  [`bslib::input_dark_mode()`](https://rstudio.github.io/bslib/reference/input_dark_mode.html)
+  toggles — so one switch drives both systems.
+
+That means you can drop shadshiny components into an existing dashboard
+incrementally. If you’re already inside a bslib page and don’t want the
+[`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
+wrapper, attach the assets manually with
+[`shadshiny_deps()`](https://orijitghosh.github.io/shadshiny/reference/shadshiny_deps.md):
+
+``` r
+
+library(bslib)
+library(shadshiny)
+
+page_sidebar(
+  shadshiny_deps(),                 # attach the bundle once, up front
+  sidebar = sidebar("Filters"),
+  shad_card(shad_card_content("A shad card inside a bslib page."))
+)
+```
+
+## Running the examples
+
+The package ships eight runnable example apps that together exercise the
+whole library. List and launch them with
+[`shad_run_example()`](https://orijitghosh.github.io/shadshiny/reference/shad_run_example.md):
+
+``` r
+
+shad_run_example("kitchen-sink")        # every component, one page
+shad_run_example("02-analytics-dashboard")
+```
+
+Calling
+[`shad_run_example()`](https://orijitghosh.github.io/shadshiny/reference/shad_run_example.md)
+with an unknown name prints the available example directories.
+
+## Where to next
+
+- [Get
+  started](https://orijitghosh.github.io/shadshiny/articles/shadshiny.md)
+  — a fuller tour of reading and updating values.
+- [Component
+  gallery](https://orijitghosh.github.io/shadshiny/articles/components.md)
+  — every component, live.
+- [Theming](https://orijitghosh.github.io/shadshiny/articles/theming.md)
+  — presets, tokens, and dark mode.
+- [Forms &
+  validation](https://orijitghosh.github.io/shadshiny/articles/forms.md)
+  — build and validate real forms. \`\`\`

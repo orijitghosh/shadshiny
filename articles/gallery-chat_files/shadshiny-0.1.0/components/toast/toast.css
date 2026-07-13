@@ -1,0 +1,119 @@
+/* FILE: inst/assets/components/toast/toast.css */
+/* shadshiny — toast (sonner-style). Stacked cards, fan on hover, swipe. */
+
+.shad-toaster {
+  position: fixed;
+  bottom: var(--shad-space-4);
+  right: var(--shad-space-4);
+  z-index: 1500;
+  display: flex;
+  flex-direction: column-reverse; /* newest at the visual bottom */
+  gap: 0; /* stacking handled by transforms */
+  width: 22.5rem;
+  max-width: calc(100vw - 2rem);
+  font-family: var(--shad-font-sans);
+  pointer-events: none;
+}
+.shad-toast {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--shad-space-3);
+  width: 100%;
+  padding: var(--shad-space-4);
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-lg);
+  background-color: var(--shad-popover);
+  color: var(--shad-popover-foreground);
+  box-shadow: var(--shad-shadow-lg);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  transition:
+    transform var(--shad-duration-slow) var(--shad-ease-out),
+    opacity var(--shad-duration-slow) var(--shad-ease-out),
+    height var(--shad-duration-slow) var(--shad-ease-out);
+  touch-action: pan-x;
+}
+/* stack collapse: JS sets --shad-toast-index (0 = front) and --shad-toast-gap.
+   Collapsed: rear toasts peek 12px, scale down. Expanded (hover): fanned. */
+.shad-toast[data-stacked] {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform:
+    translateY(calc(var(--shad-toast-index) * -12px))
+    scale(calc(1 - var(--shad-toast-index) * 0.05));
+  z-index: calc(100 - var(--shad-toast-index));
+}
+.shad-toast[data-stacked][data-hidden-in-stack] { opacity: 0; }
+.shad-toaster[data-expanded] .shad-toast[data-stacked] {
+  transform: translateY(var(--shad-toast-offset, 0));
+  scale: 1;
+}
+.shad-toaster[data-expanded] .shad-toast[data-stacked][data-hidden-in-stack] { opacity: 1; }
+
+/* enter/exit */
+.shad-toast[data-state="open"] {
+  animation: shad-slide-in-from-bottom var(--shad-duration-slow) var(--shad-ease-out);
+}
+.shad-toast[data-state="closed"] {
+  animation: shad-fade-out var(--shad-duration-normal) var(--shad-ease-out) forwards;
+}
+/* swiping: JS drives inline transform; no transition mid-drag */
+.shad-toast[data-swiping] { transition: none; }
+
+.shad-toast__icon {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 1px;
+}
+.shad-toast--success .shad-toast__icon { color: oklch(0.723 0.192 149.579); }
+.shad-toast--error .shad-toast__icon   { color: var(--shad-destructive); }
+.shad-toast--warning .shad-toast__icon { color: oklch(0.795 0.184 86.047); }
+.shad-toast--loading .shad-toast__icon { color: var(--shad-muted-foreground); }
+
+.shad-toast__body { flex: 1; display: grid; gap: 2px; min-width: 0; }
+.shad-toast__title { font-weight: var(--shad-font-weight-medium); }
+.shad-toast__description {
+  color: var(--shad-muted-foreground);
+  font-size: var(--shad-text-sm);
+}
+.shad-toast__action {
+  flex-shrink: 0;
+  align-self: center;
+  height: 1.5rem;
+  padding: 0 var(--shad-space-2);
+  border: 0;
+  border-radius: var(--shad-radius-sm);
+  background-color: var(--shad-primary);
+  color: var(--shad-primary-foreground);
+  font-size: var(--shad-text-xs);
+  font-weight: var(--shad-font-weight-medium);
+  cursor: pointer;
+}
+.shad-toast__action:focus-visible {
+  outline: none;
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-toast__close {
+  position: absolute;
+  top: var(--shad-space-2);
+  right: var(--shad-space-2);
+  display: inline-flex;
+  padding: 2px;
+  border: 0;
+  border-radius: var(--shad-radius-sm);
+  background: transparent;
+  color: var(--shad-muted-foreground);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-toast:hover .shad-toast__close,
+.shad-toast__close:focus-visible { opacity: 1; }
+.shad-toast__close:focus-visible {
+  outline: none;
+  box-shadow: var(--shad-focus-shadow);
+}

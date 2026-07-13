@@ -1,0 +1,42 @@
+<svg width="300" height="346" viewBox="0 0 300 346" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="shadshiny">
+  <defs>
+    <linearGradient id="bg" x1="150" y1="4" x2="150" y2="342" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#18181b"/>
+      <stop offset="1" stop-color="#09090b"/>
+    </linearGradient>
+    <linearGradient id="card" x1="95" y1="118" x2="205" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e4e4e7"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- hex plate -->
+  <path d="M150 4 L296 89 L296 257 L150 342 L4 257 L4 89 Z" fill="url(#bg)"/>
+  <path d="M150 4 L296 89 L296 257 L150 342 L4 257 L4 89 Z" fill="none" stroke="#3f3f46" stroke-width="3"/>
+  <path d="M150 12 L289 93 L289 253 L150 334 L11 253 L11 93 Z" fill="none" stroke="#27272a" stroke-width="1.5"/>
+
+  <!-- layered component cards (a UI kit), fanned for depth -->
+  <g stroke-linejoin="round">
+    <rect x="76" y="92" width="118" height="82" rx="16" fill="none" stroke="#3f3f46" stroke-width="3"/>
+    <rect x="88" y="104" width="118" height="82" rx="16" fill="none" stroke="#71717a" stroke-width="3"/>
+    <g filter="url(#soft)">
+      <rect x="100" y="116" width="118" height="82" rx="16" fill="url(#card)"/>
+    </g>
+    <!-- component "content" inside the front card -->
+    <rect x="116" y="132" width="40" height="14" rx="7" fill="#18181b"/>
+    <rect x="116" y="156" width="86" height="8" rx="4" fill="#a1a1aa"/>
+    <rect x="116" y="172" width="62" height="8" rx="4" fill="#c4c4c8"/>
+  </g>
+
+  <!-- reactive spark (Shiny) -->
+  <path d="M214 74 C216 86 222 92 234 94 C222 96 216 102 214 114 C212 102 206 96 194 94 C206 92 212 86 214 74 Z" fill="#fafafa"/>
+
+  <!-- wordmark -->
+  <text x="150" y="252" text-anchor="middle" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="34" font-weight="700" letter-spacing="-0.5">
+    <tspan fill="#71717a">shad</tspan><tspan fill="#fafafa">shiny</tspan>
+  </text>
+  <text x="150" y="278" text-anchor="middle" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="500" letter-spacing="1.5" fill="#52525b">shadcn/ui &#183; for Shiny</text>
+</svg>

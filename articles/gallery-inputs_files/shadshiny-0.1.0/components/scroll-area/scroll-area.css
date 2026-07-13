@@ -1,0 +1,54 @@
+/* FILE: inst/assets/components/scroll-area/scroll-area.css */
+/* shadshiny — scroll-area. Native scrolling, custom overlay scrollbar. */
+
+.shad-scroll-area {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--shad-font-sans);
+}
+.shad-scroll-area__viewport {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /* hide native scrollbars — the custom thumb replaces them */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.shad-scroll-area__viewport::-webkit-scrollbar { display: none; }
+
+.shad-scroll-area__scrollbar {
+  position: absolute;
+  display: flex;
+  touch-action: none;
+  user-select: none;
+  padding: 1px;
+  opacity: 0;
+  transition: opacity var(--shad-duration-normal) var(--shad-ease-out);
+}
+.shad-scroll-area__scrollbar[data-orientation="vertical"] {
+  top: 0; right: 0; bottom: 0;
+  width: 10px;
+  border-left: 1px solid transparent;
+}
+.shad-scroll-area__scrollbar[data-orientation="horizontal"] {
+  left: 0; right: 0; bottom: 0;
+  height: 10px;
+  flex-direction: column;
+  border-top: 1px solid transparent;
+}
+/* visible while hovering the area, scrolling, or dragging the thumb */
+.shad-scroll-area:hover .shad-scroll-area__scrollbar,
+.shad-scroll-area__scrollbar[data-state="visible"],
+.shad-scroll-area__scrollbar[data-dragging] {
+  opacity: 1;
+}
+.shad-scroll-area__thumb {
+  position: relative;
+  flex: 1;
+  border-radius: var(--shad-radius-full);
+  background-color: var(--shad-border);
+}
+.shad-scroll-area__thumb:hover,
+.shad-scroll-area__scrollbar[data-dragging] .shad-scroll-area__thumb {
+  background-color: var(--shad-muted-foreground);
+}

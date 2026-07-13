@@ -1,0 +1,44 @@
+<!-- FILE: inst/assets/components/select/select.html -->
+<div class="shad-select" data-shad="select" style="width: 200px;">
+  <button type="button" class="shad-select__trigger" data-placeholder>
+    <span class="shad-select__value">Select a fruit</span>
+    <svg class="shad-select__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+  <div class="shad-select__content shad-anim-pop" hidden>
+    <button type="button" class="shad-select__scroll-btn" data-dir="up" hidden tabindex="-1" aria-hidden="true">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
+    <div class="shad-select__viewport">
+      <div role="group" aria-labelledby="sel-fruits-label">
+        <div class="shad-select__group-label" id="sel-fruits-label">Fruits</div>
+        <div class="shad-select__item" role="option" data-value="apple" data-state="unchecked">
+          <svg class="shad-select__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Apple
+        </div>
+        <div class="shad-select__item" role="option" data-value="banana" data-state="unchecked">
+          <svg class="shad-select__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Banana
+        </div>
+        <div class="shad-select__item" role="option" data-value="blueberry" data-state="unchecked" data-disabled aria-disabled="true">
+          <svg class="shad-select__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Blueberry (out of stock)
+        </div>
+      </div>
+      <div class="shad-select__separator" role="separator" aria-hidden="true"></div>
+      <div role="group" aria-labelledby="sel-veg-label">
+        <div class="shad-select__group-label" id="sel-veg-label">Vegetables</div>
+        <div class="shad-select__item" role="option" data-value="carrot" data-state="unchecked">
+          <svg class="shad-select__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Carrot
+        </div>
+        <div class="shad-select__item" role="option" data-value="leek" data-state="unchecked">
+          <svg class="shad-select__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Leek
+        </div>
+      </div>
+    </div>
+    <button type="button" class="shad-select__scroll-btn" data-dir="down" hidden tabindex="-1" aria-hidden="true">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</div>

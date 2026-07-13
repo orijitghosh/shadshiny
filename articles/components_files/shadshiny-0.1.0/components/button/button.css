@@ -1,0 +1,120 @@
+/* FILE: inst/assets/components/button/button.css */
+/* shadshiny — button. CSS-only. Variants: default/secondary/destructive/
+   outline/ghost/link. Sizes: sm/default/lg/icon. Loading: data-loading. */
+
+.shad-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--shad-space-2);
+  white-space: nowrap;
+  border-radius: var(--shad-radius-md);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  font-weight: var(--shad-font-weight-medium);
+  height: 2.25rem;                 /* size default = h-9 */
+  padding: 0 var(--shad-space-4);
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  position: relative;
+  transition: color var(--shad-duration-fast) var(--shad-ease-out),
+              background-color var(--shad-duration-fast) var(--shad-ease-out),
+              border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-btn .shad-icon { width: 1rem; height: 1rem; }
+
+/* focus ring (shared recipe) */
+.shad-btn:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+
+/* disabled — attribute or aria (for <a> buttons) */
+.shad-btn:disabled,
+.shad-btn[data-disabled],
+.shad-btn[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ---- variants ---- */
+.shad-btn--default {
+  background-color: var(--shad-primary);
+  color: var(--shad-primary-foreground);
+  box-shadow: var(--shad-shadow-xs);
+}
+.shad-btn--default:hover { background-color: color-mix(in oklab, var(--shad-primary) 90%, transparent); }
+
+.shad-btn--secondary {
+  background-color: var(--shad-secondary);
+  color: var(--shad-secondary-foreground);
+  box-shadow: var(--shad-shadow-xs);
+}
+.shad-btn--secondary:hover { background-color: color-mix(in oklab, var(--shad-secondary) 80%, transparent); }
+
+.shad-btn--destructive {
+  background-color: var(--shad-destructive);
+  color: var(--shad-destructive-foreground);
+  box-shadow: var(--shad-shadow-xs);
+}
+.shad-btn--destructive:hover { background-color: color-mix(in oklab, var(--shad-destructive) 90%, transparent); }
+.shad-btn--destructive:focus-visible {
+  border-color: var(--shad-destructive);
+  box-shadow: var(--shad-focus-shadow-destructive);
+}
+
+.shad-btn--outline {
+  background-color: var(--shad-background);
+  border-color: var(--shad-input);
+  color: var(--shad-foreground);
+  box-shadow: var(--shad-shadow-xs);
+}
+.shad-btn--outline:hover {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+
+.shad-btn--ghost { background-color: transparent; color: var(--shad-foreground); }
+.shad-btn--ghost:hover {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+
+.shad-btn--link {
+  background-color: transparent;
+  color: var(--shad-primary);
+  text-underline-offset: 4px;
+  padding: 0;
+  height: auto;
+}
+.shad-btn--link:hover { text-decoration: underline; }
+
+/* ---- sizes ---- */
+.shad-btn--sm {
+  height: 2rem;
+  padding: 0 var(--shad-space-3);
+  border-radius: var(--shad-radius-md);
+  gap: var(--shad-space-1_5);
+}
+.shad-btn--lg {
+  height: 2.5rem;
+  padding: 0 var(--shad-space-6);
+}
+.shad-btn--icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+}
+.shad-btn--icon.shad-btn--sm { width: 2rem; height: 2rem; }
+.shad-btn--icon.shad-btn--lg { width: 2.5rem; height: 2.5rem; }
+
+/* ---- loading state: data-loading hides label visually, shows spinner ---- */
+.shad-btn[data-loading] { pointer-events: none; opacity: 0.8; }
+.shad-btn[data-loading] > .shad-btn__spinner { display: inline-flex; }
+.shad-btn__spinner { display: none; }
+.shad-btn__spinner .shad-icon { animation: shad-spin 1s linear infinite; }

@@ -1,0 +1,530 @@
+# shadshiny
+
+**shadshiny** brings the [shadcn/ui](https://ui.shadcn.com) design
+system to [Shiny](https://shiny.posit.co). It is a from-scratch port —
+59 accessible, themeable components rebuilt in framework-free CSS and
+vanilla JavaScript, then wrapped as ordinary R functions with native
+Shiny input bindings.
+
+- **No build step, no npm, no React.** Components are plain `htmltools`
+  tags backed by a single bundled asset dependency.
+- **Native Shiny inputs.** Read values with `input$id`; drive them from
+  the server with `update_shad_*()`. Modules and
+  [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) just work.
+- **Coexists with Bootstrap 5 / bslib.** Dark mode keys off the same
+  signals
+  [`bslib::input_dark_mode()`](https://rstudio.github.io/bslib/reference/input_dark_mode.html)
+  uses, so theme sync needs zero glue.
+- **OKLCH token theming.** Seven presets out of the box, switchable at
+  runtime.
+
+> shadshiny is an independent reimplementation. It ships no shadcn/ui or
+> Radix source — only visually-compatible CSS/JS written for this
+> package. See [Attribution](#attribution).
+
+## Installation
+
+``` r
+
+# install.packages("pak")
+pak::pak("orijitghosh/shadshiny")
+```
+
+## Quick start
+
+``` r
+
+library(shiny)
+library(shadshiny)
+
+ui <- page_shad(
+  theme_preset = "violet",
+  shad_card(
+    shad_card_header(
+      shad_card_title("Create account"),
+      shad_card_description("Enter your details below.")
+    ),
+    shad_card_content(
+      shad_input("email", label = "Email", type = "email",
+                 placeholder = "you@example.com"),
+      shad_select("plan", label = "Plan",
+                  choices = c(Free = "free", Pro = "pro", Team = "team"),
+                  selected = "pro"),
+      shad_checkbox("tos", label = "I accept the terms")
+    ),
+    shad_card_footer(
+      shad_button(inputId = "submit", "Sign up", variant = "default")
+    )
+  ),
+  verbatimTextOutput("out")
+)
+
+server <- function(input, output, session) {
+  output$out <- renderPrint(
+    list(email = input$email, plan = input$plan, tos = input$tos)
+  )
+  observeEvent(input$submit, {
+    if (!isTRUE(input$tos)) {
+      shad_toast_error("Please accept the terms.")
+    } else {
+      shad_toast_success(paste("Welcome,", input$email))
+    }
+  })
+}
+
+shinyApp(ui, server)
+```
+
+Run the flagship demo covering every component:
+
+``` r
+
+shad_run_example("kitchen-sink")
+```
+
+## Components
+
+**Tier 1 — display & typography**
+
+|  |  |  |  |
+|----|----|----|----|
+| `shad_button` | `shad_badge` | `shad_avatar` | `shad_card` |
+| `shad_alert` | `shad_separator` | `shad_skeleton` | `shad_spinner` |
+| `shad_aspect_ratio` | `shad_label` | `shad_progress` | `shad_breadcrumb` |
+| `shad_table` | `shad_kbd` | `shad_code` | typography (`shad_h1`…`shad_p`) |
+| `shad_item` | `shad_empty` | `shad_button_group` |  |
+
+**Tier 2 — form inputs**
+
+|  |  |  |  |
+|----|----|----|----|
+| `shad_input` | `shad_textarea` | `shad_checkbox` | `shad_switch` |
+| `shad_radio_group` | `shad_toggle` | `shad_toggle_group` | `shad_slider` |
+| `shad_select` | `shad_native_select` | `shad_combobox` | `shad_input_otp` |
+| `shad_calendar` | `shad_date_picker` | `shad_form_field` | `shad_input_group` |
+
+**Tier 3 — overlays**
+
+|  |  |  |  |
+|----|----|----|----|
+| `shad_dialog` | `shad_alert_dialog` | `shad_sheet` | `shad_drawer` |
+| `shad_popover` | `shad_tooltip` | `shad_hover_card` | `shad_dropdown_menu` |
+| `shad_context_menu` | `shad_menubar` | `shad_command` | `shad_toast` |
+
+**Tier 3 — navigation & structure**
+
+|  |  |  |  |
+|----|----|----|----|
+| `shad_tabs` | `shad_accordion` | `shad_collapsible` | `shad_pagination` |
+| `shad_scroll_area` | `shad_resizable` | `shad_carousel` | `shad_navigation_menu` |
+| `shad_sidebar_layout` |  |  |  |
+
+**Chat / AI kit**
+
+|                         |               |                   |               |
+|-------------------------|---------------|-------------------|---------------|
+| `shad_message`          | `shad_bubble` | `shad_attachment` | `shad_marker` |
+| `shad_message_scroller` |               |                   |               |
+
+Every stateful component is namespaced-module safe and has a matching
+`update_shad_*()` server helper where it holds a value. Overlays add
+`shad_<name>_open()` / `shad_<name>_close()`.
+
+## Theming
+
+Colours are OKLCH `--shad-*` custom properties — never hard-code hex.
+Pick a preset at page level or swap it live:
+
+``` r
+
+page_shad(theme_preset = "green")            # slate stone blue green rose violet orange
+
+# server-side, e.g. from a shad_select + shad_switch toolbar
+update_shad_theme(preset = input$preset, dark = input$dark)
+```
+
+Dark mode is driven by `.dark` / `[data-bs-theme="dark"]`, so
+[`bslib::input_dark_mode()`](https://rstudio.github.io/bslib/reference/input_dark_mode.html)
+toggles shadshiny components with no extra wiring. See
+[`vignette("theming")`](https://orijitghosh.github.io/shadshiny/articles/theming.md).
+
+## Attribution
+
+shadshiny is inspired by and visually compatible with
+[shadcn/ui](https://ui.shadcn.com) (MIT) by shadcn, which itself builds
+on [Radix UI](https://www.radix-ui.com) primitives. **No upstream source
+code is vendored.** All CSS and JavaScript in this package were
+reimplemented from scratch to be framework-free and Shiny-native.
+shadcn/ui and Radix are trademarks of their respective owners. shadshiny
+is released under the [MIT
+License](https://orijitghosh.github.io/shadshiny/LICENSE).
+
+# Package index
+
+## Page & theming
+
+Page wrapper, theme presets, and runtime theme control.
+
+- [`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
+  : A shadshiny page
+- [`shad_theme_preset()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_preset.md)
+  : Wrap UI in a theme-preset scope
+- [`update_shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_theme.md)
+  : Switch the theme preset and/or dark mode at runtime
+- [`shad_run_example()`](https://orijitghosh.github.io/shadshiny/reference/shad_run_example.md)
+  : Run a bundled shadshiny example app
+
+## Tier 1 — display & typography
+
+Non-interactive display components and typographic helpers.
+
+- [`shad_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_button.md)
+  : Button
+- [`shad_badge()`](https://orijitghosh.github.io/shadshiny/reference/shad_badge.md)
+  : Badge
+- [`shad_avatar()`](https://orijitghosh.github.io/shadshiny/reference/shad_avatar.md)
+  [`shad_avatar_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_avatar.md)
+  : Avatar
+- [`shad_card()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md)
+  [`shad_card_header()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md)
+  [`shad_card_title()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md)
+  [`shad_card_description()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md)
+  [`shad_card_action()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md)
+  [`shad_card_content()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md)
+  [`shad_card_footer()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md)
+  : Card
+- [`shad_alert()`](https://orijitghosh.github.io/shadshiny/reference/shad_alert.md)
+  : Alert
+- [`shad_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_separator.md)
+  : Separator
+- [`shad_skeleton()`](https://orijitghosh.github.io/shadshiny/reference/shad_skeleton.md)
+  : Skeleton
+- [`shad_spinner()`](https://orijitghosh.github.io/shadshiny/reference/shad_spinner.md)
+  : Spinner
+- [`shad_aspect_ratio()`](https://orijitghosh.github.io/shadshiny/reference/shad_aspect_ratio.md)
+  : Aspect ratio
+- [`shad_label()`](https://orijitghosh.github.io/shadshiny/reference/shad_label.md)
+  : Label
+- [`shad_progress()`](https://orijitghosh.github.io/shadshiny/reference/shad_progress.md)
+  : Progress bar
+- [`shad_breadcrumb()`](https://orijitghosh.github.io/shadshiny/reference/shad_breadcrumb.md)
+  [`shad_breadcrumb_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_breadcrumb.md)
+  [`shad_breadcrumb_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_breadcrumb.md)
+  [`shad_breadcrumb_ellipsis()`](https://orijitghosh.github.io/shadshiny/reference/shad_breadcrumb.md)
+  : Breadcrumb
+- [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md)
+  [`shad_table_header()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md)
+  [`shad_table_body()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md)
+  [`shad_table_footer()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md)
+  [`shad_table_row()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md)
+  [`shad_table_head()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md)
+  [`shad_table_cell()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md)
+  [`shad_table_caption()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md)
+  : Table
+- [`shad_h1()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_h2()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_h3()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_h4()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_p()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_lead()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_large()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_small()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_muted()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_blockquote()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_code()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_kbd()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  [`shad_list()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+  : Typography helpers
+- [`shad_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md)
+  [`shad_item_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md)
+  [`shad_item_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md)
+  : Item
+- [`shad_empty()`](https://orijitghosh.github.io/shadshiny/reference/shad_empty.md)
+  : Empty state
+- [`shad_button_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_button_group.md)
+  [`shad_button_group_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_button_group.md)
+  [`shad_button_group_text()`](https://orijitghosh.github.io/shadshiny/reference/shad_button_group.md)
+  : Button group
+
+## Tier 2 — form inputs
+
+Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
+
+- [`shad_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_input.md)
+  : Text input
+- [`shad_textarea()`](https://orijitghosh.github.io/shadshiny/reference/shad_textarea.md)
+  : Textarea
+- [`shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/shad_checkbox.md)
+  : Checkbox
+- [`shad_switch()`](https://orijitghosh.github.io/shadshiny/reference/shad_switch.md)
+  : Switch
+- [`shad_radio_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_radio_group.md)
+  [`shad_radio_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_radio_group.md)
+  : Radio group
+- [`shad_toggle()`](https://orijitghosh.github.io/shadshiny/reference/shad_toggle.md)
+  : Toggle
+- [`shad_toggle_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_toggle_group.md)
+  [`shad_toggle_group_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_toggle_group.md)
+  : Toggle group
+- [`shad_slider()`](https://orijitghosh.github.io/shadshiny/reference/shad_slider.md)
+  : Slider
+- [`shad_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_select.md)
+  [`shad_select_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_select.md)
+  [`shad_select_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_select.md)
+  [`shad_select_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_select.md)
+  : Select
+- [`shad_native_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_native_select.md)
+  : Native select
+- [`shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/shad_combobox.md)
+  : Combobox
+- [`shad_input_otp()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_otp.md)
+  : One-time-code input
+- [`shad_calendar()`](https://orijitghosh.github.io/shadshiny/reference/shad_calendar.md)
+  : Calendar
+- [`shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_picker.md)
+  : Date picker
+- [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md)
+  : Form field wrapper
+- [`shad_input_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md)
+  [`shad_input_group_addon()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md)
+  [`shad_input_group_text()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md)
+  [`shad_input_group_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md)
+  : Input group
+
+## Chat & AI kit
+
+Streaming transcript primitives — bubbles, messages, attachments,
+markers, and a stick-to-bottom scroller.
+
+- [`shad_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md)
+  [`shad_message_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md)
+  : Chat message
+- [`shad_message_spinner()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_spinner.md)
+  : A spinner glyph for a message footer (in-progress state)
+- [`shad_bubble()`](https://orijitghosh.github.io/shadshiny/reference/shad_bubble.md)
+  [`shad_bubble_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_bubble.md)
+  : Chat bubble
+- [`shad_attachment()`](https://orijitghosh.github.io/shadshiny/reference/shad_attachment.md)
+  [`shad_attachment_action()`](https://orijitghosh.github.io/shadshiny/reference/shad_attachment.md)
+  [`shad_attachment_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_attachment.md)
+  : Attachment
+- [`shad_marker()`](https://orijitghosh.github.io/shadshiny/reference/shad_marker.md)
+  : Conversation marker
+- [`shad_message_scroller()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller.md)
+  [`shad_message_scroller_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller.md)
+  : Message scroller
+
+## Tier 3 — overlays
+
+Dialogs, popovers, menus, command palette, and toasts (UI side).
+
+- [`shad_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_dialog.md)
+  [`shad_dialog_close_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_dialog.md)
+  : Dialog (modal)
+- [`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_dialog_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_alert_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_alert_dialog_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_sheet_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_sheet_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_drawer_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_drawer_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_popover_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_popover_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_sidebar_toggle()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  : Open and close overlays from the server
+- [`shad_alert_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_alert_dialog.md)
+  : Alert dialog (confirmation)
+- [`shad_sheet()`](https://orijitghosh.github.io/shadshiny/reference/shad_sheet.md)
+  : Sheet (side panel)
+- [`shad_drawer()`](https://orijitghosh.github.io/shadshiny/reference/shad_drawer.md)
+  : Drawer (bottom sheet)
+- [`shad_popover()`](https://orijitghosh.github.io/shadshiny/reference/shad_popover.md)
+  : Popover
+- [`shad_tooltip()`](https://orijitghosh.github.io/shadshiny/reference/shad_tooltip.md)
+  : Tooltip
+- [`shad_hover_card()`](https://orijitghosh.github.io/shadshiny/reference/shad_hover_card.md)
+  : Hover card
+- [`shad_dropdown_menu()`](https://orijitghosh.github.io/shadshiny/reference/shad_dropdown_menu.md)
+  : Dropdown menu
+- [`shad_context_menu()`](https://orijitghosh.github.io/shadshiny/reference/shad_context_menu.md)
+  : Context menu
+- [`shad_menubar()`](https://orijitghosh.github.io/shadshiny/reference/shad_menubar.md)
+  [`shad_menubar_menu()`](https://orijitghosh.github.io/shadshiny/reference/shad_menubar.md)
+  : Menubar
+- [`shad_menu_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_menu_parts.md)
+  [`shad_menu_checkbox_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_menu_parts.md)
+  [`shad_menu_radio_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_menu_parts.md)
+  [`shad_menu_radio_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_menu_parts.md)
+  [`shad_menu_label()`](https://orijitghosh.github.io/shadshiny/reference/shad_menu_parts.md)
+  [`shad_menu_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_menu_parts.md)
+  [`shad_menu_sub()`](https://orijitghosh.github.io/shadshiny/reference/shad_menu_parts.md)
+  : Menu part constructors
+- [`shad_command()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
+  [`shad_command_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
+  [`shad_command_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
+  [`shad_command_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
+  : Command palette
+
+## Tier 3 — navigation & structure
+
+Tabs, accordion, pagination, carousel, and the sidebar layout family.
+
+- [`shad_tabs()`](https://orijitghosh.github.io/shadshiny/reference/shad_tabs.md)
+  [`shad_tab()`](https://orijitghosh.github.io/shadshiny/reference/shad_tabs.md)
+  : Tabs
+- [`shad_accordion()`](https://orijitghosh.github.io/shadshiny/reference/shad_accordion.md)
+  [`shad_accordion_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_accordion.md)
+  : Accordion
+- [`shad_collapsible()`](https://orijitghosh.github.io/shadshiny/reference/shad_collapsible.md)
+  : Collapsible
+- [`shad_pagination()`](https://orijitghosh.github.io/shadshiny/reference/shad_pagination.md)
+  : Pagination
+- [`shad_scroll_area()`](https://orijitghosh.github.io/shadshiny/reference/shad_scroll_area.md)
+  : Scroll area
+- [`shad_resizable()`](https://orijitghosh.github.io/shadshiny/reference/shad_resizable.md)
+  [`shad_resizable_panel()`](https://orijitghosh.github.io/shadshiny/reference/shad_resizable.md)
+  [`shad_resizable_handle()`](https://orijitghosh.github.io/shadshiny/reference/shad_resizable.md)
+  : Resizable panel group
+- [`shad_carousel()`](https://orijitghosh.github.io/shadshiny/reference/shad_carousel.md)
+  [`shad_carousel_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_carousel.md)
+  : Carousel
+- [`shad_navigation_menu()`](https://orijitghosh.github.io/shadshiny/reference/shad_navigation_menu.md)
+  [`shad_navigation_menu_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_navigation_menu.md)
+  : Navigation menu
+- [`shad_sidebar_layout()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
+  [`shad_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
+  [`shad_sidebar_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
+  [`shad_sidebar_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
+  [`shad_sidebar_trigger()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
+  : Sidebar layout
+
+## Server — updates
+
+Update bound component values from the server.
+
+- [`update_shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_radio_group()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_switch()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_slider()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_toggle()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_toggle_group()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_select()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_input_otp()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_native_select()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_calendar()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_tabs()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_accordion()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_pagination()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_carousel()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_progress()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_button()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  : Update bound component values from the server
+
+## Server — overlays & toast
+
+Open/close overlays and raise toast notifications from the server.
+
+- [`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_dialog_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_alert_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_alert_dialog_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_sheet_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_sheet_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_drawer_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_drawer_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_popover_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_popover_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  [`shad_sidebar_toggle()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
+  : Open and close overlays from the server
+- [`shad_message_scroller_to_bottom()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller_to_bottom.md)
+  : Scroll a message-scroller to the latest message
+- [`shad_toast()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
+  [`shad_toast_success()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
+  [`shad_toast_error()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
+  [`shad_toast_warning()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
+  [`shad_toast_loading()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
+  [`shad_toast_update()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
+  [`shad_toast_dismiss()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
+  : Show a toast notification
+
+## Utilities
+
+Icons and the asset dependency.
+
+- [`shad_icon()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon.md)
+  : Inline Lucide icon
+- [`shad_icon_names()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon_names.md)
+  : Available shadshiny icon names
+- [`shadshiny_deps()`](https://orijitghosh.github.io/shadshiny/reference/shadshiny_deps.md)
+  : Attach the shadshiny asset bundle
+
+# Articles
+
+### Guides
+
+- [Installation &
+  setup](https://orijitghosh.github.io/shadshiny/articles/installation.md):
+- [Get started with
+  shadshiny](https://orijitghosh.github.io/shadshiny/articles/shadshiny.md):
+- [Theming](https://orijitghosh.github.io/shadshiny/articles/theming.md):
+- [Forms &
+  validation](https://orijitghosh.github.io/shadshiny/articles/forms.md):
+- [Layout &
+  composition](https://orijitghosh.github.io/shadshiny/articles/layout.md):
+- [The server
+  API](https://orijitghosh.github.io/shadshiny/articles/server-api.md):
+- [Overlays and the server
+  API](https://orijitghosh.github.io/shadshiny/articles/overlays-and-server.md):
+- [Migrating from base
+  Shiny](https://orijitghosh.github.io/shadshiny/articles/migrating-inputs.md):
+
+### Component gallery
+
+- [Component
+  gallery](https://orijitghosh.github.io/shadshiny/articles/components.md):
+
+  A live, visual index of every shadshiny component, grouped by tier.
+  Start here to browse the library.
+
+- [Gallery: display &
+  typography](https://orijitghosh.github.io/shadshiny/articles/gallery-display.md):
+
+  Every Tier 1 display component — buttons, badges, avatars, cards,
+  alerts, tables, progress, and the typography set — rendered live with
+  its source.
+
+- [Gallery: form
+  inputs](https://orijitghosh.github.io/shadshiny/articles/gallery-inputs.md):
+
+  Tier 2 bound inputs — text, select, combobox, checkbox, switch, radio,
+  toggle, slider, OTP and date pickers — rendered live with their
+  source.
+
+- [Gallery: overlays &
+  menus](https://orijitghosh.github.io/shadshiny/articles/gallery-overlays.md):
+
+  Tier 3 overlays — dialog, sheet, drawer, popover, tooltip, hover-card,
+  dropdown, context-menu, menubar and the command palette — live and
+  clickable.
+
+- [Gallery: navigation &
+  structure](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.md):
+
+  Tier 3 layout — tabs, accordion, collapsible, pagination, carousel,
+  scroll-area, resizable panels and the sidebar family — rendered live.
+
+- [Gallery: chat & AI
+  kit](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.md):
+
+  The streaming-transcript primitives — bubbles, messages, attachments,
+  markers and the stick-to-bottom scroller — rendered live with their
+  source.
+
+- [Icons](https://orijitghosh.github.io/shadshiny/articles/icons.md):
+
+  The full shadshiny icon set, rendered live, and how to use icon names
+  across buttons, badges, menus and items.

@@ -1,0 +1,59 @@
+<!-- FILE: inst/assets/components/dropdown-menu/dropdown-menu.html -->
+<div data-shad="dropdown-menu" data-align="start" style="display:inline-block">
+  <button type="button" class="shad-btn shad-btn--outline shad-menu__trigger">Open menu</button>
+  <div class="shad-menu__content shad-anim-pop" hidden>
+    <div class="shad-menu__label">My Account</div>
+    <div class="shad-menu__separator"></div>
+    <button type="button" class="shad-menu__item" data-value="profile">
+      Profile <span class="shad-menu__shortcut">⇧⌘P</span>
+    </button>
+    <button type="button" class="shad-menu__item" data-value="billing">
+      Billing <span class="shad-menu__shortcut">⌘B</span>
+    </button>
+    <button type="button" class="shad-menu__item" data-value="settings" data-disabled>
+      Settings <span class="shad-menu__shortcut">⌘S</span>
+    </button>
+    <div class="shad-menu__separator"></div>
+    <button type="button" class="shad-menu__item" data-type="checkbox" data-state="checked" data-value="status-bar">
+      <span class="shad-menu__indicator">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      Status Bar
+    </button>
+    <button type="button" class="shad-menu__item" data-type="checkbox" data-state="unchecked" data-value="activity-bar">
+      <span class="shad-menu__indicator">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      Activity Bar
+    </button>
+    <div class="shad-menu__separator"></div>
+    <div class="shad-menu__label">Position</div>
+    <button type="button" class="shad-menu__item" data-type="radio" data-group="pos" data-state="checked" data-value="top">
+      <span class="shad-menu__indicator">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+      </span>
+      Top
+    </button>
+    <button type="button" class="shad-menu__item" data-type="radio" data-group="pos" data-state="unchecked" data-value="bottom">
+      <span class="shad-menu__indicator">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+      </span>
+      Bottom
+    </button>
+    <div class="shad-menu__separator"></div>
+    <div data-shad-submenu>
+      <button type="button" class="shad-menu__item" data-shad-submenu-trigger aria-haspopup="menu" aria-expanded="false" data-state="closed">
+        Invite users
+        <svg class="shad-menu__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+      <div class="shad-menu__content shad-anim-pop" hidden>
+        <button type="button" class="shad-menu__item" data-value="invite-email">Email</button>
+        <button type="button" class="shad-menu__item" data-value="invite-link">Copy link</button>
+      </div>
+    </div>
+    <div class="shad-menu__separator"></div>
+    <button type="button" class="shad-menu__item shad-menu__item--destructive" data-value="logout">
+      Log out <span class="shad-menu__shortcut">⇧⌘Q</span>
+    </button>
+  </div>
+</div>

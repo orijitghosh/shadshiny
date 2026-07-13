@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- FILE: inst/assets/components/native-select/native-select.html -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — native-select</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="native-select.css">
+<style>
+  html { background: var(--shad-background); }
+  body { margin: 0; }
+  .demo { padding: 2rem; max-width: 480px; display: grid; gap: 2.5rem; }
+  .demo-toolbar { display: flex; gap: .5rem; }
+  .demo-toolbar button { font: 500 .75rem/1 var(--shad-font-mono); padding: .375rem .625rem; border: 1px solid var(--shad-border); border-radius: .375rem; background: var(--shad-background); color: var(--shad-foreground); cursor: pointer; }
+  .demo-label { font: 500 .6875rem/1 var(--shad-font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--shad-muted-foreground); margin: 0 0 .75rem; }
+  .demo-col { display: grid; gap: 1rem; }
+  .demo-out { font: 400 .75rem/1.4 var(--shad-font-mono); color: var(--shad-muted-foreground); }
+</style>
+</head>
+<body class="shad-scope">
+<div class="demo">
+  <div class="demo-toolbar">
+    <button type="button" onclick="document.documentElement.classList.toggle('dark')">toggle dark</button>
+    <button type="button" onclick="var h=document.documentElement;h.dir=h.dir==='rtl'?'ltr':'rtl'">toggle rtl</button>
+  </div>
+
+  <section>
+    <p class="demo-label">default</p>
+    <div class="demo-col">
+      <div class="shad-native-select" data-shad="native-select" id="ns-demo">
+        <select class="shad-native-select__select" aria-label="Fruit">
+          <option value="">Select a fruit…</option>
+          <option value="apple">Apple</option>
+          <option value="banana">Banana</option>
+          <option value="cherry">Cherry</option>
+        </select>
+        <svg class="shad-icon shad-native-select__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <p class="demo-out" id="ns-out">shad:change → (none yet)</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="demo-label">sizes</p>
+    <div class="demo-col">
+      <div class="shad-native-select shad-native-select--sm" data-shad="native-select">
+        <select class="shad-native-select__select" aria-label="Small">
+          <option>Small</option><option>Option B</option>
+        </select>
+        <svg class="shad-icon shad-icon--sm shad-native-select__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="shad-native-select shad-native-select--lg" data-shad="native-select">
+        <select class="shad-native-select__select" aria-label="Large">
+          <option>Large</option><option>Option B</option>
+        </select>
+        <svg class="shad-icon shad-native-select__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="demo-label">optgroup</p>
+    <div class="demo-col">
+      <div class="shad-native-select" data-shad="native-select">
+        <select class="shad-native-select__select" aria-label="Timezone">
+          <optgroup label="Americas">
+            <option>America/New_York</option>
+            <option>America/Sao_Paulo</option>
+          </optgroup>
+          <optgroup label="Europe">
+            <option>Europe/London</option>
+            <option>Europe/Berlin</option>
+          </optgroup>
+        </select>
+        <svg class="shad-icon shad-native-select__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="demo-label">invalid + disabled</p>
+    <div class="demo-col">
+      <div class="shad-native-select" data-shad="native-select">
+        <select class="shad-native-select__select" aria-invalid="true" aria-label="Region (invalid)">
+          <option value="">Choose a region…</option>
+          <option>us-east-1</option>
+        </select>
+        <svg class="shad-icon shad-native-select__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="shad-native-select" data-shad="native-select">
+        <select class="shad-native-select__select" disabled aria-label="Disabled">
+          <option>Disabled</option>
+        </select>
+        <svg class="shad-icon shad-native-select__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="../../core/shad-runtime.js"></script>
+<script src="native-select.js"></script>
+<script>
+  document.getElementById("ns-demo").addEventListener("shad:change", function (ev) {
+    document.getElementById("ns-out").textContent = "shad:change → " + JSON.stringify(ev.detail.value);
+  });
+</script>
+</body>
+</html>

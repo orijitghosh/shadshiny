@@ -1,0 +1,44 @@
+<!-- FILE: inst/assets/components/sheet/sheet.html -->
+<div data-shad="sheet" data-side="right">
+  <button type="button" class="shad-btn shad-btn--outline shad-sheet__trigger">Open right sheet</button>
+  <div class="shad-sheet__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-sheet__content shad-anim-sheet" hidden>
+    <button type="button" class="shad-sheet__close" data-shad-sheet-close aria-label="Close">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="shad-sheet__header">
+      <div class="shad-sheet__title">Edit profile</div>
+      <div class="shad-sheet__description">Make changes to your profile here.</div>
+    </div>
+    <div class="shad-form-field">
+      <label class="shad-label" for="sheet-name">Name</label>
+      <input class="shad-input" id="sheet-name" type="text" data-shad-autofocus />
+    </div>
+    <div class="shad-sheet__footer">
+      <button type="button" class="shad-btn shad-btn--default" data-shad-sheet-close>Save changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- other sides: change data-side (content [data-side] is set by JS from root) -->
+<div data-shad="sheet" data-side="left">
+  <button type="button" class="shad-btn shad-btn--outline shad-sheet__trigger">Left</button>
+  <div class="shad-sheet__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-sheet__content shad-anim-sheet" hidden>
+    <div class="shad-sheet__header"><div class="shad-sheet__title">Left sheet</div></div>
+  </div>
+</div>
+<div data-shad="sheet" data-side="top">
+  <button type="button" class="shad-btn shad-btn--outline shad-sheet__trigger">Top</button>
+  <div class="shad-sheet__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-sheet__content shad-anim-sheet" hidden>
+    <div class="shad-sheet__header"><div class="shad-sheet__title">Top sheet</div></div>
+  </div>
+</div>
+<div data-shad="sheet" data-side="bottom">
+  <button type="button" class="shad-btn shad-btn--outline shad-sheet__trigger">Bottom</button>
+  <div class="shad-sheet__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-sheet__content shad-anim-sheet" hidden>
+    <div class="shad-sheet__header"><div class="shad-sheet__title">Bottom sheet</div></div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+/* FILE: inst/assets/components/switch/switch.css */
+/* shadshiny — switch. Thumb slide via transform on data-state. */
+
+.shad-switch {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 1.15rem;
+  border: 1px solid transparent;
+  border-radius: var(--shad-radius-full);
+  background-color: var(--shad-input);
+  box-shadow: var(--shad-shadow-xs);
+  cursor: pointer;
+  padding: 0;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.dark .shad-switch[data-state="unchecked"],
+[data-bs-theme="dark"] .shad-switch[data-state="unchecked"] {
+  background-color: color-mix(in oklab, var(--shad-input) 80%, transparent);
+}
+.shad-switch[data-state="checked"] { background-color: var(--shad-primary); }
+.shad-switch:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-switch[data-disabled],
+.shad-switch:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.shad-switch__thumb {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: var(--shad-radius-full);
+  background-color: var(--shad-background);
+  pointer-events: none;
+  transform: translateX(0);
+  transition: transform var(--shad-duration-fast) var(--shad-ease-out);
+}
+.dark .shad-switch__thumb,
+[data-bs-theme="dark"] .shad-switch__thumb {
+  background-color: var(--shad-foreground);
+}
+.shad-switch[data-state="checked"] .shad-switch__thumb {
+  transform: translateX(calc(2rem - 1rem - 2px));
+}
+.dark .shad-switch[data-state="checked"] .shad-switch__thumb,
+[data-bs-theme="dark"] .shad-switch[data-state="checked"] .shad-switch__thumb {
+  background-color: var(--shad-primary-foreground);
+}
+.shad-switch-row {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+}

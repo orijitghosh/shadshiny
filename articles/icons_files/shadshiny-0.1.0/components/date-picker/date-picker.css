@@ -1,0 +1,46 @@
+/* FILE: inst/assets/components/date-picker/date-picker.css */
+/* shadshiny — date-picker: trigger button + popover calendar. */
+
+.shad-date-picker { position: relative; display: inline-block; }
+
+.shad-date-picker__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  width: 100%;
+  min-width: 12rem;
+  height: 2.25rem;
+  padding: 0 var(--shad-space-3);
+  border: 1px solid var(--shad-input);
+  border-radius: var(--shad-radius-md);
+  background: transparent;
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  color: var(--shad-foreground);
+  box-shadow: var(--shad-shadow-xs);
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-date-picker__trigger:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-date-picker__trigger[data-placeholder] .shad-date-picker__value {
+  color: var(--shad-muted-foreground);
+}
+.shad-date-picker__trigger .shad-icon { color: var(--shad-muted-foreground); }
+.shad-date-picker__value { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+
+/* popover panel: chrome-less wrapper around a .shad-calendar */
+.shad-date-picker__content {
+  position: fixed;
+  z-index: 1100;
+  padding: 0;
+}
+.shad-date-picker__content .shad-calendar {
+  box-shadow: var(--shad-shadow-md);
+}

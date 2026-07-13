@@ -1,0 +1,33 @@
+/* FILE: inst/assets/components/popover/popover.css */
+/* shadshiny — popover panel. */
+
+.shad-popover__content {
+  position: fixed;
+  z-index: 1300;
+  width: 18rem;
+  padding: var(--shad-space-4);
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  background-color: var(--shad-popover);
+  color: var(--shad-popover-foreground);
+  box-shadow: var(--shad-shadow-md);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  outline: none;
+}
+.shad-popover__content--auto { width: max-content; max-width: 20rem; }
+.shad-popover__arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--shad-popover);
+  border: 1px solid var(--shad-border);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+/* hide the arrow's inner border half per side */
+.shad-popover__arrow[data-side="bottom"] { border-bottom: 0; border-right: 0; }
+.shad-popover__arrow[data-side="top"]    { border-top: 0; border-left: 0; }
+.shad-popover__arrow[data-side="right"]  { border-top: 0; border-right: 0; }
+.shad-popover__arrow[data-side="left"]   { border-bottom: 0; border-left: 0; }

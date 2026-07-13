@@ -1,0 +1,63 @@
+/* FILE: inst/assets/components/pagination/pagination.css */
+/* shadshiny — pagination. CSS-first; optional JS for active-state control. */
+
+.shad-pagination {
+  display: flex;
+  justify-content: center;
+  font-family: var(--shad-font-sans);
+}
+.shad-pagination__list {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.shad-pagination__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--shad-space-1);
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 var(--shad-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--shad-radius-md);
+  background: transparent;
+  font-size: var(--shad-text-sm);
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-foreground);
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-pagination__link:hover {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-pagination__link:focus-visible {
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+/* active page: outline-button look (shadcn) */
+.shad-pagination__link[data-state="active"],
+.shad-pagination__link[aria-current="page"] {
+  border-color: var(--shad-input);
+  background-color: var(--shad-background);
+  box-shadow: var(--shad-shadow-xs);
+}
+.shad-pagination__link[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.shad-pagination__link--nav { padding: 0 var(--shad-space-3); }
+.shad-pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--shad-muted-foreground);
+}

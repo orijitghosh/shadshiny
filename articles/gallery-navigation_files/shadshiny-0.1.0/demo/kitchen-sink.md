@@ -1,0 +1,785 @@
+# Taxing Laughter: The Joke Tax Chronicles
+
+## accordion
+
+Is it accessible?
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1hY2NvcmRpb25fX2NoZXZyb24iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0ibTYgOSA2IDYgNi02IiAvPjwvc3ZnPg==)
+
+Yes. It adheres to the WAI-ARIA accordion pattern.
+
+Is it styled?
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1hY2NvcmRpb25fX2NoZXZyb24iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0ibTYgOSA2IDYgNi02IiAvPjwvc3ZnPg==)
+
+Yes. It comes with default styles that match the shadcn aesthetic.
+
+Is it animated?
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1hY2NvcmRpb25fX2NoZXZyb24iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0ibTYgOSA2IDYgNi02IiAvPjwvc3ZnPg==)
+
+Yes. Height animates smoothly, and the chevron rotates.
+
+## alert
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1hbGVydF9faWNvbiIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cG9seWxpbmUgcG9pbnRzPSI0IDE3IDEwIDExIDQgNSI+PC9wb2x5bGluZT48bGluZSB4MT0iMTIiIHgyPSIyMCIgeTE9IjE5IiB5Mj0iMTkiPjwvbGluZT48L3N2Zz4=)
+
+Heads up!
+
+You can add components to your app using the CLI.
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1hbGVydF9faWNvbiIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCI+PC9jaXJjbGU+PGxpbmUgeDE9IjEyIiB4Mj0iMTIiIHkxPSI4IiB5Mj0iMTIiPjwvbGluZT48bGluZSB4MT0iMTIiIHgyPSIxMi4wMSIgeTE9IjE2IiB5Mj0iMTYiPjwvbGluZT48L3N2Zz4=)
+
+Error
+
+Your session has expired. Please log in again.
+
+Title only alert.
+
+## alert dialog
+
+Delete account
+
+Are you absolutely sure?
+
+This action cannot be undone. This will permanently delete your account
+and remove your data from our servers.
+
+Cancel
+
+Continue
+
+## aspect ratio
+
+![Landscape photograph by Tobias
+Tullius](https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80)
+
+## avatar
+
+CN ![@shadcn](https://github.com/shadcn.png) JD S M L XL AB CD EF +3
+
+## badge
+
+Badge Secondary Destructive Outline
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik0yMCA2IDkgMTdsLTUtNSIgLz48L3N2Zz4=)
+Verified
+
+## breadcrumb
+
+1.  [Home](#)
+2.  ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTkgMTggNi02LTYtNiIgLz48L3N2Zz4=)
+3.  
+    ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMSI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMTkiIGN5PSIxMiIgcj0iMSI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iNSIgY3k9IjEyIiByPSIxIj48L2NpcmNsZT48L3N2Zz4=)More
+    pages
+4.  ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTkgMTggNi02LTYtNiIgLz48L3N2Zz4=)
+5.  [Components](#)
+6.  ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTkgMTggNi02LTYtNiIgLz48L3N2Zz4=)
+7.  Breadcrumb
+
+## button
+
+Button
+
+Secondary
+
+Destructive
+
+Outline
+
+Ghost
+
+Link
+
+Small
+
+Default
+
+Large
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Im05IDE4IDYtNi02LTYiIC8+PC9zdmc+)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIxNiIgeD0iMiIgeT0iNCIgcng9IjIiIC8+PHBhdGggZD0ibTIyIDctOC45NyA1LjdhMS45NCAxLjk0IDAgMCAxLTIuMDYgMEwyIDciIC8+PC9zdmc+)
+Login with Email
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDEgMS02LjIxOS04LjU2IiAvPjwvc3ZnPg==)
+Please wait
+
+Disabled
+
+[Anchor button](#)
+
+## calendar
+
+## card
+
+Create project
+
+Deploy your new project in one-click.
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjE5IiBjeT0iMTIiIHI9IjEiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjUiIGN5PSIxMiIgcj0iMSI+PC9jaXJjbGU+PC9zdmc+)
+
+Card content goes here. Any markup is valid.
+
+Cancel
+
+Deploy
+
+Content-only card.
+
+## carousel
+
+1
+
+2
+
+3
+
+4
+
+5
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Im0xMiAxOS03LTcgNy03IiAvPjxwYXRoIGQ9Ik0xOSAxMkg1IiAvPjwvc3ZnPg==)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik01IDEyaDE0IiAvPjxwYXRoIGQ9Im0xMiA1IDcgNy03IDciIC8+PC9zdmc+)
+
+## checkbox
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggcGF0aGxlbmd0aD0iMSIgZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tbWludXMiIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTUgMTJoMTQiIC8+PC9zdmc+)
+
+Accept terms and conditions
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggcGF0aGxlbmd0aD0iMSIgZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tbWludXMiIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTUgMTJoMTQiIC8+PC9zdmc+)
+
+Email me updates
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggcGF0aGxlbmd0aD0iMSIgZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tbWludXMiIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTUgMTJoMTQiIC8+PC9zdmc+)
+
+Select all
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggcGF0aGxlbmd0aD0iMSIgZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tbWludXMiIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTUgMTJoMTQiIC8+PC9zdmc+)
+
+Disabled
+
+## collapsible
+
+@peduarte starred 3 repositories
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Im03IDE1IDUgNSA1LTUiIC8+PHBhdGggZD0ibTcgOSA1LTUgNSA1IiAvPjwvc3ZnPg==)
+
+@radix-ui/primitives
+
+@radix-ui/colors
+
+@stitches/react
+
+## combobox
+
+Select framework…
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9fY2hldnJvbnMiIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0ibTcgMTUgNSA1IDUtNSIgLz48cGF0aCBkPSJtNyA5IDUtNSA1IDUiIC8+PC9zdmc+)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxjaXJjbGUgY3g9IjExIiBjeT0iMTEiIHI9IjgiPjwvY2lyY2xlPjxwYXRoIGQ9Im0yMSAyMS00LjMtNC4zIiAvPjwvc3ZnPg==)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9faXRlbS1jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiIC8+PC9zdmc+)
+Next.js
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9faXRlbS1jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiIC8+PC9zdmc+)
+SvelteKit
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9faXRlbS1jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiIC8+PC9zdmc+)
+Nuxt
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9faXRlbS1jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiIC8+PC9zdmc+)
+Remix (deprecated)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9faXRlbS1jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiIC8+PC9zdmc+)
+Astro
+
+No framework found.
+
+Select languages…
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9fY2hldnJvbnMiIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0ibTcgMTUgNSA1IDUtNSIgLz48cGF0aCBkPSJtNyA5IDUtNSA1IDUiIC8+PC9zdmc+)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxjaXJjbGUgY3g9IjExIiBjeT0iMTEiIHI9IjgiPjwvY2lyY2xlPjxwYXRoIGQ9Im0yMSAyMS00LjMtNC4zIiAvPjwvc3ZnPg==)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9faXRlbS1jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiIC8+PC9zdmc+)
+R
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9faXRlbS1jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiIC8+PC9zdmc+)
+Python
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9faXRlbS1jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiIC8+PC9zdmc+)
+Julia
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21ib2JveF9faXRlbS1jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiIC8+PC9zdmc+)
+JavaScript
+
+No language found.
+
+## command
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21tYW5kX19zZWFyY2gtaWNvbiIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48Y2lyY2xlIGN4PSIxMSIgY3k9IjExIiByPSI4Ij48L2NpcmNsZT48cGF0aCBkPSJtMjEgMjEtNC4zLTQuMyIgLz48L3N2Zz4=)
+
+No results found.
+
+Suggestions
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik04IDJ2NCIgLz48cGF0aCBkPSJNMTYgMnY0IiAvPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iNCIgcng9IjIiIC8+PHBhdGggZD0iTTMgMTBoMTgiIC8+PC9zdmc+)
+Calendar
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIj48L2NpcmNsZT48cGF0aCBkPSJNOCAxNHMxLjUgMiA0IDIgNC0yIDQtMiIgLz48bGluZSB4MT0iOSIgeDI9IjkuMDEiIHkxPSI5IiB5Mj0iOSI+PC9saW5lPjxsaW5lIHgxPSIxNSIgeDI9IjE1LjAxIiB5MT0iOSIgeTI9IjkiPjwvbGluZT48L3N2Zz4=)
+Search Emoji
+
+Calculator
+
+Settings
+
+Profile ⌘P
+
+Billing ⌘B
+
+Settings ⌘S
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21tYW5kX19zZWFyY2gtaWNvbiIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48Y2lyY2xlIGN4PSIxMSIgY3k9IjExIiByPSI4Ij48L2NpcmNsZT48cGF0aCBkPSJtMjEgMjEtNC4zLTQuMyIgLz48L3N2Zz4=)
+
+No results found.
+
+Quick actions
+
+New file ⌘N
+
+Open recent…
+
+Toggle theme
+
+## context menu
+
+Right click here
+
+Back ⌘\[
+
+Forward ⌘\]
+
+Reload ⌘R
+
+More tools
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1tZW51X19jaGV2cm9uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Im05IDE4IDYtNi02LTYiIC8+PC9zdmc+)
+
+Save page…
+
+Developer tools
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIHNoYWQtaWNvbi0tc20iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)
+Show bookmarks
+
+## date picker
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik04IDJ2NCIgLz48cGF0aCBkPSJNMTYgMnY0IiAvPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iNCIgcng9IjIiIC8+PHBhdGggZD0iTTMgMTBoMTgiIC8+PC9zdmc+)Pick
+a date
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik04IDJ2NCIgLz48cGF0aCBkPSJNMTYgMnY0IiAvPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iNCIgcng9IjIiIC8+PHBhdGggZD0iTTMgMTBoMTgiIC8+PC9zdmc+)Pick
+a date range
+
+## dialog
+
+Edit Profile
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik0xOCA2IDYgMTgiIC8+PHBhdGggZD0ibTYgNiAxMiAxMiIgLz48L3N2Zz4=)
+
+Edit profile
+
+Make changes to your profile here. Click save when you're done.
+
+Name
+
+Username
+
+Cancel
+
+Save changes
+
+## drawer
+
+Open drawer
+
+Move Goal
+
+Set your daily activity goal.
+
+Drag the handle down to dismiss, or use the buttons.
+
+Submit
+
+Cancel
+
+## dropdown menu
+
+Open menu
+
+My Account
+
+Profile ⇧⌘P
+
+Billing ⌘B
+
+Settings ⌘S
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIHNoYWQtaWNvbi0tc20iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)
+Status Bar
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIHNoYWQtaWNvbi0tc20iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)
+Activity Bar
+
+Position
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIHNoYWQtaWNvbi0tc20iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIiBzdHJva2U9Im5vbmUiIGFyaWEtaGlkZGVuPSJ0cnVlIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI0Ij48L2NpcmNsZT48L3N2Zz4=)
+Top
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIHNoYWQtaWNvbi0tc20iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIiBzdHJva2U9Im5vbmUiIGFyaWEtaGlkZGVuPSJ0cnVlIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI0Ij48L2NpcmNsZT48L3N2Zz4=)
+Bottom
+
+Invite users
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1tZW51X19jaGV2cm9uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Im05IDE4IDYtNi02LTYiIC8+PC9zdmc+)
+
+Email
+
+Copy link
+
+Log out ⇧⌘Q
+
+## form field
+
+Username
+
+This is your public display name.
+
+Email
+
+We never share your email.
+
+Please enter a valid email address.
+
+Marketing emails
+
+Receive emails about new products.
+
+## hover card
+
+[@nextjs](#)
+
+VC
+
+@nextjs
+
+The React Framework — created and maintained by Vercel.
+
+Joined December 2021
+
+## input
+
+## input otp
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTUgMTJoMTQiIC8+PC9zdmc+)
+
+## label
+
+Email address Disabled field
+
+## menubar
+
+File
+
+New tab ⌘T
+
+New window ⌘N
+
+Share
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1tZW51X19jaGV2cm9uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Im05IDE4IDYtNi02LTYiIC8+PC9zdmc+)
+
+Email link
+
+Messages
+
+Print… ⌘P
+
+Edit
+
+Undo ⌘Z
+
+Redo ⇧⌘Z
+
+View
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIHNoYWQtaWNvbi0tc20iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)
+Show toolbar
+
+Reload ⌘R
+
+## navigation menu
+
+- Getting started
+  ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1uYXYtbWVudV9fY2hldnJvbiIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJtNiA5IDYgNiA2LTYiIC8+PC9zdmc+)
+  [](#)
+  Introduction
+
+  Re-usable components built with vanilla CSS and JS.
+
+  [](#)
+  Installation
+
+  How to install dependencies and structure your app.
+
+  [](#)
+  Typography
+
+  Styles for headings, paragraphs, lists…
+
+  [](#)
+  Theming
+
+  Using CSS variables to switch palettes.
+- Components
+  ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1uYXYtbWVudV9fY2hldnJvbiIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJtNiA5IDYgNiA2LTYiIC8+PC9zdmc+)
+  [](#)
+  Dialog
+
+  A modal window overlaid on the page.
+
+  [](#)
+  Tabs
+
+  Layered sections shown one at a time.
+
+  [](#)
+  Tooltip
+
+  Popup info on hover or focus.
+
+  [](#)
+  Toast
+
+  Succinct transient notifications.
+- [Documentation](#)
+
+## pagination
+
+&nbsp;
+
+- [![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Im0xNSAxOC02LTYgNi02IiAvPjwvc3ZnPg==)
+  Previous](#)
+- [1](#)
+- [2](#)
+- [3](#)
+- 
+  ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMSI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMTkiIGN5PSIxMiIgcj0iMSI+PC9jaXJjbGU+PGNpcmNsZSBjeD0iNSIgY3k9IjEyIiByPSIxIj48L2NpcmNsZT48L3N2Zz4=)
+- [10](#)
+- [Next
+  ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Im05IDE4IDYtNi02LTYiIC8+PC9zdmc+)](#)
+
+## popover
+
+Open popover
+
+Dimensions
+
+Set the dimensions for the layer.
+
+Width Height
+
+## progress
+
+## radio group
+
+Default
+
+Comfortable
+
+Compact
+
+Off (disabled)
+
+Free
+
+Pro
+
+## resizable
+
+One
+
+![](data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNiIgaGVpZ2h0PSIxMCIgdmlld2JveD0iMCAwIDYgMTAiIGZpbGw9ImN1cnJlbnRDb2xvciIgYXJpYS1oaWRkZW49InRydWUiPjxjaXJjbGUgY3g9IjEuNSIgY3k9IjIiIHI9IjEiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjQuNSIgY3k9IjIiIHI9IjEiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEuNSIgY3k9IjUiIHI9IjEiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjQuNSIgY3k9IjUiIHI9IjEiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEuNSIgY3k9IjgiIHI9IjEiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjQuNSIgY3k9IjgiIHI9IjEiPjwvY2lyY2xlPjwvc3ZnPg==)
+
+Two
+
+Three
+
+## scroll area
+
+Tags
+
+v1.2.0-beta.50
+
+v1.2.0-beta.49
+
+v1.2.0-beta.48
+
+v1.2.0-beta.47
+
+v1.2.0-beta.46
+
+v1.2.0-beta.45
+
+v1.2.0-beta.44
+
+v1.2.0-beta.43
+
+## select
+
+Select a fruit
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zZWxlY3RfX2NoZXZyb24iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0ibTYgOSA2IDYgNi02IiAvPjwvc3ZnPg==)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTE4IDE1LTYtNi02IDYiIC8+PC9zdmc+)
+
+Fruits
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zZWxlY3RfX2l0ZW0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)
+Apple
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zZWxlY3RfX2l0ZW0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)
+Banana
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zZWxlY3RfX2l0ZW0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)
+Blueberry (out of stock)
+
+Vegetables
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zZWxlY3RfX2l0ZW0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)
+Carrot
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zZWxlY3RfX2l0ZW0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)
+Leek
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTYgOSA2IDYgNi02IiAvPjwvc3ZnPg==)
+
+## separator
+
+Above
+
+Below
+
+Blog
+
+Docs
+
+Source
+
+## sheet
+
+Open right sheet
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik0xOCA2IDYgMTgiIC8+PHBhdGggZD0ibTYgNiAxMiAxMiIgLz48L3N2Zz4=)
+
+Edit profile
+
+Make changes to your profile here.
+
+Name
+
+Save changes
+
+Left
+
+Left sheet
+
+Top
+
+Top sheet
+
+Bottom
+
+Bottom sheet
+
+## sidebar
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iMyIgcng9IjIiIC8+PHBhdGggZD0iTTkgM3YxOCIgLz48L3N2Zz4=)Acme
+Inc
+
+Platform
+
+- ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik0xNSAyMXYtOGExIDEgMCAwIDAtMS0xaC00YTEgMSAwIDAgMC0xIDF2OCIgLz48cGF0aCBkPSJNMyAxMGEyIDIgMCAwIDEgLjcwOS0xLjUyOGw3LTUuOTk5YTIgMiAwIDAgMSAyLjU4MiAwbDcgNS45OTlBMiAyIDAgMCAxIDIxIDEwdjlhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ6IiAvPjwvc3ZnPg==)Home
+- ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwb2x5bGluZSBwb2ludHM9IjIyIDEyIDE2IDEyIDE0IDE1IDEwIDE1IDggMTIgMiAxMiI+PC9wb2x5bGluZT48cGF0aCBkPSJNNS40NSA1LjExIDIgMTJ2NmEyIDIgMCAwIDAgMiAyaDE2YTIgMiAwIDAgMCAyLTJ2LTZsLTMuNDUtNi44OUEyIDIgMCAwIDAgMTYuNzYgNEg3LjI0YTIgMiAwIDAgMC0xLjc5IDEuMTF6IiAvPjwvc3ZnPg==)Inbox
+  24
+- ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik0xMi4yMiAyaC0uNDRhMiAyIDAgMCAwLTIgMnYuMThhMiAyIDAgMCAxLTEgMS43M2wtLjQzLjI1YTIgMiAwIDAgMS0yIDBsLS4xNS0uMDhhMiAyIDAgMCAwLTIuNzMuNzNsLS4yMi4zOGEyIDIgMCAwIDAgLjczIDIuNzNsLjE1LjFhMiAyIDAgMCAxIDEgMS43MnYuNTFhMiAyIDAgMCAxLTEgMS43NGwtLjE1LjA5YTIgMiAwIDAgMC0uNzMgMi43M2wuMjIuMzhhMiAyIDAgMCAwIDIuNzMuNzNsLjE1LS4wOGEyIDIgMCAwIDEgMiAwbC40My4yNWEyIDIgMCAwIDEgMSAxLjczVjIwYTIgMiAwIDAgMCAyIDJoLjQ0YTIgMiAwIDAgMCAyLTJ2LS4xOGEyIDIgMCAwIDEgMS0xLjczbC40My0uMjVhMiAyIDAgMCAxIDIgMGwuMTUuMDhhMiAyIDAgMCAwIDIuNzMtLjczbC4yMi0uMzlhMiAyIDAgMCAwLS43My0yLjczbC0uMTUtLjA4YTIgMiAwIDAgMS0xLTEuNzR2LS41YTIgMiAwIDAgMSAxLTEuNzRsLjE1LS4wOWEyIDIgMCAwIDAgLjczLTIuNzNsLS4yMi0uMzhhMiAyIDAgMCAwLTIuNzMtLjczbC0uMTUuMDhhMiAyIDAgMCAxLTIgMGwtLjQzLS4yNWEyIDIgMCAwIDEtMS0xLjczVjRhMiAyIDAgMCAwLTItMnoiIC8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMyI+PC9jaXJjbGU+PC9zdmc+)Settings
+
+Projects
+
+- ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxjaXJjbGUgY3g9IjEzLjUiIGN5PSI2LjUiIHI9Ii41IiBmaWxsPSJjdXJyZW50Q29sb3IiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjE3LjUiIGN5PSIxMC41IiByPSIuNSIgZmlsbD0iY3VycmVudENvbG9yIj48L2NpcmNsZT48Y2lyY2xlIGN4PSI4LjUiIGN5PSI3LjUiIHI9Ii41IiBmaWxsPSJjdXJyZW50Q29sb3IiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjYuNSIgY3k9IjEyLjUiIHI9Ii41IiBmaWxsPSJjdXJyZW50Q29sb3IiPjwvY2lyY2xlPjxwYXRoIGQ9Ik0xMiAyQzYuNSAyIDIgNi41IDIgMTJzNC41IDEwIDEwIDEwYy45MjYgMCAxLjY0OC0uNzQ2IDEuNjQ4LTEuNjg4IDAtLjQzNy0uMTgtLjgzNS0uNDM3LTEuMTI1LS4yOS0uMjg5LS40MzgtLjY1Mi0uNDM4LTEuMTI1YTEuNjQgMS42NCAwIDAgMSAxLjY2OC0xLjY2OGgxLjk5NmMzLjA1MSAwIDUuNTU1LTIuNTAzIDUuNTU1LTUuNTU0QzIxLjk2NSA2LjAxMiAxNy40NjEgMiAxMiAyeiIgLz48L3N2Zz4=)Design
+  Engineering
+
+SC
+
+shadcn
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iMyIgcng9IjIiIC8+PHBhdGggZD0iTTkgM3YxOCIgLz48L3N2Zz4=)
+
+Dashboard
+
+Main content. Toggle with the button or ⌘/Ctrl+B. Resize below 768px for
+the mobile sheet.
+
+## skeleton
+
+## slider
+
+## spinner
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zcGlubmVyIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgcm9sZT0ic3RhdHVzIiBhcmlhLWxhYmVsPSJMb2FkaW5nIj48cGF0aCBkPSJNMjEgMTJhOSA5IDAgMSAxLTYuMjE5LTguNTYiIC8+PC9zdmc+)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zcGlubmVyIHNoYWQtc3Bpbm5lci0tbGcgc2hhZC1zcGlubmVyLS1tdXRlZCIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHJvbGU9InN0YXR1cyIgYXJpYS1sYWJlbD0iTG9hZGluZyI+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDEgMS02LjIxOS04LjU2IiAvPjwvc3ZnPg==)
+
+## switch
+
+Airplane Mode
+
+Wi-Fi
+
+Disabled
+
+## table
+
+| Invoice | Status  | Method        |   Amount |
+|---------|---------|---------------|---------:|
+| INV001  | Paid    | Credit Card   | \$250.00 |
+| INV002  | Pending | PayPal        | \$150.00 |
+| INV003  | Unpaid  | Bank Transfer | \$350.00 |
+| Total   |         |               | \$750.00 |
+
+A list of your recent invoices. {.shad-table .shad-table--hover}
+
+| Name      | Role          |
+|-----------|---------------|
+| Ada       | Engineer      |
+| Grace     | Admiral       |
+| Katherine | Mathematician |
+| Margaret  | Director      |
+| Radia     | Inventor      |
+| Annie     | Programmer    |
+
+## tabs
+
+Account
+
+Password
+
+Team
+
+Account
+
+Make changes to your account here.
+
+Name
+
+Save changes
+
+Password
+
+Change your password here.
+
+New password
+
+Save password
+
+Team content.
+
+## textarea
+
+## toast
+
+Default toast
+
+Success
+
+Error
+
+Warning
+
+Promise toast
+
+Dismiss all
+
+## toggle
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik02IDEyaDlhNCA0IDAgMCAxIDAgOEg3YTEgMSAwIDAgMS0xLTFWNWExIDEgMCAwIDEgMS0xaDdhNCA0IDAgMCAxIDAgOCIgLz48L3N2Zz4=)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxsaW5lIHgxPSIxOSIgeDI9IjEwIiB5MT0iNCIgeTI9IjQiPjwvbGluZT48bGluZSB4MT0iMTQiIHgyPSI1IiB5MT0iMjAiIHkyPSIyMCI+PC9saW5lPjxsaW5lIHgxPSIxNSIgeDI9IjkiIHkxPSI0IiB5Mj0iMjAiPjwvbGluZT48L3N2Zz4=)
+Italic
+
+Outline
+
+Small
+
+Large
+
+Disabled
+
+## toggle group
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik02IDEyaDlhNCA0IDAgMCAxIDAgOEg3YTEgMSAwIDAgMS0xLTFWNWExIDEgMCAwIDEgMS0xaDdhNCA0IDAgMCAxIDAgOCIgLz48L3N2Zz4=)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxsaW5lIHgxPSIxOSIgeDI9IjEwIiB5MT0iNCIgeTI9IjQiPjwvbGluZT48bGluZSB4MT0iMTQiIHgyPSI1IiB5MT0iMjAiIHkyPSIyMCI+PC9saW5lPjxsaW5lIHgxPSIxNSIgeDI9IjkiIHkxPSI0IiB5Mj0iMjAiPjwvbGluZT48L3N2Zz4=)
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik02IDR2NmE2IDYgMCAwIDAgMTIgMFY0IiAvPjxsaW5lIHgxPSI0IiB4Mj0iMjAiIHkxPSIyMCIgeTI9IjIwIj48L2xpbmU+PC9zdmc+)
+
+Left
+
+Center
+
+Right
+
+## tooltip
+
+Hover me
+
+Add to library
+
+Right
+
+Opens to the right
+
+Bottom
+
+Opens below
+
+## typography
+
+# Taxing Laughter: The Joke Tax Chronicles
+
+A modest king faces his greatest challenge yet: a kingdom that has
+stopped laughing.
+
+## The People of the Kingdom
+
+The king, seeing how much happier his subjects were, realized the error
+of his ways and repealed the joke tax.
+
+### The Joke Tax
+
+The king thought long and hard, and finally came up with [a brilliant
+plan](#).
+
+> "After all," he said, "everyone enjoys a good joke, so it's only fair
+> that they should pay for the privilege."
+
+#### People stopped telling jokes
+
+- 1st level of puns: 5 gold coins
+- 2nd level of jokes: 10 gold coins
+- 3rd level of one-liners: 20 gold coins
+
+Install it with `npm install shadshiny` — or press ⌘ K.
+
+Are you absolutely sure?
+
+Email address
+
+Enter your email address.
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iMyIgcng9IjIiIC8+PHBhdGggZD0iTTkgM3YxOCIgLz48L3N2Zz4=)
+
+Dashboard
+
+Main content. Toggle with the button or ⌘/Ctrl+B. Resize below 768px for
+the mobile sheet.

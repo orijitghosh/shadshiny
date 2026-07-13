@@ -1,0 +1,48 @@
+/* FILE: inst/assets/components/breadcrumb/breadcrumb.css */
+/* shadshiny — breadcrumb with ellipsis collapse */
+
+.shad-breadcrumb {
+  font-family: var(--shad-font-sans);
+}
+.shad-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--shad-space-1_5);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-muted-foreground);
+  word-break: break-word;
+}
+.shad-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-1_5);
+}
+.shad-breadcrumb__link {
+  color: var(--shad-muted-foreground);
+  text-decoration: none;
+  transition: color var(--shad-duration-fast) var(--shad-ease-out);
+  border-radius: var(--shad-radius-sm);
+}
+.shad-breadcrumb__link:hover { color: var(--shad-foreground); }
+.shad-breadcrumb__link:focus-visible {
+  outline: none;
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-breadcrumb__page {
+  color: var(--shad-foreground);
+  font-weight: var(--shad-font-weight-normal);
+}
+.shad-breadcrumb__separator {
+  display: inline-flex;
+  color: var(--shad-muted-foreground);
+}
+.shad-breadcrumb__separator .shad-icon { width: 0.875rem; height: 0.875rem; }
+.shad-breadcrumb__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+}

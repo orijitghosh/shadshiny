@@ -1,0 +1,134 @@
+/* shadshiny pkgdown site — live-demo frames, swatches, gallery polish.
+   Loaded on every page (pkgdown auto-includes pkgdown/extra.css). All colours
+   read shadshiny tokens, which the embedded component dependency defines on
+   :root, so the demo chrome recolours with the site's light/dark switch. */
+
+/* -- Live demo frame -------------------------------------------------------- */
+.shad-demo {
+  border: 1px solid var(--shad-border, #e5e7eb);
+  border-radius: var(--shad-radius-lg, 0.6rem);
+  margin: 1.5rem 0;
+  overflow: hidden;
+  background: var(--shad-background, #fff);
+  color: var(--shad-foreground, #09090b);
+}
+
+.shad-demo__stage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  min-height: 3.5rem;
+}
+.shad-demo__stage--center { justify-content: center; }
+.shad-demo__stage--col {
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+.shad-demo__stage--col > * { width: 100%; }
+
+.shad-demo__code {
+  border-top: 1px solid var(--shad-border, #e5e7eb);
+  background: var(--shad-muted, #f4f4f5);
+}
+.shad-demo__code > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.55rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--shad-muted-foreground, #71717a);
+  user-select: none;
+}
+.shad-demo__code > summary::-webkit-details-marker { display: none; }
+.shad-demo__code > summary::before {
+  content: "▸ ";
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.shad-demo__code[open] > summary::before { content: "▾ "; }
+.shad-demo__code[open] > summary { border-bottom: 1px solid var(--shad-border, #e5e7eb); }
+.shad-demo__code pre {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+.shad-demo__code code { background: transparent; padding: 0; }
+
+/* -- Theme swatches --------------------------------------------------------- */
+.shad-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+.shad-swatch {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+}
+.shad-swatch__chip {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--shad-radius-md, 0.4rem);
+  border: 1px solid var(--shad-border, #e5e7eb);
+  flex: none;
+}
+
+/* -- Component index cards (gallery landing) -------------------------------- */
+.shad-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.shad-gallery-grid a {
+  display: block;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--shad-border, #e5e7eb);
+  border-radius: var(--shad-radius-lg, 0.6rem);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.shad-gallery-grid a:hover {
+  border-color: var(--shad-primary, #7c3aed);
+  transform: translateY(-2px);
+}
+.shad-gallery-grid strong { display: block; margin-bottom: 0.15rem; }
+.shad-gallery-grid span {
+  font-size: 0.82rem;
+  color: var(--shad-muted-foreground, #71717a);
+}
+
+/* -- Icon reference grid ---------------------------------------------------- */
+.shad-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+}
+.shad-icon-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.9rem 0.5rem;
+  border: 1px solid var(--shad-border, #e5e7eb);
+  border-radius: var(--shad-radius-md, 0.4rem);
+  font-size: 0.72rem;
+  text-align: center;
+}
+.shad-icon-cell svg { width: 1.35rem; height: 1.35rem; }
+.shad-icon-cell code { font-size: 0.7rem; background: transparent; }
+
+/* Keep tall overlays from being clipped by the demo frame. */
+.shad-demo .shad-popover__content,
+.shad-demo .shad-tooltip__content { z-index: 60; }

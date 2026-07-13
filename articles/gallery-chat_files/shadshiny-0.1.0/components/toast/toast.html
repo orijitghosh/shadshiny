@@ -1,0 +1,21 @@
+<!-- FILE: inst/assets/components/toast/toast.html -->
+<!-- Toasts are imperative (shad.toast API) — no declarative anatomy to place.
+     These buttons demonstrate every entry point. -->
+<div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+  <button type="button" class="shad-btn shad-btn--outline"
+    onclick="shad.toast({title:'Event has been created', description:'Sunday, December 03, 2023 at 9:00 AM', action:{label:'Undo', onClick:function(){shad.toast('Undone')}}})">
+    Default toast
+  </button>
+  <button type="button" class="shad-btn shad-btn--outline"
+    onclick="shad.toast.success('Profile saved')">Success</button>
+  <button type="button" class="shad-btn shad-btn--outline"
+    onclick="shad.toast.error('Something went wrong')">Error</button>
+  <button type="button" class="shad-btn shad-btn--outline"
+    onclick="shad.toast.warning('Storage almost full')">Warning</button>
+  <button type="button" class="shad-btn shad-btn--outline"
+    onclick="shad.toast.promise(new Promise(function(res){setTimeout(res,2000)}), {loading:'Saving…', success:'Saved!', error:'Failed to save'})">
+    Promise toast
+  </button>
+  <button type="button" class="shad-btn shad-btn--ghost"
+    onclick="shad.toast.dismiss()">Dismiss all</button>
+</div>

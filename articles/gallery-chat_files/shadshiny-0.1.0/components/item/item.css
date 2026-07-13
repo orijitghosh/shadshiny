@@ -1,0 +1,144 @@
+/* FILE: inst/assets/components/item/item.css */
+/* shadshiny — item / item-group. Flex row list primitive. CSS-only.
+   Variants: (none = default/transparent) | --outline | --muted.
+   Sizes: (none = default) | --sm | --xs. Renders as div or <a>. */
+
+.shad-item-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.shad-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--shad-space-4);
+  width: 100%;
+  padding: var(--shad-space-4);
+  border: 1px solid transparent;
+  border-radius: var(--shad-radius-md);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-foreground);
+  text-align: start;
+  text-decoration: none;
+  outline: none;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out),
+              border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+
+/* ---- variants ---- */
+.shad-item--outline { border-color: var(--shad-border); }
+.shad-item--muted { background-color: color-mix(in oklab, var(--shad-muted) 50%, transparent); }
+
+/* interactive rendering (<a> or button) */
+a.shad-item:hover,
+button.shad-item:hover {
+  background-color: color-mix(in oklab, var(--shad-accent) 50%, transparent);
+}
+a.shad-item:focus-visible,
+button.shad-item:focus-visible {
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+
+/* ---- sizes ---- */
+.shad-item--sm { gap: var(--shad-space-2_5); padding: var(--shad-space-2_5) var(--shad-space-3); }
+.shad-item--xs { gap: var(--shad-space-2); padding: var(--shad-space-2) var(--shad-space-2_5); }
+
+/* ---- parts ---- */
+/* header / footer span the full row (flex-wrap) */
+.shad-item__header,
+.shad-item__footer {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--shad-space-2);
+  font-size: var(--shad-text-sm);
+  color: var(--shad-muted-foreground);
+}
+
+.shad-item__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: var(--shad-space-2);
+  align-self: flex-start;
+  color: var(--shad-muted-foreground);
+}
+/* keep media vertically centered on single-line items */
+.shad-item:not(:has(.shad-item__description)) .shad-item__media { align-self: center; }
+
+.shad-item__media--icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--shad-radius-sm);
+  border: 1px solid var(--shad-border);
+  background-color: var(--shad-muted);
+  color: var(--shad-foreground);
+}
+.shad-item__media--image {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--shad-radius-sm);
+  overflow: hidden;
+}
+.shad-item__media--image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.shad-item__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--shad-space-1);
+  min-width: 0;
+}
+
+.shad-item__title {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-foreground);
+}
+
+.shad-item__description {
+  color: var(--shad-muted-foreground);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  text-wrap: pretty;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.shad-item__description a {
+  color: var(--shad-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.shad-item__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  margin-inline-start: auto;
+  flex-shrink: 0;
+}
+
+/* separator between rows */
+.shad-item-separator {
+  border: 0;
+  height: 1px;
+  width: 100%;
+  background-color: var(--shad-border);
+  margin: var(--shad-space-1) 0;
+}

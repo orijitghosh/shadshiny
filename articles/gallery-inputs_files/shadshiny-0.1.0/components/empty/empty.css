@@ -1,0 +1,81 @@
+/* FILE: inst/assets/components/empty/empty.css */
+/* shadshiny — empty. Centered no-data / 404 / onboarding state. CSS-only. */
+
+.shad-empty {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--shad-space-6);
+  border-radius: var(--shad-radius-lg);
+  padding: var(--shad-space-12) var(--shad-space-6);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.shad-empty__header {
+  display: flex;
+  max-width: 24rem;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--shad-space-2);
+  text-align: center;
+}
+
+/* media — icon tile vs free-form (illustration / avatar) */
+.shad-empty__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block-end: var(--shad-space-2);
+  color: var(--shad-muted-foreground);
+}
+.shad-empty__media--icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--shad-radius-lg);
+  background-color: var(--shad-muted);
+  color: var(--shad-foreground);
+  flex-shrink: 0;
+}
+.shad-empty__media--icon .shad-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.shad-empty__title {
+  font-size: var(--shad-text-lg);
+  line-height: var(--shad-leading-lg);
+  font-weight: var(--shad-font-weight-medium);
+  letter-spacing: -0.025em;
+  color: var(--shad-foreground);
+}
+
+.shad-empty__description {
+  font-size: var(--shad-text-sm);
+  line-height: 1.625;
+  color: var(--shad-muted-foreground);
+}
+.shad-empty__description a {
+  color: var(--shad-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.shad-empty__description a:hover {
+  color: color-mix(in oklab, var(--shad-primary) 90%, transparent);
+}
+
+/* actions / extra content */
+.shad-empty__content {
+  display: flex;
+  width: 100%;
+  max-width: 24rem;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--shad-space-4);
+  font-size: var(--shad-text-sm);
+  text-wrap: balance;
+}
