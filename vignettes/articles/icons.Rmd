@@ -49,16 +49,17 @@ tags$div(
 
 ## Sizing & colour
 
-Icons inherit the current text colour (`currentColor`) and scale with font size,
-so they tint and size themselves to whatever context they sit in. To resize a
-standalone icon, wrap it or set `width`/`height` on the returned SVG via
-`htmltools::tagAppendAttributes()`.
+Icons inherit the current text colour (`currentColor`), so they tint themselves
+to whatever context they sit in — wrap one in a coloured element and it follows.
+They render at `1rem` by default; to resize a standalone icon, pass an inline
+`style` through `...` (it overrides the default sizing), or attach the
+`shad-icon--sm` / `shad-icon--lg` class.
 
 ```{r}
 demo({
   tags$span(style = "color:var(--shad-primary)", shad_icon("circle-check"))
   tags$span(style = "color:var(--shad-destructive)", shad_icon("triangle-alert"))
-  tags$span(style = "font-size:2rem", shad_icon("loader"))
+  shad_icon("loader", style = "width:2rem;height:2rem")
 })
 ```
 

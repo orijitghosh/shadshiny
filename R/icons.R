@@ -121,10 +121,14 @@ shad_icon <- function(name, class = "shad-icon", ...) {
     )
   }
   aria <- if ("aria-label" %in% names(attrs)) "" else ' aria-hidden="true"'
-  htmltools::HTML(sprintf(
+  svg <- htmltools::HTML(sprintf(
     '<svg class="%s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%s%s>%s</svg>',
     class, aria, extra_attr, .shad_icon_paths[[name]]
   ))
+  # Carry the asset bundle so a standalone icon still gets its `.shad-icon`
+  # sizing CSS when it is the only shadshiny output on a page. When nested in
+  # another component the duplicate dependency is de-duplicated by htmltools.
+  with_deps(svg)
 }
 
 #' Available shadshiny icon names

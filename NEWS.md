@@ -1,5 +1,10 @@
 # shadshiny (development version)
 
+* **Bug fix (icons):** `shad_icon()` now carries the shadshiny asset dependency,
+  so a standalone icon still loads its `.shad-icon` sizing CSS when it is the
+  only shadshiny output on a page (previously such icons rendered size-less /
+  invisible — e.g. the icon previews in the pkgdown *Icons* article). Nested in
+  a component, the duplicate dependency is de-duplicated as before.
 * **Bug fix (component init):** `shad.autoInit()` no longer throws when the
   asset bundle loads in `<head>` before `document.body` exists. Previously the
   `MutationObserver` attached to a null body, which aborted initialisation and
