@@ -1,6 +1,6 @@
 <!-- README.md is generated. Edit the source, not the rendered gallery. -->
 
-# shadshiny
+# shadshiny <img src="man/figures/logo.png" align="right" height="139" alt="shadshiny hex logo" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
