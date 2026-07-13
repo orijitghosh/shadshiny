@@ -88,8 +88,8 @@ ui <- page_shad(
         uiOutput("chat_header", style = "display:contents"),
         tags$div(style = "flex:1"),
         tags$div(style = "width:9rem",
-          shad_select("model", choices = c("GPT-4o" = "gpt", "Claude" = "claude",
-            "Llama 3" = "llama"), selected = "claude")),
+          shad_select("model", choices = c("Assistant Pro" = "pro",
+            "Assistant Lite" = "lite", "Assistant Max" = "max"), selected = "pro")),
         shad_tooltip(
           shad_button(inputId = "open_details", icon = "info", size = "icon",
             variant = "ghost", aria_label = "Details"), "Details"),

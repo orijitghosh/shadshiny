@@ -43,6 +43,7 @@ runtime with \code{\link[=update_shad_theme]{update_shad_theme()}}. Dark mode ke
 Useful links:
 \itemize{
   \item \url{https://github.com/orijitghosh/shadshiny}
+  \item \url{https://orijitghosh.github.io/shadshiny/}
   \item Report bugs at \url{https://github.com/orijitghosh/shadshiny/issues}
 }
 

@@ -1,8 +1,6 @@
 ^shadshiny\.Rproj$
 ^\.Rproj\.user$
-^PRD$
-^Shadshiny RShiny UI Kit$
-^DESIGN-PROMPT\.md$
+^dev$
 ^\.git$
 ^\.github$
 ^_pkgdown\.yml$
@@ -13,7 +11,6 @@
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^\.vscode$
-^scratch_out\.txt$
 ^tests/testthat/_snaps$
 ^vignettes/articles$
 ^vignettes/_common\.R$

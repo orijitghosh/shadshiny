@@ -16,7 +16,8 @@ tests/testthat/apps/**/tests/testthat/_snaps/**/*-actual*
 *.Rcheck/
 *.tar.gz
 
-# scratch / build output
+# development materials (design handoff, PRD, prompts, scratch)
+dev/
 scratch_out.txt
 
 # OS
