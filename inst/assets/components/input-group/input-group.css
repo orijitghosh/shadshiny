@@ -32,7 +32,9 @@
 /* Wrapped control sheds its own border/shadow/background — the shell owns them. */
 .shad-input-group > .shad-input,
 .shad-input-group > .shad-textarea {
-  flex: 1 1 auto;
+  flex: 1 1 0%;
+  width: auto;          /* neutralise the control's own width:100% so the
+                           flex basis (0) wins and addons stay on one row */
   min-width: 0;
   border: 0;
   background-color: transparent;

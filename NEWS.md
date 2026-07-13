@@ -1,5 +1,27 @@
 # shadshiny (development version)
 
+* **Bug fix (component init):** `shad.autoInit()` no longer throws when the
+  asset bundle loads in `<head>` before `document.body` exists. Previously the
+  `MutationObserver` attached to a null body, which aborted initialisation and
+  left dynamically inserted components (`renderUI`, `insertUI`, dynamic tabs)
+  un-wired. Components now initialise immediately and the observer attaches on
+  DOM ready.
+* **Bug fix (input group):** the wrapped control's `width: 100%` no longer
+  forces leading/trailing addons onto their own rows — the control now flexes
+  from a zero basis so icons, prefixes and buttons sit inline as intended.
+* **More icons:** the built-in set grows from 32 to 78, adding common glyphs —
+  `home`, `user`, `users`, `settings`, `bell`, `trash`, `pencil`, `download`,
+  `upload`, `external-link`, `eye`, `eye-off`, `lock`, `unlock`, `heart`,
+  `star`, `bookmark`, `filter`, `refresh-cw`, `log-in`, `log-out`, `copy`,
+  `clipboard`, `save`, `sun`, `moon`, `image`, `link`, `phone`, `map-pin`,
+  `credit-card`, `shopping-cart`, `package`, `bar-chart`, `activity`, `zap`,
+  `message-circle`, `send`, `paperclip`, `thumbs-up`, `globe`, `github`,
+  `circle-x`, `circle-plus`, `circle-help`, `arrow-up`, `arrow-down`, and
+  `chevrons-down-up`.
+* **Demo:** the `kitchen-sink` sidebar now switches its main pane per nav item,
+  and its chat scroller starts at the top so the "Scroll chat" round-trip is
+  visible.
+
 * **Documentation site.** The pkgdown site is now a full handbook. A new
   **Component gallery** renders every component *live* — the real component
   next to the exact source that made it — across pages for display, inputs,

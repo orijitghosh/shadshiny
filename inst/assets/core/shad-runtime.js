@@ -560,26 +560,41 @@
    */
   let observer = null;
   shad.autoInit = function () {
-    if (observer) return () => {};
-    observer = new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        m.addedNodes.forEach((n) => { if (n.nodeType === 1) shad.init(n); });
-        m.removedNodes.forEach((n) => {
-          if (n.nodeType !== 1) return;
-          const roots = [];
-          if (n.matches && n.matches("[data-shad]")) roots.push(n);
-          if (n.querySelectorAll) n.querySelectorAll("[data-shad]").forEach((e) => roots.push(e));
-          roots.forEach((e) => {
-            const inst = e.__shadInstance;
-            if (inst && typeof inst.destroy === "function") inst.destroy();
-            delete e.__shadInstance;
-          });
-        });
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+    // Initialise whatever exists right now. Safe to call repeatedly —
+    // shad.init caches instances on the element, so this is idempotent.
     shad.init(document);
-    return function stop() { observer.disconnect(); observer = null; };
+
+    // Then watch for dynamically inserted / removed components (Shiny
+    // renderUI, insertUI, dynamic tabs). The bundle's scripts run in <head>,
+    // so document.body can still be null here; defer the observer to DOM ready
+    // rather than throwing (a throw here previously aborted init entirely).
+    function startObserver() {
+      if (observer || !document.body) return;
+      observer = new MutationObserver((mutations) => {
+        for (const m of mutations) {
+          m.addedNodes.forEach((n) => { if (n.nodeType === 1) shad.init(n); });
+          m.removedNodes.forEach((n) => {
+            if (n.nodeType !== 1) return;
+            const roots = [];
+            if (n.matches && n.matches("[data-shad]")) roots.push(n);
+            if (n.querySelectorAll) n.querySelectorAll("[data-shad]").forEach((e) => roots.push(e));
+            roots.forEach((e) => {
+              const inst = e.__shadInstance;
+              if (inst && typeof inst.destroy === "function") inst.destroy();
+              delete e.__shadInstance;
+            });
+          });
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    if (document.body) {
+      startObserver();
+    } else {
+      document.addEventListener("DOMContentLoaded", startObserver, { once: true });
+    }
+    return function stop() { if (observer) { observer.disconnect(); observer = null; } };
   };
 
   /* auto-init on DOM ready for static pages */

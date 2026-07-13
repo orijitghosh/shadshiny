@@ -5,6 +5,7 @@
 
 library(shiny)
 library(shadshiny)
+`%||%` <- function(a, b) if (is.null(a)) b else a
 
 # A titled section wrapper. Children flow in a wrapping flex row.
 section <- function(id, title, ...) {
@@ -519,8 +520,8 @@ ui <- page_shad(
               shad_sidebar_item("settings", "Settings"))),
           main = tags$div(
             tags$div(style = "display:flex;gap:0.5rem;align-items:center;padding:0.75rem;border-bottom:1px solid var(--shad-border)",
-              shad_sidebar_trigger(), shad_small("Dashboard")),
-            tags$div(style = "padding:1rem", shad_muted("Main content.")))))),
+              shad_sidebar_trigger(), shad_small(textOutput("sbar_title", inline = TRUE))),
+            tags$div(style = "padding:1rem", uiOutput("sbar_body")))))),
 
     # =====================================================================
     # Chat / AI kit
@@ -545,7 +546,7 @@ ui <- page_shad(
               reactions = c("👍 3", "🎉 1")))))),
 
     section("s-message", "Message",
-      shad_message_scroller("chat", height = "20rem",
+      shad_message_scroller("chat", height = "20rem", default_position = "start",
         shad_message_scroller_item(
           shad_marker("Today", variant = "separator"), anchor = TRUE),
         shad_message_scroller_item(
@@ -643,6 +644,25 @@ server <- function(input, output, session) {
   observeEvent(input$open_dialog, shad_dialog_open("dlg"))
   observeEvent(input$scroll_chat, shad_message_scroller_to_bottom("chat"))
   observeEvent(input$toggle_sidebar, shad_sidebar_toggle("sbar"))
+
+  # Sidebar nav switches the main pane so clicking Inbox/Settings is visible.
+  sbar_active <- reactive(input$sbar$active %||% "home")
+  output$sbar_title <- renderText({
+    c(home = "Home", inbox = "Inbox", settings = "Settings")[[sbar_active()]]
+  })
+  output$sbar_body <- renderUI({
+    switch(sbar_active(),
+      home = shad_muted("Dashboard overview — your main content."),
+      inbox = shad_item_group(
+        shad_item(title = "Welcome to Acme", description = "2 min ago",
+                  media = "mail", media_variant = "icon"),
+        shad_item(title = "Your invoice is ready", description = "1 hour ago",
+                  media = "file", media_variant = "icon")),
+      settings = tagList(
+        shad_switch("sb_notify", label = "Email notifications", value = TRUE),
+        shad_switch("sb_beta", label = "Beta features")),
+      shad_muted("Main content."))
+  })
 
   # Alert-dialog confirm hooks.
   observeEvent(input$alrt_confirm, shad_toast_error("Deleted."))
