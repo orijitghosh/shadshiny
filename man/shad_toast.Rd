@@ -81,7 +81,7 @@ There is no R analogue of \code{shad.toast.promise()} — use the loading →
 \examples{
 \dontrun{
 shad_toast("Saved", variant = "success")
-id <- shad_toast_loading("Uploading…")
+id <- shad_toast_loading("Uploading...")
 shad_toast_update(id, message = "Uploaded", variant = "success")
 }
 }

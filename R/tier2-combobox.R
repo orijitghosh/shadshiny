@@ -42,8 +42,8 @@
 #' shad_combobox("fw", choices = c("Next.js" = "next", "Astro" = "astro"))
 #' @export
 shad_combobox <- function(inputId, label = NULL, choices, selected = NULL,
-                          multiple = FALSE, placeholder = "Select2026",
-                          search_placeholder = "Search2026",
+                          multiple = FALSE, placeholder = "Select...",
+                          search_placeholder = "Search...",
                           empty_text = "No results.", disabled = FALSE,
                           width = NULL, class = NULL, ...) {
   selected <- shiny::restoreInput(id = inputId, default = selected)

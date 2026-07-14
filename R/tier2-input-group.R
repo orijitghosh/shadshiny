@@ -21,7 +21,7 @@
 #' @examples
 #' shad_input_group(
 #'   shad_input_group_addon(shad_icon("search"), align = "inline-start"),
-#'   shad_input("q", placeholder = "Search…"),
+#'   shad_input("q", placeholder = "Search..."),
 #'   block = TRUE
 #' )
 #' @export

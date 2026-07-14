@@ -28,7 +28,7 @@
 #'     shad_command_item("calendar", "Calendar", keywords = "date schedule")))
 #' @export
 shad_command <- function(inputId, ...,
-                         placeholder = "Type a command or search2026",
+                         placeholder = "Type a command or search...",
                          empty_text = "No results found.", dialog = FALSE,
                          hotkey = dialog, class = NULL) {
   with_deps(htmltools::tags$div(
