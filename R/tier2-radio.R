@@ -25,6 +25,7 @@ shad_radio_group <- function(inputId, label = NULL, choices, selected = NULL,
                              disabled = FALSE, class = NULL, ...) {
   orientation <- arg_match_shad(orientation, c("vertical", "horizontal"),
                                 "orientation")
+  selected <- shiny::restoreInput(id = inputId, default = selected)
   items <- normalize_choices(choices)
 
   rows <- lapply(seq_along(items), function(i) {

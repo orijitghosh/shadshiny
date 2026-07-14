@@ -46,6 +46,7 @@ shad_combobox <- function(inputId, label = NULL, choices, selected = NULL,
                           search_placeholder = "Search2026",
                           empty_text = "No results.", disabled = FALSE,
                           width = NULL, class = NULL, ...) {
+  selected <- shiny::restoreInput(id = inputId, default = selected)
   items <- normalize_choices(choices)
   sel <- as.character(selected)
 

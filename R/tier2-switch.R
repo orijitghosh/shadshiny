@@ -18,6 +18,7 @@
 #' @export
 shad_switch <- function(inputId, label = NULL, value = FALSE, disabled = FALSE,
                         description = NULL, class = NULL, ...) {
+  value <- shiny::restoreInput(id = inputId, default = value)
   state <- if (isTRUE(value)) "checked" else "unchecked"
   sw <- htmltools::tags$button(
     type = "button",

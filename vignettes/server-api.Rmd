@@ -164,6 +164,22 @@ are worth calling out:
 - **Menus and command items** report the chosen item's value as an event —
   observe `input$menu` / `input$cmd` and switch on it.
 
+## Bookmarking
+
+shadshiny inputs work with Shiny's
+[bookmarking](https://shiny.posit.co/r/articles/share/bookmarking-state/). Turn
+it on with `enableBookmarking("url")` (or `"server"`); each stateful input
+seeds its initial value from `shiny::restoreInput()`, so a restored link
+reopens with the saved selections in place — text and text areas, checkboxes,
+switches, sliders, toggles and toggle groups, radio groups, all three selects
+(`shad_select()`, `shad_native_select()`, `shad_combobox()`), calendars and
+date pickers, accordions, pagination, and tabs.
+
+A handful of components take no initial-value argument and so are **saved but
+not seeded back** on restore: the overlays' open state, `shad_input_otp()`,
+`shad_carousel()`, and `shad_sidebar()`. Restore those by hand in an
+`onRestored()` observer if you need them.
+
 ## Gotchas checklist
 
 - No `update_shad_input()` — use `updateTextInput()` for `shad_input()`.

@@ -32,6 +32,7 @@
 shad_checkbox <- function(inputId, label = NULL, value = FALSE,
                           indeterminate = FALSE, disabled = FALSE,
                           description = NULL, class = NULL, ...) {
+  value <- shiny::restoreInput(id = inputId, default = value)
   if (identical(value, "indeterminate")) indeterminate <- TRUE
   state <- if (isTRUE(indeterminate)) {
     "indeterminate"

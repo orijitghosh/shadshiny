@@ -82,6 +82,7 @@
 shad_select <- function(inputId, label = NULL, choices, selected = NULL,
                         placeholder = "Select2026", disabled = FALSE,
                         width = NULL, description = NULL, class = NULL, ...) {
+  selected <- shiny::restoreInput(id = inputId, default = selected)
   nodes <- normalize_choices(choices)
   items_markup <- lapply(nodes, .shad_render_select_node, selected = selected)
 

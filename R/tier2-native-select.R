@@ -64,6 +64,7 @@
 shad_native_select <- function(inputId, choices, selected = NULL, size = NULL,
                                disabled = FALSE, invalid = FALSE, width = NULL,
                                label = NULL, class = NULL, ...) {
+  selected <- shiny::restoreInput(id = inputId, default = selected)
   if (!is.null(size)) arg_match_shad(size, c("sm", "lg"), "size")
   size_class <- if (is.null(size)) NULL else paste0("shad-native-select--", size)
 

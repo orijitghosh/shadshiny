@@ -28,6 +28,7 @@
 shad_input <- function(inputId, label = NULL, value = "", placeholder = NULL,
                        type = "text", invalid = FALSE, disabled = FALSE,
                        description = NULL, width = NULL, class = NULL, ...) {
+  value <- shiny::restoreInput(id = inputId, default = value)
   wrapped <- !is.null(label) || !is.null(description)
   input_tag <- htmltools::tags$input(
     id = inputId,
@@ -64,6 +65,7 @@ shad_textarea <- function(inputId, label = NULL, value = "", placeholder = NULL,
                           rows = 3, autosize = FALSE, invalid = FALSE,
                           disabled = FALSE, description = NULL, width = NULL,
                           class = NULL, ...) {
+  value <- shiny::restoreInput(id = inputId, default = value)
   wrapped <- !is.null(label) || !is.null(description)
   ta <- htmltools::tags$textarea(
     id = inputId,

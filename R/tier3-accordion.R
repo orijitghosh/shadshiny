@@ -22,6 +22,7 @@
 #' @export
 shad_accordion <- function(inputId, ..., type = c("single", "multiple"),
                            collapsible = TRUE, value = NULL, class = NULL) {
+  value <- shiny::restoreInput(id = inputId, default = value)
   type <- arg_match_shad(type, c("single", "multiple"), "type")
   items <- Filter(function(x) inherits(x, "shad_accordion_item"), list(...))
   open <- as.character(value)

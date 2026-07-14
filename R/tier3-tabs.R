@@ -28,6 +28,7 @@ shad_tabs <- function(inputId, ..., selected = NULL,
                       orientation = c("horizontal", "vertical"), class = NULL) {
   orientation <- arg_match_shad(orientation, c("horizontal", "vertical"),
                                 "orientation")
+  selected <- shiny::restoreInput(id = inputId, default = selected)
   tabs <- Filter(function(x) inherits(x, "shad_tab"), list(...))
   if (!length(tabs)) stop("`shad_tabs()` needs at least one `shad_tab()`.", call. = FALSE)
   if (is.null(selected)) selected <- tabs[[1]]$value

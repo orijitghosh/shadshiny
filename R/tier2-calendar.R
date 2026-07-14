@@ -34,6 +34,7 @@ shad_calendar <- function(inputId, value = NULL, mode = c("single", "range"),
                           min = NULL, max = NULL, month = NULL,
                           week_starts_on = 0, disabled = FALSE, class = NULL,
                           ...) {
+  if (!is.null(inputId)) value <- shiny::restoreInput(id = inputId, default = value)
   mode <- arg_match_shad(mode, c("single", "range"), "mode")
   v_start <- if (!is.null(value)) .iso_date(value[[1]]) else NULL
   v_end <- if (mode == "range" && length(value) >= 2) .iso_date(value[[2]]) else NULL
@@ -83,6 +84,7 @@ shad_date_picker <- function(inputId, label = NULL, value = NULL,
                              mode = c("single", "range"),
                              placeholder = "Pick a date", min = NULL, max = NULL,
                              disabled = FALSE, width = NULL, class = NULL, ...) {
+  value <- shiny::restoreInput(id = inputId, default = value)
   mode <- arg_match_shad(mode, c("single", "range"), "mode")
   # Inner calendar is unbound (no id); the date-picker root is the Shiny input.
   cal <- shad_calendar(

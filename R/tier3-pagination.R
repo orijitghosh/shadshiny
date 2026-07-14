@@ -18,6 +18,7 @@
 #' shad_pagination("pg", pages = 10, selected = 2)
 #' @export
 shad_pagination <- function(inputId, pages, selected = 1, class = NULL, ...) {
+  selected <- shiny::restoreInput(id = inputId, default = selected)
   with_deps(htmltools::tags$nav(
     class = shad_class("shad-pagination", extra = class),
     `data-shad` = "pagination", id = inputId,

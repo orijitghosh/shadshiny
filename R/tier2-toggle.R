@@ -23,6 +23,7 @@ shad_toggle <- function(inputId, label = NULL, value = FALSE,
                         variant = c("default", "outline"),
                         size = c("default", "sm", "lg"),
                         icon = NULL, disabled = FALSE, class = NULL, ...) {
+  value <- shiny::restoreInput(id = inputId, default = value)
   variant <- arg_match_shad(variant, c("default", "outline"), "variant")
   size <- arg_match_shad(size, c("default", "sm", "lg"), "size")
   cls <- shad_class(
@@ -76,6 +77,7 @@ shad_toggle_group <- function(inputId, choices, selected = NULL,
   size <- arg_match_shad(size, c("default", "sm", "lg"), "size")
   orientation <- arg_match_shad(orientation, c("horizontal", "vertical"),
                                 "orientation")
+  selected <- shiny::restoreInput(id = inputId, default = selected)
   items <- normalize_choices(choices)
   sel <- as.character(selected)
 

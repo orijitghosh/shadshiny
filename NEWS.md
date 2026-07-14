@@ -1,5 +1,17 @@
 # shadshiny (development version)
 
+* **Bookmarking support:** every stateful input now seeds its initial value
+  from `shiny::restoreInput()`, so `enableBookmarking()` (both `"url"` and
+  `"server"`) restores saved state on reload. Covers `shad_input()`,
+  `shad_textarea()`, `shad_checkbox()`, `shad_switch()`, `shad_slider()`,
+  `shad_toggle()`, `shad_toggle_group()`, `shad_radio_group()`, `shad_select()`,
+  `shad_native_select()`, `shad_combobox()`, `shad_calendar()`,
+  `shad_date_picker()`, `shad_accordion()`, `shad_pagination()`, and
+  `shad_tabs()`. Not restored (they take no initial-value argument): the
+  overlays' open state, `shad_input_otp()`, `shad_carousel()`, and
+  `shad_sidebar()` — their values are still *saved*, only not seeded back on
+  restore.
+
 * **Docs:** the *Migrating from base Shiny* guide is now a **complete**
   base-Shiny→shadshiny reference — sectioned tables covering inputs, buttons,
   layout, navigation, overlays, notifications, outputs, and typography, each row

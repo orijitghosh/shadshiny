@@ -27,6 +27,7 @@ shad_slider <- function(inputId, label = NULL, min = 0, max = 100, value = min,
                         step = 1, marks = NULL,
                         orientation = c("horizontal", "vertical"),
                         disabled = FALSE, width = NULL, class = NULL, ...) {
+  value <- shiny::restoreInput(id = inputId, default = value)
   orientation <- arg_match_shad(orientation, c("horizontal", "vertical"),
                                 "orientation")
   value <- as.numeric(value)
