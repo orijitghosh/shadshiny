@@ -237,6 +237,24 @@ value as an event — observe <code>input$menu</code> /
 </ul>
 </div>
 <div class="section level2">
+<h2 id="bookmarking">Bookmarking<a class="anchor" aria-label="anchor" href="#bookmarking"></a>
+</h2>
+<p>shadshiny inputs work with Shiny’s <a href="https://shiny.posit.co/r/articles/share/bookmarking-state/" class="external-link">bookmarking</a>.
+Turn it on with <code>enableBookmarking("url")</code> (or
+<code>"server"</code>); each stateful input seeds its initial value from
+<code><a href="https://rdrr.io/pkg/shiny/man/restoreInput.html" class="external-link">shiny::restoreInput()</a></code>, so a restored link reopens with the
+saved selections in place — text and text areas, checkboxes, switches,
+sliders, toggles and toggle groups, radio groups, all three selects
+(<code><a href="../reference/shad_select.html">shad_select()</a></code>, <code><a href="../reference/shad_native_select.html">shad_native_select()</a></code>,
+<code><a href="../reference/shad_combobox.html">shad_combobox()</a></code>), calendars and date pickers, accordions,
+pagination, and tabs.</p>
+<p>A handful of components take no initial-value argument and so are
+<strong>saved but not seeded back</strong> on restore: the overlays’
+open state, <code><a href="../reference/shad_input_otp.html">shad_input_otp()</a></code>, <code><a href="../reference/shad_carousel.html">shad_carousel()</a></code>,
+and <code><a href="../reference/shad_sidebar_layout.html">shad_sidebar()</a></code>. Restore those by hand in an
+<code><a href="https://rdrr.io/pkg/shiny/man/onBookmark.html" class="external-link">onRestored()</a></code> observer if you need them.</p>
+</div>
+<div class="section level2">
 <h2 id="gotchas-checklist">Gotchas checklist<a class="anchor" aria-label="anchor" href="#gotchas-checklist"></a>
 </h2>
 <ul>

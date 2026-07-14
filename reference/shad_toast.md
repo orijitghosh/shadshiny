@@ -105,7 +105,7 @@ Other shadshiny server API:
 ``` r
 if (FALSE) { # \dontrun{
 shad_toast("Saved", variant = "success")
-id <- shad_toast_loading("Uploading…")
+id <- shad_toast_loading("Uploading...")
 shad_toast_update(id, message = "Uploaded", variant = "success")
 } # }
 ```

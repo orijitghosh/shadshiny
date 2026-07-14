@@ -10,7 +10,7 @@ selected item. Compose contents with `shad_command_group()`,
 shad_command(
   inputId,
   ...,
-  placeholder = "Type a command or search2026",
+  placeholder = "Type a command or search...",
   empty_text = "No results found.",
   dialog = FALSE,
   hotkey = dialog,
@@ -123,7 +123,7 @@ shad_command("cmd",
 #> <div class="shad-command" data-shad="command" id="cmd">
 #>   <div class="shad-command__header">
 #>     <svg class="shad-command__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-#>     <input class="shad-command__input" type="text" placeholder="Type a command or search2026" aria-label="Search commands"/>
+#>     <input class="shad-command__input" type="text" placeholder="Type a command or search..." aria-label="Search commands"/>
 #>   </div>
 #>   <div class="shad-command__list">
 #>     <div class="shad-command__empty">No results found.</div>

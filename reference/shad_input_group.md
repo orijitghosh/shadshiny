@@ -92,11 +92,11 @@ Other shadshiny tier-2 components:
 ``` r
 shad_input_group(
   shad_input_group_addon(shad_icon("search"), align = "inline-start"),
-  shad_input("q", placeholder = "Search…"),
+  shad_input("q", placeholder = "Search..."),
   block = TRUE
 )
 #> <div class="shad-input-group shad-input-group--block" role="group">
 #>   <span class="shad-input-group__addon" data-align="inline-start"><svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
-#>   <input id="q" class="shad-input" type="text" placeholder="Search…"/>
+#>   <input id="q" class="shad-input" type="text" placeholder="Search..."/>
 #> </div>
 ```

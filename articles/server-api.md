@@ -176,6 +176,31 @@ shapes are worth calling out:
 - **Menus and command items** report the chosen item’s value as an event
   — observe `input$menu` / `input$cmd` and switch on it.
 
+## Bookmarking
+
+shadshiny inputs work with Shiny’s
+[bookmarking](https://shiny.posit.co/r/articles/share/bookmarking-state/).
+Turn it on with `enableBookmarking("url")` (or `"server"`); each
+stateful input seeds its initial value from
+[`shiny::restoreInput()`](https://rdrr.io/pkg/shiny/man/restoreInput.html),
+so a restored link reopens with the saved selections in place — text and
+text areas, checkboxes, switches, sliders, toggles and toggle groups,
+radio groups, all three selects
+([`shad_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_select.md),
+[`shad_native_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_native_select.md),
+[`shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/shad_combobox.md)),
+calendars and date pickers, accordions, pagination, and tabs.
+
+A handful of components take no initial-value argument and so are
+**saved but not seeded back** on restore: the overlays’ open state,
+[`shad_input_otp()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_otp.md),
+[`shad_carousel()`](https://orijitghosh.github.io/shadshiny/reference/shad_carousel.md),
+and
+[`shad_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md).
+Restore those by hand in an
+[`onRestored()`](https://rdrr.io/pkg/shiny/man/onBookmark.html) observer
+if you need them.
+
 ## Gotchas checklist
 
 - No `update_shad_input()` — use

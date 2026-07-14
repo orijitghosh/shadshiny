@@ -2,6 +2,37 @@
 
 ## shadshiny (development version)
 
+- **Bookmarking support:** every stateful input now seeds its initial
+  value from
+  [`shiny::restoreInput()`](https://rdrr.io/pkg/shiny/man/restoreInput.html),
+  so
+  [`enableBookmarking()`](https://rdrr.io/pkg/shiny/man/enableBookmarking.html)
+  (both `"url"` and `"server"`) restores saved state on reload. Covers
+  [`shad_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_input.md),
+  [`shad_textarea()`](https://orijitghosh.github.io/shadshiny/reference/shad_textarea.md),
+  [`shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/shad_checkbox.md),
+  [`shad_switch()`](https://orijitghosh.github.io/shadshiny/reference/shad_switch.md),
+  [`shad_slider()`](https://orijitghosh.github.io/shadshiny/reference/shad_slider.md),
+  [`shad_toggle()`](https://orijitghosh.github.io/shadshiny/reference/shad_toggle.md),
+  [`shad_toggle_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_toggle_group.md),
+  [`shad_radio_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_radio_group.md),
+  [`shad_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_select.md),
+  [`shad_native_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_native_select.md),
+  [`shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/shad_combobox.md),
+  [`shad_calendar()`](https://orijitghosh.github.io/shadshiny/reference/shad_calendar.md),
+  [`shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_picker.md),
+  [`shad_accordion()`](https://orijitghosh.github.io/shadshiny/reference/shad_accordion.md),
+  [`shad_pagination()`](https://orijitghosh.github.io/shadshiny/reference/shad_pagination.md),
+  and
+  [`shad_tabs()`](https://orijitghosh.github.io/shadshiny/reference/shad_tabs.md).
+  Not restored (they take no initial-value argument): the overlays’ open
+  state,
+  [`shad_input_otp()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_otp.md),
+  [`shad_carousel()`](https://orijitghosh.github.io/shadshiny/reference/shad_carousel.md),
+  and
+  [`shad_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
+  — their values are still *saved*, only not seeded back on restore.
+
 - **Docs:** the *Migrating from base Shiny* guide is now a **complete**
   base-Shiny→shadshiny reference — sectioned tables covering inputs,
   buttons, layout, navigation, overlays, notifications, outputs, and

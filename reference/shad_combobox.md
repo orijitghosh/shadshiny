@@ -13,8 +13,8 @@ shad_combobox(
   choices,
   selected = NULL,
   multiple = FALSE,
-  placeholder = "Select2026",
-  search_placeholder = "Search2026",
+  placeholder = "Select...",
+  search_placeholder = "Search...",
   empty_text = "No results.",
   disabled = FALSE,
   width = NULL,
@@ -105,13 +105,13 @@ Other shadshiny tier-2 components:
 shad_combobox("fw", choices = c("Next.js" = "next", "Astro" = "astro"))
 #> <div class="shad-combobox" data-shad="combobox" id="fw" data-state="closed">
 #>   <button type="button" class="shad-combobox__trigger" data-placeholder>
-#>     <span class="shad-combobox__value">Select2026</span>
+#>     <span class="shad-combobox__value">Select...</span>
 #>     <svg class="shad-combobox__chevrons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
 #>   </button>
 #>   <div class="shad-combobox__content shad-anim-pop" hidden>
 #>     <div class="shad-combobox__search">
 #>       <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-#>       <input class="shad-combobox__input" type="text" placeholder="Search2026" autocomplete="off" autocorrect="off" spellcheck="false"/>
+#>       <input class="shad-combobox__input" type="text" placeholder="Search..." autocomplete="off" autocorrect="off" spellcheck="false"/>
 #>     </div>
 #>     <div class="shad-combobox__list">
 #>       <div class="shad-combobox__item" data-value="next" data-state="unchecked">
