@@ -11,7 +11,7 @@
 <!-- badges: end -->
 
 **shadshiny** brings the [shadcn/ui](https://ui.shadcn.com) design system to
-[Shiny](https://shiny.posit.co). It is a from-scratch port — 59 accessible,
+[Shiny](https://shiny.posit.co). It is a from-scratch port — 70 accessible,
 themeable components rebuilt in framework-free CSS and vanilla JavaScript, then
 wrapped as ordinary R functions with native Shiny input bindings.
 
@@ -19,9 +19,19 @@ wrapped as ordinary R functions with native Shiny input bindings.
   backed by a single bundled asset dependency.
 - **Native Shiny inputs.** Read values with `input$id`; drive them from the
   server with `update_shad_*()`. Modules and `renderUI()` just work.
+- **A real data table.** `shad_data_table()` does multi-column sort, per-column
+  and global filtering, paging, and selection — client-side, themed, no `DT`.
+- **Dashboards & charts.** `shad_value_box()` and `shad_chart_container()` for
+  the shell; `shad_theme_ggplot2()` / `shad_theme_plotly()` /
+  `shad_theme_echarts4r()` restyle plots to the live theme.
+- **Server-side validation.** `shad_validator()` + `shad_rules` drive
+  `aria-invalid` and inline shadcn-styled field messages.
+- **Streaming chat.** `shad_chat_ui()` / `shad_chat_server()` render a
+  stick-to-bottom transcript from any token generator (`ellmer` included).
 - **Coexists with Bootstrap 5 / bslib.** Dark mode keys off the same signals
   `bslib::input_dark_mode()` uses, so theme sync needs zero glue.
-- **OKLCH token theming.** Seven presets out of the box, switchable at runtime.
+- **OKLCH token theming.** Seven presets out of the box, switchable at runtime,
+  plus custom palettes via `shad_theme()` and the shadcn theme registry.
 
 > shadshiny is an independent reimplementation. It ships no shadcn/ui or Radix
 > source — only visually-compatible CSS/JS written for this package. See
@@ -104,6 +114,14 @@ shad_run_example("kitchen-sink")
 | `shad_radio_group` | `shad_toggle` | `shad_toggle_group` | `shad_slider` |
 | `shad_select` | `shad_native_select` | `shad_combobox` | `shad_input_otp` |
 | `shad_calendar` | `shad_date_picker` | `shad_form_field` | `shad_input_group` |
+| `shad_number_input` | `shad_rating` | `shad_dropzone` | `shad_tree` |
+
+**Data, dashboards & flow**
+
+| | | | |
+|---|---|---|---|
+| `shad_data_table` | `shad_value_box` | `shad_chart_container` | `shad_timeline` |
+| `shad_stepper` | `shad_form_message` | `shad_validator` | `shad_theme` |
 
 **Tier 3 — overlays**
 
@@ -126,7 +144,7 @@ shad_run_example("kitchen-sink")
 | | | | |
 |---|---|---|---|
 | `shad_message` | `shad_bubble` | `shad_attachment` | `shad_marker` |
-| `shad_message_scroller` | | | |
+| `shad_message_scroller` | `shad_chat_ui` | `shad_chat_server` | |
 
 Every stateful component is namespaced-module safe and has a matching
 `update_shad_*()` server helper where it holds a value. Overlays add

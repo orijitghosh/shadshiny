@@ -17,6 +17,8 @@
 #'   `data-shad-theme` on the scope container.
 #' @param dark `NULL` to follow bslib/OS, `TRUE` to force dark, `FALSE` to
 #'   force light.
+#' @param theme An optional custom [shad_theme()] applied page-wide (layered over
+#'   `theme_preset` when both are given).
 #' @param lang Document language attribute.
 #'
 #' @returns A page UI object.
@@ -30,7 +32,7 @@
 #' }
 #' @export
 page_shad <- function(..., title = NULL, theme_preset = NULL, dark = NULL,
-                      lang = "en") {
+                      theme = NULL, lang = "en") {
   if (!is.null(theme_preset)) arg_match_shad(theme_preset, .shad_presets, "theme_preset")
 
   scope_class <- c("shad-scope", if (isTRUE(dark)) "dark")
@@ -41,7 +43,8 @@ page_shad <- function(..., title = NULL, theme_preset = NULL, dark = NULL,
   ))
   scope <- do.call(htmltools::tags$div, c(scope_attrs, list(...)))
 
-  body <- htmltools::tagList(shadshiny_dependency(), scope)
+  body <- htmltools::tagList(shadshiny_dependency(),
+                             shad_theme_style_tag(theme), scope)
 
   if (requireNamespace("bslib", quietly = TRUE)) {
     bslib::page_fillable(title = title, lang = lang, body)
@@ -76,18 +79,28 @@ shad_theme_preset <- function(preset, ...) {
 #' @param preset A preset name, `"default"` to clear the preset, or `NULL` to
 #'   leave it unchanged.
 #' @param dark `TRUE`/`FALSE` to set dark mode, or `NULL` to leave unchanged.
+#' @param theme An optional custom [shad_theme()] to apply live (its tokens are
+#'   written to a managed `<style>` element); pass `NA` to remove a previously
+#'   applied custom theme.
 #' @param session The Shiny session.
 #' @returns Invisibly `NULL`, called for its side effect.
 #' @family shadshiny page & theming
 #' @export
-update_shad_theme <- function(preset = NULL, dark = NULL,
+update_shad_theme <- function(preset = NULL, dark = NULL, theme = NULL,
                               session = shiny::getDefaultReactiveDomain()) {
   if (!is.null(preset) && !identical(preset, "default")) {
     arg_match_shad(preset, .shad_presets, "preset")
   }
+  css <- NULL
+  if (inherits(theme, "shad_theme")) {
+    css <- .shad_theme_css(theme, ":root")
+  } else if (length(theme) == 1 && is.na(theme)) {
+    css <- ""  # clear
+  }
   session$sendCustomMessage("shadshiny:theme", drop_nulls(list(
     preset = preset,
-    dark = if (is.null(dark)) NULL else isTRUE(dark)
+    dark = if (is.null(dark)) NULL else isTRUE(dark),
+    css = css
   )))
   invisible(NULL)
 }

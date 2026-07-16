@@ -1,5 +1,55 @@
-# shadshiny (development version)
+# shadshiny 0.2.0
 
+Eleven new components and several server-side systems that turn shadshiny from a
+component library into a full application toolkit.
+
+* **Data table (`shad_data_table()`):** a client-side, shadcn-styled data table
+  with multi-column sort (Shift+click), global and per-column filtering, windowed
+  pagination, single/multiple row selection persisted across pages, column
+  visibility, sticky header, and loading skeletons. Column specs via `shad_col()`
+  with formatters `shad_fmt_number()`, `shad_fmt_percent()`, `shad_fmt_date()`,
+  and `shad_fmt_badge()`, plus arbitrary `cell` render functions. `input$<id>`
+  reports `{selected, sort, filter, page, pageSize}`; refresh from the server with
+  `update_shad_data_table()`.
+* **Dashboard shells:** `shad_value_box()` (KPI card with trend delta chip, icon
+  and sparkline slots), `shad_chart_container()` (card wrapper for
+  `plotOutput()`/htmlwidgets with legend strip), and `shad_timeline()`.
+* **Chart theming:** `shad_theme_ggplot2()` / `shad_scale_color_shad()` /
+  `shad_scale_fill_shad()`, `shad_theme_plotly()`, and `shad_theme_echarts4r()`
+  restyle plots to the active theme. `shad_current_theme()` is a reactive that
+  re-runs plot code on dark-mode/preset switches; `shad_tokens()` and
+  `shad_chart_colors()` expose the resolved design tokens (OKLCH converted to hex
+  in base R -- no new dependency).
+* **Theming V2:** `shad_theme()` builds arbitrary custom themes from token
+  overrides; `shad_theme_from_registry()` imports tweakcn / shadcn registry theme
+  JSON; `page_shad(theme=)`, `shad_theme_scope()`, and `update_shad_theme(theme=)`
+  apply them at page, subtree, and runtime scope.
+* **Form validation:** `shad_validator()` with rules (`shad_rule_required()`,
+  `shad_rule_email()`, `shad_rule_min_chars()`, `shad_rule_range()`,
+  `shad_rule_regex()`, ...), live validation, submit gating, and an error
+  summary. `update_shad_form_field()`, `shad_form_message()`, and
+  `shad_form_summary()` provide the underlying messaging.
+* **Flow / input components:** `shad_stepper()`, `shad_tree()` (with lazy
+  branches via `update_shad_tree(children=)`), `shad_rating()`,
+  `shad_number_input()`, and `shad_dropzone()` (bridged to Shiny's native file
+  upload, so `input$<id>` is the standard files data frame). Each is a bound
+  input with an `update_*()` companion.
+* **Date-range presets:** `shad_date_picker(mode = "range", presets = ...)` adds a
+  quick-range rail; `shad_date_presets()` supplies a default set.
+* **Streaming chat (`shad_chat_ui()` / `shad_chat_server()`):** a module whose
+  handler may return a complete string, a chunk-yielding function, or a coro
+  generator (e.g. an ellmer stream); replies stream into a stick-to-bottom
+  transcript and render as Markdown.
+* **`shad_icon_raw()`:** use any raw `<svg>` (e.g. a Lucide glyph) with the
+  `.shad-icon` sizing class.
+* **New guides:** `vignette("data-tables")`, `vignette("charts")`, and
+  `vignette("chat")`; the theming and forms guides now cover custom themes and
+  `shad_validator()`. Two new examples: `shad_run_example("07-data-explorer")`
+  and `shad_run_example("08-llm-chat")`.
+* `input$<id>$sort` on a data table now reports `{column, direction}` rather
+  than the client's terser `{col, dir}`.
+* **Bookmarking:** `shad_input_otp(value=)` now seeds and restores its code.
+* `jsonlite` moves to Imports (used by the data table and theming).
 * **Bookmarking support:** every stateful input now seeds its initial value
   from `shiny::restoreInput()`, so `enableBookmarking()` (both `"url"` and
   `"server"`) restores saved state on reload. Covers `shad_input()`,

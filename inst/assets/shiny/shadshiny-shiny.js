@@ -74,6 +74,33 @@
       if (target && msg.prop) target.style.setProperty(msg.prop, msg.value);
     });
 
+    // form-field validation: set/clear an error on the field wrapping a control.
+    Shiny.addCustomMessageHandler("shadshiny:formField", function (msg) {
+      var control = document.getElementById(msg.id);
+      if (!control) { console.warn("[shadshiny] formField: no control", msg.id); return; }
+      var field = (control.closest && control.closest(".shad-form-field")) || control.parentElement;
+      var msgId = msg.id + "-error";
+      if (msg.error) {
+        control.setAttribute("aria-invalid", "true");
+        control.setAttribute("aria-describedby", msgId);
+        if (field) field.setAttribute("data-invalid", "");
+        var el = document.getElementById(msgId);
+        if (!el) {
+          el = document.createElement("div");
+          el.id = msgId;
+          el.className = "shad-form-message shad-form-message--error";
+          (field || control.parentElement).appendChild(el);
+        }
+        el.textContent = msg.error;
+        el.hidden = false;
+      } else {
+        control.removeAttribute("aria-invalid");
+        if (field) field.removeAttribute("data-invalid");
+        var old = document.getElementById(msgId);
+        if (old) old.parentNode.removeChild(old);
+      }
+    });
+
     Shiny.addCustomMessageHandler("shadshiny:theme", function (msg) {
       var root = document.documentElement;
       if (typeof msg.preset !== "undefined" && msg.preset !== null) {
@@ -88,6 +115,16 @@
           root.classList.remove("dark");
           root.setAttribute("data-bs-theme", "light");
         }
+      }
+      // custom theme: write tokens into a managed <style> element.
+      if (typeof msg.css !== "undefined" && msg.css !== null) {
+        var styleEl = document.getElementById("shad-custom-theme");
+        if (!styleEl) {
+          styleEl = document.createElement("style");
+          styleEl.id = "shad-custom-theme";
+          document.head.appendChild(styleEl);
+        }
+        styleEl.textContent = msg.css;
       }
     });
 
@@ -238,6 +275,82 @@
   makeShadBinding("resizable");
   makeShadBinding("sidebar");
   makeShadBinding("carousel");
+
+  /* ----------------------------------------------------------------------
+     V2 stateful components
+     ---------------------------------------------------------------------- */
+  // data-table: compound value {selected, sort, filter, page, pageSize}.
+  makeShadBinding("data-table", { type: "shadshiny.dataTable", debounce: true });
+  makeShadBinding("stepper", { type: "shadshiny.step1" });
+  makeShadBinding("rating");
+  makeShadBinding("number-stepper");
+  // tree: value = selected keys. Lazy expand is forwarded separately below.
+  makeShadBinding("tree");
+
+  /* tree lazy-load: forward shad:expand to `input$<id>_expanded` as an event so
+     the server can answer with update_shad_tree(children=). Also exposes the
+     current expanded-key set. Delegated so dynamically inserted trees work. */
+  document.addEventListener("shad:expand", function (ev) {
+    var root = ev.target;
+    if (!root || !root.matches || !root.matches('[data-shad="tree"]')) return;
+    if (!root.id) return;
+    Shiny.setInputValue(root.id + "_expanded", {
+      key: ev.detail ? ev.detail.key : null,
+      expanded: ev.detail ? ev.detail.expanded : null,
+      nonce: Date.now()
+    }, { priority: "event" });
+  }, true);
+
+  /* ----------------------------------------------------------------------
+     dropzone → Shiny native file upload bridge
+     --------------------------------------------------------------------------
+     The dropzone asset emits `shad:files` with raw File objects but performs no
+     transfer. We forward those Files into a visually-hidden real
+     shiny::fileInput (rendered by shad_dropzone with id = <inputId>__file) via a
+     DataTransfer + synthetic change event, so Shiny's own fileInputBinding
+     uploads them and `input$<inputId>` becomes the standard files data.frame.
+     ---------------------------------------------------------------------- */
+  document.addEventListener("shad:files", function (ev) {
+    var root = ev.target;
+    if (!root || !root.matches || !root.matches('[data-shad="dropzone"]')) return;
+    var targetId = root.getAttribute("data-upload-target");
+    if (!targetId) return;
+    var fileInput = document.getElementById(targetId);
+    if (!fileInput) { console.warn("[shadshiny] dropzone: no upload target", targetId); return; }
+    var detail = ev.detail || {};
+    var files = (detail.files || []).map(function (f) { return f.file; }).filter(Boolean);
+    if (!files.length) return;
+    try {
+      var dt = new DataTransfer();
+      files.forEach(function (f) { dt.items.add(f); });
+      fileInput.files = dt.files;
+      fileInput.dispatchEvent(new Event("change", { bubbles: true }));
+    } catch (e) {
+      console.warn("[shadshiny] dropzone: DataTransfer unsupported", e);
+    }
+  }, true);
+
+  /* ----------------------------------------------------------------------
+     Report the active theme (preset + dark) as `input$.shad_theme` so
+     server-side chart code (shad_current_theme()) re-runs on theme changes.
+     ---------------------------------------------------------------------- */
+  (function themeReporter() {
+    var rootEl = document.documentElement;
+    function report() {
+      var preset = rootEl.getAttribute("data-shad-theme") || "default";
+      var dark = rootEl.classList.contains("dark") ||
+        rootEl.getAttribute("data-bs-theme") === "dark" ||
+        document.body.getAttribute("data-bs-theme") === "dark";
+      Shiny.setInputValue(".shad_theme", { preset: preset, dark: !!dark });
+    }
+    report();
+    var mo = new MutationObserver(report);
+    mo.observe(rootEl, { attributes: true,
+      attributeFilter: ["class", "data-shad-theme", "data-bs-theme"] });
+    if (document.body) {
+      mo.observe(document.body, { attributes: true, attributeFilter: ["data-bs-theme"] });
+    }
+  })();
 
   /* ----------------------------------------------------------------------
      Init after registration. shad.autoInit installs the MutationObserver for

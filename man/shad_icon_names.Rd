@@ -18,6 +18,7 @@ shad_icon_names()
 \seealso{
 Other shadshiny utilities:
 \code{\link[=shad_icon]{shad_icon()}},
+\code{\link[=shad_icon_raw]{shad_icon_raw()}},
 \code{\link[=shad_run_example]{shad_run_example()}},
 \code{\link[=shadshiny_deps]{shadshiny_deps()}}
 }

@@ -67,13 +67,14 @@ bar_chart <- function(values, labels, unit = "") {
   mx <- max(values)
   tags$div(style = "display:flex;align-items:flex-end;gap:0.5rem;height:9rem;padding-top:0.5rem",
     Map(function(v, l) {
-      tags$div(style = "flex:1;display:grid;gap:0.35rem;justify-items:center;height:100%",
-        shad_tooltip(
-          tags$div(style = "flex:1;width:100%;display:flex;align-items:flex-end",
-            tags$div(style = sprintf(paste0("width:100%%;height:%d%%;border-radius:",
-              "var(--shad-radius-sm);background:var(--shad-primary)"),
-              round(v / mx * 100)))),
-          paste0(l, ": ", unit, format(v, big.mark = ","))),
+      h <- max(2L, round(v / mx * 116))
+      tags$div(
+        style = paste0("flex:1;display:flex;flex-direction:column;align-items:center;",
+                       "justify-content:flex-end;gap:0.35rem;height:100%"),
+        tags$div(
+          title = paste0(l, ": ", unit, format(v, big.mark = ",")),
+          style = sprintf(paste0("width:100%%;height:%dpx;border-radius:var(--shad-radius-sm);",
+                                  "background:var(--shad-primary)"), h)),
         shad_small(class = "shad-muted", l))
     }, values, labels))
 }

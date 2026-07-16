@@ -29,6 +29,7 @@ shad_icon("chevron-down", class = "shad-select__chevron")
 \seealso{
 Other shadshiny utilities:
 \code{\link[=shad_icon_names]{shad_icon_names()}},
+\code{\link[=shad_icon_raw]{shad_icon_raw()}},
 \code{\link[=shad_run_example]{shad_run_example()}},
 \code{\link[=shadshiny_deps]{shadshiny_deps()}}
 }

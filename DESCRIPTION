@@ -1,14 +1,17 @@
 Package: shadshiny
 Title: 'shadcn/ui' Components for 'Shiny'
-Version: 0.1.0
+Version: 0.2.0
 Authors@R:
     person("Arijit", "Ghosh", email = "arijitghosh2009@gmail.com",
            role = c("aut", "cre"))
 Description: A complete port of the 'shadcn/ui' design system for 'Shiny'
-    applications: 49 accessible, themeable components implemented in
-    framework-free CSS and vanilla JavaScript, wrapped as native R functions
-    with 'Shiny' input bindings. Coexists with 'Bootstrap 5' and 'bslib',
-    including automatic dark-mode synchronization.
+    applications: 70 accessible, themeable components -- including a
+    full-featured data table, dashboard value boxes and chart theming,
+    a server-side form validator, custom and registry-imported themes, and
+    a streaming chat module -- implemented in framework-free CSS and vanilla
+    JavaScript, wrapped as native R functions with 'Shiny' input bindings.
+    Coexists with 'Bootstrap 5' and 'bslib', including automatic dark-mode
+    synchronization.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -16,11 +19,16 @@ Depends:
     R (>= 4.1.0)
 Imports:
     htmltools (>= 0.5.7),
+    jsonlite,
     shiny (>= 1.8.0)
 Suggests:
     bslib,
+    commonmark,
+    coro,
+    echarts4r,
+    ggplot2,
+    plotly,
     xml2,
-    jsonlite,
     testthat (>= 3.0.0),
     shinytest2,
     chromote,

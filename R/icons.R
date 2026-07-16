@@ -141,6 +141,34 @@ shad_icon_names <- function() {
   names(.shad_icon_paths)
 }
 
+#' Use an arbitrary SVG as a shadshiny icon
+#'
+#' Wrap a raw `<svg>` string (e.g. any Lucide glyph pasted from
+#' \url{https://lucide.dev}) with the `.shad-icon` sizing class, so icons beyond
+#' the built-in set can be used anywhere a [shad_icon()] is accepted.
+#'
+#' @param svg A raw `<svg>...</svg>` string, or an htmltools tag.
+#' @param class CSS classes to apply (default `"shad-icon"`).
+#' @returns An icon tag carrying the shadshiny asset dependency.
+#' @family shadshiny utilities
+#' @examples
+#' shad_icon_raw('<svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>')
+#' @export
+shad_icon_raw <- function(svg, class = "shad-icon") {
+  if (is_tag_like(svg)) {
+    return(with_deps(htmltools::tagAppendAttributes(svg, class = class)))
+  }
+  svg <- as.character(svg)
+  if (!grepl("^\\s*<svg", svg)) {
+    stop("`svg` must be an <svg> string or an htmltools tag.", call. = FALSE)
+  }
+  # inject the sizing class into the opening <svg ...> tag (only if absent)
+  if (!grepl("<svg[^>]*\\sclass=", svg)) {
+    svg <- sub("<svg", sprintf('<svg class="%s"', class), svg)
+  }
+  with_deps(htmltools::tagList(htmltools::HTML(svg)))
+}
+
 # Normalise an `icon` argument (name string or tag) into a tag/HTML, or NULL.
 #' @noRd
 resolve_icon <- function(icon, class = "shad-icon") {

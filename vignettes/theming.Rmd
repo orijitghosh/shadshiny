@@ -8,7 +8,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE, purl = FALSE)
 ```
 
 shadshiny's look is entirely token-driven. Every colour, radius, and surface is
@@ -90,10 +90,91 @@ server <- function(input, output, session) {
 }
 ```
 
-## Custom theming
+## Custom themes
 
-For a bespoke brand, override the tokens you care about and leave the rest to
-the preset. The sidebar family has its own `--shad-sidebar-*` tokens
+The seven presets are a starting point, not a ceiling. `shad_theme()` builds a
+palette in R: name the tokens you care about, leave the rest to the base.
+
+```{r}
+brand <- shad_theme(
+  primary            = "#7c3aed",
+  primary_foreground = "#ffffff",
+  radius             = "0.75rem",
+  font_sans          = "Inter, system-ui, sans-serif",
+  chart              = c("#7c3aed", "#06b6d4", "#f59e0b", "#ef4444"),
+  dark = list(primary = "#a78bfa", background = "oklch(0.16 0.02 285)")
+)
+
+ui <- page_shad(theme = brand, ...)
+```
+
+Colours may be hex (`"#7c3aed"`), `rgb()`, a named CSS colour, or OKLCH
+(`"oklch(0.55 0.24 285)"`) — everything is normalised on the way in. `dark =`
+takes a list of the same token names, applied only under `.dark`; tokens you
+don't name there inherit the light value, which is almost never what you want
+for `background` and `foreground`.
+
+The named arguments cover the common tokens (`primary`, `background`,
+`foreground`, `card`, `muted`, `accent`, `destructive`, `border`, `input`,
+`ring`, `radius`, `font_sans`, `font_mono`, and their `*_foreground` pairs).
+Anything else — including the `--shad-sidebar-*` family — goes through `...`
+with the `--shad-` prefix dropped:
+
+```{r}
+shad_theme(primary = "#7c3aed", `sidebar-background` = "oklch(0.98 0.01 285)")
+```
+
+### Scoping a theme
+
+`theme =` on `page_shad()` themes the whole page. To theme one region instead,
+wrap it:
+
+```{r}
+shad_theme_scope(
+  brand,
+  shad_card(shad_card_content("Only this subtree uses `brand`."))
+)
+```
+
+`shad_theme_scope()` mints a private class and emits the CSS for it, so nested
+scopes compose and nothing leaks out.
+
+### Importing from the shadcn registry
+
+The [shadcn theme registry](https://ui.shadcn.com/themes) publishes themes as
+JSON. `shad_theme_from_registry()` maps their token names onto shadshiny's and
+hands you back a `shad_theme()`:
+
+```{r}
+tw <- shad_theme_from_registry("https://tweakcn.com/r/themes/some-theme.json")
+ui <- page_shad(theme = tw, ...)
+```
+
+It takes a URL or a local path. Unmapped tokens are dropped rather than
+guessed, so a registry theme built for a much newer shadcn will land, minus
+whatever shadshiny has no slot for.
+
+### Switching a custom theme at runtime
+
+`update_shad_theme(theme = )` takes a `shad_theme()` just like `preset =` takes
+a preset name, and `theme = NA` clears back to the page's own:
+
+```{r}
+observeEvent(input$brand_on,  update_shad_theme(theme = brand))
+observeEvent(input$brand_off, update_shad_theme(theme = NA))
+```
+
+### Reading the tokens back
+
+`shad_tokens(preset, dark)` returns the resolved token set, and
+`shad_chart_colors(n, preset, dark)` the chart ramp as hex — both useful when
+you need to hand a colour to something that isn't CSS, like a plot. See
+`vignette("charts")`.
+
+## Hand-written CSS
+
+You never have to use `shad_theme()`. The tokens are ordinary custom
+properties, so plain CSS works. The sidebar family has its own `--shad-sidebar-*` tokens
 (`--shad-sidebar-background`, `--shad-sidebar-foreground`,
 `--shad-sidebar-border`, …) so you can give navigation a distinct surface:
 

@@ -408,3 +408,132 @@
   --shad-sidebar-ring: oklch(0.553 0.195 38.402);
   --shad-chart-1: oklch(0.705 0.213 47.604);
 }
+
+/* ==========================================================================
+   V2 ADDITIONS — chart token extension
+   --------------------------------------------------------------------------
+   - --shad-chart-6 completes the categorical series set (upstream shadcn
+     ships 5; shadshiny adds a 6th for R plotting defaults).
+   - --shad-chart-grid / --shad-chart-label: muted axis/gridline + axis-label
+     colors for R plot theming (ggplot2/plotly themes read these via
+     tokens/shad-tokens.json).
+   - Accent presets re-key the whole series so chart-1 (== primary) leads a
+     harmonious 6-color categorical set; slate/stone keep the neutral-theme
+     series but re-tune grid/label to their neutral ramp.
+   ========================================================================== */
+:root {
+  --shad-chart-6: oklch(0.577 0.245 27.325);
+  --shad-chart-grid: oklch(0.922 0 0);
+  --shad-chart-label: oklch(0.556 0 0);
+}
+.dark,
+[data-bs-theme="dark"] {
+  --shad-chart-6: oklch(0.705 0.213 47.604);
+  --shad-chart-grid: oklch(1 0 0 / 0.1);
+  --shad-chart-label: oklch(0.708 0 0);
+}
+
+/* slate / stone: neutral-theme series retained; grid/label match ramp */
+[data-shad-theme="slate"] {
+  --shad-chart-grid: oklch(0.929 0.013 255.508);
+  --shad-chart-label: oklch(0.554 0.046 257.417);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="slate"],
+[data-shad-theme="slate"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-grid: oklch(1 0 0 / 0.1);
+  --shad-chart-label: oklch(0.704 0.04 256.788);
+}
+[data-shad-theme="stone"] {
+  --shad-chart-grid: oklch(0.923 0.003 48.717);
+  --shad-chart-label: oklch(0.553 0.013 58.071);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="stone"],
+[data-shad-theme="stone"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-grid: oklch(1 0 0 / 0.1);
+  --shad-chart-label: oklch(0.709 0.01 56.259);
+}
+
+/* blue: chart-1 = primary (set above); series walks blue->cyan->violet */
+[data-shad-theme="blue"] {
+  --shad-chart-2: oklch(0.715 0.143 215.221);  /* cyan-500   */
+  --shad-chart-3: oklch(0.606 0.25 292.717);   /* violet-500 */
+  --shad-chart-4: oklch(0.723 0.192 149.579);  /* green-500  */
+  --shad-chart-5: oklch(0.769 0.188 70.08);    /* amber-500  */
+  --shad-chart-6: oklch(0.645 0.246 16.439);   /* rose-500   */
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="blue"],
+[data-shad-theme="blue"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-2: oklch(0.715 0.143 215.221);
+  --shad-chart-3: oklch(0.606 0.25 292.717);
+  --shad-chart-4: oklch(0.723 0.192 149.579);
+  --shad-chart-5: oklch(0.769 0.188 70.08);
+  --shad-chart-6: oklch(0.645 0.246 16.439);
+}
+
+/* green: series walks green->teal->lime + contrast hues */
+[data-shad-theme="green"] {
+  --shad-chart-2: oklch(0.704 0.14 182.503);   /* teal-500  */
+  --shad-chart-3: oklch(0.768 0.233 130.85);   /* lime-500  */
+  --shad-chart-4: oklch(0.623 0.214 259.815);  /* blue-500  */
+  --shad-chart-5: oklch(0.769 0.188 70.08);    /* amber-500 */
+  --shad-chart-6: oklch(0.645 0.246 16.439);   /* rose-500  */
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="green"],
+[data-shad-theme="green"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-2: oklch(0.704 0.14 182.503);
+  --shad-chart-3: oklch(0.768 0.233 130.85);
+  --shad-chart-4: oklch(0.623 0.214 259.815);
+  --shad-chart-5: oklch(0.769 0.188 70.08);
+  --shad-chart-6: oklch(0.645 0.246 16.439);
+}
+
+/* rose: series walks rose->pink->orange + contrast hues */
+[data-shad-theme="rose"] {
+  --shad-chart-2: oklch(0.656 0.241 354.308);  /* pink-500   */
+  --shad-chart-3: oklch(0.705 0.213 47.604);   /* orange-500 */
+  --shad-chart-4: oklch(0.606 0.25 292.717);   /* violet-500 */
+  --shad-chart-5: oklch(0.715 0.143 215.221);  /* cyan-500   */
+  --shad-chart-6: oklch(0.769 0.188 70.08);    /* amber-500  */
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="rose"],
+[data-shad-theme="rose"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-2: oklch(0.656 0.241 354.308);
+  --shad-chart-3: oklch(0.705 0.213 47.604);
+  --shad-chart-4: oklch(0.606 0.25 292.717);
+  --shad-chart-5: oklch(0.715 0.143 215.221);
+  --shad-chart-6: oklch(0.769 0.188 70.08);
+}
+
+/* violet: series walks violet->fuchsia->indigo + contrast hues */
+[data-shad-theme="violet"] {
+  --shad-chart-2: oklch(0.667 0.295 322.15);   /* fuchsia-500 */
+  --shad-chart-3: oklch(0.585 0.233 277.117);  /* indigo-500  */
+  --shad-chart-4: oklch(0.715 0.143 215.221);  /* cyan-500    */
+  --shad-chart-5: oklch(0.769 0.188 70.08);    /* amber-500   */
+  --shad-chart-6: oklch(0.645 0.246 16.439);   /* rose-500    */
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="violet"],
+[data-shad-theme="violet"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-2: oklch(0.667 0.295 322.15);
+  --shad-chart-3: oklch(0.585 0.233 277.117);
+  --shad-chart-4: oklch(0.715 0.143 215.221);
+  --shad-chart-5: oklch(0.769 0.188 70.08);
+  --shad-chart-6: oklch(0.645 0.246 16.439);
+}
+
+/* orange: series walks orange->amber->yellow + contrast hues */
+[data-shad-theme="orange"] {
+  --shad-chart-2: oklch(0.769 0.188 70.08);    /* amber-500  */
+  --shad-chart-3: oklch(0.795 0.184 86.047);   /* yellow-500 */
+  --shad-chart-4: oklch(0.623 0.214 259.815);  /* blue-500   */
+  --shad-chart-5: oklch(0.704 0.14 182.503);   /* teal-500   */
+  --shad-chart-6: oklch(0.645 0.246 16.439);   /* rose-500   */
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="orange"],
+[data-shad-theme="orange"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-2: oklch(0.769 0.188 70.08);
+  --shad-chart-3: oklch(0.795 0.184 86.047);
+  --shad-chart-4: oklch(0.623 0.214 259.815);
+  --shad-chart-5: oklch(0.704 0.14 182.503);
+  --shad-chart-6: oklch(0.645 0.246 16.439);
+}

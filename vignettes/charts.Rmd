@@ -1,0 +1,196 @@
+---
+title: "Dashboards & charts"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Dashboards & charts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE, purl = FALSE)
+```
+
+shadshiny does not draw charts. It gives you the shell around them —
+`shad_value_box()` and `shad_chart_container()` — and the palette inside them,
+so a ggplot2, plotly, or echarts4r figure matches the page instead of fighting
+it.
+
+## KPI cards
+
+```{r}
+library(shiny)
+library(shadshiny)
+
+shad_value_box(
+  value           = "$48,120",
+  label           = "Revenue",
+  delta           = "+12.4%",
+  delta_direction = "up",       # "auto", "up", "down", "neutral"
+  icon            = "activity",
+  caption         = "vs. last month"
+)
+```
+
+`delta_direction = "auto"` reads the sign off the `delta` string: a leading `-`
+or `−` renders the down/destructive chip, anything else renders up. Set it
+explicitly whenever "up" isn't the good direction — churn going up is not a
+win.
+
+`sparkline` takes any tag, so a small inline plot or SVG drops straight in:
+
+```{r}
+shad_value_box("1,204", "Sessions", sparkline = plotOutput("spark", height = "40px"))
+```
+
+`size` is `"sm"`, `"md"`, or `"lg"`; `href` turns the whole card into a link.
+
+Lay them out with CSS grid — shadshiny deliberately doesn't reimplement a grid
+system:
+
+```{r}
+div(
+  style = "display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1rem;",
+  shad_value_box("$48,120", "Revenue", delta = "+12.4%"),
+  shad_value_box("1,204", "Sessions", delta = "-3.1%"),
+  shad_value_box("2.4%", "Conversion", delta = "0.0%", delta_direction = "neutral")
+)
+```
+
+## The chart card
+
+```{r}
+shad_chart_container(
+  plotOutput("trend", height = "260px"),
+  title       = "Revenue by region",
+  description = "Last 6 months",
+  legend      = TRUE,
+  aspect      = "video"   # "video", "square", "wide", or "auto"
+)
+```
+
+`aspect` locks the card's ratio. Use `"auto"` when you set an explicit height
+on the plot yourself — otherwise the two fight and you get letterboxing.
+`plain = TRUE` drops the card chrome and keeps only the sizing wrapper, which
+is what you want when the container already sits inside a `shad_card()`.
+
+`legend_labels` renders a legend strip in the chart palette, in order, so you
+can label a plot whose own legend you suppressed:
+
+```{r}
+shad_chart_container(
+  plotOutput("stack"),
+  title = "Channel mix",
+  legend_labels = c("Online", "Retail", "Partner")
+)
+```
+
+## The palette
+
+`shad_chart_colors(n, preset, dark)` returns `n` hex colours from the active
+theme's `--shad-chart-1` … `--shad-chart-6` ramp, interpolating past six:
+
+```{r}
+shad_chart_colors(3)                        # default preset, light
+shad_chart_colors(8, "blue", dark = TRUE)   # 8 colours, blue preset, dark mode
+```
+
+`shad_tokens(preset, dark)` gives you the whole token set as OKLCH strings if
+you need something the chart ramp doesn't cover (`background`, `border`,
+`muted-foreground`, …).
+
+## Following the live theme
+
+This is the part that matters. `page_shad()` themes are switched at *runtime* —
+by `update_shad_theme()` or the user's dark-mode toggle — and a plot rendered
+in R has no idea. `shad_current_theme()` is the bridge: a reactive read of the
+browser's current theme that returns `list(preset = , dark = )`. Touch it
+inside `renderPlot()` and the plot re-renders whenever the theme changes.
+
+```{r}
+output$trend <- renderPlot({
+  th <- shad_current_theme()          # reactive dependency on the live theme
+  ggplot2::ggplot(sales, ggplot2::aes(month, amount, colour = region)) +
+    ggplot2::geom_line(linewidth = 1) +
+    shad_scale_color_shad(th$preset, th$dark) +
+    shad_theme_ggplot2(th$preset, th$dark)
+})
+```
+
+Forget `shad_current_theme()` and your chart keeps its old colours until some
+unrelated reactive happens to invalidate it.
+
+## ggplot2
+
+| Helper | Does |
+|---|---|
+| `shad_theme_ggplot2(preset, dark, base_size)` | A `theme()` matching the page: background, grid, text, and border colours. |
+| `shad_scale_color_shad(preset, dark, ...)` | Discrete colour scale from the chart ramp. |
+| `shad_scale_fill_shad(preset, dark, ...)` | The same, for `fill`. |
+
+Extra `...` pass through to `ggplot2::discrete_scale()`, so `name`, `labels`,
+and `guide` work as usual.
+
+```{r}
+ggplot2::ggplot(agg, ggplot2::aes(region, amount, fill = region)) +
+  ggplot2::geom_col() +
+  shad_scale_fill_shad(th$preset, th$dark, guide = "none") +
+  shad_theme_ggplot2(th$preset, th$dark, base_size = 13) +
+  ggplot2::labs(x = NULL, y = NULL)
+```
+
+## plotly and echarts4r
+
+These take the widget and return it, so they pipe:
+
+```{r}
+output$p <- plotly::renderPlotly({
+  th <- shad_current_theme()
+  plotly::plot_ly(sales, x = ~month, y = ~amount, color = ~region,
+                  type = "scatter", mode = "lines") |>
+    shad_theme_plotly(th$preset, th$dark)
+})
+
+output$e <- echarts4r::renderEcharts4r({
+  th <- shad_current_theme()
+  sales |>
+    echarts4r::e_charts(month) |>
+    echarts4r::e_line(amount) |>
+    shad_theme_echarts4r(th$preset, th$dark)
+})
+```
+
+Both `plotly` and `echarts4r` are Suggests — the helpers error with a clear
+message if the package isn't installed.
+
+## Base graphics
+
+There is no theme helper, but the palette is just hex, so:
+
+```{r}
+output$bar <- renderPlot({
+  th <- shad_current_theme()
+  barplot(values, col = shad_chart_colors(length(values), th$preset, th$dark),
+          border = NA)
+})
+```
+
+## Timelines
+
+For event feeds rather than figures:
+
+```{r}
+shad_timeline(
+  shad_timeline_item("Order placed", time = "09:12", icon = "check",
+                     description = "Payment authorised"),
+  shad_timeline_item("Shipped", time = "14:40", status = "active"),
+  shad_timeline_item("Delivered", time = "—", status = "muted", last = TRUE),
+  align = "left"   # or "alternate"
+)
+```
+
+## See also
+
+- `vignette("theming")` for presets, custom palettes, and runtime switching.
+- `vignette("data-tables")` for the table these dashboards usually sit above.
+- `shad_run_example("07-data-explorer")` for all of it in one app.

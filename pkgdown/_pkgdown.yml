@@ -25,6 +25,12 @@ navbar:
           href: articles/theming.html
         - text: Forms & validation
           href: articles/forms.html
+        - text: Data tables
+          href: articles/data-tables.html
+        - text: Dashboards & charts
+          href: articles/charts.html
+        - text: Streaming chat
+          href: articles/chat.html
         - text: Layout & composition
           href: articles/layout.html
         - text: The server API
@@ -42,6 +48,9 @@ articles:
       - shadshiny
       - theming
       - forms
+      - data-tables
+      - charts
+      - chat
       - layout
       - server-api
       - overlays-and-server
@@ -241,6 +250,12 @@ reference:
       - update_shad_sidebar
       - update_shad_progress
       - update_shad_button
+      - update_shad_data_table
+      - update_shad_stepper
+      - update_shad_tree
+      - update_shad_rating
+      - update_shad_number_input
+      - update_shad_form_field
 
   - title: Server — overlays & toast
     desc: Open/close overlays and raise toast notifications from the server.
@@ -260,9 +275,66 @@ reference:
       - shad_toast_update
       - shad_toast_dismiss
 
+  - title: Data table
+    desc: A full-featured, client-side data table with sorting, filtering, paging, and selection.
+    contents:
+      - shad_data_table
+      - shad_col
+      - shad_fmt
+      - update_shad_data_table
+
+  - title: Dashboard & charts
+    desc: KPI cards, chart wrappers, timelines, and plot theming.
+    contents:
+      - shad_value_box
+      - shad_chart_container
+      - shad_timeline
+      - shad_timeline_item
+      - shad_theme_ggplot2
+      - shad_theme_plotly
+      - shad_theme_echarts4r
+      - shad_tokens
+      - shad_chart_colors
+      - shad_current_theme
+
+  - title: Flow & input components
+    desc: Stepper, tree, rating, number input, and file dropzone.
+    contents:
+      - shad_stepper
+      - shad_step
+      - shad_tree
+      - shad_tree_item
+      - shad_rating
+      - shad_number_input
+      - shad_dropzone
+      - shad_date_presets
+
+  - title: Forms & validation
+    desc: A server-side validator with shadcn-styled field messaging.
+    contents:
+      - shad_validator
+      - shad_rules
+      - shad_form_message
+      - shad_form_counter
+      - shad_form_summary
+
+  - title: Custom theming
+    desc: Build, import, and switch custom themes.
+    contents:
+      - shad_theme
+      - shad_theme_scope
+      - shad_theme_from_registry
+
+  - title: Chat
+    desc: A streaming chat module built on the chat kit.
+    contents:
+      - shad_chat_ui
+      - shad_chat_server
+
   - title: Utilities
     desc: Icons and the asset dependency.
     contents:
       - shad_icon
+      - shad_icon_raw
       - shad_icon_names
       - shadshiny_deps

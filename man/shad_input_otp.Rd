@@ -9,6 +9,7 @@ shad_input_otp(
   length = 6,
   groups = NULL,
   label = NULL,
+  value = NULL,
   pattern = c("numeric", "alphanumeric"),
   disabled = FALSE,
   class = NULL,
@@ -24,6 +25,8 @@ shad_input_otp(
 a divider (e.g. \code{c(3, 3)}). Must sum to \code{length}.}
 
 \item{label}{Optional label (wraps in \code{\link[=shad_form_field]{shad_form_field()}}).}
+
+\item{value}{Optional initial code (also restored on bookmark reload).}
 
 \item{pattern}{\code{"numeric"} (digits only) or \code{"alphanumeric"} (any character).}
 
@@ -49,6 +52,7 @@ Other shadshiny tier-2 components:
 \code{\link[=shad_checkbox]{shad_checkbox()}},
 \code{\link[=shad_combobox]{shad_combobox()}},
 \code{\link[=shad_date_picker]{shad_date_picker()}},
+\code{\link[=shad_date_presets]{shad_date_presets()}},
 \code{\link[=shad_form_field]{shad_form_field()}},
 \code{\link[=shad_input]{shad_input()}},
 \code{\link[=shad_input_group]{shad_input_group()}},

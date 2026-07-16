@@ -13,7 +13,7 @@ test_that("CSS load order leads with tokens, base, animations, dropdown-menu", {
     "components/dropdown-menu/dropdown-menu.css"
   ))
   # 59 component CSS + tokens + base + animations
-  expect_length(css, 59 + 3)
+  expect_length(css, 70 + 3)
   # no component css appears twice (dropdown-menu hoisted, not duplicated)
   expect_false(any(duplicated(css)))
 })
@@ -28,7 +28,7 @@ test_that("JS load order leads with runtime and ends with the shiny binding", {
   ))
   expect_identical(js[length(js)], "shiny/shadshiny-shiny.js")
   # 36 component JS + runtime + shiny binding
-  expect_length(js, 36 + 2)
+  expect_length(js, 43 + 2)
   expect_false(any(duplicated(js)))
 })
 

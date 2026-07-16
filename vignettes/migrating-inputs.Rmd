@@ -8,7 +8,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE, purl = FALSE)
 ```
 
 shadshiny is designed to sit on top of an ordinary Shiny app: same `inputId`
@@ -34,7 +34,7 @@ too.
 | `textInput()` | `shad_input()` | drop-in | `type=` for email/password/number/search. |
 | `passwordInput()` | `shad_input(type = "password")` | drop-in | — |
 | `textAreaInput()` | `shad_textarea()` | drop-in | `autosize = TRUE` grows with content. |
-| `numericInput()` | `shad_input(type = "number")` | drop-in | Value returns as entered; coerce server-side. |
+| `numericInput()` | `shad_number_input()` | drop-in | Numeric value with stepper buttons, `min`/`max`/`step`, and clamping. `shad_input(type = "number")` is the plainer alternative. |
 | `checkboxInput()` | `shad_checkbox()` | drop-in | Adds a tri-state `"indeterminate"`. |
 | `checkboxInput()` (on/off) | `shad_switch()` | drop-in | Logical value; the toggle-switch look. |
 | `checkboxGroupInput()` | `shad_toggle_group(type = "multiple")` | drop-in | Returns a character vector of selected values. |
@@ -50,7 +50,11 @@ too.
 | `dateRangeInput()` | `shad_date_picker(mode = "range")` | drop-in | Value is `list(start, end)`. |
 | — (calendar surface) | `shad_calendar()` | new | Inline month grid; `input$id` is the picked date. |
 | — (segmented code) | `shad_input_otp()` | new | One-time-code entry; no base analogue. |
-| `fileInput()` | keep base `fileInput()` | keep base | No shadshiny binding. Pair with `shad_attachment()` to render the uploaded-file list. |
+| `fileInput()` | `shad_dropzone()` | drop-in | Drag-and-drop surface over a hidden `fileInput()`, so `input$id` is the same files data frame. Pair with `shad_attachment()` to render the uploaded-file list. |
+| — (star rating) | `shad_rating()` | new | Numeric rating; `half = TRUE` for half-stars. |
+| — (wizard) | `shad_stepper()` (+ `shad_step()`) | new | Multi-step flow; `input$id` is the active step. |
+| — (hierarchy picker) | `shad_tree()` (+ `shad_tree_item()`) | new | Tree with selection and `input$<id>_expanded`. |
+| `dateRangeInput()` + preset buttons | `shad_date_picker(mode = "range", presets = shad_date_presets())` | drop-in | Adds a preset rail ("Last 7 days", "This month", …). |
 
 ## Buttons & actions
 
@@ -77,7 +81,7 @@ too.
 | `hr()` | `shad_separator()` | drop-in | Horizontal or vertical rule. |
 | `absolutePanel()` / `fixedPanel()` | keep base | keep base | Positioning helpers; no shadcn analogue. |
 | `bslib::card()` | `shad_card()` | drop-in | Header/title/description/content/footer parts. |
-| `bslib::value_box()` | `shad_card()` + typography | restyle | Compose from card + `shad_h2()`/`shad_muted()`. |
+| `bslib::value_box()` | `shad_value_box()` | drop-in | KPI card with trend delta chip, icon, and a sparkline slot. |
 | `bslib::accordion()` | `shad_accordion()` (+ item) | drop-in | `type = "single"|"multiple"`. |
 
 ## Navigation
@@ -116,15 +120,17 @@ too.
 | `removeNotification()` | `shad_toast_dismiss()` | drop-in | — |
 | `withProgress()` / `Progress$new()` / `incProgress()` | `shad_progress()` + `update_shad_progress()` | pattern shift | Determinate bar you drive by `id`; wrap your own loop. |
 | `insertUI()` / `removeUI()` | keep base | keep base | Works as-is — inserted shadshiny components auto-initialise. |
-| `validate()` / `need()` | keep base + `shad_form_field()` | restyle | Keep base validation; render messages/`invalid =` state via `shad_form_field()`. |
+| `validate()` / `need()` | `shad_validator()` (+ `shad_rules`) | pattern shift | Declare rules per field; the validator drives `aria-invalid` and inline `shad_form_message()` text. Base `validate()`/`need()` still works for output gating. |
 
 ## Outputs & display
 
 | base Shiny | shadshiny | Kind | Notes |
 |---|---|---|---|
 | `tableOutput()` / `renderTable()` | `shad_table()` (+ parts) via `renderUI()` | restyle | `shad_table` is static markup; build rows from your data and `renderUI()`. |
-| `dataTableOutput()` / `DT` | keep base / `DT` | keep base | Style the container; shadshiny doesn't reimplement DT. |
-| `plotOutput()` / `renderPlot()` | keep base | keep base | Render slot; place inside `shad_card()` for framing. |
+| `dataTableOutput()` / `DT` / `reactable` | `shad_data_table()` | drop-in | Client-side sort/filter/page/select, styled to the theme. `input$id` reports `{selected, sort, filter, page, pageSize}`; refresh with `update_shad_data_table()`. Keep `DT` when you need server-side paging over large data. |
+| `plotOutput()` / `renderPlot()` | keep base, inside `shad_chart_container()` | keep base | Card wrapper with title/description/legend. Theme the plot with `shad_theme_ggplot2()` + `shad_current_theme()`. |
+| `plotly` / `echarts4r` widgets | keep base, inside `shad_chart_container()` | keep base | Restyle with `shad_theme_plotly()` / `shad_theme_echarts4r()`. |
+| event log / activity feed (manual) | `shad_timeline()` (+ item) | new | — |
 | `uiOutput()` / `renderUI()` | keep base | keep base | Render slot; emit shadshiny tags into it — they auto-initialise. |
 | `textOutput()` / `verbatimTextOutput()` | keep base | keep base | Wrap in `shad_code()` / typography for styling. |
 | `icon()` (Font Awesome) | `shad_icon()` | drop-in | Lucide set; see `vignette("icons")`. Any custom SVG also accepted. |
@@ -155,7 +161,10 @@ Worth adopting on their own; there is nothing to migrate *from*:
   items, badges, and a server-toggled state.
 - `shad_toast()` — server-raised notifications, including loading→done flows.
 - The **chat / AI kit** — `shad_bubble()`, `shad_message()` (+ scroller),
-  `shad_attachment()`, `shad_marker()` — a stick-to-bottom streaming transcript.
+  `shad_attachment()`, `shad_marker()` — a stick-to-bottom streaming transcript,
+  or `shad_chat_ui()` / `shad_chat_server()` for the whole module at once.
+- `shad_theme()` / `shad_theme_from_registry()` — build a custom palette, or
+  import one from the shadcn theme registry.
 - `shad_empty()` — empty-state panel; `shad_item()` — flex list-row primitive.
 
 ## Value-shape differences to watch

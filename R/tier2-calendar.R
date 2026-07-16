@@ -73,6 +73,12 @@ shad_calendar <- function(inputId, value = NULL, mode = c("single", "range"),
 #' @inheritParams shad_calendar
 #' @param label Optional label (wraps in [shad_form_field()]).
 #' @param placeholder Trigger text shown when nothing is selected.
+#' @param presets Optional quick-range rail, only valid with `mode = "range"`.
+#'   A named list; names are the button labels and each value is either a
+#'   keyword (`"today"`, `"yesterday"`, `"this-week"`, `"this-month"`,
+#'   `"last-month"`, `"this-year"`), an integer `N` meaning the last `N` days,
+#'   or a length-2 `Date` vector giving an explicit start and end.
+#'   [shad_date_presets()] returns a ready-made set.
 #' @param width CSS width.
 #' @returns A date-picker tag.
 #' @family shadshiny tier-2 components
@@ -83,9 +89,15 @@ shad_calendar <- function(inputId, value = NULL, mode = c("single", "range"),
 shad_date_picker <- function(inputId, label = NULL, value = NULL,
                              mode = c("single", "range"),
                              placeholder = "Pick a date", min = NULL, max = NULL,
+                             presets = NULL,
                              disabled = FALSE, width = NULL, class = NULL, ...) {
   value <- shiny::restoreInput(id = inputId, default = value)
   mode <- arg_match_shad(mode, c("single", "range"), "mode")
+  if (!is.null(presets) && mode != "range") {
+    stop("`presets` is only valid with `mode = \"range\"` in shad_date_picker().",
+         call. = FALSE)
+  }
+  presets_tag <- if (!is.null(presets)) .shad_build_presets(presets)
   # Inner calendar is unbound (no id); the date-picker root is the Shiny input.
   cal <- shad_calendar(
     inputId = NULL, value = value, mode = mode, min = min, max = max,
@@ -110,7 +122,8 @@ shad_date_picker <- function(inputId, label = NULL, value = NULL,
         htmltools::tags$span(class = "shad-date-picker__value", placeholder)
       ),
       htmltools::tags$div(
-        class = "shad-date-picker__content shad-anim-pop", hidden = NA, cal
+        class = "shad-date-picker__content shad-anim-pop", hidden = NA,
+        presets_tag, cal
       )
     )
   ))

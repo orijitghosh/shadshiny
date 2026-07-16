@@ -12,6 +12,7 @@ shad_date_picker(
   placeholder = "Pick a date",
   min = NULL,
   max = NULL,
+  presets = NULL,
   disabled = FALSE,
   width = NULL,
   class = NULL,
@@ -31,6 +32,13 @@ shad_date_picker(
 \item{placeholder}{Trigger text shown when nothing is selected.}
 
 \item{min, max}{Selectable bounds (inclusive), \code{Date}/character.}
+
+\item{presets}{Optional quick-range rail, only valid with \code{mode = "range"}.
+A named list; names are the button labels and each value is either a
+keyword (\code{"today"}, \code{"yesterday"}, \code{"this-week"}, \code{"this-month"},
+\code{"last-month"}, \code{"this-year"}), an integer \code{N} meaning the last \code{N} days,
+or a length-2 \code{Date} vector giving an explicit start and end.
+\code{\link[=shad_date_presets]{shad_date_presets()}} returns a ready-made set.}
 
 \item{disabled}{If \code{TRUE}, disables the control.}
 
@@ -56,6 +64,7 @@ Other shadshiny tier-2 components:
 \code{\link[=shad_calendar]{shad_calendar()}},
 \code{\link[=shad_checkbox]{shad_checkbox()}},
 \code{\link[=shad_combobox]{shad_combobox()}},
+\code{\link[=shad_date_presets]{shad_date_presets()}},
 \code{\link[=shad_form_field]{shad_form_field()}},
 \code{\link[=shad_input]{shad_input()}},
 \code{\link[=shad_input_group]{shad_input_group()}},

@@ -1,0 +1,80 @@
+test_that("v2 inputs seed correctly and reflect server updates", {
+  skip_if_no_shinytest2()
+  app <- shinytest2::AppDriver$new(test_path("apps/v2"), name = "v2")
+  withr::defer(app$stop())
+
+  # initial seeds
+  expect_equal(app$get_value(input = "rate"), 2)
+  expect_equal(app$get_value(input = "num"), 4)
+  expect_equal(app$get_value(input = "step"), 1)
+
+  tbl <- app$get_value(input = "tbl")
+  expect_equal(tbl$page, 1)
+  expect_equal(tbl$pageSize, 5)
+  expect_length(tbl$selected, 0)
+
+  # server-driven updates propagate back to input$
+  app$click("do_update")
+  app$wait_for_idle()
+  expect_equal(app$get_value(input = "rate"), 4)
+  expect_equal(app$get_value(input = "num"), 7)
+  expect_equal(app$get_value(input = "step"), 2)
+  expect_equal(app$get_value(input = "tree"), "pear")
+  expect_equal(as.integer(app$get_value(input = "tbl")$selected), c(1L, 3L))
+
+  expect_no_js_errors(app)
+})
+
+test_that("the data table sorts and filters on the client", {
+  skip_if_no_shinytest2()
+  app <- shinytest2::AppDriver$new(test_path("apps/v2"), name = "v2-table")
+  withr::defer(app$stop())
+
+  # 8 rows at pageSize 5 => 5 rendered
+  n_rows <- function() {
+    app$get_js("document.querySelectorAll('#tbl tbody tr').length")
+  }
+  expect_equal(n_rows(), 5)
+
+  # a header click sorts client-side and reports back through input$
+  app$run_js("document.querySelector('#tbl .shad-data-table__sort').click()")
+  app$wait_for_idle()
+  srt <- app$get_value(input = "tbl")$sort
+  expect_equal(srt[[1]]$column, "model")
+  expect_equal(srt[[1]]$direction, "asc")
+
+  # the global filter narrows the rendered rows without a server round-trip
+  app$run_js(paste0(
+    "var i = document.querySelector('#tbl .shad-data-table__filter');",
+    "i.value = 'Mazda';",
+    "i.dispatchEvent(new Event('input', { bubbles: true }));"
+  ))
+  app$wait_for_idle()
+  expect_equal(n_rows(), 2)
+  expect_equal(app$get_value(input = "tbl")$filter$global, "Mazda")
+
+  expect_no_js_errors(app)
+})
+
+test_that("the rating and number stepper respond to clicks", {
+  skip_if_no_shinytest2()
+  app <- shinytest2::AppDriver$new(test_path("apps/v2"), name = "v2-clicks")
+  withr::defer(app$stop())
+
+  # click the 5th star
+  app$run_js("document.querySelectorAll('#rate .shad-rating__item')[4].click()")
+  app$wait_for_idle()
+  expect_equal(app$get_value(input = "rate"), 5)
+
+  # the increment button steps by `step`. It nudges on pointerdown (so
+  # hold-to-repeat works), which .click() does not fire.
+  app$run_js(paste0(
+    "var b = document.querySelector('#num .shad-number-stepper__btn--inc');",
+    "b.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));",
+    "b.dispatchEvent(new PointerEvent('pointerup', { bubbles: true }));"
+  ))
+  app$wait_for_idle()
+  expect_equal(app$get_value(input = "num"), 5)
+
+  expect_no_js_errors(app)
+})

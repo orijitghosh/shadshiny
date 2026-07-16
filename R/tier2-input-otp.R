@@ -16,6 +16,7 @@
 #' @param groups Optional integer vector splitting cells into groups separated by
 #'   a divider (e.g. `c(3, 3)`). Must sum to `length`.
 #' @param label Optional label (wraps in [shad_form_field()]).
+#' @param value Optional initial code (also restored on bookmark reload).
 #' @param pattern `"numeric"` (digits only) or `"alphanumeric"` (any character).
 #' @param disabled If `TRUE`, disables the control.
 #' @param class Extra CSS classes.
@@ -26,8 +27,10 @@
 #' shad_input_otp("code", length = 6, groups = c(3, 3))
 #' @export
 shad_input_otp <- function(inputId, length = 6, groups = NULL, label = NULL,
+                           value = NULL,
                            pattern = c("numeric", "alphanumeric"),
                            disabled = FALSE, class = NULL, ...) {
+  value <- shiny::restoreInput(id = inputId, default = value)
   pattern <- arg_match_shad(pattern, c("numeric", "alphanumeric"), "pattern")
   if (is.null(groups)) groups <- length
   groups <- as.integer(groups)
@@ -53,6 +56,7 @@ shad_input_otp <- function(inputId, length = 6, groups = NULL, label = NULL,
     inputmode = if (pattern == "numeric") "numeric" else NULL,
     autocomplete = "one-time-code",
     `aria-label` = "One-time code",
+    value = if (!is.null(value)) value else NULL,
     disabled = flag_attr(disabled)
   )
 

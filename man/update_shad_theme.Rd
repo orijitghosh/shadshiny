@@ -7,6 +7,7 @@
 update_shad_theme(
   preset = NULL,
   dark = NULL,
+  theme = NULL,
   session = shiny::getDefaultReactiveDomain()
 )
 }
@@ -15,6 +16,10 @@ update_shad_theme(
 leave it unchanged.}
 
 \item{dark}{\code{TRUE}/\code{FALSE} to set dark mode, or \code{NULL} to leave unchanged.}
+
+\item{theme}{An optional custom \code{\link[=shad_theme]{shad_theme()}} to apply live (its tokens are
+written to a managed \verb{<style>} element); pass \code{NA} to remove a previously
+applied custom theme.}
 
 \item{session}{The Shiny session.}
 }

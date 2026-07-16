@@ -4,7 +4,14 @@
 \alias{page_shad}
 \title{A shadshiny page}
 \usage{
-page_shad(..., title = NULL, theme_preset = NULL, dark = NULL, lang = "en")
+page_shad(
+  ...,
+  title = NULL,
+  theme_preset = NULL,
+  dark = NULL,
+  theme = NULL,
+  lang = "en"
+)
 }
 \arguments{
 \item{...}{UI elements, or named HTML attributes for the scope container.}
@@ -17,6 +24,9 @@ page_shad(..., title = NULL, theme_preset = NULL, dark = NULL, lang = "en")
 
 \item{dark}{\code{NULL} to follow bslib/OS, \code{TRUE} to force dark, \code{FALSE} to
 force light.}
+
+\item{theme}{An optional custom \code{\link[=shad_theme]{shad_theme()}} applied page-wide (layered over
+\code{theme_preset} when both are given).}
 
 \item{lang}{Document language attribute.}
 }

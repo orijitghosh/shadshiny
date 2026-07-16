@@ -37,6 +37,7 @@ Run a bundled shadshiny example app
 Other shadshiny utilities:
 \code{\link[=shad_icon]{shad_icon()}},
 \code{\link[=shad_icon_names]{shad_icon_names()}},
+\code{\link[=shad_icon_raw]{shad_icon_raw()}},
 \code{\link[=shadshiny_deps]{shadshiny_deps()}}
 }
 \concept{shadshiny utilities}

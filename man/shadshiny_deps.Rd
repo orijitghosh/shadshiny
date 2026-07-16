@@ -25,6 +25,7 @@ if (interactive()) {
 Other shadshiny utilities:
 \code{\link[=shad_icon]{shad_icon()}},
 \code{\link[=shad_icon_names]{shad_icon_names()}},
+\code{\link[=shad_icon_raw]{shad_icon_raw()}},
 \code{\link[=shad_run_example]{shad_run_example()}}
 }
 \concept{shadshiny utilities}
