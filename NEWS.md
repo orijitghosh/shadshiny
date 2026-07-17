@@ -17,9 +17,10 @@ component library into a full application toolkit.
 * **Chart theming:** `shad_theme_ggplot2()` / `shad_scale_color_shad()` /
   `shad_scale_fill_shad()`, `shad_theme_plotly()`, and `shad_theme_echarts4r()`
   restyle plots to the active theme. `shad_current_theme()` is a reactive that
-  re-runs plot code on dark-mode/preset switches; `shad_tokens()` and
-  `shad_chart_colors()` expose the resolved design tokens (OKLCH converted to hex
-  in base R -- no new dependency).
+  re-runs plot code on dark-mode/preset switches. `shad_chart_colors()` returns
+  the categorical chart ramp as hex (OKLCH converted in base R -- no new
+  dependency); `shad_tokens()` exposes the full resolved token set as CSS
+  strings.
 * **Theming V2:** `shad_theme()` builds arbitrary custom themes from token
   overrides; `shad_theme_from_registry()` imports tweakcn / shadcn registry theme
   JSON; `page_shad(theme=)`, `shad_theme_scope()`, and `update_shad_theme(theme=)`
@@ -48,6 +49,24 @@ component library into a full application toolkit.
   and `shad_run_example("08-llm-chat")`.
 * `input$<id>$sort` on a data table now reports `{column, direction}` rather
   than the client's terser `{col, dir}`.
+* **Bug fix (theme reporter):** the `input$.shad_theme` reporter read
+  `document.body` and `Shiny.setInputValue` unguarded, and ran even with no
+  Shiny on the page. Since the asset bundle loads in `<head>`, both were absent
+  on the first pass, so it threw and aborted the rest of `shadshiny-shiny.js` —
+  taking `shad.autoInit()` with it. `shad_current_theme()` therefore never fired
+  (charts could not follow runtime theme changes), components inserted by
+  `renderUI()` / `insertUI()` were left un-wired, and the pkgdown gallery
+  previews (no Shiny) failed the same way. Components already on the page still
+  worked, which masked it: the runtime self-initialises on `DOMContentLoaded`.
+* **Gallery:** a new *Data, dashboards & flow* page renders the V2 kit live —
+  data table, value boxes, chart container, timeline, stepper, tree, rating,
+  number input, dropzone, and the form-messaging components.
+* **Demo:** `kitchen-sink` now covers the V2 components, including a plot that
+  tracks the theme toolbar via `shad_current_theme()` and a live
+  `shad_validator()` form. Its `update_*()` / scroll / sidebar controls moved
+  next to the components they drive — previously they sat in a card at the foot
+  of the page and appeared to do nothing, because the component they changed was
+  scrolled far out of view.
 * **Bookmarking:** `shad_input_otp(value=)` now seeds and restores its code.
 * `jsonlite` moves to Imports (used by the data table and theming).
 * **Bookmarking support:** every stateful input now seeds its initial value

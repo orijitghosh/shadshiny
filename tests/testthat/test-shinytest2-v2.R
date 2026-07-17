@@ -78,3 +78,34 @@ test_that("the rating and number stepper respond to clicks", {
 
   expect_no_js_errors(app)
 })
+
+test_that("the theme reporter seeds input$.shad_theme and tracks dark mode", {
+  skip_if_no_shinytest2()
+  app <- shinytest2::AppDriver$new(test_path("apps/v2"), name = "v2-theme")
+  withr::defer(app$stop())
+
+  # Regression: the reporter used to read document.body and Shiny.setInputValue
+  # unguarded while the bundle loads in <head>, so it threw and aborted the rest
+  # of shadshiny-shiny.js -- taking shad.autoInit() and this input with it.
+  th <- app$get_value(input = ".shad_theme")
+  expect_false(is.null(th))
+  expect_false(th$dark)
+
+  app$run_js("document.documentElement.classList.add('dark')")
+  app$wait_for_idle()
+  expect_true(app$get_value(input = ".shad_theme")$dark)
+
+  # autoInit's MutationObserver must still wire components inserted after load.
+  app$run_js(paste0(
+    "var d = document.createElement('div');",
+    "d.innerHTML = '<div class=\"shad-slider\" data-shad=\"slider\" id=\"dyn\"",
+    " data-min=\"0\" data-max=\"100\" data-value=\"10\">",
+    "<div class=\"shad-slider__track\"><div class=\"shad-slider__range\"></div></div>",
+    "<div class=\"shad-slider__thumb\" role=\"slider\" tabindex=\"0\"></div></div>';",
+    "document.body.appendChild(d.firstChild);"
+  ))
+  app$wait_for_idle()
+  expect_true(app$get_js("!!shad.get(document.getElementById('dyn'))"))
+
+  expect_no_js_errors(app)
+})

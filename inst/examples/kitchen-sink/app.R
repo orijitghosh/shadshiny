@@ -35,6 +35,13 @@ tz <- list(
   Europe   = c("London" = "Europe/London", "Berlin" = "Europe/Berlin")
 )
 
+# Data-table demo rows: mtcars, plus a categorical column so the badge
+# formatter has something to map.
+dt_data <- head(mtcars[order(-mtcars$mpg), c("mpg", "cyl", "hp", "wt")], 12)
+dt_data <- data.frame(model = rownames(dt_data), dt_data, row.names = NULL)
+dt_data$class <- ifelse(dt_data$mpg >= 26, "economy",
+                 ifelse(dt_data$hp >= 175, "sport", "thirsty"))
+
 ui <- page_shad(
   title = "shadshiny — kitchen sink",
 
@@ -281,6 +288,10 @@ ui <- page_shad(
     section("s-slider", "Slider",
       tags$div(style = "width:22rem;display:grid;gap:1.75rem",
         shad_slider("sld", label = "Volume", value = 50),
+        # The update_* button sits next to its target: a round-trip you have to
+        # scroll to look at reads as a button that does nothing.
+        shad_button(inputId = "set_slider", "Set volume to 80",
+          variant = "outline", size = "sm"),
         shad_slider("sld2", label = "Range", value = c(25, 75), step = 5,
           marks = c("0" = 0, "50" = 50, "100" = 100)),
         shad_slider("sld_dis", label = "Disabled", value = 30, disabled = TRUE))),
@@ -522,6 +533,9 @@ ui <- page_shad(
             style = "display:grid;place-items:center;aspect-ratio:1;font-size:2rem", i)))))))),
 
     section("s-sidebar", "Sidebar layout",
+      tags$div(style = "width:100%;display:grid;gap:0.75rem",
+      shad_button(inputId = "toggle_sidebar", "Toggle sidebar from the server",
+        variant = "outline", size = "sm", style = "justify-self:start"),
       tags$div(style = "width:100%;height:18rem;border:1px solid var(--shad-border);border-radius:var(--shad-radius-lg);overflow:hidden",
         shad_sidebar_layout("sbar",
           sidebar = shad_sidebar(
@@ -533,7 +547,7 @@ ui <- page_shad(
           main = tags$div(
             tags$div(style = "display:flex;gap:0.5rem;align-items:center;padding:0.75rem;border-bottom:1px solid var(--shad-border)",
               shad_sidebar_trigger(), shad_small(textOutput("sbar_title", inline = TRUE))),
-            tags$div(style = "padding:1rem", uiOutput("sbar_body")))))),
+            tags$div(style = "padding:1rem", uiOutput("sbar_body"))))))),
 
     # =====================================================================
     # Chat / AI kit
@@ -558,6 +572,9 @@ ui <- page_shad(
               reactions = c("👍 3", "🎉 1")))))),
 
     section("s-message", "Message",
+      tags$div(style = "width:100%;display:grid;gap:0.75rem",
+      shad_button(inputId = "scroll_chat", "Scroll to latest from the server",
+        variant = "outline", size = "sm", style = "justify-self:start"),
       shad_message_scroller("chat", height = "20rem", default_position = "start",
         shad_message_scroller_item(
           shad_marker("Today", variant = "separator"), anchor = TRUE),
@@ -577,7 +594,7 @@ ui <- page_shad(
           shad_message("Failed to send.", align = "end", avatar = "ME",
             state = "failed")),
         shad_message_scroller_item(
-          shad_message(align = "start", avatar = "AI", state = "typing")))),
+          shad_message(align = "start", avatar = "AI", state = "typing"))))),
 
     section("s-attachment", "Attachment",
       cluster("Upload states",
@@ -607,6 +624,109 @@ ui <- page_shad(
       shad_marker("Streaming…", streaming = TRUE, icon = "loader")),
 
     # =====================================================================
+    # Data, dashboards & flow
+    # =====================================================================
+    shad_h2("Data, dashboards & flow"),
+
+    section("s-value-box", "Value box",
+      shad_value_box("$45,231", "Revenue", delta = "+20.1%",
+        icon = "credit-card", caption = "vs. last month"),
+      shad_value_box("2,350", "Subscribers", delta = "+180", icon = "users"),
+      # delta_direction overrides the sign: a falling error rate is good news.
+      shad_value_box("0.9%", "Error rate", delta = "-0.4%",
+        delta_direction = "up", icon = "activity", caption = "Lower is better"),
+      shad_value_box("573", "Active now", icon = "zap", size = "sm")),
+
+    section("s-data-table", "Data table",
+      tags$div(style = "width:100%",
+        shad_data_table("tbl", dt_data,
+          columns = list(
+            model  = shad_col("Model", width = "12rem"),
+            mpg    = shad_col("MPG", format = shad_fmt_number(1)),
+            cyl    = shad_col("Cylinders", align = "center"),
+            hp     = shad_col("Horsepower", format = shad_fmt_number(0)),
+            wt     = shad_col("Weight", format = shad_fmt_number(2, suffix = " t")),
+            class  = shad_col("Class", format = shad_fmt_badge(
+              c(economy = "default", sport = "secondary", thirsty = "destructive")))
+          ),
+          selection = "multiple", filter = "both", page_size = 5,
+          page_sizes = c(5, 10, 25)),
+        shad_muted(style = "margin-top:0.5rem",
+          "Click a header to sort, Shift+click to add a second key."))),
+
+    section("s-chart", "Chart container",
+      tags$div(style = "width:100%;max-width:38rem",
+        shad_chart_container(
+          title = "Revenue by month", description = "Live — follows the theme",
+          legend = TRUE, legend_labels = "Revenue", aspect = "wide",
+          plotOutput("chart", height = "100%")))),
+
+    section("s-timeline", "Timeline",
+      tags$div(style = "width:100%;max-width:32rem",
+        shad_timeline(
+          shad_timeline_item("Order placed", time = "09:14",
+            description = "Payment authorised.", icon = "check"),
+          shad_timeline_item("Packed", time = "11:02",
+            description = "Left the fulfilment centre.", icon = "package"),
+          shad_timeline_item("In transit", time = "14:30", status = "active",
+            description = "Out for delivery.", icon = "map-pin"),
+          shad_timeline_item("Delivered", status = "muted", last = TRUE,
+            description = "Expected today by 18:00.", icon = "home")))),
+
+    section("s-stepper", "Stepper",
+      tags$div(style = "width:100%;display:grid;gap:1rem",
+        shad_stepper("wiz", active = 2,
+          shad_step("Account", description = "Email and password"),
+          shad_step("Profile", description = "Name and avatar"),
+          shad_step("Billing", description = "Card details"),
+          shad_step("Done", description = "Confirm")),
+        tags$div(style = "display:flex;gap:0.5rem",
+          shad_button(inputId = "step_back", "Back", variant = "outline",
+            size = "sm"),
+          shad_button(inputId = "step_next", "Next", size = "sm")))),
+
+    section("s-tree", "Tree",
+      tags$div(style = "width:18rem",
+        shad_tree("files", selected = "app.R", selection = "single",
+          shad_tree_item("R", "R", icon = "folder", expanded = TRUE,
+            shad_tree_item("app.R", "app.R", icon = "file"),
+            shad_tree_item("ui.R", "ui.R", icon = "file")),
+          shad_tree_item("www", "www", icon = "folder",
+            shad_tree_item("style.css", "style.css", icon = "file")),
+          shad_tree_item("README", "README.md", icon = "file")))),
+
+    section("s-rating", "Rating",
+      cluster("Variants",
+        shad_rating("rt", label = "Rating", value = 3),
+        shad_rating("rt_half", label = "Half steps", value = 3.5, half = TRUE),
+        shad_rating("rt_ro", label = "Read-only", value = 4, readonly = TRUE),
+        shad_rating("rt_10", label = "Ten stars", value = 7, max = 10,
+          size = "sm"))),
+
+    section("s-number", "Number input",
+      cluster("Variants",
+        shad_number_input("num", label = "Quantity", value = 1, min = 0,
+          max = 99, width = "10rem"),
+        shad_number_input("num_p", label = "Price", value = 9.99, step = 0.01,
+          precision = 2, width = "10rem"),
+        shad_number_input("num_d", label = "Disabled", value = 5,
+          disabled = TRUE, width = "10rem"))),
+
+    section("s-dropzone", "Dropzone",
+      tags$div(style = "width:100%;max-width:32rem;display:grid;gap:0.75rem",
+        shad_dropzone("files_up", label = "Attachments", multiple = TRUE,
+          hint = "Any file, up to 5 MB each"),
+        verbatimTextOutput("files_out"))),
+
+    section("s-validate", "Form validation",
+      tags$div(style = "width:22rem;display:grid;gap:1rem",
+        shad_form_summary("sum"),
+        shad_input("v_email", label = "Email", placeholder = "you@example.com"),
+        shad_input("v_pw", label = "Password", type = "password",
+          description = "At least 8 characters."),
+        shad_button(inputId = "v_submit", "Create account"))),
+
+    # =====================================================================
     # Server round-trip
     # =====================================================================
     shad_h2("Server round-trip"),
@@ -614,15 +734,15 @@ ui <- page_shad(
       shad_card_header(shad_card_title("Live input values"),
         shad_card_description("A representative subset of bound inputs.")),
       shad_card_content(verbatimTextOutput("vals")),
+      # Only overlays live here: a toast or dialog surfaces wherever you are on
+      # the page. The update_* / scroll / sidebar controls sit beside the
+      # components they drive, further up, so their effect is actually visible.
       shad_card_footer(style = "display:flex;flex-wrap:wrap;gap:0.5rem",
         shad_button(inputId = "toast_default", "Toast"),
         shad_button(inputId = "toast_success", "Success", variant = "secondary"),
         shad_button(inputId = "toast_error", "Error", variant = "destructive"),
         shad_button(inputId = "toast_loading", "Loading→update"),
-        shad_button(inputId = "set_slider", "Slider→80", variant = "outline"),
-        shad_button(inputId = "open_dialog", "Open dialog", variant = "outline"),
-        shad_button(inputId = "scroll_chat", "Scroll chat", variant = "outline"),
-        shad_button(inputId = "toggle_sidebar", "Toggle sidebar", variant = "outline")))
+        shad_button(inputId = "open_dialog", "Open dialog", variant = "outline")))
   )
 )
 
@@ -679,6 +799,51 @@ server <- function(input, output, session) {
   # Alert-dialog confirm hooks.
   observeEvent(input$alrt_confirm, shad_toast_error("Deleted."))
   observeEvent(input$alrt2_confirm, shad_toast_success("Published."))
+
+  # --- Data, dashboards & flow ------------------------------------------
+
+  # shad_current_theme() makes this re-render when the preset or dark mode
+  # changes, so the plot tracks the toolbar at the top of the page.
+  output$chart <- renderPlot({
+    th <- shad_current_theme()
+    cols <- shad_chart_colors(1, preset = th$preset, dark = th$dark)
+    # shad_tokens() returns raw OKLCH, which base graphics can't parse; only
+    # shad_chart_colors() converts. Axis ink is picked off the dark flag.
+    ink <- if (th$dark) "#A1A1A1" else "#737373"
+    revenue <- c(31, 40, 28, 51, 42, 62)
+    op <- par(bg = NA, fg = ink, col.axis = ink, mar = c(3, 3, 1, 1))
+    on.exit(par(op), add = TRUE)
+    barplot(revenue, names.arg = month.abb[1:6], col = cols, border = NA,
+            las = 1, cex.names = 0.9)
+  }, bg = "transparent")
+
+  output$files_out <- renderPrint({
+    if (is.null(input$files_up)) cat("No files yet — drop some above.")
+    else str(input$files_up)
+  })
+
+  # Stepper: clamp at both ends so the buttons can't drive it out of range.
+  observeEvent(input$step_next,
+    update_shad_stepper("wiz", active = min((input$wiz %||% 1) + 1, 4)))
+  observeEvent(input$step_back,
+    update_shad_stepper("wiz", active = max((input$wiz %||% 1) - 1, 1)))
+
+  # Validator: rules run live once enabled, gate the submit button, and feed
+  # the summary panel. shad_rule_required() goes first so an empty field
+  # reports "Required." rather than a format complaint.
+  v <- shad_validator()
+  v$add_rule("v_email", shad_rule_required(), label = "Email")
+  v$add_rule("v_email", shad_rule_email())
+  v$add_rule("v_pw", shad_rule_required(), label = "Password")
+  v$add_rule("v_pw", shad_rule_min_chars(8))
+  v$bind_summary("sum")
+  v$bind_submit("v_submit")
+  v$enable()
+
+  observeEvent(input$v_submit, {
+    if (v$validate()) shad_toast_success("Account created.")
+    else shad_toast_error("Check the highlighted fields.")
+  })
 }
 
 shinyApp(ui, server)

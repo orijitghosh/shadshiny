@@ -63,6 +63,7 @@ articles:
       - articles/gallery-inputs
       - articles/gallery-overlays
       - articles/gallery-navigation
+      - articles/gallery-data
       - articles/gallery-chat
       - articles/icons
 

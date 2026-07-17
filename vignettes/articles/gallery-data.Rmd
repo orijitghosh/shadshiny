@@ -1,0 +1,264 @@
+---
+title: "Gallery: data, dashboards & flow"
+description: >
+  The V2 kit — data table, value boxes, chart containers, timelines, stepper,
+  tree, rating, number input and dropzone — rendered live with their source.
+---
+
+```{r setup, include = FALSE}
+for (p in c("_common.R", "../_common.R", "vignettes/_common.R"))
+  if (file.exists(p)) { source(p); break }
+```
+
+The components on this page turn shadshiny from a component library into an
+application toolkit: a client-side data table, the dashboard shells, and the
+flow inputs. The previews are live — sort the table, drag the rating, hold the
+stepper — but with no Shiny server attached they won't echo values back.
+
+For the reactive side, see [Data tables](../articles/data-tables.html),
+[Dashboards & charts](../articles/charts.html), and
+[Forms & validation](../articles/forms.html).
+
+## Data table
+
+`shad_data_table()` is a **bound input**, not an output. It serialises the frame
+once and does all sorting, filtering, paging and selection in the browser.
+`input$<id>` reports `{selected, sort, filter, page, pageSize}`.
+
+Click a header to sort, Shift+click to add a second sort key, and use the search
+box or the per-column filters to narrow the rows.
+
+```{r}
+cars <- head(mtcars[order(-mtcars$mpg), c("mpg", "cyl", "hp", "wt")], 8)
+cars <- data.frame(model = rownames(cars), cars, row.names = NULL)
+
+demo(
+  columns = TRUE,
+  shad_data_table(
+    "tbl_demo", cars,
+    columns = list(
+      model = shad_col("Model", width = "12rem"),
+      mpg   = shad_col("MPG", format = shad_fmt_number(1)),
+      cyl   = shad_col("Cylinders", align = "center"),
+      hp    = shad_col("Horsepower", format = shad_fmt_number(0)),
+      wt    = shad_col("Weight", format = shad_fmt_number(2, suffix = " t"))
+    ),
+    selection = "multiple",
+    filter    = "global",
+    page_size = 5
+  )
+)
+```
+
+### Formatted cells
+
+`shad_col(format=)` takes one of the `shad_fmt_*()` formatters. Each keeps the
+**raw** value as the sort key, so a `$1,200.00` cell still sorts numerically and
+a formatted date still sorts chronologically.
+
+```{r}
+sales <- data.frame(
+  order  = c("A-1041", "A-1042", "A-1043", "A-1044"),
+  amount = c(1200, 250.5, 89.99, 4300),
+  margin = c(0.42, 0.18, 0.31, 0.09),
+  date   = as.Date(c("2026-03-01", "2026-03-04", "2026-03-11", "2026-03-15")),
+  status = c("paid", "pending", "refunded", "paid"),
+  stringsAsFactors = FALSE
+)
+
+demo(
+  columns = TRUE,
+  shad_data_table(
+    "tbl_fmt", sales,
+    columns = list(
+      order  = shad_col("Order #", width = "8rem"),
+      amount = shad_col("Amount", format = shad_fmt_number(2, prefix = "$")),
+      margin = shad_col("Margin", format = shad_fmt_percent(1)),
+      date   = shad_col("Date", format = shad_fmt_date("%b %d, %Y")),
+      status = shad_col("Status", format = shad_fmt_badge(
+        c(paid = "default", pending = "secondary", refunded = "destructive")
+      ))
+    ),
+    filter = "none", page_size = 5
+  )
+)
+```
+
+## Value box
+
+`shad_value_box()` is the KPI card. `delta_direction = "auto"` (the default)
+reads the sign off the `delta` string, so `"+12.5%"` is up and `"-3%"` is down —
+pass `delta_direction` explicitly when the arrow shouldn't follow the sign (a
+falling error rate is good news).
+
+```{r}
+demo({
+  shad_value_box("$45,231", "Revenue", delta = "+20.1%", icon = "credit-card",
+                 caption = "vs. last month")
+  shad_value_box("2,350", "Subscribers", delta = "+180", icon = "users")
+  shad_value_box("0.9%", "Error rate", delta = "-0.4%",
+                 delta_direction = "up", icon = "activity",
+                 caption = "Lower is better")
+  shad_value_box("573", "Active now", icon = "zap", size = "sm")
+})
+```
+
+## Chart container
+
+`shad_chart_container()` is the card shell around a `plotOutput()` or any
+htmlwidget, with an optional legend strip. The stage below holds a static image
+in place of a plot, since these pages have no R server behind them.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_chart_container(
+    title = "Revenue by month",
+    description = "Jan – Jun 2026",
+    legend = TRUE,
+    legend_labels = c("This year", "Last year"),
+    aspect = "wide",
+    shad_skeleton(width = "100%", height = "100%")
+  )
+)
+```
+
+In an app the child is your plot, and `shad_theme_ggplot2()` (or the plotly /
+echarts4r equivalents) restyles the figure onto the active palette:
+
+```r
+output$plot <- renderPlot({
+  shad_current_theme()          # re-render when the theme changes at runtime
+  ggplot(df, aes(month, revenue)) +
+    geom_col(fill = shad_chart_colors(1)) +
+    shad_theme_ggplot2()
+})
+```
+
+## Timeline
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_timeline(
+    shad_timeline_item("Order placed", time = "09:14",
+                       description = "Payment authorised.", icon = "check"),
+    shad_timeline_item("Packed", time = "11:02",
+                       description = "Left the fulfilment centre.", icon = "package"),
+    shad_timeline_item("In transit", time = "14:30", status = "active",
+                       description = "Out for delivery.", icon = "map-pin"),
+    shad_timeline_item("Delivered", status = "muted", last = TRUE,
+                       description = "Expected today by 18:00.", icon = "home")
+  )
+)
+```
+
+## Stepper
+
+`shad_stepper()` holds the **1-based** index of the active step. `linear = TRUE`
+stops the user skipping ahead of the current step.
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_stepper("wiz", active = 2,
+    shad_step("Account", description = "Email and password"),
+    shad_step("Profile", description = "Name and avatar"),
+    shad_step("Billing", description = "Card details"),
+    shad_step("Done", description = "Confirm"))
+  shad_stepper("wiz_v", active = 2, orientation = "vertical",
+    shad_step("Draft"),
+    shad_step("In review", description = "Waiting on a second approver"),
+    shad_step("Published", error = TRUE))
+})
+```
+
+## Tree
+
+`shad_tree_item()` takes the value first, then the label. Nest items to build
+branches; `lazy = TRUE` marks a branch whose children arrive later via
+`update_shad_tree(children=)`.
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_tree("files", selected = "app.R", selection = "single",
+    shad_tree_item("R", "R", icon = "folder", expanded = TRUE,
+      shad_tree_item("app.R", "app.R", icon = "file"),
+      shad_tree_item("ui.R", "ui.R", icon = "file")),
+    shad_tree_item("www", "www", icon = "folder",
+      shad_tree_item("style.css", "style.css", icon = "file")),
+    shad_tree_item("data", "data", icon = "folder", lazy = TRUE),
+    shad_tree_item("README", "README.md", icon = "file"))
+)
+```
+
+## Rating
+
+```{r}
+demo({
+  shad_rating("r1", label = "Rating", value = 3)
+  shad_rating("r2", label = "Half steps", value = 3.5, half = TRUE)
+  shad_rating("r3", label = "Read-only", value = 4, readonly = TRUE)
+  shad_rating("r4", label = "Ten stars", value = 7, max = 10, size = "sm")
+})
+```
+
+## Number input
+
+A text input with hold-to-repeat stepper buttons. `precision` fixes the decimal
+places; `min` / `max` clamp the value.
+
+```{r}
+demo({
+  shad_number_input("qty", label = "Quantity", value = 1, min = 0, max = 99)
+  shad_number_input("price", label = "Price", value = 9.99, step = 0.01,
+                    precision = 2)
+  shad_number_input("dis", label = "Disabled", value = 5, disabled = TRUE)
+})
+```
+
+## Dropzone
+
+`shad_dropzone()` bridges to a hidden `fileInput()`, so `input$<id>` is the
+**standard Shiny files data frame** (`name`, `size`, `type`, `datapath`) — every
+`renderTable(input$files)` you already have keeps working.
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_dropzone("files", label = "Attachments", multiple = TRUE,
+                accept = c(".csv", ".xlsx"),
+                hint = "CSV or Excel, up to 5 MB each")
+  shad_dropzone("avatar", label = "Avatar", accept = "image/*",
+                hint = "PNG or JPG, square works best")
+})
+```
+
+## Form messaging
+
+The pieces `shad_validator()` drives from the server. In an app you rarely place
+these by hand — the validator sets them for you — but they're plain components.
+
+```{r}
+demo(
+  columns = TRUE, {
+  shad_form_message("Looks good.", type = "success")
+  shad_form_message("Enter a valid email address.", type = "error")
+  shad_form_message("This name is already taken.", type = "warning")
+  shad_form_counter(214, 280)
+  shad_form_summary("errs", errors = c(
+    email = "Enter a valid email address.",
+    pw    = "Password must be at least 8 characters."
+  ))
+})
+```
+
+## See also
+
+- [Data tables](../articles/data-tables.html) — the full table API.
+- [Dashboards & charts](../articles/charts.html) — plot theming and the
+  `shad_current_theme()` reactive bridge.
+- [Forms & validation](../articles/forms.html) — wiring `shad_validator()`.
+- `shad_run_example("07-data-explorer")` and `shad_run_example("08-llm-chat")`
+  are full apps built on this kit.

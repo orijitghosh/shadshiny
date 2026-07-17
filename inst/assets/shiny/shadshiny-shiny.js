@@ -334,22 +334,38 @@
      Report the active theme (preset + dark) as `input$.shad_theme` so
      server-side chart code (shad_current_theme()) re-runs on theme changes.
      ---------------------------------------------------------------------- */
-  (function themeReporter() {
+  if (hasShiny) (function themeReporter() {
     var rootEl = document.documentElement;
+
+    // This file loads in <head>, so on the first pass neither `document.body`
+    // nor `Shiny.setInputValue` exists yet. Both reads must be guarded: an
+    // unguarded one throws and aborts the rest of this IIFE, taking
+    // shad.autoInit() -- and `input$.shad_theme` itself -- down with it.
     function report() {
-      var preset = rootEl.getAttribute("data-shad-theme") || "default";
+      if (!Shiny.setInputValue) return;
+      var body = document.body;
       var dark = rootEl.classList.contains("dark") ||
         rootEl.getAttribute("data-bs-theme") === "dark" ||
-        document.body.getAttribute("data-bs-theme") === "dark";
-      Shiny.setInputValue(".shad_theme", { preset: preset, dark: !!dark });
+        (!!body && body.getAttribute("data-bs-theme") === "dark");
+      Shiny.setInputValue(".shad_theme", {
+        preset: rootEl.getAttribute("data-shad-theme") || "default",
+        dark: !!dark
+      });
     }
-    report();
+
     var mo = new MutationObserver(report);
     mo.observe(rootEl, { attributes: true,
       attributeFilter: ["class", "data-shad-theme", "data-bs-theme"] });
-    if (document.body) {
+
+    function onReady() {
       mo.observe(document.body, { attributes: true, attributeFilter: ["data-bs-theme"] });
+      report();
     }
+    if (document.body) onReady();
+    else document.addEventListener("DOMContentLoaded", onReady, { once: true });
+
+    // setInputValue only exists once Shiny has initialised; seed the value then.
+    $(document).on("shiny:connected", report);
   })();
 
   /* ----------------------------------------------------------------------
