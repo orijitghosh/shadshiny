@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Forms &amp; validation • shadshiny</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -21,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +44,9 @@
     <li><a class="dropdown-item" href="../articles/shadshiny.html">Get started</a></li>
     <li><a class="dropdown-item" href="../articles/theming.html">Theming</a></li>
     <li><a class="dropdown-item" href="../articles/forms.html">Forms &amp; validation</a></li>
+    <li><a class="dropdown-item" href="../articles/data-tables.html">Data tables</a></li>
+    <li><a class="dropdown-item" href="../articles/charts.html">Dashboards &amp; charts</a></li>
+    <li><a class="dropdown-item" href="../articles/chat.html">Streaming chat</a></li>
     <li><a class="dropdown-item" href="../articles/layout.html">Layout &amp; composition</a></li>
     <li><a class="dropdown-item" href="../articles/server-api.html">The server API</a></li>
     <li><a class="dropdown-item" href="../articles/overlays-and-server.html">Overlays &amp; the server</a></li>
@@ -157,11 +165,189 @@ import it from rlang.</p>
 </blockquote>
 </div>
 <div class="section level2">
+<h2 id="the-validator">The validator<a class="anchor" aria-label="anchor" href="#the-validator"></a>
+</h2>
+<p>Hand-rolling that per field gets old fast.
+<code><a href="../reference/shad_validator.html">shad_validator()</a></code> does the same thing declaratively: you
+register rules per input, and it drives the field’s
+<code>aria-invalid</code> state and inline error text for you — no
+<code>error =</code> slot or <code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput()</a></code> needed in the
+UI.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/page_shad.html">page_shad</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/shad_input.html">shad_input</a></span><span class="op">(</span><span class="st">"email"</span>, label <span class="op">=</span> <span class="st">"Email"</span>, type <span class="op">=</span> <span class="st">"email"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/shad_input.html">shad_input</a></span><span class="op">(</span><span class="st">"pw"</span>, label <span class="op">=</span> <span class="st">"Password"</span>, type <span class="op">=</span> <span class="st">"password"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"submit"</span>, <span class="st">"Sign up"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">sv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_validator.html">shad_validator</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"email"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_required</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"email"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_email</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"pw"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_min_chars</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">enable</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">submit</span>, <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">sv</span><span class="op">$</span><span class="fu">validate</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="../reference/shad_toast.html">shad_toast_success</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Welcome,"</span>, <span class="va">input</span><span class="op">$</span><span class="va">email</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p><code>enable()</code> starts live validation: errors appear as the
+user changes a field. <code><a href="https://rdrr.io/pkg/shiny/man/validate.html" class="external-link">validate()</a></code> runs a full pass — it
+shows <em>every</em> error and returns a logical, which is what you want
+in a submit handler, since a field the user never touched has never been
+checked.</p>
+<div class="section level3">
+<h3 id="the-rules">The rules<a class="anchor" aria-label="anchor" href="#the-rules"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th>Rule</th>
+<th>Fails when</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>shad_rule_required(message)</code></td>
+<td>Value is empty, <code>NULL</code>, <code>""</code>, or an unchecked
+checkbox/switch.</td>
+</tr>
+<tr class="even">
+<td><code>shad_rule_email(message)</code></td>
+<td>Not a plausible email address.</td>
+</tr>
+<tr class="odd">
+<td><code>shad_rule_min_chars(n, message)</code></td>
+<td>Shorter than <code>n</code>.</td>
+</tr>
+<tr class="even">
+<td><code>shad_rule_max_chars(n, message)</code></td>
+<td>Longer than <code>n</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>shad_rule_range(min, max, message)</code></td>
+<td>Not numeric, or outside <code>[min, max]</code>.</td>
+</tr>
+<tr class="even">
+<td><code>shad_rule_regex(pattern, message)</code></td>
+<td>
+<code>pattern</code> doesn’t match.</td>
+</tr>
+<tr class="odd">
+<td><code>shad_rule_in(choices, message)</code></td>
+<td>Any value is outside <code>choices</code>.</td>
+</tr>
+<tr class="even">
+<td><code>shad_rule_fn(fn)</code></td>
+<td>Your own <code>function(value)</code> returning an error string, or
+<code>NULL</code> to pass.</td>
+</tr>
+</tbody>
+</table>
+<p>Every rule takes a <code>message</code> you can override. Rules for
+one field run in the order you added them and the first failure wins, so
+put <code><a href="../reference/shad_rules.html">shad_rule_required()</a></code> first — every other rule passes an
+empty value on purpose, leaving “is this mandatory?” as a separate
+decision.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"username"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_required</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"username"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_regex</a></span><span class="op">(</span><span class="st">"^[a-z0-9_]+$"</span>,</span>
+<span>                                        <span class="st">"Lowercase, digits, and _ only."</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"username"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_fn</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">value</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">taken_usernames</span><span class="op">)</span> <span class="st">"That username is taken."</span> <span class="kw">else</span> <span class="cn">NULL</span></span>
+<span><span class="op">}</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="the-rest-of-the-object">The rest of the object<a class="anchor" aria-label="anchor" href="#the-rest-of-the-object"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th>Method</th>
+<th>Does</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>add_rule(inputId, rule, label)</code></td>
+<td>Register a rule. Chainable.</td>
+</tr>
+<tr class="even">
+<td>
+<code>enable()</code> / <code>disable()</code>
+</td>
+<td>Start / stop live validation (<code>disable()</code> clears the
+messages).</td>
+</tr>
+<tr class="odd">
+<td><code>is_valid()</code></td>
+<td>Reactive logical: do all rules currently pass?</td>
+</tr>
+<tr class="even">
+<td><code><a href="https://rdrr.io/pkg/shiny/man/validate.html" class="external-link">validate()</a></code></td>
+<td>Imperative full pass; shows every error, returns a logical.</td>
+</tr>
+<tr class="odd">
+<td><code>fields()</code></td>
+<td>The registered input ids.</td>
+</tr>
+<tr class="even">
+<td><code>bind_submit(buttonId)</code></td>
+<td>Keep a <code><a href="../reference/shad_button.html">shad_button()</a></code> disabled while the form is
+invalid.</td>
+</tr>
+<tr class="odd">
+<td><code>bind_summary(id)</code></td>
+<td>Render a <code><a href="../reference/shad_form_summary.html">shad_form_summary()</a></code> of the outstanding
+errors.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/page_shad.html">page_shad</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/shad_input.html">shad_input</a></span><span class="op">(</span><span class="st">"email"</span>, label <span class="op">=</span> <span class="st">"Email"</span>, type <span class="op">=</span> <span class="st">"email"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">uiOutput</a></span><span class="op">(</span><span class="st">"errors"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"submit"</span>, <span class="st">"Sign up"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">sv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_validator.html">shad_validator</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"email"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_required</a></span><span class="op">(</span><span class="op">)</span>, label <span class="op">=</span> <span class="st">"Email"</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"email"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_email</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">bind_submit</span><span class="op">(</span><span class="st">"submit"</span><span class="op">)</span>     <span class="co"># button greys out until valid</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">bind_summary</span><span class="op">(</span><span class="st">"errors"</span><span class="op">)</span>    <span class="co"># error list renders here on validate()</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">enable</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p><code>label =</code> is the human name used in the summary; without
+it the summary falls back to the input id.</p>
+</div>
+<div class="section level3">
+<h3 id="standalone-messages">Standalone messages<a class="anchor" aria-label="anchor" href="#standalone-messages"></a>
+</h3>
+<p>The pieces the validator drives are also plain components, for when
+you want one without the machinery:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_form_message.html">shad_form_message</a></span><span class="op">(</span><span class="st">"We'll never share this."</span>, type <span class="op">=</span> <span class="st">"info"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_form_message.html">shad_form_message</a></span><span class="op">(</span><span class="st">"Username is taken."</span>, type <span class="op">=</span> <span class="st">"error"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_form_counter.html">shad_form_counter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html" class="external-link">nchar</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">bio</span> <span class="op"><a href="https://rdrr.io/r/base/Control.html" class="external-link">%||%</a></span> <span class="st">""</span><span class="op">)</span>, <span class="fl">280</span><span class="op">)</span>   <span class="co"># a 42/280 counter chip</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="base-validate-need">Base <code>validate()</code> / <code>need()</code><a class="anchor" aria-label="anchor" href="#base-validate-need"></a>
+</h3>
+<p>Still fine, and still the right tool for <em>outputs</em> —
+<code><a href="../reference/shad_validator.html">shad_validator()</a></code> is about inputs. The two coexist.</p>
+</div>
+</div>
+<div class="section level2">
 <h2 id="gating-submission">Gating submission<a class="anchor" aria-label="anchor" href="#gating-submission"></a>
 </h2>
 <p>Use <code><a href="https://rdrr.io/pkg/shiny/man/req.html" class="external-link">shiny::req()</a></code> to hold logic until required inputs are
 present and truthy, and validate the rest before acting:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">submit</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/req.html" class="external-link">req</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">email</span>, <span class="va">input</span><span class="op">$</span><span class="va">plan</span><span class="op">)</span>          <span class="co"># both must be truthy</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/Logic.html" class="external-link">isTRUE</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">tos</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -178,7 +364,7 @@ present and truthy, and validate the rest before acting:</p>
 <p>Each valued component has an <code>update_shad_*()</code> twin. They
 take the same <code>inputId</code>, are Shiny-module safe, and are the
 way to reset or prefill a form:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">reset</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/updateTextInput.html" class="external-link">updateTextInput</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"email"</span>, value <span class="op">=</span> <span class="st">""</span><span class="op">)</span>   <span class="co"># shad_input uses the</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/updateTextInput.html" class="external-link">updateTextInput</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"site"</span>, value <span class="op">=</span> <span class="st">""</span><span class="op">)</span>    <span class="co"># native text binding</span></span>
@@ -203,7 +389,7 @@ toggle(s), slider, OTP, calendar, date-picker — has a dedicated
 <div class="section level2">
 <h2 id="a-complete-example">A complete example<a class="anchor" aria-label="anchor" href="#a-complete-example"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/orijitghosh/shadshiny" class="external-link">shadshiny</a></span><span class="op">)</span></span>
 <span><span class="va">`%||%`</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span> <span class="va">b</span> <span class="kw">else</span> <span class="va">a</span></span>
@@ -230,6 +416,14 @@ toggle(s), slider, OTP, calendar, date-picker — has a dedicated
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">sv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_validator.html">shad_validator</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"email"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_required</a></span><span class="op">(</span><span class="op">)</span>, label <span class="op">=</span> <span class="st">"Email"</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"email"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_email</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"pw"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_required</a></span><span class="op">(</span><span class="op">)</span>, label <span class="op">=</span> <span class="st">"Password"</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"pw"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_min_chars</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">add_rule</span><span class="op">(</span><span class="st">"tos"</span>, <span class="fu"><a href="../reference/shad_rules.html">shad_rule_required</a></span><span class="op">(</span><span class="st">"Accept the terms to continue."</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">sv</span><span class="op">$</span><span class="fu">enable</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">reset</span>, <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/updateTextInput.html" class="external-link">updateTextInput</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"email"</span>, value <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/updateTextInput.html" class="external-link">updateTextInput</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"pw"</span>, value <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
@@ -238,12 +432,7 @@ toggle(s), slider, OTP, calendar, date-picker — has a dedicated
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">submit</span>, <span class="op">{</span></span>
-<span>    <span class="va">ok_email</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^[^@ ]+@[^@ ]+\\.[^@ ]+$"</span>, <span class="va">input</span><span class="op">$</span><span class="va">email</span> <span class="op"><a href="https://rdrr.io/r/base/Control.html" class="external-link">%||%</a></span> <span class="st">""</span><span class="op">)</span></span>
-<span>    <span class="va">ok_pw</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nchar.html" class="external-link">nchar</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">pw</span> <span class="op"><a href="https://rdrr.io/r/base/Control.html" class="external-link">%||%</a></span> <span class="st">""</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">8</span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">ok_email</span><span class="op">)</span>          <span class="fu"><a href="../reference/shad_toast.html">shad_toast_error</a></span><span class="op">(</span><span class="st">"Enter a valid email."</span><span class="op">)</span></span>
-<span>    <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">ok_pw</span><span class="op">)</span>        <span class="fu"><a href="../reference/shad_toast.html">shad_toast_error</a></span><span class="op">(</span><span class="st">"Password too short."</span><span class="op">)</span></span>
-<span>    <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/Logic.html" class="external-link">isTRUE</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">tos</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="../reference/shad_toast.html">shad_toast_error</a></span><span class="op">(</span><span class="st">"Accept the terms to continue."</span><span class="op">)</span></span>
-<span>    <span class="kw">else</span>                    <span class="fu"><a href="../reference/shad_toast.html">shad_toast_success</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Welcome,"</span>, <span class="va">input</span><span class="op">$</span><span class="va">email</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">sv</span><span class="op">$</span><span class="fu">validate</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="../reference/shad_toast.html">shad_toast_success</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Welcome,"</span>, <span class="va">input</span><span class="op">$</span><span class="va">email</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>

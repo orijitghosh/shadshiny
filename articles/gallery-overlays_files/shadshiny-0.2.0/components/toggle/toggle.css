@@ -1,0 +1,52 @@
+/* FILE: inst/assets/components/toggle/toggle.css */
+/* shadshiny — toggle (pressed button). Variants: default/outline. */
+
+.shad-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--shad-space-2);
+  height: 2.25rem;
+  min-width: 2.25rem;
+  padding: 0 var(--shad-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--shad-radius-md);
+  background-color: transparent;
+  color: var(--shad-foreground);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  font-weight: var(--shad-font-weight-medium);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out),
+              color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-toggle:hover {
+  background-color: var(--shad-muted);
+  color: var(--shad-muted-foreground);
+}
+.shad-toggle[data-state="on"] {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-toggle:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-toggle[data-disabled],
+.shad-toggle:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.shad-toggle--outline {
+  border-color: var(--shad-input);
+  box-shadow: var(--shad-shadow-xs);
+}
+.shad-toggle--outline:hover {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-toggle--sm { height: 2rem; min-width: 2rem; padding: 0 var(--shad-space-1_5); }
+.shad-toggle--lg { height: 2.5rem; min-width: 2.5rem; padding: 0 var(--shad-space-2_5); }

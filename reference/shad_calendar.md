@@ -70,6 +70,7 @@ Other shadshiny tier-2 components:
 [`shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/shad_checkbox.md),
 [`shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/shad_combobox.md),
 [`shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_picker.md),
+[`shad_date_presets()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_presets.md),
 [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md),
 [`shad_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_input.md),
 [`shad_input_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md),
@@ -87,7 +88,7 @@ Other shadshiny tier-2 components:
 
 ``` r
 shad_calendar("day", value = Sys.Date())
-#> <div class="shad-calendar" data-shad="calendar" id="day" data-mode="single" data-value="2026-07-14" data-week-start="0"></div>
+#> <div class="shad-calendar" data-shad="calendar" id="day" data-mode="single" data-value="2026-07-17" data-week-start="0"></div>
 shad_calendar("range", mode = "range", week_starts_on = 1)
 #> <div class="shad-calendar" data-shad="calendar" id="range" data-mode="range" data-week-start="1"></div>
 ```

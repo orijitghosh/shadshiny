@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Theming • shadshiny</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -21,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +44,9 @@
     <li><a class="dropdown-item" href="../articles/shadshiny.html">Get started</a></li>
     <li><a class="dropdown-item" href="../articles/theming.html">Theming</a></li>
     <li><a class="dropdown-item" href="../articles/forms.html">Forms &amp; validation</a></li>
+    <li><a class="dropdown-item" href="../articles/data-tables.html">Data tables</a></li>
+    <li><a class="dropdown-item" href="../articles/charts.html">Dashboards &amp; charts</a></li>
+    <li><a class="dropdown-item" href="../articles/chat.html">Streaming chat</a></li>
     <li><a class="dropdown-item" href="../articles/layout.html">Layout &amp; composition</a></li>
     <li><a class="dropdown-item" href="../articles/server-api.html">The server API</a></li>
     <li><a class="dropdown-item" href="../articles/overlays-and-server.html">Overlays &amp; the server</a></li>
@@ -157,21 +165,100 @@ live from the server — ideal for a settings toolbar built from a
 <span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="custom-theming">Custom theming<a class="anchor" aria-label="anchor" href="#custom-theming"></a>
+<h2 id="custom-themes">Custom themes<a class="anchor" aria-label="anchor" href="#custom-themes"></a>
 </h2>
-<p>For a bespoke brand, override the tokens you care about and leave the
-rest to the preset. The sidebar family has its own
-<code>--shad-sidebar-*</code> tokens
+<p>The seven presets are a starting point, not a ceiling.
+<code><a href="../reference/shad_theme.html">shad_theme()</a></code> builds a palette in R: name the tokens you
+care about, leave the rest to the base.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">brand</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_theme.html">shad_theme</a></span><span class="op">(</span></span>
+<span>  primary            <span class="op">=</span> <span class="st">"#7c3aed"</span>,</span>
+<span>  primary_foreground <span class="op">=</span> <span class="st">"#ffffff"</span>,</span>
+<span>  radius             <span class="op">=</span> <span class="st">"0.75rem"</span>,</span>
+<span>  font_sans          <span class="op">=</span> <span class="st">"Inter, system-ui, sans-serif"</span>,</span>
+<span>  chart              <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#7c3aed"</span>, <span class="st">"#06b6d4"</span>, <span class="st">"#f59e0b"</span>, <span class="st">"#ef4444"</span><span class="op">)</span>,</span>
+<span>  dark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>primary <span class="op">=</span> <span class="st">"#a78bfa"</span>, background <span class="op">=</span> <span class="st">"oklch(0.16 0.02 285)"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/page_shad.html">page_shad</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="va">brand</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<p>Colours may be hex (<code>"#7c3aed"</code>), <code><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb()</a></code>, a
+named CSS colour, or OKLCH (<code>"oklch(0.55 0.24 285)"</code>) —
+everything is normalised on the way in. <code>dark =</code> takes a list
+of the same token names, applied only under <code>.dark</code>; tokens
+you don’t name there inherit the light value, which is almost never what
+you want for <code>background</code> and <code>foreground</code>.</p>
+<p>The named arguments cover the common tokens (<code>primary</code>,
+<code>background</code>, <code>foreground</code>, <code>card</code>,
+<code>muted</code>, <code>accent</code>, <code>destructive</code>,
+<code>border</code>, <code>input</code>, <code>ring</code>,
+<code>radius</code>, <code>font_sans</code>, <code>font_mono</code>, and
+their <code>*_foreground</code> pairs). Anything else — including the
+<code>--shad-sidebar-*</code> family — goes through <code>...</code>
+with the <code>--shad-</code> prefix dropped:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_theme.html">shad_theme</a></span><span class="op">(</span>primary <span class="op">=</span> <span class="st">"#7c3aed"</span>, `sidebar-background` <span class="op">=</span> <span class="st">"oklch(0.98 0.01 285)"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="scoping-a-theme">Scoping a theme<a class="anchor" aria-label="anchor" href="#scoping-a-theme"></a>
+</h3>
+<p><code>theme =</code> on <code><a href="../reference/page_shad.html">page_shad()</a></code> themes the whole
+page. To theme one region instead, wrap it:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_theme_scope.html">shad_theme_scope</a></span><span class="op">(</span></span>
+<span>  <span class="va">brand</span>,</span>
+<span>  <span class="fu"><a href="../reference/shad_card.html">shad_card</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_card.html">shad_card_content</a></span><span class="op">(</span><span class="st">"Only this subtree uses `brand`."</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="../reference/shad_theme_scope.html">shad_theme_scope()</a></code> mints a private class and emits the
+CSS for it, so nested scopes compose and nothing leaks out.</p>
+</div>
+<div class="section level3">
+<h3 id="importing-from-the-shadcn-registry">Importing from the shadcn registry<a class="anchor" aria-label="anchor" href="#importing-from-the-shadcn-registry"></a>
+</h3>
+<p>The <a href="https://ui.shadcn.com/themes" class="external-link">shadcn theme registry</a>
+publishes themes as JSON. <code><a href="../reference/shad_theme_from_registry.html">shad_theme_from_registry()</a></code> maps
+their token names onto shadshiny’s and hands you back a
+<code><a href="../reference/shad_theme.html">shad_theme()</a></code>:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_theme_from_registry.html">shad_theme_from_registry</a></span><span class="op">(</span><span class="st">"https://tweakcn.com/r/themes/some-theme.json"</span><span class="op">)</span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/page_shad.html">page_shad</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="va">tw</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<p>It takes a URL or a local path. Unmapped tokens are dropped rather
+than guessed, so a registry theme built for a much newer shadcn will
+land, minus whatever shadshiny has no slot for.</p>
+</div>
+<div class="section level3">
+<h3 id="switching-a-custom-theme-at-runtime">Switching a custom theme at runtime<a class="anchor" aria-label="anchor" href="#switching-a-custom-theme-at-runtime"></a>
+</h3>
+<p><code>update_shad_theme(theme = )</code> takes a
+<code><a href="../reference/shad_theme.html">shad_theme()</a></code> just like <code>preset =</code> takes a preset
+name, and <code>theme = NA</code> clears back to the page’s own:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">brand_on</span>,  <span class="fu"><a href="../reference/update_shad_theme.html">update_shad_theme</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="va">brand</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">brand_off</span>, <span class="fu"><a href="../reference/update_shad_theme.html">update_shad_theme</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="reading-the-tokens-back">Reading the tokens back<a class="anchor" aria-label="anchor" href="#reading-the-tokens-back"></a>
+</h3>
+<p><code>shad_tokens(preset, dark)</code> returns the resolved token
+set, and <code>shad_chart_colors(n, preset, dark)</code> the chart ramp
+as hex — both useful when you need to hand a colour to something that
+isn’t CSS, like a plot. See <code><a href="../articles/charts.html">vignette("charts")</a></code>.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="hand-written-css">Hand-written CSS<a class="anchor" aria-label="anchor" href="#hand-written-css"></a>
+</h2>
+<p>You never have to use <code><a href="../reference/shad_theme.html">shad_theme()</a></code>. The tokens are
+ordinary custom properties, so plain CSS works. The sidebar family has
+its own <code>--shad-sidebar-*</code> tokens
 (<code>--shad-sidebar-background</code>,
 <code>--shad-sidebar-foreground</code>,
 <code>--shad-sidebar-border</code>, …) so you can give navigation a
 distinct surface:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="in">:root</span> {</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="va">--shad-sidebar-background</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">0.98</span> <span class="dv">0.01</span> <span class="dv">265</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>}</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="fu">.dark</span> {</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="va">--shad-sidebar-background</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">0.20</span> <span class="dv">0.02</span> <span class="dv">265</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>  <span class="va">--shad-sidebar-background</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">0.98</span> <span class="dv">0.01</span> <span class="dv">265</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>}</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="fu">.dark</span> {</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>  <span class="va">--shad-sidebar-background</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">0.20</span> <span class="dv">0.02</span> <span class="dv">265</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>}</span></code></pre></div>
 <p>Override under both the light selector and <code>.dark</code> to keep
 the two modes in step.</p>
 </div>

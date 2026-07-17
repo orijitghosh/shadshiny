@@ -9,6 +9,12 @@
 - [Theming](https://orijitghosh.github.io/shadshiny/articles/theming.md):
 - [Forms &
   validation](https://orijitghosh.github.io/shadshiny/articles/forms.md):
+- [Data
+  tables](https://orijitghosh.github.io/shadshiny/articles/data-tables.md):
+- [Dashboards &
+  charts](https://orijitghosh.github.io/shadshiny/articles/charts.md):
+- [Streaming
+  chat](https://orijitghosh.github.io/shadshiny/articles/chat.md):
 - [Layout &
   composition](https://orijitghosh.github.io/shadshiny/articles/layout.md):
 - [The server
@@ -52,6 +58,13 @@
 
   Tier 3 layout — tabs, accordion, collapsible, pagination, carousel,
   scroll-area, resizable panels and the sidebar family — rendered live.
+
+- [Gallery: data, dashboards &
+  flow](https://orijitghosh.github.io/shadshiny/articles/gallery-data.md):
+
+  The V2 kit — data table, value boxes, chart containers, timelines,
+  stepper, tree, rating, number input and dropzone — rendered live with
+  their source.
 
 - [Gallery: chat & AI
   kit](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.md):

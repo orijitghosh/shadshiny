@@ -1,0 +1,55 @@
+/* FILE: inst/assets/components/input/input.css */
+/* shadshiny — input. Text-like inputs; invalid via aria-invalid. */
+
+.shad-input {
+  display: flex;
+  width: 100%;
+  height: 2.25rem;                 /* h-9 */
+  min-width: 0;
+  border-radius: var(--shad-radius-md);
+  border: 1px solid var(--shad-input);
+  background-color: transparent;
+  padding: var(--shad-space-1) var(--shad-space-3);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-foreground);
+  box-shadow: var(--shad-shadow-xs);
+  outline: none;
+  transition: color var(--shad-duration-fast) var(--shad-ease-out),
+              border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-input::placeholder { color: var(--shad-muted-foreground); }
+.shad-input::selection {
+  background-color: var(--shad-primary);
+  color: var(--shad-primary-foreground);
+}
+.shad-input:focus-visible {
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-shadow-xs), var(--shad-focus-shadow);
+}
+.shad-input:disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.shad-input[aria-invalid="true"] { border-color: var(--shad-destructive); }
+.shad-input[aria-invalid="true"]:focus-visible {
+  border-color: var(--shad-destructive);
+  box-shadow: var(--shad-shadow-xs), var(--shad-focus-shadow-destructive);
+}
+/* file input */
+.shad-input[type="file"] {
+  padding-top: 0.4375rem;
+  font-size: var(--shad-text-sm);
+}
+.shad-input[type="file"]::file-selector-button {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-foreground);
+  margin-right: var(--shad-space-2);
+  padding: 0;
+}

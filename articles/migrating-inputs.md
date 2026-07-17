@@ -25,7 +25,7 @@ markup, that is noted too.
 | [`textInput()`](https://rdrr.io/pkg/shiny/man/textInput.html) | [`shad_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_input.md) | drop-in | `type=` for email/password/number/search. |
 | [`passwordInput()`](https://rdrr.io/pkg/shiny/man/passwordInput.html) | `shad_input(type = "password")` | drop-in | — |
 | [`textAreaInput()`](https://rdrr.io/pkg/shiny/man/textAreaInput.html) | [`shad_textarea()`](https://orijitghosh.github.io/shadshiny/reference/shad_textarea.md) | drop-in | `autosize = TRUE` grows with content. |
-| [`numericInput()`](https://rdrr.io/pkg/shiny/man/numericInput.html) | `shad_input(type = "number")` | drop-in | Value returns as entered; coerce server-side. |
+| [`numericInput()`](https://rdrr.io/pkg/shiny/man/numericInput.html) | [`shad_number_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_number_input.md) | drop-in | Numeric value with stepper buttons, `min`/`max`/`step`, and clamping. `shad_input(type = "number")` is the plainer alternative. |
 | [`checkboxInput()`](https://rdrr.io/pkg/shiny/man/checkboxInput.html) | [`shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/shad_checkbox.md) | drop-in | Adds a tri-state `"indeterminate"`. |
 | [`checkboxInput()`](https://rdrr.io/pkg/shiny/man/checkboxInput.html) (on/off) | [`shad_switch()`](https://orijitghosh.github.io/shadshiny/reference/shad_switch.md) | drop-in | Logical value; the toggle-switch look. |
 | [`checkboxGroupInput()`](https://rdrr.io/pkg/shiny/man/checkboxGroupInput.html) | `shad_toggle_group(type = "multiple")` | drop-in | Returns a character vector of selected values. |
@@ -41,7 +41,11 @@ markup, that is noted too.
 | [`dateRangeInput()`](https://rdrr.io/pkg/shiny/man/dateRangeInput.html) | `shad_date_picker(mode = "range")` | drop-in | Value is `list(start, end)`. |
 | — (calendar surface) | [`shad_calendar()`](https://orijitghosh.github.io/shadshiny/reference/shad_calendar.md) | new | Inline month grid; `input$id` is the picked date. |
 | — (segmented code) | [`shad_input_otp()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_otp.md) | new | One-time-code entry; no base analogue. |
-| [`fileInput()`](https://rdrr.io/pkg/shiny/man/fileInput.html) | keep base [`fileInput()`](https://rdrr.io/pkg/shiny/man/fileInput.html) | keep base | No shadshiny binding. Pair with [`shad_attachment()`](https://orijitghosh.github.io/shadshiny/reference/shad_attachment.md) to render the uploaded-file list. |
+| [`fileInput()`](https://rdrr.io/pkg/shiny/man/fileInput.html) | [`shad_dropzone()`](https://orijitghosh.github.io/shadshiny/reference/shad_dropzone.md) | drop-in | Drag-and-drop surface over a hidden [`fileInput()`](https://rdrr.io/pkg/shiny/man/fileInput.html), so `input$id` is the same files data frame. Pair with [`shad_attachment()`](https://orijitghosh.github.io/shadshiny/reference/shad_attachment.md) to render the uploaded-file list. |
+| — (star rating) | [`shad_rating()`](https://orijitghosh.github.io/shadshiny/reference/shad_rating.md) | new | Numeric rating; `half = TRUE` for half-stars. |
+| — (wizard) | [`shad_stepper()`](https://orijitghosh.github.io/shadshiny/reference/shad_stepper.md) (+ [`shad_step()`](https://orijitghosh.github.io/shadshiny/reference/shad_step.md)) | new | Multi-step flow; `input$id` is the active step. |
+| — (hierarchy picker) | [`shad_tree()`](https://orijitghosh.github.io/shadshiny/reference/shad_tree.md) (+ [`shad_tree_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_tree_item.md)) | new | Tree with selection and `input$<id>_expanded`. |
+| [`dateRangeInput()`](https://rdrr.io/pkg/shiny/man/dateRangeInput.html) + preset buttons | `shad_date_picker(mode = "range", presets = shad_date_presets())` | drop-in | Adds a preset rail (“Last 7 days”, “This month”, …). |
 
 ## Buttons & actions
 
@@ -68,7 +72,7 @@ markup, that is noted too.
 | [`hr()`](https://rstudio.github.io/htmltools/reference/builder.html) | [`shad_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_separator.md) | drop-in | Horizontal or vertical rule. |
 | [`absolutePanel()`](https://rdrr.io/pkg/shiny/man/absolutePanel.html) / [`fixedPanel()`](https://rdrr.io/pkg/shiny/man/absolutePanel.html) | keep base | keep base | Positioning helpers; no shadcn analogue. |
 | [`bslib::card()`](https://rstudio.github.io/bslib/reference/card.html) | [`shad_card()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md) | drop-in | Header/title/description/content/footer parts. |
-| [`bslib::value_box()`](https://rstudio.github.io/bslib/reference/value_box.html) | [`shad_card()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md) + typography | restyle | Compose from card + [`shad_h2()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)/[`shad_muted()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md). |
+| [`bslib::value_box()`](https://rstudio.github.io/bslib/reference/value_box.html) | [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md) | drop-in | KPI card with trend delta chip, icon, and a sparkline slot. |
 | [`bslib::accordion()`](https://rstudio.github.io/bslib/reference/accordion.html) | [`shad_accordion()`](https://orijitghosh.github.io/shadshiny/reference/shad_accordion.md) (+ item) | drop-in | `type = "single"|"multiple"`. |
 
 ## Navigation
@@ -107,15 +111,17 @@ markup, that is noted too.
 | [`removeNotification()`](https://rdrr.io/pkg/shiny/man/showNotification.html) | [`shad_toast_dismiss()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md) | drop-in | — |
 | [`withProgress()`](https://rdrr.io/pkg/shiny/man/withProgress.html) / `Progress$new()` / [`incProgress()`](https://rdrr.io/pkg/shiny/man/withProgress.html) | [`shad_progress()`](https://orijitghosh.github.io/shadshiny/reference/shad_progress.md) + [`update_shad_progress()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md) | pattern shift | Determinate bar you drive by `id`; wrap your own loop. |
 | [`insertUI()`](https://rdrr.io/pkg/shiny/man/insertUI.html) / [`removeUI()`](https://rdrr.io/pkg/shiny/man/insertUI.html) | keep base | keep base | Works as-is — inserted shadshiny components auto-initialise. |
-| [`validate()`](https://rdrr.io/pkg/shiny/man/validate.html) / [`need()`](https://rdrr.io/pkg/shiny/man/validate.html) | keep base + [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md) | restyle | Keep base validation; render messages/`invalid =` state via [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md). |
+| [`validate()`](https://rdrr.io/pkg/shiny/man/validate.html) / [`need()`](https://rdrr.io/pkg/shiny/man/validate.html) | [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md) (+ `shad_rules`) | pattern shift | Declare rules per field; the validator drives `aria-invalid` and inline [`shad_form_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_message.md) text. Base [`validate()`](https://rdrr.io/pkg/shiny/man/validate.html)/[`need()`](https://rdrr.io/pkg/shiny/man/validate.html) still works for output gating. |
 
 ## Outputs & display
 
 | base Shiny | shadshiny | Kind | Notes |
 |----|----|----|----|
 | [`tableOutput()`](https://rdrr.io/pkg/shiny/man/renderTable.html) / [`renderTable()`](https://rdrr.io/pkg/shiny/man/renderTable.html) | [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md) (+ parts) via [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) | restyle | `shad_table` is static markup; build rows from your data and [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html). |
-| [`dataTableOutput()`](https://rdrr.io/pkg/shiny/man/renderDataTable.html) / `DT` | keep base / `DT` | keep base | Style the container; shadshiny doesn’t reimplement DT. |
-| [`plotOutput()`](https://rdrr.io/pkg/shiny/man/plotOutput.html) / [`renderPlot()`](https://rdrr.io/pkg/shiny/man/renderPlot.html) | keep base | keep base | Render slot; place inside [`shad_card()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md) for framing. |
+| [`dataTableOutput()`](https://rdrr.io/pkg/shiny/man/renderDataTable.html) / `DT` / `reactable` | [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md) | drop-in | Client-side sort/filter/page/select, styled to the theme. `input$id` reports `{selected, sort, filter, page, pageSize}`; refresh with [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md). Keep `DT` when you need server-side paging over large data. |
+| [`plotOutput()`](https://rdrr.io/pkg/shiny/man/plotOutput.html) / [`renderPlot()`](https://rdrr.io/pkg/shiny/man/renderPlot.html) | keep base, inside [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md) | keep base | Card wrapper with title/description/legend. Theme the plot with [`shad_theme_ggplot2()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md) + [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md). |
+| `plotly` / `echarts4r` widgets | keep base, inside [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md) | keep base | Restyle with [`shad_theme_plotly()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_plotly.md) / [`shad_theme_echarts4r()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_echarts4r.md). |
+| event log / activity feed (manual) | [`shad_timeline()`](https://orijitghosh.github.io/shadshiny/reference/shad_timeline.md) (+ item) | new | — |
 | [`uiOutput()`](https://rdrr.io/pkg/shiny/man/htmlOutput.html) / [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) | keep base | keep base | Render slot; emit shadshiny tags into it — they auto-initialise. |
 | [`textOutput()`](https://rdrr.io/pkg/shiny/man/textOutput.html) / [`verbatimTextOutput()`](https://rdrr.io/pkg/shiny/man/textOutput.html) | keep base | keep base | Wrap in [`shad_code()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md) / typography for styling. |
 | [`icon()`](https://rdrr.io/pkg/shiny/man/icon.html) (Font Awesome) | [`shad_icon()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon.md) | drop-in | Lucide set; see `vignette("icons")`. Any custom SVG also accepted. |
@@ -155,7 +161,16 @@ Worth adopting on their own; there is nothing to migrate *from*:
   (+ scroller),
   [`shad_attachment()`](https://orijitghosh.github.io/shadshiny/reference/shad_attachment.md),
   [`shad_marker()`](https://orijitghosh.github.io/shadshiny/reference/shad_marker.md)
-  — a stick-to-bottom streaming transcript.
+  — a stick-to-bottom streaming transcript, or
+  [`shad_chat_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_ui.md)
+  /
+  [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md)
+  for the whole module at once.
+- [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
+  /
+  [`shad_theme_from_registry()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_from_registry.md)
+  — build a custom palette, or import one from the shadcn theme
+  registry.
 - [`shad_empty()`](https://orijitghosh.github.io/shadshiny/reference/shad_empty.md)
   — empty-state panel;
   [`shad_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md)

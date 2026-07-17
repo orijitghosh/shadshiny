@@ -1,0 +1,44 @@
+<!-- FILE: inst/assets/components/tabs/tabs.html -->
+<div data-shad="tabs" data-value="account" style="max-width:24rem">
+  <div class="shad-tabs__list">
+    <div class="shad-tabs__indicator" aria-hidden="true"></div>
+    <button type="button" class="shad-tabs__trigger" data-value="account">Account</button>
+    <button type="button" class="shad-tabs__trigger" data-value="password">Password</button>
+    <button type="button" class="shad-tabs__trigger" data-value="team" data-disabled>Team</button>
+  </div>
+  <div class="shad-tabs__content" data-value="account">
+    <div class="shad-card">
+      <div class="shad-card__header">
+        <div class="shad-card__title">Account</div>
+        <div class="shad-card__description">Make changes to your account here.</div>
+      </div>
+      <div class="shad-card__content">
+        <div class="shad-form-field">
+          <label class="shad-label" for="tabs-name">Name</label>
+          <input class="shad-input" id="tabs-name" type="text" value="Pedro Duarte" />
+        </div>
+      </div>
+      <div class="shad-card__footer">
+        <button type="button" class="shad-btn shad-btn--default">Save changes</button>
+      </div>
+    </div>
+  </div>
+  <div class="shad-tabs__content" data-value="password">
+    <div class="shad-card">
+      <div class="shad-card__header">
+        <div class="shad-card__title">Password</div>
+        <div class="shad-card__description">Change your password here.</div>
+      </div>
+      <div class="shad-card__content">
+        <div class="shad-form-field">
+          <label class="shad-label" for="tabs-pw">New password</label>
+          <input class="shad-input" id="tabs-pw" type="password" />
+        </div>
+      </div>
+      <div class="shad-card__footer">
+        <button type="button" class="shad-btn shad-btn--default">Save password</button>
+      </div>
+    </div>
+  </div>
+  <div class="shad-tabs__content" data-value="team">Team content.</div>
+</div>

@@ -1,0 +1,73 @@
+/* FILE: inst/assets/components/tabs/tabs.css */
+/* shadshiny — tabs with animated indicator. */
+
+.shad-tabs { font-family: var(--shad-font-sans); }
+.shad-tabs__list {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+  height: 2.25rem;
+  padding: 3px;
+  border-radius: var(--shad-radius-lg);
+  background-color: var(--shad-muted);
+  color: var(--shad-muted-foreground);
+  width: fit-content;
+}
+.shad-tabs__trigger {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--shad-space-1_5);
+  height: calc(100% - 1px);
+  padding: 0 var(--shad-space-3);
+  border: 1px solid transparent;
+  border-radius: var(--shad-radius-md);
+  background: transparent;
+  font-size: var(--shad-text-sm);
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-foreground);
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  transition: color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-tabs__trigger[data-state="inactive"] { color: var(--shad-muted-foreground); }
+.shad-tabs__trigger:focus-visible {
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-tabs__trigger[data-disabled] { opacity: 0.5; pointer-events: none; }
+
+/* animated indicator: JS positions it under the active trigger */
+.shad-tabs__indicator {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: calc(100% - 6px);
+  border-radius: var(--shad-radius-md);
+  background-color: var(--shad-background);
+  box-shadow: var(--shad-shadow-sm);
+  border: 1px solid color-mix(in oklab, var(--shad-border) 60%, transparent);
+  transition:
+    transform var(--shad-duration-normal) var(--shad-ease-out),
+    width var(--shad-duration-normal) var(--shad-ease-out);
+  pointer-events: none;
+}
+:is(.dark, [data-bs-theme="dark"]) .shad-tabs__indicator,
+.shad-tabs__indicator:is(.dark *, [data-bs-theme="dark"] *) {
+  background-color: var(--shad-input);
+}
+
+.shad-tabs__content {
+  margin-top: var(--shad-space-2);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  outline: none;
+}
+.shad-tabs__content[data-state="inactive"] { display: none; }
+.shad-tabs__content[data-state="active"] {
+  animation: shad-fade-in var(--shad-duration-normal) var(--shad-ease-out);
+}

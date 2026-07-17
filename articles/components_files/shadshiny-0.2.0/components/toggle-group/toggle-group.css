@@ -1,0 +1,28 @@
+/* FILE: inst/assets/components/toggle-group/toggle-group.css */
+/* shadshiny — toggle group. Items share edges (joined pill). */
+
+.shad-toggle-group {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--shad-radius-md);
+  width: fit-content;
+}
+.shad-toggle-group .shad-toggle {
+  border-radius: 0;
+  flex: 1 0 auto;
+  min-width: 2.25rem;
+}
+.shad-toggle-group .shad-toggle:first-child {
+  border-top-left-radius: var(--shad-radius-md);
+  border-bottom-left-radius: var(--shad-radius-md);
+}
+.shad-toggle-group .shad-toggle:last-child {
+  border-top-right-radius: var(--shad-radius-md);
+  border-bottom-right-radius: var(--shad-radius-md);
+}
+/* outline group: collapse adjacent borders */
+.shad-toggle-group--outline .shad-toggle {
+  border-color: var(--shad-input);
+  box-shadow: var(--shad-shadow-xs);
+}
+.shad-toggle-group--outline .shad-toggle + .shad-toggle { border-left-width: 0; }

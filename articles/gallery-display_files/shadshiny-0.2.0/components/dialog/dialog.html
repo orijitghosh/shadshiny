@@ -1,0 +1,26 @@
+<!-- FILE: inst/assets/components/dialog/dialog.html -->
+<div class="shad-dialog" data-shad="dialog">
+  <button type="button" class="shad-btn shad-btn--outline shad-dialog__trigger">Edit Profile</button>
+  <div class="shad-dialog__overlay shad-anim-overlay" hidden></div>
+  <div class="shad-dialog__content shad-anim-dialog" hidden>
+    <button type="button" class="shad-dialog__close" data-shad-dialog-close aria-label="Close">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="shad-dialog__header">
+      <div class="shad-dialog__title">Edit profile</div>
+      <div class="shad-dialog__description">Make changes to your profile here. Click save when you're done.</div>
+    </div>
+    <div class="shad-form-field">
+      <label class="shad-label" for="dlg-name">Name</label>
+      <input class="shad-input" id="dlg-name" type="text" value="Pedro Duarte" data-shad-autofocus />
+    </div>
+    <div class="shad-form-field">
+      <label class="shad-label" for="dlg-username">Username</label>
+      <input class="shad-input" id="dlg-username" type="text" value="@peduarte" />
+    </div>
+    <div class="shad-dialog__footer">
+      <button type="button" class="shad-btn shad-btn--outline" data-shad-dialog-close>Cancel</button>
+      <button type="button" class="shad-btn shad-btn--default" data-shad-dialog-close>Save changes</button>
+    </div>
+  </div>
+</div>

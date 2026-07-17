@@ -13,7 +13,14 @@ automatically because the assets key off both `.dark` and
 ## Usage
 
 ``` r
-page_shad(..., title = NULL, theme_preset = NULL, dark = NULL, lang = "en")
+page_shad(
+  ...,
+  title = NULL,
+  theme_preset = NULL,
+  dark = NULL,
+  theme = NULL,
+  lang = "en"
+)
 ```
 
 ## Arguments
@@ -36,6 +43,12 @@ page_shad(..., title = NULL, theme_preset = NULL, dark = NULL, lang = "en")
 
   `NULL` to follow bslib/OS, `TRUE` to force dark, `FALSE` to force
   light.
+
+- theme:
+
+  An optional custom
+  [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
+  applied page-wide (layered over `theme_preset` when both are given).
 
 - lang:
 

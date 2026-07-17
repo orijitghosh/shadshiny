@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- FILE: inst/assets/components/item/item.html -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — item</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="../button/button.css">
+<link rel="stylesheet" href="item.css">
+<style>
+  html { background: var(--shad-background); }
+  body { margin: 0; }
+  .demo { padding: 2rem; max-width: 520px; display: grid; gap: 2.5rem; }
+  .demo-toolbar { display: flex; gap: .5rem; }
+  .demo-toolbar button { font: 500 .75rem/1 var(--shad-font-mono); padding: .375rem .625rem; border: 1px solid var(--shad-border); border-radius: .375rem; background: var(--shad-background); color: var(--shad-foreground); cursor: pointer; }
+  .demo-label { font: 500 .6875rem/1 var(--shad-font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--shad-muted-foreground); margin: 0 0 .75rem; }
+  .demo-col { display: grid; gap: 1rem; }
+</style>
+</head>
+<body class="shad-scope">
+<div class="demo">
+  <div class="demo-toolbar">
+    <button type="button" onclick="document.documentElement.classList.toggle('dark')">toggle dark</button>
+    <button type="button" onclick="var h=document.documentElement;h.dir=h.dir==='rtl'?'ltr':'rtl'">toggle rtl</button>
+  </div>
+
+  <section>
+    <p class="demo-label">variants</p>
+    <div class="demo-col">
+      <div class="shad-item">
+        <div class="shad-item__content">
+          <div class="shad-item__title">Default (transparent)</div>
+          <div class="shad-item__description">A simple item with title and description.</div>
+        </div>
+      </div>
+      <div class="shad-item shad-item--outline">
+        <div class="shad-item__content">
+          <div class="shad-item__title">Outline</div>
+          <div class="shad-item__description">Bordered row, radius from tokens.</div>
+        </div>
+      </div>
+      <div class="shad-item shad-item--muted">
+        <div class="shad-item__content">
+          <div class="shad-item__title">Muted</div>
+          <div class="shad-item__description">Muted surface at 50% mix.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="demo-label">media + actions</p>
+    <div class="demo-col">
+      <div class="shad-item shad-item--outline">
+        <div class="shad-item__media shad-item__media--icon" aria-hidden="true">
+          <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z"/><path d="M12 8v4l2 2"/></svg>
+        </div>
+        <div class="shad-item__content">
+          <div class="shad-item__title">Nightly backup</div>
+          <div class="shad-item__description">Runs every day at 02:00 UTC.</div>
+        </div>
+        <div class="shad-item__actions">
+          <button type="button" class="shad-btn shad-btn--outline shad-btn--sm">Configure</button>
+        </div>
+      </div>
+      <div class="shad-item shad-item--outline">
+        <div class="shad-item__media shad-item__media--image" aria-hidden="true">
+          <svg class="shad-icon" viewBox="0 0 40 40" style="width:100%;height:100%"><rect width="40" height="40" fill="currentColor" opacity=".15"/><circle cx="14" cy="15" r="5" fill="currentColor" opacity=".4"/><path d="M0 34 14 22l8 7 8-9 10 10v10H0Z" fill="currentColor" opacity=".4"/></svg>
+        </div>
+        <div class="shad-item__content">
+          <div class="shad-item__title">cover-photo.png</div>
+          <div class="shad-item__description">1.2 MB &middot; uploaded 2 days ago</div>
+        </div>
+        <div class="shad-item__actions">
+          <button type="button" class="shad-btn shad-btn--ghost shad-btn--icon shad-btn--sm" aria-label="Remove">
+            <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="demo-label">group + separator + link item</p>
+    <div class="shad-item-group shad-item-group--demo" role="list" style="border:1px solid var(--shad-border); border-radius: var(--shad-radius-lg); padding: var(--shad-space-1);">
+      <a class="shad-item shad-item--sm" href="#" role="listitem">
+        <div class="shad-item__content">
+          <div class="shad-item__title">Profile</div>
+          <div class="shad-item__description">Name, avatar, contact info</div>
+        </div>
+        <div class="shad-item__actions" aria-hidden="true">
+          <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+      </a>
+      <hr class="shad-item-separator" aria-hidden="true">
+      <a class="shad-item shad-item--sm" href="#" role="listitem">
+        <div class="shad-item__content">
+          <div class="shad-item__title">Notifications</div>
+          <div class="shad-item__description">Email and push preferences</div>
+        </div>
+        <div class="shad-item__actions" aria-hidden="true">
+          <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <p class="demo-label">sizes + header/footer</p>
+    <div class="demo-col">
+      <div class="shad-item shad-item--outline shad-item--xs">
+        <div class="shad-item__content">
+          <div class="shad-item__title">Extra small</div>
+        </div>
+        <div class="shad-item__actions">
+          <button type="button" class="shad-btn shad-btn--ghost shad-btn--sm">Edit</button>
+        </div>
+      </div>
+      <div class="shad-item shad-item--outline">
+        <div class="shad-item__header">
+          <span>deploy/production</span><span>#412</span>
+        </div>
+        <div class="shad-item__content">
+          <div class="shad-item__title">Deploy succeeded</div>
+          <div class="shad-item__description">Build finished in 2m 14s with no warnings.</div>
+        </div>
+        <div class="shad-item__footer">
+          <span>main &rarr; production</span><span>3 min ago</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

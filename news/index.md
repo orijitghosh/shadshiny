@@ -1,6 +1,155 @@
 # Changelog
 
-## shadshiny (development version)
+## shadshiny 0.2.0
+
+Eleven new components and several server-side systems that turn
+shadshiny from a component library into a full application toolkit.
+
+- **Data table
+  ([`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)):**
+  a client-side, shadcn-styled data table with multi-column sort
+  (Shift+click), global and per-column filtering, windowed pagination,
+  single/multiple row selection persisted across pages, column
+  visibility, sticky header, and loading skeletons. Column specs via
+  [`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md)
+  with formatters
+  [`shad_fmt_number()`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md),
+  [`shad_fmt_percent()`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md),
+  [`shad_fmt_date()`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md),
+  and
+  [`shad_fmt_badge()`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md),
+  plus arbitrary `cell` render functions. `input$<id>` reports
+  `{selected, sort, filter, page, pageSize}`; refresh from the server
+  with
+  [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md).
+
+- **Dashboard shells:**
+  [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
+  (KPI card with trend delta chip, icon and sparkline slots),
+  [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md)
+  (card wrapper for
+  [`plotOutput()`](https://rdrr.io/pkg/shiny/man/plotOutput.html)/htmlwidgets
+  with legend strip), and
+  [`shad_timeline()`](https://orijitghosh.github.io/shadshiny/reference/shad_timeline.md).
+
+- **Chart theming:**
+  [`shad_theme_ggplot2()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md)
+  /
+  [`shad_scale_color_shad()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md)
+  /
+  [`shad_scale_fill_shad()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md),
+  [`shad_theme_plotly()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_plotly.md),
+  and
+  [`shad_theme_echarts4r()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_echarts4r.md)
+  restyle plots to the active theme.
+  [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md)
+  is a reactive that re-runs plot code on dark-mode/preset switches.
+  [`shad_chart_colors()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_colors.md)
+  returns the categorical chart ramp as hex (OKLCH converted in base R –
+  no new dependency);
+  [`shad_tokens()`](https://orijitghosh.github.io/shadshiny/reference/shad_tokens.md)
+  exposes the full resolved token set as CSS strings.
+
+- **Theming V2:**
+  [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
+  builds arbitrary custom themes from token overrides;
+  [`shad_theme_from_registry()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_from_registry.md)
+  imports tweakcn / shadcn registry theme JSON; `page_shad(theme=)`,
+  [`shad_theme_scope()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_scope.md),
+  and `update_shad_theme(theme=)` apply them at page, subtree, and
+  runtime scope.
+
+- **Form validation:**
+  [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
+  with rules
+  ([`shad_rule_required()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md),
+  [`shad_rule_email()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md),
+  [`shad_rule_min_chars()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md),
+  [`shad_rule_range()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md),
+  [`shad_rule_regex()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md),
+  …), live validation, submit gating, and an error summary.
+  [`update_shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_form_field.md),
+  [`shad_form_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_message.md),
+  and
+  [`shad_form_summary()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_summary.md)
+  provide the underlying messaging.
+
+- **Flow / input components:**
+  [`shad_stepper()`](https://orijitghosh.github.io/shadshiny/reference/shad_stepper.md),
+  [`shad_tree()`](https://orijitghosh.github.io/shadshiny/reference/shad_tree.md)
+  (with lazy branches via `update_shad_tree(children=)`),
+  [`shad_rating()`](https://orijitghosh.github.io/shadshiny/reference/shad_rating.md),
+  [`shad_number_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_number_input.md),
+  and
+  [`shad_dropzone()`](https://orijitghosh.github.io/shadshiny/reference/shad_dropzone.md)
+  (bridged to Shiny’s native file upload, so `input$<id>` is the
+  standard files data frame). Each is a bound input with an `update_*()`
+  companion.
+
+- **Date-range presets:**
+  `shad_date_picker(mode = "range", presets = ...)` adds a quick-range
+  rail;
+  [`shad_date_presets()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_presets.md)
+  supplies a default set.
+
+- **Streaming chat
+  ([`shad_chat_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_ui.md)
+  /
+  [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md)):**
+  a module whose handler may return a complete string, a chunk-yielding
+  function, or a coro generator (e.g. an ellmer stream); replies stream
+  into a stick-to-bottom transcript and render as Markdown.
+
+- **[`shad_icon_raw()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon_raw.md):**
+  use any raw `<svg>` (e.g. a Lucide glyph) with the `.shad-icon` sizing
+  class.
+
+- **New guides:**
+  [`vignette("data-tables")`](https://orijitghosh.github.io/shadshiny/articles/data-tables.md),
+  [`vignette("charts")`](https://orijitghosh.github.io/shadshiny/articles/charts.md),
+  and
+  [`vignette("chat")`](https://orijitghosh.github.io/shadshiny/articles/chat.md);
+  the theming and forms guides now cover custom themes and
+  [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md).
+  Two new examples: `shad_run_example("07-data-explorer")` and
+  `shad_run_example("08-llm-chat")`.
+
+- `input$<id>$sort` on a data table now reports `{column, direction}`
+  rather than the client’s terser `{col, dir}`.
+
+- **Bug fix (theme reporter):** the `input$.shad_theme` reporter read
+  `document.body` and `Shiny.setInputValue` unguarded, and ran even with
+  no Shiny on the page. Since the asset bundle loads in `<head>`, both
+  were absent on the first pass, so it threw and aborted the rest of
+  `shadshiny-shiny.js` — taking `shad.autoInit()` with it.
+  [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md)
+  therefore never fired (charts could not follow runtime theme changes),
+  components inserted by
+  [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) /
+  [`insertUI()`](https://rdrr.io/pkg/shiny/man/insertUI.html) were left
+  un-wired, and the pkgdown gallery previews (no Shiny) failed the same
+  way. Components already on the page still worked, which masked it: the
+  runtime self-initialises on `DOMContentLoaded`.
+
+- **Gallery:** a new *Data, dashboards & flow* page renders the V2 kit
+  live — data table, value boxes, chart container, timeline, stepper,
+  tree, rating, number input, dropzone, and the form-messaging
+  components.
+
+- **Demo:** `kitchen-sink` now covers the V2 components, including a
+  plot that tracks the theme toolbar via
+  [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md)
+  and a live
+  [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
+  form. Its `update_*()` / scroll / sidebar controls moved next to the
+  components they drive — previously they sat in a card at the foot of
+  the page and appeared to do nothing, because the component they
+  changed was scrolled far out of view.
+
+- **Bookmarking:** `shad_input_otp(value=)` now seeds and restores its
+  code.
+
+- `jsonlite` moves to Imports (used by the data table and theming).
 
 - **Bookmarking support:** every stateful input now seeds its initial
   value from

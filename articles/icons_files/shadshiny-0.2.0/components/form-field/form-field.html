@@ -1,0 +1,27 @@
+<!-- FILE: inst/assets/components/form-field/form-field.html -->
+<div class="shad-form-field" data-shad="form-field" style="max-width: 20rem;">
+  <label class="shad-label">Username</label>
+  <input class="shad-input" type="text" placeholder="shadcn" />
+  <p class="shad-form-field__description">This is your public display name.</p>
+  <p class="shad-form-field__error" hidden></p>
+</div>
+
+<!-- invalid state (error visible at load) -->
+<div class="shad-form-field" data-shad="form-field" style="max-width: 20rem;">
+  <label class="shad-label">Email</label>
+  <input class="shad-input" type="email" value="not-an-email" />
+  <p class="shad-form-field__description">We never share your email.</p>
+  <p class="shad-form-field__error">Please enter a valid email address.</p>
+</div>
+
+<!-- wrapping a shad component (switch) -->
+<div class="shad-form-field" data-shad="form-field">
+  <div class="shad-switch-row">
+    <button type="button" class="shad-switch" data-shad="switch" role="switch" data-state="unchecked">
+      <span class="shad-switch__thumb" aria-hidden="true"></span>
+    </button>
+    <label class="shad-label">Marketing emails</label>
+  </div>
+  <p class="shad-form-field__description">Receive emails about new products.</p>
+  <p class="shad-form-field__error" hidden></p>
+</div>

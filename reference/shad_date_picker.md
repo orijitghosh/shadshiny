@@ -16,6 +16,7 @@ shad_date_picker(
   placeholder = "Pick a date",
   min = NULL,
   max = NULL,
+  presets = NULL,
   disabled = FALSE,
   width = NULL,
   class = NULL,
@@ -51,6 +52,16 @@ shad_date_picker(
 
   Selectable bounds (inclusive), `Date`/character.
 
+- presets:
+
+  Optional quick-range rail, only valid with `mode = "range"`. A named
+  list; names are the button labels and each value is either a keyword
+  (`"today"`, `"yesterday"`, `"this-week"`, `"this-month"`,
+  `"last-month"`, `"this-year"`), an integer `N` meaning the last `N`
+  days, or a length-2 `Date` vector giving an explicit start and end.
+  [`shad_date_presets()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_presets.md)
+  returns a ready-made set.
+
 - disabled:
 
   If `TRUE`, disables the control.
@@ -77,6 +88,7 @@ Other shadshiny tier-2 components:
 [`shad_calendar()`](https://orijitghosh.github.io/shadshiny/reference/shad_calendar.md),
 [`shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/shad_checkbox.md),
 [`shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/shad_combobox.md),
+[`shad_date_presets()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_presets.md),
 [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md),
 [`shad_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_input.md),
 [`shad_input_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md),

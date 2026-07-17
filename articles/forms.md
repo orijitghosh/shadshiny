@@ -80,6 +80,123 @@ server <- function(input, output, session) {
 > `` `%||%` <- function(a, b) if (is.null(a)) b else a `` or import it
 > from rlang.
 
+## The validator
+
+Hand-rolling that per field gets old fast.
+[`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
+does the same thing declaratively: you register rules per input, and it
+drives the field’s `aria-invalid` state and inline error text for you —
+no `error =` slot or
+[`textOutput()`](https://rdrr.io/pkg/shiny/man/textOutput.html) needed
+in the UI.
+
+``` r
+
+ui <- page_shad(
+  shad_input("email", label = "Email", type = "email"),
+  shad_input("pw", label = "Password", type = "password"),
+  shad_button("submit", "Sign up")
+)
+
+server <- function(input, output, session) {
+  sv <- shad_validator()
+  sv$add_rule("email", shad_rule_required())
+  sv$add_rule("email", shad_rule_email())
+  sv$add_rule("pw", shad_rule_min_chars(8))
+  sv$enable()
+
+  observeEvent(input$submit, {
+    if (sv$validate()) shad_toast_success(paste("Welcome,", input$email))
+  })
+}
+```
+
+`enable()` starts live validation: errors appear as the user changes a
+field. [`validate()`](https://rdrr.io/pkg/shiny/man/validate.html) runs
+a full pass — it shows *every* error and returns a logical, which is
+what you want in a submit handler, since a field the user never touched
+has never been checked.
+
+### The rules
+
+| Rule | Fails when |
+|----|----|
+| `shad_rule_required(message)` | Value is empty, `NULL`, `""`, or an unchecked checkbox/switch. |
+| `shad_rule_email(message)` | Not a plausible email address. |
+| `shad_rule_min_chars(n, message)` | Shorter than `n`. |
+| `shad_rule_max_chars(n, message)` | Longer than `n`. |
+| `shad_rule_range(min, max, message)` | Not numeric, or outside `[min, max]`. |
+| `shad_rule_regex(pattern, message)` | `pattern` doesn’t match. |
+| `shad_rule_in(choices, message)` | Any value is outside `choices`. |
+| `shad_rule_fn(fn)` | Your own `function(value)` returning an error string, or `NULL` to pass. |
+
+Every rule takes a `message` you can override. Rules for one field run
+in the order you added them and the first failure wins, so put
+[`shad_rule_required()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md)
+first — every other rule passes an empty value on purpose, leaving “is
+this mandatory?” as a separate decision.
+
+``` r
+
+sv$add_rule("username", shad_rule_required())
+sv$add_rule("username", shad_rule_regex("^[a-z0-9_]+$",
+                                        "Lowercase, digits, and _ only."))
+sv$add_rule("username", shad_rule_fn(function(value) {
+  if (value %in% taken_usernames) "That username is taken." else NULL
+}))
+```
+
+### The rest of the object
+
+| Method | Does |
+|----|----|
+| `add_rule(inputId, rule, label)` | Register a rule. Chainable. |
+| `enable()` / `disable()` | Start / stop live validation (`disable()` clears the messages). |
+| `is_valid()` | Reactive logical: do all rules currently pass? |
+| [`validate()`](https://rdrr.io/pkg/shiny/man/validate.html) | Imperative full pass; shows every error, returns a logical. |
+| `fields()` | The registered input ids. |
+| `bind_submit(buttonId)` | Keep a [`shad_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_button.md) disabled while the form is invalid. |
+| `bind_summary(id)` | Render a [`shad_form_summary()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_summary.md) of the outstanding errors. |
+
+``` r
+
+ui <- page_shad(
+  shad_input("email", label = "Email", type = "email"),
+  uiOutput("errors"),
+  shad_button("submit", "Sign up")
+)
+
+server <- function(input, output, session) {
+  sv <- shad_validator()
+  sv$add_rule("email", shad_rule_required(), label = "Email")
+  sv$add_rule("email", shad_rule_email())
+  sv$bind_submit("submit")     # button greys out until valid
+  sv$bind_summary("errors")    # error list renders here on validate()
+  sv$enable()
+}
+```
+
+`label =` is the human name used in the summary; without it the summary
+falls back to the input id.
+
+### Standalone messages
+
+The pieces the validator drives are also plain components, for when you
+want one without the machinery:
+
+``` r
+
+shad_form_message("We'll never share this.", type = "info")
+shad_form_message("Username is taken.", type = "error")
+shad_form_counter(nchar(input$bio %||% ""), 280)   # a 42/280 counter chip
+```
+
+### Base `validate()` / `need()`
+
+Still fine, and still the right tool for *outputs* —
+[`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
+is about inputs. The two coexist.
+
 ## Gating submission
 
 Use [`shiny::req()`](https://rdrr.io/pkg/shiny/man/req.html) to hold
@@ -163,6 +280,14 @@ ui <- page_shad(
 )
 
 server <- function(input, output, session) {
+  sv <- shad_validator()
+  sv$add_rule("email", shad_rule_required(), label = "Email")
+  sv$add_rule("email", shad_rule_email())
+  sv$add_rule("pw", shad_rule_required(), label = "Password")
+  sv$add_rule("pw", shad_rule_min_chars(8))
+  sv$add_rule("tos", shad_rule_required("Accept the terms to continue."))
+  sv$enable()
+
   observeEvent(input$reset, {
     updateTextInput(session, "email", value = "")
     updateTextInput(session, "pw", value = "")
@@ -171,12 +296,7 @@ server <- function(input, output, session) {
   })
 
   observeEvent(input$submit, {
-    ok_email <- grepl("^[^@ ]+@[^@ ]+\\.[^@ ]+$", input$email %||% "")
-    ok_pw    <- nchar(input$pw %||% "") >= 8
-    if (!ok_email)          shad_toast_error("Enter a valid email.")
-    else if (!ok_pw)        shad_toast_error("Password too short.")
-    else if (!isTRUE(input$tos)) shad_toast_error("Accept the terms to continue.")
-    else                    shad_toast_success(paste("Welcome,", input$email))
+    if (sv$validate()) shad_toast_success(paste("Welcome,", input$email))
   })
 }
 

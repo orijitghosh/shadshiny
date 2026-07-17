@@ -1,0 +1,68 @@
+/* FILE: inst/assets/components/table/table.css */
+/* shadshiny — table. Options: striped, hover, sticky header. */
+
+.shad-table-container {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  border-radius: var(--shad-radius-md);
+}
+.shad-table {
+  width: 100%;
+  caption-side: bottom;
+  border-collapse: collapse;
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-foreground);
+}
+.shad-table__caption {
+  margin-top: var(--shad-space-4);
+  color: var(--shad-muted-foreground);
+  text-align: inherit;
+}
+.shad-table__header .shad-table__row { border-bottom: 1px solid var(--shad-border); }
+.shad-table__head {
+  height: 2.5rem;
+  padding: 0 var(--shad-space-2);
+  text-align: left;
+  vertical-align: middle;
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-muted-foreground);
+  white-space: nowrap;
+}
+.shad-table__body .shad-table__row {
+  border-bottom: 1px solid var(--shad-border);
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-table__body .shad-table__row:last-child { border-bottom: 0; }
+.shad-table__cell {
+  padding: var(--shad-space-2);
+  vertical-align: middle;
+}
+.shad-table__row[data-state="selected"] {
+  background-color: var(--shad-muted);
+}
+.shad-table__footer {
+  border-top: 1px solid var(--shad-border);
+  background-color: color-mix(in oklab, var(--shad-muted) 50%, transparent);
+  font-weight: var(--shad-font-weight-medium);
+}
+.shad-table__footer .shad-table__row:last-child { border-bottom: 0; }
+
+/* option: hover rows */
+.shad-table--hover .shad-table__body .shad-table__row:hover {
+  background-color: color-mix(in oklab, var(--shad-muted) 50%, transparent);
+}
+/* option: striped */
+.shad-table--striped .shad-table__body .shad-table__row:nth-child(even) {
+  background-color: color-mix(in oklab, var(--shad-muted) 50%, transparent);
+}
+/* option: sticky header (container must set a max-height) */
+.shad-table--sticky .shad-table__header .shad-table__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--shad-background);
+  box-shadow: inset 0 -1px 0 var(--shad-border);
+}

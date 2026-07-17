@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- FILE: inst/assets/components/empty/empty.html -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — empty</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="../button/button.css">
+<link rel="stylesheet" href="empty.css">
+<style>
+  html { background: var(--shad-background); }
+  body { margin: 0; }
+  .demo { padding: 2rem; max-width: 640px; display: grid; gap: 2.5rem; }
+  .demo-toolbar { display: flex; gap: .5rem; }
+  .demo-toolbar button { font: 500 .75rem/1 var(--shad-font-mono); padding: .375rem .625rem; border: 1px solid var(--shad-border); border-radius: .375rem; background: var(--shad-background); color: var(--shad-foreground); cursor: pointer; }
+  .demo-label { font: 500 .6875rem/1 var(--shad-font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--shad-muted-foreground); margin: 0 0 .75rem; }
+  .demo-frame { border: 1px dashed var(--shad-border); border-radius: var(--shad-radius-lg); display: flex; min-height: 300px; }
+</style>
+</head>
+<body class="shad-scope">
+<div class="demo">
+  <div class="demo-toolbar">
+    <button type="button" onclick="document.documentElement.classList.toggle('dark')">toggle dark</button>
+    <button type="button" onclick="var h=document.documentElement;h.dir=h.dir==='rtl'?'ltr':'rtl'">toggle rtl</button>
+  </div>
+
+  <section>
+    <p class="demo-label">icon media + actions</p>
+    <div class="demo-frame">
+      <div class="shad-empty">
+        <div class="shad-empty__header">
+          <div class="shad-empty__media shad-empty__media--icon" aria-hidden="true">
+            <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+          </div>
+          <div class="shad-empty__title">No projects yet</div>
+          <div class="shad-empty__description">You haven&rsquo;t created any projects. Get started by creating your first project.</div>
+        </div>
+        <div class="shad-empty__content">
+          <button type="button" class="shad-btn shad-btn--default">Create project</button>
+          <button type="button" class="shad-btn shad-btn--link">Import from folder</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="demo-label">default media (avatar) + link in description</p>
+    <div class="demo-frame">
+      <div class="shad-empty">
+        <div class="shad-empty__header">
+          <div class="shad-empty__media shad-empty__media--default" aria-hidden="true">
+            <svg class="shad-icon shad-icon--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <div class="shad-empty__title">No results found</div>
+          <div class="shad-empty__description">Try a different search term, or <a href="#">browse all datasets</a> instead.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

@@ -262,6 +262,18 @@ Update bound component values from the server.
   [`update_shad_progress()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_button()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   : Update bound component values from the server
+- [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md)
+  : Update a data table from the server
+- [`update_shad_stepper()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_stepper.md)
+  : Update a stepper from the server
+- [`update_shad_tree()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_tree.md)
+  : Update a tree from the server
+- [`update_shad_rating()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_rating.md)
+  : Update a rating from the server
+- [`update_shad_number_input()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_number_input.md)
+  : Update a number input from the server
+- [`update_shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_form_field.md)
+  : Set or clear a field's error state from the server
 
 ## Server — overlays & toast
 
@@ -290,12 +302,130 @@ Open/close overlays and raise toast notifications from the server.
   [`shad_toast_dismiss()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
   : Show a toast notification
 
+## Data table
+
+A full-featured, client-side data table with sorting, filtering, paging,
+and selection.
+
+- [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
+  : Interactive data table
+
+- [`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md)
+  :
+
+  Column specification for
+  [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
+
+- [`shad_fmt_number()`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md)
+  [`shad_fmt_percent()`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md)
+  [`shad_fmt_date()`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md)
+  [`shad_fmt_badge()`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md)
+  :
+
+  Cell formatters for
+  [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
+
+- [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md)
+  : Update a data table from the server
+
+## Dashboard & charts
+
+KPI cards, chart wrappers, timelines, and plot theming.
+
+- [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
+  : KPI / value box
+- [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md)
+  : Chart container
+- [`shad_timeline()`](https://orijitghosh.github.io/shadshiny/reference/shad_timeline.md)
+  : Timeline
+- [`shad_timeline_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_timeline_item.md)
+  : Timeline item
+- [`shad_theme_ggplot2()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md)
+  [`shad_scale_color_shad()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md)
+  [`shad_scale_fill_shad()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md)
+  : ggplot2 theme matching the shadshiny design system
+- [`shad_theme_plotly()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_plotly.md)
+  : Apply the shadshiny theme to a plotly chart
+- [`shad_theme_echarts4r()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_echarts4r.md)
+  : Apply the shadshiny theme to an echarts4r chart
+- [`shad_tokens()`](https://orijitghosh.github.io/shadshiny/reference/shad_tokens.md)
+  : Resolve theme tokens
+- [`shad_chart_colors()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_colors.md)
+  : Chart series colors
+- [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md)
+  : The active shadshiny theme (reactive)
+
+## Flow & input components
+
+Stepper, tree, rating, number input, and file dropzone.
+
+- [`shad_stepper()`](https://orijitghosh.github.io/shadshiny/reference/shad_stepper.md)
+  : Stepper
+- [`shad_step()`](https://orijitghosh.github.io/shadshiny/reference/shad_step.md)
+  : A stepper step
+- [`shad_tree()`](https://orijitghosh.github.io/shadshiny/reference/shad_tree.md)
+  : Tree view
+- [`shad_tree_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_tree_item.md)
+  : Tree item
+- [`shad_rating()`](https://orijitghosh.github.io/shadshiny/reference/shad_rating.md)
+  : Star rating
+- [`shad_number_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_number_input.md)
+  : Number input with stepper buttons
+- [`shad_dropzone()`](https://orijitghosh.github.io/shadshiny/reference/shad_dropzone.md)
+  : File dropzone
+- [`shad_date_presets()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_presets.md)
+  : Default date-range presets
+
+## Forms & validation
+
+A server-side validator with shadcn-styled field messaging.
+
+- [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
+  : Form validator
+- [`shad_rule_required()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md)
+  [`shad_rule_email()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md)
+  [`shad_rule_min_chars()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md)
+  [`shad_rule_max_chars()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md)
+  [`shad_rule_range()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md)
+  [`shad_rule_regex()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md)
+  [`shad_rule_in()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md)
+  [`shad_rule_fn()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md)
+  : Validation rules
+- [`shad_form_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_message.md)
+  : Form validation message
+- [`shad_form_counter()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_counter.md)
+  : Character counter message
+- [`shad_form_summary()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_summary.md)
+  : Form error summary
+
+## Custom theming
+
+Build, import, and switch custom themes.
+
+- [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
+  : Define a custom theme
+- [`shad_theme_scope()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_scope.md)
+  : Scope a custom theme to a subtree
+- [`shad_theme_from_registry()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_from_registry.md)
+  : Import a theme from a shadcn / tweakcn registry export
+
+## Chat
+
+A streaming chat module built on the chat kit.
+
+- [`shad_chat_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_ui.md)
+  : Chat UI
+- [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md)
+  : Chat server
+
 ## Utilities
 
 Icons and the asset dependency.
 
 - [`shad_icon()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon.md)
   : Inline Lucide icon
+- [`shad_icon_raw()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon_raw.md)
+  : Use an arbitrary SVG as a shadshiny icon
 - [`shad_icon_names()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon_names.md)
   : Available shadshiny icon names
 - [`shadshiny_deps()`](https://orijitghosh.github.io/shadshiny/reference/shadshiny_deps.md)

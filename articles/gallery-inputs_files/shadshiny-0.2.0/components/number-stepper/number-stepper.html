@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- FILE: inst/assets/components/number-stepper/number-stepper.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — number-stepper</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="../input/input.css">
+<link rel="stylesheet" href="../input-group/input-group.css">
+<link rel="stylesheet" href="number-stepper.css">
+<style>body { margin: 2rem; background: var(--shad-background); font-family: var(--shad-font-sans); color: var(--shad-foreground); } .demo { max-width: 30rem; margin: 0 auto 2rem; display: flex; align-items: center; gap: 1rem; } .demo h2 { font-size: var(--shad-text-sm); width: 13rem; margin: 0; color: var(--shad-muted-foreground); font-weight: 500; }</style>
+</head>
+<body>
+<div class="demo">
+  <h2>Basic (0–10)</h2>
+  <div id="ns1" data-shad="number-stepper" class="shad-input-group shad-number-stepper" data-min="0" data-max="10">
+    <input class="shad-input" type="text" inputmode="decimal" value="2" aria-label="Quantity">
+    <button type="button" class="shad-number-stepper__btn shad-number-stepper__btn--dec" aria-label="Decrease"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+    <button type="button" class="shad-number-stepper__btn shad-number-stepper__btn--inc" aria-label="Increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+  </div>
+</div>
+<div class="demo">
+  <h2>Decimal step 0.25, hold to repeat</h2>
+  <div data-shad="number-stepper" class="shad-input-group shad-number-stepper" data-min="0" data-max="5" data-step="0.25">
+    <input class="shad-input" type="text" inputmode="decimal" value="1.5" aria-label="Dose (mg)">
+    <button type="button" class="shad-number-stepper__btn shad-number-stepper__btn--dec" aria-label="Decrease"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+    <button type="button" class="shad-number-stepper__btn shad-number-stepper__btn--inc" aria-label="Increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+  </div>
+</div>
+<div class="demo">
+  <h2>Unbounded, step 100 (Shift = ×10)</h2>
+  <div data-shad="number-stepper" class="shad-input-group shad-number-stepper" data-step="100" style="width: 10rem;">
+    <input class="shad-input" type="text" inputmode="decimal" value="1000" aria-label="Budget">
+    <button type="button" class="shad-number-stepper__btn shad-number-stepper__btn--dec" aria-label="Decrease"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+    <button type="button" class="shad-number-stepper__btn shad-number-stepper__btn--inc" aria-label="Increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+  </div>
+</div>
+
+<script src="../../core/shad-runtime.js"></script>
+<script src="number-stepper.js"></script>
+<script>
+shad.autoInit();
+document.getElementById("ns1").addEventListener("shad:change", function (e) { console.log("value:", e.detail.value); });
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- FILE: inst/assets/components/value-box/value-box.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — value-box</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="value-box.css">
+<style>body { margin: 2rem; background: var(--shad-background); } .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; max-width: 64rem; margin: 0 auto 2rem; }</style>
+</head>
+<body>
+<div class="grid">
+  <div class="shad-value-box">
+    <div class="shad-value-box__label">Total revenue</div>
+    <span class="shad-value-box__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+    <div class="shad-value-box__value">$45,231.89
+      <span class="shad-value-box__delta" data-trend="up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>+20.1%</span>
+    </div>
+    <div class="shad-value-box__caption">vs. last month</div>
+  </div>
+
+  <div class="shad-value-box">
+    <div class="shad-value-box__label">Active users</div>
+    <div class="shad-value-box__value">2,350
+      <span class="shad-value-box__delta" data-trend="down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M7 17h10V7"/></svg>−4.3%</span>
+    </div>
+    <div class="shad-value-box__caption">vs. last week</div>
+    <div class="shad-value-box__sparkline">
+      <svg viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,22 12,18 25,20 38,12 50,15 62,9 75,13 88,6 100,10" fill="none" stroke="var(--shad-chart-1)" stroke-width="1.5"/></svg>
+    </div>
+  </div>
+
+  <a class="shad-value-box" href="#details">
+    <div class="shad-value-box__label">Open tickets (link variant)</div>
+    <div class="shad-value-box__value">17
+      <span class="shad-value-box__delta" data-trend="neutral">±0</span>
+    </div>
+    <div class="shad-value-box__caption">Click through to the queue</div>
+  </a>
+</div>
+
+<div class="grid">
+  <div class="shad-value-box shad-value-box--sm">
+    <div class="shad-value-box__label">Small</div>
+    <div class="shad-value-box__value">98.2%</div>
+  </div>
+  <div class="shad-value-box shad-value-box--lg">
+    <div class="shad-value-box__label">Large</div>
+    <div class="shad-value-box__value">$1.2M
+      <span class="shad-value-box__delta" data-trend="up">+8%</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

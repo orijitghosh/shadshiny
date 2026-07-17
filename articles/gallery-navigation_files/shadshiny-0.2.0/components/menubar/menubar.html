@@ -1,0 +1,42 @@
+<!-- FILE: inst/assets/components/menubar/menubar.html -->
+<div class="shad-menubar" data-shad="menubar">
+  <div data-shad-menubar-menu>
+    <button type="button" class="shad-menubar__trigger">File</button>
+    <div class="shad-menu__content shad-anim-pop" hidden>
+      <button type="button" class="shad-menu__item" data-value="new-tab">New tab <span class="shad-menu__shortcut">⌘T</span></button>
+      <button type="button" class="shad-menu__item" data-value="new-window">New window <span class="shad-menu__shortcut">⌘N</span></button>
+      <div class="shad-menu__separator"></div>
+      <div data-shad-submenu>
+        <button type="button" class="shad-menu__item" data-shad-submenu-trigger aria-haspopup="menu" aria-expanded="false" data-state="closed">
+          Share
+          <svg class="shad-menu__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <div class="shad-menu__content shad-anim-pop" hidden>
+          <button type="button" class="shad-menu__item" data-value="share-email">Email link</button>
+          <button type="button" class="shad-menu__item" data-value="share-messages">Messages</button>
+        </div>
+      </div>
+      <div class="shad-menu__separator"></div>
+      <button type="button" class="shad-menu__item" data-value="print">Print… <span class="shad-menu__shortcut">⌘P</span></button>
+    </div>
+  </div>
+  <div data-shad-menubar-menu>
+    <button type="button" class="shad-menubar__trigger">Edit</button>
+    <div class="shad-menu__content shad-anim-pop" hidden>
+      <button type="button" class="shad-menu__item" data-value="undo">Undo <span class="shad-menu__shortcut">⌘Z</span></button>
+      <button type="button" class="shad-menu__item" data-value="redo">Redo <span class="shad-menu__shortcut">⇧⌘Z</span></button>
+    </div>
+  </div>
+  <div data-shad-menubar-menu>
+    <button type="button" class="shad-menubar__trigger">View</button>
+    <div class="shad-menu__content shad-anim-pop" hidden>
+      <button type="button" class="shad-menu__item" data-type="checkbox" data-state="checked" data-value="show-toolbar">
+        <span class="shad-menu__indicator">
+          <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
+        Show toolbar
+      </button>
+      <button type="button" class="shad-menu__item" data-value="reload">Reload <span class="shad-menu__shortcut">⌘R</span></button>
+    </div>
+  </div>
+</div>

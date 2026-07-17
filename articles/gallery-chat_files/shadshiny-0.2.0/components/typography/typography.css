@@ -1,0 +1,8 @@
+/* FILE: inst/assets/components/typography/typography.css */
+/* shadshiny — typography.
+   DECISION: the actual rules live in core/shad-base.css (they are base-layer
+   utilities loaded on every page). This file exists so the per-component
+   file layout stays uniform for the downstream agent; it intentionally
+   contains no duplicate rules. Classes provided by shad-base.css:
+   .shad-h1 .shad-h2 .shad-h3 .shad-h4 .shad-p .shad-lead .shad-large
+   .shad-small .shad-muted .shad-blockquote .shad-code .shad-kbd .shad-list */

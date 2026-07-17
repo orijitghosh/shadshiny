@@ -1,0 +1,65 @@
+<!-- FILE: inst/assets/components/sidebar/sidebar.html -->
+<div class="shad-sidebar-layout" data-shad="sidebar" style="height:24rem;border:1px solid var(--shad-border);border-radius:var(--shad-radius-lg);overflow:hidden">
+  <div class="shad-sidebar__overlay" hidden></div>
+  <aside class="shad-sidebar" aria-label="Sidebar">
+    <div class="shad-sidebar__header">
+      <div style="display:flex;align-items:center;gap:0.5rem;padding:0.25rem 0.5rem">
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+        <span class="shad-sidebar__label" style="font-weight:var(--shad-font-weight-semibold);font-size:var(--shad-text-sm)">Acme Inc</span>
+      </div>
+    </div>
+    <div class="shad-sidebar__content">
+      <div class="shad-sidebar__group">
+        <div class="shad-sidebar__group-label">Platform</div>
+        <ul class="shad-sidebar__menu">
+          <li>
+            <button type="button" class="shad-sidebar__item" data-value="home" data-state="active">
+              <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              <span class="shad-sidebar__label">Home</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="shad-sidebar__item" data-value="inbox">
+              <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+              <span class="shad-sidebar__label">Inbox</span>
+              <span class="shad-sidebar__badge">24</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="shad-sidebar__item" data-value="settings">
+              <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span class="shad-sidebar__label">Settings</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="shad-sidebar__separator"></div>
+      <div class="shad-sidebar__group">
+        <div class="shad-sidebar__group-label">Projects</div>
+        <ul class="shad-sidebar__menu">
+          <li>
+            <button type="button" class="shad-sidebar__item" data-value="design">
+              <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+              <span class="shad-sidebar__label">Design Engineering</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="shad-sidebar__footer">
+      <button type="button" class="shad-sidebar__item" data-value="account">
+        <div class="shad-avatar shad-avatar--sm"><div class="shad-avatar__fallback">SC</div></div>
+        <span class="shad-sidebar__label">shadcn</span>
+      </button>
+    </div>
+  </aside>
+  <main class="shad-sidebar-layout__main">
+    <div style="display:flex;align-items:center;gap:0.5rem;padding:0.75rem;border-bottom:1px solid var(--shad-border)">
+      <button type="button" class="shad-sidebar__trigger">
+        <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+      </button>
+      <span class="shad-small">Dashboard</span>
+    </div>
+    <div style="padding:1rem" class="shad-muted">Main content. Toggle with the button or ⌘/Ctrl+B. Resize below 768px for the mobile sheet.</div>
+  </main>
+</div>

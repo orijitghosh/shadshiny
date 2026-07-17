@@ -1,0 +1,56 @@
+/* FILE: inst/assets/components/accordion/accordion.css */
+/* shadshiny — accordion. Height animation via --shad-collapsible-height. */
+
+.shad-accordion {
+  font-family: var(--shad-font-sans);
+  width: 100%;
+}
+.shad-accordion__item {
+  border-bottom: 1px solid var(--shad-border);
+}
+.shad-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--shad-space-4);
+  width: 100%;
+  padding: var(--shad-space-4) 0;
+  border: 0;
+  background: transparent;
+  font-size: var(--shad-text-sm);
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-foreground);
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  border-radius: var(--shad-radius-md);
+}
+.shad-accordion__trigger:hover { text-decoration: underline; }
+.shad-accordion__trigger:focus-visible {
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-accordion__chevron {
+  width: 1rem;
+  height: 1rem;
+  color: var(--shad-muted-foreground);
+  transition: transform var(--shad-duration-normal) var(--shad-ease-out);
+  flex-shrink: 0;
+}
+.shad-accordion__trigger[data-state="open"] .shad-accordion__chevron {
+  transform: rotate(180deg);
+}
+.shad-accordion__content {
+  overflow: hidden;
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-foreground);
+}
+.shad-accordion__content[data-state="open"] {
+  animation: shad-collapse-down var(--shad-duration-normal) var(--shad-ease-out);
+}
+.shad-accordion__content[data-state="closed"] {
+  animation: shad-collapse-up var(--shad-duration-normal) var(--shad-ease-out) forwards;
+}
+.shad-accordion__content-inner {
+  padding-bottom: var(--shad-space-4);
+}

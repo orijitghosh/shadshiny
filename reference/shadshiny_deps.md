@@ -23,6 +23,7 @@ carrying the html dependency.
 Other shadshiny utilities:
 [`shad_icon()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon.md),
 [`shad_icon_names()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon_names.md),
+[`shad_icon_raw()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon_raw.md),
 [`shad_run_example()`](https://orijitghosh.github.io/shadshiny/reference/shad_run_example.md)
 
 ## Examples

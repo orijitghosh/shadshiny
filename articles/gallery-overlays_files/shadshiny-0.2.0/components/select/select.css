@@ -1,0 +1,129 @@
+/* FILE: inst/assets/components/select/select.css */
+/* shadshiny — select. Custom listbox panel with groups, scroll buttons. */
+
+.shad-select { display: inline-block; position: relative; }
+
+.shad-select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--shad-space-2);
+  width: 100%;
+  min-width: 8rem;
+  height: 2.25rem;
+  padding: 0 var(--shad-space-3);
+  border: 1px solid var(--shad-input);
+  border-radius: var(--shad-radius-md);
+  background-color: transparent;
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-foreground);
+  box-shadow: var(--shad-shadow-xs);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-select__trigger:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-select__trigger[data-disabled],
+.shad-select__trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.shad-select__trigger[data-placeholder] .shad-select__value {
+  color: var(--shad-muted-foreground);
+}
+.shad-select__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  flex: 1;
+}
+.shad-select__chevron {
+  color: var(--shad-muted-foreground);
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* panel */
+.shad-select__content {
+  position: fixed;
+  z-index: 1100;
+  min-width: 8rem;
+  max-height: min(24rem, var(--shad-available-height, 24rem));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  background-color: var(--shad-popover);
+  color: var(--shad-popover-foreground);
+  box-shadow: var(--shad-shadow-md);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+}
+.shad-select__viewport {
+  overflow-y: auto;
+  padding: var(--shad-space-1);
+  flex: 1;
+  scrollbar-width: thin;
+}
+.shad-select__scroll-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  flex-shrink: 0;
+  cursor: default;
+  color: var(--shad-muted-foreground);
+  background: var(--shad-popover);
+}
+.shad-select__scroll-btn[hidden] { display: none; }
+
+.shad-select__group-label {
+  padding: var(--shad-space-1_5) var(--shad-space-2);
+  font-size: var(--shad-text-xs);
+  color: var(--shad-muted-foreground);
+}
+.shad-select__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  width: 100%;
+  padding: var(--shad-space-1_5) var(--shad-space-2);
+  padding-right: 2rem;
+  border-radius: var(--shad-radius-sm);
+  cursor: default;
+  user-select: none;
+  outline: none;
+}
+.shad-select__item[data-highlighted] {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-select__item[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.shad-select__item-check {
+  position: absolute;
+  right: var(--shad-space-2);
+  display: none;
+  width: 1rem;
+  height: 1rem;
+}
+.shad-select__item[data-state="checked"] .shad-select__item-check { display: block; }
+.shad-select__separator {
+  height: 1px;
+  margin: var(--shad-space-1) calc(-1 * var(--shad-space-1));
+  background-color: var(--shad-border);
+}

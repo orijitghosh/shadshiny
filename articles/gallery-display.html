@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Gallery: display &amp; typography • shadshiny</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -24,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +47,9 @@
     <li><a class="dropdown-item" href="../articles/shadshiny.html">Get started</a></li>
     <li><a class="dropdown-item" href="../articles/theming.html">Theming</a></li>
     <li><a class="dropdown-item" href="../articles/forms.html">Forms &amp; validation</a></li>
+    <li><a class="dropdown-item" href="../articles/data-tables.html">Data tables</a></li>
+    <li><a class="dropdown-item" href="../articles/charts.html">Dashboards &amp; charts</a></li>
+    <li><a class="dropdown-item" href="../articles/chat.html">Streaming chat</a></li>
     <li><a class="dropdown-item" href="../articles/layout.html">Layout &amp; composition</a></li>
     <li><a class="dropdown-item" href="../articles/server-api.html">The server API</a></li>
     <li><a class="dropdown-item" href="../articles/overlays-and-server.html">Overlays &amp; the server</a></li>
@@ -73,69 +81,80 @@
 
 
 
-<link href="gallery-display_files/shadshiny-0.1.0/tokens/shad-tokens.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/core/shad-base.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/core/shad-animations.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/dropdown-menu/dropdown-menu.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/accordion/accordion.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/alert/alert.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/alert-dialog/alert-dialog.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/aspect-ratio/aspect-ratio.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/attachment/attachment.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/avatar/avatar.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/badge/badge.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/breadcrumb/breadcrumb.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/bubble/bubble.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/button/button.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/button-group/button-group.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/calendar/calendar.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/card/card.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/carousel/carousel.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/checkbox/checkbox.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/collapsible/collapsible.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/combobox/combobox.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/command/command.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/context-menu/context-menu.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/date-picker/date-picker.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/dialog/dialog.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/drawer/drawer.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/empty/empty.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/form-field/form-field.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/hover-card/hover-card.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/input/input.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/input-group/input-group.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/input-otp/input-otp.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/item/item.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/label/label.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/marker/marker.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/menubar/menubar.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/message/message.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/message-scroller/message-scroller.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/native-select/native-select.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/navigation-menu/navigation-menu.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/pagination/pagination.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/popover/popover.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/progress/progress.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/radio-group/radio-group.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/resizable/resizable.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/scroll-area/scroll-area.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/select/select.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/separator/separator.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/sheet/sheet.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/sidebar/sidebar.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/skeleton/skeleton.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/slider/slider.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/spinner/spinner.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/switch/switch.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/table/table.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/tabs/tabs.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/textarea/textarea.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/toast/toast.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/toggle/toggle.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/toggle-group/toggle-group.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/tooltip/tooltip.css" rel="stylesheet">
-<link href="gallery-display_files/shadshiny-0.1.0/components/typography/typography.css" rel="stylesheet">
-<script src="gallery-display_files/shadshiny-0.1.0/core/shad-runtime.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/dialog/dialog.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/alert-dialog/alert-dialog.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/dropdown-menu/dropdown-menu.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/accordion/accordion.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/calendar/calendar.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/carousel/carousel.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/checkbox/checkbox.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/collapsible/collapsible.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/combobox/combobox.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/command/command.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/context-menu/context-menu.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/date-picker/date-picker.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/drawer/drawer.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/form-field/form-field.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/hover-card/hover-card.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/input-otp/input-otp.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/menubar/menubar.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/message-scroller/message-scroller.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/native-select/native-select.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/navigation-menu/navigation-menu.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/pagination/pagination.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/popover/popover.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/radio-group/radio-group.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/resizable/resizable.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/scroll-area/scroll-area.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/select/select.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/sheet/sheet.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/sidebar/sidebar.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/slider/slider.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/switch/switch.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/tabs/tabs.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/textarea/textarea.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/toast/toast.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/toggle/toggle.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/toggle-group/toggle-group.js"></script><script src="gallery-display_files/shadshiny-0.1.0/components/tooltip/tooltip.js"></script><script src="gallery-display_files/shadshiny-0.1.0/shiny/shadshiny-shiny.js"></script><div class="row">
+<link href="gallery-display_files/shadshiny-0.2.0/tokens/shad-tokens.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/core/shad-base.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/core/shad-animations.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/dropdown-menu/dropdown-menu.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/accordion/accordion.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/alert/alert.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/alert-dialog/alert-dialog.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/aspect-ratio/aspect-ratio.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/attachment/attachment.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/avatar/avatar.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/badge/badge.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/breadcrumb/breadcrumb.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/bubble/bubble.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/button/button.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/button-group/button-group.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/calendar/calendar.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/card/card.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/carousel/carousel.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/chart-container/chart-container.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/checkbox/checkbox.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/collapsible/collapsible.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/combobox/combobox.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/command/command.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/context-menu/context-menu.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/data-table/data-table.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/date-picker/date-picker.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/date-range-presets/date-range-presets.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/dialog/dialog.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/drawer/drawer.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/dropzone/dropzone.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/empty/empty.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/form-field/form-field.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/form-message/form-message.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/hover-card/hover-card.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/input/input.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/input-group/input-group.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/input-otp/input-otp.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/item/item.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/label/label.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/marker/marker.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/menubar/menubar.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/message/message.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/message-scroller/message-scroller.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/native-select/native-select.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/navigation-menu/navigation-menu.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/number-stepper/number-stepper.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/pagination/pagination.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/popover/popover.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/progress/progress.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/radio-group/radio-group.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/rating/rating.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/resizable/resizable.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/scroll-area/scroll-area.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/select/select.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/separator/separator.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/sheet/sheet.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/sidebar/sidebar.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/skeleton/skeleton.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/slider/slider.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/spinner/spinner.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/stepper/stepper.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/switch/switch.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/table/table.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/tabs/tabs.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/textarea/textarea.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/timeline/timeline.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/toast/toast.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/toggle/toggle.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/toggle-group/toggle-group.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/tooltip/tooltip.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/tree/tree.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/typography/typography.css" rel="stylesheet">
+<link href="gallery-display_files/shadshiny-0.2.0/components/value-box/value-box.css" rel="stylesheet">
+<script src="gallery-display_files/shadshiny-0.2.0/core/shad-runtime.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/dialog/dialog.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/alert-dialog/alert-dialog.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/dropdown-menu/dropdown-menu.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/accordion/accordion.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/calendar/calendar.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/carousel/carousel.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/checkbox/checkbox.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/collapsible/collapsible.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/combobox/combobox.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/command/command.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/context-menu/context-menu.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/data-table/data-table.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/date-picker/date-picker.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/date-range-presets/date-range-presets.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/drawer/drawer.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/dropzone/dropzone.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/form-field/form-field.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/hover-card/hover-card.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/input-otp/input-otp.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/menubar/menubar.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/message-scroller/message-scroller.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/native-select/native-select.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/navigation-menu/navigation-menu.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/number-stepper/number-stepper.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/pagination/pagination.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/popover/popover.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/radio-group/radio-group.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/rating/rating.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/resizable/resizable.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/scroll-area/scroll-area.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/select/select.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/sheet/sheet.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/sidebar/sidebar.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/slider/slider.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/stepper/stepper.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/switch/switch.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/tabs/tabs.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/textarea/textarea.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/toast/toast.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/toggle/toggle.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/toggle-group/toggle-group.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/tooltip/tooltip.js"></script><script src="gallery-display_files/shadshiny-0.2.0/components/tree/tree.js"></script><script src="gallery-display_files/shadshiny-0.2.0/shiny/shadshiny-shiny.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Gallery: display &amp; typography</h1>
             

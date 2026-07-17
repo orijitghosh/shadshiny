@@ -1,0 +1,156 @@
+## data-table
+
+## value-box
+
+Total revenue
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDF2MjJNMTcgNUg5LjVhMy41IDMuNSAwIDAgMCAwIDdoNWEzLjUgMy41IDAgMCAxIDAgN0g2IiAvPjwvc3ZnPg==)
+
+\$45,231.89 +20.1%
+
+vs. last month
+
+Active users
+
+2,350 −4.3%
+
+vs. last week
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMTAwIDMwIiBwcmVzZXJ2ZWFzcGVjdHJhdGlvPSJub25lIj48cG9seWxpbmUgcG9pbnRzPSIwLDIyIDEyLDE4IDI1LDIwIDM4LDEyIDUwLDE1IDYyLDkgNzUsMTMgODgsNiAxMDAsMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idmFyKC0tc2hhZC1jaGFydC0xKSIgc3Ryb2tlLXdpZHRoPSIxLjUiPjwvcG9seWxpbmU+PC9zdmc+)
+
+[](#c-value-box)
+
+Open tickets (link)
+
+17 ±0
+
+Click through to the queue
+
+## chart-container
+
+Monthly revenue
+
+January – June 2026
+
+Jan Feb Mar Apr May Jun
+
+Trending up 12% this quarter
+
+March 2026
+
+Revenue\$12,430
+
+Costs\$8,150
+
+## stepper
+
+1.  1![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zdGVwcGVyX19jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNNCAxMmw1IDVMMjAgNyIgcGF0aGxlbmd0aD0iMSIgLz48L3N2Zz4=)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zdGVwcGVyX194IiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik02IDZsMTIgMTJNMTggNkw2IDE4IiAvPjwvc3ZnPg==)
+    AccountEmail + password
+2.  2![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zdGVwcGVyX19jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNNCAxMmw1IDVMMjAgNyIgcGF0aGxlbmd0aD0iMSIgLz48L3N2Zz4=)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zdGVwcGVyX194IiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik02IDZsMTIgMTJNMTggNkw2IDE4IiAvPjwvc3ZnPg==)
+    ProfileName + avatar
+3.  3![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zdGVwcGVyX19jaGVjayIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNNCAxMmw1IDVMMjAgNyIgcGF0aGxlbmd0aD0iMSIgLz48L3N2Zz4=)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1zdGVwcGVyX194IiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik02IDZsMTIgMTJNMTggNkw2IDE4IiAvPjwvc3ZnPg==)
+    Review
+
+Step 1 — account form.
+
+Step 2 — profile form.
+
+Step 3 — review and submit.
+
+Back
+
+Next
+
+## timeline
+
+1.  
+    ![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTQgMTJsNSA1TDIwIDciIC8+PC9zdmc+)
+    Jul 10, 2026 · 09:14
+    Order placed
+
+    Order \#4213 confirmed and queued.
+2.  
+    ![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjkiPjwvY2lyY2xlPjxwYXRoIGQ9Ik0xMiA3djVsMyAzIiAvPjwvc3ZnPg==)
+    Jul 12, 2026 · 16:40
+    Shipped
+
+    Handed to carrier; ETA 3 days.
+3.  
+    Delivered
+
+## tree
+
+- ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC10cmVlX19jaGV2cm9uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik05IDZsNiA2LTYgNiIgLz48L3N2Zz4=)src
+
+  - ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC10cmVlX19jaGV2cm9uIHNoYWQtdHJlZV9fY2hldnJvbi0tbGVhZiIgdmlld2JveD0iMCAwIDI0IDI0IiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTkgNmw2IDYtNiA2IiAvPjwvc3ZnPg==)app.R
+
+  - ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC10cmVlX19jaGV2cm9uIHNoYWQtdHJlZV9fY2hldnJvbi0tbGVhZiIgdmlld2JveD0iMCAwIDI0IDI0IiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTkgNmw2IDYtNiA2IiAvPjwvc3ZnPg==)utils.R
+
+- ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC10cmVlX19jaGV2cm9uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik05IDZsNiA2LTYgNiIgLz48L3N2Zz4=)data
+  (lazy)
+
+- ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC10cmVlX19jaGV2cm9uIHNoYWQtdHJlZV9fY2hldnJvbi0tbGVhZiIgdmlld2JveD0iMCAwIDI0IDI0IiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTkgNmw2IDYtNiA2IiAvPjwvc3ZnPg==)README.md
+
+## rating
+
+## number-stepper
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTUgMTJoMTQiIC8+PC9zdmc+)
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTEyIDV2MTRNNSAxMmgxNCIgLz48L3N2Zz4=)
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTUgMTJoMTQiIC8+PC9zdmc+)
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTEyIDV2MTRNNSAxMmgxNCIgLz48L3N2Zz4=)
+
+## dropzone
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIxIDE1djRhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ2LTQiIC8+PHBhdGggZD0iTTE3IDhsLTUtNS01IDUiIC8+PHBhdGggZD0iTTEyIDN2MTIiIC8+PC9zdmc+)
+
+**Click to browse** or drag files here
+
+CSV up to 1 MB
+
+## date-range-presets
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHJlY3QgeD0iMyIgeT0iNCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIgLz48cGF0aCBkPSJNMTYgMnY0TTggMnY0TTMgMTBoMTgiIC8+PC9zdmc+)Pick
+a date range
+
+Today
+
+Last 7 days
+
+Last 30 days
+
+This month
+
+Last month
+
+This year
+
+## form-message
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIj48L2NpcmNsZT48cGF0aCBkPSJNMTIgOHY0TTEyIDE2aC4wMSIgLz48L3N2Zz4=)
+2 fields need attention
+
+- [Email is not a valid address](#ks-email)
+- [Password must be at least 8 characters](#ks-pw)
+
+Email
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIj48L2NpcmNsZT48cGF0aCBkPSJNMTIgOHY0TTEyIDE2aC4wMSIgLz48L3N2Zz4=)
+Enter a valid email address.
+
+Username
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik00IDEybDUgNUwyMCA3IiAvPjwvc3ZnPg==)
+Username is available.
+
+Password
+
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik0xMC4zIDMuODZMMS44MiAxOGEyIDIgMCAwIDAgMS43MSAzaDE2Ljk0YTIgMiAwIDAgMCAxLjcxLTNMMTMuNyAzLjg2YTIgMiAwIDAgMC0zLjQgMHoiIC8+PHBhdGggZD0iTTEyIDl2NE0xMiAxN2guMDEiIC8+PC9zdmc+)
+Weak password — add a symbol or number.
+
+Bio
+
+142 / 120

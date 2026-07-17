@@ -1,0 +1,33 @@
+/* FILE: inst/assets/components/menubar/menubar.css */
+/* shadshiny — menubar. Reuses .shad-menu* from dropdown-menu.css (dependency). */
+
+.shad-menubar {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+  height: 2.25rem;
+  padding: var(--shad-space-1);
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  background-color: var(--shad-background);
+  box-shadow: var(--shad-shadow-xs);
+  font-family: var(--shad-font-sans);
+  width: max-content;
+}
+.shad-menubar__trigger {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem var(--shad-space-2);
+  border-radius: var(--shad-radius-sm);
+  font-size: var(--shad-text-sm);
+  font-weight: var(--shad-font-weight-medium);
+  cursor: default;
+  user-select: none;
+  outline: none;
+  color: var(--shad-foreground);
+}
+.shad-menubar__trigger:focus-visible,
+.shad-menubar__trigger[data-state="open"] {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}

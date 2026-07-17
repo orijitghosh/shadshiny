@@ -1,0 +1,38 @@
+/* FILE: inst/assets/components/badge/badge.css */
+/* shadshiny — badge. Variants: default/secondary/destructive/outline. */
+
+.shad-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--shad-space-1);
+  border-radius: var(--shad-radius-md);
+  border: 1px solid transparent;
+  padding: 0.125rem var(--shad-space-2);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-xs);
+  line-height: var(--shad-leading-xs);
+  font-weight: var(--shad-font-weight-medium);
+  white-space: nowrap;
+  width: fit-content;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-badge .shad-icon { width: 0.75rem; height: 0.75rem; }
+
+.shad-badge--default {
+  background-color: var(--shad-primary);
+  color: var(--shad-primary-foreground);
+}
+.shad-badge--secondary {
+  background-color: var(--shad-secondary);
+  color: var(--shad-secondary-foreground);
+}
+.shad-badge--destructive {
+  background-color: var(--shad-destructive);
+  color: var(--shad-destructive-foreground);
+}
+.shad-badge--outline {
+  background-color: transparent;
+  border-color: var(--shad-border);
+  color: var(--shad-foreground);
+}

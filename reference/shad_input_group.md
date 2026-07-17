@@ -75,6 +75,7 @@ Other shadshiny tier-2 components:
 [`shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/shad_checkbox.md),
 [`shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/shad_combobox.md),
 [`shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_picker.md),
+[`shad_date_presets()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_presets.md),
 [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md),
 [`shad_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_input.md),
 [`shad_input_otp()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_otp.md),

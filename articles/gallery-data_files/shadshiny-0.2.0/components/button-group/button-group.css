@@ -1,0 +1,82 @@
+/* FILE: inst/assets/components/button-group/button-group.css */
+/* shadshiny — button-group. CSS-only. Adjoining buttons share a border and
+   collapse their inner radii into one segmented control. Orientation via
+   data-orientation (horizontal default / vertical). */
+
+.shad-button-group {
+  display: inline-flex;
+  align-items: stretch;
+  width: fit-content;
+}
+.shad-button-group[data-orientation="vertical"] { flex-direction: column; }
+
+/* Children stack in the paint order so the raised element's full border shows. */
+.shad-button-group > * { position: relative; }
+.shad-button-group > *:hover,
+.shad-button-group > *:focus-visible,
+.shad-button-group > *:focus-within,
+.shad-button-group > *[data-state="open"],
+.shad-button-group > *[aria-expanded="true"] { z-index: 1; }
+
+/* ---- horizontal: collapse inner radii, overlap the shared 1px border ---- */
+.shad-button-group[data-orientation="horizontal"] > * { border-radius: 0; }
+.shad-button-group[data-orientation="horizontal"] > *:not(:first-child) {
+  margin-inline-start: -1px;
+}
+.shad-button-group[data-orientation="horizontal"] > *:first-child {
+  border-start-start-radius: var(--shad-radius-md);
+  border-end-start-radius: var(--shad-radius-md);
+}
+.shad-button-group[data-orientation="horizontal"] > *:last-child {
+  border-start-end-radius: var(--shad-radius-md);
+  border-end-end-radius: var(--shad-radius-md);
+}
+
+/* ---- vertical ---- */
+.shad-button-group[data-orientation="vertical"] > * {
+  border-radius: 0;
+  width: 100%;
+  justify-content: center;
+}
+.shad-button-group[data-orientation="vertical"] > *:not(:first-child) {
+  margin-block-start: -1px;
+}
+.shad-button-group[data-orientation="vertical"] > *:first-child {
+  border-start-start-radius: var(--shad-radius-md);
+  border-start-end-radius: var(--shad-radius-md);
+}
+.shad-button-group[data-orientation="vertical"] > *:last-child {
+  border-end-start-radius: var(--shad-radius-md);
+  border-end-end-radius: var(--shad-radius-md);
+}
+
+/* ---- separator: a hairline between segments ---- */
+.shad-button-group__separator {
+  align-self: stretch;
+  flex: none;
+  width: 1px;
+  background-color: var(--shad-border);
+  border: 0;
+  margin: 0;
+}
+.shad-button-group[data-orientation="vertical"] .shad-button-group__separator {
+  width: auto;
+  height: 1px;
+}
+
+/* ---- text: a non-interactive label segment styled like an outline button ---- */
+.shad-button-group__text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  height: 2.25rem;
+  padding: 0 var(--shad-space-4);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  font-weight: var(--shad-font-weight-medium);
+  white-space: nowrap;
+  color: var(--shad-muted-foreground);
+  background-color: var(--shad-muted);
+  border: 1px solid var(--shad-input);
+}
+.shad-button-group__text .shad-icon { width: 1rem; height: 1rem; }

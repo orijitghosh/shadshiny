@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- FILE: inst/assets/components/data-table/data-table.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — data-table</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="../../core/shad-animations.css">
+<link rel="stylesheet" href="../table/table.css">
+<link rel="stylesheet" href="../checkbox/checkbox.css">
+<link rel="stylesheet" href="../native-select/native-select.css">
+<link rel="stylesheet" href="../button/button.css">
+<link rel="stylesheet" href="../dropdown-menu/dropdown-menu.css">
+<link rel="stylesheet" href="data-table.css">
+<style>body { margin: 2rem; background: var(--shad-background); } .demo { max-width: 64rem; margin: 0 auto 3rem; } .demo h2 { font-family: var(--shad-font-sans); color: var(--shad-foreground); font-size: var(--shad-text-lg); }</style>
+</head>
+<body>
+<div class="demo">
+  <h2>Full-featured: sort (Shift+click = multi), global + column filters, multiple selection, column visibility, pagination</h2>
+  <div data-shad="data-table" data-selection="multiple" data-global-filter data-column-filters data-page-size="10">
+    <script type="application/json">
+    {
+      "columns": [
+        {"key": "invoice", "label": "Invoice", "sortable": true},
+        {"key": "status", "label": "Status", "sortable": true},
+        {"key": "method", "label": "Method", "sortable": true},
+        {"key": "amount", "label": "Amount", "sortable": true, "filterable": false}
+      ],
+      "rows": [],
+      "options": {"columnVisibility": true, "emptyText": "No invoices found."}
+    }
+    </script>
+  </div>
+</div>
+
+<div class="demo">
+  <h2>Single selection + sticky header (max-height viewport)</h2>
+  <div id="dt2" data-shad="data-table" data-selection="single" data-sticky data-page-size="25">
+    <script type="application/json">
+    {
+      "columns": [
+        {"key": "invoice", "label": "Invoice", "sortable": true},
+        {"key": "status", "label": "Status", "sortable": true},
+        {"key": "amount", "label": "Amount", "sortable": true}
+      ],
+      "rows": [],
+      "options": {"sticky": true, "maxHeight": "20rem"}
+    }
+    </script>
+  </div>
+</div>
+
+<div class="demo">
+  <h2>Loading state (skeleton rows)</h2>
+  <div id="dt3" data-shad="data-table">
+    <script type="application/json">
+    {"columns": [{"key": "a", "label": "Name"}, {"key": "b", "label": "Email"}, {"key": "c", "label": "Role"}],
+     "rows": [], "options": {"loading": true}}
+    </script>
+  </div>
+</div>
+
+<script src="../../core/shad-runtime.js"></script>
+<script src="../dropdown-menu/dropdown-menu.js"></script>
+<script src="../native-select/native-select.js"></script>
+<script src="data-table.js"></script>
+<script>
+// Demo data injected before init (in Shiny, R serializes it into the JSON child).
+(function () {
+  var statuses = ["Paid", "Pending", "Unpaid", "Refunded"];
+  var methods = ["Credit Card", "PayPal", "Bank Transfer"];
+  function rows(n) {
+    var out = [];
+    for (var i = 1; i <= n; i++) {
+      var badgeVariant = i % 4 === 0 ? "shad-badge--destructive" : i % 4 === 1 ? "shad-badge--default" : "shad-badge--secondary";
+      out.push({
+        key: "INV-" + String(i).padStart(4, "0"),
+        cells: {
+          invoice: "INV-" + String(i).padStart(4, "0"),
+          status: { html: '<span class="shad-badge ' + badgeVariant + '">' + statuses[i % 4] + "</span>", text: statuses[i % 4], sort: statuses[i % 4] },
+          method: methods[i % 3],
+          amount: { html: "$" + (((i * 137) % 900) + 100) + ".00", text: "$" + (((i * 137) % 900) + 100) + ".00", sort: ((i * 137) % 900) + 100 }
+        }
+      });
+    }
+    return out;
+  }
+  document.querySelectorAll('[data-shad="data-table"]').forEach(function (el, idx) {
+    if (el.id === "dt3") return;
+    var s = el.querySelector('script[type="application/json"]');
+    var m = JSON.parse(s.textContent);
+    m.rows = rows(idx === 0 ? 87 : 300);
+    s.textContent = JSON.stringify(m);
+  });
+  shad.autoInit();
+  document.querySelectorAll('[data-shad="data-table"]').forEach(function (el) {
+    el.addEventListener("shad:change", function (e) { console.log("shad:change", e.detail.value); });
+  });
+})();
+</script>
+</body>
+</html>

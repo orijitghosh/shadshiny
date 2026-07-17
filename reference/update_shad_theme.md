@@ -9,6 +9,7 @@ Sends a custom message that sets/removes `data-shad-theme` and toggles
 update_shad_theme(
   preset = NULL,
   dark = NULL,
+  theme = NULL,
   session = shiny::getDefaultReactiveDomain()
 )
 ```
@@ -23,6 +24,13 @@ update_shad_theme(
 - dark:
 
   `TRUE`/`FALSE` to set dark mode, or `NULL` to leave unchanged.
+
+- theme:
+
+  An optional custom
+  [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
+  to apply live (its tokens are written to a managed `<style>` element);
+  pass `NA` to remove a previously applied custom theme.
 
 - session:
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- FILE: inst/assets/components/tree/tree.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — tree</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="tree.css">
+<style>body { margin: 2rem; background: var(--shad-background); } .demo { max-width: 22rem; margin: 0 auto 3rem; } .demo h2 { font-family: var(--shad-font-sans); color: var(--shad-foreground); font-size: var(--shad-text-lg); }</style>
+</head>
+<body>
+<div class="demo">
+  <h2>File explorer (single select, lazy branch)</h2>
+  <div id="tr1" data-shad="tree" class="shad-tree" data-selection="single">
+    <ul class="shad-tree__list" role="tree" aria-label="Project files">
+      <li class="shad-tree__item" role="treeitem" data-key="src" aria-expanded="true">
+        <div class="shad-tree__row">
+          <svg class="shad-tree__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          <span class="shad-tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+          <span class="shad-tree__label">src</span>
+        </div>
+        <ul class="shad-tree__group" role="group">
+          <li class="shad-tree__item" role="treeitem" data-key="src/app.R">
+            <div class="shad-tree__row">
+              <svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+              <span class="shad-tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+              <span class="shad-tree__label">app.R</span>
+            </div>
+          </li>
+          <li class="shad-tree__item" role="treeitem" data-key="src/utils.R">
+            <div class="shad-tree__row">
+              <svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+              <span class="shad-tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+              <span class="shad-tree__label">utils.R</span>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li class="shad-tree__item" role="treeitem" data-key="data" aria-expanded="false" data-lazy>
+        <div class="shad-tree__row">
+          <svg class="shad-tree__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          <span class="shad-tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+          <span class="shad-tree__label">data (lazy)</span>
+        </div>
+      </li>
+      <li class="shad-tree__item" role="treeitem" data-key="README.md">
+        <div class="shad-tree__row">
+          <svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          <span class="shad-tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+          <span class="shad-tree__label">README.md</span>
+        </div>
+      </li>
+      <li class="shad-tree__item" role="treeitem" data-key="secrets.env" aria-disabled="true">
+        <div class="shad-tree__row">
+          <svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          <span class="shad-tree__label">secrets.env (disabled)</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="demo">
+  <h2>Multiple selection (Ctrl/Cmd+click or +Enter)</h2>
+  <div data-shad="tree" class="shad-tree" data-selection="multiple">
+    <ul class="shad-tree__list" role="tree" aria-label="Regions" aria-multiselectable="true">
+      <li class="shad-tree__item" role="treeitem" data-key="emea"><div class="shad-tree__row"><svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="shad-tree__label">EMEA</span></div></li>
+      <li class="shad-tree__item" role="treeitem" data-key="amer" aria-selected="true"><div class="shad-tree__row"><svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="shad-tree__label">AMER</span></div></li>
+      <li class="shad-tree__item" role="treeitem" data-key="apac"><div class="shad-tree__row"><svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="shad-tree__label">APAC</span></div></li>
+    </ul>
+  </div>
+</div>
+
+<script src="../../core/shad-runtime.js"></script>
+<script src="tree.js"></script>
+<script>
+shad.autoInit();
+var tr1El = document.getElementById("tr1");
+var tr1 = shad.get(tr1El);
+tr1El.addEventListener("shad:expand", function (e) {
+  if (e.detail.key === "data" && e.detail.expanded) {
+    setTimeout(function () { // simulate server round-trip (Shiny does this)
+      tr1.setChildren("data",
+        '<li class="shad-tree__item" role="treeitem" data-key="data/sales.csv"><div class="shad-tree__row"><svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="shad-tree__label">sales.csv</span></div></li>' +
+        '<li class="shad-tree__item" role="treeitem" data-key="data/users.csv"><div class="shad-tree__row"><svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="shad-tree__label">users.csv</span></div></li>');
+    }, 900);
+  }
+});
+tr1El.addEventListener("shad:change", function (e) { console.log("selected:", e.detail.value); });
+</script>
+</body>
+</html>

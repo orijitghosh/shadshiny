@@ -1,0 +1,188 @@
+# Data tables
+
+[`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
+renders a data frame as a shadcn-styled, client-side table with sorting,
+filtering, paging, and row selection. Everything runs in the browser:
+the whole frame is serialised once, and interaction never round-trips to
+R unless you ask for it.
+
+It is an *input*, not an output. Place it in the UI like any other bound
+component and read its state with `input$<id>`.
+
+## The minimum
+
+``` r
+
+library(shiny)
+library(shadshiny)
+
+ui <- page_shad(
+  shad_data_table("tbl", mtcars)
+)
+
+server <- function(input, output, session) {
+  observe(print(input$tbl))
+}
+```
+
+Column names become headers, row names are dropped, and each column gets
+a default cell renderer based on its type: numerics are right-aligned
+and formatted, dates print ISO, logicals become check marks, and factors
+and characters print as text.
+
+## Reading state
+
+`input$<id>` is a list describing what the user is looking at:
+
+| Field | Type | Meaning |
+|----|----|----|
+| `selected` | character vector | Row keys, in selection order, and persisting across pages. By default a key is the row’s 1-based index in the data you passed, as a string — so `as.integer(input$tbl$selected)` indexes the frame. Set `row_key` to use a column instead. |
+| `sort` | list of `{column, direction}` | Active sort keys, outermost first. `direction` is `"asc"` or `"desc"`. |
+| `filter` | list | `global` (string) plus one entry per filtered column. |
+| `page` | integer | Current 1-based page. |
+| `pageSize` | integer | Rows per page. |
+
+``` r
+
+server <- function(input, output, session) {
+  chosen <- reactive({
+    keys <- input$tbl$selected
+    if (!length(keys)) mtcars else mtcars[as.integer(keys), , drop = FALSE]
+  })
+  output$n <- renderText(sprintf("%d rows selected", nrow(chosen())))
+}
+```
+
+Because the default key is a row index into the *original* frame, you
+never have to reconstruct the client’s sort or filter in R to know which
+rows the user picked.
+
+## Table options
+
+``` r
+
+shad_data_table(
+  "tbl", sales,
+  selection         = "multiple",   # "none", "single", or "multiple"
+  filter            = "both",       # "none", "global", "columns", or "both"
+  page_size         = 25,
+  page_sizes        = c(10, 25, 50, 100),
+  column_visibility = TRUE,         # a dropdown to show/hide columns
+  sticky_header     = TRUE,
+  max_height        = "32rem",
+  empty             = "Nothing matches that filter."
+)
+```
+
+With `filter = "both"` the table gets a search box above it *and* a
+filter input under each header; `"global"` and `"columns"` give you one
+or the other.
+
+[`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
+serialises the whole frame, so it guards the size for you: over 100,000
+cells it warns, and over 1,000,000 it errors. Pre-aggregate or page
+server-side before you get there.
+
+## Columns and formatting
+
+Pass `columns` — a named list of
+[`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md)
+specs, keyed by column name. Anything you leave out keeps its default.
+
+``` r
+
+shad_data_table(
+  "tbl", sales,
+  columns = list(
+    order  = shad_col("Order #", width = "8rem"),
+    amount = shad_col("Amount", format = shad_fmt_number(2, prefix = "$")),
+    margin = shad_col("Margin", format = shad_fmt_percent(1)),
+    date   = shad_col("Date", format = shad_fmt_date("%b %d, %Y")),
+    status = shad_col("Status", format = shad_fmt_badge(
+      c(paid = "default", pending = "secondary", refunded = "destructive")
+    )),
+    notes  = shad_col(visible = FALSE)
+  )
+)
+```
+
+[`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md)
+takes `header` (the first argument — the displayed label), plus `width`,
+`align`, `sortable`, `filterable`, `visible`, `html`, and one of
+`format` or `cell`. `format` and `cell` are mutually exclusive, and
+neither combines with `html = TRUE` (which passes the column’s strings
+through as raw HTML — only do that with values you generated).
+
+The bundled formatters are:
+
+| Formatter | Renders |
+|----|----|
+| `shad_fmt_number(digits, big_mark, prefix, suffix)` | Fixed-decimal number. |
+| `shad_fmt_percent(digits)` | Value × 100 with a `%` suffix. |
+| `shad_fmt_date(format)` | [`format()`](https://rdrr.io/r/base/format.html)-style date string, e.g. `"%b %d, %Y"`. |
+| `shad_fmt_badge(map)` | [`shad_badge()`](https://orijitghosh.github.io/shadshiny/reference/shad_badge.md) per value; `map` is value → variant. |
+
+Formatters keep the raw value as the sort key, so a `$1,200.00` cell
+still sorts numerically and a `"Mar 03"` cell still sorts
+chronologically.
+
+### Custom cells
+
+When a formatter isn’t enough, give the column a `cell` function. It is
+called once per row with the column value and the whole row, and returns
+a tag or a string:
+
+``` r
+
+shad_col("Owner", cell = function(value, row) {
+  shad_item(
+    shad_avatar(src = row$avatar_url, fallback = substr(value, 1, 2)),
+    shad_p(value)
+  )
+})
+```
+
+Cell functions run in R at render time, not on the client — so they cost
+one call per visible row of the frame you pass, and they cannot see
+later filter state. Keep them cheap.
+
+## Updating from the server
+
+``` r
+
+observeEvent(input$refresh, {
+  update_shad_data_table("tbl", data = fetch_latest())
+})
+```
+
+[`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md)
+replaces the rows and can patch `selected`, `page`, `page_size`, and
+`loading`. Pass `columns` alongside `data` to re-apply your formatters
+and `cell` functions to the new rows. The client keeps its sort and
+filter, so a refresh doesn’t yank the view out from under the user; the
+column *headers* and visibility are fixed at UI-construction time.
+
+## Loading state
+
+``` r
+
+shad_data_table("tbl", NULL, loading = TRUE)
+# later:
+update_shad_data_table("tbl", data = result(), loading = FALSE)
+```
+
+`loading = TRUE` renders skeleton rows at the current page size.
+
+## When to keep `DT`
+
+[`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
+ships the whole frame to the browser. That is the right trade for tables
+up to roughly the tens of thousands of rows. Past that — or when you
+need server-side paging, Excel export, or the JS DataTables plugin
+ecosystem — keep `DT::datatable()` and style its container.
+
+## See also
+
+- [`vignette("charts")`](https://orijitghosh.github.io/shadshiny/articles/charts.md)
+  for pairing a table with themed plots.
+- `shad_run_example("07-data-explorer")` for a full app using both.

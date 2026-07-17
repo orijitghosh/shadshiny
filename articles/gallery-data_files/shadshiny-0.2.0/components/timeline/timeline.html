@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- FILE: inst/assets/components/timeline/timeline.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — timeline</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="timeline.css">
+<style>body { margin: 2rem; background: var(--shad-background); } .demo { max-width: 36rem; margin: 0 auto 3rem; } .demo h2 { font-family: var(--shad-font-sans); color: var(--shad-foreground); font-size: var(--shad-text-lg); }</style>
+</head>
+<body>
+<div class="demo">
+  <h2>Left-aligned with icon dots + states</h2>
+  <ol class="shad-timeline">
+    <li class="shad-timeline__item">
+      <span class="shad-timeline__marker">
+        <span class="shad-timeline__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 7"/></svg></span>
+        <span class="shad-timeline__connector" aria-hidden="true"></span>
+      </span>
+      <div class="shad-timeline__content">
+        <time class="shad-timeline__time">Jul 10, 2026 · 09:14</time>
+        <div class="shad-timeline__title">Order placed</div>
+        <div class="shad-timeline__description">Order #4213 confirmed and queued for processing.</div>
+      </div>
+    </li>
+    <li class="shad-timeline__item" data-state="active">
+      <span class="shad-timeline__marker">
+        <span class="shad-timeline__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+        <span class="shad-timeline__connector" aria-hidden="true"></span>
+      </span>
+      <div class="shad-timeline__content">
+        <time class="shad-timeline__time">Jul 12, 2026 · 16:40</time>
+        <div class="shad-timeline__title">Shipped</div>
+        <div class="shad-timeline__description">Package handed to carrier; ETA 3 days.</div>
+      </div>
+    </li>
+    <li class="shad-timeline__item" data-state="muted">
+      <span class="shad-timeline__marker">
+        <span class="shad-timeline__dot"></span>
+        <span class="shad-timeline__connector" aria-hidden="true"></span>
+      </span>
+      <div class="shad-timeline__content">
+        <div class="shad-timeline__title">Out for delivery</div>
+      </div>
+    </li>
+    <li class="shad-timeline__item" data-state="muted">
+      <span class="shad-timeline__marker"><span class="shad-timeline__dot"></span></span>
+      <div class="shad-timeline__content">
+        <div class="shad-timeline__title">Delivered</div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<div class="demo" style="max-width: 44rem;">
+  <h2>Alternating</h2>
+  <ol class="shad-timeline shad-timeline--alternate">
+    <li class="shad-timeline__item">
+      <span class="shad-timeline__marker"><span class="shad-timeline__dot"></span><span class="shad-timeline__connector" aria-hidden="true"></span></span>
+      <div class="shad-timeline__content"><time class="shad-timeline__time">2024</time><div class="shad-timeline__title">Company founded</div></div>
+    </li>
+    <li class="shad-timeline__item">
+      <span class="shad-timeline__marker"><span class="shad-timeline__dot"></span><span class="shad-timeline__connector" aria-hidden="true"></span></span>
+      <div class="shad-timeline__content"><time class="shad-timeline__time">2025</time><div class="shad-timeline__title">Series A</div></div>
+    </li>
+    <li class="shad-timeline__item" data-state="active">
+      <span class="shad-timeline__marker"><span class="shad-timeline__dot"></span></span>
+      <div class="shad-timeline__content"><time class="shad-timeline__time">2026</time><div class="shad-timeline__title">1M users</div></div>
+    </li>
+  </ol>
+</div>
+</body>
+</html>

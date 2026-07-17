@@ -64,4 +64,5 @@ Called for its side effect (launches a Shiny app).
 Other shadshiny utilities:
 [`shad_icon()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon.md),
 [`shad_icon_names()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon_names.md),
+[`shad_icon_raw()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon_raw.md),
 [`shadshiny_deps()`](https://orijitghosh.github.io/shadshiny/reference/shadshiny_deps.md)

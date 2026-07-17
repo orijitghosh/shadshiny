@@ -1,0 +1,24 @@
+/* FILE: inst/assets/components/collapsible/collapsible.css */
+/* shadshiny — collapsible. Same height animation as accordion. */
+
+.shad-collapsible { font-family: var(--shad-font-sans); }
+.shad-collapsible__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  cursor: pointer;
+  outline: none;
+  border-radius: var(--shad-radius-sm);
+}
+.shad-collapsible__trigger:focus-visible {
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-collapsible__content {
+  overflow: hidden;
+}
+.shad-collapsible__content[data-state="open"] {
+  animation: shad-collapse-down var(--shad-duration-normal) var(--shad-ease-out);
+}
+.shad-collapsible__content[data-state="closed"] {
+  animation: shad-collapse-up var(--shad-duration-normal) var(--shad-ease-out) forwards;
+}

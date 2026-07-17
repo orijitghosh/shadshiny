@@ -1,0 +1,118 @@
+/* FILE: inst/assets/components/chart-container/chart-container.css */
+/* shadshiny — chart-container. CSS-only wrapper giving R plot outputs
+   (renderPlot <img>, htmlwidget <div>, canvas) the shadcn chart look.
+   Card typography mirrors card/card.css. Uses --shad-chart-* tokens. */
+
+.shad-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--shad-space-4);
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-xl);
+  background-color: var(--shad-card);
+  color: var(--shad-card-foreground);
+  box-shadow: var(--shad-shadow-2xs);
+  padding: var(--shad-space-6);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+}
+/* borderless: embed inside an existing card */
+.shad-chart--plain { border: 0; box-shadow: none; padding: 0; background: none; }
+
+.shad-chart__header { display: flex; flex-direction: column; gap: var(--shad-space-1_5); }
+.shad-chart__title { font-weight: var(--shad-font-weight-semibold); line-height: 1; }
+.shad-chart__description { color: var(--shad-muted-foreground); }
+
+/* body: the opaque plot child fills it; aspect variants via data-aspect */
+.shad-chart__body { position: relative; width: 100%; }
+.shad-chart__body[data-aspect="video"] { aspect-ratio: 16 / 9; }
+.shad-chart__body[data-aspect="square"] { aspect-ratio: 1 / 1; }
+.shad-chart__body[data-aspect="wide"] { aspect-ratio: 21 / 9; }
+.shad-chart__body > img,
+.shad-chart__body > canvas,
+.shad-chart__body > svg,
+.shad-chart__body > div {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;   /* htmlwidgets set inline sizes; documented exception */
+  height: 100% !important;
+  object-fit: contain;
+}
+/* natural-height body (no aspect lock): children flow normally */
+.shad-chart__body--auto { position: static; }
+.shad-chart__body--auto > img, .shad-chart__body--auto > canvas,
+.shad-chart__body--auto > svg, .shad-chart__body--auto > div {
+  position: static; width: 100% !important; height: auto !important;
+}
+
+.shad-chart__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  color: var(--shad-muted-foreground);
+  font-size: var(--shad-text-sm);
+}
+
+/* -- legend strip -------------------------------------------------------- */
+.shad-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--shad-space-4);
+  font-size: var(--shad-text-xs);
+  line-height: var(--shad-leading-xs);
+  color: var(--shad-muted-foreground);
+  font-family: var(--shad-font-sans);
+}
+.shad-chart-legend__item { display: inline-flex; align-items: center; gap: var(--shad-space-1_5); }
+.shad-chart-legend__swatch {
+  width: 0.625rem;
+  height: 0.625rem;
+  flex: none;
+  border-radius: 2px;
+  background-color: var(--shad-chart-1);
+}
+.shad-chart-legend__item:nth-child(2) .shad-chart-legend__swatch { background-color: var(--shad-chart-2); }
+.shad-chart-legend__item:nth-child(3) .shad-chart-legend__swatch { background-color: var(--shad-chart-3); }
+.shad-chart-legend__item:nth-child(4) .shad-chart-legend__swatch { background-color: var(--shad-chart-4); }
+.shad-chart-legend__item:nth-child(5) .shad-chart-legend__swatch { background-color: var(--shad-chart-5); }
+.shad-chart-legend__item:nth-child(6) .shad-chart-legend__swatch { background-color: var(--shad-chart-6); }
+/* explicit override: style="--legend-color: var(--shad-chart-3)" */
+.shad-chart-legend__swatch[style*="--legend-color"] { background-color: var(--legend-color); }
+
+/* -- themed tooltip (adoptable by plotly/ggiraph/echarts) ------------------ */
+.shad-chart-tooltip {
+  display: grid;
+  gap: var(--shad-space-1);
+  min-width: 8rem;
+  padding: var(--shad-space-1_5) var(--shad-space-2_5);
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  background-color: var(--shad-popover);
+  color: var(--shad-popover-foreground);
+  box-shadow: var(--shad-shadow-md);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-xs);
+  line-height: var(--shad-leading-xs);
+}
+.shad-chart-tooltip__label { font-weight: var(--shad-font-weight-medium); }
+.shad-chart-tooltip__row {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-1_5);
+  color: var(--shad-muted-foreground);
+}
+.shad-chart-tooltip__swatch {
+  width: 0.625rem; height: 0.625rem; flex: none;
+  border-radius: 2px;
+  background-color: var(--legend-color, var(--shad-chart-1));
+}
+.shad-chart-tooltip__value {
+  margin-left: auto;
+  font-family: var(--shad-font-mono);
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-foreground);
+  font-variant-numeric: tabular-nums;
+}
