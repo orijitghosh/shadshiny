@@ -18,16 +18,18 @@ wrapped as ordinary R functions with native Shiny input bindings.
 - **No build step, no npm, no React.** Components are plain `htmltools` tags
   backed by a single bundled asset dependency.
 - **Native Shiny inputs.** Read values with `input$id`; drive them from the
-  server with `update_shad_*()`. Modules and `renderUI()` just work.
-- **A real data table.** `shad_data_table()` does multi-column sort, per-column
-  and global filtering, paging, and selection — client-side, themed, no `DT`.
+  server with `update_shad_*()`. Modules, `renderUI()` and bookmarking just work.
+- **A real data table.** `shad_data_table()` does multi-column sort, global and
+  per-column filtering, paging, and selection that survives paging — client-side
+  and themed, with no `DT`.
 - **Dashboards & charts.** `shad_value_box()` and `shad_chart_container()` for
   the shell; `shad_theme_ggplot2()` / `shad_theme_plotly()` /
-  `shad_theme_echarts4r()` restyle plots to the live theme.
-- **Server-side validation.** `shad_validator()` + `shad_rules` drive
-  `aria-invalid` and inline shadcn-styled field messages.
+  `shad_theme_echarts4r()` restyle plots onto the live theme.
+- **Server-side validation.** `shad_validator()` plus a rule set drive
+  `aria-invalid` and inline, shadcn-styled field messages.
 - **Streaming chat.** `shad_chat_ui()` / `shad_chat_server()` render a
-  stick-to-bottom transcript from any token generator (`ellmer` included).
+  stick-to-bottom transcript from any token source — an `ellmer` stream drops
+  straight in.
 - **Coexists with Bootstrap 5 / bslib.** Dark mode keys off the same signals
   `bslib::input_dark_mode()` uses, so theme sync needs zero glue.
 - **OKLCH token theming.** Seven presets out of the box, switchable at runtime,
@@ -88,7 +90,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-Run the flagship demo covering every component:
+Run the flagship demo, which covers every component:
 
 ```r
 shad_run_example("kitchen-sink")
@@ -114,14 +116,7 @@ shad_run_example("kitchen-sink")
 | `shad_radio_group` | `shad_toggle` | `shad_toggle_group` | `shad_slider` |
 | `shad_select` | `shad_native_select` | `shad_combobox` | `shad_input_otp` |
 | `shad_calendar` | `shad_date_picker` | `shad_form_field` | `shad_input_group` |
-| `shad_number_input` | `shad_rating` | `shad_dropzone` | `shad_tree` |
-
-**Data, dashboards & flow**
-
-| | | | |
-|---|---|---|---|
-| `shad_data_table` | `shad_value_box` | `shad_chart_container` | `shad_timeline` |
-| `shad_stepper` | `shad_form_message` | `shad_validator` | `shad_theme` |
+| `shad_number_input` | `shad_rating` | `shad_dropzone` | |
 
 **Tier 3 — overlays**
 
@@ -137,7 +132,14 @@ shad_run_example("kitchen-sink")
 |---|---|---|---|
 | `shad_tabs` | `shad_accordion` | `shad_collapsible` | `shad_pagination` |
 | `shad_scroll_area` | `shad_resizable` | `shad_carousel` | `shad_navigation_menu` |
-| `shad_sidebar_layout` | | | |
+| `shad_sidebar_layout` | `shad_stepper` | `shad_tree` | |
+
+**Data, dashboards & flow**
+
+| | | | |
+|---|---|---|---|
+| `shad_data_table` | `shad_value_box` | `shad_chart_container` | `shad_timeline` |
+| `shad_validator` | `shad_form_message` | `shad_form_summary` | `shad_theme` |
 
 **Chat / AI kit**
 
@@ -148,7 +150,85 @@ shad_run_example("kitchen-sink")
 
 Every stateful component is namespaced-module safe and has a matching
 `update_shad_*()` server helper where it holds a value. Overlays add
-`shad_<name>_open()` / `shad_<name>_close()`.
+`shad_<name>_open()` / `shad_<name>_close()`. Inputs that take an initial value
+seed it from `shiny::restoreInput()`, so `enableBookmarking()` restores them on
+reload.
+
+## Data tables
+
+`shad_data_table()` is an **input**, not an output. It serialises the frame once
+and does everything else in the browser, so interaction never round-trips to R
+unless you ask for it.
+
+```r
+ui <- page_shad(
+  shad_data_table(
+    "tbl", sales,
+    columns = list(
+      amount = shad_col("Amount", format = shad_fmt_number(2, prefix = "$")),
+      status = shad_col("Status", format = shad_fmt_badge(
+        c(paid = "default", refunded = "destructive")
+      ))
+    ),
+    selection = "multiple", filter = "both", page_size = 25
+  )
+)
+
+server <- function(input, output, session) {
+  # $selected, $sort, $filter, $page, $pageSize
+  observe(print(input$tbl$selected))
+}
+```
+
+Formatters keep the raw value as the sort key, so a `$1,200.00` cell still sorts
+numerically. See `vignette("data-tables")`.
+
+## Charts that follow the theme
+
+Themes switch at *runtime*, and a plot rendered in R has no idea.
+`shad_current_theme()` is the bridge — read it in a render block and the plot
+re-runs whenever the preset or dark mode changes.
+
+```r
+output$plot <- renderPlot({
+  shad_current_theme()
+  ggplot(df, aes(month, revenue)) +
+    geom_col(fill = shad_chart_colors(1)) +
+    shad_theme_ggplot2()
+})
+```
+
+`shad_chart_colors()` returns the categorical ramp as hex (OKLCH converted in
+base R — no new dependency). `shad_tokens()` exposes the full token set as CSS
+strings. See `vignette("charts")`.
+
+## Validation
+
+```r
+v <- shad_validator()
+v$add_rule("email", shad_rule_required(), label = "Email")
+v$add_rule("email", shad_rule_email())
+v$add_rule("pw", shad_rule_min_chars(8))
+v$bind_submit("submit")   # disables the button until valid
+v$bind_summary("errors")  # renders an error summary panel
+v$enable()
+```
+
+Put `shad_rule_required()` first so an empty field reports *Required.* rather
+than a format complaint. See `vignette("forms")`.
+
+## Streaming chat
+
+The handler may return a complete string, a chunk-yielding function, or a coro
+generator, so an `ellmer` stream drops straight in.
+
+```r
+shad_chat_server("chat", handler = function(user, history) {
+  chat$stream(user)
+})
+```
+
+See `vignette("chat")`.
 
 ## Theming
 
@@ -162,9 +242,38 @@ page_shad(theme_preset = "green")            # slate stone blue green rose viole
 update_shad_theme(preset = input$preset, dark = input$dark)
 ```
 
+Build a custom palette with `shad_theme()`, scope one to a subtree with
+`shad_theme_scope()`, or import tweakcn / shadcn registry JSON with
+`shad_theme_from_registry()`.
+
 Dark mode is driven by `.dark` / `[data-bs-theme="dark"]`, so
 `bslib::input_dark_mode()` toggles shadshiny components with no extra wiring.
 See `vignette("theming")`.
+
+## Example apps
+
+Each is a real app, launchable with `shad_run_example()`:
+
+| | |
+|---|---|
+| `kitchen-sink` | Every component, variant and server round-trip |
+| `01-auth-onboarding` | Tabbed auth card, a 4-step wizard, and input-OTP 2FA |
+| `02-analytics-dashboard` | Admin console: live chart, date range, command palette, mutable team directory |
+| `03-support-chat` | Conversation list, stick-to-bottom transcript, composer with attachments |
+| `04-storefront` | Product page: carousel, variant pickers, add-to-cart sheet, reviews |
+| `05-settings-profile` | Vertical tabs, profile and notification forms, a live appearance panel |
+| `06-docs-reader` | Sidebar nav, ⌘K palette, resizable article/TOC split, prev/next paging |
+| `07-data-explorer` | `shad_data_table()` with value boxes and theme-following plots |
+| `08-llm-chat` | Streaming `shad_chat_server()` — swap the handler for `ellmer` to go live |
+
+## Guides
+
+`vignette("shadshiny")` to get started, then: `installation`, `theming`,
+`forms`, `data-tables`, `charts`, `chat`, `layout`, `server-api`,
+`overlays-and-server`, and `migrating-inputs` — a complete base-Shiny →
+shadshiny reference. The [pkgdown site](https://orijitghosh.github.io/shadshiny/)
+adds a live component gallery and an icon reference (78 built-in icons; use any
+other Lucide glyph via `shad_icon_raw()`).
 
 ## Attribution
 
