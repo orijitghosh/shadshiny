@@ -9,8 +9,17 @@
    lg -> md -> sm -> base -> 1 — so `cols = c(sm = 2, lg = 4)` behaves the way
    it reads. */
 
+/* Every primitive resets its own knobs to `initial` first. Custom properties
+   INHERIT, so without this a stack nested inside a horizontal stack would pick
+   up its parent's direction (and gap, and alignment) and quietly lay itself out
+   sideways. `initial` discards the inherited value so the var() fallback in the
+   declaration below applies; an inline style on the element still wins, because
+   inline beats a stylesheet rule. */
+
 /* -- container ------------------------------------------------------------ */
 .shad-container {
+  --shad-container-max: initial;
+  --shad-container-pad: initial;
   width: 100%;
   max-width: var(--shad-container-max, 60rem);
   margin-inline: auto;
@@ -21,6 +30,10 @@
 
 /* -- stack ---------------------------------------------------------------- */
 .shad-stack {
+  --shad-stack-dir: initial;
+  --shad-stack-gap: initial;
+  --shad-stack-align: initial;
+  --shad-stack-justify: initial;
   display: flex;
   flex-direction: var(--shad-stack-dir, column);
   gap: var(--shad-stack-gap, var(--shad-space-4));
@@ -33,6 +46,14 @@
 
 /* -- grid ----------------------------------------------------------------- */
 .shad-grid {
+  --shad-grid-gap: initial;
+  --shad-grid-align: initial;
+  --shad-grid-min: initial;
+  --shad-grid-template: initial;
+  --shad-grid-cols: initial;
+  --shad-grid-cols-sm: initial;
+  --shad-grid-cols-md: initial;
+  --shad-grid-cols-lg: initial;
   display: grid;
   gap: var(--shad-grid-gap, var(--shad-space-4));
   align-items: var(--shad-grid-align, stretch);
@@ -69,7 +90,10 @@
 .shad-grid--template { grid-template-columns: var(--shad-grid-template); }
 
 /* span helper for a child of either grid */
-.shad-grid__item { grid-column: span var(--shad-span, 1) / span var(--shad-span, 1); }
+.shad-grid__item {
+  --shad-span: initial;
+  grid-column: span var(--shad-span, 1) / span var(--shad-span, 1);
+}
 .shad-grid__item--full { grid-column: 1 / -1; }
 
 /* -- page shells ---------------------------------------------------------- */

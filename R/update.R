@@ -203,12 +203,16 @@ update_shad_carousel <- function(id, selected,
 }
 
 #' @rdname update_shad
-#' @param collapsed,mobile_open For [update_shad_sidebar()]; `NULL` leaves that
-#'   facet unchanged.
+#' @param collapsed,mobile_open,active For [update_shad_sidebar()]; `NULL`
+#'   leaves that facet unchanged. `active` selects the [shad_sidebar_item()]
+#'   with that value, so navigating from elsewhere (a command palette, a link)
+#'   moves the rail too.
 #' @export
 update_shad_sidebar <- function(id, collapsed = NULL, mobile_open = NULL,
+                                active = NULL,
                                 session = shiny::getDefaultReactiveDomain()) {
-  val <- drop_nulls(list(collapsed = collapsed, mobileOpen = mobile_open))
+  val <- drop_nulls(list(collapsed = collapsed, mobileOpen = mobile_open,
+                         active = active))
   shad_set_value(id, val, session)
 }
 

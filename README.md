@@ -352,6 +352,7 @@ Each is a real app, launchable with `shad_run_example()`:
 | `06-docs-reader` | Sidebar nav, ⌘K palette, resizable article/TOC split, prev/next paging |
 | `07-data-explorer` | `shad_data_table()` with value boxes and theme-following plots |
 | `08-llm-chat` | Streaming `shad_chat_server()` — swap the handler for `ellmer` to go live |
+| `09-app-shell` | `shad_page_sidebar()`, layout primitives, sparklines, a ⌘K palette that navigates, and server-built dialogs |
 
 ## Guides
 

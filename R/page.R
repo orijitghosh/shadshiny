@@ -123,8 +123,15 @@ update_shad_theme <- function(preset = NULL, dark = NULL, theme = NULL,
 #'       checks, 2FA and destructive alert-dialogs.}
 #'     \item{`"06-docs-reader"`}{documentation site: sidebar nav, ⌘K search, resizable
 #'       article/TOC split, rich typography and tabbed code examples.}
+#'     \item{`"07-data-explorer"`}{`shad_data_table()` with KPI value boxes and
+#'       theme-following plots.}
+#'     \item{`"08-llm-chat"`}{streaming `shad_chat_server()`; swap the handler for
+#'       an ellmer stream to go live.}
+#'     \item{`"09-app-shell"`}{`shad_page_sidebar()` with the layout primitives,
+#'       sparklines, a ⌘K palette that drives navigation, and dialogs built in
+#'       the server.}
 #'   }
-#'   The six numbered apps are real-world examples that together exercise the whole
+#'   The numbered apps are real-world examples that together exercise the whole
 #'   component library.
 #' @returns Called for its side effect (launches a Shiny app).
 #' @family shadshiny utilities

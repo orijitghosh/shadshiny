@@ -64,6 +64,15 @@ component library into a full application toolkit.
   (`gap = 4` is `var(--shad-space-4)`) or any CSS length, and `shad_grid()`
   handles responsive columns with an outward `var()` fallback chain rather than
   a utility-class grid system.
+* **Bug fix (layout):** the layout primitives' custom properties inherited, so a
+  `shad_stack()` nested inside a horizontal one laid itself out sideways (and
+  picked up its parent's gap and alignment). Each rule now resets its own
+  variables to `initial`.
+* `update_shad_sidebar(active=)` selects a sidebar item from the server, so
+  navigating from elsewhere — a command palette, a link — moves the rail too.
+* **New example:** `shad_run_example("09-app-shell")` — `shad_page_sidebar()`
+  with the layout primitives, sparklines, a ⌘K palette that drives navigation,
+  and dialogs built in the server.
 * **Server-created overlays:** `shad_show_dialog()` / `shad_remove_dialog()`
   build a dialog, alert dialog, sheet or drawer in the server and show it, the
   way `shiny::showModal()` does. Transient by default: the overlay removes

@@ -7,19 +7,28 @@ library(shiny)
 library(shadshiny)
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
-# A titled section wrapper. Children flow in a wrapping flex row.
+# A titled section wrapper. Children flow in a wrapping flex row. Both helpers
+# are built from the layout primitives -- this page is the first thing that
+# would have needed them.
 section <- function(id, title, ...) {
   tags$section(
     id = id, style = "scroll-margin-top:5rem;margin-bottom:2.5rem",
     shad_h3(title),
-    tags$div(style = "display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-start;margin-top:0.75rem", ...)
+    shad_stack(direction = "horizontal", wrap = TRUE, align = "start",
+               style = "margin-top:0.75rem", ...)
   )
 }
 # A labelled sub-group, so a section can show several clusters of variants.
-cluster <- function(label, ...) {
-  tags$div(style = "display:grid;gap:0.5rem",
+# Variants sit in a wrapping row by default. `width` and `direction` escape that
+# for demos that need the full row: a responsive grid has nothing to show inside
+# a shrink-to-fit flex item.
+cluster <- function(label, ..., width = NULL, direction = "horizontal") {
+  row <- direction == "horizontal"
+  shad_stack(
+    gap = 2, style = if (!is.null(width)) paste0("width:", width),
     shad_small(label, class = "shad-muted"),
-    tags$div(style = "display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center", ...))
+    shad_stack(direction = direction, gap = 3, wrap = row,
+               align = if (row) "center" else NULL, ...))
 }
 
 fruits <- c("Apple" = "apple", "Banana" = "banana", "Blueberry" = "blueberry")
@@ -455,6 +464,8 @@ ui <- page_shad(
         shad_command_trigger("palette"),
         shad_button(inputId = "open_palette", "Open from the server",
           variant = "ghost", size = "sm"),
+        shad_button(inputId = "refresh_palette", "Swap its items",
+          variant = "ghost", size = "sm"),
         shad_command_palette("palette", items = list(
           "Go to" = c("Buttons" = "s-button", "Data table" = "s-data-table",
                       "Sparkline" = "s-mini-chart"),
@@ -555,6 +566,39 @@ ui <- page_shad(
         do.call(shad_carousel, c(list("car"), lapply(1:5, function(i)
           shad_carousel_item(shad_card(shad_card_content(
             style = "display:grid;place-items:center;aspect-ratio:1;font-size:2rem", i)))))))),
+
+    section("s-layout", "Layout primitives",
+      cluster(width = "100%", direction = "vertical", "Grid — auto-fit (min_width)",
+        shad_grid(style = "width:100%", min_width = "9rem",
+          lapply(1:4, function(i)
+            shad_card(shad_card_content(style = "padding:1rem", paste("Cell", i)))))),
+      cluster(width = "100%", direction = "vertical", "Grid — responsive cols c(base = 1, md = 2, lg = 4)",
+        shad_grid(style = "width:100%", cols = c(base = 1, md = 2, lg = 4),
+          lapply(1:4, function(i)
+            shad_card(shad_card_content(style = "padding:1rem", paste("Col", i)))))),
+      cluster(width = "100%", direction = "vertical", "Grid — template + spanning item",
+        shad_grid(style = "width:100%", template = "1fr 2fr",
+          shad_card(shad_card_content(style = "padding:1rem", "1fr")),
+          shad_card(shad_card_content(style = "padding:1rem", "2fr")),
+          shad_grid_item(span = "full",
+            shad_card(shad_card_content(style = "padding:1rem", "spans the row"))))),
+      cluster(width = "100%", direction = "vertical", "Stack — direction, justify, fill",
+        shad_stack(style = "width:100%", gap = 3,
+          shad_stack(direction = "horizontal", gap = 2,
+            shad_button("Save"), shad_button("Cancel", variant = "outline")),
+          shad_stack(direction = "horizontal", justify = "between",
+            shad_badge("start"), shad_badge("end")),
+          shad_stack(direction = "horizontal", fill = TRUE, gap = 3,
+            shad_card(shad_card_content(style = "padding:1rem", "equal")),
+            shad_card(shad_card_content(style = "padding:1rem", "widths")),
+            shad_card(shad_card_content(style = "padding:1rem", "always"))))),
+      cluster(width = "100%", direction = "vertical", "Container",
+        shad_container(size = "sm", style = "border:1px dashed var(--shad-border)",
+          shad_muted("A centred, max-width column. `size` is sm/md/lg/xl/full.")))),
+
+    # page_shad() is this demo's own wrapper, so the whole-page shells --
+    # shad_page_navbar() and shad_page_sidebar() -- live in their own example:
+    # shad_run_example("09-app-shell").
 
     section("s-sidebar", "Sidebar layout",
       tags$div(style = "width:100%;display:grid;gap:0.75rem",
@@ -781,12 +825,19 @@ ui <- page_shad(
       # Only overlays live here: a toast or dialog surfaces wherever you are on
       # the page. The update_* / scroll / sidebar controls sit beside the
       # components they drive, further up, so their effect is actually visible.
-      shad_card_footer(style = "display:flex;flex-wrap:wrap;gap:0.5rem",
-        shad_button(inputId = "toast_default", "Toast"),
-        shad_button(inputId = "toast_success", "Success", variant = "secondary"),
-        shad_button(inputId = "toast_error", "Error", variant = "destructive"),
-        shad_button(inputId = "toast_loading", "Loading→update"),
-        shad_button(inputId = "open_dialog", "Open dialog", variant = "outline")))
+      shad_card_footer(
+        shad_stack(direction = "horizontal", gap = 2, wrap = TRUE,
+          shad_button(inputId = "toast_default", "Toast"),
+          shad_button(inputId = "toast_success", "Success", variant = "secondary"),
+          shad_button(inputId = "toast_error", "Error", variant = "destructive"),
+          shad_button(inputId = "toast_loading", "Loading→update"),
+          shad_button(inputId = "open_dialog", "Open dialog", variant = "outline"),
+          # These two build their overlay in the server -- no dialog for them
+          # exists in this UI.
+          shad_button(inputId = "make_dialog", "Server-built dialog",
+                      variant = "outline"),
+          shad_button(inputId = "make_sheet", "Server-built sheet",
+                      variant = "outline"))))
   )
 )
 
@@ -816,6 +867,27 @@ server <- function(input, output, session) {
     later::later(function() shad_toast_update(id, message = "Uploaded",
       variant = "success", session = session), delay = 1.5)
   })
+  # Server-created overlays: built here, inserted, opened, and removed on close.
+  observeEvent(input$make_dialog, {
+    shad_show_dialog(shad_dialog(
+      "made", title = "Built in the server",
+      description = "This dialog is not in the UI -- it was created just now.",
+      shad_input("made_note", label = "Note", placeholder = "Live while open"),
+      footer = tagList(shad_dialog_close_button(),
+                       shad_button(inputId = "made_save", "Save"))))
+  })
+  observeEvent(input$make_sheet, {
+    shad_show_dialog(shad_sheet(
+      "made_sheet", side = "right", title = "Server-built sheet",
+      shad_p("Same helper; it takes sheets and drawers too.")))
+  })
+  # input$made_note only exists while the dialog is open -- read it here, then
+  # let the close take the whole thing away.
+  observeEvent(input$made_save, {
+    shad_toast_success(paste0("Saved: ", input$made_note %||% ""))
+    shad_remove_dialog("made")
+  })
+
   observeEvent(input$set_slider, update_shad_slider("sld", 80))
   observeEvent(input$open_dialog, shad_dialog_open("dlg"))
   observeEvent(input$scroll_chat, shad_message_scroller_to_bottom("chat"))
@@ -846,6 +918,15 @@ server <- function(input, output, session) {
   # The "Go to" items are handled in the browser (see the script in the UI);
   # only the actions need the server.
   observeEvent(input$open_palette, shad_command_open("palette"))
+  # update_shad_command() re-renders the list from data the session knows.
+  observeEvent(input$refresh_palette, {
+    update_shad_command("palette", items = list(
+      "Recently viewed" = c("Data table" = "s-data-table",
+                            "Sparkline" = "s-mini-chart",
+                            "Layout primitives" = "s-layout"),
+      "Actions" = c("Show a toast" = "toast")))
+    shad_toast("Palette items replaced from the server.")
+  })
   observeEvent(input$palette_event, {
     switch(input$palette_event$value,
       toast = shad_toast("Ran a command from the palette."),

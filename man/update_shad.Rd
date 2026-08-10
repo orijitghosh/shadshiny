@@ -80,6 +80,7 @@ update_shad_sidebar(
   id,
   collapsed = NULL,
   mobile_open = NULL,
+  active = NULL,
   session = shiny::getDefaultReactiveDomain()
 )
 
@@ -109,8 +110,10 @@ its value contract.}
 \item{multiple}{For \code{\link[=update_shad_combobox]{update_shad_combobox()}}, whether the combobox is in
 multiple mode (forces an array even for a single value).}
 
-\item{collapsed, mobile_open}{For \code{\link[=update_shad_sidebar]{update_shad_sidebar()}}; \code{NULL} leaves that
-facet unchanged.}
+\item{collapsed, mobile_open, active}{For \code{\link[=update_shad_sidebar]{update_shad_sidebar()}}; \code{NULL}
+leaves that facet unchanged. \code{active} selects the \code{\link[=shad_sidebar_item]{shad_sidebar_item()}}
+with that value, so navigating from elsewhere (a command palette, a link)
+moves the rail too.}
 
 \item{max}{For \code{\link[=update_shad_progress]{update_shad_progress()}}, the maximum value.}
 

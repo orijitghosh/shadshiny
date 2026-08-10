@@ -143,3 +143,40 @@ test_that("navbar shell honours the selected tab", {
                              selected = "b"))
   expect_match(h, 'data-value="b"')
 })
+
+# --- CSS contract -------------------------------------------------------------
+
+test_that("each primitive resets its own custom properties", {
+  # Custom properties INHERIT. Without a reset, a stack nested inside a
+  # horizontal stack picks up its parent's --shad-stack-dir and lays itself out
+  # sideways; the same goes for gap, alignment and every grid knob. Each rule
+  # therefore declares its variables `initial`, which discards the inherited
+  # value and lets the var() fallback apply (an inline style still wins).
+  css <- readLines(system.file("assets", "components", "layout", "layout.css",
+                               package = "shadshiny"), warn = FALSE)
+  css <- paste(css, collapse = "\n")
+
+  rule <- function(selector) {
+    m <- regmatches(css, regexpr(
+      paste0("[.]", sub("^[.]", "", selector), "[[:space:]]*[{][^}]*[}]"), css))
+    expect_length(m, 1L)
+    m
+  }
+
+  stack <- rule(".shad-stack")
+  for (v in c("dir", "gap", "align", "justify")) {
+    expect_match(stack, paste0("--shad-stack-", v, ": initial"), fixed = TRUE)
+  }
+
+  grid <- rule(".shad-grid")
+  for (v in c("gap", "align", "min", "template", "cols",
+              "cols-sm", "cols-md", "cols-lg")) {
+    expect_match(grid, paste0("--shad-grid-", v, ": initial"), fixed = TRUE)
+  }
+
+  container <- rule(".shad-container")
+  expect_match(container, "--shad-container-max: initial", fixed = TRUE)
+  expect_match(container, "--shad-container-pad: initial", fixed = TRUE)
+
+  expect_match(rule(".shad-grid__item"), "--shad-span: initial", fixed = TRUE)
+})
