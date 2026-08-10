@@ -61,6 +61,27 @@
     isTouchPointer(ev) {
       return ev.pointerType === "touch" || ev.pointerType === "pen";
     },
+    /**
+     * Scroll `container` just enough to reveal `item`, and scroll NOTHING else.
+     *
+     * This is the reason not to use scrollIntoView(): that walks every
+     * scrollable ancestor up to the document, so highlighting an item inside a
+     * component that sits in ordinary document flow drags the whole page to it.
+     * An inline command palette used to jump the page to itself on load and on
+     * every keystroke exactly this way.
+     *
+     * Honours the container's scroll-padding-block-start, so an item does not
+     * come to rest under a sticky header inside the list.
+     */
+    keepInView(container, item) {
+      if (!container || !item) return;
+      const pad = parseFloat(
+        getComputedStyle(container).scrollPaddingBlockStart) || 0;
+      const c = container.getBoundingClientRect();
+      const i = item.getBoundingClientRect();
+      if (i.top < c.top + pad) container.scrollTop -= c.top + pad - i.top;
+      else if (i.bottom > c.bottom - pad) container.scrollTop += i.bottom - c.bottom + pad;
+    },
     clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
   };
 
@@ -294,6 +315,8 @@
       if (items.length === 0) { ev.preventDefault(); return; }
       const first = items[0], last = items[items.length - 1];
       const active = document.activeElement;
+      // Tab wrap-around scrolls by design: the panel may be taller than its
+      // viewport, and the newly focused control has to be visible.
       if (ev.shiftKey && (active === first || !container.contains(active))) {
         ev.preventDefault(); last.focus();
       } else if (!ev.shiftKey && (active === last || !container.contains(active))) {

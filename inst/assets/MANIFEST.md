@@ -29,6 +29,14 @@ Layout (CSS-only): `layout` — `container` / `stack` / `grid` primitives (+ `gr
 - `kitchen-sink.html` — every component/variant, sticky toolbar with dark toggle (flips `.dark` + `data-bs-theme` on `<html>`) and theme-preset select (`data-shad-theme` on the page root); loads all 49 CSS + runtime + 34 JS in dependency order; `shad.autoInit()`.
 
 ## Deviations & decisions
+0. **Scrolling and focus are never page-level side effects.** No component
+   calls `scrollIntoView()` — it walks *every* scrollable ancestor, so a
+   component in ordinary document flow drags the whole page to itself (this is
+   what opened the kitchen sink at "Tier 3"). Use `shad.util.keepInView(container,
+   item)`, which scrolls that one container. Pointer-driven `focus()` passes
+   `{preventScroll: true}`: the user can already see what they clicked.
+   Keyboard roving focus (tree, rating, focus-trap Tab wrap) deliberately does
+   NOT, because the user needs to see where focus landed.
 1. **No `@layer`.** Bootstrap/bslib ships unlayered CSS and unlayered beats layered regardless of specificity; all shad rules are unlayered and class-scoped instead.
 2. **alert-dialog factory lives in `dialog/dialog.js`** (registers both `dialog` and `alert-dialog`; sets `window.__shadDialogLoaded`). The alert-dialog dir's css/js are documented thin shims — load dialog's files alongside.
 3. **`context-menu` and `menubar` reuse `.shad-menu*` CSS and `shad.__menuCore`** from dropdown-menu — load `dropdown-menu.css`/`.js` first.

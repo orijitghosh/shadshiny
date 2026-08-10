@@ -58,6 +58,37 @@ component library into a full application toolkit.
   `renderUI()` / `insertUI()` were left un-wired, and the pkgdown gallery
   previews (no Shiny) failed the same way. Components already on the page still
   worked, which masked it: the runtime self-initialises on `DOMContentLoaded`.
+* **Layout primitives:** `shad_container()`, `shad_stack()`, `shad_grid()` /
+  `shad_grid_item()`, plus the page shells `shad_page_sidebar()` and
+  `shad_page_navbar()`. CSS-only; spacing arguments take a token step
+  (`gap = 4` is `var(--shad-space-4)`) or any CSS length, and `shad_grid()`
+  handles responsive columns with an outward `var()` fallback chain rather than
+  a utility-class grid system.
+* **Server-created overlays:** `shad_show_dialog()` / `shad_remove_dialog()`
+  build a dialog, alert dialog, sheet or drawer in the server and show it, the
+  way `shiny::showModal()` does. Transient by default: the overlay removes
+  itself once it closes.
+* **Native mini-charts:** `shad_sparkline()` (line/area/bar/step) and
+  `shad_mini_donut()` — inline SVG painted with the chart tokens, so they follow
+  dark mode and preset switches in CSS with no re-render. Fills
+  `shad_value_box(sparkline=)`.
+* **Command palette:** `shad_command_palette()` takes its items as data,
+  `shad_command_trigger()` opens one from anywhere, and `update_shad_command()`
+  refreshes the items from the server. Read selections from
+  `input$<id>_event` — `input$<id>` alone cannot tell one selection of
+  "Settings" from two.
+* **Bug fix (command dialog):** `shad_command(dialog = TRUE, hotkey = FALSE)`
+  rendered a visible inline palette — the asset infers dialog mode from
+  `data-hotkey` or `data-dialog`, and the constructor emitted neither.
+* **Bug fix (runtime):** opening a command dialog destroyed it. `shad.portal()`
+  moves the root itself to `<body>`, and the runtime's MutationObserver read
+  that removal as an unmount. A move is a removal plus an insertion, so the
+  teardown now skips nodes still connected to the document.
+* **Scroll/focus sweep:** no component calls `scrollIntoView()` any more — it
+  walks every scrollable ancestor, so a component in ordinary document flow
+  drags the whole page to itself. Highlights now scroll their own container via
+  `shad.util.keepInView()`, and pointer-driven `focus()` passes
+  `preventScroll`. Keyboard roving focus still scrolls, deliberately.
 * **Bug fix (command):** an inline `shad_command()` scrolled the page to itself
   on load, and again on every keystroke. Its highlight used
   `scrollIntoView()`/`scrollIntoViewIfNeeded()`, which scroll *every* scrollable

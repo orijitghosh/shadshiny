@@ -106,7 +106,9 @@
       if (item) {
         item.setAttribute("data-highlighted", "");
         input.setAttribute("aria-activedescendant", item.id || (item.id = shad.uid("opt")));
-        if (scroll !== false) item.scrollIntoView({ block: "nearest" });
+        // list only -- see shad.util.keepInView; scrollIntoView() would also
+        // scroll the page behind the open panel
+        if (scroll !== false) shad.util.keepInView(list, item);
       } else {
         input.removeAttribute("aria-activedescendant");
       }
@@ -136,7 +138,7 @@
         const changed = v !== value;
         value = v;
         renderItems(); renderTrigger();
-        doClose(); trigger.focus();
+        doClose(); trigger.focus({ preventScroll: true });
         if (changed) emit();
       }
     }
@@ -154,12 +156,12 @@
       disposeDismiss = shad.dismiss.push({
         el: content,
         extraElements: [trigger],
-        onDismiss: () => { doClose(); trigger.focus(); }
+        onDismiss: () => { doClose(); trigger.focus({ preventScroll: true }); }
       });
       trigger.setAttribute("aria-expanded", "true");
       input.value = "";
       filter();
-      input.focus();
+      input.focus({ preventScroll: true });
       shad.util.emit(root, "shad:open", {});
     }
     function doClose() {
