@@ -5,10 +5,11 @@ Authors@R:
     person("Arijit", "Ghosh", email = "arijitghosh2009@gmail.com",
            role = c("aut", "cre"))
 Description: A complete port of the 'shadcn/ui' design system for 'Shiny'
-    applications: 70 accessible, themeable components -- including a
-    full-featured data table, dashboard value boxes and chart theming,
-    a server-side form validator, custom and registry-imported themes, and
-    a streaming chat module -- implemented in framework-free CSS and vanilla
+    applications: 72 accessible, themeable components -- including a
+    full-featured data table, layout and page-shell primitives, dashboard
+    value boxes, sparklines and chart theming, a server-side form validator,
+    custom and registry-imported themes, and a streaming chat module --
+    implemented in framework-free CSS and vanilla
     JavaScript, wrapped as native R functions with 'Shiny' input bindings.
     Coexists with 'Bootstrap 5' and 'bslib', including automatic dark-mode
     synchronization.

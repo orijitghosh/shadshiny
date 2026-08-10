@@ -121,9 +121,34 @@ shad_dialog(
 )
 ```
 
+A dialog can also be built in the server and shown with `shad_show_dialog()`,
+the way `shiny::showModal()` works — useful when its content depends on what the
+user just did.
+
+## Laying out a page
+
+`shad_container()`, `shad_stack()` and `shad_grid()` handle page layout on the
+same spacing scale the components use internally:
+
+```{r}
+shad_container(
+  shad_stack(
+    shad_grid(kpi_one, kpi_two, kpi_three, min_width = "14rem"),
+    shad_card(shad_card_content("Details")),
+    gap = 6
+  ),
+  size = "lg"
+)
+```
+
+For a whole app, `shad_page_navbar()` and `shad_page_sidebar()` replace
+`page_shad()` and assemble the shell — bar, navigation and scrolling main
+region — in one call.
+
 ## Where to next
 
 - `vignette("theming")` — the token system, presets, and dark mode.
+- `vignette("layout")` — containers, grids, and the page shells.
 - `vignette("overlays-and-server")` — dialogs, confirm flows, and toasts.
 - `vignette("migrating-inputs")` — moving from base Shiny inputs.
 - `shad_run_example("kitchen-sink")` — a live tour of every component.

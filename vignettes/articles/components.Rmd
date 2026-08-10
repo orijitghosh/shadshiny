@@ -21,8 +21,8 @@ New to the package? Read [Get started](shadshiny.html) first, then browse here.
 <a href="gallery-display.html"><strong>Display &amp; typography</strong><span>Buttons, badges, avatars, cards, alerts, tables, progress, and the type scale.</span></a>
 <a href="gallery-inputs.html"><strong>Form inputs</strong><span>Text, select, combobox, checkbox, switch, radio, toggle, slider, OTP, dates.</span></a>
 <a href="gallery-overlays.html"><strong>Overlays &amp; menus</strong><span>Dialog, sheet, drawer, popover, tooltip, dropdown, context-menu, command.</span></a>
-<a href="gallery-navigation.html"><strong>Navigation &amp; structure</strong><span>Tabs, accordion, pagination, carousel, resizable, and the sidebar shell.</span></a>
-<a href="gallery-data.html"><strong>Data, dashboards &amp; flow</strong><span>Data table, value boxes, chart shells, timeline, stepper, tree, rating, dropzone.</span></a>
+<a href="gallery-navigation.html"><strong>Navigation &amp; structure</strong><span>Tabs, accordion, pagination, carousel, resizable, container/stack/grid, page shells, sidebar.</span></a>
+<a href="gallery-data.html"><strong>Data, dashboards &amp; flow</strong><span>Data table, value boxes, sparklines, donuts, chart shells, timeline, stepper, tree, rating, dropzone.</span></a>
 <a href="gallery-chat.html"><strong>Chat &amp; AI kit</strong><span>Bubbles, messages, typing indicator, attachments, and the sticky scroller.</span></a>
 <a href="icons.html"><strong>Icons</strong><span>The full icon set, live, with names you pass to <code>icon =</code>.</span></a>
 </div>

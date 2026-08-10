@@ -166,11 +166,58 @@ demo(
 )
 ```
 
+## Dialogs built in the server
+
+Everything above declares its overlay in the UI. When the content depends on
+what just happened — the row that was clicked, the upload that failed — build
+the dialog in the server instead and show it, the way `shiny::showModal()`
+works:
+
+```r
+observeEvent(input$delete, {
+  shad_show_dialog(shad_dialog(
+    "confirm",
+    title = paste("Delete", input$project, "?"),
+    description = "This cannot be undone.",
+    footer = tagList(
+      shad_dialog_close_button(),
+      shad_button(inputId = "confirm_go", "Delete", variant = "destructive")
+    )
+  ))
+})
+```
+
+It is appended to `<body>`, opens itself, and by default removes itself once it
+closes — nothing to clean up and no ids left behind. Inputs inside it are live
+while it is open, so read them in the observer; pass `transient = FALSE` to keep
+the overlay (and its values) around for `shad_dialog_open()`.
+`shad_show_dialog()` also takes `shad_alert_dialog()`, `shad_sheet()` and
+`shad_drawer()`, and `shad_remove_dialog()` closes one from the server.
+
 ## Command palette
 
-`shad_command()` is a searchable action list. Inline it (below) or set
-`dialog = TRUE` for a ⌘K spotlight overlay you open from the server with the
-`shadshiny:invoke` message. Type to filter.
+`shad_command()` is a searchable action list. Inline it (below) or use
+`shad_command_palette()` for the ⌘K spotlight overlay — same component, items
+supplied as data:
+
+```r
+shad_command_palette("palette", items = list(
+  "Go to"   = c(Dashboard = "dashboard", Reports = "reports"),
+  "Actions" = list(list(value = "new", label = "New report", shortcut = "N"))
+))
+
+# a trigger for people who don't know the shortcut
+shad_command_trigger("palette")
+
+# observe input$palette_event, NOT input$palette: Shiny drops a repeat of the
+# same value, so picking "Reports" twice would only fire once
+observeEvent(input$palette_event, { ... })
+```
+
+`update_shad_command()` swaps the items from the server — recent documents,
+search hits, commands gated on the signed-in user.
+
+Inline, the same component looks like this. Type to filter.
 
 ```{r}
 demo(

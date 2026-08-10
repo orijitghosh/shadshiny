@@ -76,6 +76,15 @@ reference:
       - update_shad_theme
       - shad_run_example
 
+  - title: Layout & page shells
+    desc: Container, stack, and grid primitives, plus whole-page shells.
+    contents:
+      - shad_container
+      - shad_stack
+      - shad_grid
+      - shad_page_sidebar
+      - shad_page_navbar
+
   - title: Tier 1 — display & typography
     desc: Non-interactive display components and typographic helpers.
     contents:
@@ -205,6 +214,7 @@ reference:
       - shad_command_group
       - shad_command_item
       - shad_command_separator
+      - shad_command_palette
 
   - title: Tier 3 — navigation & structure
     desc: Tabs, accordion, pagination, carousel, and the sidebar layout family.
@@ -257,6 +267,7 @@ reference:
       - update_shad_rating
       - update_shad_number_input
       - update_shad_form_field
+      - update_shad_command
 
   - title: Server — overlays & toast
     desc: Open/close overlays and raise toast notifications from the server.
@@ -266,6 +277,8 @@ reference:
       - shad_sheet_open
       - shad_drawer_open
       - shad_popover_open
+      - shad_show_dialog
+      - shad_remove_dialog
       - shad_sidebar_toggle
       - shad_message_scroller_to_bottom
       - shad_toast
@@ -288,6 +301,8 @@ reference:
     desc: KPI cards, chart wrappers, timelines, and plot theming.
     contents:
       - shad_value_box
+      - shad_sparkline
+      - shad_mini_donut
       - shad_chart_container
       - shad_timeline
       - shad_timeline_item

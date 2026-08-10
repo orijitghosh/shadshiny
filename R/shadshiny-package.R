@@ -1,6 +1,6 @@
 #' shadshiny: 'shadcn/ui' Components for 'Shiny'
 #'
-#' A complete port of the shadcn/ui design system for Shiny: 49 accessible,
+#' A complete port of the shadcn/ui design system for Shiny: 72 accessible,
 #' themeable components implemented in framework-free CSS and vanilla
 #' JavaScript, wrapped as native R functions with Shiny input bindings. It
 #' coexists with Bootstrap 5 and bslib, including automatic dark-mode

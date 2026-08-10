@@ -1,8 +1,9 @@
 ---
 title: "Gallery: data, dashboards & flow"
 description: >
-  The V2 kit — data table, value boxes, chart containers, timelines, stepper,
-  tree, rating, number input and dropzone — rendered live with their source.
+  The V2 kit — data table, value boxes, sparklines, donuts, chart containers,
+  timelines, stepper, tree, rating, number input and dropzone — rendered live
+  with their source.
 ---
 
 ```{r setup, include = FALSE}
@@ -100,6 +101,60 @@ demo({
                  delta_direction = "up", icon = "activity",
                  caption = "Lower is better")
   shad_value_box("573", "Active now", icon = "zap", size = "sm")
+})
+```
+
+## Sparkline
+
+`shad_sparkline()` is a tiny inline chart with no axes, no labels, and no
+plotting stack — one SVG path (or a row of bars) that stretches to fill its
+box. Every mark is painted with the theme's chart tokens, so the light/dark
+switch at the top of this page restyles these in CSS, with no re-render.
+
+```{r}
+demo({
+  shad_sparkline(c(31, 40, 28, 51, 42, 62, 58, 70), type = "line")
+  shad_sparkline(c(31, 40, 28, 51, 42, 62, 58, 70), type = "area")
+  shad_sparkline(c(31, 40, 28, 51, 42, 62, 58, 70), type = "bar", color = 2)
+  shad_sparkline(c(31, 40, 28, 51, 42, 62, 58, 70), type = "step", color = 3)
+})
+```
+
+Non-finite values break the series rather than being interpolated across, and
+bars hang off a zero baseline once the data crosses it:
+
+```{r}
+demo({
+  shad_sparkline(c(4, 9, NA, NA, 6, 12, 8), type = "area")
+  shad_sparkline(c(-4, -1, 2, 5, -3, 6), type = "bar", color = 4)
+})
+```
+
+Dropped into `shad_value_box(sparkline = )` it fills the strip at the foot of
+the card:
+
+```{r}
+demo({
+  shad_value_box("$45,231", "Revenue", delta = "+20.1%",
+                 sparkline = shad_sparkline(c(31, 40, 28, 51, 42, 62),
+                                            type = "area"))
+  shad_value_box("2,350", "Subscribers", delta = "+180",
+                 sparkline = shad_sparkline(c(12, 19, 15, 27, 24, 31),
+                                            type = "bar", color = 2))
+})
+```
+
+## Mini donut
+
+`shad_mini_donut()` shows a few parts of a whole, with optional content in the
+middle. `thickness = 1` gives a pie.
+
+```{r}
+demo({
+  shad_mini_donut(c(62, 24, 14), center = "62%")
+  shad_mini_donut(c(3, 1), size = "5rem", thickness = 0.5)
+  shad_mini_donut(c(3, 1), size = "5rem", thickness = 1)
+  shad_mini_donut(c(1, 1, 1, 1, 1), size = "5rem")
 })
 ```
 

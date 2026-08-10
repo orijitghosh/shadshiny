@@ -2,7 +2,8 @@
 title: "Gallery: navigation & structure"
 description: >
   Tier 3 layout — tabs, accordion, collapsible, pagination, carousel,
-  scroll-area, resizable panels and the sidebar family — rendered live.
+  scroll-area, resizable panels, the layout primitives and the sidebar family —
+  rendered live.
 ---
 
 ```{r setup, include = FALSE}
@@ -141,6 +142,90 @@ demo(
   )
 )
 ```
+
+## Layout primitives
+
+`shad_container()`, `shad_stack()` and `shad_grid()` cover page layout without
+hand-written CSS. Spacing takes a token step — `gap = 4` is
+`var(--shad-space-4)`, the same scale the components use internally — or any CSS
+length.
+
+`shad_grid(min_width = )` fits as many equal columns as will fit, with no
+breakpoints to maintain. **Resize the window** to watch this reflow:
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_grid(
+    shad_value_box("$45,231", "Revenue", delta = "+20.1%"),
+    shad_value_box("2,350", "Subscribers", delta = "+180"),
+    shad_value_box("573", "Active now"),
+    min_width = "13rem"
+  )
+)
+```
+
+For an exact column count, pass `cols` — optionally per breakpoint
+(`base`, `sm` 40rem, `md` 48rem, `lg` 64rem), where each falls back to the one
+below it. `shad_grid_item(span = )` spans cells, and `template` takes a raw
+track list:
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_grid(
+    shad_card(shad_card_content("1fr")),
+    shad_card(shad_card_content("2fr")),
+    shad_grid_item(shad_card(shad_card_content("full row")), span = "full"),
+    template = "1fr 2fr"
+  )
+)
+```
+
+`shad_stack()` is the one-dimensional version — a column by default, a row when
+asked, with `align`, `justify`, `wrap` and `fill`:
+
+```{r}
+demo(
+  columns = TRUE,
+  shad_stack(
+    shad_button("Save"),
+    shad_button("Cancel", variant = "outline"),
+    shad_button("Delete", variant = "destructive"),
+    direction = "horizontal", gap = 2, wrap = TRUE
+  )
+)
+```
+
+## Page shells
+
+Two wrappers assemble a whole page in one call, taking the `page_shad()`
+theming arguments and wrapping content in a `shad_container()` unless you pass
+`container = FALSE`.
+
+```r
+# a title bar carrying a tab strip; input$nav is the active view
+ui <- shad_page_navbar(
+  shad_tab("overview", "Overview", overview_ui),
+  shad_tab("reports",  "Reports",  reports_ui),
+  title = "Acme", inputId = "nav",
+  header_end = bslib::input_dark_mode()
+)
+
+# the application frame: collapsible sidebar, bar with its trigger, scrolling main
+ui <- shad_page_sidebar(
+  sidebar = shad_sidebar(
+    shad_sidebar_group("Platform",
+      shad_sidebar_item("home", "Home", icon = "home", active = TRUE))),
+  inputId = "shell", title = "Acme",
+  shad_grid(kpi_one, kpi_two, min_width = "14rem")
+)
+```
+
+The two differ in what scrolls. The navbar shell lets the window scroll and pins
+its bar with `position: sticky`; the sidebar shell takes the viewport height and
+scrolls its main region instead, because a sidebar that scrolls away is a
+sidebar with a drifting rail and footer.
 
 ## Sidebar layout
 
