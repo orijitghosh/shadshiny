@@ -58,6 +58,13 @@ component library into a full application toolkit.
   `renderUI()` / `insertUI()` were left un-wired, and the pkgdown gallery
   previews (no Shiny) failed the same way. Components already on the page still
   worked, which masked it: the runtime self-initialises on `DOMContentLoaded`.
+* **Bug fix (command):** an inline `shad_command()` scrolled the page to itself
+  on load, and again on every keystroke. Its highlight used
+  `scrollIntoView()`/`scrollIntoViewIfNeeded()`, which scroll *every* scrollable
+  ancestor — harmless in dialog mode, but an inline palette is part of the
+  document, so a page containing one opened wherever the palette sat (in the
+  kitchen sink, a long way down at *Tier 3 — overlays*). The highlight now
+  scrolls only the command list itself.
 * **Gallery:** a new *Data, dashboards & flow* page renders the V2 kit live —
   data table, value boxes, chart container, timeline, stepper, tree, rating,
   number input, dropzone, and the form-messaging components.

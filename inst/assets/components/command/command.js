@@ -43,14 +43,23 @@
       it.id = it.id || shad.uid("cmd-item");
     });
 
+    /* Keep the highlight visible by scrolling the list itself. scrollIntoView()
+       walks every scrollable ancestor, so on an inline command it drags the
+       whole page down to the palette — on load, and again on every keystroke. */
+    function keepInView(item) {
+      const pad = parseFloat(getComputedStyle(list).scrollPaddingBlockStart) || 0;
+      const lr = list.getBoundingClientRect(), ir = item.getBoundingClientRect();
+      if (ir.top < lr.top + pad) list.scrollTop -= lr.top + pad - ir.top;
+      else if (ir.bottom > lr.bottom - pad) list.scrollTop += ir.bottom - lr.bottom + pad;
+    }
+
     function highlight(item) {
       allItems().forEach((it) => {
         if (it === item) {
           it.setAttribute("data-highlighted", "");
           it.setAttribute("aria-selected", "true");
           input.setAttribute("aria-activedescendant", it.id);
-          it.scrollIntoViewIfNeeded ? it.scrollIntoViewIfNeeded(false)
-            : it.scrollIntoView({ block: "nearest" });
+          keepInView(it);
         } else {
           it.removeAttribute("data-highlighted");
           it.removeAttribute("aria-selected");
