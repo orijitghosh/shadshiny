@@ -310,7 +310,8 @@ demo(
 
 ## Form messaging
 
-*A shadshiny addition: no shadcn/ui counterpart.*
+*`shad_form_summary()` is a shadshiny addition; the rest mirrors shadcn/ui's
+Form messaging.*
 
 The pieces `shad_validator()` drives from the server. In an app you rarely place
 these by hand — the validator sets them for you — but they're plain components.

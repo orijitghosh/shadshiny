@@ -170,8 +170,7 @@ reference:
 
   - title: Chat & AI kit
     desc: Streaming transcript primitives — bubbles, messages, attachments,
-      markers, and a stick-to-bottom scroller. Shadshiny additions, with no
-      shadcn/ui counterpart.
+      markers, and a stick-to-bottom scroller.
     contents:
       - shad_message
       - shad_message_group
@@ -332,8 +331,9 @@ reference:
       - shad_date_presets
 
   - title: Forms & validation
-    desc: A server-side validator with shadcn-styled field messaging. A
-      shadshiny addition; shadcn/ui validates on the client instead.
+    desc: A server-side validator with shadcn-styled field messaging. The
+      shadcn/ui equivalent validates on the client; `shad_form_summary()` has no
+      counterpart at all.
     contents:
       - shad_validator
       - shad_rules

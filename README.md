@@ -123,7 +123,7 @@ unmarked throughout.
 |---|---|---|---|
 | `shad_input` | `shad_textarea` | `shad_checkbox` | `shad_switch` |
 | `shad_radio_group` | `shad_toggle` | `shad_toggle_group` | `shad_slider` |
-| `shad_select` | `shad_native_select` `+` | `shad_combobox` | `shad_input_otp` |
+| `shad_select` | `shad_native_select` | `shad_combobox` | `shad_input_otp` |
 | `shad_calendar` | `shad_date_picker` | `shad_form_field` | `shad_input_group` |
 | `shad_number_input` `+` | `shad_rating` `+` | `shad_dropzone` `+` | |
 
@@ -151,15 +151,15 @@ unmarked throughout.
 | | | | |
 |---|---|---|---|
 | `shad_data_table` | `shad_value_box` `+` | `shad_chart_container` | `shad_timeline` `+` |
-| `shad_sparkline` `+` | `shad_mini_donut` `+` | `shad_validator` `+` | `shad_form_message` `+` |
+| `shad_sparkline` `+` | `shad_mini_donut` `+` | `shad_validator` | `shad_form_message` |
 | `shad_form_summary` `+` | `shad_theme` | | |
 
-**Chat / AI kit** (all `+`)
+**Chat / AI kit**
 
 | | | | |
 |---|---|---|---|
 | `shad_message` | `shad_bubble` | `shad_attachment` | `shad_marker` |
-| `shad_message_scroller` | `shad_chat_ui` | `shad_chat_server` | |
+| `shad_message_scroller` | `shad_chat_ui` `+` | `shad_chat_server` `+` | |
 
 Every stateful component is namespaced-module safe and has a matching
 `update_shad_*()` server helper where it holds a value. Overlays add
