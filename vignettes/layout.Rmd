@@ -35,24 +35,58 @@ shad_card(
 )
 ```
 
-## Grids and flex
+## Container, stack, grid
 
-There is no bespoke grid component — use CSS. A responsive card grid is a few
-lines:
+Three primitives cover almost all page layout. They are CSS-only wrappers: each
+argument becomes a custom property on the root, so there is no utility-class
+soup and no JavaScript.
+
+`shad_container()` is the outermost wrapper — a centred, max-width column:
 
 ```{r}
-tags$div(
-  style = paste(
-    "display:grid;gap:1rem;",
-    "grid-template-columns:repeat(auto-fill, minmax(16rem, 1fr))"
-  ),
-  card_one, card_two, card_three
+shad_container(page_content, size = "lg")   # sm/md/lg/xl/full, or a CSS length
+```
+
+`shad_stack()` is "these things, spaced" — a flex column by default, a row when
+you ask:
+
+```{r}
+shad_stack(section_one, section_two, gap = 6)
+
+shad_stack(
+  shad_button("Save"), shad_button("Cancel", variant = "outline"),
+  direction = "horizontal", gap = 2, align = "center"
 )
 ```
 
-For a KPI row, the same pattern with fixed columns, or flex with `flex:1`
-children. Because spacing tokens (`--shad-space-*`) and radii (`--shad-radius-*`)
-are shared, hand-written layout stays visually consistent with the components.
+`shad_grid()` handles two dimensions. Reach for `min_width` first — it fits as
+many equal columns as will fit, with no breakpoints to reason about:
+
+```{r}
+shad_grid(card_one, card_two, card_three, min_width = "16rem")
+```
+
+When you want an exact column count, pass `cols`, optionally per breakpoint
+(`base`, `sm` 40rem, `md` 48rem, `lg` 64rem). Each breakpoint falls back to the
+one below it, so you only name the ones that change:
+
+```{r}
+shad_grid(a, b, c, d, cols = c(base = 1, md = 2, lg = 4))
+```
+
+`template` takes an explicit track list, and `shad_grid_item()` spans cells:
+
+```{r}
+shad_grid(
+  main_panel,
+  shad_grid_item(wide_chart, span = "full"),
+  template = "2fr 1fr"
+)
+```
+
+Gaps and padding accept a **spacing token step** — `gap = 4` is
+`var(--shad-space-4)`, the same scale the components use internally — or any CSS
+length when you need to escape the scale.
 
 ## Tabs
 
@@ -74,10 +108,45 @@ shad_tabs(
 > `outputOptions(output, "id", suspendWhenHidden = FALSE)`. The same applies to
 > outputs inside a dialog or sheet that opens later.
 
-## The sidebar shell
+## Page shells
 
-`shad_sidebar_layout()` is the full application frame: a collapsible sidebar plus
-a main region. Build the sidebar from grouped, icon'd, badgeable items.
+Two wrappers assemble a whole page in one call. Both take the `page_shad()`
+theming arguments (`theme_preset`, `dark`, `theme`) and wrap their content in a
+`shad_container()` unless you pass `container = FALSE`.
+
+`shad_page_navbar()` — a title bar carrying a tab strip, panels below. The
+window scrolls; the bar is sticky. `input$<inputId>` is the active tab.
+
+```{r}
+ui <- shad_page_navbar(
+  shad_tab("overview", "Overview", overview_ui),
+  shad_tab("reports",  "Reports",  reports_ui),
+  title = "Acme", inputId = "nav",
+  header_end = bslib::input_dark_mode()
+)
+```
+
+`shad_page_sidebar()` — the application frame: a collapsible sidebar, a bar with
+its trigger, and a scrolling main region. This shell takes the full viewport
+height and scrolls its main region rather than the window, so the sidebar rail
+and footer stay put.
+
+```{r}
+ui <- shad_page_sidebar(
+  sidebar = shad_sidebar(
+    shad_sidebar_group("Platform",
+      shad_sidebar_item("home",  "Home",  icon = "home", active = TRUE),
+      shad_sidebar_item("inbox", "Inbox", icon = "mail", badge = "3"))),
+  inputId = "shell", title = "Acme",
+  shad_grid(kpi_one, kpi_two, kpi_three, min_width = "14rem")
+)
+```
+
+## The sidebar shell, by hand
+
+`shad_page_sidebar()` is a thin wrapper over `shad_sidebar_layout()`. Use the
+layout directly when the sidebar is one region of a larger page rather than the
+page itself.
 
 ```{r}
 sidebar <- shad_sidebar(
