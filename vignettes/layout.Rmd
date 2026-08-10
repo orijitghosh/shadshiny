@@ -255,7 +255,7 @@ shad_resizable(
 useful for long lists inside a card or a chat transcript. For a growing
 conversation that should pin to the bottom, reach for
 `shad_message_scroller()` instead (see the
-[chat gallery](../articles/gallery-chat.html)).
+[chat gallery](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html)).
 
 ## Separators
 
@@ -273,7 +273,7 @@ tags$div(style = "display:flex;align-items:center;gap:0.75rem",
 
 ## Where to next
 
-- [Gallery: navigation & structure](../articles/gallery-navigation.html) — these
+- [Gallery: navigation & structure](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.html) — these
   components, live.
 - [Server API](server-api.html) — driving tabs, sidebars and overlays.
 - `shad_run_example("02-analytics-dashboard")` — a full sidebar + menubar shell.

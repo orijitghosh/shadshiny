@@ -14,7 +14,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE, purl = FALS
 shadshiny ships two levels of chat. The **chat kit** (`shad_bubble()`,
 `shad_message()`, `shad_message_scroller()`, `shad_attachment()`,
 `shad_marker()`) is a set of transcript primitives you compose yourself — see
-[Gallery: chat](../articles/gallery-chat.html). This guide is about the level
+[Gallery: chat](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html). This guide is about the level
 above it: `shad_chat_ui()` / `shad_chat_server()`, a Shiny module that gives
 you the whole thing — scroller, composer, streaming, Markdown — for two calls.
 
@@ -163,5 +163,5 @@ commented in the source.
 
 ## See also
 
-- [Gallery: chat](../articles/gallery-chat.html) — the primitives, if you want
+- [Gallery: chat](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html) — the primitives, if you want
   to build a transcript by hand instead.

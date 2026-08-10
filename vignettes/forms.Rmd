@@ -288,6 +288,6 @@ shinyApp(ui, server)
 ## Where to next
 
 - [Server API](server-api.html) — updating inputs, overlays and toasts.
-- [Gallery: form inputs](../articles/gallery-inputs.html) — every input, live.
+- [Gallery: form inputs](https://orijitghosh.github.io/shadshiny/articles/gallery-inputs.html) — every input, live.
 - [Migrating from base Shiny inputs](migrating-inputs.html).
 ```

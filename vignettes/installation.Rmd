@@ -127,7 +127,7 @@ directories.
 ## Where to next
 
 - [Get started](shadshiny.html) — a fuller tour of reading and updating values.
-- [Component gallery](../articles/components.html) — every component, live.
+- [Component gallery](https://orijitghosh.github.io/shadshiny/articles/components.html) — every component, live.
 - [Theming](theming.html) — presets, tokens, and dark mode.
 - [Forms & validation](forms.html) — build and validate real forms.
 ```

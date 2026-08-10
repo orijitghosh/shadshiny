@@ -110,7 +110,7 @@ shad_command_palette <- function(inputId, items = NULL, ..., hotkey = "mod+k",
 #' @param variant,size Passed to [shad_button()].
 #' @export
 shad_command_trigger <- function(id, label = "Search...", icon = "search",
-                                 shortcut = "⌘K", variant = "outline",
+                                 shortcut = "\u2318K", variant = "outline",
                                  size = "sm", class = NULL, ...) {
   # The shortcut hint goes through `label`, not `...`: shad_button() renders
   # extra children before the label, and the hint belongs at the end.
