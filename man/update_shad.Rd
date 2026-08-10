@@ -129,6 +129,8 @@ of a component is a non-goal — re-render with \code{\link[shiny:renderUI]{shin
 Other shadshiny server API:
 \code{\link[=shad_message_scroller_to_bottom]{shad_message_scroller_to_bottom()}},
 \code{\link{shad_overlay_server}},
+\code{\link[=shad_remove_dialog]{shad_remove_dialog()}},
+\code{\link[=shad_show_dialog]{shad_show_dialog()}},
 \code{\link[=shad_toast]{shad_toast()}}
 }
 \concept{shadshiny server API}

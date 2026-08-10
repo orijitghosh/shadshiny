@@ -27,6 +27,8 @@ rows (e.g. via \code{\link[shiny:insertUI]{shiny::insertUI()}}) to follow a stre
 \seealso{
 Other shadshiny server API:
 \code{\link{shad_overlay_server}},
+\code{\link[=shad_remove_dialog]{shad_remove_dialog()}},
+\code{\link[=shad_show_dialog]{shad_show_dialog()}},
 \code{\link[=shad_toast]{shad_toast()}},
 \code{\link{update_shad}}
 }
