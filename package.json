@@ -1,0 +1,15 @@
+{
+  "name": "shadshiny-assets",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Dev-only test harness for shadshiny's browser assets. Node is NOT required to install or use the R package.",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1",
+    "vitest": "^2.1.8"
+  }
+}

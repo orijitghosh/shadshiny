@@ -31,3 +31,6 @@ Thumbs.db
 # testthat CheckReporter artifacts
 tests/testthat/_problems/
 tests/testthat/testthat-problems.rds
+
+# JS test harness (dev-only; the R package never needs Node)
+node_modules/

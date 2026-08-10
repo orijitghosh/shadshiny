@@ -14,3 +14,9 @@
 ^tests/testthat/_snaps$
 ^vignettes/articles$
 ^vignettes/_common\.R$
+^package\.json$
+^package-lock\.json$
+^node_modules$
+^vitest\.config\.js$
+^tests/js$
+^\.claude$
