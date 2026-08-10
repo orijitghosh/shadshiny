@@ -43,6 +43,8 @@ Timeline item
 \seealso{
 Other shadshiny dashboard:
 \code{\link[=shad_chart_container]{shad_chart_container()}},
+\code{\link[=shad_mini_donut]{shad_mini_donut()}},
+\code{\link[=shad_sparkline]{shad_sparkline()}},
 \code{\link[=shad_timeline]{shad_timeline()}},
 \code{\link[=shad_value_box]{shad_value_box()}}
 }

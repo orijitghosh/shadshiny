@@ -39,6 +39,9 @@ tz <- list(
 # formatter has something to map.
 dt_data <- head(mtcars[order(-mtcars$mpg), c("mpg", "cyl", "hp", "wt")], 12)
 dt_data <- data.frame(model = rownames(dt_data), dt_data, row.names = NULL)
+# Shared series for the sparkline demos.
+trend <- c(31, 40, 28, 51, 42, 62, 58, 70, 66, 81)
+
 dt_data$class <- ifelse(dt_data$mpg >= 26, "economy",
                  ifelse(dt_data$hp >= 175, "sport", "thirsty"))
 
@@ -630,8 +633,10 @@ ui <- page_shad(
 
     section("s-value-box", "Value box",
       shad_value_box("$45,231", "Revenue", delta = "+20.1%",
-        icon = "credit-card", caption = "vs. last month"),
-      shad_value_box("2,350", "Subscribers", delta = "+180", icon = "users"),
+        icon = "credit-card", caption = "vs. last month",
+        sparkline = shad_sparkline(trend, type = "area")),
+      shad_value_box("2,350", "Subscribers", delta = "+180", icon = "users",
+        sparkline = shad_sparkline(trend, type = "bar", color = 2)),
       # delta_direction overrides the sign: a falling error rate is good news.
       shad_value_box("0.9%", "Error rate", delta = "-0.4%",
         delta_direction = "up", icon = "activity", caption = "Lower is better"),
@@ -653,6 +658,24 @@ ui <- page_shad(
           page_sizes = c(5, 10, 25)),
         shad_muted(style = "margin-top:0.5rem",
           "Click a header to sort, Shift+click to add a second key."))),
+
+    section("s-mini-chart", "Sparkline / mini donut",
+      cluster("Sparkline types",
+        tags$div(style = "display:grid;gap:0.75rem;width:18rem",
+          shad_sparkline(trend, type = "line"),
+          shad_sparkline(trend, type = "area"),
+          shad_sparkline(trend, type = "bar", color = 2),
+          shad_sparkline(trend, type = "step", color = 3))),
+      cluster("Edge cases",
+        tags$div(style = "display:grid;gap:0.75rem;width:14rem",
+          # A gap in the data reads as a gap in the line, not a straight
+          # line across it.
+          shad_sparkline(c(4, 9, NA, NA, 6, 12, 8), type = "area"),
+          # Bars hang off a zero baseline once the series crosses it.
+          shad_sparkline(c(-4, -1, 2, 5, -3, 6), type = "bar", color = 4))),
+      cluster("Mini donut",
+        shad_mini_donut(c(62, 24, 14), center = "62%"),
+        shad_mini_donut(c(3, 1), size = "4.5rem", thickness = 1))),
 
     section("s-chart", "Chart container",
       tags$div(style = "width:100%;max-width:38rem",

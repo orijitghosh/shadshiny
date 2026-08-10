@@ -37,25 +37,57 @@ or `−` renders the down/destructive chip, anything else renders up. Set it
 explicitly whenever "up" isn't the good direction — churn going up is not a
 win.
 
-`sparkline` takes any tag, so a small inline plot or SVG drops straight in:
+`sparkline` takes any tag. Reach for `shad_sparkline()` before a
+`plotOutput()`: it is inline SVG with no plotting stack and, more usefully, its
+marks are painted with the theme's chart tokens, so a dark-mode toggle or a
+preset switch restyles it *in CSS* — no re-render, no server round-trip.
 
 ```{r}
-shad_value_box("1,204", "Sessions", sparkline = plotOutput("spark", height = "40px"))
+shad_value_box("1,204", "Sessions", delta = "-3.1%",
+               sparkline = shad_sparkline(sessions, type = "area"))
 ```
 
 `size` is `"sm"`, `"md"`, or `"lg"`; `href` turns the whole card into a link.
 
-Lay them out with CSS grid — shadshiny deliberately doesn't reimplement a grid
-system:
+Lay them out with `shad_grid()` — `min_width` fits as many equal columns as
+will fit, with no breakpoints to maintain:
 
 ```{r}
-div(
-  style = "display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1rem;",
+shad_grid(
   shad_value_box("$48,120", "Revenue", delta = "+12.4%"),
   shad_value_box("1,204", "Sessions", delta = "-3.1%"),
-  shad_value_box("2.4%", "Conversion", delta = "0.0%", delta_direction = "neutral")
+  shad_value_box("2.4%", "Conversion", delta = "0.0%", delta_direction = "neutral"),
+  min_width = "12rem"
 )
 ```
+
+## Sparklines and donuts
+
+`shad_sparkline()` draws `"line"`, `"area"`, `"bar"`, or `"step"` from a numeric
+vector, with no axes and no labels. It stretches to fill whatever box it is
+dropped into — a value box strip, a table cell, an item row:
+
+```{r}
+shad_sparkline(c(31, 40, 28, 51, 42, 62), type = "area")
+shad_sparkline(c(-4, -1, 2, 5, -3), type = "bar", color = 2)  # bars hang off zero
+```
+
+Non-finite values break the series rather than being interpolated across, so a
+gap in the data reads as a gap in the line.
+
+`shad_mini_donut()` shows a few parts of a whole, with optional content in the
+middle:
+
+```{r}
+shad_mini_donut(c(62, 24, 14), center = "62%")
+shad_mini_donut(c(3, 1), thickness = 1)   # thickness = 1 is a pie
+```
+
+`color` (and the donut's `colors`) take a chart-token index `1`–`5`, or any CSS
+colour when you need to step outside the palette. Both charts are decorative by
+default and hidden from screen readers — the number they illustrate is normally
+right next to them. Pass `label` when the chart is the only carrier of the
+information.
 
 ## The chart card
 

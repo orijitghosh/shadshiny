@@ -58,6 +58,8 @@ shad_value_box("$45,231.89", "Total revenue", delta = "+20.1\%",
 \seealso{
 Other shadshiny dashboard:
 \code{\link[=shad_chart_container]{shad_chart_container()}},
+\code{\link[=shad_mini_donut]{shad_mini_donut()}},
+\code{\link[=shad_sparkline]{shad_sparkline()}},
 \code{\link[=shad_timeline]{shad_timeline()}},
 \code{\link[=shad_timeline_item]{shad_timeline_item()}}
 }

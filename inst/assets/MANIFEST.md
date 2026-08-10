@@ -21,6 +21,8 @@ Chat / AI kit (CSS-only except message-scroller js): `bubble` (7 variants, align
 Tier 3 (+ js): `dialog`, `alert-dialog`, `sheet` (4 sides), `drawer` (drag-dismiss), `tooltip` (delay group), `popover`, `hover-card`, `dropdown-menu` (submenus, check/radio items), `context-menu`, `menubar`, `navigation-menu` (animated viewport), `command` (inline + mod+K dialog), `toast` (imperative sonner-style), `tabs` (animated indicator), `accordion`, `collapsible`, `pagination`, `scroll-area`, `resizable`, `sidebar` (icon rail + mobile sheet), `carousel` (scroll-snap).
 
 
+Dashboard (CSS-only): `mini-chart` — `sparkline` (line/area/bar/step; 0..100 viewBox stretched with `preserveAspectRatio="none"`, `vector-effect="non-scaling-stroke"`) and `donut` (segments as dashes on one circle, `-90deg` rotation, optional centre slot). Marks are painted `var(--shad-chart-N)`, so presets and dark mode restyle them with no re-render.
+
 Layout (CSS-only): `layout` — `container` / `stack` / `grid` primitives (+ `grid__item` span) and the `.shad-page*` chrome behind `shad_page_sidebar()` / `shad_page_navbar()`. Every knob is a custom property set inline by the R constructor; breakpoints sm 40rem / md 48rem / lg 64rem with an outward `var()` fallback chain.
 
 ## demo/
