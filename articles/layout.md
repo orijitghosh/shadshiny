@@ -279,7 +279,7 @@ scrollbar — useful for long lists inside a card or a chat transcript.
 For a growing conversation that should pin to the bottom, reach for
 [`shad_message_scroller()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller.md)
 instead (see the [chat
-gallery](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.md)).
+gallery](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html)).
 
 ## Separators
 
@@ -300,7 +300,7 @@ tags$div(style = "display:flex;align-items:center;gap:0.75rem",
 ## Where to next
 
 - [Gallery: navigation &
-  structure](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.md)
+  structure](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.html)
   — these components, live.
 - [Server
   API](https://orijitghosh.github.io/shadshiny/articles/server-api.md) —

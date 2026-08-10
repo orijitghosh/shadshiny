@@ -7,7 +7,7 @@ shadshiny ships two levels of chat. The **chat kit**
 [`shad_attachment()`](https://orijitghosh.github.io/shadshiny/reference/shad_attachment.md),
 [`shad_marker()`](https://orijitghosh.github.io/shadshiny/reference/shad_marker.md))
 is a set of transcript primitives you compose yourself — see [Gallery:
-chat](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.md).
+chat](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html).
 This guide is about the level above it:
 [`shad_chat_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_ui.md)
 /
@@ -175,5 +175,5 @@ swap commented in the source.
 ## See also
 
 - [Gallery:
-  chat](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.md)
+  chat](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html)
   — the primitives, if you want to build a transcript by hand instead.

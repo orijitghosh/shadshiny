@@ -86,29 +86,29 @@
 </div>
 <!-- badges: start -->
 
-<p><strong>shadshiny</strong> brings the <a href="https://ui.shadcn.com" class="external-link">shadcn/ui</a> design system to <a href="https://shiny.posit.co" class="external-link">Shiny</a>. It is a from-scratch port — 72 accessible, themeable components rebuilt in framework-free CSS and vanilla JavaScript, then wrapped as ordinary R functions with native Shiny input bindings.</p>
+<p><strong>shadshiny</strong> brings the <a href="https://ui.shadcn.com" class="external-link">shadcn/ui</a> design system to <a href="https://shiny.posit.co" class="external-link">Shiny</a>. It is a from-scratch port: 72 accessible, themeable components rebuilt in framework-free CSS and vanilla JavaScript, then wrapped as ordinary R functions with native Shiny input bindings.</p>
 <ul>
 <li>
 <strong>No build step, no npm, no React.</strong> Components are plain <code>htmltools</code> tags backed by a single bundled asset dependency.</li>
 <li>
-<strong>Native Shiny inputs.</strong> Read values with <code>input$id</code>; drive them from the server with <code>update_shad_*()</code>. Modules, <code><a href="https://rdrr.io/pkg/shiny/man/renderUI.html" class="external-link">renderUI()</a></code> and bookmarking just work.</li>
+<strong>Native Shiny inputs.</strong> Read values with <code>input$id</code>; drive them from the server with <code>update_shad_*()</code>. Modules, <code><a href="https://rdrr.io/pkg/shiny/man/renderUI.html" class="external-link">renderUI()</a></code> and bookmarking all work.</li>
 <li>
-<strong>Layout without CSS gymnastics.</strong> <code><a href="reference/shad_container.html">shad_container()</a></code>, <code><a href="reference/shad_stack.html">shad_stack()</a></code> and <code><a href="reference/shad_grid.html">shad_grid()</a></code> cover page layout on the token spacing scale, and <code><a href="reference/shad_page_sidebar.html">shad_page_sidebar()</a></code> / <code><a href="reference/shad_page_navbar.html">shad_page_navbar()</a></code> assemble a whole app shell in one call.</li>
+<strong>Layout primitives.</strong> <code><a href="reference/shad_container.html">shad_container()</a></code>, <code><a href="reference/shad_stack.html">shad_stack()</a></code> and <code><a href="reference/shad_grid.html">shad_grid()</a></code> cover page layout on the token spacing scale, and <code><a href="reference/shad_page_sidebar.html">shad_page_sidebar()</a></code> / <code><a href="reference/shad_page_navbar.html">shad_page_navbar()</a></code> assemble a whole app shell in one call.</li>
 <li>
-<strong>A real data table.</strong> <code><a href="reference/shad_data_table.html">shad_data_table()</a></code> does multi-column sort, global and per-column filtering, paging, and selection that survives paging — client-side and themed, with no <code>DT</code>.</li>
+<strong>Full data table.</strong> <code><a href="reference/shad_data_table.html">shad_data_table()</a></code> does multi-column sort, global and per-column filtering, paging, and selection that survives paging, all client-side and themed, with no <code>DT</code>.</li>
 <li>
 <strong>Dashboards &amp; charts.</strong> <code><a href="reference/shad_value_box.html">shad_value_box()</a></code> and <code><a href="reference/shad_chart_container.html">shad_chart_container()</a></code> for the shell; <code><a href="reference/shad_sparkline.html">shad_sparkline()</a></code> and <code><a href="reference/shad_mini_donut.html">shad_mini_donut()</a></code> draw inline SVG that follows the theme in CSS with no re-render; <code><a href="reference/shad_theme_ggplot2.html">shad_theme_ggplot2()</a></code> / <code><a href="reference/shad_theme_plotly.html">shad_theme_plotly()</a></code> / <code><a href="reference/shad_theme_echarts4r.html">shad_theme_echarts4r()</a></code> restyle plots onto the live theme.</li>
 <li>
 <strong>Server-side validation.</strong> <code><a href="reference/shad_validator.html">shad_validator()</a></code> plus a rule set drive <code>aria-invalid</code> and inline, shadcn-styled field messages.</li>
 <li>
-<strong>Streaming chat.</strong> <code><a href="reference/shad_chat_ui.html">shad_chat_ui()</a></code> / <code><a href="reference/shad_chat_server.html">shad_chat_server()</a></code> render a stick-to-bottom transcript from any token source — an <code>ellmer</code> stream drops straight in.</li>
+<strong>Streaming chat.</strong> <code><a href="reference/shad_chat_ui.html">shad_chat_ui()</a></code> / <code><a href="reference/shad_chat_server.html">shad_chat_server()</a></code> render a stick-to-bottom transcript from any token source, so an <code>ellmer</code> stream drops straight in.</li>
 <li>
-<strong>Coexists with Bootstrap 5 / bslib.</strong> Dark mode keys off the same signals <code><a href="https://rstudio.github.io/bslib/reference/input_dark_mode.html" class="external-link">bslib::input_dark_mode()</a></code> uses, so theme sync needs zero glue.</li>
+<strong>Coexists with Bootstrap 5 / bslib.</strong> Dark mode keys off the same signals <code><a href="https://rstudio.github.io/bslib/reference/input_dark_mode.html" class="external-link">bslib::input_dark_mode()</a></code> uses, so theme sync needs no glue.</li>
 <li>
 <strong>OKLCH token theming.</strong> Seven presets out of the box, switchable at runtime, plus custom palettes via <code><a href="reference/shad_theme.html">shad_theme()</a></code> and the shadcn theme registry.</li>
 </ul>
 <blockquote>
-<p>shadshiny is an independent reimplementation. It ships no shadcn/ui or Radix source — only visually-compatible CSS/JS written for this package. See <a href="#attribution">Attribution</a>.</p>
+<p>shadshiny is an independent reimplementation. It ships no shadcn/ui or Radix source, only visually-compatible CSS/JS written for this package. See <a href="#attribution">Attribution</a>.</p>
 </blockquote>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -167,7 +167,7 @@
 <div class="section level2">
 <h2 id="components">Components<a class="anchor" aria-label="anchor" href="#components"></a>
 </h2>
-<p><strong>Tier 1 — display &amp; typography</strong></p>
+<p><strong>Tier 1: display &amp; typography</strong></p>
 <table class="table">
 <colgroup>
 <col width="25%">
@@ -198,7 +198,7 @@
 <td><code>shad_table</code></td>
 <td><code>shad_kbd</code></td>
 <td><code>shad_code</code></td>
-<td>typography (<code>shad_h1</code>…<code>shad_p</code>)</td>
+<td>typography (<code>shad_h1</code> to <code>shad_p</code>)</td>
 </tr>
 <tr>
 <td><code>shad_item</code></td>
@@ -208,7 +208,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Tier 2 — form inputs</strong></p>
+<p><strong>Tier 2: form inputs</strong></p>
 <table class="table">
 <colgroup>
 <col width="25%">
@@ -249,7 +249,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Tier 3 — overlays</strong></p>
+<p><strong>Tier 3: overlays</strong></p>
 <table class="table">
 <colgroup>
 <col width="25%">
@@ -284,7 +284,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Tier 3 — navigation &amp; structure</strong></p>
+<p><strong>Tier 3: navigation &amp; structure</strong></p>
 <table class="table">
 <colgroup>
 <col width="25%">
@@ -407,7 +407,7 @@
 <span>    gap <span class="op">=</span> <span class="fl">6</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><code><a href="reference/shad_grid.html">shad_grid()</a></code> takes <code>min_width</code> for an auto-fit track list, or <code>cols</code> for an exact count — optionally per breakpoint, <code>cols = c(base = 1, md = 2, lg = 4)</code>.</p>
+<p><code><a href="reference/shad_grid.html">shad_grid()</a></code> takes <code>min_width</code> for an auto-fit track list, or <code>cols</code> for an exact count, optionally per breakpoint, <code>cols = c(base = 1, md = 2, lg = 4)</code>.</p>
 <p>Two shells assemble a whole page, taking the <code><a href="reference/page_shad.html">page_shad()</a></code> theming arguments:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/shad_page_navbar.html">shad_page_navbar</a></span><span class="op">(</span></span>
@@ -449,7 +449,7 @@
 <div class="section level2">
 <h2 id="charts-that-follow-the-theme">Charts that follow the theme<a class="anchor" aria-label="anchor" href="#charts-that-follow-the-theme"></a>
 </h2>
-<p>Themes switch at <em>runtime</em>, and a plot rendered in R has no idea. <code><a href="reference/shad_current_theme.html">shad_current_theme()</a></code> is the bridge — read it in a render block and the plot re-runs whenever the preset or dark mode changes.</p>
+<p>Themes switch at runtime, which a plot rendered in R cannot see on its own. <code><a href="reference/shad_current_theme.html">shad_current_theme()</a></code> is the bridge: read it in a render block and the plot re-runs whenever the preset or dark mode changes.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span><span class="op">$</span><span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="reference/shad_current_theme.html">shad_current_theme</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -457,8 +457,8 @@
 <span>    <span class="fu">geom_col</span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="reference/shad_chart_colors.html">shad_chart_colors</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="reference/shad_theme_ggplot2.html">shad_theme_ggplot2</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<p><code><a href="reference/shad_chart_colors.html">shad_chart_colors()</a></code> returns the categorical ramp as hex (OKLCH converted in base R — no new dependency). <code><a href="reference/shad_tokens.html">shad_tokens()</a></code> exposes the full token set as CSS strings.</p>
-<p>For the small stuff, skip the plotting stack entirely — <code><a href="reference/shad_sparkline.html">shad_sparkline()</a></code> and <code><a href="reference/shad_mini_donut.html">shad_mini_donut()</a></code> are inline SVG painted with the chart tokens, so a dark-mode toggle restyles them in CSS with no re-render and no round trip:</p>
+<p><code><a href="reference/shad_chart_colors.html">shad_chart_colors()</a></code> returns the categorical ramp as hex (OKLCH converted in base R, with no new dependency). <code><a href="reference/shad_tokens.html">shad_tokens()</a></code> exposes the full token set as CSS strings.</p>
+<p>For small inline graphics, skip the plotting stack. <code><a href="reference/shad_sparkline.html">shad_sparkline()</a></code> and <code><a href="reference/shad_mini_donut.html">shad_mini_donut()</a></code> are inline SVG painted with the chart tokens, so a dark-mode toggle restyles them in CSS with no re-render and no round trip:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"1,204"</span>, <span class="st">"Sessions"</span>, delta <span class="op">=</span> <span class="st">"-3.1%"</span>,</span>
 <span>               sparkline <span class="op">=</span> <span class="fu"><a href="reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="va">sessions</span>, type <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -490,7 +490,7 @@
 <div class="section level2">
 <h2 id="theming">Theming<a class="anchor" aria-label="anchor" href="#theming"></a>
 </h2>
-<p>Colours are OKLCH <code>--shad-*</code> custom properties — never hard-code hex. Pick a preset at page level or swap it live:</p>
+<p>Colours are OKLCH <code>--shad-*</code> custom properties, so never hard-code hex. Pick a preset at page level or swap it live:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/page_shad.html">page_shad</a></span><span class="op">(</span>theme_preset <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span>            <span class="co"># slate stone blue green rose violet orange</span></span>
 <span></span>
@@ -544,7 +544,7 @@
 </tr>
 <tr>
 <td><code>08-llm-chat</code></td>
-<td>Streaming <code><a href="reference/shad_chat_server.html">shad_chat_server()</a></code> — swap the handler for <code>ellmer</code> to go live</td>
+<td>Streaming <code><a href="reference/shad_chat_server.html">shad_chat_server()</a></code>; swap the handler for <code>ellmer</code> to go live</td>
 </tr>
 <tr>
 <td><code>09-app-shell</code></td>
@@ -557,7 +557,7 @@
 <div class="section level2">
 <h2 id="guides">Guides<a class="anchor" aria-label="anchor" href="#guides"></a>
 </h2>
-<p><code><a href="articles/shadshiny.html">vignette("shadshiny")</a></code> to get started, then: <code>installation</code>, <code>theming</code>, <code>forms</code>, <code>data-tables</code>, <code>charts</code>, <code>chat</code>, <code>layout</code>, <code>server-api</code>, <code>overlays-and-server</code>, and <code>migrating-inputs</code> — a complete base-Shiny → shadshiny reference. The <a href="https://orijitghosh.github.io/shadshiny/">pkgdown site</a> adds a live component gallery and an icon reference (78 built-in icons; use any other Lucide glyph via <code><a href="reference/shad_icon_raw.html">shad_icon_raw()</a></code>).</p>
+<p><code><a href="articles/shadshiny.html">vignette("shadshiny")</a></code> to get started, then: <code>installation</code>, <code>theming</code>, <code>forms</code>, <code>data-tables</code>, <code>charts</code>, <code>chat</code>, <code>layout</code>, <code>server-api</code>, <code>overlays-and-server</code>, and <code>migrating-inputs</code>, a complete base-Shiny to shadshiny reference. The <a href="https://orijitghosh.github.io/shadshiny/">pkgdown site</a> adds a live component gallery and an icon reference (78 built-in icons; use any other Lucide glyph via <code><a href="reference/shad_icon_raw.html">shad_icon_raw()</a></code>).</p>
 </div>
 <div class="section level2">
 <h2 id="attribution">Attribution<a class="anchor" aria-label="anchor" href="#attribution"></a>

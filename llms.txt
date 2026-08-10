@@ -1,8 +1,8 @@
 # shadshiny
 
 **shadshiny** brings the [shadcn/ui](https://ui.shadcn.com) design
-system to [Shiny](https://shiny.posit.co). It is a from-scratch port —
-72 accessible, themeable components rebuilt in framework-free CSS and
+system to [Shiny](https://shiny.posit.co). It is a from-scratch port: 72
+accessible, themeable components rebuilt in framework-free CSS and
 vanilla JavaScript, then wrapped as ordinary R functions with native
 Shiny input bindings.
 
@@ -11,8 +11,8 @@ Shiny input bindings.
 - **Native Shiny inputs.** Read values with `input$id`; drive them from
   the server with `update_shad_*()`. Modules,
   [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) and
-  bookmarking just work.
-- **Layout without CSS gymnastics.**
+  bookmarking all work.
+- **Layout primitives.**
   [`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md),
   [`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
   and
@@ -22,10 +22,11 @@ Shiny input bindings.
   /
   [`shad_page_navbar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_navbar.md)
   assemble a whole app shell in one call.
-- **A real data table.**
+- **Full data table.**
   [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
   does multi-column sort, global and per-column filtering, paging, and
-  selection that survives paging — client-side and themed, with no `DT`.
+  selection that survives paging, all client-side and themed, with no
+  `DT`.
 - **Dashboards & charts.**
   [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
   and
@@ -49,19 +50,19 @@ Shiny input bindings.
   [`shad_chat_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_ui.md)
   /
   [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md)
-  render a stick-to-bottom transcript from any token source — an
+  render a stick-to-bottom transcript from any token source, so an
   `ellmer` stream drops straight in.
 - **Coexists with Bootstrap 5 / bslib.** Dark mode keys off the same
   signals
   [`bslib::input_dark_mode()`](https://rstudio.github.io/bslib/reference/input_dark_mode.html)
-  uses, so theme sync needs zero glue.
+  uses, so theme sync needs no glue.
 - **OKLCH token theming.** Seven presets out of the box, switchable at
   runtime, plus custom palettes via
   [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
   and the shadcn theme registry.
 
 > shadshiny is an independent reimplementation. It ships no shadcn/ui or
-> Radix source — only visually-compatible CSS/JS written for this
+> Radix source, only visually-compatible CSS/JS written for this
 > package. See [Attribution](#attribution).
 
 ## Installation
@@ -126,17 +127,17 @@ shad_run_example("kitchen-sink")
 
 ## Components
 
-**Tier 1 — display & typography**
+**Tier 1: display & typography**
 
 |  |  |  |  |
 |----|----|----|----|
 | `shad_button` | `shad_badge` | `shad_avatar` | `shad_card` |
 | `shad_alert` | `shad_separator` | `shad_skeleton` | `shad_spinner` |
 | `shad_aspect_ratio` | `shad_label` | `shad_progress` | `shad_breadcrumb` |
-| `shad_table` | `shad_kbd` | `shad_code` | typography (`shad_h1`…`shad_p`) |
+| `shad_table` | `shad_kbd` | `shad_code` | typography (`shad_h1` to `shad_p`) |
 | `shad_item` | `shad_empty` | `shad_button_group` |  |
 
-**Tier 2 — form inputs**
+**Tier 2: form inputs**
 
 |  |  |  |  |
 |----|----|----|----|
@@ -146,7 +147,7 @@ shad_run_example("kitchen-sink")
 | `shad_calendar` | `shad_date_picker` | `shad_form_field` | `shad_input_group` |
 | `shad_number_input` | `shad_rating` | `shad_dropzone` |  |
 
-**Tier 3 — overlays**
+**Tier 3: overlays**
 
 |  |  |  |  |
 |----|----|----|----|
@@ -155,7 +156,7 @@ shad_run_example("kitchen-sink")
 | `shad_context_menu` | `shad_menubar` | `shad_command` | `shad_toast` |
 | `shad_command_palette` | `shad_show_dialog` |  |  |
 
-**Tier 3 — navigation & structure**
+**Tier 3: navigation & structure**
 
 |  |  |  |  |
 |----|----|----|----|
@@ -239,7 +240,7 @@ shad_container(size = "lg",
 
 [`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
 takes `min_width` for an auto-fit track list, or `cols` for an exact
-count — optionally per breakpoint, `cols = c(base = 1, md = 2, lg = 4)`.
+count, optionally per breakpoint, `cols = c(base = 1, md = 2, lg = 4)`.
 
 Two shells assemble a whole page, taking the
 [`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
@@ -302,9 +303,10 @@ of the same value, so picking “Reports” twice would only fire once.
 
 ## Charts that follow the theme
 
-Themes switch at *runtime*, and a plot rendered in R has no idea.
+Themes switch at runtime, which a plot rendered in R cannot see on its
+own.
 [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md)
-is the bridge — read it in a render block and the plot re-runs whenever
+is the bridge: read it in a render block and the plot re-runs whenever
 the preset or dark mode changes.
 
 ``` r
@@ -318,12 +320,12 @@ output$plot <- renderPlot({
 ```
 
 [`shad_chart_colors()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_colors.md)
-returns the categorical ramp as hex (OKLCH converted in base R — no new
-dependency).
+returns the categorical ramp as hex (OKLCH converted in base R, with no
+new dependency).
 [`shad_tokens()`](https://orijitghosh.github.io/shadshiny/reference/shad_tokens.md)
 exposes the full token set as CSS strings.
 
-For the small stuff, skip the plotting stack entirely —
+For small inline graphics, skip the plotting stack.
 [`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md)
 and
 [`shad_mini_donut()`](https://orijitghosh.github.io/shadshiny/reference/shad_mini_donut.md)
@@ -375,7 +377,7 @@ See
 
 ## Theming
 
-Colours are OKLCH `--shad-*` custom properties — never hard-code hex.
+Colours are OKLCH `--shad-*` custom properties, so never hard-code hex.
 Pick a preset at page level or swap it live:
 
 ``` r
@@ -413,7 +415,7 @@ Each is a real app, launchable with
 | `05-settings-profile` | Vertical tabs, profile and notification forms, a live appearance panel |
 | `06-docs-reader` | Sidebar nav, ⌘K palette, resizable article/TOC split, prev/next paging |
 | `07-data-explorer` | [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md) with value boxes and theme-following plots |
-| `08-llm-chat` | Streaming [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md) — swap the handler for `ellmer` to go live |
+| `08-llm-chat` | Streaming [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md); swap the handler for `ellmer` to go live |
 | `09-app-shell` | [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md), layout primitives, sparklines, a ⌘K palette that navigates, and server-built dialogs |
 
 ## Guides
@@ -421,7 +423,7 @@ Each is a real app, launchable with
 [`vignette("shadshiny")`](https://orijitghosh.github.io/shadshiny/articles/shadshiny.md)
 to get started, then: `installation`, `theming`, `forms`, `data-tables`,
 `charts`, `chat`, `layout`, `server-api`, `overlays-and-server`, and
-`migrating-inputs` — a complete base-Shiny → shadshiny reference. The
+`migrating-inputs`, a complete base-Shiny to shadshiny reference. The
 [pkgdown site](https://orijitghosh.github.io/shadshiny/) adds a live
 component gallery and an icon reference (78 built-in icons; use any
 other Lucide glyph via

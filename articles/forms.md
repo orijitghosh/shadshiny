@@ -309,7 +309,7 @@ shinyApp(ui, server)
   API](https://orijitghosh.github.io/shadshiny/articles/server-api.md) —
   updating inputs, overlays and toasts.
 - [Gallery: form
-  inputs](https://orijitghosh.github.io/shadshiny/articles/gallery-inputs.md)
+  inputs](https://orijitghosh.github.io/shadshiny/articles/gallery-inputs.html)
   — every input, live.
 - [Migrating from base Shiny
   inputs](https://orijitghosh.github.io/shadshiny/articles/migrating-inputs.md).

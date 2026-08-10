@@ -136,7 +136,7 @@ with an unknown name prints the available example directories.
   started](https://orijitghosh.github.io/shadshiny/articles/shadshiny.md)
   — a fuller tour of reading and updating values.
 - [Component
-  gallery](https://orijitghosh.github.io/shadshiny/articles/components.md)
+  gallery](https://orijitghosh.github.io/shadshiny/articles/components.html)
   — every component, live.
 - [Theming](https://orijitghosh.github.io/shadshiny/articles/theming.md)
   — presets, tokens, and dark mode.
