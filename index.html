@@ -167,6 +167,7 @@
 <div class="section level2">
 <h2 id="components">Components<a class="anchor" aria-label="anchor" href="#components"></a>
 </h2>
+<p>Names marked <code>+</code> have no shadcn/ui counterpart; they are shadshiny additions. The marker covers components only. The server-side API (<code>update_shad_*()</code>, <code>shad_&lt;name&gt;_open()</code> / <code>_close()</code>, <code><a href="reference/shad_show_dialog.html">shad_show_dialog()</a></code>, the toast functions) is Shiny plumbing that shadcn/ui has no equivalent for by construction, so it goes unmarked throughout.</p>
 <p><strong>Tier 1: display &amp; typography</strong></p>
 <table class="table">
 <colgroup>
@@ -231,7 +232,9 @@
 </tr>
 <tr>
 <td><code>shad_select</code></td>
-<td><code>shad_native_select</code></td>
+<td>
+<code>shad_native_select</code> <code>+</code>
+</td>
 <td><code>shad_combobox</code></td>
 <td><code>shad_input_otp</code></td>
 </tr>
@@ -242,9 +245,15 @@
 <td><code>shad_input_group</code></td>
 </tr>
 <tr>
-<td><code>shad_number_input</code></td>
-<td><code>shad_rating</code></td>
-<td><code>shad_dropzone</code></td>
+<td>
+<code>shad_number_input</code> <code>+</code>
+</td>
+<td>
+<code>shad_rating</code> <code>+</code>
+</td>
+<td>
+<code>shad_dropzone</code> <code>+</code>
+</td>
 <td></td>
 </tr>
 </tbody>
@@ -307,18 +316,32 @@
 </tr>
 <tr>
 <td><code>shad_sidebar_layout</code></td>
-<td><code>shad_stepper</code></td>
-<td><code>shad_tree</code></td>
+<td>
+<code>shad_stepper</code> <code>+</code>
+</td>
+<td>
+<code>shad_tree</code> <code>+</code>
+</td>
 <td></td>
 </tr>
 <tr>
-<td><code>shad_container</code></td>
-<td><code>shad_stack</code></td>
-<td><code>shad_grid</code></td>
-<td><code>shad_page_sidebar</code></td>
+<td>
+<code>shad_container</code> <code>+</code>
+</td>
+<td>
+<code>shad_stack</code> <code>+</code>
+</td>
+<td>
+<code>shad_grid</code> <code>+</code>
+</td>
+<td>
+<code>shad_page_sidebar</code> <code>+</code>
+</td>
 </tr>
 <tr>
-<td><code>shad_page_navbar</code></td>
+<td>
+<code>shad_page_navbar</code> <code>+</code>
+</td>
 <td></td>
 <td></td>
 <td></td>
@@ -336,25 +359,39 @@
 <tbody>
 <tr>
 <td><code>shad_data_table</code></td>
-<td><code>shad_value_box</code></td>
+<td>
+<code>shad_value_box</code> <code>+</code>
+</td>
 <td><code>shad_chart_container</code></td>
-<td><code>shad_timeline</code></td>
+<td>
+<code>shad_timeline</code> <code>+</code>
+</td>
 </tr>
 <tr>
-<td><code>shad_sparkline</code></td>
-<td><code>shad_mini_donut</code></td>
-<td><code>shad_validator</code></td>
-<td><code>shad_form_message</code></td>
+<td>
+<code>shad_sparkline</code> <code>+</code>
+</td>
+<td>
+<code>shad_mini_donut</code> <code>+</code>
+</td>
+<td>
+<code>shad_validator</code> <code>+</code>
+</td>
+<td>
+<code>shad_form_message</code> <code>+</code>
+</td>
 </tr>
 <tr>
-<td><code>shad_form_summary</code></td>
+<td>
+<code>shad_form_summary</code> <code>+</code>
+</td>
 <td><code>shad_theme</code></td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Chat / AI kit</strong></p>
+<p><strong>Chat / AI kit</strong> (all <code>+</code>)</p>
 <table class="table"><tbody>
 <tr>
 <td><code>shad_message</code></td>

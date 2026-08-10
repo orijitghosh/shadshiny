@@ -41,6 +41,8 @@ Code
 
 ## Value box
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
 is the KPI card. `delta_direction = "auto"` (the default) reads the sign
 off the `delta` string, so `"+12.5%"` is up and `"-3%"` is down — pass
@@ -90,6 +92,8 @@ Code
     shad_value_box("573", "Active now", icon = "zap", size = "sm")
 
 ## Sparkline
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 [`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md)
 is a tiny inline chart with no axes, no labels, and no plotting stack —
@@ -144,6 +148,8 @@ Code
     shad_value_box("2,350", "Subscribers", delta = "+180", sparkline = shad_sparkline(c(12, 19, 15, 27, 24, 31), type = "bar", color = 2))
 
 ## Mini donut
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 [`shad_mini_donut()`](https://orijitghosh.github.io/shadshiny/reference/shad_mini_donut.md)
 shows a few parts of a whole, with optional content in the middle.
@@ -204,6 +210,8 @@ output$plot <- renderPlot({
 
 ## Timeline
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 1.  
     ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik0yMCA2IDkgMTdsLTUtNSIgLz48L3N2Zz4=)
     09:14
@@ -234,6 +242,8 @@ Code
     shad_timeline(shad_timeline_item("Order placed", time = "09:14", description = "Payment authorised.", icon = "check"), shad_timeline_item("Packed", time = "11:02", description = "Left the fulfilment centre.", icon = "package"), shad_timeline_item("In transit", time = "14:30", status = "active", description = "Out for delivery.", icon = "map-pin"), shad_timeline_item("Delivered", status = "muted", last = TRUE, description = "Expected today by 18:00.", icon = "home"))
 
 ## Stepper
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 [`shad_stepper()`](https://orijitghosh.github.io/shadshiny/reference/shad_stepper.md)
 holds the **1-based** index of the active step. `linear = TRUE` stops
@@ -270,6 +280,8 @@ Code
 
 ## Tree
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 [`shad_tree_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_tree_item.md)
 takes the value first, then the label. Nest items to build branches;
 `lazy = TRUE` marks a branch whose children arrive later via
@@ -303,6 +315,8 @@ Code
 
 ## Rating
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 Rating
 
 Half steps
@@ -320,6 +334,8 @@ Code
     shad_rating("r4", label = "Ten stars", value = 7, max = 10, size = "sm")
 
 ## Number input
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 A text input with hold-to-repeat stepper buttons. `precision` fixes the
 decimal places; `min` / `max` clamp the value.
@@ -351,6 +367,8 @@ Code
 
 ## Dropzone
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 [`shad_dropzone()`](https://orijitghosh.github.io/shadshiny/reference/shad_dropzone.md)
 bridges to a hidden
 [`fileInput()`](https://rdrr.io/pkg/shiny/man/fileInput.html), so
@@ -381,6 +399,8 @@ Code
     shad_dropzone("avatar", label = "Avatar", accept = "image/*", hint = "PNG or JPG, square works best")
 
 ## Form messaging
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 The pieces
 [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)

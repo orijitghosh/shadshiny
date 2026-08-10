@@ -162,7 +162,7 @@ Code
 
 [`shad_native_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_native_select.md)
 is the same look over a real `<select>` — better on mobile and inside
-dense forms.
+dense forms. It is a shadshiny addition, with no shadcn/ui counterpart.
 
 United States India
 Germany![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIHNoYWQtbmF0aXZlLXNlbGVjdF9fY2hldnJvbiIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJtNiA5IDYgNiA2LTYiIC8+PC9zdmc+)

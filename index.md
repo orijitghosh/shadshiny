@@ -127,6 +127,13 @@ shad_run_example("kitchen-sink")
 
 ## Components
 
+Names marked `+` have no shadcn/ui counterpart; they are shadshiny
+additions. The marker covers components only. The server-side API
+(`update_shad_*()`, `shad_<name>_open()` / `_close()`,
+[`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md),
+the toast functions) is Shiny plumbing that shadcn/ui has no equivalent
+for by construction, so it goes unmarked throughout.
+
 **Tier 1: display & typography**
 
 |  |  |  |  |
@@ -143,9 +150,9 @@ shad_run_example("kitchen-sink")
 |----|----|----|----|
 | `shad_input` | `shad_textarea` | `shad_checkbox` | `shad_switch` |
 | `shad_radio_group` | `shad_toggle` | `shad_toggle_group` | `shad_slider` |
-| `shad_select` | `shad_native_select` | `shad_combobox` | `shad_input_otp` |
+| `shad_select` | `shad_native_select` `+` | `shad_combobox` | `shad_input_otp` |
 | `shad_calendar` | `shad_date_picker` | `shad_form_field` | `shad_input_group` |
-| `shad_number_input` | `shad_rating` | `shad_dropzone` |  |
+| `shad_number_input` `+` | `shad_rating` `+` | `shad_dropzone` `+` |  |
 
 **Tier 3: overlays**
 
@@ -162,19 +169,19 @@ shad_run_example("kitchen-sink")
 |----|----|----|----|
 | `shad_tabs` | `shad_accordion` | `shad_collapsible` | `shad_pagination` |
 | `shad_scroll_area` | `shad_resizable` | `shad_carousel` | `shad_navigation_menu` |
-| `shad_sidebar_layout` | `shad_stepper` | `shad_tree` |  |
-| `shad_container` | `shad_stack` | `shad_grid` | `shad_page_sidebar` |
-| `shad_page_navbar` |  |  |  |
+| `shad_sidebar_layout` | `shad_stepper` `+` | `shad_tree` `+` |  |
+| `shad_container` `+` | `shad_stack` `+` | `shad_grid` `+` | `shad_page_sidebar` `+` |
+| `shad_page_navbar` `+` |  |  |  |
 
 **Data, dashboards & flow**
 
 |  |  |  |  |
 |----|----|----|----|
-| `shad_data_table` | `shad_value_box` | `shad_chart_container` | `shad_timeline` |
-| `shad_sparkline` | `shad_mini_donut` | `shad_validator` | `shad_form_message` |
-| `shad_form_summary` | `shad_theme` |  |  |
+| `shad_data_table` | `shad_value_box` `+` | `shad_chart_container` | `shad_timeline` `+` |
+| `shad_sparkline` `+` | `shad_mini_donut` `+` | `shad_validator` `+` | `shad_form_message` `+` |
+| `shad_form_summary` `+` | `shad_theme` |  |  |
 
-**Chat / AI kit**
+**Chat / AI kit** (all `+`)
 
 |                         |                |                    |               |
 |-------------------------|----------------|--------------------|---------------|

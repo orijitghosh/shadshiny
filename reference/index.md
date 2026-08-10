@@ -15,7 +15,8 @@ Page wrapper, theme presets, and runtime theme control.
 
 ## Layout & page shells
 
-Container, stack, and grid primitives, plus whole-page shells.
+Container, stack, and grid primitives, plus whole-page shells. Shadshiny
+additions, with no shadcn/ui counterpart.
 
 - [`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md)
   : Centred content container
@@ -149,7 +150,8 @@ Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
 ## Chat & AI kit
 
 Streaming transcript primitives — bubbles, messages, attachments,
-markers, and a stick-to-bottom scroller.
+markers, and a stick-to-bottom scroller. Shadshiny additions, with no
+shadcn/ui counterpart.
 
 - [`shad_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md)
   [`shad_message_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md)
@@ -261,7 +263,8 @@ Tabs, accordion, pagination, carousel, and the sidebar layout family.
 
 ## Server — updates
 
-Update bound component values from the server.
+Update bound component values from the server. Shiny-side API, so there
+is nothing in shadcn/ui to compare it against.
 
 - [`update_shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_radio_group()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
@@ -301,6 +304,7 @@ Update bound component values from the server.
 ## Server — overlays & toast
 
 Open/close overlays and raise toast notifications from the server.
+Shiny-side API, so there is nothing in shadcn/ui to compare it against.
 
 - [`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
   [`shad_dialog_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
@@ -357,7 +361,10 @@ and selection.
 
 ## Dashboard & charts
 
-KPI cards, chart wrappers, timelines, and plot theming.
+KPI cards, chart wrappers, timelines, and plot theming. Everything here
+except
+[`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md)
+is a shadshiny addition.
 
 - [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
   : KPI / value box
@@ -388,7 +395,8 @@ KPI cards, chart wrappers, timelines, and plot theming.
 
 ## Flow & input components
 
-Stepper, tree, rating, number input, and file dropzone.
+Stepper, tree, rating, number input, and file dropzone. Shadshiny
+additions, with no shadcn/ui counterpart.
 
 - [`shad_stepper()`](https://orijitghosh.github.io/shadshiny/reference/shad_stepper.md)
   : Stepper
@@ -409,7 +417,8 @@ Stepper, tree, rating, number input, and file dropzone.
 
 ## Forms & validation
 
-A server-side validator with shadcn-styled field messaging.
+A server-side validator with shadcn-styled field messaging. A shadshiny
+addition; shadcn/ui validates on the client instead.
 
 - [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
   : Form validator
@@ -442,7 +451,8 @@ Build, import, and switch custom themes.
 
 ## Chat
 
-A streaming chat module built on the chat kit.
+A streaming chat module built on the chat kit. A shadshiny addition,
+with no shadcn/ui counterpart.
 
 - [`shad_chat_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_ui.md)
   : Chat UI

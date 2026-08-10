@@ -170,6 +170,8 @@ Code
 
 ## Layout primitives
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 [`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md),
 [`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
 and
@@ -234,6 +236,8 @@ Code
     shad_stack(shad_button("Save"), shad_button("Cancel", variant = "outline"), shad_button("Delete", variant = "destructive"), direction = "horizontal", gap = 2, wrap = TRUE)
 
 ## Page shells
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 Two wrappers assemble a whole page in one call, taking the
 [`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)

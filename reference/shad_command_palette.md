@@ -24,7 +24,7 @@ shad_command_trigger(
   id,
   label = "Search...",
   icon = "search",
-  shortcut = "\u2318K",
+  shortcut = "⌘K",
   variant = "outline",
   size = "sm",
   class = NULL,
