@@ -1,5 +1,3 @@
-<!-- README.md is generated. Edit the source, not the rendered gallery. -->
-
 # shadshiny <img src="man/figures/logo.png" align="right" height="139" alt="shadshiny hex logo" />
 
 <!-- badges: start -->
@@ -11,21 +9,20 @@
 <!-- badges: end -->
 
 **shadshiny** brings the [shadcn/ui](https://ui.shadcn.com) design system to
-[Shiny](https://shiny.posit.co). It is a from-scratch port — 72 accessible,
+[Shiny](https://shiny.posit.co). It is a from-scratch port: 72 accessible,
 themeable components rebuilt in framework-free CSS and vanilla JavaScript, then
 wrapped as ordinary R functions with native Shiny input bindings.
 
 - **No build step, no npm, no React.** Components are plain `htmltools` tags
   backed by a single bundled asset dependency.
 - **Native Shiny inputs.** Read values with `input$id`; drive them from the
-  server with `update_shad_*()`. Modules, `renderUI()` and bookmarking just work.
-- **Layout without CSS gymnastics.** `shad_container()`, `shad_stack()` and
-  `shad_grid()` cover page layout on the token spacing scale, and
-  `shad_page_sidebar()` / `shad_page_navbar()` assemble a whole app shell in one
-  call.
-- **A real data table.** `shad_data_table()` does multi-column sort, global and
-  per-column filtering, paging, and selection that survives paging — client-side
-  and themed, with no `DT`.
+  server with `update_shad_*()`. Modules, `renderUI()` and bookmarking all work.
+- **Layout primitives.** `shad_container()`, `shad_stack()` and `shad_grid()`
+  cover page layout on the token spacing scale, and `shad_page_sidebar()` /
+  `shad_page_navbar()` assemble a whole app shell in one call.
+- **Full data table.** `shad_data_table()` does multi-column sort, global and
+  per-column filtering, paging, and selection that survives paging, all
+  client-side and themed, with no `DT`.
 - **Dashboards & charts.** `shad_value_box()` and `shad_chart_container()` for
   the shell; `shad_sparkline()` and `shad_mini_donut()` draw inline SVG that
   follows the theme in CSS with no re-render; `shad_theme_ggplot2()` /
@@ -34,15 +31,15 @@ wrapped as ordinary R functions with native Shiny input bindings.
 - **Server-side validation.** `shad_validator()` plus a rule set drive
   `aria-invalid` and inline, shadcn-styled field messages.
 - **Streaming chat.** `shad_chat_ui()` / `shad_chat_server()` render a
-  stick-to-bottom transcript from any token source — an `ellmer` stream drops
+  stick-to-bottom transcript from any token source, so an `ellmer` stream drops
   straight in.
 - **Coexists with Bootstrap 5 / bslib.** Dark mode keys off the same signals
-  `bslib::input_dark_mode()` uses, so theme sync needs zero glue.
+  `bslib::input_dark_mode()` uses, so theme sync needs no glue.
 - **OKLCH token theming.** Seven presets out of the box, switchable at runtime,
   plus custom palettes via `shad_theme()` and the shadcn theme registry.
 
 > shadshiny is an independent reimplementation. It ships no shadcn/ui or Radix
-> source — only visually-compatible CSS/JS written for this package. See
+> source, only visually-compatible CSS/JS written for this package. See
 > [Attribution](#attribution).
 
 ## Installation
@@ -104,17 +101,17 @@ shad_run_example("kitchen-sink")
 
 ## Components
 
-**Tier 1 — display & typography**
+**Tier 1: display & typography**
 
 | | | | |
 |---|---|---|---|
 | `shad_button` | `shad_badge` | `shad_avatar` | `shad_card` |
 | `shad_alert` | `shad_separator` | `shad_skeleton` | `shad_spinner` |
 | `shad_aspect_ratio` | `shad_label` | `shad_progress` | `shad_breadcrumb` |
-| `shad_table` | `shad_kbd` | `shad_code` | typography (`shad_h1`…`shad_p`) |
+| `shad_table` | `shad_kbd` | `shad_code` | typography (`shad_h1` to `shad_p`) |
 | `shad_item` | `shad_empty` | `shad_button_group` | |
 
-**Tier 2 — form inputs**
+**Tier 2: form inputs**
 
 | | | | |
 |---|---|---|---|
@@ -124,7 +121,7 @@ shad_run_example("kitchen-sink")
 | `shad_calendar` | `shad_date_picker` | `shad_form_field` | `shad_input_group` |
 | `shad_number_input` | `shad_rating` | `shad_dropzone` | |
 
-**Tier 3 — overlays**
+**Tier 3: overlays**
 
 | | | | |
 |---|---|---|---|
@@ -133,7 +130,7 @@ shad_run_example("kitchen-sink")
 | `shad_context_menu` | `shad_menubar` | `shad_command` | `shad_toast` |
 | `shad_command_palette` | `shad_show_dialog` | | |
 
-**Tier 3 — navigation & structure**
+**Tier 3: navigation & structure**
 
 | | | | |
 |---|---|---|---|
@@ -209,7 +206,7 @@ shad_container(size = "lg",
 ```
 
 `shad_grid()` takes `min_width` for an auto-fit track list, or `cols` for an
-exact count — optionally per breakpoint, `cols = c(base = 1, md = 2, lg = 4)`.
+exact count, optionally per breakpoint, `cols = c(base = 1, md = 2, lg = 4)`.
 
 Two shells assemble a whole page, taking the `page_shad()` theming arguments:
 
@@ -261,8 +258,8 @@ same value, so picking "Reports" twice would only fire once.
 
 ## Charts that follow the theme
 
-Themes switch at *runtime*, and a plot rendered in R has no idea.
-`shad_current_theme()` is the bridge — read it in a render block and the plot
+Themes switch at runtime, which a plot rendered in R cannot see on its own.
+`shad_current_theme()` is the bridge: read it in a render block and the plot
 re-runs whenever the preset or dark mode changes.
 
 ```r
@@ -275,10 +272,10 @@ output$plot <- renderPlot({
 ```
 
 `shad_chart_colors()` returns the categorical ramp as hex (OKLCH converted in
-base R — no new dependency). `shad_tokens()` exposes the full token set as CSS
-strings.
+base R, with no new dependency). `shad_tokens()` exposes the full token set as
+CSS strings.
 
-For the small stuff, skip the plotting stack entirely — `shad_sparkline()` and
+For small inline graphics, skip the plotting stack. `shad_sparkline()` and
 `shad_mini_donut()` are inline SVG painted with the chart tokens, so a dark-mode
 toggle restyles them in CSS with no re-render and no round trip:
 
@@ -319,7 +316,7 @@ See `vignette("chat")`.
 
 ## Theming
 
-Colours are OKLCH `--shad-*` custom properties — never hard-code hex. Pick a
+Colours are OKLCH `--shad-*` custom properties, so never hard-code hex. Pick a
 preset at page level or swap it live:
 
 ```r
@@ -351,14 +348,14 @@ Each is a real app, launchable with `shad_run_example()`:
 | `05-settings-profile` | Vertical tabs, profile and notification forms, a live appearance panel |
 | `06-docs-reader` | Sidebar nav, ⌘K palette, resizable article/TOC split, prev/next paging |
 | `07-data-explorer` | `shad_data_table()` with value boxes and theme-following plots |
-| `08-llm-chat` | Streaming `shad_chat_server()` — swap the handler for `ellmer` to go live |
+| `08-llm-chat` | Streaming `shad_chat_server()`; swap the handler for `ellmer` to go live |
 | `09-app-shell` | `shad_page_sidebar()`, layout primitives, sparklines, a ⌘K palette that navigates, and server-built dialogs |
 
 ## Guides
 
 `vignette("shadshiny")` to get started, then: `installation`, `theming`,
 `forms`, `data-tables`, `charts`, `chat`, `layout`, `server-api`,
-`overlays-and-server`, and `migrating-inputs` — a complete base-Shiny →
+`overlays-and-server`, and `migrating-inputs`, a complete base-Shiny to
 shadshiny reference. The [pkgdown site](https://orijitghosh.github.io/shadshiny/)
 adds a live component gallery and an icon reference (78 built-in icons; use any
 other Lucide glyph via `shad_icon_raw()`).
