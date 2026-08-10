@@ -23,8 +23,10 @@ helpers.
 \section{Load order & the uniform contract}{
 
 All assets ship as a single bundled \link[htmltools:htmlDependency]{htmlDependency}
-(\code{\link[=shadshiny_deps]{shadshiny_deps()}}) whose files load in a fixed order: tokens, base and
-animation CSS, then component CSS/JS, with the Shiny binding layer last. Every
+(\code{\link[=shadshiny_deps]{shadshiny_deps()}}): one minified stylesheet and one minified script, built
+in a fixed order from tokens, base and animation CSS, then component CSS/JS,
+with the Shiny binding layer last. Set \code{options(shadshiny.assets = "source")}
+to load the per-component files instead when debugging the CSS or JS. Every
 stateful component root carries \code{data-shad="<name>"}; its JS instance exposes
 \code{getValue()}/\code{setValue()} (plus \code{open()}/\code{close()} for overlays) and
 dispatches a bubbling \code{shad:change} event that the generic Shiny input binding

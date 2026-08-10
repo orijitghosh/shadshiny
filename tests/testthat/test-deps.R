@@ -39,3 +39,27 @@ test_that("shadshiny_deps() returns a tagList carrying the dependency", {
   tl <- shadshiny_deps()
   expect_s3_class(tl, "shiny.tag.list")
 })
+
+test_that("the built bundle is served as one stylesheet and one script", {
+  skip_if(is.null(shadshiny:::shad_asset_bundle()), "bundle not built")
+  dep <- shadshiny:::shadshiny_dependency()
+  expect_identical(dep$stylesheet, "dist/shadshiny.min.css")
+  expect_identical(dep$script, "dist/shadshiny.min.js")
+})
+
+test_that("options(shadshiny.assets = 'source') falls back to the split files", {
+  withr::local_options(shadshiny.assets = "source")
+  dep <- shadshiny:::shadshiny_dependency()
+  expect_identical(dep$stylesheet, shadshiny:::shad_asset_css_order())
+  expect_identical(dep$script, shadshiny:::shad_asset_js_order())
+})
+
+test_that("the bundle was built from the same files, in the same order", {
+  # tools/build-assets.mjs reimplements the load order in JS. If the two ever
+  # disagree the bundle silently ships stale or misordered CSS, so pin them.
+  path <- system.file("assets", "dist", "manifest.json", package = "shadshiny")
+  skip_if(!nzchar(path), "bundle not built")
+  manifest <- jsonlite::fromJSON(path)
+  expect_identical(manifest$css, shadshiny:::shad_asset_css_order())
+  expect_identical(manifest$js, shadshiny:::shad_asset_js_order())
+})

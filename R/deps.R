@@ -43,16 +43,31 @@ shad_asset_js_order <- function() {
   c(head, rest, tail)
 }
 
+# The bundle built by tools/build-assets.mjs, or NULL when it is absent.
+#' @noRd
+shad_asset_bundle <- function() {
+  root <- system.file("assets", package = "shadshiny")
+  files <- file.path("dist", c("shadshiny.min.css", "shadshiny.min.js"))
+  if (!all(file.exists(file.path(root, files)))) return(NULL)
+  list(css = files[1], js = files[2])
+}
+
 #' The bundled shadshiny html dependency
+#'
+#' Serves one minified stylesheet and one minified script when the built bundle
+#' is present, which is the case for any installed copy of the package. Set
+#' `options(shadshiny.assets = "source")` to load the per-component files
+#' instead, which is what you want when stepping through the CSS or JS.
 #' @noRd
 shadshiny_dependency <- function() {
+  bundle <- if (identical(getOption("shadshiny.assets"), "source")) NULL else shad_asset_bundle()
   htmltools::htmlDependency(
     name       = "shadshiny",
     version    = as.character(utils::packageVersion("shadshiny")),
     package    = "shadshiny",
     src        = "assets",
-    stylesheet = shad_asset_css_order(),
-    script     = shad_asset_js_order()
+    stylesheet = if (is.null(bundle)) shad_asset_css_order() else bundle$css,
+    script     = if (is.null(bundle)) shad_asset_js_order() else bundle$js
   )
 }
 

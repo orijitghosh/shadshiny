@@ -44,3 +44,10 @@ jobs:
       - run: npm ci
 
       - run: npm test
+
+      # inst/assets/dist is committed, so a source edit that skips the rebuild
+      # would ship a stale bundle. Rebuild and fail if the result differs.
+      - name: bundle is up to date
+        run: |
+          npm run build:assets
+          git diff --exit-code -- inst/assets/dist
