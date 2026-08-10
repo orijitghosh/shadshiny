@@ -25,26 +25,68 @@ shad_card(
 )
 ```
 
-## Grids and flex
+## Container, stack, grid
 
-There is no bespoke grid component — use CSS. A responsive card grid is
-a few lines:
+Three primitives cover almost all page layout. They are CSS-only
+wrappers: each argument becomes a custom property on the root, so there
+is no utility-class soup and no JavaScript.
+
+[`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md)
+is the outermost wrapper — a centred, max-width column:
 
 ``` r
 
-tags$div(
-  style = paste(
-    "display:grid;gap:1rem;",
-    "grid-template-columns:repeat(auto-fill, minmax(16rem, 1fr))"
-  ),
-  card_one, card_two, card_three
+shad_container(page_content, size = "lg")   # sm/md/lg/xl/full, or a CSS length
+```
+
+[`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
+is “these things, spaced” — a flex column by default, a row when you
+ask:
+
+``` r
+
+shad_stack(section_one, section_two, gap = 6)
+
+shad_stack(
+  shad_button("Save"), shad_button("Cancel", variant = "outline"),
+  direction = "horizontal", gap = 2, align = "center"
 )
 ```
 
-For a KPI row, the same pattern with fixed columns, or flex with
-`flex:1` children. Because spacing tokens (`--shad-space-*`) and radii
-(`--shad-radius-*`) are shared, hand-written layout stays visually
-consistent with the components.
+[`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
+handles two dimensions. Reach for `min_width` first — it fits as many
+equal columns as will fit, with no breakpoints to reason about:
+
+``` r
+
+shad_grid(card_one, card_two, card_three, min_width = "16rem")
+```
+
+When you want an exact column count, pass `cols`, optionally per
+breakpoint (`base`, `sm` 40rem, `md` 48rem, `lg` 64rem). Each breakpoint
+falls back to the one below it, so you only name the ones that change:
+
+``` r
+
+shad_grid(a, b, c, d, cols = c(base = 1, md = 2, lg = 4))
+```
+
+`template` takes an explicit track list, and
+[`shad_grid_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
+spans cells:
+
+``` r
+
+shad_grid(
+  main_panel,
+  shad_grid_item(wide_chart, span = "full"),
+  template = "2fr 1fr"
+)
+```
+
+Gaps and padding accept a **spacing token step** — `gap = 4` is
+`var(--shad-space-4)`, the same scale the components use internally — or
+any CSS length when you need to escape the scale.
 
 ## Tabs
 
@@ -71,11 +113,98 @@ shad_tabs(
 > `outputOptions(output, "id", suspendWhenHidden = FALSE)`. The same
 > applies to outputs inside a dialog or sheet that opens later.
 
-## The sidebar shell
+## Page shells
 
-[`shad_sidebar_layout()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
-is the full application frame: a collapsible sidebar plus a main region.
-Build the sidebar from grouped, icon’d, badgeable items.
+Two wrappers assemble a whole page in one call. Both take the
+[`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
+theming arguments (`theme_preset`, `dark`, `theme`) and wrap their
+content in a
+[`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md)
+unless you pass `container = FALSE`.
+
+[`shad_page_navbar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_navbar.md)
+— a title bar carrying a tab strip, panels below. The window scrolls;
+the bar is sticky. `input$<inputId>` is the active tab.
+
+``` r
+
+ui <- shad_page_navbar(
+  shad_tab("overview", "Overview", overview_ui),
+  shad_tab("reports",  "Reports",  reports_ui),
+  title = "Acme", inputId = "nav",
+  header_end = bslib::input_dark_mode()
+)
+```
+
+[`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
+— the application frame: a collapsible sidebar, a bar with its trigger,
+and a scrolling main region. This shell takes the full viewport height
+and scrolls its main region rather than the window, so the sidebar rail
+and footer stay put.
+
+``` r
+
+ui <- shad_page_sidebar(
+  sidebar = shad_sidebar(
+    shad_sidebar_group("Platform",
+      shad_sidebar_item("home",  "Home",  icon = "home", active = TRUE),
+      shad_sidebar_item("inbox", "Inbox", icon = "mail", badge = "3"))),
+  inputId = "shell", title = "Acme",
+  shad_grid(kpi_one, kpi_two, kpi_three, min_width = "14rem")
+)
+```
+
+## ⌘K navigation
+
+[`shad_command_palette()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
+is the “jump anywhere” pattern: a modal, searchable list of everything
+the app can do, opened with ⌘K / Ctrl+K. Items come from data — a named
+vector, or a named list of them for grouped sections:
+
+``` r
+
+shad_command_palette("palette", items = list(
+  "Go to"   = c(Dashboard = "dashboard", Reports = "reports"),
+  "Actions" = list(
+    list(value = "new", label = "New report", shortcut = "N",
+         keywords = "create add")
+  )
+))
+```
+
+Drop `shad_command_trigger("palette")` in the page bar for people who do
+not know the shortcut, and observe **`input$palette_event`** — not
+`input$palette`:
+
+``` r
+
+server <- function(input, output, session) {
+  observeEvent(input$palette_event, {
+    switch(input$palette_event$value,
+      dashboard = update_shad_tabs("nav", "dashboard"),
+      reports   = update_shad_tabs("nav", "reports"),
+      new       = shad_show_dialog(new_report_dialog())
+    )
+  })
+}
+```
+
+`input$palette` holds the last value, but Shiny drops a repeat of the
+same value — so choosing “Reports” twice would only fire once. `_event`
+carries `value` plus a `nonce` and fires every time, which is what
+navigation needs.
+
+[`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
+replaces the items from the server: recent documents, search hits,
+commands gated on the signed-in user.
+
+## The sidebar shell, by hand
+
+[`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
+is a thin wrapper over
+[`shad_sidebar_layout()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md).
+Use the layout directly when the sidebar is one region of a larger page
+rather than the page itself.
 
 ``` r
 

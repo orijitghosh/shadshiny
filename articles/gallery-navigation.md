@@ -168,6 +168,104 @@ Code
 
     tags$div(style = "height:12rem", shad_resizable("demo_rz", shad_resizable_panel(default_size = 40, tags$div(style = "display:grid;place-items:center;height:100%", "Sidebar")), shad_resizable_handle(), shad_resizable_panel(default_size = 60, tags$div(style = "display:grid;place-items:center;height:100%", "Content"))))
 
+## Layout primitives
+
+[`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md),
+[`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
+and
+[`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
+cover page layout without hand-written CSS. Spacing takes a token step —
+`gap = 4` is `var(--shad-space-4)`, the same scale the components use
+internally — or any CSS length.
+
+`shad_grid(min_width = )` fits as many equal columns as will fit, with
+no breakpoints to maintain. **Resize the window** to watch this reflow:
+
+Revenue
+
+\$45,231
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik03IDE3TDE3IDdNNyA3aDEwdjEwIiAvPjwvc3ZnPg==)
++20.1%
+
+Subscribers
+
+2,350
+![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik03IDE3TDE3IDdNNyA3aDEwdjEwIiAvPjwvc3ZnPg==)
++180
+
+Active now
+
+573
+
+Code
+
+
+    shad_grid(shad_value_box("$45,231", "Revenue", delta = "+20.1%"), shad_value_box("2,350", "Subscribers", delta = "+180"), shad_value_box("573", "Active now"), min_width = "13rem")
+
+For an exact column count, pass `cols` — optionally per breakpoint
+(`base`, `sm` 40rem, `md` 48rem, `lg` 64rem), where each falls back to
+the one below it. `shad_grid_item(span = )` spans cells, and `template`
+takes a raw track list:
+
+1fr
+
+2fr
+
+full row
+
+Code
+
+
+    shad_grid(shad_card(shad_card_content("1fr")), shad_card(shad_card_content("2fr")), shad_grid_item(shad_card(shad_card_content("full row")), span = "full"), template = "1fr 2fr")
+
+[`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
+is the one-dimensional version — a column by default, a row when asked,
+with `align`, `justify`, `wrap` and `fill`:
+
+Save
+
+Cancel
+
+Delete
+
+Code
+
+
+    shad_stack(shad_button("Save"), shad_button("Cancel", variant = "outline"), shad_button("Delete", variant = "destructive"), direction = "horizontal", gap = 2, wrap = TRUE)
+
+## Page shells
+
+Two wrappers assemble a whole page in one call, taking the
+[`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
+theming arguments and wrapping content in a
+[`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md)
+unless you pass `container = FALSE`.
+
+``` r
+
+# a title bar carrying a tab strip; input$nav is the active view
+ui <- shad_page_navbar(
+  shad_tab("overview", "Overview", overview_ui),
+  shad_tab("reports",  "Reports",  reports_ui),
+  title = "Acme", inputId = "nav",
+  header_end = bslib::input_dark_mode()
+)
+
+# the application frame: collapsible sidebar, bar with its trigger, scrolling main
+ui <- shad_page_sidebar(
+  sidebar = shad_sidebar(
+    shad_sidebar_group("Platform",
+      shad_sidebar_item("home", "Home", icon = "home", active = TRUE))),
+  inputId = "shell", title = "Acme",
+  shad_grid(kpi_one, kpi_two, min_width = "14rem")
+)
+```
+
+The two differ in what scrolls. The navbar shell lets the window scroll
+and pins its bar with `position: sticky`; the sidebar shell takes the
+viewport height and scrolls its main region instead, because a sidebar
+that scrolls away is a sidebar with a drifting rail and footer.
+
 ## Sidebar layout
 
 The full app shell: a collapsible sidebar with grouped, badged nav items

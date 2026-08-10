@@ -118,6 +118,7 @@
         else {
           var g = groupOf(item);
           var child = g && g.querySelector('[role="treeitem"]');
+          // keyboard nav: let the browser reveal the new item (see rating.js)
           if (child) child.focus();
         }
       } else if (ev.key === "ArrowLeft") {
@@ -137,7 +138,7 @@
       if (!row || !list.contains(row)) return;
       var item = row.closest('[role="treeitem"]');
       if (isDisabled(item)) return;
-      item.focus();
+      item.focus({ preventScroll: true });
       var onChevron = ev.target.closest(".shad-tree__chevron");
       if (isBranch(item) && (onChevron || ev.detail === 2)) {
         setExpanded(item, item.getAttribute("aria-expanded") !== "true");

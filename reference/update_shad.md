@@ -66,6 +66,7 @@ update_shad_sidebar(
   id,
   collapsed = NULL,
   mobile_open = NULL,
+  active = NULL,
   session = shiny::getDefaultReactiveDomain()
 )
 
@@ -105,9 +106,13 @@ update_shad_button(
   For `update_shad_combobox()`, whether the combobox is in multiple mode
   (forces an array even for a single value).
 
-- collapsed, mobile_open:
+- collapsed, mobile_open, active:
 
   For `update_shad_sidebar()`; `NULL` leaves that facet unchanged.
+  `active` selects the
+  [`shad_sidebar_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
+  with that value, so navigating from elsewhere (a command palette, a
+  link) moves the rail too.
 
 - max:
 
@@ -126,4 +131,7 @@ Invisibly `NULL`; called for its side effect.
 Other shadshiny server API:
 [`shad_message_scroller_to_bottom()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller_to_bottom.md),
 [`shad_overlay_server`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md),
-[`shad_toast()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
+[`shad_remove_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_remove_dialog.md),
+[`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md),
+[`shad_toast()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md),
+[`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)

@@ -93,7 +93,7 @@
         on(b, "click", function (ev) {
           var v = valueFromEvent(b, ev);
           set(v === value ? 0 : v); // click current value clears
-          b.focus();
+          b.focus({ preventScroll: true });
         });
         on(b, "mousemove", function (ev) {
           root.setAttribute("data-preview", "");
@@ -117,6 +117,8 @@
         focusCurrent();
       });
     }
+    /* Keyboard roving focus: no preventScroll here on purpose. The user is
+       navigating by keyboard and needs to see where they landed. */
     function focusCurrent() {
       var i = Math.max(1, Math.ceil(value));
       var b = items[i - 1];

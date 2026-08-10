@@ -49,8 +49,8 @@
           it.setAttribute("data-highlighted", "");
           it.setAttribute("aria-selected", "true");
           input.setAttribute("aria-activedescendant", it.id);
-          it.scrollIntoViewIfNeeded ? it.scrollIntoViewIfNeeded(false)
-            : it.scrollIntoView({ block: "nearest" });
+          // scrolls the list only — never the page (see shad.util.keepInView)
+          shad.util.keepInView(list, it);
         } else {
           it.removeAttribute("data-highlighted");
           it.removeAttribute("aria-selected");
@@ -194,5 +194,18 @@
         list.removeEventListener("click", onClick);
       }
     };
+  });
+
+  /* Any element with data-shad-command-open="<id>" opens that palette.
+     Delegated from the document so a trigger rendered later (a navbar button,
+     a Shiny-inserted fragment) works without re-wiring. */
+  document.addEventListener("click", function (ev) {
+    const trigger = ev.target.closest && ev.target.closest("[data-shad-command-open]");
+    if (!trigger) return;
+    const root = document.getElementById(trigger.getAttribute("data-shad-command-open"));
+    const inst = root && shad.get(root);
+    if (!inst || typeof inst.open !== "function") return;
+    ev.preventDefault();
+    inst.open();
   });
 })();

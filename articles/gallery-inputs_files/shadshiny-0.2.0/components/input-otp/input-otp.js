@@ -71,7 +71,7 @@
       maybeEmit();
     }
     function onFocusBlur() { render(); }
-    function onCellsClick() { input.focus(); }
+    function onCellsClick() { input.focus({ preventScroll: true }); }
 
     input.addEventListener("input", onInput);
     input.addEventListener("paste", onPaste);

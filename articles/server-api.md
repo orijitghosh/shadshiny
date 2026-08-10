@@ -32,6 +32,7 @@ update_shad_carousel("gallery", selected = 3)
 update_shad_sidebar("shell", collapsed = TRUE)
 update_shad_progress("upload", value = 80)
 update_shad_button("save", loading = TRUE)         # or disabled=, label=
+update_shad_command("palette", items = c("Recent: Q3.pdf" = "q3"))
 ```
 
 **The one exception: text inputs.**
@@ -86,6 +87,40 @@ observeEvent(input$confirm_delete, {      # the dialog's confirm action
 })
 ```
 
+Overlays only reachable this way have to exist in the UI. When the
+content depends on what just happened, build the dialog in the server
+and show it —
+[`shiny::showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html)’s
+shape:
+
+``` r
+
+observeEvent(input$delete, {
+  shad_show_dialog(shad_dialog(
+    "confirm", title = paste("Delete", input$project, "?"),
+    description = "This cannot be undone.",
+    footer = tagList(shad_dialog_close_button(),
+                     shad_button(inputId = "confirm_go", "Delete",
+                                 variant = "destructive"))
+  ))
+})
+```
+
+It opens itself and, by default, destroys and removes itself once it
+closes — so inputs inside it are live while open and gone afterwards.
+Pass `transient = FALSE` to keep it (and its values) in the document for
+a later
+[`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md).
+`shad_remove_dialog(id)` closes one from the server. Accepts
+[`shad_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_dialog.md),
+[`shad_alert_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_alert_dialog.md),
+[`shad_sheet()`](https://orijitghosh.github.io/shadshiny/reference/shad_sheet.md)
+and
+[`shad_drawer()`](https://orijitghosh.github.io/shadshiny/reference/shad_drawer.md)
+— not
+[`shad_popover()`](https://orijitghosh.github.io/shadshiny/reference/shad_popover.md),
+which has no trigger to anchor to.
+
 > **Dialog and sheet content portals to `<body>` on open.** The open
 > element carries `data-state="open"` on `.shad-dialog__content` (not on
 > the root `#id`). This matters if you probe open state from JavaScript
@@ -137,24 +172,40 @@ shad_toast_dismiss(id)     # or shad_toast_dismiss() to clear all
 
 ## The command palette from the server
 
-The `dialog = TRUE` command palette opens on ⌘K by default. To open it
-programmatically there is no dedicated helper — send the
-`shadshiny:invoke` custom message, which calls a method on a component
-instance by id:
+[`shad_command_palette()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
+opens on ⌘K, from
+[`shad_command_trigger()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md),
+or from the server:
 
 ``` r
 
-open_palette <- function(session) {
-  session$sendCustomMessage("shadshiny:invoke",
-    list(id = "cmdk", method = "open"))
-}
+shad_command_open("palette")
+shad_command_close("palette")
 
-observeEvent(input$search_button, open_palette(session))
+# swap the items for whatever the session knows
+update_shad_command("palette", items = list(
+  "Recent" = c("Q3 report" = "q3", "Q4 forecast" = "q4")
+))
 ```
 
-The companion `shadshiny:attr` message sets or removes an attribute on
-any element — handy for, say, a password reveal that flips an input’s
-`type`:
+Read selections from **`input$<id>_event`**, a list of `value` and
+`nonce` — not `input$<id>`:
+
+``` r
+
+observeEvent(input$palette_event, {
+  switch(input$palette_event$value,
+    dashboard = update_shad_tabs("nav", "dashboard"),
+    reports   = update_shad_tabs("nav", "reports"))
+})
+```
+
+`input$<id>` holds the last value, and Shiny drops a repeat of the same
+value. That is fine for a filter and wrong for navigation: choosing
+“Reports” twice has to work twice. `_event` fires every time.
+
+The `shadshiny:attr` message sets or removes an attribute on any element
+— handy for, say, a password reveal that flips an input’s `type`:
 
 ``` r
 

@@ -114,27 +114,58 @@ matches the page instead of fighting it.</p>
 renders the down/destructive chip, anything else renders up. Set it
 explicitly whenever “up” isn’t the good direction — churn going up is
 not a win.</p>
-<p><code>sparkline</code> takes any tag, so a small inline plot or SVG
-drops straight in:</p>
+<p><code>sparkline</code> takes any tag. Reach for
+<code><a href="../reference/shad_sparkline.html">shad_sparkline()</a></code> before a <code><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput()</a></code>: it is
+inline SVG with no plotting stack and, more usefully, its marks are
+painted with the theme’s chart tokens, so a dark-mode toggle or a preset
+switch restyles it <em>in CSS</em> — no re-render, no server
+round-trip.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"1,204"</span>, <span class="st">"Sessions"</span>, sparkline <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"spark"</span>, height <span class="op">=</span> <span class="st">"40px"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"1,204"</span>, <span class="st">"Sessions"</span>, delta <span class="op">=</span> <span class="st">"-3.1%"</span>,</span>
+<span>               sparkline <span class="op">=</span> <span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="va">sessions</span>, type <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><code>size</code> is <code>"sm"</code>, <code>"md"</code>, or
 <code>"lg"</code>; <code>href</code> turns the whole card into a
 link.</p>
-<p>Lay them out with CSS grid — shadshiny deliberately doesn’t
-reimplement a grid system:</p>
+<p>Lay them out with <code><a href="../reference/shad_grid.html">shad_grid()</a></code> — <code>min_width</code>
+fits as many equal columns as will fit, with no breakpoints to
+maintain:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span></span>
-<span>  style <span class="op">=</span> <span class="st">"display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1rem;"</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_grid.html">shad_grid</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"$48,120"</span>, <span class="st">"Revenue"</span>, delta <span class="op">=</span> <span class="st">"+12.4%"</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"1,204"</span>, <span class="st">"Sessions"</span>, delta <span class="op">=</span> <span class="st">"-3.1%"</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"2.4%"</span>, <span class="st">"Conversion"</span>, delta <span class="op">=</span> <span class="st">"0.0%"</span>, delta_direction <span class="op">=</span> <span class="st">"neutral"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"2.4%"</span>, <span class="st">"Conversion"</span>, delta <span class="op">=</span> <span class="st">"0.0%"</span>, delta_direction <span class="op">=</span> <span class="st">"neutral"</span><span class="op">)</span>,</span>
+<span>  min_width <span class="op">=</span> <span class="st">"12rem"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="sparklines-and-donuts">Sparklines and donuts<a class="anchor" aria-label="anchor" href="#sparklines-and-donuts"></a>
+</h2>
+<p><code><a href="../reference/shad_sparkline.html">shad_sparkline()</a></code> draws <code>"line"</code>,
+<code>"area"</code>, <code>"bar"</code>, or <code>"step"</code> from a
+numeric vector, with no axes and no labels. It stretches to fill
+whatever box it is dropped into — a value box strip, a table cell, an
+item row:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">31</span>, <span class="fl">40</span>, <span class="fl">28</span>, <span class="fl">51</span>, <span class="fl">42</span>, <span class="fl">62</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"bar"</span>, color <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>  <span class="co"># bars hang off zero</span></span></code></pre></div>
+<p>Non-finite values break the series rather than being interpolated
+across, so a gap in the data reads as a gap in the line.</p>
+<p><code><a href="../reference/shad_mini_donut.html">shad_mini_donut()</a></code> shows a few parts of a whole, with
+optional content in the middle:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_mini_donut.html">shad_mini_donut</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">62</span>, <span class="fl">24</span>, <span class="fl">14</span><span class="op">)</span>, center <span class="op">=</span> <span class="st">"62%"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_mini_donut.html">shad_mini_donut</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span>, thickness <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>   <span class="co"># thickness = 1 is a pie</span></span></code></pre></div>
+<p><code>color</code> (and the donut’s <code>colors</code>) take a
+chart-token index <code>1</code>–<code>5</code>, or any CSS colour when
+you need to step outside the palette. Both charts are decorative by
+default and hidden from screen readers — the number they illustrate is
+normally right next to them. Pass <code>label</code> when the chart is
+the only carrier of the information.</p>
 </div>
 <div class="section level2">
 <h2 id="the-chart-card">The chart card<a class="anchor" aria-label="anchor" href="#the-chart-card"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_chart_container.html">shad_chart_container</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"trend"</span>, height <span class="op">=</span> <span class="st">"260px"</span><span class="op">)</span>,</span>
 <span>  title       <span class="op">=</span> <span class="st">"Revenue by region"</span>,</span>
@@ -150,7 +181,7 @@ the container already sits inside a <code><a href="../reference/shad_card.html">
 <p><code>legend_labels</code> renders a legend strip in the chart
 palette, in order, so you can label a plot whose own legend you
 suppressed:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_chart_container.html">shad_chart_container</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"stack"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Channel mix"</span>,</span>
@@ -164,7 +195,7 @@ suppressed:</p>
 <code>n</code> hex colours from the active theme’s
 <code>--shad-chart-1</code> … <code>--shad-chart-6</code> ramp,
 interpolating past six:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_chart_colors.html">shad_chart_colors</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>                        <span class="co"># default preset, light</span></span>
 <span><span class="fu"><a href="../reference/shad_chart_colors.html">shad_chart_colors</a></span><span class="op">(</span><span class="fl">8</span>, <span class="st">"blue"</span>, dark <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>   <span class="co"># 8 colours, blue preset, dark mode</span></span></code></pre></div>
 <p><code>shad_tokens(preset, dark)</code> gives you the whole token set
@@ -183,7 +214,7 @@ browser’s current theme that returns
 <code>list(preset = , dark = )</code>. Touch it inside
 <code><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot()</a></code> and the plot re-renders whenever the theme
 changes.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span><span class="op">$</span><span class="va">trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">th</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_current_theme.html">shad_current_theme</a></span><span class="op">(</span><span class="op">)</span>          <span class="co"># reactive dependency on the live theme</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">sales</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">month</span>, <span class="va">amount</span>, colour <span class="op">=</span> <span class="va">region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -225,7 +256,7 @@ and border colours.</td>
 <p>Extra <code>...</code> pass through to
 <code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html" class="external-link">ggplot2::discrete_scale()</a></code>, so <code>name</code>,
 <code>labels</code>, and <code>guide</code> work as usual.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">agg</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">region</span>, <span class="va">amount</span>, fill <span class="op">=</span> <span class="va">region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/shad_theme_ggplot2.html">shad_scale_fill_shad</a></span><span class="op">(</span><span class="va">th</span><span class="op">$</span><span class="va">preset</span>, <span class="va">th</span><span class="op">$</span><span class="va">dark</span>, guide <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -236,7 +267,7 @@ and border colours.</td>
 <h2 id="plotly-and-echarts4r">plotly and echarts4r<a class="anchor" aria-label="anchor" href="#plotly-and-echarts4r"></a>
 </h2>
 <p>These take the widget and return it, so they pipe:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span><span class="op">$</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">plotly</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">renderPlotly</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">th</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_current_theme.html">shad_current_theme</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="fu">plotly</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plot_ly.html" class="external-link">plot_ly</a></span><span class="op">(</span><span class="va">sales</span>, x <span class="op">=</span> <span class="op">~</span><span class="va">month</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">amount</span>, color <span class="op">=</span> <span class="op">~</span><span class="va">region</span>,</span>
@@ -259,7 +290,7 @@ installed.</p>
 <h2 id="base-graphics">Base graphics<a class="anchor" aria-label="anchor" href="#base-graphics"></a>
 </h2>
 <p>There is no theme helper, but the palette is just hex, so:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span><span class="op">$</span><span class="va">bar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">th</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_current_theme.html">shad_current_theme</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">values</span>, col <span class="op">=</span> <span class="fu"><a href="../reference/shad_chart_colors.html">shad_chart_colors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span>, <span class="va">th</span><span class="op">$</span><span class="va">preset</span>, <span class="va">th</span><span class="op">$</span><span class="va">dark</span><span class="op">)</span>,</span>
@@ -270,7 +301,7 @@ installed.</p>
 <h2 id="timelines">Timelines<a class="anchor" aria-label="anchor" href="#timelines"></a>
 </h2>
 <p>For event feeds rather than figures:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_timeline.html">shad_timeline</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/shad_timeline_item.html">shad_timeline_item</a></span><span class="op">(</span><span class="st">"Order placed"</span>, time <span class="op">=</span> <span class="st">"09:12"</span>, icon <span class="op">=</span> <span class="st">"check"</span>,</span>
 <span>                     description <span class="op">=</span> <span class="st">"Payment authorised"</span><span class="op">)</span>,</span>

@@ -57,14 +57,15 @@
   structure](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.md):
 
   Tier 3 layout — tabs, accordion, collapsible, pagination, carousel,
-  scroll-area, resizable panels and the sidebar family — rendered live.
+  scroll-area, resizable panels, the layout primitives and the sidebar
+  family — rendered live.
 
 - [Gallery: data, dashboards &
   flow](https://orijitghosh.github.io/shadshiny/articles/gallery-data.md):
 
-  The V2 kit — data table, value boxes, chart containers, timelines,
-  stepper, tree, rating, number input and dropzone — rendered live with
-  their source.
+  The V2 kit — data table, value boxes, sparklines, donuts, chart
+  containers, timelines, stepper, tree, rating, number input and
+  dropzone — rendered live with their source.
 
 - [Gallery: chat & AI
   kit](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.md):

@@ -35,6 +35,8 @@ A timeline `<ol>` tag.
 
 Other shadshiny dashboard:
 [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md),
+[`shad_mini_donut()`](https://orijitghosh.github.io/shadshiny/reference/shad_mini_donut.md),
+[`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md),
 [`shad_timeline_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_timeline_item.md),
 [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
 

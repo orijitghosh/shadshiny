@@ -69,7 +69,7 @@
       disposeDismiss = shad.dismiss.push({
         el: content,
         extraElements: [trigger],
-        onDismiss: () => { doClose(); trigger.focus(); }
+        onDismiss: () => { doClose(); trigger.focus({ preventScroll: true }); }
       });
       trigger.setAttribute("aria-expanded", "true");
       const day = content.querySelector('.shad-calendar__day[tabindex="0"]');
@@ -96,7 +96,7 @@
       shad.util.emit(root, "shad:change", { value: ev.detail.value });
       const v = ev.detail.value;
       const complete = isRange ? (v && v.start && v.end) : !!v;
-      if (complete) { doClose(); trigger.focus(); }
+      if (complete) { doClose(); trigger.focus({ preventScroll: true }); }
     }
 
     trigger.addEventListener("click", onTriggerClick);

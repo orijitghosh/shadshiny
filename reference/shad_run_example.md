@@ -52,8 +52,25 @@ shad_run_example(example = "kitchen-sink")
   :   documentation site: sidebar nav, ⌘K search, resizable article/TOC
       split, rich typography and tabbed code examples.
 
-  The six numbered apps are real-world examples that together exercise
-  the whole component library.
+  `"07-data-explorer"`
+
+  :   [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
+      with KPI value boxes and theme-following plots.
+
+  `"08-llm-chat"`
+
+  :   streaming
+      [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md);
+      swap the handler for an ellmer stream to go live.
+
+  `"09-app-shell"`
+
+  :   [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
+      with the layout primitives, sparklines, a ⌘K palette that drives
+      navigation, and dialogs built in the server.
+
+  The numbered apps are real-world examples that together exercise the
+  whole component library.
 
 ## Value
 

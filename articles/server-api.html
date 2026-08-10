@@ -119,7 +119,8 @@ taking the same <code>inputId</code>:</p>
 <span><span class="fu"><a href="../reference/update_shad.html">update_shad_carousel</a></span><span class="op">(</span><span class="st">"gallery"</span>, selected <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/update_shad.html">update_shad_sidebar</a></span><span class="op">(</span><span class="st">"shell"</span>, collapsed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/update_shad.html">update_shad_progress</a></span><span class="op">(</span><span class="st">"upload"</span>, value <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/update_shad.html">update_shad_button</a></span><span class="op">(</span><span class="st">"save"</span>, loading <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>         <span class="co"># or disabled=, label=</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/update_shad.html">update_shad_button</a></span><span class="op">(</span><span class="st">"save"</span>, loading <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>         <span class="co"># or disabled=, label=</span></span>
+<span><span class="fu"><a href="../reference/update_shad_command.html">update_shad_command</a></span><span class="op">(</span><span class="st">"palette"</span>, items <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Recent: Q3.pdf"</span> <span class="op">=</span> <span class="st">"q3"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><strong>The one exception: text inputs.</strong>
 <code><a href="../reference/shad_input.html">shad_input()</a></code> and <code><a href="../reference/shad_textarea.html">shad_textarea()</a></code> render real
 <code>&lt;input&gt;</code>/<code>&lt;textarea&gt;</code> elements and
@@ -159,6 +160,27 @@ by <code>inputId</code>:</p>
 <span>  <span class="fu"><a href="../reference/shad_overlay_server.html">shad_alert_dialog_close</a></span><span class="op">(</span><span class="st">"confirm_delete"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="../reference/shad_toast.html">shad_toast_success</a></span><span class="op">(</span><span class="st">"Deleted."</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<p>Overlays only reachable this way have to exist in the UI. When the
+content depends on what just happened, build the dialog in the server
+and show it — <code><a href="https://rdrr.io/pkg/shiny/man/showModal.html" class="external-link">shiny::showModal()</a></code>’s shape:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">delete</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/shad_show_dialog.html">shad_show_dialog</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_dialog.html">shad_dialog</a></span><span class="op">(</span></span>
+<span>    <span class="st">"confirm"</span>, title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Delete"</span>, <span class="va">input</span><span class="op">$</span><span class="va">project</span>, <span class="st">"?"</span><span class="op">)</span>,</span>
+<span>    description <span class="op">=</span> <span class="st">"This cannot be undone."</span>,</span>
+<span>    footer <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/tagList.html" class="external-link">tagList</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_dialog.html">shad_dialog_close_button</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                     <span class="fu"><a href="../reference/shad_button.html">shad_button</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"confirm_go"</span>, <span class="st">"Delete"</span>,</span>
+<span>                                 variant <span class="op">=</span> <span class="st">"destructive"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<p>It opens itself and, by default, destroys and removes itself once it
+closes — so inputs inside it are live while open and gone afterwards.
+Pass <code>transient = FALSE</code> to keep it (and its values) in the
+document for a later <code><a href="../reference/shad_overlay_server.html">shad_dialog_open()</a></code>.
+<code>shad_remove_dialog(id)</code> closes one from the server. Accepts
+<code><a href="../reference/shad_dialog.html">shad_dialog()</a></code>, <code><a href="../reference/shad_alert_dialog.html">shad_alert_dialog()</a></code>,
+<code><a href="../reference/shad_sheet.html">shad_sheet()</a></code> and <code><a href="../reference/shad_drawer.html">shad_drawer()</a></code> — not
+<code><a href="../reference/shad_popover.html">shad_popover()</a></code>, which has no trigger to anchor to.</p>
 <blockquote>
 <p><strong>Dialog and sheet content portals to <code>&lt;body&gt;</code>
 on open.</strong> The open element carries
@@ -173,14 +195,14 @@ id.</p>
 </h2>
 <p>Toasts are entirely server-side. The base <code><a href="../reference/shad_toast.html">shad_toast()</a></code>
 plus four shorthands:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_toast.html">shad_toast</a></span><span class="op">(</span><span class="st">"Saved."</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shad_toast.html">shad_toast_success</a></span><span class="op">(</span><span class="st">"Profile updated."</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shad_toast.html">shad_toast_error</a></span><span class="op">(</span><span class="st">"Something went wrong."</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shad_toast.html">shad_toast_warning</a></span><span class="op">(</span><span class="st">"Your trial ends in 3 days."</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shad_toast.html">shad_toast_loading</a></span><span class="op">(</span><span class="st">"Uploading…"</span><span class="op">)</span>          <span class="co"># a persistent spinner toast</span></span></code></pre></div>
 <p>For a loading → done flow, capture the id and update it:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">export</span>, <span class="op">{</span></span>
 <span>  <span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_toast.html">shad_toast_loading</a></span><span class="op">(</span><span class="st">"Preparing export…"</span><span class="op">)</span></span>
 <span>  <span class="co"># ... do the work ...</span></span>
@@ -195,7 +217,7 @@ If you raise or update a toast (or scroll a component) inside a
 default-session lookup fails. Pass <code>session</code> explicitly, and
 wrap reactive reads/writes in
 <code>shiny::withReactiveDomain(session, { ... })</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">later</span><span class="fu">::</span><span class="fu"><a href="https://later.r-lib.org/reference/later.html" class="external-link">later</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/domains.html" class="external-link">withReactiveDomain</a></span><span class="op">(</span><span class="va">session</span>, <span class="op">{</span></span>
 <span>    <span class="fu"><a href="../reference/shad_toast.html">shad_toast_update</a></span><span class="op">(</span><span class="va">id</span>, message <span class="op">=</span> <span class="st">"Done."</span>, type <span class="op">=</span> <span class="st">"success"</span>, session <span class="op">=</span> <span class="va">session</span><span class="op">)</span></span>
@@ -206,21 +228,34 @@ wrap reactive reads/writes in
 <div class="section level2">
 <h2 id="the-command-palette-from-the-server">The command palette from the server<a class="anchor" aria-label="anchor" href="#the-command-palette-from-the-server"></a>
 </h2>
-<p>The <code>dialog = TRUE</code> command palette opens on ⌘K by
-default. To open it programmatically there is no dedicated helper — send
-the <code>shadshiny:invoke</code> custom message, which calls a method
-on a component instance by id:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">open_palette</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">session</span><span class="op">$</span><span class="fu">sendCustomMessage</span><span class="op">(</span><span class="st">"shadshiny:invoke"</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"cmdk"</span>, method <span class="op">=</span> <span class="st">"open"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">search_button</span>, <span class="fu">open_palette</span><span class="op">(</span><span class="va">session</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>The companion <code>shadshiny:attr</code> message sets or removes an
-attribute on any element — handy for, say, a password reveal that flips
-an input’s <code>type</code>:</p>
+<p><code><a href="../reference/shad_command_palette.html">shad_command_palette()</a></code> opens on ⌘K, from
+<code><a href="../reference/shad_command_palette.html">shad_command_trigger()</a></code>, or from the server:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_command_palette.html">shad_command_open</a></span><span class="op">(</span><span class="st">"palette"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_command_palette.html">shad_command_close</a></span><span class="op">(</span><span class="st">"palette"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># swap the items for whatever the session knows</span></span>
+<span><span class="fu"><a href="../reference/update_shad_command.html">update_shad_command</a></span><span class="op">(</span><span class="st">"palette"</span>, items <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Recent"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Q3 report"</span> <span class="op">=</span> <span class="st">"q3"</span>, <span class="st">"Q4 forecast"</span> <span class="op">=</span> <span class="st">"q4"</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Read selections from
+<strong><code>input$&lt;id&gt;_event</code></strong>, a list of
+<code>value</code> and <code>nonce</code> — not
+<code>input$&lt;id&gt;</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">palette_event</span>, <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/switch.html" class="external-link">switch</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">palette_event</span><span class="op">$</span><span class="va">value</span>,</span>
+<span>    dashboard <span class="op">=</span> <span class="fu"><a href="../reference/update_shad.html">update_shad_tabs</a></span><span class="op">(</span><span class="st">"nav"</span>, <span class="st">"dashboard"</span><span class="op">)</span>,</span>
+<span>    reports   <span class="op">=</span> <span class="fu"><a href="../reference/update_shad.html">update_shad_tabs</a></span><span class="op">(</span><span class="st">"nav"</span>, <span class="st">"reports"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<p><code>input$&lt;id&gt;</code> holds the last value, and Shiny drops a
+repeat of the same value. That is fine for a filter and wrong for
+navigation: choosing “Reports” twice has to work twice.
+<code>_event</code> fires every time.</p>
+<p>The <code>shadshiny:attr</code> message sets or removes an attribute
+on any element — handy for, say, a password reveal that flips an input’s
+<code>type</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">reveal</span>, <span class="op">{</span></span>
 <span>  <span class="va">session</span><span class="op">$</span><span class="fu">sendCustomMessage</span><span class="op">(</span><span class="st">"shadshiny:attr"</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"password"</span>, attr <span class="op">=</span> <span class="st">"type"</span>,</span>

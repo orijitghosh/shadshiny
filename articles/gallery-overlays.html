@@ -120,10 +120,12 @@
 <link href="gallery-overlays_files/shadshiny-0.2.0/components/input-otp/input-otp.css" rel="stylesheet">
 <link href="gallery-overlays_files/shadshiny-0.2.0/components/item/item.css" rel="stylesheet">
 <link href="gallery-overlays_files/shadshiny-0.2.0/components/label/label.css" rel="stylesheet">
+<link href="gallery-overlays_files/shadshiny-0.2.0/components/layout/layout.css" rel="stylesheet">
 <link href="gallery-overlays_files/shadshiny-0.2.0/components/marker/marker.css" rel="stylesheet">
 <link href="gallery-overlays_files/shadshiny-0.2.0/components/menubar/menubar.css" rel="stylesheet">
 <link href="gallery-overlays_files/shadshiny-0.2.0/components/message/message.css" rel="stylesheet">
 <link href="gallery-overlays_files/shadshiny-0.2.0/components/message-scroller/message-scroller.css" rel="stylesheet">
+<link href="gallery-overlays_files/shadshiny-0.2.0/components/mini-chart/mini-chart.css" rel="stylesheet">
 <link href="gallery-overlays_files/shadshiny-0.2.0/components/native-select/native-select.css" rel="stylesheet">
 <link href="gallery-overlays_files/shadshiny-0.2.0/components/navigation-menu/navigation-menu.css" rel="stylesheet">
 <link href="gallery-overlays_files/shadshiny-0.2.0/components/number-stepper/number-stepper.css" rel="stylesheet">
@@ -433,12 +435,55 @@ Redo
 </div>
 </div>
 <div class="section level2">
+<h2 id="dialogs-built-in-the-server">Dialogs built in the server<a class="anchor" aria-label="anchor" href="#dialogs-built-in-the-server"></a>
+</h2>
+<p>Everything above declares its overlay in the UI. When the content
+depends on what just happened — the row that was clicked, the upload
+that failed — build the dialog in the server instead and show it, the
+way <code><a href="https://rdrr.io/pkg/shiny/man/showModal.html" class="external-link">shiny::showModal()</a></code> works:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">delete</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/shad_show_dialog.html">shad_show_dialog</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_dialog.html">shad_dialog</a></span><span class="op">(</span></span>
+<span>    <span class="st">"confirm"</span>,</span>
+<span>    title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Delete"</span>, <span class="va">input</span><span class="op">$</span><span class="va">project</span>, <span class="st">"?"</span><span class="op">)</span>,</span>
+<span>    description <span class="op">=</span> <span class="st">"This cannot be undone."</span>,</span>
+<span>    footer <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/tagList.html" class="external-link">tagList</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="../reference/shad_dialog.html">shad_dialog_close_button</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="../reference/shad_button.html">shad_button</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"confirm_go"</span>, <span class="st">"Delete"</span>, variant <span class="op">=</span> <span class="st">"destructive"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<p>It is appended to <code>&lt;body&gt;</code>, opens itself, and by
+default removes itself once it closes — nothing to clean up and no ids
+left behind. Inputs inside it are live while it is open, so read them in
+the observer; pass <code>transient = FALSE</code> to keep the overlay
+(and its values) around for <code><a href="../reference/shad_overlay_server.html">shad_dialog_open()</a></code>.
+<code><a href="../reference/shad_show_dialog.html">shad_show_dialog()</a></code> also takes
+<code><a href="../reference/shad_alert_dialog.html">shad_alert_dialog()</a></code>, <code><a href="../reference/shad_sheet.html">shad_sheet()</a></code> and
+<code><a href="../reference/shad_drawer.html">shad_drawer()</a></code>, and <code><a href="../reference/shad_remove_dialog.html">shad_remove_dialog()</a></code> closes
+one from the server.</p>
+</div>
+<div class="section level2">
 <h2 id="command-palette">Command palette<a class="anchor" aria-label="anchor" href="#command-palette"></a>
 </h2>
 <p><code><a href="../reference/shad_command.html">shad_command()</a></code> is a searchable action list. Inline it
-(below) or set <code>dialog = TRUE</code> for a ⌘K spotlight overlay you
-open from the server with the <code>shadshiny:invoke</code> message.
-Type to filter.</p>
+(below) or use <code><a href="../reference/shad_command_palette.html">shad_command_palette()</a></code> for the ⌘K spotlight
+overlay — same component, items supplied as data:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_command_palette.html">shad_command_palette</a></span><span class="op">(</span><span class="st">"palette"</span>, items <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Go to"</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Dashboard <span class="op">=</span> <span class="st">"dashboard"</span>, Reports <span class="op">=</span> <span class="st">"reports"</span><span class="op">)</span>,</span>
+<span>  <span class="st">"Actions"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>value <span class="op">=</span> <span class="st">"new"</span>, label <span class="op">=</span> <span class="st">"New report"</span>, shortcut <span class="op">=</span> <span class="st">"N"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># a trigger for people who don't know the shortcut</span></span>
+<span><span class="fu"><a href="../reference/shad_command_palette.html">shad_command_trigger</a></span><span class="op">(</span><span class="st">"palette"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># observe input$palette_event, NOT input$palette: Shiny drops a repeat of the</span></span>
+<span><span class="co"># same value, so picking "Reports" twice would only fire once</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">palette_event</span>, <span class="op">{</span> <span class="va">...</span> <span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="../reference/update_shad_command.html">update_shad_command()</a></code> swaps the items from the server —
+recent documents, search hits, commands gated on the signed-in user.</p>
+<p>Inline, the same component looks like this. Type to filter.</p>
 <div class="shad-demo">
 <div class="shad-demo__stage shad-demo__stage--center shad-demo__stage--col">
 <div style="max-width:26rem;width:100%">

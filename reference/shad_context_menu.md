@@ -39,6 +39,7 @@ Other shadshiny tier-3 components:
 [`shad_carousel()`](https://orijitghosh.github.io/shadshiny/reference/shad_carousel.md),
 [`shad_collapsible()`](https://orijitghosh.github.io/shadshiny/reference/shad_collapsible.md),
 [`shad_command()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md),
+[`shad_command_palette()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md),
 [`shad_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_dialog.md),
 [`shad_drawer()`](https://orijitghosh.github.io/shadshiny/reference/shad_drawer.md),
 [`shad_dropdown_menu()`](https://orijitghosh.github.io/shadshiny/reference/shad_dropdown_menu.md),

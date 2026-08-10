@@ -176,12 +176,71 @@ Code
 
     shad_menubar("demo_menubar", shad_menubar_menu("File", shad_menu_item("new", "New tab", shortcut = "⌘T"), shad_menu_item("open", "Open…", shortcut = "⌘O"), shad_menu_separator(), shad_menu_item("print", "Print", shortcut = "⌘P")), shad_menubar_menu("Edit", shad_menu_item("undo", "Undo", shortcut = "⌘Z"), shad_menu_item("redo", "Redo", shortcut = "⇧⌘Z")), shad_menubar_menu("View", shad_menu_item("zoom_in", "Zoom in"), shad_menu_item("zoom_out", "Zoom out")))
 
+## Dialogs built in the server
+
+Everything above declares its overlay in the UI. When the content
+depends on what just happened — the row that was clicked, the upload
+that failed — build the dialog in the server instead and show it, the
+way [`shiny::showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html)
+works:
+
+``` r
+
+observeEvent(input$delete, {
+  shad_show_dialog(shad_dialog(
+    "confirm",
+    title = paste("Delete", input$project, "?"),
+    description = "This cannot be undone.",
+    footer = tagList(
+      shad_dialog_close_button(),
+      shad_button(inputId = "confirm_go", "Delete", variant = "destructive")
+    )
+  ))
+})
+```
+
+It is appended to `<body>`, opens itself, and by default removes itself
+once it closes — nothing to clean up and no ids left behind. Inputs
+inside it are live while it is open, so read them in the observer; pass
+`transient = FALSE` to keep the overlay (and its values) around for
+[`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md).
+[`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md)
+also takes
+[`shad_alert_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_alert_dialog.md),
+[`shad_sheet()`](https://orijitghosh.github.io/shadshiny/reference/shad_sheet.md)
+and
+[`shad_drawer()`](https://orijitghosh.github.io/shadshiny/reference/shad_drawer.md),
+and
+[`shad_remove_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_remove_dialog.md)
+closes one from the server.
+
 ## Command palette
 
 [`shad_command()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
-is a searchable action list. Inline it (below) or set `dialog = TRUE`
-for a ⌘K spotlight overlay you open from the server with the
-`shadshiny:invoke` message. Type to filter.
+is a searchable action list. Inline it (below) or use
+[`shad_command_palette()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
+for the ⌘K spotlight overlay — same component, items supplied as data:
+
+``` r
+
+shad_command_palette("palette", items = list(
+  "Go to"   = c(Dashboard = "dashboard", Reports = "reports"),
+  "Actions" = list(list(value = "new", label = "New report", shortcut = "N"))
+))
+
+# a trigger for people who don't know the shortcut
+shad_command_trigger("palette")
+
+# observe input$palette_event, NOT input$palette: Shiny drops a repeat of the
+# same value, so picking "Reports" twice would only fire once
+observeEvent(input$palette_event, { ... })
+```
+
+[`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
+swaps the items from the server — recent documents, search hits,
+commands gated on the signed-in user.
+
+Inline, the same component looks like this. Type to filter.
 
 ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jb21tYW5kX19zZWFyY2gtaWNvbiIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj48Y2lyY2xlIGN4PSIxMSIgY3k9IjExIiByPSI4Ij48L2NpcmNsZT48cGF0aCBkPSJtMjEgMjEtNC4zLTQuMyIgLz48L3N2Zz4=)
 

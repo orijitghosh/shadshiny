@@ -17,8 +17,8 @@
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Gallery: navigation &amp; structure">
-<meta name="description" content="Tier 3 layout — tabs, accordion, collapsible, pagination, carousel, scroll-area, resizable panels and the sidebar family — rendered live.">
-<meta property="og:description" content="Tier 3 layout — tabs, accordion, collapsible, pagination, carousel, scroll-area, resizable panels and the sidebar family — rendered live.">
+<meta name="description" content="Tier 3 layout — tabs, accordion, collapsible, pagination, carousel, scroll-area, resizable panels, the layout primitives and the sidebar family — rendered live.">
+<meta property="og:description" content="Tier 3 layout — tabs, accordion, collapsible, pagination, carousel, scroll-area, resizable panels, the layout primitives and the sidebar family — rendered live.">
 <meta property="og:image" content="https://orijitghosh.github.io/shadshiny/logo.svg">
 </head>
 <body>
@@ -120,10 +120,12 @@
 <link href="gallery-navigation_files/shadshiny-0.2.0/components/input-otp/input-otp.css" rel="stylesheet">
 <link href="gallery-navigation_files/shadshiny-0.2.0/components/item/item.css" rel="stylesheet">
 <link href="gallery-navigation_files/shadshiny-0.2.0/components/label/label.css" rel="stylesheet">
+<link href="gallery-navigation_files/shadshiny-0.2.0/components/layout/layout.css" rel="stylesheet">
 <link href="gallery-navigation_files/shadshiny-0.2.0/components/marker/marker.css" rel="stylesheet">
 <link href="gallery-navigation_files/shadshiny-0.2.0/components/menubar/menubar.css" rel="stylesheet">
 <link href="gallery-navigation_files/shadshiny-0.2.0/components/message/message.css" rel="stylesheet">
 <link href="gallery-navigation_files/shadshiny-0.2.0/components/message-scroller/message-scroller.css" rel="stylesheet">
+<link href="gallery-navigation_files/shadshiny-0.2.0/components/mini-chart/mini-chart.css" rel="stylesheet">
 <link href="gallery-navigation_files/shadshiny-0.2.0/components/native-select/native-select.css" rel="stylesheet">
 <link href="gallery-navigation_files/shadshiny-0.2.0/components/navigation-menu/navigation-menu.css" rel="stylesheet">
 <link href="gallery-navigation_files/shadshiny-0.2.0/components/number-stepper/number-stepper.css" rel="stylesheet">
@@ -439,6 +441,124 @@ Show advanced options
 </pre>
 </details>
 </div>
+</div>
+<div class="section level2">
+<h2 id="layout-primitives">Layout primitives<a class="anchor" aria-label="anchor" href="#layout-primitives"></a>
+</h2>
+<p><code><a href="../reference/shad_container.html">shad_container()</a></code>, <code><a href="../reference/shad_stack.html">shad_stack()</a></code> and
+<code><a href="../reference/shad_grid.html">shad_grid()</a></code> cover page layout without hand-written CSS.
+Spacing takes a token step — <code>gap = 4</code> is
+<code>var(--shad-space-4)</code>, the same scale the components use
+internally — or any CSS length.</p>
+<p><code>shad_grid(min_width = )</code> fits as many equal columns as
+will fit, with no breakpoints to maintain. <strong>Resize the
+window</strong> to watch this reflow:</p>
+<div class="shad-demo">
+<div class="shad-demo__stage shad-demo__stage--center shad-demo__stage--col">
+<div class="shad-grid shad-grid--auto" style="--shad-grid-gap:var(--shad-space-4);--shad-grid-min:13rem;">
+<div class="shad-value-box">
+<div class="shad-value-box__label">Revenue</div>
+<div class="shad-value-box__value">
+$45,231
+<span class="shad-value-box__delta" data-trend="up">
+<svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"></path></svg>
++20.1%
+</span>
+</div>
+</div>
+<div class="shad-value-box">
+<div class="shad-value-box__label">Subscribers</div>
+<div class="shad-value-box__value">
+2,350
+<span class="shad-value-box__delta" data-trend="up">
+<svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"></path></svg>
++180
+</span>
+</div>
+</div>
+<div class="shad-value-box">
+<div class="shad-value-box__label">Active now</div>
+<div class="shad-value-box__value">573</div>
+</div>
+</div>
+</div>
+<details class="shad-demo__code"><summary>Code</summary><pre>
+<code class="language-r"><span><span class="fu"><a href="../reference/shad_grid.html">shad_grid</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"$45,231"</span>, <span class="st">"Revenue"</span>, delta <span class="op">=</span> <span class="st">"+20.1%"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"2,350"</span>, <span class="st">"Subscribers"</span>, delta <span class="op">=</span> <span class="st">"+180"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"573"</span>, <span class="st">"Active now"</span><span class="op">)</span>, min_width <span class="op">=</span> <span class="st">"13rem"</span><span class="op">)</span></span></code>
+</pre>
+</details>
+</div>
+<p>For an exact column count, pass <code>cols</code> — optionally per
+breakpoint (<code>base</code>, <code>sm</code> 40rem, <code>md</code>
+48rem, <code>lg</code> 64rem), where each falls back to the one below
+it. <code>shad_grid_item(span = )</code> spans cells, and
+<code>template</code> takes a raw track list:</p>
+<div class="shad-demo">
+<div class="shad-demo__stage shad-demo__stage--center shad-demo__stage--col">
+<div class="shad-grid shad-grid--template" style="--shad-grid-gap:var(--shad-space-4);--shad-grid-template:1fr 2fr;">
+<div class="shad-card">
+<div class="shad-card__content">1fr</div>
+</div>
+<div class="shad-card">
+<div class="shad-card__content">2fr</div>
+</div>
+<div class="shad-grid__item shad-grid__item--full">
+<div class="shad-card">
+<div class="shad-card__content">full row</div>
+</div>
+</div>
+</div>
+</div>
+<details class="shad-demo__code"><summary>Code</summary><pre>
+<code class="language-r"><span><span class="fu"><a href="../reference/shad_grid.html">shad_grid</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_card.html">shad_card</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_card.html">shad_card_content</a></span><span class="op">(</span><span class="st">"1fr"</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_card.html">shad_card</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_card.html">shad_card_content</a></span><span class="op">(</span><span class="st">"2fr"</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_grid.html">shad_grid_item</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_card.html">shad_card</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_card.html">shad_card_content</a></span><span class="op">(</span><span class="st">"full row"</span><span class="op">)</span><span class="op">)</span>, span <span class="op">=</span> <span class="st">"full"</span><span class="op">)</span>, template <span class="op">=</span> <span class="st">"1fr 2fr"</span><span class="op">)</span></span></code>
+</pre>
+</details>
+</div>
+<p><code><a href="../reference/shad_stack.html">shad_stack()</a></code> is the one-dimensional version — a column
+by default, a row when asked, with <code>align</code>,
+<code>justify</code>, <code>wrap</code> and <code>fill</code>:</p>
+<div class="shad-demo">
+<div class="shad-demo__stage shad-demo__stage--center shad-demo__stage--col">
+<div class="shad-stack shad-stack--wrap" style="--shad-stack-dir:row;--shad-stack-gap:var(--shad-space-2);">
+<button type="button" class="shad-btn shad-btn--default">Save</button>
+<button type="button" class="shad-btn shad-btn--outline">Cancel</button>
+<button type="button" class="shad-btn shad-btn--destructive">Delete</button>
+</div>
+</div>
+<details class="shad-demo__code"><summary>Code</summary><pre>
+<code class="language-r"><span><span class="fu"><a href="../reference/shad_stack.html">shad_stack</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"Save"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"Cancel"</span>, variant <span class="op">=</span> <span class="st">"outline"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"Delete"</span>, variant <span class="op">=</span> <span class="st">"destructive"</span><span class="op">)</span>, direction <span class="op">=</span> <span class="st">"horizontal"</span>, gap <span class="op">=</span> <span class="fl">2</span>, wrap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code>
+</pre>
+</details>
+</div>
+</div>
+<div class="section level2">
+<h2 id="page-shells">Page shells<a class="anchor" aria-label="anchor" href="#page-shells"></a>
+</h2>
+<p>Two wrappers assemble a whole page in one call, taking the
+<code><a href="../reference/page_shad.html">page_shad()</a></code> theming arguments and wrapping content in a
+<code><a href="../reference/shad_container.html">shad_container()</a></code> unless you pass
+<code>container = FALSE</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># a title bar carrying a tab strip; input$nav is the active view</span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_page_navbar.html">shad_page_navbar</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/shad_tabs.html">shad_tab</a></span><span class="op">(</span><span class="st">"overview"</span>, <span class="st">"Overview"</span>, <span class="va">overview_ui</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/shad_tabs.html">shad_tab</a></span><span class="op">(</span><span class="st">"reports"</span>,  <span class="st">"Reports"</span>,  <span class="va">reports_ui</span><span class="op">)</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"Acme"</span>, inputId <span class="op">=</span> <span class="st">"nav"</span>,</span>
+<span>  header_end <span class="op">=</span> <span class="fu">bslib</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/input_dark_mode.html" class="external-link">input_dark_mode</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># the application frame: collapsible sidebar, bar with its trigger, scrolling main</span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_page_sidebar.html">shad_page_sidebar</a></span><span class="op">(</span></span>
+<span>  sidebar <span class="op">=</span> <span class="fu"><a href="../reference/shad_sidebar_layout.html">shad_sidebar</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="../reference/shad_sidebar_layout.html">shad_sidebar_group</a></span><span class="op">(</span><span class="st">"Platform"</span>,</span>
+<span>      <span class="fu"><a href="../reference/shad_sidebar_layout.html">shad_sidebar_item</a></span><span class="op">(</span><span class="st">"home"</span>, <span class="st">"Home"</span>, icon <span class="op">=</span> <span class="st">"home"</span>, active <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  inputId <span class="op">=</span> <span class="st">"shell"</span>, title <span class="op">=</span> <span class="st">"Acme"</span>,</span>
+<span>  <span class="fu"><a href="../reference/shad_grid.html">shad_grid</a></span><span class="op">(</span><span class="va">kpi_one</span>, <span class="va">kpi_two</span>, min_width <span class="op">=</span> <span class="st">"14rem"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The two differ in what scrolls. The navbar shell lets the window
+scroll and pins its bar with <code>position: sticky</code>; the sidebar
+shell takes the viewport height and scrolls its main region instead,
+because a sidebar that scrolls away is a sidebar with a drifting rail
+and footer.</p>
 </div>
 <div class="section level2">
 <h2 id="sidebar-layout">Sidebar layout<a class="anchor" aria-label="anchor" href="#sidebar-layout"></a>

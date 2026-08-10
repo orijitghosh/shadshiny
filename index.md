@@ -2,7 +2,7 @@
 
 **shadshiny** brings the [shadcn/ui](https://ui.shadcn.com) design
 system to [Shiny](https://shiny.posit.co). It is a from-scratch port —
-70 accessible, themeable components rebuilt in framework-free CSS and
+72 accessible, themeable components rebuilt in framework-free CSS and
 vanilla JavaScript, then wrapped as ordinary R functions with native
 Shiny input bindings.
 
@@ -12,6 +12,16 @@ Shiny input bindings.
   the server with `update_shad_*()`. Modules,
   [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) and
   bookmarking just work.
+- **Layout without CSS gymnastics.**
+  [`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md),
+  [`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
+  and
+  [`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
+  cover page layout on the token spacing scale, and
+  [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
+  /
+  [`shad_page_navbar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_navbar.md)
+  assemble a whole app shell in one call.
 - **A real data table.**
   [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
   does multi-column sort, global and per-column filtering, paging, and
@@ -21,6 +31,10 @@ Shiny input bindings.
   and
   [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md)
   for the shell;
+  [`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md)
+  and
+  [`shad_mini_donut()`](https://orijitghosh.github.io/shadshiny/reference/shad_mini_donut.md)
+  draw inline SVG that follows the theme in CSS with no re-render;
   [`shad_theme_ggplot2()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md)
   /
   [`shad_theme_plotly()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_plotly.md)
@@ -139,6 +153,7 @@ shad_run_example("kitchen-sink")
 | `shad_dialog` | `shad_alert_dialog` | `shad_sheet` | `shad_drawer` |
 | `shad_popover` | `shad_tooltip` | `shad_hover_card` | `shad_dropdown_menu` |
 | `shad_context_menu` | `shad_menubar` | `shad_command` | `shad_toast` |
+| `shad_command_palette` | `shad_show_dialog` |  |  |
 
 **Tier 3 — navigation & structure**
 
@@ -147,13 +162,16 @@ shad_run_example("kitchen-sink")
 | `shad_tabs` | `shad_accordion` | `shad_collapsible` | `shad_pagination` |
 | `shad_scroll_area` | `shad_resizable` | `shad_carousel` | `shad_navigation_menu` |
 | `shad_sidebar_layout` | `shad_stepper` | `shad_tree` |  |
+| `shad_container` | `shad_stack` | `shad_grid` | `shad_page_sidebar` |
+| `shad_page_navbar` |  |  |  |
 
 **Data, dashboards & flow**
 
 |  |  |  |  |
 |----|----|----|----|
 | `shad_data_table` | `shad_value_box` | `shad_chart_container` | `shad_timeline` |
-| `shad_validator` | `shad_form_message` | `shad_form_summary` | `shad_theme` |
+| `shad_sparkline` | `shad_mini_donut` | `shad_validator` | `shad_form_message` |
+| `shad_form_summary` | `shad_theme` |  |  |
 
 **Chat / AI kit**
 
@@ -203,6 +221,85 @@ Formatters keep the raw value as the sort key, so a `$1,200.00` cell
 still sorts numerically. See
 [`vignette("data-tables")`](https://orijitghosh.github.io/shadshiny/articles/data-tables.md).
 
+## Page shells and layout
+
+Three primitives cover page layout, on the same spacing scale the
+components use internally (`gap = 4` is `var(--shad-space-4)`):
+
+``` r
+
+shad_container(size = "lg",
+  shad_stack(
+    shad_grid(kpi_one, kpi_two, kpi_three, min_width = "14rem"),
+    shad_card(...),
+    gap = 6
+  )
+)
+```
+
+[`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
+takes `min_width` for an auto-fit track list, or `cols` for an exact
+count — optionally per breakpoint, `cols = c(base = 1, md = 2, lg = 4)`.
+
+Two shells assemble a whole page, taking the
+[`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
+theming arguments:
+
+``` r
+
+ui <- shad_page_navbar(
+  shad_tab("overview", "Overview", overview_ui),
+  shad_tab("reports",  "Reports",  reports_ui),
+  title = "Acme", inputId = "nav"
+)
+
+ui <- shad_page_sidebar(sidebar = shad_sidebar(...), title = "Acme", body_ui)
+```
+
+See
+[`vignette("layout")`](https://orijitghosh.github.io/shadshiny/articles/layout.md).
+
+## Dialogs from the server
+
+Overlays can be declared in the UI with a `trigger`, or built in the
+server when their content depends on what just happened:
+
+``` r
+
+observeEvent(input$delete, {
+  shad_show_dialog(shad_dialog(
+    "confirm", title = paste("Delete", input$project, "?"),
+    description = "This cannot be undone.",
+    footer = tagList(shad_dialog_close_button(),
+                     shad_button(inputId = "go", "Delete", variant = "destructive"))
+  ))
+})
+```
+
+It opens itself and, by default, removes itself once it closes. Also
+takes
+[`shad_alert_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_alert_dialog.md),
+[`shad_sheet()`](https://orijitghosh.github.io/shadshiny/reference/shad_sheet.md)
+and
+[`shad_drawer()`](https://orijitghosh.github.io/shadshiny/reference/shad_drawer.md).
+See
+[`vignette("overlays-and-server")`](https://orijitghosh.github.io/shadshiny/articles/overlays-and-server.md).
+
+## ⌘K navigation
+
+``` r
+
+shad_command_palette("palette", items = list(
+  "Go to"   = c(Dashboard = "dashboard", Reports = "reports"),
+  "Actions" = list(list(value = "new", label = "New report", shortcut = "N"))
+))
+
+observeEvent(input$palette_event, { ... })   # fires on every activation
+```
+
+Observe `input$palette_event`, not `input$palette`: Shiny drops a repeat
+of the same value, so picking “Reports” twice would only fire once.
+
 ## Charts that follow the theme
 
 Themes switch at *runtime*, and a plot rendered in R has no idea.
@@ -224,7 +321,22 @@ output$plot <- renderPlot({
 returns the categorical ramp as hex (OKLCH converted in base R — no new
 dependency).
 [`shad_tokens()`](https://orijitghosh.github.io/shadshiny/reference/shad_tokens.md)
-exposes the full token set as CSS strings. See
+exposes the full token set as CSS strings.
+
+For the small stuff, skip the plotting stack entirely —
+[`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md)
+and
+[`shad_mini_donut()`](https://orijitghosh.github.io/shadshiny/reference/shad_mini_donut.md)
+are inline SVG painted with the chart tokens, so a dark-mode toggle
+restyles them in CSS with no re-render and no round trip:
+
+``` r
+
+shad_value_box("1,204", "Sessions", delta = "-3.1%",
+               sparkline = shad_sparkline(sessions, type = "area"))
+```
+
+See
 [`vignette("charts")`](https://orijitghosh.github.io/shadshiny/articles/charts.md).
 
 ## Validation
@@ -302,6 +414,7 @@ Each is a real app, launchable with
 | `06-docs-reader` | Sidebar nav, ⌘K palette, resizable article/TOC split, prev/next paging |
 | `07-data-explorer` | [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md) with value boxes and theme-following plots |
 | `08-llm-chat` | Streaming [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md) — swap the handler for `ellmer` to go live |
+| `09-app-shell` | [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md), layout primitives, sparklines, a ⌘K palette that navigates, and server-built dialogs |
 
 ## Guides
 

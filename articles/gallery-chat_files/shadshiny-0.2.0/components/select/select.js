@@ -80,9 +80,9 @@
         item.setAttribute("data-highlighted", "");
         trigger.setAttribute("aria-activedescendant",
           item.id || (item.id = shad.uid("opt")));
-        if (scroll !== false) item.scrollIntoViewIfNeeded
-          ? item.scrollIntoViewIfNeeded(false)
-          : item.scrollIntoView({ block: "nearest" });
+        // scrolls the listbox viewport only; scrollIntoView() would also walk
+        // out to the document and move the page behind the open panel
+        if (scroll !== false) shad.util.keepInView(viewport, item);
       } else {
         trigger.removeAttribute("aria-activedescendant");
       }
@@ -139,7 +139,7 @@
       disposeDismiss = shad.dismiss.push({
         el: content,
         extraElements: [trigger],
-        onDismiss: () => { doClose(); trigger.focus(); }
+        onDismiss: () => { doClose(); trigger.focus({ preventScroll: true }); }
       });
       trigger.setAttribute("aria-expanded", "true");
       const target = items().find((it) => it.getAttribute("data-value") === value)
@@ -211,7 +211,9 @@
     }
     function onContentClick(ev) {
       const item = ev.target.closest(".shad-select__item");
-      if (item && !item.hasAttribute("data-disabled")) { select(item); trigger.focus(); }
+      if (item && !item.hasAttribute("data-disabled")) {
+        select(item); trigger.focus({ preventScroll: true });
+      }
     }
 
     trigger.addEventListener("click", onTriggerClick);

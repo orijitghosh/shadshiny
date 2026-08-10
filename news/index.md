@@ -131,6 +131,94 @@ shadshiny from a component library into a full application toolkit.
   way. Components already on the page still worked, which masked it: the
   runtime self-initialises on `DOMContentLoaded`.
 
+- **Layout primitives:**
+  [`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md),
+  [`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md),
+  [`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
+  /
+  [`shad_grid_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md),
+  plus the page shells
+  [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
+  and
+  [`shad_page_navbar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_navbar.md).
+  CSS-only; spacing arguments take a token step (`gap = 4` is
+  `var(--shad-space-4)`) or any CSS length, and
+  [`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
+  handles responsive columns with an outward
+  [`var()`](https://rdrr.io/r/stats/cor.html) fallback chain rather than
+  a utility-class grid system.
+
+- **Bug fix (layout):** the layout primitives’ custom properties
+  inherited, so a
+  [`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
+  nested inside a horizontal one laid itself out sideways (and picked up
+  its parent’s gap and alignment). Each rule now resets its own
+  variables to `initial`.
+
+- `update_shad_sidebar(active=)` selects a sidebar item from the server,
+  so navigating from elsewhere — a command palette, a link — moves the
+  rail too.
+
+- **New example:** `shad_run_example("09-app-shell")` —
+  [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
+  with the layout primitives, sparklines, a ⌘K palette that drives
+  navigation, and dialogs built in the server.
+
+- **Server-created overlays:**
+  [`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md)
+  /
+  [`shad_remove_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_remove_dialog.md)
+  build a dialog, alert dialog, sheet or drawer in the server and show
+  it, the way
+  [`shiny::showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html)
+  does. Transient by default: the overlay removes itself once it closes.
+
+- **Native mini-charts:**
+  [`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md)
+  (line/area/bar/step) and
+  [`shad_mini_donut()`](https://orijitghosh.github.io/shadshiny/reference/shad_mini_donut.md)
+  — inline SVG painted with the chart tokens, so they follow dark mode
+  and preset switches in CSS with no re-render. Fills
+  `shad_value_box(sparkline=)`.
+
+- **Command palette:**
+  [`shad_command_palette()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
+  takes its items as data,
+  [`shad_command_trigger()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
+  opens one from anywhere, and
+  [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
+  refreshes the items from the server. Read selections from
+  `input$<id>_event` — `input$<id>` alone cannot tell one selection of
+  “Settings” from two.
+
+- **Bug fix (command dialog):**
+  `shad_command(dialog = TRUE, hotkey = FALSE)` rendered a visible
+  inline palette — the asset infers dialog mode from `data-hotkey` or
+  `data-dialog`, and the constructor emitted neither.
+
+- **Bug fix (runtime):** opening a command dialog destroyed it.
+  `shad.portal()` moves the root itself to `<body>`, and the runtime’s
+  MutationObserver read that removal as an unmount. A move is a removal
+  plus an insertion, so the teardown now skips nodes still connected to
+  the document.
+
+- **Scroll/focus sweep:** no component calls `scrollIntoView()` any more
+  — it walks every scrollable ancestor, so a component in ordinary
+  document flow drags the whole page to itself. Highlights now scroll
+  their own container via `shad.util.keepInView()`, and pointer-driven
+  `focus()` passes `preventScroll`. Keyboard roving focus still scrolls,
+  deliberately.
+
+- **Bug fix (command):** an inline
+  [`shad_command()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
+  scrolled the page to itself on load, and again on every keystroke. Its
+  highlight used `scrollIntoView()`/`scrollIntoViewIfNeeded()`, which
+  scroll *every* scrollable ancestor — harmless in dialog mode, but an
+  inline palette is part of the document, so a page containing one
+  opened wherever the palette sat (in the kitchen sink, a long way down
+  at *Tier 3 — overlays*). The highlight now scrolls only the command
+  list itself.
+
 - **Gallery:** a new *Data, dashboards & flow* page renders the V2 kit
   live — data table, value boxes, chart container, timeline, stepper,
   tree, rating, number input, dropzone, and the form-messaging

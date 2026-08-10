@@ -13,6 +13,22 @@ Page wrapper, theme presets, and runtime theme control.
 - [`shad_run_example()`](https://orijitghosh.github.io/shadshiny/reference/shad_run_example.md)
   : Run a bundled shadshiny example app
 
+## Layout & page shells
+
+Container, stack, and grid primitives, plus whole-page shells.
+
+- [`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md)
+  : Centred content container
+- [`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
+  : Flex stack
+- [`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
+  [`shad_grid_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
+  : Responsive grid
+- [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
+  : Page shell with a sidebar
+- [`shad_page_navbar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_navbar.md)
+  : Page shell with a tabbed navbar
+
 ## Tier 1 — display & typography
 
 Non-interactive display components and typographic helpers.
@@ -204,6 +220,11 @@ Dialogs, popovers, menus, command palette, and toasts (UI side).
   [`shad_command_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
   [`shad_command_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
   : Command palette
+- [`shad_command_palette()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
+  [`shad_command_trigger()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
+  [`shad_command_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
+  [`shad_command_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
+  : Command palette for app navigation
 
 ## Tier 3 — navigation & structure
 
@@ -274,6 +295,8 @@ Update bound component values from the server.
   : Update a number input from the server
 - [`update_shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_form_field.md)
   : Set or clear a field's error state from the server
+- [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
+  : Replace a command palette's items from the server
 
 ## Server — overlays & toast
 
@@ -291,6 +314,10 @@ Open/close overlays and raise toast notifications from the server.
   [`shad_popover_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
   [`shad_sidebar_toggle()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
   : Open and close overlays from the server
+- [`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md)
+  : Show an overlay created on the server
+- [`shad_remove_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_remove_dialog.md)
+  : Close and remove a server-created overlay
 - [`shad_message_scroller_to_bottom()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller_to_bottom.md)
   : Scroll a message-scroller to the latest message
 - [`shad_toast()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
@@ -334,6 +361,10 @@ KPI cards, chart wrappers, timelines, and plot theming.
 
 - [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
   : KPI / value box
+- [`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md)
+  : Sparkline
+- [`shad_mini_donut()`](https://orijitghosh.github.io/shadshiny/reference/shad_mini_donut.md)
+  : Mini donut chart
 - [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md)
   : Chart container
 - [`shad_timeline()`](https://orijitghosh.github.io/shadshiny/reference/shad_timeline.md)

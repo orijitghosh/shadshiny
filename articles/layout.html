@@ -113,23 +113,47 @@ its parts; each is optional:</p>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="grids-and-flex">Grids and flex<a class="anchor" aria-label="anchor" href="#grids-and-flex"></a>
+<h2 id="container-stack-grid">Container, stack, grid<a class="anchor" aria-label="anchor" href="#container-stack-grid"></a>
 </h2>
-<p>There is no bespoke grid component — use CSS. A responsive card grid
-is a few lines:</p>
+<p>Three primitives cover almost all page layout. They are CSS-only
+wrappers: each argument becomes a custom property on the root, so there
+is no utility-class soup and no JavaScript.</p>
+<p><code><a href="../reference/shad_container.html">shad_container()</a></code> is the outermost wrapper — a centred,
+max-width column:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tags</span><span class="op">$</span><span class="fu">div</span><span class="op">(</span></span>
-<span>  style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
-<span>    <span class="st">"display:grid;gap:1rem;"</span>,</span>
-<span>    <span class="st">"grid-template-columns:repeat(auto-fill, minmax(16rem, 1fr))"</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  <span class="va">card_one</span>, <span class="va">card_two</span>, <span class="va">card_three</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_container.html">shad_container</a></span><span class="op">(</span><span class="va">page_content</span>, size <span class="op">=</span> <span class="st">"lg"</span><span class="op">)</span>   <span class="co"># sm/md/lg/xl/full, or a CSS length</span></span></code></pre></div>
+<p><code><a href="../reference/shad_stack.html">shad_stack()</a></code> is “these things, spaced” — a flex column
+by default, a row when you ask:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_stack.html">shad_stack</a></span><span class="op">(</span><span class="va">section_one</span>, <span class="va">section_two</span>, gap <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/shad_stack.html">shad_stack</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"Save"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"Cancel"</span>, variant <span class="op">=</span> <span class="st">"outline"</span><span class="op">)</span>,</span>
+<span>  direction <span class="op">=</span> <span class="st">"horizontal"</span>, gap <span class="op">=</span> <span class="fl">2</span>, align <span class="op">=</span> <span class="st">"center"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>For a KPI row, the same pattern with fixed columns, or flex with
-<code>flex:1</code> children. Because spacing tokens
-(<code>--shad-space-*</code>) and radii (<code>--shad-radius-*</code>)
-are shared, hand-written layout stays visually consistent with the
-components.</p>
+<p><code><a href="../reference/shad_grid.html">shad_grid()</a></code> handles two dimensions. Reach for
+<code>min_width</code> first — it fits as many equal columns as will
+fit, with no breakpoints to reason about:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_grid.html">shad_grid</a></span><span class="op">(</span><span class="va">card_one</span>, <span class="va">card_two</span>, <span class="va">card_three</span>, min_width <span class="op">=</span> <span class="st">"16rem"</span><span class="op">)</span></span></code></pre></div>
+<p>When you want an exact column count, pass <code>cols</code>,
+optionally per breakpoint (<code>base</code>, <code>sm</code> 40rem,
+<code>md</code> 48rem, <code>lg</code> 64rem). Each breakpoint falls
+back to the one below it, so you only name the ones that change:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_grid.html">shad_grid</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>base <span class="op">=</span> <span class="fl">1</span>, md <span class="op">=</span> <span class="fl">2</span>, lg <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><code>template</code> takes an explicit track list, and
+<code><a href="../reference/shad_grid.html">shad_grid_item()</a></code> spans cells:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_grid.html">shad_grid</a></span><span class="op">(</span></span>
+<span>  <span class="va">main_panel</span>,</span>
+<span>  <span class="fu"><a href="../reference/shad_grid.html">shad_grid_item</a></span><span class="op">(</span><span class="va">wide_chart</span>, span <span class="op">=</span> <span class="st">"full"</span><span class="op">)</span>,</span>
+<span>  template <span class="op">=</span> <span class="st">"2fr 1fr"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Gaps and padding accept a <strong>spacing token step</strong> —
+<code>gap = 4</code> is <code>var(--shad-space-4)</code>, the same scale
+the components use internally — or any CSS length when you need to
+escape the scale.</p>
 </div>
 <div class="section level2">
 <h2 id="tabs">Tabs<a class="anchor" aria-label="anchor" href="#tabs"></a>
@@ -137,7 +161,7 @@ components.</p>
 <p><code><a href="../reference/shad_tabs.html">shad_tabs()</a></code> splits a region into panes. The active pane
 is <code>input$id</code>; switch it from the server with
 <code><a href="../reference/update_shad.html">update_shad_tabs()</a></code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_tabs.html">shad_tabs</a></span><span class="op">(</span></span>
 <span>  <span class="st">"settings_tabs"</span>, selected <span class="op">=</span> <span class="st">"profile"</span>,</span>
 <span>  <span class="fu"><a href="../reference/shad_tabs.html">shad_tab</a></span><span class="op">(</span><span class="st">"profile"</span>,  <span class="st">"Profile"</span>,  <span class="va">profile_ui</span><span class="op">)</span>,</span>
@@ -155,12 +179,83 @@ same applies to outputs inside a dialog or sheet that opens later.</p>
 </blockquote>
 </div>
 <div class="section level2">
-<h2 id="the-sidebar-shell">The sidebar shell<a class="anchor" aria-label="anchor" href="#the-sidebar-shell"></a>
+<h2 id="page-shells">Page shells<a class="anchor" aria-label="anchor" href="#page-shells"></a>
 </h2>
-<p><code><a href="../reference/shad_sidebar_layout.html">shad_sidebar_layout()</a></code> is the full application frame: a
-collapsible sidebar plus a main region. Build the sidebar from grouped,
-icon’d, badgeable items.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>Two wrappers assemble a whole page in one call. Both take the
+<code><a href="../reference/page_shad.html">page_shad()</a></code> theming arguments (<code>theme_preset</code>,
+<code>dark</code>, <code>theme</code>) and wrap their content in a
+<code><a href="../reference/shad_container.html">shad_container()</a></code> unless you pass
+<code>container = FALSE</code>.</p>
+<p><code><a href="../reference/shad_page_navbar.html">shad_page_navbar()</a></code> — a title bar carrying a tab strip,
+panels below. The window scrolls; the bar is sticky.
+<code>input$&lt;inputId&gt;</code> is the active tab.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_page_navbar.html">shad_page_navbar</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/shad_tabs.html">shad_tab</a></span><span class="op">(</span><span class="st">"overview"</span>, <span class="st">"Overview"</span>, <span class="va">overview_ui</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/shad_tabs.html">shad_tab</a></span><span class="op">(</span><span class="st">"reports"</span>,  <span class="st">"Reports"</span>,  <span class="va">reports_ui</span><span class="op">)</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"Acme"</span>, inputId <span class="op">=</span> <span class="st">"nav"</span>,</span>
+<span>  header_end <span class="op">=</span> <span class="fu">bslib</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/input_dark_mode.html" class="external-link">input_dark_mode</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="../reference/shad_page_sidebar.html">shad_page_sidebar()</a></code> — the application frame: a
+collapsible sidebar, a bar with its trigger, and a scrolling main
+region. This shell takes the full viewport height and scrolls its main
+region rather than the window, so the sidebar rail and footer stay
+put.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_page_sidebar.html">shad_page_sidebar</a></span><span class="op">(</span></span>
+<span>  sidebar <span class="op">=</span> <span class="fu"><a href="../reference/shad_sidebar_layout.html">shad_sidebar</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="../reference/shad_sidebar_layout.html">shad_sidebar_group</a></span><span class="op">(</span><span class="st">"Platform"</span>,</span>
+<span>      <span class="fu"><a href="../reference/shad_sidebar_layout.html">shad_sidebar_item</a></span><span class="op">(</span><span class="st">"home"</span>,  <span class="st">"Home"</span>,  icon <span class="op">=</span> <span class="st">"home"</span>, active <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="../reference/shad_sidebar_layout.html">shad_sidebar_item</a></span><span class="op">(</span><span class="st">"inbox"</span>, <span class="st">"Inbox"</span>, icon <span class="op">=</span> <span class="st">"mail"</span>, badge <span class="op">=</span> <span class="st">"3"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  inputId <span class="op">=</span> <span class="st">"shell"</span>, title <span class="op">=</span> <span class="st">"Acme"</span>,</span>
+<span>  <span class="fu"><a href="../reference/shad_grid.html">shad_grid</a></span><span class="op">(</span><span class="va">kpi_one</span>, <span class="va">kpi_two</span>, <span class="va">kpi_three</span>, min_width <span class="op">=</span> <span class="st">"14rem"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="k-navigation">⌘K navigation<a class="anchor" aria-label="anchor" href="#k-navigation"></a>
+</h2>
+<p><code><a href="../reference/shad_command_palette.html">shad_command_palette()</a></code> is the “jump anywhere” pattern: a
+modal, searchable list of everything the app can do, opened with ⌘K /
+Ctrl+K. Items come from data — a named vector, or a named list of them
+for grouped sections:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_command_palette.html">shad_command_palette</a></span><span class="op">(</span><span class="st">"palette"</span>, items <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Go to"</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Dashboard <span class="op">=</span> <span class="st">"dashboard"</span>, Reports <span class="op">=</span> <span class="st">"reports"</span><span class="op">)</span>,</span>
+<span>  <span class="st">"Actions"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>value <span class="op">=</span> <span class="st">"new"</span>, label <span class="op">=</span> <span class="st">"New report"</span>, shortcut <span class="op">=</span> <span class="st">"N"</span>,</span>
+<span>         keywords <span class="op">=</span> <span class="st">"create add"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Drop <code>shad_command_trigger("palette")</code> in the page bar for
+people who do not know the shortcut, and observe
+<strong><code>input$palette_event</code></strong> — not
+<code>input$palette</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">palette_event</span>, <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/switch.html" class="external-link">switch</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">palette_event</span><span class="op">$</span><span class="va">value</span>,</span>
+<span>      dashboard <span class="op">=</span> <span class="fu"><a href="../reference/update_shad.html">update_shad_tabs</a></span><span class="op">(</span><span class="st">"nav"</span>, <span class="st">"dashboard"</span><span class="op">)</span>,</span>
+<span>      reports   <span class="op">=</span> <span class="fu"><a href="../reference/update_shad.html">update_shad_tabs</a></span><span class="op">(</span><span class="st">"nav"</span>, <span class="st">"reports"</span><span class="op">)</span>,</span>
+<span>      new       <span class="op">=</span> <span class="fu"><a href="../reference/shad_show_dialog.html">shad_show_dialog</a></span><span class="op">(</span><span class="fu">new_report_dialog</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p><code>input$palette</code> holds the last value, but Shiny drops a
+repeat of the same value — so choosing “Reports” twice would only fire
+once. <code>_event</code> carries <code>value</code> plus a
+<code>nonce</code> and fires every time, which is what navigation
+needs.</p>
+<p><code><a href="../reference/update_shad_command.html">update_shad_command()</a></code> replaces the items from the
+server: recent documents, search hits, commands gated on the signed-in
+user.</p>
+</div>
+<div class="section level2">
+<h2 id="the-sidebar-shell-by-hand">The sidebar shell, by hand<a class="anchor" aria-label="anchor" href="#the-sidebar-shell-by-hand"></a>
+</h2>
+<p><code><a href="../reference/shad_page_sidebar.html">shad_page_sidebar()</a></code> is a thin wrapper over
+<code><a href="../reference/shad_sidebar_layout.html">shad_sidebar_layout()</a></code>. Use the layout directly when the
+sidebar is one region of a larger page rather than the page itself.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sidebar</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_sidebar_layout.html">shad_sidebar</a></span><span class="op">(</span></span>
 <span>  header <span class="op">=</span> <span class="va">tags</span><span class="op">$</span><span class="fu">div</span><span class="op">(</span></span>
 <span>    style <span class="op">=</span> <span class="st">"display:flex;gap:0.5rem;align-items:center;padding:0.25rem"</span>,</span>
@@ -192,7 +287,7 @@ icon’d, badgeable items.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p><strong>Reading the sidebar.</strong> The layout reports a list, not
 a scalar. Observe the active item specifically:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># input$shell is list(collapsed=, mobileOpen=, active=)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">shell</span><span class="op">$</span><span class="va">active</span>, <span class="op">{</span></span>
@@ -210,7 +305,7 @@ a scalar. Observe the active item specifically:</p>
 </h2>
 <p>For a two-pane workspace (list + detail, editor + preview), use
 <code><a href="../reference/shad_resizable.html">shad_resizable()</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_resizable.html">shad_resizable</a></span><span class="op">(</span></span>
 <span>  <span class="st">"split"</span>,</span>
 <span>  <span class="fu"><a href="../reference/shad_resizable.html">shad_resizable_panel</a></span><span class="op">(</span>default_size <span class="op">=</span> <span class="fl">35</span>, <span class="va">list_ui</span><span class="op">)</span>,</span>
@@ -233,7 +328,7 @@ reach for <code><a href="../reference/shad_message_scroller.html">shad_message_s
 span the full width by default, which overflows inside a flex row — give
 them <code>style = "flex:1"</code> when using one as a rule between
 inline items (for example an “OR” divider).</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tags</span><span class="op">$</span><span class="fu">div</span><span class="op">(</span>style <span class="op">=</span> <span class="st">"display:flex;align-items:center;gap:0.75rem"</span>,</span>
 <span>  <span class="fu"><a href="../reference/shad_separator.html">shad_separator</a></span><span class="op">(</span>style <span class="op">=</span> <span class="st">"flex:1"</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/shad_typography.html">shad_muted</a></span><span class="op">(</span><span class="st">"OR"</span><span class="op">)</span>,</span>

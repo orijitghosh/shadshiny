@@ -17,8 +17,8 @@
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Gallery: data, dashboards &amp; flow">
-<meta name="description" content="The V2 kit — data table, value boxes, chart containers, timelines, stepper, tree, rating, number input and dropzone — rendered live with their source.">
-<meta property="og:description" content="The V2 kit — data table, value boxes, chart containers, timelines, stepper, tree, rating, number input and dropzone — rendered live with their source.">
+<meta name="description" content="The V2 kit — data table, value boxes, sparklines, donuts, chart containers, timelines, stepper, tree, rating, number input and dropzone — rendered live with their source.">
+<meta property="og:description" content="The V2 kit — data table, value boxes, sparklines, donuts, chart containers, timelines, stepper, tree, rating, number input and dropzone — rendered live with their source.">
 <meta property="og:image" content="https://orijitghosh.github.io/shadshiny/logo.svg">
 </head>
 <body>
@@ -120,10 +120,12 @@
 <link href="gallery-data_files/shadshiny-0.2.0/components/input-otp/input-otp.css" rel="stylesheet">
 <link href="gallery-data_files/shadshiny-0.2.0/components/item/item.css" rel="stylesheet">
 <link href="gallery-data_files/shadshiny-0.2.0/components/label/label.css" rel="stylesheet">
+<link href="gallery-data_files/shadshiny-0.2.0/components/layout/layout.css" rel="stylesheet">
 <link href="gallery-data_files/shadshiny-0.2.0/components/marker/marker.css" rel="stylesheet">
 <link href="gallery-data_files/shadshiny-0.2.0/components/menubar/menubar.css" rel="stylesheet">
 <link href="gallery-data_files/shadshiny-0.2.0/components/message/message.css" rel="stylesheet">
 <link href="gallery-data_files/shadshiny-0.2.0/components/message-scroller/message-scroller.css" rel="stylesheet">
+<link href="gallery-data_files/shadshiny-0.2.0/components/mini-chart/mini-chart.css" rel="stylesheet">
 <link href="gallery-data_files/shadshiny-0.2.0/components/native-select/native-select.css" rel="stylesheet">
 <link href="gallery-data_files/shadshiny-0.2.0/components/navigation-menu/navigation-menu.css" rel="stylesheet">
 <link href="gallery-data_files/shadshiny-0.2.0/components/number-stepper/number-stepper.css" rel="stylesheet">
@@ -269,6 +271,106 @@ $45,231
 <span><span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"2,350"</span>, <span class="st">"Subscribers"</span>, delta <span class="op">=</span> <span class="st">"+180"</span>, icon <span class="op">=</span> <span class="st">"users"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"0.9%"</span>, <span class="st">"Error rate"</span>, delta <span class="op">=</span> <span class="st">"-0.4%"</span>, delta_direction <span class="op">=</span> <span class="st">"up"</span>, icon <span class="op">=</span> <span class="st">"activity"</span>, caption <span class="op">=</span> <span class="st">"Lower is better"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"573"</span>, <span class="st">"Active now"</span>, icon <span class="op">=</span> <span class="st">"zap"</span>, size <span class="op">=</span> <span class="st">"sm"</span><span class="op">)</span></span></code>
+</pre>
+</details>
+</div>
+</div>
+<div class="section level2">
+<h2 id="sparkline">Sparkline<a class="anchor" aria-label="anchor" href="#sparkline"></a>
+</h2>
+<p><code><a href="../reference/shad_sparkline.html">shad_sparkline()</a></code> is a tiny inline chart with no axes, no
+labels, and no plotting stack — one SVG path (or a row of bars) that
+stretches to fill its box. Every mark is painted with the theme’s chart
+tokens, so the light/dark switch at the top of this page restyles these
+in CSS, with no re-render.</p>
+<div class="shad-demo">
+<div class="shad-demo__stage shad-demo__stage--center">
+<svg class="shad-sparkline" viewbox="0 0 100 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:2.5rem;" aria-hidden="true"><path d="M0 91.14L14.29 70.57L28.57 98L42.86 45.43L57.14 66L71.43 20.29L85.71 29.43L100 2" fill="none" stroke="var(--shad-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg><svg class="shad-sparkline" viewbox="0 0 100 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:2.5rem;" aria-hidden="true"><path d="M0 91.14L14.29 70.57L28.57 98L42.86 45.43L57.14 66L71.43 20.29L85.71 29.43L100 2V100H0Z" fill="var(--shad-chart-1)" fill-opacity="0.18" stroke="none"></path><path d="M0 91.14L14.29 70.57L28.57 98L42.86 45.43L57.14 66L71.43 20.29L85.71 29.43L100 2" fill="none" stroke="var(--shad-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg><svg class="shad-sparkline" viewbox="0 0 100 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:2.5rem;" aria-hidden="true"><rect x="1" width="10.5" y="92.86" height="7.14" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="13.5" width="10.5" y="71.43" height="28.57" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="26" width="10.5" y="100" height="0.5" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="38.5" width="10.5" y="45.24" height="54.76" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="51" width="10.5" y="66.67" height="33.33" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="63.5" width="10.5" y="19.05" height="80.95" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="76" width="10.5" y="28.57" height="71.43" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="88.5" width="10.5" y="0" height="100" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect></svg><svg class="shad-sparkline" viewbox="0 0 100 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:2.5rem;" aria-hidden="true"><path d="M0 91.14H14.29V70.57H28.57V98H42.86V45.43H57.14V66H71.43V20.29H85.71V29.43H100V2" fill="none" stroke="var(--shad-chart-3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+<details class="shad-demo__code"><summary>Code</summary><pre>
+<code class="language-r"><span><span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">31</span>, <span class="fl">40</span>, <span class="fl">28</span>, <span class="fl">51</span>, <span class="fl">42</span>, <span class="fl">62</span>, <span class="fl">58</span>, <span class="fl">70</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">31</span>, <span class="fl">40</span>, <span class="fl">28</span>, <span class="fl">51</span>, <span class="fl">42</span>, <span class="fl">62</span>, <span class="fl">58</span>, <span class="fl">70</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">31</span>, <span class="fl">40</span>, <span class="fl">28</span>, <span class="fl">51</span>, <span class="fl">42</span>, <span class="fl">62</span>, <span class="fl">58</span>, <span class="fl">70</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"bar"</span>, color <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">31</span>, <span class="fl">40</span>, <span class="fl">28</span>, <span class="fl">51</span>, <span class="fl">42</span>, <span class="fl">62</span>, <span class="fl">58</span>, <span class="fl">70</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"step"</span>, color <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code>
+</pre>
+</details>
+</div>
+<p>Non-finite values break the series rather than being interpolated
+across, and bars hang off a zero baseline once the data crosses it:</p>
+<div class="shad-demo">
+<div class="shad-demo__stage shad-demo__stage--center">
+<svg class="shad-sparkline" viewbox="0 0 100 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:2.5rem;" aria-hidden="true"><path d="M0 98L16.67 38V100H0Z" fill="var(--shad-chart-1)" fill-opacity="0.18" stroke="none"></path><path d="M66.67 74L83.33 2L100 50V100H66.67Z" fill="var(--shad-chart-1)" fill-opacity="0.18" stroke="none"></path><path d="M0 98L16.67 38" fill="none" stroke="var(--shad-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path><path d="M66.67 74L83.33 2L100 50" fill="none" stroke="var(--shad-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg><svg class="shad-sparkline" viewbox="0 0 100 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:2.5rem;" aria-hidden="true"><rect x="1" width="14.67" y="60" height="40" fill="var(--shad-chart-4)" fill-opacity="0.18" rx="1.5"></rect><rect x="17.67" width="14.67" y="60" height="10" fill="var(--shad-chart-4)" fill-opacity="0.18" rx="1.5"></rect><rect x="34.33" width="14.67" y="40" height="20" fill="var(--shad-chart-4)" fill-opacity="0.18" rx="1.5"></rect><rect x="51" width="14.67" y="10" height="50" fill="var(--shad-chart-4)" fill-opacity="0.18" rx="1.5"></rect><rect x="67.67" width="14.67" y="60" height="30" fill="var(--shad-chart-4)" fill-opacity="0.18" rx="1.5"></rect><rect x="84.33" width="14.67" y="0" height="60" fill="var(--shad-chart-4)" fill-opacity="0.18" rx="1.5"></rect></svg>
+</div>
+<details class="shad-demo__code"><summary>Code</summary><pre>
+<code class="language-r"><span><span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">9</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="fl">6</span>, <span class="fl">12</span>, <span class="fl">8</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">6</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"bar"</span>, color <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code>
+</pre>
+</details>
+</div>
+<p>Dropped into <code>shad_value_box(sparkline = )</code> it fills the
+strip at the foot of the card:</p>
+<div class="shad-demo">
+<div class="shad-demo__stage shad-demo__stage--center">
+<div class="shad-value-box">
+<div class="shad-value-box__label">Revenue</div>
+<div class="shad-value-box__value">
+$45,231
+<span class="shad-value-box__delta" data-trend="up">
+<svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"></path></svg>
++20.1%
+</span>
+</div>
+<div class="shad-value-box__sparkline">
+<svg class="shad-sparkline" viewbox="0 0 100 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:2.5rem;" aria-hidden="true"><path d="M0 89.53L20 64.12L40 98L60 33.06L80 58.47L100 2V100H0Z" fill="var(--shad-chart-1)" fill-opacity="0.18" stroke="none"></path><path d="M0 89.53L20 64.12L40 98L60 33.06L80 58.47L100 2" fill="none" stroke="var(--shad-chart-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+</div>
+<div class="shad-value-box">
+<div class="shad-value-box__label">Subscribers</div>
+<div class="shad-value-box__value">
+2,350
+<span class="shad-value-box__delta" data-trend="up">
+<svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"></path></svg>
++180
+</span>
+</div>
+<div class="shad-value-box__sparkline">
+<svg class="shad-sparkline" viewbox="0 0 100 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:2.5rem;" aria-hidden="true"><rect x="1" width="14.67" y="100" height="0.5" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="17.67" width="14.67" y="63.16" height="36.84" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="34.33" width="14.67" y="84.21" height="15.79" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="51" width="14.67" y="21.05" height="78.95" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="67.67" width="14.67" y="36.84" height="63.16" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect><rect x="84.33" width="14.67" y="0" height="100" fill="var(--shad-chart-2)" fill-opacity="0.18" rx="1.5"></rect></svg>
+</div>
+</div>
+</div>
+<details class="shad-demo__code"><summary>Code</summary><pre>
+<code class="language-r"><span><span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"$45,231"</span>, <span class="st">"Revenue"</span>, delta <span class="op">=</span> <span class="st">"+20.1%"</span>, sparkline <span class="op">=</span> <span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">31</span>, <span class="fl">40</span>, <span class="fl">28</span>, <span class="fl">51</span>, <span class="fl">42</span>, <span class="fl">62</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"area"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_value_box.html">shad_value_box</a></span><span class="op">(</span><span class="st">"2,350"</span>, <span class="st">"Subscribers"</span>, delta <span class="op">=</span> <span class="st">"+180"</span>, sparkline <span class="op">=</span> <span class="fu"><a href="../reference/shad_sparkline.html">shad_sparkline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">19</span>, <span class="fl">15</span>, <span class="fl">27</span>, <span class="fl">24</span>, <span class="fl">31</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"bar"</span>, color <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code>
+</pre>
+</details>
+</div>
+</div>
+<div class="section level2">
+<h2 id="mini-donut">Mini donut<a class="anchor" aria-label="anchor" href="#mini-donut"></a>
+</h2>
+<p><code><a href="../reference/shad_mini_donut.html">shad_mini_donut()</a></code> shows a few parts of a whole, with
+optional content in the middle. <code>thickness = 1</code> gives a
+pie.</p>
+<div class="shad-demo">
+<div class="shad-demo__stage shad-demo__stage--center">
+<div class="shad-donut" style="width:6rem;height:6rem;">
+<svg class="shad-donut__svg" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="39.06" fill="none" stroke="var(--shad-muted)" stroke-width="21.88"></circle><circle cx="50" cy="50" r="39.06" fill="none" stroke="var(--shad-chart-1)" stroke-width="21.88" stroke-dasharray="152.17 93.27" stroke-dashoffset="0"></circle><circle cx="50" cy="50" r="39.06" fill="none" stroke="var(--shad-chart-2)" stroke-width="21.88" stroke-dasharray="58.9 186.53" stroke-dashoffset="-152.17"></circle><circle cx="50" cy="50" r="39.06" fill="none" stroke="var(--shad-chart-3)" stroke-width="21.88" stroke-dasharray="34.36 211.08" stroke-dashoffset="-211.08"></circle></svg><div class="shad-donut__center">62%</div>
+</div>
+<div class="shad-donut" style="width:5rem;height:5rem;">
+<svg class="shad-donut__svg" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="33.33" fill="none" stroke="var(--shad-muted)" stroke-width="33.33"></circle><circle cx="50" cy="50" r="33.33" fill="none" stroke="var(--shad-chart-1)" stroke-width="33.33" stroke-dasharray="157.08 52.36" stroke-dashoffset="0"></circle><circle cx="50" cy="50" r="33.33" fill="none" stroke="var(--shad-chart-2)" stroke-width="33.33" stroke-dasharray="52.36 157.08" stroke-dashoffset="-157.08"></circle></svg>
+</div>
+<div class="shad-donut" style="width:5rem;height:5rem;">
+<svg class="shad-donut__svg" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="25" fill="none" stroke="var(--shad-muted)" stroke-width="50"></circle><circle cx="50" cy="50" r="25" fill="none" stroke="var(--shad-chart-1)" stroke-width="50" stroke-dasharray="117.81 39.27" stroke-dashoffset="0"></circle><circle cx="50" cy="50" r="25" fill="none" stroke="var(--shad-chart-2)" stroke-width="50" stroke-dasharray="39.27 117.81" stroke-dashoffset="-117.81"></circle></svg>
+</div>
+<div class="shad-donut" style="width:5rem;height:5rem;">
+<svg class="shad-donut__svg" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="39.06" fill="none" stroke="var(--shad-muted)" stroke-width="21.88"></circle><circle cx="50" cy="50" r="39.06" fill="none" stroke="var(--shad-chart-1)" stroke-width="21.88" stroke-dasharray="49.09 196.35" stroke-dashoffset="0"></circle><circle cx="50" cy="50" r="39.06" fill="none" stroke="var(--shad-chart-2)" stroke-width="21.88" stroke-dasharray="49.09 196.35" stroke-dashoffset="-49.09"></circle><circle cx="50" cy="50" r="39.06" fill="none" stroke="var(--shad-chart-3)" stroke-width="21.88" stroke-dasharray="49.09 196.35" stroke-dashoffset="-98.17"></circle><circle cx="50" cy="50" r="39.06" fill="none" stroke="var(--shad-chart-4)" stroke-width="21.88" stroke-dasharray="49.09 196.35" stroke-dashoffset="-147.26"></circle><circle cx="50" cy="50" r="39.06" fill="none" stroke="var(--shad-chart-5)" stroke-width="21.88" stroke-dasharray="49.09 196.35" stroke-dashoffset="-196.35"></circle></svg>
+</div>
+</div>
+<details class="shad-demo__code"><summary>Code</summary><pre>
+<code class="language-r"><span><span class="fu"><a href="../reference/shad_mini_donut.html">shad_mini_donut</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">62</span>, <span class="fl">24</span>, <span class="fl">14</span><span class="op">)</span>, center <span class="op">=</span> <span class="st">"62%"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_mini_donut.html">shad_mini_donut</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span>, size <span class="op">=</span> <span class="st">"5rem"</span>, thickness <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_mini_donut.html">shad_mini_donut</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span>, size <span class="op">=</span> <span class="st">"5rem"</span>, thickness <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_mini_donut.html">shad_mini_donut</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, size <span class="op">=</span> <span class="st">"5rem"</span><span class="op">)</span></span></code>
 </pre>
 </details>
 </div>

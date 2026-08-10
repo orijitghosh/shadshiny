@@ -126,10 +126,48 @@ shad_dialog(
 )
 ```
 
+A dialog can also be built in the server and shown with
+[`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md),
+the way
+[`shiny::showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html)
+works — useful when its content depends on what the user just did.
+
+## Laying out a page
+
+[`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md),
+[`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
+and
+[`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
+handle page layout on the same spacing scale the components use
+internally:
+
+``` r
+
+shad_container(
+  shad_stack(
+    shad_grid(kpi_one, kpi_two, kpi_three, min_width = "14rem"),
+    shad_card(shad_card_content("Details")),
+    gap = 6
+  ),
+  size = "lg"
+)
+```
+
+For a whole app,
+[`shad_page_navbar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_navbar.md)
+and
+[`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
+replace
+[`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
+and assemble the shell — bar, navigation and scrolling main region — in
+one call.
+
 ## Where to next
 
 - [`vignette("theming")`](https://orijitghosh.github.io/shadshiny/articles/theming.md)
   — the token system, presets, and dark mode.
+- [`vignette("layout")`](https://orijitghosh.github.io/shadshiny/articles/layout.md)
+  — containers, grids, and the page shells.
 - [`vignette("overlays-and-server")`](https://orijitghosh.github.io/shadshiny/articles/overlays-and-server.md)
   — dialogs, confirm flows, and toasts.
 - [`vignette("migrating-inputs")`](https://orijitghosh.github.io/shadshiny/articles/migrating-inputs.md)

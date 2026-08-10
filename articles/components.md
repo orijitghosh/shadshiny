@@ -19,10 +19,10 @@ dates.](https://orijitghosh.github.io/shadshiny/articles/gallery-inputs.md)
 context-menu,
 command.](https://orijitghosh.github.io/shadshiny/articles/gallery-overlays.md)
 [**Navigation & structure**Tabs, accordion, pagination, carousel,
-resizable, and the sidebar
-shell.](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.md)
-[**Data, dashboards & flow**Data table, value boxes, chart shells,
-timeline, stepper, tree, rating,
+resizable, container/stack/grid, page shells,
+sidebar.](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.md)
+[**Data, dashboards & flow**Data table, value boxes, sparklines, donuts,
+chart shells, timeline, stepper, tree, rating,
 dropzone.](https://orijitghosh.github.io/shadshiny/articles/gallery-data.md)
 [**Chat & AI kit**Bubbles, messages, typing indicator, attachments, and
 the sticky

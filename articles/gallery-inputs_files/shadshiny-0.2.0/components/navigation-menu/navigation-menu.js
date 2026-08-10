@@ -111,7 +111,7 @@
         if (ev.key === "ArrowDown" && activeIndex === i) {
           ev.preventDefault();
           const first = shad.util.tabbables(e.panel)[0];
-          if (first) first.focus();
+          if (first) first.focus({ preventScroll: true });
         }
       });
     });

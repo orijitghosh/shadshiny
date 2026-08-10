@@ -49,6 +49,54 @@ server <- function(input, output, session) {
 }
 ```
 
+## Dialogs built in the server
+
+Both forms above need the overlay to exist in the UI. When the dialog’s
+content depends on what just happened — the row you clicked, the file
+that failed — build it in the server and show it, the way
+[`shiny::showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html)
+works:
+
+``` r
+
+server <- function(input, output, session) {
+  observeEvent(input$delete, {
+    shad_show_dialog(shad_dialog(
+      "confirm_delete",
+      title = paste("Delete", input$selected_project, "?"),
+      description = "This cannot be undone.",
+      footer = tagList(
+        shad_dialog_close_button(),
+        shad_button(inputId = "confirm_delete_go", "Delete",
+                    variant = "destructive")
+      )
+    ))
+  })
+}
+```
+
+The overlay is appended to `<body>`, opens itself, and — by default —
+destroys and removes itself once it closes. Nothing to clean up, and no
+ids left behind.
+[`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md)
+also takes
+[`shad_alert_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_alert_dialog.md),
+[`shad_sheet()`](https://orijitghosh.github.io/shadshiny/reference/shad_sheet.md)
+and
+[`shad_drawer()`](https://orijitghosh.github.io/shadshiny/reference/shad_drawer.md).
+
+Inputs inside it are live while it is open, so `input$confirm_delete_go`
+works exactly as it would in a UI-declared dialog. They vanish with the
+dialog, though: read what you need in the observer, or pass
+`transient = FALSE` to keep the overlay (and its values) in the document
+so it can be reopened with
+[`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md).
+
+`shad_remove_dialog(id)` closes one from the server — for a job that
+finished or a save that succeeded. Esc, the backdrop and
+[`shad_dialog_close_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_dialog.md)
+all still work on their own.
+
 ## Confirm flows with alert-dialog
 
 [`shad_alert_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_alert_dialog.md)

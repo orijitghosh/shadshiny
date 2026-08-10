@@ -1,0 +1,158 @@
+/* FILE: inst/assets/components/layout/layout.css */
+/* shadshiny — layout primitives (CSS-only): container, stack, grid, and the
+   two page shells. Every knob is a custom property set inline by the R
+   constructor, so there is exactly one rule per primitive and no utility-class
+   explosion.
+
+   Breakpoints (shared with the page shells): sm 40rem, md 48rem, lg 64rem.
+   The responsive column chain falls back outward —
+   lg -> md -> sm -> base -> 1 — so `cols = c(sm = 2, lg = 4)` behaves the way
+   it reads. */
+
+/* Every primitive resets its own knobs to `initial` first. Custom properties
+   INHERIT, so without this a stack nested inside a horizontal stack would pick
+   up its parent's direction (and gap, and alignment) and quietly lay itself out
+   sideways. `initial` discards the inherited value so the var() fallback in the
+   declaration below applies; an inline style on the element still wins, because
+   inline beats a stylesheet rule. */
+
+/* -- container ------------------------------------------------------------ */
+.shad-container {
+  --shad-container-max: initial;
+  --shad-container-pad: initial;
+  width: 100%;
+  max-width: var(--shad-container-max, 60rem);
+  margin-inline: auto;
+  padding-inline: var(--shad-container-pad, var(--shad-space-4));
+}
+.shad-container--full { max-width: none; }
+.shad-container--flush { padding-inline: 0; }
+
+/* -- stack ---------------------------------------------------------------- */
+.shad-stack {
+  --shad-stack-dir: initial;
+  --shad-stack-gap: initial;
+  --shad-stack-align: initial;
+  --shad-stack-justify: initial;
+  display: flex;
+  flex-direction: var(--shad-stack-dir, column);
+  gap: var(--shad-stack-gap, var(--shad-space-4));
+  align-items: var(--shad-stack-align, stretch);
+  justify-content: var(--shad-stack-justify, flex-start);
+}
+.shad-stack--wrap { flex-wrap: wrap; }
+/* fill=TRUE: children share the free space along the main axis */
+.shad-stack--fill > * { flex: 1 1 0; min-width: 0; }
+
+/* -- grid ----------------------------------------------------------------- */
+.shad-grid {
+  --shad-grid-gap: initial;
+  --shad-grid-align: initial;
+  --shad-grid-min: initial;
+  --shad-grid-template: initial;
+  --shad-grid-cols: initial;
+  --shad-grid-cols-sm: initial;
+  --shad-grid-cols-md: initial;
+  --shad-grid-cols-lg: initial;
+  display: grid;
+  gap: var(--shad-grid-gap, var(--shad-space-4));
+  align-items: var(--shad-grid-align, stretch);
+  grid-template-columns: repeat(var(--shad-grid-cols, 1), minmax(0, 1fr));
+}
+@media (min-width: 40rem) {
+  .shad-grid {
+    grid-template-columns:
+      repeat(var(--shad-grid-cols-sm, var(--shad-grid-cols, 1)), minmax(0, 1fr));
+  }
+}
+@media (min-width: 48rem) {
+  .shad-grid {
+    grid-template-columns: repeat(
+      var(--shad-grid-cols-md, var(--shad-grid-cols-sm, var(--shad-grid-cols, 1))),
+      minmax(0, 1fr));
+  }
+}
+@media (min-width: 64rem) {
+  .shad-grid {
+    grid-template-columns: repeat(
+      var(--shad-grid-cols-lg,
+        var(--shad-grid-cols-md, var(--shad-grid-cols-sm, var(--shad-grid-cols, 1)))),
+      minmax(0, 1fr));
+  }
+}
+/* auto-fit track list: no media queries needed, and it must beat the rules
+   above at every width -- hence last in the file (equal specificity). */
+.shad-grid--auto {
+  grid-template-columns:
+    repeat(auto-fit, minmax(min(var(--shad-grid-min, 16rem), 100%), 1fr));
+}
+/* an explicit template string wins outright */
+.shad-grid--template { grid-template-columns: var(--shad-grid-template); }
+
+/* span helper for a child of either grid */
+.shad-grid__item {
+  --shad-span: initial;
+  grid-column: span var(--shad-span, 1) / span var(--shad-span, 1);
+}
+.shad-grid__item--full { grid-column: 1 / -1; }
+
+/* -- page shells ---------------------------------------------------------- */
+/* Scroll model, deliberately different per shell:
+   - navbar: the WINDOW scrolls. The bar is `position: sticky`, which pins to
+     the viewport, and we inherit whatever the host page (bslib page_fillable,
+     fluidPage, a Quarto doc) does about height. Nothing to constrain.
+   - sidebar: the SHELL scrolls. A sidebar has to be viewport-tall or its rail
+     and footer drift away, so this one takes the height and its main region
+     scrolls inside. */
+.shad-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background-color: var(--shad-background);
+  color: var(--shad-foreground);
+  font-family: var(--shad-font-sans);
+}
+.shad-page__main {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding-block: var(--shad-space-6);
+}
+
+/* The sidebar shell owns the whole viewport, so drop the host page's padding
+   (bslib's page_fillable ships 24px) -- otherwise 100dvh plus that padding
+   leaves a second, outer scrollbar. Specificity 0,1,1 beats `.bslib-page-fill`
+   without !important. */
+body:has(.shad-page--sidebar) { padding: 0; overflow: hidden; }
+.shad-page--sidebar { height: 100dvh; min-height: 0; overflow: hidden; }
+.shad-page--sidebar .shad-sidebar-layout { height: 100%; }
+.shad-page--sidebar .shad-sidebar-layout__main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.shad-page--sidebar .shad-page__main { overflow-y: auto; }
+
+/* the bar shared by both shells */
+.shad-page__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-3);
+  padding: var(--shad-space-3) var(--shad-space-4);
+  border-bottom: 1px solid var(--shad-border);
+  background-color: var(--shad-background);
+}
+.shad-page__bar--sticky { position: sticky; top: 0; z-index: 30; }
+.shad-page__title {
+  font-size: var(--shad-text-base);
+  font-weight: var(--shad-font-weight-semibold);
+  line-height: var(--shad-leading-base);
+  margin: 0;
+}
+.shad-page__bar-end { margin-inline-start: auto; display: flex; align-items: center;
+  gap: var(--shad-space-2); }
+
+/* navbar shell: the tab strip lives in the bar, the panels fill the page.
+   The root IS the tabs element (data-shad="tabs"), so the component's own
+   root-scoped queries keep working with the bar in between. */
+.shad-page--navbar .shad-page__bar .shad-tabs__list { flex: 0 0 auto; }
+.shad-page--navbar > .shad-page__main > .shad-tabs__content { outline: none; }

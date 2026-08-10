@@ -208,6 +208,29 @@ trigger element in the UI or opened from the server with
 <span>  <span class="fu"><a href="../reference/shad_typography.html">shad_p</a></span><span class="op">(</span><span class="st">"This action can be undone."</span><span class="op">)</span>,</span>
 <span>  footer <span class="op">=</span> <span class="fu"><a href="../reference/shad_dialog.html">shad_dialog_close_button</a></span><span class="op">(</span><span class="st">"Close"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p>A dialog can also be built in the server and shown with
+<code><a href="../reference/shad_show_dialog.html">shad_show_dialog()</a></code>, the way <code><a href="https://rdrr.io/pkg/shiny/man/showModal.html" class="external-link">shiny::showModal()</a></code>
+works — useful when its content depends on what the user just did.</p>
+</div>
+<div class="section level2">
+<h2 id="laying-out-a-page">Laying out a page<a class="anchor" aria-label="anchor" href="#laying-out-a-page"></a>
+</h2>
+<p><code><a href="../reference/shad_container.html">shad_container()</a></code>, <code><a href="../reference/shad_stack.html">shad_stack()</a></code> and
+<code><a href="../reference/shad_grid.html">shad_grid()</a></code> handle page layout on the same spacing scale
+the components use internally:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_container.html">shad_container</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/shad_stack.html">shad_stack</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="../reference/shad_grid.html">shad_grid</a></span><span class="op">(</span><span class="va">kpi_one</span>, <span class="va">kpi_two</span>, <span class="va">kpi_three</span>, min_width <span class="op">=</span> <span class="st">"14rem"</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="../reference/shad_card.html">shad_card</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_card.html">shad_card_content</a></span><span class="op">(</span><span class="st">"Details"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    gap <span class="op">=</span> <span class="fl">6</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  size <span class="op">=</span> <span class="st">"lg"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>For a whole app, <code><a href="../reference/shad_page_navbar.html">shad_page_navbar()</a></code> and
+<code><a href="../reference/shad_page_sidebar.html">shad_page_sidebar()</a></code> replace <code><a href="../reference/page_shad.html">page_shad()</a></code> and
+assemble the shell — bar, navigation and scrolling main region — in one
+call.</p>
 </div>
 <div class="section level2">
 <h2 id="where-to-next">Where to next<a class="anchor" aria-label="anchor" href="#where-to-next"></a>
@@ -216,6 +239,9 @@ trigger element in the UI or opened from the server with
 <li>
 <code><a href="../articles/theming.html">vignette("theming")</a></code> — the token system, presets, and
 dark mode.</li>
+<li>
+<code><a href="../articles/layout.html">vignette("layout")</a></code> — containers, grids, and the page
+shells.</li>
 <li>
 <code><a href="../articles/overlays-and-server.html">vignette("overlays-and-server")</a></code> — dialogs, confirm
 flows, and toasts.</li>

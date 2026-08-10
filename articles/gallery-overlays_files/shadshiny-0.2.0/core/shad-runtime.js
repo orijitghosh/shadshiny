@@ -61,6 +61,27 @@
     isTouchPointer(ev) {
       return ev.pointerType === "touch" || ev.pointerType === "pen";
     },
+    /**
+     * Scroll `container` just enough to reveal `item`, and scroll NOTHING else.
+     *
+     * This is the reason not to use scrollIntoView(): that walks every
+     * scrollable ancestor up to the document, so highlighting an item inside a
+     * component that sits in ordinary document flow drags the whole page to it.
+     * An inline command palette used to jump the page to itself on load and on
+     * every keystroke exactly this way.
+     *
+     * Honours the container's scroll-padding-block-start, so an item does not
+     * come to rest under a sticky header inside the list.
+     */
+    keepInView(container, item) {
+      if (!container || !item) return;
+      const pad = parseFloat(
+        getComputedStyle(container).scrollPaddingBlockStart) || 0;
+      const c = container.getBoundingClientRect();
+      const i = item.getBoundingClientRect();
+      if (i.top < c.top + pad) container.scrollTop -= c.top + pad - i.top;
+      else if (i.bottom > c.bottom - pad) container.scrollTop += i.bottom - c.bottom + pad;
+    },
     clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
   };
 
@@ -294,6 +315,8 @@
       if (items.length === 0) { ev.preventDefault(); return; }
       const first = items[0], last = items[items.length - 1];
       const active = document.activeElement;
+      // Tab wrap-around scrolls by design: the panel may be taller than its
+      // viewport, and the newly focused control has to be visible.
       if (ev.shiftKey && (active === first || !container.contains(active))) {
         ev.preventDefault(); last.focus();
       } else if (!ev.shiftKey && (active === last || !container.contains(active))) {
@@ -513,6 +536,46 @@
     registry.set(name, factory);
   };
 
+  /* Two init-time attributes, used by server-created overlays
+     (shad_show_dialog() and friends). They live here rather than in each
+     overlay's file so dialog / alert-dialog / sheet / drawer / popover all get
+     them from one place.
+
+       data-shad-open       open as soon as the instance exists
+       data-shad-transient  after it closes, unbind, destroy and remove it
+
+     Transient is what makes a server-created overlay disposable: the R side
+     inserts the markup and never has to reach back in to clean it up. */
+  function autoOpen(el, instance) {
+    if (!el.hasAttribute("data-shad-open")) return;
+    if (typeof instance.open !== "function") return;
+    // Defer past the end of the current task, for two reasons:
+    //   - Shiny appends the fragment and binds it in one task. Overlays portal
+    //     their panel to <body> on open, so opening before Shiny::bindAll gets
+    //     there would move the inputs out from under it and leave them unbound.
+    //   - the element needs to be laid out before the enter animation runs.
+    // setTimeout, not requestAnimationFrame: a backgrounded tab paints no
+    // frames, and an overlay that only appears once you look at the tab is a
+    // bug you cannot reproduce on demand.
+    setTimeout(function () { instance.open(); }, 0);
+  }
+
+  function autoRemove(el) {
+    if (!el.hasAttribute("data-shad-transient") || el.__shadTransient) return;
+    el.__shadTransient = true;
+    el.addEventListener("shad:close", function () {
+      // shad:close fires when the close STARTS; Presence is still animating the
+      // element out and only then applies [hidden]. Its own fallback timer caps
+      // that at 500ms, so waiting past it needs no per-component knowledge —
+      // and the element is invisible for the whole wait either way.
+      setTimeout(function () {
+        if (window.Shiny && Shiny.unbindAll) Shiny.unbindAll(el);
+        shad.destroy(el);
+        if (el.parentNode) el.parentNode.removeChild(el);
+      }, 550);
+    });
+  }
+
   /**
    * Scan `root` (default document) for [data-shad] elements and wire them.
    * Idempotent: elements that already carry an instance are skipped.
@@ -532,6 +595,8 @@
         instance.el = el;
         instance.name = name;
         el.__shadInstance = instance;
+        autoOpen(el, instance);
+        autoRemove(el);
       } catch (err) {
         console.error("[shad] failed to init <" + name + ">", el, err);
       }
@@ -579,6 +644,11 @@
             if (n.matches && n.matches("[data-shad]")) roots.push(n);
             if (n.querySelectorAll) n.querySelectorAll("[data-shad]").forEach((e) => roots.push(e));
             roots.forEach((e) => {
+              // A move is a removal plus an insertion, and shad.portal() moves
+              // panels (and, for a command dialog, the root itself) to <body>
+              // on open. Tearing those down here would destroy the component
+              // mid-open. Anything still in the document was moved, not removed.
+              if (e.isConnected) return;
               const inst = e.__shadInstance;
               if (inst && typeof inst.destroy === "function") inst.destroy();
               delete e.__shadInstance;

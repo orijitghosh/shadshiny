@@ -67,6 +67,20 @@
 
     // Set a single inline style property, optionally on a descendant. Used by
     // update_shad_progress (no bound instance) to move the indicator bar.
+    // Replace a component's markup (or a region of it) with server-rendered
+    // HTML. Goes through Shiny.renderContent so dependencies are registered and
+    // any inputs/outputs inside are bound, then gives the component a chance to
+    // re-read what changed.
+    Shiny.addCustomMessageHandler("shadshiny:html", function (msg) {
+      var el = document.getElementById(msg.id);
+      if (!el) { console.warn("[shadshiny] html: no element", msg.id); return; }
+      var target = msg.selector ? el.querySelector(msg.selector) : el;
+      if (!target) { console.warn("[shadshiny] html: no match", msg.selector); return; }
+      Shiny.renderContent(target, { html: msg.html, deps: msg.deps || [] });
+      var inst = window.shad && shad.get(el);
+      if (inst && typeof inst.refresh === "function") inst.refresh();
+    });
+
     Shiny.addCustomMessageHandler("shadshiny:style", function (msg) {
       var el = document.getElementById(msg.id);
       if (!el) { console.warn("[shadshiny] style: no element", msg.id); return; }
@@ -286,6 +300,20 @@
   makeShadBinding("number-stepper");
   // tree: value = selected keys. Lazy expand is forwarded separately below.
   makeShadBinding("tree");
+
+  /* command: forward every activation to `input$<id>_event` as an event.
+     input$<id> holds the selected value, and Shiny drops a repeat of the same
+     value — fine for a filter, wrong for navigation, where picking "Settings"
+     twice has to run twice. Delegated so palettes inserted later work too. */
+  document.addEventListener("shad:change", function (ev) {
+    var root = ev.target;
+    if (!root || !root.matches || !root.matches('[data-shad="command"]')) return;
+    if (!root.id) return;
+    Shiny.setInputValue(root.id + "_event", {
+      value: ev.detail ? ev.detail.value : null,
+      nonce: Date.now()
+    }, { priority: "event" });
+  }, true);
 
   /* tree lazy-load: forward shad:expand to `input$<id>_expanded` as an event so
      the server can answer with update_shad_tree(children=). Also exposes the

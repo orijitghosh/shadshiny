@@ -77,15 +77,24 @@
     });
 
     // active item tracking
-    function onItemClick(ev) {
-      const item = ev.target.closest(".shad-sidebar__item");
-      if (!item || !sidebar.contains(item)) return;
+    function activate(item) {
+      if (!item || !sidebar.contains(item)) return false;
       sidebar.querySelectorAll(".shad-sidebar__item").forEach((it) => {
         it.setAttribute("data-state", it === item ? "active" : "inactive");
       });
       active = item.dataset.value || (item.textContent || "").trim();
       if (mql.matches) closeMobile();
       emit();
+      return true;
+    }
+    function activateByValue(value) {
+      const items = Array.from(sidebar.querySelectorAll(".shad-sidebar__item"));
+      const match = items.find((it) =>
+        (it.dataset.value || (it.textContent || "").trim()) === value);
+      return activate(match);
+    }
+    function onItemClick(ev) {
+      activate(ev.target.closest(".shad-sidebar__item"));
     }
     sidebar.addEventListener("click", onItemClick);
 
@@ -108,6 +117,9 @@
         if (v && typeof v === "object") {
           if (v.collapsed != null) setCollapsed(v.collapsed);
           if (v.mobileOpen != null) (v.mobileOpen ? openMobile() : closeMobile());
+          // selecting the item the server asks for, so navigating from
+          // somewhere else (a command palette, a link) moves the rail too
+          if (v.active != null && v.active !== active) activateByValue(v.active);
         }
       },
       open: openMobile, close: closeMobile,

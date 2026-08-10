@@ -96,7 +96,7 @@
         : nearestThumb(v);
       dragIndex = ti;
       if (!ev.target.closest(".shad-slider__thumb")) setIndex(ti, v);
-      thumbs[ti].focus();
+      thumbs[ti].focus({ preventScroll: true });
       root.setPointerCapture && root.setPointerCapture(ev.pointerId);
       root.addEventListener("pointermove", onPointerMove);
       root.addEventListener("pointerup", onPointerUp);
