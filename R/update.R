@@ -43,6 +43,26 @@ shad_set_text <- function(id, text, selector = NULL,
   invisible(NULL)
 }
 
+#' Replace a component's markup (or a region of it) with rendered UI
+#'
+#' Dependencies are registered with the session and sent alongside the HTML, so
+#' the client can bind whatever the fragment contains. The receiving component's
+#' `refresh()` runs afterwards, where it has one.
+#' @noRd
+shad_set_html <- function(id, ui, selector = NULL,
+                          session = shiny::getDefaultReactiveDomain()) {
+  rendered <- htmltools::renderTags(ui)
+  deps <- lapply(
+    htmltools::resolveDependencies(rendered$dependencies),
+    shiny::createWebDependency
+  )
+  session$sendCustomMessage("shadshiny:html", list(
+    id = session$ns(id), selector = selector,
+    html = rendered$html, deps = deps
+  ))
+  invisible(NULL)
+}
+
 # ISO-8601 serialize a Date/character scalar (helper shared with calendar).
 .iso_or_null <- function(x) if (is.null(x)) NULL else .iso_date(x)
 

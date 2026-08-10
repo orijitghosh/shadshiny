@@ -45,6 +45,7 @@ Other shadshiny tier-3 components:
 \code{\link[=shad_carousel]{shad_carousel()}},
 \code{\link[=shad_collapsible]{shad_collapsible()}},
 \code{\link[=shad_command]{shad_command()}},
+\code{\link[=shad_command_palette]{shad_command_palette()}},
 \code{\link[=shad_context_menu]{shad_context_menu()}},
 \code{\link[=shad_dialog]{shad_dialog()}},
 \code{\link[=shad_dropdown_menu]{shad_dropdown_menu()}},

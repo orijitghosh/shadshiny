@@ -451,13 +451,34 @@ ui <- page_shad(
           shad_menu_item("redo", "Redo")))),
 
     section("s-command", "Command",
+      cluster("Palette (Ctrl/Cmd + K, or the trigger)",
+        shad_command_trigger("palette"),
+        shad_button(inputId = "open_palette", "Open from the server",
+          variant = "ghost", size = "sm"),
+        shad_command_palette("palette", items = list(
+          "Go to" = c("Buttons" = "s-button", "Data table" = "s-data-table",
+                      "Sparkline" = "s-mini-chart"),
+          "Actions" = list(
+            list(value = "toast", label = "Show a toast", shortcut = "T",
+                 keywords = "notify message"),
+            list(value = "dialog", label = "Open the dialog",
+                 icon = "external-link")))),
+        # Navigation is pure client-side: the palette's shad:change carries the
+        # section id, so no round trip is needed to jump to one.
+        tags$script(htmltools::HTML(
+          "document.addEventListener('shad:change', function (ev) {
+             if (ev.target.id !== 'palette') return;
+             var el = document.getElementById(ev.detail.value);
+             if (el) el.scrollIntoView({ behavior: 'smooth' });
+           });"))),
+      cluster("Inline",
       shad_command("cmd",
         shad_command_group("Suggestions",
           shad_command_item("calendar", "Calendar", keywords = "date"),
           shad_command_item("emoji", "Search Emoji")),
         shad_command_separator(),
         shad_command_group("Settings",
-          shad_command_item("profile", "Profile", shortcut = "⌘P")))),
+          shad_command_item("profile", "Profile", shortcut = "⌘P"))))),
 
     # =====================================================================
     # Tier 3 — navigation & structure
@@ -820,6 +841,18 @@ server <- function(input, output, session) {
   })
 
   # Alert-dialog confirm hooks.
+  # Palette: input$<id>_event fires on every activation, unlike input$<id>,
+  # which Shiny deduplicates -- picking the same command twice must work twice.
+  # The "Go to" items are handled in the browser (see the script in the UI);
+  # only the actions need the server.
+  observeEvent(input$open_palette, shad_command_open("palette"))
+  observeEvent(input$palette_event, {
+    switch(input$palette_event$value,
+      toast = shad_toast("Ran a command from the palette."),
+      dialog = shad_dialog_open("dlg"),
+      NULL)
+  })
+
   observeEvent(input$alrt_confirm, shad_toast_error("Deleted."))
   observeEvent(input$alrt2_confirm, shad_toast_success("Published."))
 

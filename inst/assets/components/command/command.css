@@ -112,3 +112,8 @@
   color: var(--shad-muted-foreground);
 }
 .shad-command__group[hidden] { display: none; }
+
+/* Trigger button (shad_command_trigger): reads like a search field rather than
+   a button -- label at the start, shortcut hint pushed to the end. */
+.shad-command__opener { justify-content: flex-start; min-width: 12rem; }
+.shad-command__opener > .shad-kbd { margin-inline-start: auto; }

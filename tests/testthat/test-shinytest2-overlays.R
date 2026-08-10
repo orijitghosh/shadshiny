@@ -27,7 +27,7 @@ test_that("server-created dialogs open themselves and clean up on close", {
                                    name = "overlays-server-created")
   withr::defer(app$stop())
 
-  count <- function(sel) app$get_js(sprintf("document.querySelectorAll('%s').length", sel))
+  count <- function(sel) app$get_js(paste0("document.querySelectorAll(\"", sel, "\").length"))
 
   expect_equal(count("#made"), 0)
 

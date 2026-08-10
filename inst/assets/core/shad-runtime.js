@@ -621,6 +621,11 @@
             if (n.matches && n.matches("[data-shad]")) roots.push(n);
             if (n.querySelectorAll) n.querySelectorAll("[data-shad]").forEach((e) => roots.push(e));
             roots.forEach((e) => {
+              // A move is a removal plus an insertion, and shad.portal() moves
+              // panels (and, for a command dialog, the root itself) to <body>
+              // on open. Tearing those down here would destroy the component
+              // mid-open. Anything still in the document was moved, not removed.
+              if (e.isConnected) return;
               const inst = e.__shadInstance;
               if (inst && typeof inst.destroy === "function") inst.destroy();
               delete e.__shadInstance;

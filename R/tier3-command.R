@@ -35,6 +35,10 @@ shad_command <- function(inputId, ...,
     class = shad_class("shad-command", extra = class),
     `data-shad` = "command", id = inputId,
     `data-hotkey` = if (isTRUE(hotkey)) "mod+k" else NULL,
+    # The asset treats a hotkey as implying dialog mode, but `dialog = TRUE,
+    # hotkey = FALSE` is a real combination (opened from a trigger or the
+    # server), so mark it explicitly.
+    `data-dialog` = flag_attr(dialog),
     `aria-label` = if (isTRUE(dialog)) "Command palette" else NULL,
     htmltools::tags$div(
       class = "shad-command__header",

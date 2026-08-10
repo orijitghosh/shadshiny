@@ -55,6 +55,7 @@ Other shadshiny server API:
 \code{\link[=shad_remove_dialog]{shad_remove_dialog()}},
 \code{\link[=shad_show_dialog]{shad_show_dialog()}},
 \code{\link[=shad_toast]{shad_toast()}},
-\code{\link{update_shad}}
+\code{\link{update_shad}},
+\code{\link[=update_shad_command]{update_shad_command()}}
 }
 \concept{shadshiny server API}

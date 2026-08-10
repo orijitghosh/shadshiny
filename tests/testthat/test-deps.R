@@ -12,8 +12,11 @@ test_that("CSS load order leads with tokens, base, animations, dropdown-menu", {
     "core/shad-animations.css",
     "components/dropdown-menu/dropdown-menu.css"
   ))
-  # 59 component CSS + tokens + base + animations
-  expect_length(css, 70 + 3)
+  # every component dir that ships a .css, plus tokens + base + animations
+  n_css <- length(list.files(
+    system.file("assets", "components", package = "shadshiny"),
+    pattern = "[.]css$", recursive = TRUE))
+  expect_length(css, n_css + 3)
   # no component css appears twice (dropdown-menu hoisted, not duplicated)
   expect_false(any(duplicated(css)))
 })

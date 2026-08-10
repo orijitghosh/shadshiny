@@ -142,6 +142,44 @@ ui <- shad_page_sidebar(
 )
 ```
 
+## ⌘K navigation
+
+`shad_command_palette()` is the "jump anywhere" pattern: a modal, searchable
+list of everything the app can do, opened with ⌘K / Ctrl+K. Items come from
+data — a named vector, or a named list of them for grouped sections:
+
+```{r}
+shad_command_palette("palette", items = list(
+  "Go to"   = c(Dashboard = "dashboard", Reports = "reports"),
+  "Actions" = list(
+    list(value = "new", label = "New report", shortcut = "N",
+         keywords = "create add")
+  )
+))
+```
+
+Drop `shad_command_trigger("palette")` in the page bar for people who do not
+know the shortcut, and observe **`input$palette_event`** — not `input$palette`:
+
+```{r}
+server <- function(input, output, session) {
+  observeEvent(input$palette_event, {
+    switch(input$palette_event$value,
+      dashboard = update_shad_tabs("nav", "dashboard"),
+      reports   = update_shad_tabs("nav", "reports"),
+      new       = shad_show_dialog(new_report_dialog())
+    )
+  })
+}
+```
+
+`input$palette` holds the last value, but Shiny drops a repeat of the same
+value — so choosing "Reports" twice would only fire once. `_event` carries
+`value` plus a `nonce` and fires every time, which is what navigation needs.
+
+`update_shad_command()` replaces the items from the server: recent documents,
+search hits, commands gated on the signed-in user.
+
 ## The sidebar shell, by hand
 
 `shad_page_sidebar()` is a thin wrapper over `shad_sidebar_layout()`. Use the

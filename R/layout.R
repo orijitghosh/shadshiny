@@ -329,7 +329,13 @@ shad_page_navbar <- function(..., inputId = "navbar", title = NULL,
                              theme_preset = NULL, dark = NULL, theme = NULL,
                              lang = "en") {
   dots <- split_dots(...)
-  tabs <- do.call(shad_tabs, c(list(inputId), dots$children, list(selected = selected)))
+  # Anything that is not a tab (a command palette, an overlay, an output that
+  # belongs to the page rather than to one view) rides along outside the tab
+  # set instead of being dropped on the floor by shad_tabs().
+  is_tab <- vapply(dots$children, inherits, logical(1), "shad_tab")
+  extras <- dots$children[!is_tab]
+  tabs <- do.call(shad_tabs, c(list(inputId), dots$children[is_tab],
+                               list(selected = selected)))
 
   # shad_tabs() renders [list, panels...]. Re-parent those children into the
   # bar and the main region -- the root stays the tabs element, so the
@@ -343,9 +349,12 @@ shad_page_navbar <- function(..., inputId = "navbar", title = NULL,
 
   tabs$attribs$class <- shad_class("shad-page", "shad-page--navbar",
                                    extra = tabs$attribs$class)
-  tabs$children <- list(
-    shad_page_bar(list_tag, title = title, end = header_end),
-    do.call(htmltools::tags$div, c(list(class = "shad-page__main"), panels))
+  tabs$children <- c(
+    list(
+      shad_page_bar(list_tag, title = title, end = header_end),
+      do.call(htmltools::tags$div, c(list(class = "shad-page__main"), panels))
+    ),
+    extras
   )
 
   do.call(page_shad, c(
