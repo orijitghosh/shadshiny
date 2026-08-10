@@ -102,6 +102,10 @@ shad_run_example("kitchen-sink")
 ## Components
 
 Names marked `+` have no shadcn/ui counterpart; they are shadshiny additions.
+The marker covers components only. The server-side API (`update_shad_*()`,
+`shad_<name>_open()` / `_close()`, `shad_show_dialog()`, the toast functions) is
+Shiny plumbing that shadcn/ui has no equivalent for by construction, so it goes
+unmarked throughout.
 
 **Tier 1: display & typography**
 

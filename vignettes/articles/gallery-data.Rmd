@@ -87,6 +87,8 @@ demo(
 
 ## Value box
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 `shad_value_box()` is the KPI card. `delta_direction = "auto"` (the default)
 reads the sign off the `delta` string, so `"+12.5%"` is up and `"-3%"` is down —
 pass `delta_direction` explicitly when the arrow shouldn't follow the sign (a
@@ -105,6 +107,8 @@ demo({
 ```
 
 ## Sparkline
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 `shad_sparkline()` is a tiny inline chart with no axes, no labels, and no
 plotting stack — one SVG path (or a row of bars) that stretches to fill its
@@ -145,6 +149,8 @@ demo({
 ```
 
 ## Mini donut
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 `shad_mini_donut()` shows a few parts of a whole, with optional content in the
 middle. `thickness = 1` gives a pie.
@@ -192,6 +198,8 @@ output$plot <- renderPlot({
 
 ## Timeline
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 ```{r}
 demo(
   columns = TRUE,
@@ -209,6 +217,8 @@ demo(
 ```
 
 ## Stepper
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 `shad_stepper()` holds the **1-based** index of the active step. `linear = TRUE`
 stops the user skipping ahead of the current step.
@@ -230,6 +240,8 @@ demo(
 
 ## Tree
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 `shad_tree_item()` takes the value first, then the label. Nest items to build
 branches; `lazy = TRUE` marks a branch whose children arrive later via
 `update_shad_tree(children=)`.
@@ -250,6 +262,8 @@ demo(
 
 ## Rating
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 ```{r}
 demo({
   shad_rating("r1", label = "Rating", value = 3)
@@ -260,6 +274,8 @@ demo({
 ```
 
 ## Number input
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 A text input with hold-to-repeat stepper buttons. `precision` fixes the decimal
 places; `min` / `max` clamp the value.
@@ -274,6 +290,8 @@ demo({
 ```
 
 ## Dropzone
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 `shad_dropzone()` bridges to a hidden `fileInput()`, so `input$<id>` is the
 **standard Shiny files data frame** (`name`, `size`, `type`, `datapath`) — every
@@ -291,6 +309,8 @@ demo(
 ```
 
 ## Form messaging
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 The pieces `shad_validator()` drives from the server. In an app you rarely place
 these by hand — the validator sets them for you — but they're plain components.

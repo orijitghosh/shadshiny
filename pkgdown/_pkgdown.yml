@@ -78,6 +78,7 @@ reference:
 
   - title: Layout & page shells
     desc: Container, stack, and grid primitives, plus whole-page shells.
+      Shadshiny additions, with no shadcn/ui counterpart.
     contents:
       - shad_container
       - shad_stack
@@ -169,7 +170,8 @@ reference:
 
   - title: Chat & AI kit
     desc: Streaming transcript primitives — bubbles, messages, attachments,
-      markers, and a stick-to-bottom scroller.
+      markers, and a stick-to-bottom scroller. Shadshiny additions, with no
+      shadcn/ui counterpart.
     contents:
       - shad_message
       - shad_message_group
@@ -240,7 +242,8 @@ reference:
       - shad_sidebar_trigger
 
   - title: Server — updates
-    desc: Update bound component values from the server.
+    desc: Update bound component values from the server. Shiny-side API, so
+      there is nothing in shadcn/ui to compare it against.
     contents:
       - update_shad_input_otp
       - update_shad_checkbox
@@ -271,6 +274,7 @@ reference:
 
   - title: Server — overlays & toast
     desc: Open/close overlays and raise toast notifications from the server.
+      Shiny-side API, so there is nothing in shadcn/ui to compare it against.
     contents:
       - shad_dialog_open
       - shad_alert_dialog_open
@@ -298,7 +302,8 @@ reference:
       - update_shad_data_table
 
   - title: Dashboard & charts
-    desc: KPI cards, chart wrappers, timelines, and plot theming.
+    desc: KPI cards, chart wrappers, timelines, and plot theming. Everything
+      here except `shad_chart_container()` is a shadshiny addition.
     contents:
       - shad_value_box
       - shad_sparkline
@@ -314,7 +319,8 @@ reference:
       - shad_current_theme
 
   - title: Flow & input components
-    desc: Stepper, tree, rating, number input, and file dropzone.
+    desc: Stepper, tree, rating, number input, and file dropzone. Shadshiny
+      additions, with no shadcn/ui counterpart.
     contents:
       - shad_stepper
       - shad_step
@@ -326,7 +332,8 @@ reference:
       - shad_date_presets
 
   - title: Forms & validation
-    desc: A server-side validator with shadcn-styled field messaging.
+    desc: A server-side validator with shadcn-styled field messaging. A
+      shadshiny addition; shadcn/ui validates on the client instead.
     contents:
       - shad_validator
       - shad_rules
@@ -342,7 +349,8 @@ reference:
       - shad_theme_from_registry
 
   - title: Chat
-    desc: A streaming chat module built on the chat kit.
+    desc: A streaming chat module built on the chat kit. A shadshiny addition,
+      with no shadcn/ui counterpart.
     contents:
       - shad_chat_ui
       - shad_chat_server

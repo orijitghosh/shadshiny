@@ -17,6 +17,9 @@ the **scroller** keeps a growing transcript pinned to the bottom. The
 [support-chat example](https://github.com/orijitghosh/shadshiny/tree/main/inst/examples/03-support-chat)
 wires them into a working inbox.
 
+Everything on this page is a shadshiny addition: shadcn/ui has no chat
+components, so these are built on the same tokens but designed here.
+
 ## Bubble
 
 The atom of a conversation. `variant` sets the surface; `align` places it

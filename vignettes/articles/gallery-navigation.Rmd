@@ -145,6 +145,8 @@ demo(
 
 ## Layout primitives
 
+*A shadshiny addition: no shadcn/ui counterpart.*
+
 `shad_container()`, `shad_stack()` and `shad_grid()` cover page layout without
 hand-written CSS. Spacing takes a token step — `gap = 4` is
 `var(--shad-space-4)`, the same scale the components use internally — or any CSS
@@ -198,6 +200,8 @@ demo(
 ```
 
 ## Page shells
+
+*A shadshiny addition: no shadcn/ui counterpart.*
 
 Two wrappers assemble a whole page in one call, taking the `page_shad()`
 theming arguments and wrapping content in a `shad_container()` unless you pass
