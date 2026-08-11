@@ -4,7 +4,9 @@
      <div data-shad="calendar" class="shad-calendar"
           [data-mode="single|range"] [data-value="YYYY-MM-DD"]
           [data-value-end="YYYY-MM-DD"] [data-min] [data-max]
-          [data-week-start="0|1"]></div>
+          [data-week-start="0|1"] [data-month="YYYY-MM"]
+          [data-caption-layout="label|dropdown|dropdown-months|dropdown-years"]
+          [data-from-year] [data-to-year]></div>
    Value: single -> "YYYY-MM-DD"|null; range -> {start, end} (either null).
    Keyboard: arrows ±1day/±7days, PageUp/Down ±month (shift: ±year),
    Home/End week start/end, Enter/Space select. Focus roves one day cell. */
@@ -34,14 +36,35 @@
     const minDate = parse(root.getAttribute("data-min"));
     const maxDate = parse(root.getAttribute("data-max"));
 
+    const captionLayout = (function (v) {
+      return ["dropdown", "dropdown-months", "dropdown-years"].indexOf(v) > -1 ? v : "label";
+    })(root.getAttribute("data-caption-layout"));
+    const monthsAsDropdown = captionLayout === "dropdown" || captionLayout === "dropdown-months";
+    const yearsAsDropdown = captionLayout === "dropdown" || captionLayout === "dropdown-years";
+
     let selStart = parse(root.getAttribute("data-value"));
     let selEnd = mode === "range" ? parse(root.getAttribute("data-value-end")) : null;
-    let view = selStart || new Date();
+    // data-month seeds the displayed month without seeding a selection.
+    const seedMonth = /^(\d{4})-(\d{2})$/.exec(root.getAttribute("data-month") || "");
+    let view = seedMonth ? new Date(+seedMonth[1], +seedMonth[2] - 1, 1) : (selStart || new Date());
     view = new Date(view.getFullYear(), view.getMonth(), 1);
+
+    // Year bounds for the dropdown: explicit attrs, else min/max, else a
+    // century back (birth dates) and a decade forward.
+    const thisYear = new Date().getFullYear();
+    function yearAttr(name, fallback) {
+      const n = parseInt(root.getAttribute(name) || "", 10);
+      return isNaN(n) ? fallback : n;
+    }
+    const fromYear = yearAttr("data-from-year",
+      minDate ? minDate.getFullYear() : thisYear - 100);
+    const toYear = yearAttr("data-to-year",
+      maxDate ? maxDate.getFullYear() : thisYear + 10);
     let focusDate = selStart || new Date();
     let hoverDate = null; // range preview
 
     const CHEV_L = '<svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
+    const CHEV_D = '<svg class="shad-calendar__caret shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
     const CHEV_R = '<svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
 
     function disabled(d) {
@@ -56,6 +79,46 @@
       return d > selStart && d < end;
     }
 
+    // Month/year captions. Options outside [minDate, maxDate] are disabled
+    // rather than dropped, so the list keeps a stable length and position.
+    function monthSelect(y, m) {
+      let opts = "";
+      for (let i = 0; i < 12; i++) {
+        const dis = (minDate && new Date(y, i + 1, 0) < minDate) ||
+          (maxDate && new Date(y, i, 1) > maxDate);
+        opts += '<option value="' + i + '"' + (i === m ? " selected" : "") +
+          (dis ? " disabled" : "") + ">" + MONTHS[i] + "</option>";
+      }
+      return wrap('<select class="shad-calendar__dropdown" data-caption="month" aria-label="Month">' +
+        opts + "</select>");
+    }
+    function yearSelect(y) {
+      const lo = Math.min(fromYear, y), hi = Math.max(toYear, y);
+      let opts = "";
+      for (let i = lo; i <= hi; i++) {
+        opts += '<option value="' + i + '"' + (i === y ? " selected" : "") + ">" + i + "</option>";
+      }
+      return wrap('<select class="shad-calendar__dropdown" data-caption="year" aria-label="Year">' +
+        opts + "</select>");
+    }
+    // The caret is decorative and sits over the select's padding gutter, the
+    // same trick native-select uses; appearance:none kills the UA arrow.
+    function wrap(select) {
+      return '<span class="shad-calendar__dropdown-wrap">' + select + CHEV_D + "</span>";
+    }
+    function caption(y, m) {
+      if (captionLayout === "label") {
+        return '<div class="shad-calendar__label" aria-live="polite" id="' + labelId + '">' +
+          MONTHS[m] + " " + y + "</div>";
+      }
+      return '<div class="shad-calendar__caption" id="' + labelId + '">' +
+        (monthsAsDropdown ? monthSelect(y, m)
+          : '<span class="shad-calendar__label">' + MONTHS[m] + "</span>") +
+        (yearsAsDropdown ? yearSelect(y)
+          : '<span class="shad-calendar__label">' + y + "</span>") +
+        "</div>";
+    }
+
     function render() {
       const y = view.getFullYear(), m = view.getMonth();
       const today = new Date();
@@ -65,8 +128,7 @@
 
       let html = '<div class="shad-calendar__header">' +
         '<button type="button" class="shad-calendar__nav" data-nav="-1" aria-label="Previous month">' + CHEV_L + "</button>" +
-        '<div class="shad-calendar__label" aria-live="polite" id="' + labelId + '">' +
-        MONTHS[m] + " " + y + "</div>" +
+        caption(y, m) +
         '<button type="button" class="shad-calendar__nav" data-nav="1" aria-label="Next month">' + CHEV_R + "</button>" +
         "</div>";
       html += '<table class="shad-calendar__grid" role="grid" aria-labelledby="' + labelId + '"><thead><tr>';
@@ -159,6 +221,24 @@
       const day = ev.target.closest(".shad-calendar__day");
       if (day && !day.hasAttribute("data-disabled")) pick(parse(day.getAttribute("data-date")));
     }
+    function onChange(ev) {
+      const sel = ev.target.closest(".shad-calendar__dropdown");
+      if (!sel) return;
+      const which = sel.getAttribute("data-caption");
+      const n = parseInt(sel.value, 10);
+      // Clamp the day-of-month implicitly: view is always the 1st.
+      if (which === "month") view = new Date(view.getFullYear(), n, 1);
+      else view = new Date(n, view.getMonth(), 1);
+      // A year change can land on a month that min/max excludes entirely.
+      if (minDate && new Date(view.getFullYear(), view.getMonth() + 1, 0) < minDate) {
+        view = new Date(minDate.getFullYear(), minDate.getMonth(), 1);
+      } else if (maxDate && view > maxDate) {
+        view = new Date(maxDate.getFullYear(), maxDate.getMonth(), 1);
+      }
+      render();
+      const again = root.querySelector('.shad-calendar__dropdown[data-caption="' + which + '"]');
+      if (again) again.focus({ preventScroll: true });
+    }
     function onKeydown(ev) {
       if (!ev.target.closest(".shad-calendar__day")) return;
       switch (ev.key) {
@@ -192,6 +272,7 @@
 
     const labelId = shad.uid("cal-label");
     root.addEventListener("click", onClick);
+    root.addEventListener("change", onChange);
     root.addEventListener("keydown", onKeydown);
     root.addEventListener("pointerover", onPointerOver);
     render();
@@ -226,6 +307,7 @@
       },
       destroy() {
         root.removeEventListener("click", onClick);
+        root.removeEventListener("change", onChange);
         root.removeEventListener("keydown", onKeydown);
         root.removeEventListener("pointerover", onPointerOver);
       }

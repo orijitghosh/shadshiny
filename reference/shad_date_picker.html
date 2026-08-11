@@ -72,6 +72,8 @@ popover. Value contract is identical to <code><a href="shad_calendar.html">shad_
 <span>  min <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  presets <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  caption_layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"label"</span>, <span class="st">"dropdown"</span>, <span class="st">"dropdown-months"</span>, <span class="st">"dropdown-years"</span><span class="op">)</span>,</span>
+<span>  year_range <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  disabled <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  width <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  class <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -115,6 +117,19 @@ keyword (<code>"today"</code>, <code>"yesterday"</code>, <code>"this-week"</code
 <code>"last-month"</code>, <code>"this-year"</code>), an integer <code>N</code> meaning the last <code>N</code> days,
 or a length-2 <code>Date</code> vector giving an explicit start and end.
 <code><a href="shad_date_presets.html">shad_date_presets()</a></code> returns a ready-made set.</p></dd>
+
+
+<dt id="arg-caption-layout">caption_layout<a class="anchor" aria-label="anchor" href="#arg-caption-layout"></a></dt>
+<dd><p>Header style: <code>"label"</code> (default, month and year as
+text), <code>"dropdown"</code> (both as selects), <code>"dropdown-months"</code> or
+<code>"dropdown-years"</code>. Use a dropdown when the user has to travel years, such
+as a date of birth.</p></dd>
+
+
+<dt id="arg-year-range">year_range<a class="anchor" aria-label="anchor" href="#arg-year-range"></a></dt>
+<dd><p>Length-2 numeric bounding the year dropdown, e.g.
+<code>c(1900, 2025)</code>. Defaults to the years of <code>min</code>/<code>max</code> when given, otherwise
+100 years back and 10 forward.</p></dd>
 
 
 <dt id="arg-disabled">disabled<a class="anchor" aria-label="anchor" href="#arg-disabled"></a></dt>
@@ -183,6 +198,20 @@ or a length-2 <code>Date</code> vector giving an explicit start and end.
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div class="shad-date-picker__content shad-anim-pop" hidden&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div class="shad-calendar" data-shad="calendar" data-mode="range" data-week-start="1"&gt;&lt;/div&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/div&gt;</span>
+<span class="r-in"><span><span class="fu">shad_date_picker</span><span class="op">(</span><span class="st">"dob"</span>, label <span class="op">=</span> <span class="st">"Date of birth"</span>, caption_layout <span class="op">=</span> <span class="st">"dropdown"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div class="shad-form-field" data-shad="form-field"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;label class="shad-label"&gt;Date of birth&lt;/label&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div class="shad-date-picker" data-shad="date-picker" id="dob"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;button type="button" class="shad-date-picker__trigger" data-placeholder&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M8 2v4"/&gt;&lt;path d="M16 2v4"/&gt;&lt;rect width="18" height="18" x="3" y="4" rx="2"/&gt;&lt;path d="M3 10h18"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;span class="shad-date-picker__value"&gt;Pick a date&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div class="shad-date-picker__content shad-anim-pop" hidden&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div class="shad-calendar" data-shad="calendar" data-mode="single" data-week-start="0" data-caption-layout="dropdown"&gt;&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;p class="shad-form-field__error" hidden&gt;&lt;/p&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/div&gt;</span>
 </code></pre></div>
     </div>

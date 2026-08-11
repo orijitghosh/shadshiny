@@ -23,6 +23,51 @@
   font-weight: var(--shad-font-weight-medium);
   font-size: var(--shad-text-sm);
 }
+.shad-calendar__caption {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+}
+.shad-calendar__dropdown-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.shad-calendar__caret {
+  position: absolute;
+  right: var(--shad-space-1);
+  width: 0.875rem;
+  height: 0.875rem;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.shad-calendar__dropdown {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0 calc(var(--shad-space-1) + 0.875rem) 0 var(--shad-space-2);
+  height: 1.75rem;
+  border: 1px solid transparent;
+  border-radius: var(--shad-radius-md);
+  background-color: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: var(--shad-text-sm);
+  font-weight: var(--shad-font-weight-medium);
+  line-height: 1.75rem;
+  cursor: pointer;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-calendar__dropdown:hover { background-color: var(--shad-accent); }
+.shad-calendar__dropdown:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+/* The popup list is UA-drawn; give it readable colors in dark mode. */
+.shad-calendar__dropdown option {
+  background-color: var(--shad-popover);
+  color: var(--shad-popover-foreground);
+}
 .shad-calendar__nav {
   display: inline-flex;
   align-items: center;

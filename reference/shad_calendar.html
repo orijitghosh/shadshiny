@@ -73,6 +73,8 @@ attributes. <code>input$&lt;inputId&gt;</code> is a <code>Date</code> (single) o
 <span>  min <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  max <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  month <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  caption_layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"label"</span>, <span class="st">"dropdown"</span>, <span class="st">"dropdown-months"</span>, <span class="st">"dropdown-years"</span><span class="op">)</span>,</span>
+<span>  year_range <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  week_starts_on <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  disabled <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  class <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -102,7 +104,21 @@ attributes. <code>input$&lt;inputId&gt;</code> is a <code>Date</code> (single) o
 
 
 <dt id="arg-month">month<a class="anchor" aria-label="anchor" href="#arg-month"></a></dt>
-<dd><p>Initially displayed month (<code>Date</code> or <code>"YYYY-MM"</code>); advisory.</p></dd>
+<dd><p>Initially displayed month (<code>Date</code> or <code>"YYYY-MM"</code>). Sets the
+month the grid opens on without selecting anything.</p></dd>
+
+
+<dt id="arg-caption-layout">caption_layout<a class="anchor" aria-label="anchor" href="#arg-caption-layout"></a></dt>
+<dd><p>Header style: <code>"label"</code> (default, month and year as
+text), <code>"dropdown"</code> (both as selects), <code>"dropdown-months"</code> or
+<code>"dropdown-years"</code>. Use a dropdown when the user has to travel years, such
+as a date of birth.</p></dd>
+
+
+<dt id="arg-year-range">year_range<a class="anchor" aria-label="anchor" href="#arg-year-range"></a></dt>
+<dd><p>Length-2 numeric bounding the year dropdown, e.g.
+<code>c(1900, 2025)</code>. Defaults to the years of <code>min</code>/<code>max</code> when given, otherwise
+100 years back and 10 forward.</p></dd>
 
 
 <dt id="arg-week-starts-on">week_starts_on<a class="anchor" aria-label="anchor" href="#arg-week-starts-on"></a></dt>
@@ -152,6 +168,8 @@ attributes. <code>input$&lt;inputId&gt;</code> is a <code>Date</code> (single) o
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div class="shad-calendar" data-shad="calendar" id="day" data-mode="single" data-value="2026-08-11" data-week-start="0"&gt;&lt;/div&gt;</span>
 <span class="r-in"><span><span class="fu">shad_calendar</span><span class="op">(</span><span class="st">"range"</span>, mode <span class="op">=</span> <span class="st">"range"</span>, week_starts_on <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div class="shad-calendar" data-shad="calendar" id="range" data-mode="range" data-week-start="1"&gt;&lt;/div&gt;</span>
+<span class="r-in"><span><span class="fu">shad_calendar</span><span class="op">(</span><span class="st">"dob"</span>, caption_layout <span class="op">=</span> <span class="st">"dropdown"</span>, year_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1900</span>, <span class="fl">2025</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div class="shad-calendar" data-shad="calendar" id="dob" data-mode="single" data-week-start="0" data-caption-layout="dropdown" data-from-year="1900" data-to-year="2025"&gt;&lt;/div&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

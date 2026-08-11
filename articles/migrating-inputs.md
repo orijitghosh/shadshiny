@@ -37,7 +37,7 @@ markup, that is noted too.
 | [`varSelectInput()`](https://rdrr.io/pkg/shiny/man/varSelectInput.html) | [`shad_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_select.md) / [`shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/shad_combobox.md) | restyle | Feed `choices = names(data)` yourself. |
 | [`sliderInput()`](https://rdrr.io/pkg/shiny/man/sliderInput.html) | [`shad_slider()`](https://orijitghosh.github.io/shadshiny/reference/shad_slider.md) | drop-in | Two-element `value` makes it a range. |
 | [`sliderInput()`](https://rdrr.io/pkg/shiny/man/sliderInput.html) (range) | `shad_slider(value = c(lo, hi))` | drop-in | Returns a length-2 numeric. |
-| [`dateInput()`](https://rdrr.io/pkg/shiny/man/dateInput.html) | [`shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_picker.md) | drop-in | Value is an ISO `"YYYY-MM-DD"` string. |
+| [`dateInput()`](https://rdrr.io/pkg/shiny/man/dateInput.html) | [`shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_picker.md) | drop-in | Value is an ISO `"YYYY-MM-DD"` string. `caption_layout = "dropdown"` gives the month/year selects that [`dateInput()`](https://rdrr.io/pkg/shiny/man/dateInput.html) has by default. |
 | [`dateRangeInput()`](https://rdrr.io/pkg/shiny/man/dateRangeInput.html) | `shad_date_picker(mode = "range")` | drop-in | Value is `list(start, end)`. |
 | — (calendar surface) | [`shad_calendar()`](https://orijitghosh.github.io/shadshiny/reference/shad_calendar.md) | new | Inline month grid; `input$id` is the picked date. |
 | — (segmented code) | [`shad_input_otp()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_otp.md) | new | One-time-code entry; no base analogue. |

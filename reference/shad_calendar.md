@@ -14,6 +14,8 @@ shad_calendar(
   min = NULL,
   max = NULL,
   month = NULL,
+  caption_layout = c("label", "dropdown", "dropdown-months", "dropdown-years"),
+  year_range = NULL,
   week_starts_on = 0,
   disabled = FALSE,
   class = NULL,
@@ -42,7 +44,21 @@ shad_calendar(
 
 - month:
 
-  Initially displayed month (`Date` or `"YYYY-MM"`); advisory.
+  Initially displayed month (`Date` or `"YYYY-MM"`). Sets the month the
+  grid opens on without selecting anything.
+
+- caption_layout:
+
+  Header style: `"label"` (default, month and year as text),
+  `"dropdown"` (both as selects), `"dropdown-months"` or
+  `"dropdown-years"`. Use a dropdown when the user has to travel years,
+  such as a date of birth.
+
+- year_range:
+
+  Length-2 numeric bounding the year dropdown, e.g. `c(1900, 2025)`.
+  Defaults to the years of `min`/`max` when given, otherwise 100 years
+  back and 10 forward.
 
 - week_starts_on:
 
@@ -91,4 +107,6 @@ shad_calendar("day", value = Sys.Date())
 #> <div class="shad-calendar" data-shad="calendar" id="day" data-mode="single" data-value="2026-08-11" data-week-start="0"></div>
 shad_calendar("range", mode = "range", week_starts_on = 1)
 #> <div class="shad-calendar" data-shad="calendar" id="range" data-mode="range" data-week-start="1"></div>
+shad_calendar("dob", caption_layout = "dropdown", year_range = c(1900, 2025))
+#> <div class="shad-calendar" data-shad="calendar" id="dob" data-mode="single" data-week-start="0" data-caption-layout="dropdown" data-from-year="1900" data-to-year="2025"></div>
 ```

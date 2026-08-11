@@ -64,8 +64,8 @@ shad_fmt_number(digits = 2, prefix = "$")
 #>         suffix))
 #>     .cell_num(disp, num)
 #> }
-#> <bytecode: 0x5572ab5e56c8>
-#> <environment: 0x5572b0af3910>
+#> <bytecode: 0x557fd1d87f78>
+#> <environment: 0x557fd2dc1760>
 #> attr(,"class")
 #> [1] "shad_fmt"
 shad_fmt_percent(digits = 1)
@@ -76,8 +76,8 @@ shad_fmt_percent(digits = 1)
 #>         num, format = "f", digits = digits), "%"))
 #>     .cell_num(disp, num)
 #> }
-#> <bytecode: 0x5572b0bc53d0>
-#> <environment: 0x5572b0b6d5f8>
+#> <bytecode: 0x557fd2df0420>
+#> <environment: 0x557fd2df3568>
 #> attr(,"class")
 #> [1] "shad_fmt"
 shad_fmt_date("%b %d, %Y")
@@ -89,8 +89,8 @@ shad_fmt_date("%b %d, %Y")
 #>     disp <- ifelse(is.na(d), NA_character_, format(d, format))
 #>     .cell_num(disp, as.numeric(d))
 #> }
-#> <bytecode: 0x5572b0b2f578>
-#> <environment: 0x5572b0b2e778>
+#> <bytecode: 0x557fd2e22618>
+#> <environment: 0x557fd2e21818>
 #> attr(,"class")
 #> [1] "shad_fmt"
 shad_fmt_badge(c(active = "default", failed = "destructive"))
@@ -107,8 +107,8 @@ shad_fmt_badge(c(active = "default", failed = "destructive"))
 #>         list(html = html, text = v, sort = v)
 #>     })
 #> }
-#> <bytecode: 0x5572b0bf81e8>
-#> <environment: 0x5572b0bf9f80>
+#> <bytecode: 0x557fd2e7afa0>
+#> <environment: 0x557fd2e7cd70>
 #> attr(,"class")
 #> [1] "shad_fmt"
 ```

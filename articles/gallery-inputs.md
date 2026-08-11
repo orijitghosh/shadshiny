@@ -242,6 +242,22 @@ Code
     shad_date_picker("due", label = "Due date", placeholder = "Pick a date")
     shad_date_picker("span", label = "Trip", mode = "range", placeholder = "Start – end")
 
+The header steps one month at a time, which is fine for a due date and
+painful for a birth date. `caption_layout = "dropdown"` swaps the month
+and year for selects, and `year_range` bounds the year list (defaults:
+the years of `min`/`max`, else 100 back and 10 forward).
+
+Date of birth
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik04IDJ2NCIgLz48cGF0aCBkPSJNMTYgMnY0IiAvPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iNCIgcng9IjIiIC8+PHBhdGggZD0iTTMgMTBoMTgiIC8+PC9zdmc+)Pick
+a date
+
+Code
+
+
+    shad_date_picker("dob", label = "Date of birth", caption_layout = "dropdown", year_range = c(1900, 2026))
+    shad_calendar("born", month = "1993-06", caption_layout = "dropdown-years", year_range = c(1900, 2026))
+
 ## Form field & input group
 
 [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md)

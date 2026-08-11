@@ -55,9 +55,10 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="shadshiny-development-version">shadshiny (development version)<a class="anchor" aria-label="anchor" href="#shadshiny-development-version"></a></h2>
-<ul><li>Assets now ship as one minified stylesheet and one minified script (<code>inst/assets/dist</code>), built by <code>npm run build:assets</code>. A page used to carry ~145 tags and 1.3 MB of source; it now carries 2 tags and 274 kB. Set <code>options(shadshiny.assets = "source")</code> to load the per-component files when debugging. Node is still not needed to install or use the package.</li>
-<li>
-<code>tools/audit-registry.R</code> diffs the port against the live shadcn/ui registry. Running it corrected the README component markers: upstream now ships <code>native-select</code> and the chat primitives, which shadshiny had listed as its own additions.</li>
+<ul><li><p><code><a href="../reference/shad_calendar.html">shad_calendar()</a></code> and <code><a href="../reference/shad_date_picker.html">shad_date_picker()</a></code> gain <code>caption_layout</code> and <code>year_range</code>. The header previously stepped one month per click, so reaching a distant year meant hundreds of clicks (Shift+PageUp/Down was the only jump, and only from the keyboard). <code>caption_layout = "dropdown"</code> renders the month and year as selects, matching shadcn/ui’s <code>captionLayout</code>; <code>"dropdown-months"</code> and <code>"dropdown-years"</code> pick one of the two.</p></li>
+<li><p><code>shad_calendar(month =)</code> now works. It set <code>data-month</code> but the browser code never read it, so the argument was silently ignored.</p></li>
+<li><p>Assets now ship as one minified stylesheet and one minified script (<code>inst/assets/dist</code>), built by <code>npm run build:assets</code>. A page used to carry ~145 tags and 1.3 MB of source; it now carries 2 tags and 274 kB. Set <code>options(shadshiny.assets = "source")</code> to load the per-component files when debugging. Node is still not needed to install or use the package.</p></li>
+<li><p><code>tools/audit-registry.R</code> diffs the port against the live shadcn/ui registry. Running it corrected the README component markers: upstream now ships <code>native-select</code> and the chat primitives, which shadshiny had listed as its own additions.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="shadshiny-020">shadshiny 0.2.0<a class="anchor" aria-label="anchor" href="#shadshiny-020"></a></h2>

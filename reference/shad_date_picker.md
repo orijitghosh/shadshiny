@@ -17,6 +17,8 @@ shad_date_picker(
   min = NULL,
   max = NULL,
   presets = NULL,
+  caption_layout = c("label", "dropdown", "dropdown-months", "dropdown-years"),
+  year_range = NULL,
   disabled = FALSE,
   width = NULL,
   class = NULL,
@@ -61,6 +63,19 @@ shad_date_picker(
   days, or a length-2 `Date` vector giving an explicit start and end.
   [`shad_date_presets()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_presets.md)
   returns a ready-made set.
+
+- caption_layout:
+
+  Header style: `"label"` (default, month and year as text),
+  `"dropdown"` (both as selects), `"dropdown-months"` or
+  `"dropdown-years"`. Use a dropdown when the user has to travel years,
+  such as a date of birth.
+
+- year_range:
+
+  Length-2 numeric bounding the year dropdown, e.g. `c(1900, 2025)`.
+  Defaults to the years of `min`/`max` when given, otherwise 100 years
+  back and 10 forward.
 
 - disabled:
 
@@ -128,5 +143,19 @@ shad_date_picker("range", mode = "range")
 #>   <div class="shad-date-picker__content shad-anim-pop" hidden>
 #>     <div class="shad-calendar" data-shad="calendar" data-mode="range" data-week-start="1"></div>
 #>   </div>
+#> </div>
+shad_date_picker("dob", label = "Date of birth", caption_layout = "dropdown")
+#> <div class="shad-form-field" data-shad="form-field">
+#>   <label class="shad-label">Date of birth</label>
+#>   <div class="shad-date-picker" data-shad="date-picker" id="dob">
+#>     <button type="button" class="shad-date-picker__trigger" data-placeholder>
+#>       <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+#>       <span class="shad-date-picker__value">Pick a date</span>
+#>     </button>
+#>     <div class="shad-date-picker__content shad-anim-pop" hidden>
+#>       <div class="shad-calendar" data-shad="calendar" data-mode="single" data-week-start="0" data-caption-layout="dropdown"></div>
+#>     </div>
+#>   </div>
+#>   <p class="shad-form-field__error" hidden></p>
 #> </div>
 ```

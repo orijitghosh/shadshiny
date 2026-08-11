@@ -462,6 +462,33 @@ embeds the same calendar inline.</p>
 </pre>
 </details>
 </div>
+<p>The header steps one month at a time, which is fine for a due date
+and painful for a birth date. <code>caption_layout = "dropdown"</code>
+swaps the month and year for selects, and <code>year_range</code> bounds
+the year list (defaults: the years of <code>min</code>/<code>max</code>,
+else 100 back and 10 forward).</p>
+<div class="shad-demo">
+<div class="shad-demo__stage shad-demo__stage--center">
+<div class="shad-form-field" data-shad="form-field">
+<label class="shad-label">Date of birth</label>
+<div class="shad-date-picker" data-shad="date-picker" id="dob">
+<button type="button" class="shad-date-picker__trigger" data-placeholder>
+<svg class="shad-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg><span class="shad-date-picker__value">Pick a date</span>
+</button>
+<div class="shad-date-picker__content shad-anim-pop" hidden>
+<div class="shad-calendar" data-shad="calendar" data-mode="single" data-week-start="0" data-caption-layout="dropdown" data-from-year="1900" data-to-year="2026"></div>
+</div>
+</div>
+<p class="shad-form-field__error" hidden></p>
+</div>
+<div class="shad-calendar" data-shad="calendar" id="born" data-mode="single" data-week-start="0" data-month="1993-06" data-caption-layout="dropdown-years" data-from-year="1900" data-to-year="2026"></div>
+</div>
+<details class="shad-demo__code"><summary>Code</summary><pre>
+<code class="language-r"><span><span class="fu"><a href="../reference/shad_date_picker.html">shad_date_picker</a></span><span class="op">(</span><span class="st">"dob"</span>, label <span class="op">=</span> <span class="st">"Date of birth"</span>, caption_layout <span class="op">=</span> <span class="st">"dropdown"</span>, year_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1900</span>, <span class="fl">2026</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/shad_calendar.html">shad_calendar</a></span><span class="op">(</span><span class="st">"born"</span>, month <span class="op">=</span> <span class="st">"1993-06"</span>, caption_layout <span class="op">=</span> <span class="st">"dropdown-years"</span>, year_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1900</span>, <span class="fl">2026</span><span class="op">)</span><span class="op">)</span></span></code>
+</pre>
+</details>
+</div>
 </div>
 <div class="section level2">
 <h2 id="form-field-input-group">Form field &amp; input group<a class="anchor" aria-label="anchor" href="#form-field-input-group"></a>

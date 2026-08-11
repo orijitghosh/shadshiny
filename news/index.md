@@ -2,12 +2,26 @@
 
 ## shadshiny (development version)
 
+- [`shad_calendar()`](https://orijitghosh.github.io/shadshiny/reference/shad_calendar.md)
+  and
+  [`shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_picker.md)
+  gain `caption_layout` and `year_range`. The header previously stepped
+  one month per click, so reaching a distant year meant hundreds of
+  clicks (Shift+PageUp/Down was the only jump, and only from the
+  keyboard). `caption_layout = "dropdown"` renders the month and year as
+  selects, matching shadcn/ui’s `captionLayout`; `"dropdown-months"` and
+  `"dropdown-years"` pick one of the two.
+
+- `shad_calendar(month =)` now works. It set `data-month` but the
+  browser code never read it, so the argument was silently ignored.
+
 - Assets now ship as one minified stylesheet and one minified script
   (`inst/assets/dist`), built by `npm run build:assets`. A page used to
   carry ~145 tags and 1.3 MB of source; it now carries 2 tags and 274
   kB. Set `options(shadshiny.assets = "source")` to load the
   per-component files when debugging. Node is still not needed to
   install or use the package.
+
 - `tools/audit-registry.R` diffs the port against the live shadcn/ui
   registry. Running it corrected the README component markers: upstream
   now ships `native-select` and the chat primitives, which shadshiny had
