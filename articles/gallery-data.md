@@ -400,7 +400,8 @@ Code
 
 ## Form messaging
 
-*A shadshiny addition: no shadcn/ui counterpart.*
+*[`shad_form_summary()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_summary.md)
+is a shadshiny addition; the rest mirrors shadcn/ui’s Form messaging.*
 
 The pieces
 [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)

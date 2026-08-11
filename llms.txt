@@ -150,7 +150,7 @@ for by construction, so it goes unmarked throughout.
 |----|----|----|----|
 | `shad_input` | `shad_textarea` | `shad_checkbox` | `shad_switch` |
 | `shad_radio_group` | `shad_toggle` | `shad_toggle_group` | `shad_slider` |
-| `shad_select` | `shad_native_select` `+` | `shad_combobox` | `shad_input_otp` |
+| `shad_select` | `shad_native_select` | `shad_combobox` | `shad_input_otp` |
 | `shad_calendar` | `shad_date_picker` | `shad_form_field` | `shad_input_group` |
 | `shad_number_input` `+` | `shad_rating` `+` | `shad_dropzone` `+` |  |
 
@@ -178,15 +178,15 @@ for by construction, so it goes unmarked throughout.
 |  |  |  |  |
 |----|----|----|----|
 | `shad_data_table` | `shad_value_box` `+` | `shad_chart_container` | `shad_timeline` `+` |
-| `shad_sparkline` `+` | `shad_mini_donut` `+` | `shad_validator` `+` | `shad_form_message` `+` |
+| `shad_sparkline` `+` | `shad_mini_donut` `+` | `shad_validator` | `shad_form_message` |
 | `shad_form_summary` `+` | `shad_theme` |  |  |
 
-**Chat / AI kit** (all `+`)
+**Chat / AI kit**
 
-|                         |                |                    |               |
-|-------------------------|----------------|--------------------|---------------|
-| `shad_message`          | `shad_bubble`  | `shad_attachment`  | `shad_marker` |
-| `shad_message_scroller` | `shad_chat_ui` | `shad_chat_server` |               |
+|  |  |  |  |
+|----|----|----|----|
+| `shad_message` | `shad_bubble` | `shad_attachment` | `shad_marker` |
+| `shad_message_scroller` | `shad_chat_ui` `+` | `shad_chat_server` `+` |  |
 
 Every stateful component is namespaced-module safe and has a matching
 `update_shad_*()` server helper where it holds a value. Overlays add
@@ -599,8 +599,7 @@ Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
 ## Chat & AI kit
 
 Streaming transcript primitives — bubbles, messages, attachments,
-markers, and a stick-to-bottom scroller. Shadshiny additions, with no
-shadcn/ui counterpart.
+markers, and a stick-to-bottom scroller.
 
 - [`shad_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md)
   [`shad_message_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md)
@@ -866,8 +865,10 @@ additions, with no shadcn/ui counterpart.
 
 ## Forms & validation
 
-A server-side validator with shadcn-styled field messaging. A shadshiny
-addition; shadcn/ui validates on the client instead.
+A server-side validator with shadcn-styled field messaging. The
+shadcn/ui equivalent validates on the client;
+[`shad_form_summary()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_summary.md)
+has no counterpart at all.
 
 - [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
   : Form validator

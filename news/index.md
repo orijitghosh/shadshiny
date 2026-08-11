@@ -1,5 +1,18 @@
 # Changelog
 
+## shadshiny (development version)
+
+- Assets now ship as one minified stylesheet and one minified script
+  (`inst/assets/dist`), built by `npm run build:assets`. A page used to
+  carry ~145 tags and 1.3 MB of source; it now carries 2 tags and 274
+  kB. Set `options(shadshiny.assets = "source")` to load the
+  per-component files when debugging. Node is still not needed to
+  install or use the package.
+- `tools/audit-registry.R` diffs the port against the live shadcn/ui
+  registry. Running it corrected the README component markers: upstream
+  now ships `native-select` and the chat primitives, which shadshiny had
+  listed as its own additions.
+
 ## shadshiny 0.2.0
 
 Eleven new components and several server-side systems that turn

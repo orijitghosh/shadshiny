@@ -232,9 +232,7 @@
 </tr>
 <tr>
 <td><code>shad_select</code></td>
-<td>
-<code>shad_native_select</code> <code>+</code>
-</td>
+<td><code>shad_native_select</code></td>
 <td><code>shad_combobox</code></td>
 <td><code>shad_input_otp</code></td>
 </tr>
@@ -374,12 +372,8 @@
 <td>
 <code>shad_mini_donut</code> <code>+</code>
 </td>
-<td>
-<code>shad_validator</code> <code>+</code>
-</td>
-<td>
-<code>shad_form_message</code> <code>+</code>
-</td>
+<td><code>shad_validator</code></td>
+<td><code>shad_form_message</code></td>
 </tr>
 <tr>
 <td>
@@ -391,8 +385,15 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Chat / AI kit</strong> (all <code>+</code>)</p>
-<table class="table"><tbody>
+<p><strong>Chat / AI kit</strong></p>
+<table class="table">
+<colgroup>
+<col width="25%">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+</colgroup>
+<tbody>
 <tr>
 <td><code>shad_message</code></td>
 <td><code>shad_bubble</code></td>
@@ -401,11 +402,16 @@
 </tr>
 <tr>
 <td><code>shad_message_scroller</code></td>
-<td><code>shad_chat_ui</code></td>
-<td><code>shad_chat_server</code></td>
+<td>
+<code>shad_chat_ui</code> <code>+</code>
+</td>
+<td>
+<code>shad_chat_server</code> <code>+</code>
+</td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>Every stateful component is namespaced-module safe and has a matching <code>update_shad_*()</code> server helper where it holds a value. Overlays add <code>shad_&lt;name&gt;_open()</code> / <code>shad_&lt;name&gt;_close()</code>. Inputs that take an initial value seed it from <code><a href="https://rdrr.io/pkg/shiny/man/restoreInput.html" class="external-link">shiny::restoreInput()</a></code>, so <code><a href="https://rdrr.io/pkg/shiny/man/enableBookmarking.html" class="external-link">enableBookmarking()</a></code> restores them on reload.</p>
 </div>
 <div class="section level2">

@@ -150,8 +150,7 @@ Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
 ## Chat & AI kit
 
 Streaming transcript primitives — bubbles, messages, attachments,
-markers, and a stick-to-bottom scroller. Shadshiny additions, with no
-shadcn/ui counterpart.
+markers, and a stick-to-bottom scroller.
 
 - [`shad_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md)
   [`shad_message_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md)
@@ -417,8 +416,10 @@ additions, with no shadcn/ui counterpart.
 
 ## Forms & validation
 
-A server-side validator with shadcn-styled field messaging. A shadshiny
-addition; shadcn/ui validates on the client instead.
+A server-side validator with shadcn-styled field messaging. The
+shadcn/ui equivalent validates on the client;
+[`shad_form_summary()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_summary.md)
+has no counterpart at all.
 
 - [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
   : Form validator

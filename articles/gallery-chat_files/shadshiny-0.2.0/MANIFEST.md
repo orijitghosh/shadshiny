@@ -25,6 +25,14 @@ Dashboard (CSS-only): `mini-chart` — `sparkline` (line/area/bar/step; 0..100 v
 
 Layout (CSS-only): `layout` — `container` / `stack` / `grid` primitives (+ `grid__item` span) and the `.shad-page*` chrome behind `shad_page_sidebar()` / `shad_page_navbar()`. Every knob is a custom property set inline by the R constructor; breakpoints sm 40rem / md 48rem / lg 64rem with an outward `var()` fallback chain.
 
+## dist/
+Built by `npm run build:assets` (`tools/build-assets.mjs`) and committed, so installing the R package never needs Node.
+- `shadshiny.min.css` — every stylesheet above concatenated in load order and minified.
+- `shadshiny.min.js` — runtime, component JS and the Shiny binding, same order, minified.
+- `manifest.json` — the source list that went into each, in order. `tests/testthat/test-deps.R` compares it against `shad_asset_css_order()` / `shad_asset_js_order()` so the two orderings cannot drift.
+
+Edit the per-component sources, never `dist/`. `shadshiny_dependency()` serves the bundle when present; `options(shadshiny.assets = "source")` forces the split files.
+
 ## demo/
 - `kitchen-sink.html` — every component/variant, sticky toolbar with dark toggle (flips `.dark` + `data-bs-theme` on `<html>`) and theme-preset select (`data-shad-theme` on the page root); loads all 49 CSS + runtime + 34 JS in dependency order; `shad.autoInit()`.
 

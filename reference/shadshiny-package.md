@@ -18,11 +18,13 @@ update them from the server with the `update_shad_*()` helpers.
 
 All assets ship as a single bundled
 [htmlDependency](https://rstudio.github.io/htmltools/reference/htmlDependency.html)
-([`shadshiny_deps()`](https://orijitghosh.github.io/shadshiny/reference/shadshiny_deps.md))
-whose files load in a fixed order: tokens, base and animation CSS, then
-component CSS/JS, with the Shiny binding layer last. Every stateful
-component root carries `data-shad="<name>"`; its JS instance exposes
-`getValue()`/`setValue()` (plus
+([`shadshiny_deps()`](https://orijitghosh.github.io/shadshiny/reference/shadshiny_deps.md)):
+one minified stylesheet and one minified script, built in a fixed order
+from tokens, base and animation CSS, then component CSS/JS, with the
+Shiny binding layer last. Set `options(shadshiny.assets = "source")` to
+load the per-component files instead when debugging the CSS or JS. Every
+stateful component root carries `data-shad="<name>"`; its JS instance
+exposes `getValue()`/`setValue()` (plus
 [`open()`](https://rdrr.io/r/base/connections.html)/[`close()`](https://rdrr.io/r/base/connections.html)
 for overlays) and dispatches a bubbling `shad:change` event that the
 generic Shiny input binding subscribes to.

@@ -85,8 +85,10 @@ helpers.</p>
 
 
 <p>All assets ship as a single bundled <a href="https://rstudio.github.io/htmltools/reference/htmlDependency.html" class="external-link">htmlDependency</a>
-(<code><a href="shadshiny_deps.html">shadshiny_deps()</a></code>) whose files load in a fixed order: tokens, base and
-animation CSS, then component CSS/JS, with the Shiny binding layer last. Every
+(<code><a href="shadshiny_deps.html">shadshiny_deps()</a></code>): one minified stylesheet and one minified script, built
+in a fixed order from tokens, base and animation CSS, then component CSS/JS,
+with the Shiny binding layer last. Set <code>options(shadshiny.assets = "source")</code>
+to load the per-component files instead when debugging the CSS or JS. Every
 stateful component root carries <code>data-shad="&lt;name&gt;"</code>; its JS instance exposes
 <code>getValue()</code>/<code>setValue()</code> (plus <code><a href="https://rdrr.io/r/base/connections.html" class="external-link">open()</a></code>/<code><a href="https://rdrr.io/r/base/connections.html" class="external-link">close()</a></code> for overlays) and
 dispatches a bubbling <code>shad:change</code> event that the generic Shiny input binding
