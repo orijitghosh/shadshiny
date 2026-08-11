@@ -11,6 +11,8 @@ shad_calendar(
   min = NULL,
   max = NULL,
   month = NULL,
+  caption_layout = c("label", "dropdown", "dropdown-months", "dropdown-years"),
+  year_range = NULL,
   week_starts_on = 0,
   disabled = FALSE,
   class = NULL,
@@ -27,7 +29,17 @@ shad_calendar(
 
 \item{min, max}{Selectable bounds (inclusive), \code{Date}/character.}
 
-\item{month}{Initially displayed month (\code{Date} or \code{"YYYY-MM"}); advisory.}
+\item{month}{Initially displayed month (\code{Date} or \code{"YYYY-MM"}). Sets the
+month the grid opens on without selecting anything.}
+
+\item{caption_layout}{Header style: \code{"label"} (default, month and year as
+text), \code{"dropdown"} (both as selects), \code{"dropdown-months"} or
+\code{"dropdown-years"}. Use a dropdown when the user has to travel years, such
+as a date of birth.}
+
+\item{year_range}{Length-2 numeric bounding the year dropdown, e.g.
+\code{c(1900, 2025)}. Defaults to the years of \code{min}/\code{max} when given, otherwise
+100 years back and 10 forward.}
 
 \item{week_starts_on}{\code{0} (Sunday, default) or \code{1} (Monday).}
 
@@ -48,6 +60,7 @@ attributes. \verb{input$<inputId>} is a \code{Date} (single) or length-2 \code{D
 \examples{
 shad_calendar("day", value = Sys.Date())
 shad_calendar("range", mode = "range", week_starts_on = 1)
+shad_calendar("dob", caption_layout = "dropdown", year_range = c(1900, 2025))
 }
 \seealso{
 Other shadshiny tier-2 components:

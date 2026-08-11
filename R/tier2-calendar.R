@@ -19,7 +19,15 @@
 #'   `Date`/character (range).
 #' @param mode `"single"` (default) or `"range"`.
 #' @param min,max Selectable bounds (inclusive), `Date`/character.
-#' @param month Initially displayed month (`Date` or `"YYYY-MM"`); advisory.
+#' @param month Initially displayed month (`Date` or `"YYYY-MM"`). Sets the
+#'   month the grid opens on without selecting anything.
+#' @param caption_layout Header style: `"label"` (default, month and year as
+#'   text), `"dropdown"` (both as selects), `"dropdown-months"` or
+#'   `"dropdown-years"`. Use a dropdown when the user has to travel years, such
+#'   as a date of birth.
+#' @param year_range Length-2 numeric bounding the year dropdown, e.g.
+#'   `c(1900, 2025)`. Defaults to the years of `min`/`max` when given, otherwise
+#'   100 years back and 10 forward.
 #' @param week_starts_on `0` (Sunday, default) or `1` (Monday).
 #' @param disabled If `TRUE`, disables the control.
 #' @param class Extra CSS classes.
@@ -29,13 +37,25 @@
 #' @examples
 #' shad_calendar("day", value = Sys.Date())
 #' shad_calendar("range", mode = "range", week_starts_on = 1)
+#' shad_calendar("dob", caption_layout = "dropdown", year_range = c(1900, 2025))
 #' @export
 shad_calendar <- function(inputId, value = NULL, mode = c("single", "range"),
                           min = NULL, max = NULL, month = NULL,
+                          caption_layout = c("label", "dropdown",
+                                             "dropdown-months", "dropdown-years"),
+                          year_range = NULL,
                           week_starts_on = 0, disabled = FALSE, class = NULL,
                           ...) {
   if (!is.null(inputId)) value <- shiny::restoreInput(id = inputId, default = value)
   mode <- arg_match_shad(mode, c("single", "range"), "mode")
+  caption_layout <- arg_match_shad(
+    caption_layout,
+    c("label", "dropdown", "dropdown-months", "dropdown-years"),
+    "caption_layout"
+  )
+  if (!is.null(year_range) && length(year_range) != 2) {
+    stop("`year_range` must be a length-2 numeric vector.", call. = FALSE)
+  }
   v_start <- if (!is.null(value)) .iso_date(value[[1]]) else NULL
   v_end <- if (mode == "range" && length(value) >= 2) .iso_date(value[[2]]) else NULL
   month_attr <- if (!is.null(month)) {
@@ -53,6 +73,9 @@ shad_calendar <- function(inputId, value = NULL, mode = c("single", "range"),
     `data-max` = .iso_date(max),
     `data-week-start` = as.integer(week_starts_on),
     `data-month` = month_attr,
+    `data-caption-layout` = if (caption_layout != "label") caption_layout,
+    `data-from-year` = if (!is.null(year_range)) as.integer(year_range[[1]]),
+    `data-to-year` = if (!is.null(year_range)) as.integer(year_range[[2]]),
     `data-disabled` = flag_attr(disabled),
     ...
   ))
@@ -85,11 +108,15 @@ shad_calendar <- function(inputId, value = NULL, mode = c("single", "range"),
 #' @examples
 #' shad_date_picker("d", label = "Date")
 #' shad_date_picker("range", mode = "range")
+#' shad_date_picker("dob", label = "Date of birth", caption_layout = "dropdown")
 #' @export
 shad_date_picker <- function(inputId, label = NULL, value = NULL,
                              mode = c("single", "range"),
                              placeholder = "Pick a date", min = NULL, max = NULL,
                              presets = NULL,
+                             caption_layout = c("label", "dropdown",
+                                                "dropdown-months", "dropdown-years"),
+                             year_range = NULL,
                              disabled = FALSE, width = NULL, class = NULL, ...) {
   value <- shiny::restoreInput(id = inputId, default = value)
   mode <- arg_match_shad(mode, c("single", "range"), "mode")
@@ -101,6 +128,7 @@ shad_date_picker <- function(inputId, label = NULL, value = NULL,
   # Inner calendar is unbound (no id); the date-picker root is the Shiny input.
   cal <- shad_calendar(
     inputId = NULL, value = value, mode = mode, min = min, max = max,
+    caption_layout = caption_layout, year_range = year_range,
     week_starts_on = if (mode == "range") 1 else 0
   )
 

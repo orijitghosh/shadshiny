@@ -163,6 +163,20 @@ demo({
 })
 ```
 
+The header steps one month at a time, which is fine for a due date and painful
+for a birth date. `caption_layout = "dropdown"` swaps the month and year for
+selects, and `year_range` bounds the year list (defaults: the years of
+`min`/`max`, else 100 back and 10 forward).
+
+```{r}
+demo({
+  shad_date_picker("dob", label = "Date of birth",
+                   caption_layout = "dropdown", year_range = c(1900, 2026))
+  shad_calendar("born", month = "1993-06",
+                caption_layout = "dropdown-years", year_range = c(1900, 2026))
+})
+```
+
 ## Form field & input group
 
 `shad_form_field()` wraps any control with a label, description, required marker

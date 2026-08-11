@@ -46,7 +46,7 @@ too.
 | `varSelectInput()` | `shad_select()` / `shad_combobox()` | restyle | Feed `choices = names(data)` yourself. |
 | `sliderInput()` | `shad_slider()` | drop-in | Two-element `value` makes it a range. |
 | `sliderInput()` (range) | `shad_slider(value = c(lo, hi))` | drop-in | Returns a length-2 numeric. |
-| `dateInput()` | `shad_date_picker()` | drop-in | Value is an ISO `"YYYY-MM-DD"` string. |
+| `dateInput()` | `shad_date_picker()` | drop-in | Value is an ISO `"YYYY-MM-DD"` string. `caption_layout = "dropdown"` gives the month/year selects that `dateInput()` has by default. |
 | `dateRangeInput()` | `shad_date_picker(mode = "range")` | drop-in | Value is `list(start, end)`. |
 | — (calendar surface) | `shad_calendar()` | new | Inline month grid; `input$id` is the picked date. |
 | — (segmented code) | `shad_input_otp()` | new | One-time-code entry; no base analogue. |

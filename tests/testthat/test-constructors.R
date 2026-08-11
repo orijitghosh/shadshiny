@@ -44,6 +44,27 @@ test_that("tier 2 inputs render and expose a data-shad root", {
   }
 })
 
+test_that("calendar caption layouts and year bounds reach the markup", {
+  html <- as.character(shad_calendar("dob", month = "1993-06",
+                                     caption_layout = "dropdown",
+                                     year_range = c(1900, 2026)))
+  expect_match(html, 'data-caption-layout="dropdown"')
+  expect_match(html, 'data-from-year="1900"')
+  expect_match(html, 'data-to-year="2026"')
+  expect_match(html, 'data-month="1993-06"')
+
+  # the default layout stays attribute-free
+  expect_false(grepl("data-caption-layout", as.character(shad_calendar("plain"))))
+
+  # date-picker forwards both to its inner calendar
+  expect_match(as.character(shad_date_picker("dp2", caption_layout = "dropdown-years",
+                                             year_range = c(1900, 2026))),
+               'data-caption-layout="dropdown-years"')
+
+  expect_error(shad_calendar("bad", year_range = 1900), "length-2")
+  expect_error(shad_calendar("bad", caption_layout = "spinner"), "caption_layout")
+})
+
 test_that("text inputs use native binding, not data-shad root", {
   expect_match(as.character(shad_input("txt", label = "Name")), "<input")
   expect_match(as.character(shad_textarea("ta", label = "Bio")), "<textarea")

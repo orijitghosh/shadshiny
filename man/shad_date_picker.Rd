@@ -13,6 +13,8 @@ shad_date_picker(
   min = NULL,
   max = NULL,
   presets = NULL,
+  caption_layout = c("label", "dropdown", "dropdown-months", "dropdown-years"),
+  year_range = NULL,
   disabled = FALSE,
   width = NULL,
   class = NULL,
@@ -40,6 +42,15 @@ keyword (\code{"today"}, \code{"yesterday"}, \code{"this-week"}, \code{"this-mon
 or a length-2 \code{Date} vector giving an explicit start and end.
 \code{\link[=shad_date_presets]{shad_date_presets()}} returns a ready-made set.}
 
+\item{caption_layout}{Header style: \code{"label"} (default, month and year as
+text), \code{"dropdown"} (both as selects), \code{"dropdown-months"} or
+\code{"dropdown-years"}. Use a dropdown when the user has to travel years, such
+as a date of birth.}
+
+\item{year_range}{Length-2 numeric bounding the year dropdown, e.g.
+\code{c(1900, 2025)}. Defaults to the years of \code{min}/\code{max} when given, otherwise
+100 years back and 10 forward.}
+
 \item{disabled}{If \code{TRUE}, disables the control.}
 
 \item{width}{CSS width.}
@@ -58,6 +69,7 @@ popover. Value contract is identical to \code{\link[=shad_calendar]{shad_calenda
 \examples{
 shad_date_picker("d", label = "Date")
 shad_date_picker("range", mode = "range")
+shad_date_picker("dob", label = "Date of birth", caption_layout = "dropdown")
 }
 \seealso{
 Other shadshiny tier-2 components:
