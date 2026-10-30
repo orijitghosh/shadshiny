@@ -1,6 +1,6 @@
-# V2 shared internals ----------------------------------------------------------
+# Component icon internals ----------------------------------------------------
 
-# Inline SVG glyphs used by the V2 constructors (kept as raw markup so the R
+# Inline SVG glyphs used by component constructors (kept as raw markup so the R
 # layer emits the exact icons the design bundle ships). Each is a self-contained
 # <svg>; callers wrap with htmltools::HTML().
 .shad_svg <- list(
@@ -23,12 +23,4 @@
   raw <- .shad_svg[[name]]
   if (grepl("%s", raw, fixed = TRUE)) raw <- sprintf(raw, class %||% "")
   htmltools::HTML(raw)
-}
-
-# Coerce an `icon` argument (a shad_icon name, a tag, or NULL) to a tag.
-.resolve_icon <- function(icon) {
-  if (is.null(icon)) return(NULL)
-  if (is_tag_like(icon)) return(icon)
-  if (is.character(icon) && length(icon) == 1) return(shad_icon(icon))
-  icon
 }

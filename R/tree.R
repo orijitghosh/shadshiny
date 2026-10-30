@@ -92,7 +92,7 @@ shad_tree_item <- function(value, label, ..., icon = NULL, expanded = FALSE,
   is_branch <- length(kids) > 0 || isTRUE(lazy)
 
   icon_tag <- if (!is.null(icon)) {
-    .resolve_icon(icon)
+    resolve_icon(icon)
   } else if (is_branch) {
     .tree_folder_icon
   } else {

@@ -18,7 +18,7 @@
 .shad-command--dialog {
   position: fixed;
   top: 20%;
-  left: 50%;
+  inset-inline-start: 50%;
   transform: translateX(-50%);
   z-index: 1301;
   width: calc(100% - 2rem);
@@ -86,16 +86,19 @@
   user-select: none;
   outline: none;
   color: inherit;
-  text-align: left;
+  text-align: start;
 }
 .shad-command__item[data-highlighted] {
   background-color: var(--shad-accent);
   color: var(--shad-accent-foreground);
 }
-.shad-command__item[data-disabled] { opacity: 0.5; pointer-events: none; }
+.shad-command__item[data-disabled] {
+  color: var(--shad-muted-foreground);
+  pointer-events: none;
+}
 .shad-command__item[hidden] { display: none; }
 .shad-command__shortcut {
-  margin-left: auto;
+  margin-inline-start: auto;
   font-size: var(--shad-text-xs);
   letter-spacing: 0.1em;
   color: var(--shad-muted-foreground);

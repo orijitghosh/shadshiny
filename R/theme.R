@@ -1,4 +1,4 @@
-# Theming V2 -------------------------------------------------------------------
+# Theming ----------------------------------------------------------------------
 
 # --- OKLCH -> hex (base R; avoids a farver runtime dependency) ----------------
 # Parses "oklch(L C H)" / "oklch(L C H / a)" and returns an #rrggbb (or
@@ -44,8 +44,6 @@
   .shad_token_cache$data
 }
 
-.shad_presets_v2 <- c("slate", "stone", "blue", "green", "rose", "violet", "orange")
-
 #' Resolve theme tokens
 #'
 #' Return the resolved shadshiny design tokens for a theme preset and mode, as a
@@ -70,7 +68,7 @@ shad_tokens <- function(preset = NULL, dark = FALSE, overrides = NULL) {
   mode <- if (isTRUE(dark)) "dark" else "light"
   vals <- tk$base[[mode]]
   if (!is.null(preset)) {
-    preset <- arg_match_shad(preset, .shad_presets_v2, "preset")
+    preset <- arg_match_shad(preset, .shad_presets, "preset")
     pv <- tk$presets[[preset]][[mode]]
     if (!is.null(pv)) vals[names(pv)] <- pv
   }

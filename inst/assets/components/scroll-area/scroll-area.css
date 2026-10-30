@@ -26,12 +26,14 @@
   transition: opacity var(--shad-duration-normal) var(--shad-ease-out);
 }
 .shad-scroll-area__scrollbar[data-orientation="vertical"] {
-  top: 0; right: 0; bottom: 0;
+  inset-block: 0;
+  inset-inline-end: 0;
   width: 10px;
-  border-left: 1px solid transparent;
+  border-inline-start: 1px solid transparent;
 }
 .shad-scroll-area__scrollbar[data-orientation="horizontal"] {
-  left: 0; right: 0; bottom: 0;
+  inset-inline: 0;
+  inset-block-end: 0;
   height: 10px;
   flex-direction: column;
   border-top: 1px solid transparent;

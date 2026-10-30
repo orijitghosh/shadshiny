@@ -35,7 +35,7 @@
 }
 .shad-calendar__caret {
   position: absolute;
-  right: var(--shad-space-1);
+  inset-inline-end: var(--shad-space-1);
   width: 0.875rem;
   height: 0.875rem;
   pointer-events: none;
@@ -44,7 +44,8 @@
 .shad-calendar__dropdown {
   appearance: none;
   -webkit-appearance: none;
-  padding: 0 calc(var(--shad-space-1) + 0.875rem) 0 var(--shad-space-2);
+  padding-block: 0;
+  padding-inline: var(--shad-space-2) calc(var(--shad-space-1) + 0.875rem);
   height: 1.75rem;
   border: 1px solid transparent;
   border-radius: var(--shad-radius-md);
@@ -127,7 +128,7 @@
   position: relative;
   z-index: 1;
 }
-.shad-calendar__day[data-outside] { color: var(--shad-muted-foreground); opacity: 0.5; }
+.shad-calendar__day[data-outside] { color: var(--shad-muted-foreground); }
 .shad-calendar__day[data-today]:not([data-selected]) {
   background-color: var(--shad-accent);
   color: var(--shad-accent-foreground);
@@ -151,12 +152,12 @@
   color: var(--shad-accent-foreground);
 }
 .shad-calendar__cell[data-range-start-cell] {
-  border-top-left-radius: var(--shad-radius-md);
-  border-bottom-left-radius: var(--shad-radius-md);
+  border-start-start-radius: var(--shad-radius-md);
+  border-end-start-radius: var(--shad-radius-md);
 }
 .shad-calendar__cell[data-range-end-cell] {
-  border-top-right-radius: var(--shad-radius-md);
-  border-bottom-right-radius: var(--shad-radius-md);
+  border-start-end-radius: var(--shad-radius-md);
+  border-end-end-radius: var(--shad-radius-md);
 }
 .shad-calendar__cell[data-range-start-cell],
 .shad-calendar__cell[data-range-end-cell] { background-color: var(--shad-accent); }

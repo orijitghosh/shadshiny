@@ -9,15 +9,16 @@
 }
 .shad-drawer__content {
   position: fixed;
-  left: 0; right: 0; bottom: 0;
+  inset-inline: 0;
+  inset-block-end: 0;
   z-index: 1201;
   display: flex;
   flex-direction: column;
   gap: var(--shad-space-4);
   max-height: 90dvh;
   border-top: 1px solid var(--shad-border);
-  border-top-left-radius: var(--shad-radius-xl);
-  border-top-right-radius: var(--shad-radius-xl);
+  border-start-start-radius: var(--shad-radius-xl);
+  border-start-end-radius: var(--shad-radius-xl);
   background-color: var(--shad-background);
   color: var(--shad-foreground);
   font-family: var(--shad-font-sans);

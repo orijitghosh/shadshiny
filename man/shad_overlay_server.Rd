@@ -51,6 +51,7 @@ The open state is also available reactively as \verb{input$<id>}.
 }
 \seealso{
 Other shadshiny server API:
+\code{\link[=bind_shad_task_button]{bind_shad_task_button()}},
 \code{\link[=shad_message_scroller_to_bottom]{shad_message_scroller_to_bottom()}},
 \code{\link[=shad_remove_dialog]{shad_remove_dialog()}},
 \code{\link[=shad_show_dialog]{shad_show_dialog()}},

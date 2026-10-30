@@ -42,7 +42,7 @@
 .shad-select__value {
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: left;
+  text-align: start;
   flex: 1;
 }
 .shad-select__chevron {
@@ -100,7 +100,7 @@
   gap: var(--shad-space-2);
   width: 100%;
   padding: var(--shad-space-1_5) var(--shad-space-2);
-  padding-right: 2rem;
+  padding-inline-end: 2rem;
   border-radius: var(--shad-radius-sm);
   cursor: default;
   user-select: none;
@@ -116,7 +116,7 @@
 }
 .shad-select__item-check {
   position: absolute;
-  right: var(--shad-space-2);
+  inset-inline-end: var(--shad-space-2);
   display: none;
   width: 1rem;
   height: 1rem;

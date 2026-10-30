@@ -36,6 +36,8 @@
     content.hidden = true;
     content.setAttribute("data-state", "closed");
 
+    items().forEach((it) => it.setAttribute("role", "option"));
+
     // seed from markup
     items().forEach((it) => {
       if (it.getAttribute("data-state") === "checked") {

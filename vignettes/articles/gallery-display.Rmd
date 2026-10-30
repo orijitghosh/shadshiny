@@ -255,6 +255,25 @@ demo({
 })
 ```
 
+Keyboard shortcuts, source snippets, loading text, and long content can use the
+four utility elements below. Code is displayed as escaped text and can be
+copied without including line numbers.
+
+~~~{r}
+demo({
+  shad_kbd_group(shad_kbd("⌘"), shad_kbd("K"))
+  shad_code_block(
+    'shad_button("Run")',
+    language = "r", filename = "app.R", line_numbers = TRUE
+  )
+  shad_scroll_fade(
+    shad_p(paste(rep("Scrollable utility content.", 8), collapse = " ")),
+    axis = "vertical", style = "max-height: 6rem;"
+  )
+  shad_shimmer("Thinking...", active = TRUE)
+})
+~~~
+
 ## Typography
 
 A tuned type scale. `shad_h1()`–`shad_h4()`, `shad_p()`, `shad_lead()`,

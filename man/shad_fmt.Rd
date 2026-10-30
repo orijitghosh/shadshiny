@@ -46,6 +46,7 @@ shad_fmt_badge(c(active = "default", failed = "destructive"))
 Other shadshiny data table:
 \code{\link[=shad_col]{shad_col()}},
 \code{\link[=shad_data_table]{shad_data_table()}},
+\code{\link[=shad_data_table_server]{shad_data_table_server()}},
 \code{\link[=update_shad_data_table]{update_shad_data_table()}}
 }
 \concept{shadshiny data table}

@@ -144,6 +144,24 @@ test_that("navbar shell honours the selected tab", {
   expect_match(h, 'data-value="b"')
 })
 
+test_that("page_shad preserves direction and language attributes", {
+  page <- page_shad(dir = "rtl", lang = "ar", shad_p("مرحبا"))
+  h <- html(page)
+  expect_match(h, 'dir="rtl"')
+  expect_identical(attr(page, "lang"), "ar")
+  # These are attributes through `...`, not new public formals.
+  expect_false("dir" %in% names(formals(page_shad)))
+})
+
+test_that("mixed-direction content can opt into automatic direction", {
+  message_html <- html(shad_message(htmltools::tags$span(
+    dir = "auto", "שלום / English")))
+  table_html <- html(shad_data_table(
+    "mixed", data.frame(label = "שלום / English"), dir = "auto"))
+  expect_match(message_html, 'dir="auto"')
+  expect_match(table_html, 'dir="auto"')
+})
+
 # --- CSS contract -------------------------------------------------------------
 
 test_that("each primitive resets its own custom properties", {

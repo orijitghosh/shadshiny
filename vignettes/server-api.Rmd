@@ -35,12 +35,21 @@ update_shad_calendar("day", value = Sys.Date())
 update_shad_date_picker("due", value = Sys.Date() + 7)
 update_shad_tabs("tabs", selected = "billing")
 update_shad_accordion("faq", value = "shipping")
+update_shad_collapsible("details", open = TRUE)
 update_shad_pagination("pager", selected = 2)
 update_shad_carousel("gallery", selected = 3)
+update_shad_resizable("split", sizes = c(35, 65))
 update_shad_sidebar("shell", collapsed = TRUE)
 update_shad_progress("upload", value = 80)
 update_shad_button("save", loading = TRUE)         # or disabled=, label=
 update_shad_command("palette", items = c("Recent: Q3.pdf" = "q3"))
+```
+
+Set or clear an error on the `shad_form_field()` wrapping a control directly:
+
+```{r}
+update_shad_form_field("email", "Enter a valid email address.")
+update_shad_form_field("email", NULL)
 ```
 
 **The one exception: text inputs.** `shad_input()` and `shad_textarea()` render
@@ -151,6 +160,59 @@ shad_toast_dismiss(id)     # or shad_toast_dismiss() to clear all
 > }, delay = 2)
 > ```
 
+## Binding an ExtendedTask to a button
+
+`bind_shad_task_button()` is a presentation binding for an
+application-owned `shiny::ExtendedTask`. It observes `task$status()` and
+calls `update_shad_button()` for the four supported states:
+
+| Task status | Button presentation |
+|-------------|---------------------|
+| `initial` | enabled, not loading |
+| `running` | loading, disabled, `label_busy` |
+| `success` | enabled, optional `label_success` |
+| `error` | enabled, optional `label_error` |
+
+The task still belongs to the application. The helper does not invoke it, call
+`task$result()`, create a worker, or choose an asynchronous backend. It returns
+the observer invisibly and destroys that observer when the session ends.
+
+```{r}
+task <- shiny::ExtendedTask$new(function(value) {
+  expensive_work(value)  # return a promise-compatible result
+})
+
+bind_shad_task_button(
+  task, "run", label_busy = "Working...", label_success = "Complete",
+  label_error = "Try again", session = session
+)
+
+observeEvent(input$run, task$invoke(input$value), ignoreInit = TRUE)
+```
+
+The async function can be supplied by an optional application dependency. Keep
+those choices outside shadshiny's imports and guard them when writing reusable
+application examples:
+
+```{r}
+if (requireNamespace("mirai", quietly = TRUE)) {
+  task <- shiny::ExtendedTask$new(function(value) {
+    mirai::mirai({ expensive_work(value) }, value = value)
+  })
+}
+
+if (requireNamespace("promises", quietly = TRUE) &&
+    requireNamespace("future", quietly = TRUE)) {
+  task <- shiny::ExtendedTask$new(function(value) {
+    promises::future_promise(expensive_work(value))
+  })
+}
+```
+
+These examples intentionally leave task creation, worker policy, error
+handling, and result rendering to the application. `bind_shad_task_button()`
+only translates the reactive lifecycle into button state.
+
 ## The command palette from the server
 
 `shad_command_palette()` opens on ⌘K, from `shad_command_trigger()`, or from
@@ -207,17 +269,19 @@ are worth calling out:
 
 shadshiny inputs work with Shiny's
 [bookmarking](https://shiny.posit.co/r/articles/share/bookmarking-state/). Turn
-it on with `enableBookmarking("url")` (or `"server"`); each stateful input
-seeds its initial value from `shiny::restoreInput()`, so a restored link
-reopens with the saved selections in place — text and text areas, checkboxes,
-switches, sliders, toggles and toggle groups, radio groups, all three selects
-(`shad_select()`, `shad_native_select()`, `shad_combobox()`), calendars and
-date pickers, accordions, pagination, and tabs.
+it on with `enableBookmarking("url")` (or `"server"`). Components with a
+meaningful constructor initial value seed it through `shiny::restoreInput()`;
+the package's strict, source-derived component-contract test keeps that set in
+sync as inputs evolve. This includes input OTP values and collapsible open
+state as well as the standard text, choice, date, navigation, and numeric
+controls.
 
-A handful of components take no initial-value argument and so are **saved but
-not seeded back** on restore: the overlays' open state, `shad_input_otp()`,
-`shad_carousel()`, and `shad_sidebar()`. Restore those by hand in an
-`onRestored()` observer if you need them.
+Some state is intentionally not seeded from a single constructor value:
+transient overlay visibility; event-only menu, command, and navigation-menu
+activity; action-button counts and browser-security-constrained file uploads;
+and composite carousel, sidebar, resizable, or data-table state. Restore any
+application-specific version of that state explicitly in an `onRestored()`
+observer, using the component's updater or imperative helper when one exists.
 
 ## Gotchas checklist
 

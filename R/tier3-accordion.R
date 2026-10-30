@@ -80,11 +80,13 @@ shad_accordion_item <- function(value, title, ...) {
 #' @param class Extra CSS classes.
 #' @returns A collapsible tag.
 #' @family shadshiny tier-3 components
+#' @seealso [update_shad_collapsible()]
 #' @examples
 #' shad_collapsible("c", trigger = shad_button("Toggle"), "Hidden content",
 #'                  open = TRUE)
 #' @export
 shad_collapsible <- function(inputId, trigger, ..., open = FALSE, class = NULL) {
+  open <- shiny::restoreInput(id = inputId, default = open)
   with_deps(htmltools::tags$div(
     class = if (!is.null(class)) class else NULL,
     `data-shad` = "collapsible", id = inputId, `data-open` = flag_attr(open),

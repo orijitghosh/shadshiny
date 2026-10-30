@@ -25,6 +25,21 @@ test_that("tier 1 display constructors render", {
   expect_renders(shad_h1("Title"))
 })
 
+test_that("manual table composition retains every public section helper", {
+  html <- as.character(shad_table(
+    shad_table_caption("Quarterly totals"),
+    shad_table_header(shad_table_row(shad_table_head("Quarter"))),
+    shad_table_body(shad_table_row(shad_table_cell("Q1"))),
+    shad_table_footer(shad_table_row(shad_table_cell("Total"))),
+    x = NULL
+  ))
+
+  expect_match(html, "<thead")
+  expect_match(html, '<th[^>]*scope="col"')
+  expect_match(html, "<tfoot")
+  expect_match(html, "<caption")
+})
+
 test_that("tier 2 inputs render and expose a data-shad root", {
   binders <- list(
     shad_checkbox("chk", label = "Accept"),
@@ -42,6 +57,19 @@ test_that("tier 2 inputs render and expose a data-shad root", {
     html <- as.character(b)
     expect_match(html, "data-shad", info = html)
   }
+})
+
+test_that("toggle-group items retain icon and disabled metadata", {
+  html <- as.character(shad_toggle_group(
+    "tools",
+    choices = list(shad_toggle_group_item(
+      "add", label = "Add", icon = "plus", disabled = TRUE
+    ))
+  ))
+
+  expect_match(html, 'data-value="add"')
+  expect_match(html, "shad-icon")
+  expect_match(html, "disabled")
 })
 
 test_that("calendar caption layouts and year bounds reach the markup", {
@@ -148,6 +176,19 @@ test_that("tier 3 overlays and structure render", {
   expect_renders(shad_tooltip(trigger = shad_button("Hover"), content = "Tip"))
   expect_renders(shad_dropdown_menu("dm", trigger = shad_button("Menu"),
                                     shad_menu_item("a", "Item A")))
+  expect_renders(shad_collapsible(
+    "col", trigger = shad_button("Toggle"), shad_p("Body")
+  ))
+  expect_renders(shad_context_menu(
+    "ctx", target = htmltools::div("Target"),
+    shad_menu_item("open", "Open")
+  ))
+  expect_renders(shad_menubar(
+    "bar", shad_menubar_menu("File", shad_menu_item("new", "New"))
+  ))
+  expect_renders(shad_navigation_menu(
+    "nav", shad_navigation_menu_item("Docs", href = "#")
+  ))
   expect_renders(shad_command("cmd", shad_command_group(
     "Group", shad_command_item("a", "Alpha"))))
   expect_renders(shad_tabs("tabs",
@@ -157,6 +198,12 @@ test_that("tier 3 overlays and structure render", {
     shad_accordion_item("i1", "First", shad_p("a"))))
   expect_renders(shad_pagination("pg", pages = 5))
   expect_renders(shad_carousel("car", shad_carousel_item(shad_p("slide"))))
+  expect_renders(shad_resizable(
+    "split",
+    shad_resizable_panel("A", default_size = 40),
+    shad_resizable_handle(),
+    shad_resizable_panel("B", default_size = 60)
+  ))
   expect_renders(shad_sidebar_layout("sbl",
     sidebar = shad_sidebar(shad_sidebar_item("home", "Home")),
     main = shad_p("main")))

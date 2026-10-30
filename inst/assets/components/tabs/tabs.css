@@ -39,13 +39,13 @@
   border-color: var(--shad-ring);
   box-shadow: var(--shad-focus-shadow);
 }
-.shad-tabs__trigger[data-disabled] { opacity: 0.5; pointer-events: none; }
+.shad-tabs__trigger[data-disabled] { pointer-events: none; cursor: not-allowed; }
 
 /* animated indicator: JS positions it under the active trigger */
 .shad-tabs__indicator {
   position: absolute;
   top: 3px;
-  left: 0;
+  inset-inline-start: 0;
   height: calc(100% - 6px);
   border-radius: var(--shad-radius-md);
   background-color: var(--shad-background);

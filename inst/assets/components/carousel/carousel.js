@@ -90,8 +90,13 @@
     function onPrev() { goTo(index - 1); }
     function onNext() { goTo(index + 1); }
     function onKeydown(ev) {
-      if (ev.key === "ArrowLeft") { ev.preventDefault(); onPrev(); }
-      if (ev.key === "ArrowRight") { ev.preventDefault(); onNext(); }
+      const rtl = shad.util.direction(root) === "rtl";
+      if (ev.key === "ArrowLeft") {
+        ev.preventDefault(); rtl ? onNext() : onPrev();
+      }
+      if (ev.key === "ArrowRight") {
+        ev.preventDefault(); rtl ? onPrev() : onNext();
+      }
     }
 
     viewport.addEventListener("scroll", onScroll, { passive: true });

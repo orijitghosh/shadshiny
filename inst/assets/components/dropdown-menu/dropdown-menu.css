@@ -32,7 +32,7 @@
   user-select: none;
   outline: none;
   color: inherit;
-  text-align: left;
+  text-align: start;
 }
 /* highlight follows data-highlighted (set on pointermove/arrow), never :hover */
 .shad-menu__item[data-highlighted] {
@@ -52,11 +52,11 @@
 /* checkbox/radio items: indicator gutter */
 .shad-menu__item[data-type="checkbox"],
 .shad-menu__item[data-type="radio"] {
-  padding-left: var(--shad-space-8);
+  padding-inline-start: var(--shad-space-8);
 }
 .shad-menu__indicator {
   position: absolute;
-  left: var(--shad-space-2);
+  inset-inline-start: var(--shad-space-2);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -65,7 +65,7 @@
 }
 .shad-menu__item[data-state="unchecked"] .shad-menu__indicator { visibility: hidden; }
 .shad-menu__shortcut {
-  margin-left: auto;
+  margin-inline-start: auto;
   font-size: var(--shad-text-xs);
   letter-spacing: 0.1em;
   color: var(--shad-muted-foreground);
@@ -83,7 +83,7 @@
 }
 /* submenu trigger chevron */
 .shad-menu__item[data-shad-submenu-trigger] .shad-menu__chevron {
-  margin-left: auto;
+  margin-inline-start: auto;
   width: 1rem;
   height: 1rem;
 }

@@ -46,10 +46,10 @@
   transition: opacity var(--shad-duration-fast) var(--shad-ease-out);
   z-index: 1;
 }
-.shad-carousel__prev { left: -2.75rem; }
-.shad-carousel__next { right: -2.75rem; }
-.shad-carousel--inset .shad-carousel__prev { left: var(--shad-space-2); }
-.shad-carousel--inset .shad-carousel__next { right: var(--shad-space-2); }
+.shad-carousel__prev { inset-inline-start: -2.75rem; }
+.shad-carousel__next { inset-inline-end: -2.75rem; }
+.shad-carousel--inset .shad-carousel__prev { inset-inline-start: var(--shad-space-2); }
+.shad-carousel--inset .shad-carousel__next { inset-inline-end: var(--shad-space-2); }
 .shad-carousel__prev:hover,
 .shad-carousel__next:hover { background-color: var(--shad-accent); }
 .shad-carousel__prev:focus-visible,

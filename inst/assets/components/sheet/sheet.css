@@ -33,12 +33,14 @@
   border-right: 1px solid var(--shad-border);
 }
 .shad-sheet__content[data-side="top"] {
-  top: 0; left: 0; right: 0;
+  inset-block-start: 0;
+  inset-inline: 0;
   max-height: 80dvh;
   border-bottom: 1px solid var(--shad-border);
 }
 .shad-sheet__content[data-side="bottom"] {
-  bottom: 0; left: 0; right: 0;
+  inset-block-end: 0;
+  inset-inline: 0;
   max-height: 80dvh;
   border-top: 1px solid var(--shad-border);
 }
@@ -64,7 +66,7 @@
 .shad-sheet__close {
   position: absolute;
   top: var(--shad-space-4);
-  right: var(--shad-space-4);
+  inset-inline-end: var(--shad-space-4);
   display: inline-flex;
   border: 0;
   border-radius: var(--shad-radius-sm);

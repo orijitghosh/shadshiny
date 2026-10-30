@@ -1,13 +1,16 @@
 Package: shadshiny
 Title: 'shadcn/ui' Components for 'Shiny'
-Version: 0.2.0
+Version: 0.3.0.9000
 Authors@R:
     person("Arijit", "Ghosh", email = "arijitghosh2009@gmail.com",
            role = c("aut", "cre"))
-Description: A complete port of the 'shadcn/ui' design system for 'Shiny'
-    applications: 72 accessible, themeable components -- including a
-    full-featured data table, layout and page-shell primitives, dashboard
-    value boxes, sparklines and chart theming, a server-side form validator,
+Description: A broad, experimental reimplementation of the 'shadcn/ui' design
+    system for 'Shiny' applications: 76 accessible, themeable components --
+    including semantic
+    field composition primitives and a
+    full-featured data table, questionnaire workflow, layout and page-shell primitives, dashboard
+    value boxes, sparklines and chart theming, keyboard/code/scroll/shimmer
+    utility elements, and a server-side form validator,
     custom and registry-imported themes, and a streaming chat module --
     implemented in framework-free CSS and vanilla
     JavaScript, wrapped as native R functions with 'Shiny' input bindings.
@@ -41,4 +44,4 @@ VignetteBuilder: knitr
 URL: https://github.com/orijitghosh/shadshiny,
     https://orijitghosh.github.io/shadshiny/
 BugReports: https://github.com/orijitghosh/shadshiny/issues
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0

@@ -30,8 +30,8 @@ test_that("JS load order leads with runtime and ends with the shiny binding", {
     "components/dropdown-menu/dropdown-menu.js"
   ))
   expect_identical(js[length(js)], "shiny/shadshiny-shiny.js")
-  # 36 component JS + runtime + shiny binding
-  expect_length(js, 43 + 2)
+  # 47 component JS + runtime + shiny binding
+  expect_length(js, 47 + 2)
   expect_false(any(duplicated(js)))
 })
 

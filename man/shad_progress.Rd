@@ -24,7 +24,7 @@ Defaults to \code{TRUE} when \code{value} is \code{NULL}.}
 
 \item{inputId}{Optional id (enables \code{\link[=update_shad_progress]{update_shad_progress()}}).}
 
-\item{label}{Accessible label (used for indeterminate bars).}
+\item{label}{Accessible label for the progress bar.}
 
 \item{class}{Extra CSS classes.}
 
@@ -52,10 +52,14 @@ Other shadshiny tier-1 components:
 \code{\link[=shad_button]{shad_button()}},
 \code{\link[=shad_button_group]{shad_button_group()}},
 \code{\link[=shad_card]{shad_card()}},
+\code{\link[=shad_code_block]{shad_code_block()}},
 \code{\link[=shad_empty]{shad_empty()}},
 \code{\link[=shad_item]{shad_item()}},
+\code{\link[=shad_kbd_group]{shad_kbd_group()}},
 \code{\link[=shad_label]{shad_label()}},
+\code{\link[=shad_scroll_fade]{shad_scroll_fade()}},
 \code{\link[=shad_separator]{shad_separator()}},
+\code{\link[=shad_shimmer]{shad_shimmer()}},
 \code{\link[=shad_skeleton]{shad_skeleton()}},
 \code{\link[=shad_spinner]{shad_spinner()}},
 \code{\link[=shad_table]{shad_table()}},

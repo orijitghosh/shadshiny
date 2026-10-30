@@ -25,6 +25,14 @@ test_that("a custom class overrides the default", {
   expect_match(svg, 'class="my-icon"', fixed = TRUE)
 })
 
+test_that("shad_icon escapes class and attribute values", {
+  hostile <- 'x" data-inert="marker'
+  rendered <- as.character(shad_icon("check", class = hostile, title = hostile))
+
+  expect_false(grepl(' data-inert="marker"', rendered, fixed = TRUE))
+  expect_match(rendered, "&quot;", fixed = TRUE)
+})
+
 test_that("resolve_icon accepts a name or a tag", {
   expect_match(as.character(shadshiny:::resolve_icon("check")), "svg")
   tag <- htmltools::tags$span("x")

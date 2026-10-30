@@ -40,7 +40,16 @@ test_that("bookmarked values seed each stateful constructor", {
     list("dp", "2024-03-14", quote(shad_date_picker("dp", value = as.Date("2020-01-01"))),         "data-value=\"2024-03-14\""),
     list("tb", "b",    quote(shad_tabs("tb", shad_tab("a","A","x"), shad_tab("b","B","y"), selected = "a")), "id=\"tb\" data-value=\"b\""),
     list("p",  7L,     quote(shad_pagination("p", pages = 9, selected = 1)),        "data-page=\"7\""),
-    list("ac", "s1",   quote(shad_accordion("ac", shad_accordion_item("s1","T","B"), value = NULL)), "data-value=\"s1\" data-open")
+    list("ac", "s1",   quote(shad_accordion("ac", shad_accordion_item("s1","T","B"), value = NULL)), "data-value=\"s1\" data-open"),
+    list("q", list(active = 2L, answers = list(second = "saved"),
+                   skipped = character(), complete = FALSE),
+         quote(shad_questionnaire(
+           "q",
+           shad_question("first", "First", type = "text"),
+           shad_question("second", "Second", type = "text"),
+           value = list(active = 1L)
+         )), "data-active=\"2\""),
+    list("col", TRUE,   quote(shad_collapsible("col", trigger = shad_button("Toggle"), "Body", open = FALSE)), "data-open")
   )
 
   for (case in cases) {

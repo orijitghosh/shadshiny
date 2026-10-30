@@ -108,6 +108,17 @@ shad_command_palette <- function(inputId, items = NULL, ..., hotkey = "mod+k",
 #' @param shortcut Hint shown at the end of the trigger, e.g. `"⌘K"`.
 #'   `NULL` for none.
 #' @param variant,size Passed to [shad_button()].
+#' @usage
+#' shad_command_trigger(
+#'   id,
+#'   label = "Search...",
+#'   icon = "search",
+#'   shortcut = "\u2318K",
+#'   variant = "outline",
+#'   size = "sm",
+#'   class = NULL,
+#'   ...
+#' )
 #' @export
 shad_command_trigger <- function(id, label = "Search...", icon = "search",
                                  shortcut = "\u2318K", variant = "outline",

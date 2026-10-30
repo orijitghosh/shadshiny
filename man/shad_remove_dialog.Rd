@@ -30,6 +30,7 @@ save).
 \code{\link[=shad_show_dialog]{shad_show_dialog()}}
 
 Other shadshiny server API:
+\code{\link[=bind_shad_task_button]{bind_shad_task_button()}},
 \code{\link[=shad_message_scroller_to_bottom]{shad_message_scroller_to_bottom()}},
 \code{\link{shad_overlay_server}},
 \code{\link[=shad_show_dialog]{shad_show_dialog()}},

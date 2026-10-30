@@ -51,6 +51,8 @@ shad_resizable("r",
   shad_resizable_panel("Two", default_size = 50))
 }
 \seealso{
+\code{\link[=update_shad_resizable]{update_shad_resizable()}}
+
 Other shadshiny tier-3 components:
 \code{\link[=shad_accordion]{shad_accordion()}},
 \code{\link[=shad_alert_dialog]{shad_alert_dialog()}},

@@ -1,7 +1,8 @@
 <!-- FILE: inst/assets/components/data-table/README.md -->
 # data-table (Tier 2, V2)
 
-Full shadcn Data Table over a client-side JSON row model. **Composes** `table/table.css` (load first), `checkbox/checkbox.css` (selection), `native-select/` (page size), and `dropdown-menu/` css+js (column visibility) — declare these as load-order dependencies like context-menu does.
+Full shadcn Data Table over a client-side JSON row model, with an experimental
+server-backed mode. **Composes** `table/table.css` (load first), `checkbox/checkbox.css` (selection), `native-select/` (page size), and `dropdown-menu/` css+js (column visibility) — declare these as load-order dependencies like context-menu does.
 
 ## Anatomy (JS-built from the JSON model)
 ```
@@ -51,12 +52,31 @@ Cell values: plain string/number → text-escaped by construction. Object form: 
 - **Loading**: `options.loading` or `setValue({loading:true})` renders skeleton rows; `setData(rows)` clears it.
 - **Performance**: only the current page is in the DOM; sort/filter run on the JS array. 5 000×20 verified interactive at 60 fps (sort ≈ single rAF).
 
+### Server-backed mode (experimental)
+
+`shad_data_table_server(id, source, columns = NULL, row_key = NULL, session =
+shiny::getDefaultReactiveDomain())` reuses this anatomy while keeping the full
+dataset in the server. `source(request)` receives `page`, `page_size`,
+multi-sort keys, a global filter, and named column filters. It must return a
+data frame containing at most `page_size` rows plus `total_rows` and
+`filtered_rows`. The source owns query construction and must parameterize any
+database work; the package does not provide database adapters.
+
+Server responses use the existing R cell serialization and trusted-HTML rules.
+Request IDs are monotonic and stale responses are ignored. A supplied `row_key`
+must be unique and non-missing on each page to keep selection stable across
+requests. Editing, grouping, pivoting, aggregation, downloads, and spreadsheet
+behavior remain outside this experimental mode.
+
 ## Methods / Events
 | Member | Description |
 |---|---|
-| `getValue()` | `{selected, sort, filter, page, pageSize}` |
+| `getValue()` | `{selected, sort, filter, page, pageSize}`; server mode also includes `requestId` |
 | `setValue(v)` | partial-state patch; re-renders + emits |
 | `setData(rows)` | server-pushed refresh; keeps selection keys; clears loading |
+| `enableServerMode(config)` | experimental server mode; requests the initial page |
+| `setServerPage(response)` | accepts only the current request ID and renders one page |
+| `setServerError(response)` | shows a fixed safe error and retry action |
 | `destroy()` | unbind + empty root |
 | `shad:change` | `{value}` — fires on sort/filter/page/pageSize/selection change |
 

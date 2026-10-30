@@ -55,6 +55,7 @@ shad_combobox <- function(inputId, label = NULL, choices, selected = NULL,
     it_disabled <- isTRUE(it$disabled)
     htmltools::tags$div(
       class = "shad-combobox__item",
+      role = "option",
       `data-value` = val,
       `data-state` = if (val %in% sel) "checked" else "unchecked",
       `data-disabled` = flag_attr(it_disabled),

@@ -49,7 +49,7 @@ shad_timeline_item <- function(title, ..., time = NULL, description = NULL,
                                icon = NULL, status = c("default", "active", "muted"),
                                last = FALSE, class = NULL) {
   status <- arg_match_shad(status, c("default", "active", "muted"), "status")
-  dot <- htmltools::tags$span(class = "shad-timeline__dot", .resolve_icon(icon))
+  dot <- htmltools::tags$span(class = "shad-timeline__dot", resolve_icon(icon))
   connector <- if (!isTRUE(last)) {
     htmltools::tags$span(class = "shad-timeline__connector", `aria-hidden` = "true")
   }

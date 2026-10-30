@@ -110,7 +110,7 @@
   background-color: var(--legend-color, var(--shad-chart-1));
 }
 .shad-chart-tooltip__value {
-  margin-left: auto;
+  margin-inline-start: auto;
   font-family: var(--shad-font-mono);
   font-weight: var(--shad-font-weight-medium);
   color: var(--shad-foreground);

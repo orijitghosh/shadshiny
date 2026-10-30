@@ -61,6 +61,23 @@
     isTouchPointer(ev) {
       return ev.pointerType === "touch" || ev.pointerType === "pen";
     },
+    /** Resolve the nearest explicit text direction for keyboard/layout logic. */
+    direction(el) {
+      let node = el;
+      while (node && node.nodeType === 1) {
+        const value = node.getAttribute("dir");
+        if (value && value.toLowerCase() !== "auto") {
+          return value.toLowerCase() === "rtl" ? "rtl" : "ltr";
+        }
+        node = node.parentElement;
+      }
+      const documentDirection = document.documentElement.getAttribute("dir");
+      if (documentDirection && documentDirection.toLowerCase() !== "auto") {
+        return documentDirection.toLowerCase() === "rtl" ? "rtl" : "ltr";
+      }
+      return getComputedStyle(el || document.documentElement).direction === "rtl"
+        ? "rtl" : "ltr";
+    },
     /**
      * Scroll `container` just enough to reveal `item`, and scroll NOTHING else.
      *
@@ -84,6 +101,53 @@
     },
     clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
   };
+
+  /* Delegated code copy: one document handler, safe for dynamic Shiny DOM. */
+  function wireCodeCopy() {
+    if (document.__shadCodeCopyHandler) return;
+
+    function announceCopy(button, message) {
+      const root = button.closest("[data-shad-code-block]");
+      const status = root && root.querySelector("[data-shad-copy-status], [role=status]");
+      if (!root || !status || !root.isConnected || !button.isConnected) return;
+      if (root.__shadCopyStatusTimer) clearTimeout(root.__shadCopyStatusTimer);
+      status.textContent = "";
+      status.textContent = message;
+      const timer = setTimeout(() => {
+        if (root.isConnected && status.isConnected && root.__shadCopyStatusTimer === timer) {
+          status.textContent = "";
+          delete root.__shadCopyStatusTimer;
+        }
+      }, 2000);
+      root.__shadCopyStatusTimer = timer;
+    }
+
+    async function copyCode(button) {
+      const root = button.closest("[data-shad-code-block]");
+      const code = root && root.querySelector("code");
+      if (!root || !code) return;
+      const request = (root.__shadCopyRequest || 0) + 1;
+      root.__shadCopyRequest = request;
+      let message = "Copied";
+      try {
+        await navigator.clipboard.writeText(code.textContent || "");
+      } catch (_error) {
+        message = "Copy failed";
+      }
+      if (!root.isConnected || !button.isConnected || root.__shadCopyRequest !== request) return;
+      announceCopy(button, message);
+    }
+
+    const handler = (event) => {
+      const target = event.target;
+      const button = target && target.closest
+        ? target.closest("[data-shad-copy-code]") : null;
+      if (button) void copyCode(button);
+    };
+    document.addEventListener("click", handler);
+    document.__shadCodeCopyHandler = handler;
+  }
+  wireCodeCopy();
 
   /* ================================================================
      FloatingEngine — popover/menu/tooltip positioning
@@ -395,12 +459,13 @@
     function onKeydown(ev) {
       const horiz = o.orientation === "horizontal" || o.orientation === "both";
       const vert = o.orientation === "vertical" || o.orientation === "both";
+      const rtl = horiz && shad.util.direction(container) === "rtl";
       let handled = true;
       switch (ev.key) {
         case "ArrowDown": if (vert) move(1); else handled = false; break;
         case "ArrowUp": if (vert) move(-1); else handled = false; break;
-        case "ArrowRight": if (horiz) move(1); else handled = false; break;
-        case "ArrowLeft": if (horiz) move(-1); else handled = false; break;
+        case "ArrowRight": if (horiz) move(rtl ? -1 : 1); else handled = false; break;
+        case "ArrowLeft": if (horiz) move(rtl ? 1 : -1); else handled = false; break;
         case "Home": setActive(items()[0]); break;
         case "End": setActive(items()[items().length - 1]); break;
         case "Enter": case " ":
@@ -514,13 +579,63 @@
      the element returns to the exact position (Shiny fragments keep
      working). Idempotent: portaling twice returns the same restorer.
      ================================================================ */
+  function inheritedAttribute(source, name) {
+    let node = source;
+    while (node && node.nodeType === 1) {
+      const value = node.getAttribute(name);
+      if (value) return value;
+      node = node.parentElement;
+    }
+    return document.documentElement.getAttribute(name) || null;
+  }
+
+  /** Copy the logical owner's direction/language onto a body portal. */
+  shad.syncPortalDirection = function (source, portal) {
+    if (!source || !portal) return;
+    const dir = inheritedAttribute(source, "dir") || "ltr";
+    const lang = inheritedAttribute(source, "lang");
+    portal.setAttribute("dir", dir);
+    if (lang) portal.setAttribute("lang", lang);
+    else portal.removeAttribute("lang");
+  };
+
   shad.portal = function (el) {
     if (el.__shadPortalRestore) return el.__shadPortalRestore;
+    const componentRoot = el.closest && el.closest("[data-shad]");
+    // A component that portals its own root (the command dialog) would lose
+    // the scope direction if the root itself were used after it moves.
+    const source = componentRoot && componentRoot.getAttribute("dir")
+      ? componentRoot
+      : (componentRoot?.parentElement || el.parentElement || el);
+    const previousDir = el.getAttribute("dir");
+    const previousLang = el.getAttribute("lang");
     const marker = document.createComment("shad-portal");
+    shad.syncPortalDirection(source || document.documentElement, el);
     el.parentNode.insertBefore(marker, el);
     document.body.appendChild(el);
+    const directionObserver = typeof MutationObserver === "function"
+      ? new MutationObserver((mutations) => {
+        if (mutations.some((m) => m.target !== el && (m.target === source ||
+            m.target.contains?.(source)))) {
+          shad.syncPortalDirection(source || document.documentElement, el);
+        }
+      })
+      : null;
+    if (directionObserver) {
+      directionObserver.observe(document.documentElement, {
+        attributes: true, attributeFilter: ["dir", "lang"], subtree: true
+      });
+    }
+    let restored = false;
     const restore = () => {
+      if (restored) return;
+      restored = true;
+      if (directionObserver) directionObserver.disconnect();
       if (marker.parentNode) marker.parentNode.replaceChild(el, marker);
+      if (previousDir == null) el.removeAttribute("dir");
+      else el.setAttribute("dir", previousDir);
+      if (previousLang == null) el.removeAttribute("lang");
+      else el.setAttribute("lang", previousLang);
       delete el.__shadPortalRestore;
     };
     el.__shadPortalRestore = restore;

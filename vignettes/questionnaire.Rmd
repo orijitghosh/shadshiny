@@ -1,0 +1,214 @@
+---
+title: "Questionnaire workflows"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Questionnaire workflows}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE, purl = FALSE)
+```
+
+`shad_questionnaire()` is an experimental, bookmarkable Shiny input for a
+sequence of single-choice, multiple-choice, and freeform questions. Define the
+questions as data with `shad_question()`. The browser owns navigation and
+answer state; the server receives one stable value and can patch it with
+`update_shad_questionnaire()`.
+
+## Define questions
+
+Choice question vectors use names as stable values and their contents as the
+labels. Unnamed vectors use the same string for both value and label. Explicit
+`value`/`label` lists are useful when labels need to be distinct from stable
+values.
+
+```{r}
+library(shiny)
+library(shadshiny)
+
+questions <- list(
+  shad_question(
+    "direction", "What should be built?",
+    description = "Choose the first milestone.",
+    choices = c(data = "Server table", rtl = "RTL"),
+    shortcuts = c(data = "1", rtl = "2")
+  ),
+  shad_question(
+    "features", "Which features are needed?",
+    type = "multiple",
+    choices = list(
+      list(value = "search", label = "Search"),
+      list(value = "export", label = "Export")
+    )
+  ),
+  shad_question(
+    "notes", "Anything else?", type = "text",
+    required = FALSE, skippable = TRUE
+  ),
+  shad_question(
+    "details", "What belongs in the server table?", type = "text",
+    required = TRUE, show_if = list(direction = "data")
+  )
+)
+```
+
+`show_if` is deliberately limited to named equality data. Every listed
+condition must match for the question to be visible. It is serialized into the
+markup and evaluated as a comparison in the browser; it never evaluates R or
+JavaScript supplied by an application or a user.
+
+## Compose the input
+
+All question fieldsets are rendered once. The active question is visible;
+inactive and conditionally hidden questions have both `hidden` and `inert`, so
+their answers and DOM identity remain stable without leaving hidden controls in
+the keyboard order.
+
+```{r}
+questionnaire <- do.call(
+  shad_questionnaire,
+  c(
+    list(
+      inputId = "onboarding",
+      progress_label = "Step %s of %s",
+      previous_label = "Back",
+      next_label = "Continue",
+      skip_label = "Not now",
+      submit_label = "Finish"
+    ),
+    questions
+  )
+)
+
+ui <- page_shad(questionnaire, verbatimTextOutput("state"))
+```
+
+The result is a regular Shiny input. Native `fieldset`/`legend`, radio,
+checkbox, and text controls provide the semantic form structure, while the
+progressbar, live status region, error slots, and real buttons provide the
+navigation feedback.
+
+## Read the value
+
+`input$onboarding` always has this shape:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `active` | integer | Current question, 1-based and including hidden definitions. |
+| `answers` | named list | Answers keyed by stable question name. Multiple answers are character vectors. |
+| `skipped` | character vector | Question names explicitly skipped by the user. |
+| `complete` | logical | `TRUE` after all visible required questions pass and the user submits or completes an optional flow. |
+
+```{r}
+server <- function(input, output, session) {
+  output$state <- renderPrint(input$onboarding)
+
+  observeEvent(input$onboarding$complete, {
+    req(isTRUE(input$onboarding$complete))
+    message("Answers received: ", paste(names(input$onboarding$answers), collapse = ", "))
+  }, ignoreInit = TRUE)
+}
+```
+
+Hidden branch answers stay in `answers` when a prior response makes their
+question unavailable. Hidden questions do not contribute to progress or
+validation. This lets an application preserve a user's work while they explore
+another branch, and the application can decide whether to discard it on submit.
+
+## Validation and server updates
+
+Required questions block Next and focus their first native control. Optional
+questions can be skipped explicitly when `skippable = TRUE`. Server-side rules
+can return named errors without replacing the user's answers:
+
+```{r}
+observeEvent(input$validate, {
+  errors <- list()
+  details <- input$onboarding$answers$details
+  if (identical(input$onboarding$answers$direction, "data") &&
+      (is.null(details) || !nzchar(details))) {
+    errors$details <- "Describe the table before finishing."
+  }
+  update_shad_questionnaire("onboarding", errors = errors, session = session)
+})
+
+observeEvent(input$load_draft, {
+  update_shad_questionnaire(
+    "onboarding",
+    active = 2L,
+    answers = list(direction = "data", features = c("search")),
+    session = session
+  )
+})
+
+observeEvent(input$start_over, {
+  update_shad_questionnaire("onboarding", reset = TRUE, session = session)
+})
+```
+
+`active` is a 1-based question index. `answers` and `errors` must be named
+lists so their keys remain stable in modules. Updates are partial: omitted
+facets are left alone. `reset = TRUE` clears active state, answers, skipped
+questions, errors, and completion.
+
+## Bookmarking
+
+The constructor passes its initial value through `shiny::restoreInput()`, so
+the complete state can be restored by Shiny bookmarking:
+
+```{r}
+enableBookmarking("url")
+
+ui <- page_shad(
+  shad_questionnaire(
+    "survey",
+    shad_question("plan", "Choose a plan", choices = c(free = "Free", pro = "Pro")),
+    shad_question("notes", "Notes", type = "text", required = FALSE),
+    value = list(
+      active = 2L,
+      answers = list(plan = "pro", notes = "Keep this draft"),
+      skipped = character(),
+      complete = FALSE
+    )
+  )
+)
+```
+
+Use the same constructor for `enableBookmarking("server")`; persistence
+remains Shiny's responsibility. The questionnaire does not write to URLs,
+databases, or browser storage itself.
+
+## Modules
+
+The generic Shiny binding and updater resolve namespaced ids through the active
+reactive domain. Keep the question names stable within each instance and use
+the ordinary module pattern:
+
+```{r}
+survey_ui <- function(id) {
+  ns <- NS(id)
+  do.call(shad_questionnaire, c(
+    list(inputId = ns("survey")),
+    list(
+      shad_question("plan", "Choose a plan", choices = c(free = "Free", pro = "Pro")),
+      shad_question("notes", "Notes", type = "text", required = FALSE)
+    )
+  ))
+}
+
+survey_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    observeEvent(input$load, {
+      update_shad_questionnaire(
+        "survey", answers = list(plan = "pro"), session = session
+      )
+    })
+  })
+}
+```
+
+The questionnaire is framework-free at runtime. Conditions, answers, labels,
+and errors are inserted as text or JSON data; no user-supplied string is
+compiled as code or inserted as raw HTML.

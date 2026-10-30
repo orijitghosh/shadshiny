@@ -57,7 +57,7 @@
 .shad-nav-menu__viewport {
   position: absolute;
   top: calc(100% + 0.375rem);
-  left: 0;
+  inset-inline-start: 0;
   z-index: 1300;
   overflow: hidden;
   border: 1px solid var(--shad-border);

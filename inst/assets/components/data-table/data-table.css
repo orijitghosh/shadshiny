@@ -123,7 +123,7 @@
 .shad-data-table .shad-table__head--select,
 .shad-data-table .shad-table__cell--select {
   width: 2.5rem;
-  padding-right: 0;
+  padding-inline-end: 0;
 }
 
 /* -- empty + loading ----------------------------------------------------------- */
@@ -132,6 +132,16 @@
   text-align: center;
   font-size: var(--shad-text-sm);
   color: var(--shad-muted-foreground);
+}
+.shad-data-table__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--shad-space-3);
+  padding: var(--shad-space-8) var(--shad-space-4);
+  text-align: center;
+  font-size: var(--shad-text-sm);
+  color: var(--shad-destructive);
 }
 .shad-data-table__skeleton {
   display: block;

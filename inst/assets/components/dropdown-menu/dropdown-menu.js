@@ -102,22 +102,22 @@
 
     function onKeydown(ev) {
       let handled = true;
+      const rtl = shad.util.direction(panel) === "rtl";
       switch (ev.key) {
         case "ArrowDown": move(1); break;
         case "ArrowUp": move(-1); break;
         case "Home": highlight(items()[0]); break;
         case "End": highlight(items()[items().length - 1]); break;
-        case "ArrowRight": {
+        case "ArrowRight": case "ArrowLeft": {
+          const opensSubmenu = rtl ? ev.key === "ArrowLeft" : ev.key === "ArrowRight";
           const h = highlighted();
-          if (h && h.hasAttribute("data-shad-submenu-trigger")) {
+          if (opensSubmenu && h && h.hasAttribute("data-shad-submenu-trigger")) {
             const sub = openSubmenu(h);
             if (sub) sub.highlightFirst();
-          } else handled = false;
+          } else if (opensSubmenu) handled = false;
+          else opts.onRequestClose("left-arrow");
           break;
         }
-        case "ArrowLeft":
-          opts.onRequestClose("left-arrow");
-          break;
         case "Enter": case " ": {
           const h = highlighted();
           if (h) activate(h);
@@ -207,6 +207,12 @@
         });
       },
       highlightFirst() { requestAnimationFrame(() => highlight(items()[0])); },
+      highlightLast() {
+        requestAnimationFrame(() => {
+          const all = items();
+          highlight(all[all.length - 1]);
+        });
+      },
       get isOpen() { return open; }
     };
   }
@@ -265,11 +271,11 @@
       }
     });
 
-    function open_() {
+    function open_(focusLast) {
       if (ctl.isOpen) return;
       ctl.show();
       trigger.setAttribute("aria-expanded", "true");
-      ctl.highlightFirst();
+      if (focusLast) ctl.highlightLast(); else ctl.highlightFirst();
       shad.util.emit(root, "shad:open", {});
     }
     function close_() {
@@ -282,7 +288,7 @@
     function onTriggerKeydown(ev) {
       if (ev.key === "ArrowDown" || ev.key === "ArrowUp") {
         ev.preventDefault();
-        open_();
+        open_(ev.key === "ArrowUp");
       }
     }
     trigger.addEventListener("click", onTriggerClick);

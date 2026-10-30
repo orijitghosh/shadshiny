@@ -78,6 +78,25 @@ test_that("shad_tokens merges preset overrides", {
   expect_false(identical(base$primary, blue$primary))
 })
 
+test_that("all theme presets resolve through page and token APIs", {
+  presets <- c("slate", "stone", "blue", "green", "rose", "violet", "orange")
+
+  for (preset in presets) {
+    expect_match(
+      as.character(shad_theme_preset(preset, "content")),
+      sprintf('data-shad-theme="%s"', preset),
+      fixed = TRUE,
+      info = preset
+    )
+    expect_true(length(shad_tokens(preset)) > 0, info = preset)
+  }
+})
+
+test_that("a theme preset can be scoped to one subtree", {
+  html <- as.character(shad_theme_preset("green", shad_badge("Ready")))
+  expect_match(html, 'data-shad-theme="green"', fixed = TRUE)
+})
+
 test_that("shad_theme maps args to tokens and renders CSS", {
   th <- shad_theme(primary = "#7c3aed", radius = "0.75rem",
                    dark = shad_theme(primary = "#a78bfa"))
@@ -162,6 +181,36 @@ test_that("shad_icon_raw injects the sizing class", {
   expect_match(html, 'class="shad-icon"')
 })
 
+test_that("validator updates controls nested in a fieldset unchanged", {
+  html <- as.character(shad_fieldset(
+    "Account",
+    shad_form_field(
+      shad_input("email"),
+      label = "Email",
+      description = "Used for account notifications."
+    )
+  ))
+  expect_match(html, "<fieldset", fixed = TRUE)
+  expect_match(html, 'data-shad="form-field"', fixed = TRUE)
+
+  messages <- list()
+  shiny::testServer(function(input, output, session) {
+    session$sendCustomMessage <- function(type, message) {
+      messages[[length(messages) + 1L]] <<- list(type = type, message = message)
+      invisible(TRUE)
+    }
+    validator <- shad_validator(session)
+    validator$add_rule("email", shad_rule_required())
+    session$setInputs(email = "")
+
+    expect_false(validator$validate())
+    expect_length(messages, 1L)
+    expect_identical(messages[[1L]]$type, "shadshiny:formField")
+    expect_identical(messages[[1L]]$message$id, session$ns("email"))
+    expect_identical(messages[[1L]]$message$error, "Required.")
+  }, {})
+})
+
 # --- chat server --------------------------------------------------------------
 
 test_that("chat server handles string and streaming handlers", {
@@ -192,7 +241,7 @@ test_that("the dataTable input handler normalizes selected and sort keys", {
     sort = list(list(col = "model", dir = "asc"),
                 list(col = "mpg", dir = "desc")),
     filter = list(global = "", columns = list()),
-    page = 1L, pageSize = 5L
+    page = 1L, pageSize = 5L, requestId = 9L
   )
   out <- h(wire, NULL, "tbl")
   expect_identical(out$selected, c("1", "3"))
@@ -200,6 +249,7 @@ test_that("the dataTable input handler normalizes selected and sort keys", {
   expect_identical(out$sort[[2]], list(column = "mpg", direction = "desc"))
   # untouched keys pass straight through
   expect_identical(out$page, 1L)
+  expect_identical(out$requestId, 9L)
   expect_identical(out$filter$global, "")
 
   # an empty selection is character(0), not list(); no sort is an empty list

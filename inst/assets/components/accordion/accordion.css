@@ -20,7 +20,7 @@
   font-size: var(--shad-text-sm);
   font-weight: var(--shad-font-weight-medium);
   color: var(--shad-foreground);
-  text-align: left;
+  text-align: start;
   cursor: pointer;
   outline: none;
   border-radius: var(--shad-radius-md);

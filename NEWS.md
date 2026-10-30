@@ -1,4 +1,63 @@
-# shadshiny (development version)
+# shadshiny 0.3.0.9000 (development version)
+
+* Development hardening now runs every fixture-gated browser suite in CI,
+  enforces an 82% repository coverage floor plus 80% patch coverage, tests the
+  declared R 4.1 minimum explicitly, and selects local `Rscript` from `PATH`
+  unless `SHADSHINY_RSCRIPT` is set. The behavioral fixture now demonstrates
+  the package's spacing primitives instead of relying on incidental flow layout.
+
+* Plan 7 adds the keyboard shortcut group, escaped code-block, CSS-only scroll
+  fade, and readable shimmer text utilities. Code copy uses a native button,
+  exact code text, repeatable polite status announcements, and safe delegated
+  handling; scroll fades use masks only and shimmer text respects reduced-motion
+  and forced-colors preferences.
+
+* Experimental structured AI workbench modules `shad_chat_workbench_ui()` and
+  `shad_chat_workbench_server()` accept provider-owned public events for text,
+  sources, tools, attachments, status, replacement, and completion. They keep
+  the existing streaming chat API unchanged, escape untrusted content, retain
+  response versions for retry, and never expose upload server paths or private
+  reasoning.
+* Experimental `bind_shad_task_button()` observes an application-owned
+  `shiny::ExtendedTask` and maps its initial, running, success, and error
+  states to the existing button updater. It does not create tasks, invoke
+  results, start workers, or add an asynchronous backend dependency.
+
+* The experimental field composition family adds
+  `shad_fieldset()`, `shad_field_group()`, and `shad_field_separator()` as
+  additive native-semantic primitives. Responsive groups use framework-free
+  container-query CSS with logical properties for RTL; no JavaScript or new
+  dependency is required. Existing `shad_form_field()` and validator contracts
+  are unchanged.
+* The release-boundary work adds derived contract gates for the 240 exported
+  functions and 58 important signatures, including all server update helpers,
+  without adding a generated inventory. The approved additive API is
+  `shad_data_table_server()`.
+* Browser coverage now exercises representative overlay, navigation, input,
+  server-update, dynamic-UI, and runtime-theme behavior. The focused repairs
+  include `ArrowUp` opening a dropdown on its last enabled item and making the
+  number-stepper disabled state authoritative in both the browser and server
+  updater paths. The four maintained visual baselines remain unchanged.
+* Development-only JavaScript gates now protect deterministic bundles,
+  compressed CSS/JavaScript transfer budgets, and representative initialization
+  and teardown timings. Node remains unnecessary for package installation and
+  use.
+* The experimental `shad_data_table_server()` adds lazy server-backed paging,
+  validated page/sort/filter requests, stable row-key selection, stale-response
+  rejection, fixed safe browser errors with retry, and the same R cell
+  serialization as the client-side table. Database adapters, editing, grouping,
+  pivoting, aggregation, downloads, and spreadsheet behavior remain out of
+  scope.
+* The experimental `shad_questionnaire()` workflow adds serializable question
+  definitions, native semantic fieldsets, required/multiple/text answers,
+  explicit skips, named equality branching, bookmark restoration, module-safe
+  server patches, and deterministic reset/error handling. The input value is
+  `{active, answers, skipped, complete}`; arbitrary condition code, persistence,
+  and application-specific submission remain out of scope.
+* Chat failure finalization, trusted raw-icon handling, bookmarking, and
+  component lifecycle behavior now have focused regression coverage. External
+  registry-theme schemas and optional third-party chart integrations remain
+  explicitly outside the stable core boundary.
 
 * `shad_calendar()` and `shad_date_picker()` gain `caption_layout` and
   `year_range`. The header previously stepped one month per click, so reaching a

@@ -111,20 +111,20 @@ shad_icon <- function(name, class = "shad-icon", ...) {
     ), call. = FALSE)
   }
   attrs <- list(...)
-  extra_attr <- ""
-  if (length(attrs)) {
-    nms <- names(attrs)
-    extra_attr <- paste0(
-      " ",
-      paste(sprintf('%s="%s"', nms, vapply(attrs, as.character, character(1))),
-            collapse = " ")
-    )
-  }
-  aria <- if ("aria-label" %in% names(attrs)) "" else ' aria-hidden="true"'
-  svg <- htmltools::HTML(sprintf(
-    '<svg class="%s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%s%s>%s</svg>',
-    class, aria, extra_attr, .shad_icon_paths[[name]]
-  ))
+  base <- list(
+    class = class,
+    viewBox = "0 0 24 24",
+    fill = "none",
+    stroke = "currentColor",
+    `stroke-width` = "2",
+    `stroke-linecap` = "round",
+    `stroke-linejoin` = "round"
+  )
+  if (!"aria-label" %in% names(attrs)) base[["aria-hidden"]] <- "true"
+  svg <- do.call(
+    htmltools::tags$svg,
+    c(base, attrs, list(htmltools::HTML(.shad_icon_paths[[name]])))
+  )
   # Carry the asset bundle so a standalone icon still gets its `.shad-icon`
   # sizing CSS when it is the only shadshiny output on a page. When nested in
   # another component the duplicate dependency is de-duplicated by htmltools.
@@ -146,6 +146,8 @@ shad_icon_names <- function() {
 #' Wrap a raw `<svg>` string (e.g. any Lucide glyph pasted from
 #' \url{https://lucide.dev}) with the `.shad-icon` sizing class, so icons beyond
 #' the built-in set can be used anywhere a [shad_icon()] is accepted.
+#' Because string input is inserted as trusted raw SVG, never pass untrusted or
+#' user-controlled content to this function.
 #'
 #' @param svg A raw `<svg>...</svg>` string, or an htmltools tag.
 #' @param class CSS classes to apply (default `"shad-icon"`).

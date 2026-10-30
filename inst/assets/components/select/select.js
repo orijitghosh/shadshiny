@@ -43,6 +43,10 @@
     trigger.setAttribute("aria-expanded", "false");
     trigger.setAttribute("aria-controls", listboxId);
     viewport.setAttribute("role", "listbox");
+    viewport.setAttribute(
+      "aria-label",
+      viewport.getAttribute("aria-label") || trigger.getAttribute("aria-label") || placeholder
+    );
     content.hidden = true;
     content.setAttribute("data-state", "closed");
 

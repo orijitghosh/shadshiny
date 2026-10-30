@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/data-table/data-table.js */
-/* shadshiny — data-table behavior. Client-side over a JSON row model.
+/* shadshiny — data-table behavior. Client-side or server-backed over a JSON row model.
    DEPENDENCY: load dropdown-menu.css/.js first if using column visibility.
    Markup:
      <div data-shad="data-table" class="shad-data-table"
@@ -11,8 +11,8 @@
      columns: [{key, label, sortable?, filterable?, html?, visible?}]
      rows:    [{key, cells: {colKey: value}}]  value = string|number|
               {html: "..."} (pre-rendered from R; never generated here)
-   Performance: only the current page is in the DOM. Sort/filter operate on
-   the JS array (5k×20 sorts <16ms on mid hardware). */
+   Performance: only the current page is in the DOM. Client-side sort/filter
+   operate on the JS array; server mode keeps the full dataset out of the DOM. */
 (function () {
   "use strict";
   var SVG_NS = "http://www.w3.org/2000/svg";
@@ -94,6 +94,68 @@
 
     var debounceTimer = null, destroyed = false;
     var els = {}; // built refs
+    var serverMode = false;
+    var serverTotalRows = 0;
+    var serverFilteredRows = 0;
+    var serverRequestId = 0;
+    var serverError = false;
+
+    function focusToken() {
+      var active = document.activeElement;
+      if (!active || !root.contains(active)) return null;
+      if (active.classList.contains("shad-data-table__sort")) {
+        return { type: "sort", col: active.getAttribute("data-col") };
+      }
+      if (active.classList.contains("shad-data-table__page-btn")) {
+        return {
+          type: "page",
+          page: active.getAttribute("data-page"),
+          aria: active.getAttribute("aria-label")
+        };
+      }
+      if (active.classList.contains("shad-data-table__retry")) return { type: "retry" };
+      if (active === els.global) return { type: "global" };
+      if (active === els.pageSizeSel) return { type: "page-size" };
+      if (active.classList.contains("shad-data-table__col-filter")) {
+        return { type: "col-filter", label: active.getAttribute("aria-label") };
+      }
+      return null;
+    }
+    function restoreFocus(token) {
+      if (!token) return;
+      var target = null;
+      if (token.type === "sort") {
+        var sortButtons = root.querySelectorAll(".shad-data-table__sort");
+        for (var i = 0; i < sortButtons.length; i++) {
+          if (sortButtons[i].getAttribute("data-col") === token.col) { target = sortButtons[i]; break; }
+        }
+      } else if (token.type === "page") {
+        var pageButtons = root.querySelectorAll(".shad-data-table__page-btn");
+        for (var j = 0; j < pageButtons.length; j++) {
+          if ((token.aria === "Next page" || token.aria === "Previous page") &&
+              pageButtons[j].getAttribute("aria-label") === token.aria) {
+            target = pageButtons[j]; break;
+          }
+          if (token.aria !== "Next page" && token.aria !== "Previous page" &&
+              pageButtons[j].getAttribute("data-page") === token.page) {
+            target = pageButtons[j]; break;
+          }
+        }
+      } else if (token.type === "retry") target = root.querySelector(".shad-data-table__retry");
+      else if (token.type === "global") target = els.global;
+      else if (token.type === "page-size") target = els.pageSizeSel;
+      else if (token.type === "col-filter") {
+        var filters = root.querySelectorAll(".shad-data-table__col-filter");
+        for (var k = 0; k < filters.length; k++) {
+          if (filters[k].getAttribute("aria-label") === token.label) { target = filters[k]; break; }
+        }
+      }
+      if (target && target.disabled && token.type === "page") {
+        var currentPage = root.querySelector('[aria-label="Page ' + state.page + '"]');
+        if (currentPage) target = currentPage;
+      }
+      if (target && typeof target.focus === "function") target.focus({ preventScroll: true });
+    }
 
     /* ---------------- build static skeleton ---------------- */
     root.classList.add("shad-data-table");
@@ -211,7 +273,8 @@
       sel.addEventListener("change", function () {
         state.pageSize = parseInt(sel.value, 10);
         state.page = 1;
-        renderBody(); emit();
+        if (serverMode) serverRequest();
+        else { renderBody(); emit(); }
       });
       els.pageSizeSel = sel;
       wrap.appendChild(sel);
@@ -273,6 +336,7 @@
 
     /* ---------------- render: head ---------------- */
     function renderHead() {
+      var focus = focusToken();
       while (els.thead.firstChild) els.thead.removeChild(els.thead.firstChild);
       var tr = document.createElement("tr");
       tr.className = "shad-table__row";
@@ -298,6 +362,7 @@
           var btn = document.createElement("button");
           btn.type = "button";
           btn.className = "shad-data-table__sort";
+          btn.setAttribute("data-col", c.key);
           btn.setAttribute("data-sort", sorted ? sorted.dir : "none");
           btn.appendChild(document.createTextNode(c.label));
           btn.appendChild(svgArrow());
@@ -343,22 +408,50 @@
         });
         els.thead.appendChild(fr);
       }
+      restoreFocus(focus);
     }
 
     /* ---------------- render: body (current page ONLY) ---------------- */
     var derived = { list: [], total: 0 };
     function renderBody() {
-      derived.list = sortedRows(filteredRows());
-      derived.total = derived.list.length;
+      var focus = focusToken();
+      if (serverMode) {
+        derived.list = rows.slice();
+        derived.total = serverFilteredRows;
+      } else {
+        derived.list = sortedRows(filteredRows());
+        derived.total = derived.list.length;
+      }
       var pages = Math.max(1, Math.ceil(derived.total / state.pageSize));
       state.page = Math.min(Math.max(1, state.page), pages);
       var start = (state.page - 1) * state.pageSize;
-      var pageRows = derived.list.slice(start, start + state.pageSize);
-      var colCount = visibleColumns().length + (selection !== "none" ? 1 : 0);
+      var pageRows = serverMode ? derived.list : derived.list.slice(start, start + state.pageSize);
+      var colCount = Math.max(1, visibleColumns().length + (selection !== "none" ? 1 : 0));
+
+      root.setAttribute("aria-busy", state.loading ? "true" : "false");
 
       while (els.tbody.firstChild) els.tbody.removeChild(els.tbody.firstChild);
 
-      if (state.loading) {
+      if (serverError) {
+        var xtr = document.createElement("tr");
+        xtr.className = "shad-table__row";
+        var xtd = document.createElement("td");
+        xtd.className = "shad-table__cell";
+        xtd.colSpan = colCount;
+        var alert = document.createElement("div");
+        alert.className = "shad-data-table__error";
+        alert.setAttribute("role", "alert");
+        alert.appendChild(document.createTextNode("Unable to load data. "));
+        var retry = document.createElement("button");
+        retry.type = "button";
+        retry.className = "shad-data-table__retry shad-btn shad-btn--outline shad-btn--sm";
+        retry.textContent = "Try again";
+        retry.addEventListener("click", function () { serverRequest(); });
+        alert.appendChild(retry);
+        xtd.appendChild(alert);
+        xtr.appendChild(xtd);
+        els.tbody.appendChild(xtr);
+      } else if (state.loading) {
         for (var i = 0; i < Math.min(state.pageSize, 10); i++) {
           var tr = document.createElement("tr");
           tr.className = "shad-table__row";
@@ -416,13 +509,17 @@
       renderSummary(start, pageRows.length);
       renderPager(pages);
       updateSelectAll(pageRows);
+      restoreFocus(focus);
     }
 
     function renderSummary(start, count) {
       if (state.loading) { els.summary.textContent = "Loading…"; return; }
+      if (serverError) { els.summary.textContent = "Unable to load data"; return; }
       var sel = state.selected.length;
+      var totalSuffix = serverMode && derived.total > 0 && serverTotalRows > derived.total
+        ? " (" + serverTotalRows + " total)" : "";
       var base = derived.total === 0 ? "0 rows"
-        : (start + 1) + "–" + (start + count) + " of " + derived.total + " rows";
+        : (start + 1) + "–" + (start + count) + " of " + derived.total + " rows" + totalSuffix;
       els.summary.textContent = sel ? sel + " selected · " + base : base;
     }
 
@@ -433,6 +530,7 @@
         var b = document.createElement("button");
         b.type = "button";
         b.className = "shad-data-table__page-btn";
+        b.setAttribute("data-page", String(page));
         b.textContent = label;
         if (opts2 && opts2.aria) b.setAttribute("aria-label", opts2.aria);
         if (opts2 && opts2.disabled) { b.disabled = true; b.setAttribute("data-disabled", ""); }
@@ -471,6 +569,7 @@
       renderBody(); emit();
     }
     function currentPageRows() {
+      if (serverMode) return derived.list.slice();
       var start = (state.page - 1) * state.pageSize;
       return derived.list.slice(start, start + state.pageSize);
     }
@@ -495,6 +594,14 @@
     }
 
     /* ---------------- sort + filter handlers ---------------- */
+    function serverRequest() {
+      if (!serverMode || destroyed) return;
+      serverRequestId += 1;
+      serverError = false;
+      state.loading = true;
+      renderBody();
+      emit();
+    }
     function onSort(col, additive) {
       var cur = state.sort.find(function (s) { return s.col === col; });
       if (!additive) {
@@ -505,14 +612,18 @@
         else if (cur.dir === "asc") cur.dir = "desc";
         else state.sort = state.sort.filter(function (s) { return s !== cur; });
       }
-      renderHead(); renderBody(); emit();
+      state.page = 1;
+      renderHead();
+      if (serverMode) serverRequest();
+      else { renderBody(); emit(); }
     }
     function debouncedRefilter() {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(function () {
         if (destroyed) return;
         state.page = 1;
-        renderBody(); emit();
+        if (serverMode) serverRequest();
+        else { renderBody(); emit(); }
       }, 150);
     }
     if (els.global) {
@@ -526,18 +637,21 @@
       var np = Math.min(Math.max(1, p), pages);
       if (np === state.page) return;
       state.page = np;
-      renderBody(); emit();
+      if (serverMode) serverRequest();
+      else { renderBody(); emit(); }
     }
 
     /* ---------------- events + instance ---------------- */
     function value() {
-      return {
+      var result = {
         selected: state.selected.slice(),
         sort: state.sort.map(function (s) { return { col: s.col, dir: s.dir }; }),
         filter: { global: state.filter.global, columns: Object.assign({}, state.filter.columns) },
         page: state.page,
         pageSize: state.pageSize
       };
+      if (serverMode) result.requestId = serverRequestId;
+      return result;
     }
     function emit() { shad.util.emit(root, "shad:change", { value: value() }); }
 
@@ -546,6 +660,40 @@
 
     return {
       getValue: value,
+      enableServerMode: function (config) {
+        config = config || {};
+        serverMode = true;
+        serverError = false;
+        state.loading = true;
+        if (Array.isArray(config.columns)) {
+          columns = config.columns;
+          columns.forEach(function (c) { if (c.visible === false) state.hidden[c.key] = true; });
+        }
+        serverTotalRows = Number(config.totalRows) || 0;
+        serverFilteredRows = Number(config.filteredRows) || serverTotalRows;
+        renderHead();
+        serverRequest();
+      },
+      setServerPage: function (payload) {
+        if (!serverMode || !payload || Number(payload.requestId) !== serverRequestId) return;
+        if (Array.isArray(payload.columns)) {
+          columns = payload.columns;
+          columns.forEach(function (c) { if (c.visible === false) state.hidden[c.key] = true; });
+          renderHead();
+        }
+        rows = Array.isArray(payload.rows) ? payload.rows : [];
+        serverTotalRows = Math.max(0, Number(payload.totalRows) || 0);
+        serverFilteredRows = Math.max(0, Number(payload.filteredRows) || 0);
+        state.loading = false;
+        serverError = false;
+        renderBody();
+      },
+      setServerError: function (payload) {
+        if (!serverMode || !payload || Number(payload.requestId) !== serverRequestId) return;
+        state.loading = false;
+        serverError = true;
+        renderBody();
+      },
       setValue: function (v) { // accepts partial state
         if (!v) return;
         if (v.sort) state.sort = v.sort.map(function (s) { return { col: s.col, dir: s.dir }; });
@@ -568,6 +716,10 @@
       setData: function (newRows) { // server-pushed refresh; selection keys kept
         rows = newRows || [];
         state.loading = false;
+        if (serverMode) {
+          serverFilteredRows = rows.length;
+          serverTotalRows = rows.length;
+        }
         renderBody(); emit();
       },
       destroy: function () {

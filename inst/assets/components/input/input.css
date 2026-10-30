@@ -50,6 +50,6 @@
   font: inherit;
   font-weight: var(--shad-font-weight-medium);
   color: var(--shad-foreground);
-  margin-right: var(--shad-space-2);
+  margin-inline-end: var(--shad-space-2);
   padding: 0;
 }

@@ -60,7 +60,7 @@ shad_value_box <- function(value, label, delta = NULL,
   body <- drop_nulls(list(
     htmltools::tags$div(class = "shad-value-box__label", label),
     if (!is.null(icon)) {
-      htmltools::tags$span(class = "shad-value-box__icon", .resolve_icon(icon))
+      htmltools::tags$span(class = "shad-value-box__icon", resolve_icon(icon))
     },
     htmltools::tags$div(class = "shad-value-box__value", value, delta_tag),
     if (!is.null(caption)) htmltools::tags$div(class = "shad-value-box__caption", caption),

@@ -58,3 +58,114 @@ shad_form_field <- function(..., label = NULL, description = NULL, error = NULL,
     drop_nulls(list(desc_tag, err_tag))
   )))
 }
+
+#' Semantic fieldset
+#'
+#' Groups related controls under a native legend while keeping the existing
+#' shad_form_field() wrapper as the single-control primitive. The optional
+#' description is associated with the fieldset through aria-describedby.
+#'
+#' @param legend Legend content for the fieldset.
+#' @param ... Child controls, field groups, and/or named HTML attributes.
+#' @param description Optional help text rendered below the legend.
+#' @param variant "legend" (default) or "label" for the legend's visual
+#'   treatment.
+#' @param class Extra CSS classes.
+#' @returns A native <fieldset> tag.
+#' @family shadshiny forms
+#' @export
+shad_fieldset <- function(legend, ..., description = NULL,
+                          variant = c("legend", "label"), class = NULL) {
+  variant <- arg_match_shad(variant, c("legend", "label"), "variant")
+  dots <- split_dots(...)
+  description_id <- if (!is.null(description)) shad_uid("fieldset-description")
+
+  legend_tag <- htmltools::tags$legend(
+    class = shad_class(
+      "shad-fieldset__legend",
+      if (variant == "label") "shad-fieldset__legend--label"
+    ),
+    legend
+  )
+  description_tag <- if (!is.null(description)) {
+    htmltools::tags$p(
+      class = "shad-fieldset__description",
+      id = description_id,
+      description
+    )
+  }
+
+  with_deps(do.call(htmltools::tags$fieldset, c(
+    drop_nulls(list(
+      class = shad_class("shad-fieldset", extra = class),
+      `data-variant` = if (variant == "label") "label" else NULL,
+      `aria-describedby` = description_id
+    )),
+    dots$attribs,
+    list(legend_tag, description_tag),
+    dots$children
+  )))
+}
+
+#' Field group
+#'
+#' Arranges shad_form_field() children vertically, horizontally, or
+#' responsively inside a container-query-aware group.
+#'
+#' @param ... Child fields and/or named HTML attributes.
+#' @param orientation "vertical" (default), "horizontal", or "responsive".
+#' @param class Extra CSS classes.
+#' @returns A <div> field-group tag.
+#' @family shadshiny forms
+#' @export
+shad_field_group <- function(...,
+                             orientation = c("vertical", "horizontal", "responsive"),
+                             class = NULL) {
+  orientation <- arg_match_shad(
+    orientation, c("vertical", "horizontal", "responsive"), "orientation"
+  )
+  dots <- split_dots(...)
+
+  with_deps(do.call(htmltools::tags$div, c(
+    list(
+      class = shad_class("shad-field-group", extra = class),
+      `data-orientation` = orientation
+    ),
+    dots$attribs,
+    dots$children
+  )))
+}
+
+#' Field separator
+#'
+#' Inserts a labelled or unlabelled visual separator between fields. For a
+#' labelled separator, the visible label is deliberately outside the child
+#' separator node so assistive technology does not treat the text as the
+#' separator's accessible name.
+#'
+#' @param label Optional visible separator label.
+#' @param class Extra CSS classes.
+#' @returns A separator tag.
+#' @family shadshiny forms
+#' @export
+shad_field_separator <- function(label = NULL, class = NULL) {
+  if (is.null(label)) {
+    return(with_deps(htmltools::tags$div(
+      class = shad_class("shad-field-separator", extra = class),
+      role = "separator",
+      `aria-orientation` = "horizontal",
+      `aria-hidden` = "true"
+    )))
+  }
+
+  with_deps(htmltools::tags$div(
+    class = shad_class("shad-field-separator", extra = class),
+    htmltools::tags$span(class = "shad-field-separator__label", label),
+    htmltools::tags$div(
+      class = "shad-field-separator__line",
+      role = "separator",
+      `aria-orientation` = "horizontal",
+      `aria-hidden` = "true"
+    )
+  ))
+}

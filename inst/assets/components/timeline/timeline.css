@@ -97,5 +97,5 @@
 .shad-timeline--alternate .shad-timeline__content { grid-column: 3; grid-row: 1; }
 .shad-timeline--alternate .shad-timeline__item:nth-child(even) .shad-timeline__content {
   grid-column: 1;
-  text-align: right;
+  text-align: end;
 }

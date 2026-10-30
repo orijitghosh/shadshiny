@@ -28,11 +28,26 @@ test_that("server-created dialogs open themselves and clean up on close", {
   withr::defer(app$stop())
 
   count <- function(sel) app$get_js(paste0("document.querySelectorAll(\"", sel, "\").length"))
+  wait_for_dom <- function(condition, timeout = 5000) {
+    deadline <- as.numeric(Sys.time()) + timeout / 1000
+    repeat {
+      state <- app$get_js(sprintf("(%s) ? 'ready' : 'pending'", condition))
+      if (identical(state, "ready")) return(invisible(NULL))
+      if (as.numeric(Sys.time()) >= deadline) {
+        stop(sprintf("Timed out waiting for DOM condition: %s", condition),
+             call. = FALSE)
+      }
+      Sys.sleep(0.1)
+    }
+  }
 
   expect_equal(count("#made"), 0)
 
   app$click("show_made")
-  app$wait_for_idle()
+  # Server insertion is observable before shinytest2 can necessarily settle
+  # its global idle tracker; assert the component's actual DOM lifecycle.
+  wait_for_dom("document.querySelector('#made') !== null")
+  wait_for_dom("document.querySelector('.shad-dialog__content[data-state=\"open\"]') !== null")
   # inserted, opened by the runtime, and Shiny-bound: the input inside it is
   # live, which is the whole point of building the dialog in the server.
   expect_equal(count("#made"), 1)
@@ -42,17 +57,19 @@ test_that("server-created dialogs open themselves and clean up on close", {
 
   # transient: closing removes the markup entirely (root, overlay, content)
   app$click("remove_made")
-  app$wait_for_idle()
-  Sys.sleep(1)  # the teardown waits out the exit animation
+  wait_for_dom("document.querySelector('#made') === null")
   expect_equal(count("#made"), 0)
 
   # transient = FALSE: stays in the document and can be reopened
   app$click("show_kept")
-  app$wait_for_idle()
+  wait_for_dom("document.querySelector('#keptdlg') !== null")
+  wait_for_dom("document.querySelector('.shad-dialog__content[data-state=\"open\"]') !== null")
   expect_true(app$get_value(input = "keptdlg"))
   app$run_js("document.getElementById('keptdlg').__shadInstance.close()")
-  app$wait_for_idle()
-  Sys.sleep(1)
+  wait_for_dom(paste0(
+    "Array.from(document.querySelectorAll('body > .shad-dialog__content[data-state=\"closed\"]'))",
+    ".some(function(x) { return x.textContent.indexOf('Kept') !== -1; })"
+  ))
   expect_equal(count("#keptdlg"), 1)
 
   expect_no_js_errors(app)

@@ -112,6 +112,54 @@ shad_aspect_ratio <- function(..., ratio = 16 / 9, class = NULL) {
   ))
 }
 
+#' Scroll fade container
+#'
+#' Add CSS-only edge fades to a keyboard-focusable scrolling container.
+#'
+#' @param ... Child content and optional attributes.
+#' @param axis One of vertical, horizontal, or both.
+#' @param class Extra CSS classes.
+#' @returns A scrolling div tag.
+#' @family shadshiny tier-1 components
+#' @export
+shad_scroll_fade <- function(..., axis = c("vertical", "horizontal", "both"), class = NULL) {
+  if (!length(axis) || is.na(axis[[1L]])) {
+    stop("axis must be one of vertical, horizontal, or both.", call. = FALSE)
+  }
+  axis <- arg_match_shad(axis, c("vertical", "horizontal", "both"), "axis")
+  parts <- split_dots(...)
+  with_deps(do.call(htmltools::tags$div, c(
+    list(
+      class = shad_class("shad-scroll-fade", extra = class),
+      tabindex = "0"
+    ),
+    stats::setNames(list(axis), "data-axis"),
+    parts$attribs,
+    parts$children
+  )))
+}
+
+#' Shimmer text
+#'
+#' Render readable text with an optional loading shimmer.
+#'
+#' @param ... Text content and optional attributes.
+#' @param active One scalar logical indicating whether the shimmer is active.
+#' @param class Extra CSS classes.
+#' @returns A span tag.
+#' @family shadshiny tier-1 components
+#' @export
+shad_shimmer <- function(..., active = TRUE, class = NULL) {
+  active <- .shad_scalar_logical(active, "active")
+  parts <- split_dots(...)
+  with_deps(do.call(htmltools::tags$span, c(
+    list(class = shad_class("shad-shimmer", extra = class)),
+    stats::setNames(list(flag_attr(active)), "data-active"),
+    parts$attribs,
+    parts$children
+  )))
+}
+
 #' Label
 #'
 #' A form label.

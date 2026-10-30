@@ -1,22 +1,34 @@
 # Unit tests for the browser assets (inst/assets). Node is a development
-# dependency only — installing or using the R package never needs it.
+# dependency only -- installing or using the R package never needs it.
 on:
   push:
     branches: [main, master]
     paths:
       - 'inst/assets/**'
       - 'tests/js/**'
+      - 'tests/browser/**'
+      - 'R/**'
+      - 'DESCRIPTION'
+      - 'NAMESPACE'
       - 'package.json'
       - 'package-lock.json'
+      - 'playwright.config.js'
       - 'vitest.config.js'
+      - 'tools/*.mjs'
       - '.github/workflows/js-tests.yaml'
   pull_request:
     paths:
       - 'inst/assets/**'
       - 'tests/js/**'
+      - 'tests/browser/**'
+      - 'R/**'
+      - 'DESCRIPTION'
+      - 'NAMESPACE'
       - 'package.json'
       - 'package-lock.json'
+      - 'playwright.config.js'
       - 'vitest.config.js'
+      - 'tools/*.mjs'
       - '.github/workflows/js-tests.yaml'
 
 name: js-tests.yaml
@@ -51,3 +63,47 @@ jobs:
         run: |
           npm run build:assets
           git diff --exit-code -- inst/assets/dist
+
+      - name: compressed bundle stays within performance budget
+        run: npm run test:performance:assets
+
+  browser:
+    runs-on: windows-latest
+    name: browser accessibility, behavior, visual, and performance (node 22)
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          dependencies: '"hard"'
+          extra-packages: any::pkgload
+
+      - name: Select the configured R executable
+        shell: pwsh
+        run: |
+          $rscript = (Get-Command Rscript).Source
+          "SHADSHINY_RSCRIPT=$rscript" >> $env:GITHUB_ENV
+          & $rscript --version
+
+      - run: npm ci
+
+      # The committed baselines are generated with Windows Chromium so the
+      # comparison is not affected by platform-specific font rasterization.
+      - run: npx playwright install chromium
+
+      # Runs the default accessibility/behavior/visual/performance suite, then
+      # every fixture-gated suite (RTL, questionnaire, fields, chat workbench,
+      # server-backed table, and utilities) against its matching Shiny app.
+      - name: complete browser suite
+        run: npm run test:browser:all

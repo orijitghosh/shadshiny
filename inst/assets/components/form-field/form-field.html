@@ -25,3 +25,20 @@
   <p class="shad-form-field__description">Receive emails about new products.</p>
   <p class="shad-form-field__error" hidden></p>
 </div>
+
+<!-- fieldset + responsive field group + labelled separator -->
+<fieldset class="shad-fieldset" aria-describedby="fieldset-description">
+  <legend class="shad-fieldset__legend">Delivery</legend>
+  <p id="fieldset-description" class="shad-fieldset__description">Where the order will be sent.</p>
+  <div class="shad-field-group" data-orientation="responsive">
+    <div class="shad-form-field" data-shad="form-field">
+      <label class="shad-label">Street</label>
+      <input id="street" class="shad-input" type="text" />
+      <p class="shad-form-field__error" hidden></p>
+    </div>
+    <div class="shad-field-separator">
+      <span class="shad-field-separator__label">Optional</span>
+      <div class="shad-field-separator__line" role="separator" aria-orientation="horizontal" aria-hidden="true"></div>
+    </div>
+  </div>
+</fieldset>

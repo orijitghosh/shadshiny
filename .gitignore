@@ -19,6 +19,7 @@ tests/testthat/apps/**/tests/testthat/_snaps/**/*-actual*
 # development materials (design handoff, PRD, prompts, scratch)
 dev/
 scratch_out.txt
+HANDOFF.md
 
 # OS
 .DS_Store
@@ -34,3 +35,5 @@ tests/testthat/testthat-problems.rds
 
 # JS test harness (dev-only; the R package never needs Node)
 node_modules/
+test-results/
+playwright-report/

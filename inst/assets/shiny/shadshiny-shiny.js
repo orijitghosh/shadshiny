@@ -267,7 +267,6 @@
   makeShadBinding("input-otp");
   makeShadBinding("calendar", { type: "shadshiny.date" });
   makeShadBinding("date-picker", { type: "shadshiny.date" });
-  makeShadBinding("form-field");
 
   // Tier 3 overlays (value = open boolean; also react to open/close)
   makeShadBinding("dialog", { alsoOpenClose: true });
@@ -295,6 +294,7 @@
      ---------------------------------------------------------------------- */
   // data-table: compound value {selected, sort, filter, page, pageSize}.
   makeShadBinding("data-table", { type: "shadshiny.dataTable", debounce: true });
+  makeShadBinding("questionnaire");
   makeShadBinding("stepper", { type: "shadshiny.step1" });
   makeShadBinding("rating");
   makeShadBinding("number-stepper");

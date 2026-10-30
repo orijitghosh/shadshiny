@@ -16,6 +16,8 @@
 \alias{update_shad_date_picker}
 \alias{update_shad_tabs}
 \alias{update_shad_accordion}
+\alias{update_shad_collapsible}
+\alias{update_shad_resizable}
 \alias{update_shad_pagination}
 \alias{update_shad_carousel}
 \alias{update_shad_sidebar}
@@ -68,6 +70,10 @@ update_shad_tabs(id, selected, session = shiny::getDefaultReactiveDomain())
 
 update_shad_accordion(id, value, session = shiny::getDefaultReactiveDomain())
 
+update_shad_collapsible(id, open, session = shiny::getDefaultReactiveDomain())
+
+update_shad_resizable(id, sizes, session = shiny::getDefaultReactiveDomain())
+
 update_shad_pagination(
   id,
   selected,
@@ -110,6 +116,10 @@ its value contract.}
 \item{multiple}{For \code{\link[=update_shad_combobox]{update_shad_combobox()}}, whether the combobox is in
 multiple mode (forces an array even for a single value).}
 
+\item{open}{For \code{\link[=update_shad_collapsible]{update_shad_collapsible()}}, the logical open state.}
+
+\item{sizes}{For \code{\link[=update_shad_resizable]{update_shad_resizable()}}, the non-negative panel sizes.}
+
 \item{collapsed, mobile_open, active}{For \code{\link[=update_shad_sidebar]{update_shad_sidebar()}}; \code{NULL}
 leaves that facet unchanged. \code{active} selects the \code{\link[=shad_sidebar_item]{shad_sidebar_item()}}
 with that value, so navigating from elsewhere (a command palette, a link)
@@ -130,6 +140,7 @@ of a component is a non-goal — re-render with \code{\link[shiny:renderUI]{shin
 }
 \seealso{
 Other shadshiny server API:
+\code{\link[=bind_shad_task_button]{bind_shad_task_button()}},
 \code{\link[=shad_message_scroller_to_bottom]{shad_message_scroller_to_bottom()}},
 \code{\link{shad_overlay_server}},
 \code{\link[=shad_remove_dialog]{shad_remove_dialog()}},

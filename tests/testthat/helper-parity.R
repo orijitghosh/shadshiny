@@ -16,7 +16,8 @@ anatomy_nodes <- function(component) {
                       paste0(component, ".html"), package = "shadshiny")
   testthat::expect_true(file.exists(path), info = component)
   doc <- xml2::read_html(paste0(
-    "<!DOCTYPE html><html><body>", paste(readLines(path), collapse = "\n"),
+    "<!DOCTYPE html><html><body>",
+    paste(readLines(path, encoding = "UTF-8"), collapse = "\n"),
     "</body></html>"
   ))
   xml2::xml_find_all(doc, "/html/body/*")
@@ -33,14 +34,18 @@ r_node <- function(tag) {
 # Normalize one node into a comparable structure.
 norm_node <- function(node) {
   attrs <- xml2::xml_attrs(node)
-  classes <- sort(strsplit(trimws(attrs[["class"]] %||% ""), "\\s+")[[1]])
+  class_value <- unname(attrs["class"])
+  if (!length(class_value)) class_value <- ""
+  classes <- sort(strsplit(trimws(class_value), "\\s+")[[1]])
   classes <- classes[nzchar(classes)]
+  id_attrs <- sort(intersect(names(attrs), .parity_id_attrs))
   keep <- setdiff(names(attrs), c("class", .parity_id_attrs))
   attrs <- attrs[sort(keep)]
   children <- xml2::xml_find_all(node, "./*")
   list(
     name = xml2::xml_name(node),
     classes = classes,
+    id_attrs = id_attrs,
     attrs = attrs,
     children = lapply(children, norm_node)
   )
@@ -53,22 +58,6 @@ norm_node <- function(node) {
 expect_anatomy_match <- function(r_tag, component, index = 1) {
   ref <- norm_node(anatomy_nodes(component)[[index]])
   got <- norm_node(r_node(r_tag))
-  testthat::expect_identical(got$name, ref$name,
-                             info = paste(component, "root element"))
-  testthat::expect_identical(got$classes, ref$classes,
-                             info = paste(component, "root classes"))
-  testthat::expect_identical(got$attrs, ref$attrs,
-                             info = paste(component, "root attributes"))
-  testthat::expect_identical(
-    length(got$children), length(ref$children),
-    info = paste(component, "child count")
-  )
-  for (i in seq_along(ref$children)) {
-    testthat::expect_identical(got$children[[i]]$name, ref$children[[i]]$name,
-                               info = paste(component, "child", i, "name"))
-    testthat::expect_identical(got$children[[i]]$classes,
-                               ref$children[[i]]$classes,
-                               info = paste(component, "child", i, "classes"))
-  }
+  testthat::expect_identical(got, ref, info = component)
   invisible(TRUE)
 }

@@ -48,6 +48,46 @@ test_that("pagination and carousel coerce to integer", {
   expect_identical(one_message(s2)$message$value, 2L)
 })
 
+test_that("collapsible updater sends a logical open value", {
+  s <- new_fake_session()
+  update_shad_collapsible("details", TRUE, session = s)
+  m <- one_message(s)
+
+  expect_identical(m$type, "shadshiny:update")
+  expect_identical(m$message$id, "details")
+  expect_identical(m$message$value, TRUE)
+})
+
+test_that("questionnaire updater sends partial state and reset method", {
+  s <- new_fake_session(ns_prefix = "mod")
+  update_shad_questionnaire(
+    "survey", active = 2, answers = list(direction = "data"),
+    errors = list(details = "Required"), session = s
+  )
+  expect_identical(s$messages[[1]]$type, "shadshiny:update")
+  expect_identical(s$messages[[1]]$message$id, "mod-survey")
+  expect_identical(s$messages[[1]]$message$value,
+                   list(active = 2L, answers = list(direction = "data")))
+  expect_identical(s$messages[[2]]$type, "shadshiny:invoke")
+  expect_identical(s$messages[[2]]$message$method, "setErrors")
+
+  s2 <- new_fake_session()
+  update_shad_questionnaire("survey", reset = TRUE, session = s2)
+  expect_identical(one_message(s2)$message$method, "reset")
+  expect_error(update_shad_questionnaire("survey", active = 0, session = s), "active")
+})
+
+test_that("resizable updater validates and sends numeric sizes", {
+  s <- new_fake_session()
+  update_shad_resizable("split", c(35, 65), session = s)
+
+  expect_identical(one_message(s)$message$value, c(35, 65))
+  expect_error(
+    update_shad_resizable("split", c(50, -1), session = s),
+    "finite non-negative"
+  )
+})
+
 test_that("sidebar update sends only the facets provided", {
   s <- new_fake_session()
   update_shad_sidebar("sb", collapsed = TRUE, session = s)
@@ -97,4 +137,18 @@ test_that("button label update sends shadshiny:text", {
   m <- one_message(s)
   expect_identical(m$type, "shadshiny:text")
   expect_identical(m$message$text, "Saved")
+})
+
+test_that("form-field errors are namespaced and can be cleared", {
+  s <- new_fake_session(ns_prefix = "mod")
+
+  update_shad_form_field("email", "Invalid", session = s)
+  expect_identical(s$messages[[1]]$type, "shadshiny:formField")
+  expect_identical(s$messages[[1]]$message$id, "mod-email")
+  expect_identical(s$messages[[1]]$message$error, "Invalid")
+
+  update_shad_form_field("email", NULL, session = s)
+  expect_identical(s$messages[[2]]$type, "shadshiny:formField")
+  expect_identical(s$messages[[2]]$message$id, "mod-email")
+  expect_null(s$messages[[2]]$message$error)
 })

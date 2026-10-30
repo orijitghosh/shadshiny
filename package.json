@@ -7,11 +7,25 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "build:assets": "node tools/build-assets.mjs"
+    "test:browser": "playwright test",
+    "test:browser:all": "node tools/run-browser-suites.mjs",
+    "test:browser:rtl": "node tools/run-browser-fixture.mjs rtl",
+    "test:browser:questionnaire": "node tools/run-browser-fixture.mjs questionnaire",
+    "test:browser:field": "node tools/run-browser-fixture.mjs field-family",
+    "test:browser:chat": "node tools/run-browser-fixture.mjs chat-workbench",
+    "test:browser:server-table": "node tools/run-browser-fixture.mjs server-data-table",
+    "test:browser:utility": "node tools/run-browser-fixture.mjs utility-elements",
+    "test:performance": "npm run test:performance:assets && npm run test:performance:browser",
+    "test:performance:assets": "node tools/check-performance-budgets.mjs",
+    "test:performance:browser": "playwright test tests/browser/performance.spec.js",
+    "build:assets": "node tools/build-assets.mjs",
+    "audit:directionality": "node tools/audit-directionality.mjs"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1",
     "esbuild": "^0.28.2",
     "jsdom": "^25.0.1",
-    "vitest": "^2.1.8"
+    "vitest": "^4.1.11"
   }
 }

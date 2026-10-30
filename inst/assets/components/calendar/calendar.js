@@ -153,6 +153,7 @@
           if (mid) cellAttrs += " data-in-range";
           if (mode === "range" && isStart && (selEnd || hoverDate)) cellAttrs += " data-range-start-cell";
           if (isEnd) cellAttrs += " data-range-end-cell";
+          if (isStart || isEnd) cellAttrs += ' aria-selected="true"';
           let dayAttrs = "";
           if (outside) dayAttrs += " data-outside";
           if (sameDay(d, today)) dayAttrs += " data-today";
@@ -165,7 +166,6 @@
             dayAttrs +
             ' tabindex="' + (isFocus ? "0" : "-1") + '"' +
             ' aria-label="' + d.toDateString() + '"' +
-            (isStart || isEnd ? ' aria-selected="true"' : "") +
             ">" + d.getDate() + "</button></td>";
         }
         html += "</tr>";

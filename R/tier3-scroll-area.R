@@ -45,7 +45,9 @@ shad_scroll_area <- function(..., height = NULL,
       `data-shad` = "scroll-area",
       style = if (!is.null(height)) paste0("height:", htmltools::validateCssUnit(height), ";")
     ),
-    list(htmltools::tags$div(class = "shad-scroll-area__viewport", ...)),
+    list(htmltools::tags$div(
+      class = "shad-scroll-area__viewport", tabindex = "0", ...
+    )),
     bars
   )))
 }
@@ -61,6 +63,7 @@ shad_scroll_area <- function(..., height = NULL,
 #' @param class Extra CSS classes.
 #' @returns A resizable group tag.
 #' @family shadshiny tier-3 components
+#' @seealso [update_shad_resizable()]
 #' @examples
 #' shad_resizable("r",
 #'   shad_resizable_panel("One", default_size = 50),

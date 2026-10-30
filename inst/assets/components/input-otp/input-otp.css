@@ -22,7 +22,7 @@
   height: 2.25rem;
   border-top: 1px solid var(--shad-input);
   border-bottom: 1px solid var(--shad-input);
-  border-right: 1px solid var(--shad-input);
+  border-inline-end: 1px solid var(--shad-input);
   background: transparent;
   font-family: var(--shad-font-sans);
   font-size: var(--shad-text-sm);
@@ -32,13 +32,13 @@
               border-color var(--shad-duration-fast) var(--shad-ease-out);
 }
 .shad-otp__group .shad-otp__cell:first-child {
-  border-left: 1px solid var(--shad-input);
-  border-top-left-radius: var(--shad-radius-md);
-  border-bottom-left-radius: var(--shad-radius-md);
+  border-inline-start: 1px solid var(--shad-input);
+  border-start-start-radius: var(--shad-radius-md);
+  border-end-start-radius: var(--shad-radius-md);
 }
 .shad-otp__group .shad-otp__cell:last-child {
-  border-top-right-radius: var(--shad-radius-md);
-  border-bottom-right-radius: var(--shad-radius-md);
+  border-start-end-radius: var(--shad-radius-md);
+  border-end-end-radius: var(--shad-radius-md);
 }
 /* active cell: ring on top of neighbors */
 .shad-otp__cell[data-active] {

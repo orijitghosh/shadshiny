@@ -19,7 +19,7 @@
   color: var(--shad-foreground);
   box-shadow: var(--shad-shadow-xs);
   cursor: pointer;
-  text-align: left;
+  text-align: start;
   white-space: nowrap;
   transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
               box-shadow var(--shad-duration-fast) var(--shad-ease-out);

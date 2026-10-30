@@ -189,6 +189,43 @@ update_shad_accordion <- function(id, value,
 }
 
 #' @rdname update_shad
+#' @param open For [update_shad_collapsible()], the logical open state.
+#' @export
+update_shad_collapsible <- function(
+  id,
+  open,
+  session = shiny::getDefaultReactiveDomain()
+) {
+  shad_set_value(id, isTRUE(open), session)
+}
+
+#' @rdname update_shad
+#' @param sizes For [update_shad_resizable()], the non-negative panel sizes.
+#' @export
+update_shad_resizable <- function(
+  id,
+  sizes,
+  session = shiny::getDefaultReactiveDomain()
+) {
+  sizes <- as.numeric(sizes)
+  if (
+    length(sizes) < 2L ||
+      any(!is.finite(sizes)) ||
+      any(sizes < 0) ||
+      sum(sizes) <= 0
+  ) {
+    stop(
+      paste(
+        "`sizes` must contain at least two finite non-negative values",
+        "with a positive sum."
+      ),
+      call. = FALSE
+    )
+  }
+  shad_set_value(id, sizes, session)
+}
+
+#' @rdname update_shad
 #' @export
 update_shad_pagination <- function(id, selected,
                                    session = shiny::getDefaultReactiveDomain()) {

@@ -149,6 +149,40 @@
   animation: shad-spin 1s linear infinite;
 }
 
+/* text shimmer: active content remains ordinary text when motion is reduced */
+@keyframes shad-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+.shad-shimmer {
+  display: inline-block;
+}
+.shad-shimmer[data-active] {
+  background-image: linear-gradient(
+    90deg,
+    var(--shad-muted-foreground) 0%,
+    var(--shad-foreground) 50%,
+    var(--shad-muted-foreground) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shad-shimmer 1.8s linear infinite;
+}
+.shad-shimmer:not([data-active]) {
+  color: inherit;
+}
+
+@media (forced-colors: active) {
+  .shad-shimmer[data-active] {
+    background: none;
+    color: CanvasText;
+    forced-color-adjust: auto;
+    animation: none;
+  }
+}
+
 /* ------------------------------------------------------------------ */
 /* Reduced motion: kill everything shad animates or transitions.       */
 /* Presence's timeout fallback still fires, so exits still unmount.    */
@@ -161,5 +195,10 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .shad-shimmer[data-active] {
+    background: none;
+    color: inherit;
+    animation: none !important;
   }
 }

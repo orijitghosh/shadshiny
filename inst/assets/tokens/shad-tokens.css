@@ -33,7 +33,7 @@
   --shad-secondary: oklch(0.97 0 0);
   --shad-secondary-foreground: oklch(0.205 0 0);
   --shad-muted: oklch(0.97 0 0);
-  --shad-muted-foreground: oklch(0.556 0 0);
+  --shad-muted-foreground: oklch(0.5 0 0);
   --shad-accent: oklch(0.97 0 0);
   --shad-accent-foreground: oklch(0.205 0 0);
   --shad-destructive: oklch(0.577 0.245 27.325);
@@ -197,7 +197,7 @@
   --shad-secondary: oklch(0.968 0.007 247.896);
   --shad-secondary-foreground: oklch(0.208 0.042 265.755);
   --shad-muted: oklch(0.968 0.007 247.896);
-  --shad-muted-foreground: oklch(0.554 0.046 257.417);
+  --shad-muted-foreground: oklch(0.5 0.046 257.417);
   --shad-accent: oklch(0.968 0.007 247.896);
   --shad-accent-foreground: oklch(0.208 0.042 265.755);
   --shad-border: oklch(0.929 0.013 255.508);
@@ -254,7 +254,7 @@
   --shad-secondary: oklch(0.97 0.001 106.424);
   --shad-secondary-foreground: oklch(0.216 0.006 56.043);
   --shad-muted: oklch(0.97 0.001 106.424);
-  --shad-muted-foreground: oklch(0.553 0.013 58.071);
+  --shad-muted-foreground: oklch(0.5 0.013 58.071);
   --shad-accent: oklch(0.97 0.001 106.424);
   --shad-accent-foreground: oklch(0.216 0.006 56.043);
   --shad-border: oklch(0.923 0.003 48.717);
@@ -424,7 +424,7 @@
 :root {
   --shad-chart-6: oklch(0.577 0.245 27.325);
   --shad-chart-grid: oklch(0.922 0 0);
-  --shad-chart-label: oklch(0.556 0 0);
+  --shad-chart-label: oklch(0.5 0 0);
 }
 .dark,
 [data-bs-theme="dark"] {
@@ -436,7 +436,7 @@
 /* slate / stone: neutral-theme series retained; grid/label match ramp */
 [data-shad-theme="slate"] {
   --shad-chart-grid: oklch(0.929 0.013 255.508);
-  --shad-chart-label: oklch(0.554 0.046 257.417);
+  --shad-chart-label: oklch(0.5 0.046 257.417);
 }
 :is(.dark, [data-bs-theme="dark"]) [data-shad-theme="slate"],
 [data-shad-theme="slate"]:is(.dark, [data-bs-theme="dark"]) {
@@ -445,7 +445,7 @@
 }
 [data-shad-theme="stone"] {
   --shad-chart-grid: oklch(0.923 0.003 48.717);
-  --shad-chart-label: oklch(0.553 0.013 58.071);
+  --shad-chart-label: oklch(0.5 0.013 58.071);
 }
 :is(.dark, [data-bs-theme="dark"]) [data-shad-theme="stone"],
 [data-shad-theme="stone"]:is(.dark, [data-bs-theme="dark"]) {

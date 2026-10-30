@@ -25,7 +25,7 @@
 .shad-table__head {
   height: 2.5rem;
   padding: 0 var(--shad-space-2);
-  text-align: left;
+  text-align: start;
   vertical-align: middle;
   font-weight: var(--shad-font-weight-medium);
   color: var(--shad-muted-foreground);

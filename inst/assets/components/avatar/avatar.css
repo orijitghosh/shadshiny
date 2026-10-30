@@ -53,5 +53,5 @@
   box-shadow: 0 0 0 2px var(--shad-background);
 }
 .shad-avatar-group .shad-avatar + .shad-avatar {
-  margin-left: -0.5rem;
+  margin-inline-start: -0.5rem;
 }

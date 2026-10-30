@@ -8,7 +8,7 @@
 //
 // The load order here must match shad_asset_css_order() / shad_asset_js_order()
 // in R/deps.R. dist/manifest.json records what went in, and
-// tests/testthat/test-assets.R fails if the two ever drift apart.
+// tests/testthat/test-deps.R fails if the two ever drift apart.
 
 import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";

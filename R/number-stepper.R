@@ -52,6 +52,7 @@ shad_number_input <- function(inputId, label = NULL, value = 0, min = NA,
     `data-max` = if (!is.na(max)) max else NULL,
     `data-step` = step,
     `data-precision` = precision,
+    `data-disabled` = flag_attr(disabled),
     style = width_style(width),
     ...,
     input, dec, inc
@@ -78,6 +79,8 @@ update_shad_number_input <- function(id, value = NULL, min = NULL, max = NULL,
   if (!is.null(min)) shad_set_attr(id, "data-min", min, session)
   if (!is.null(max)) shad_set_attr(id, "data-max", max, session)
   if (!is.null(step)) shad_set_attr(id, "data-step", step, session)
-  if (!is.null(disabled)) shad_set_attr(id, "data-disabled", isTRUE(disabled), session)
+  if (!is.null(disabled)) {
+    shad_invoke(id, "setDisabled", list(isTRUE(disabled)), session)
+  }
   invisible(NULL)
 }

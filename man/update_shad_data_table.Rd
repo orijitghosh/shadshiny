@@ -45,6 +45,7 @@ selection keys) and/or patch its interaction state.
 Other shadshiny data table:
 \code{\link[=shad_col]{shad_col()}},
 \code{\link[=shad_data_table]{shad_data_table()}},
+\code{\link[=shad_data_table_server]{shad_data_table_server()}},
 \code{\link{shad_fmt}}
 }
 \concept{shadshiny data table}

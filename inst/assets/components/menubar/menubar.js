@@ -91,7 +91,8 @@
        reaches here means "next menubar menu". Listen on document because
        panels are portaled to body while open. */
     function onDocKeydown(ev) {
-      if (openIndex === -1 || ev.key !== "ArrowRight") return;
+      const nextKey = shad.util.direction(root) === "rtl" ? "ArrowLeft" : "ArrowRight";
+      if (openIndex === -1 || ev.key !== nextKey) return;
       const panel = menus[openIndex].panel;
       if (panel.contains(document.activeElement)) {
         ev.preventDefault();

@@ -28,10 +28,12 @@
 
     function fmt(v) { return precision > 0 ? v.toFixed(precision) : String(Math.round(v)); }
     function render() {
+      var disabled = root.hasAttribute("data-disabled");
+      input.disabled = disabled;
       input.value = fmt(value);
       input.setAttribute("aria-valuenow", String(value));
-      if (dec) dec.disabled = value <= min;
-      if (inc) inc.disabled = value >= max;
+      if (dec) dec.disabled = disabled || value <= min;
+      if (inc) inc.disabled = disabled || value >= max;
     }
     function set(v, emitEvt) {
       var nv = shad.util.clamp(v, min, max);
@@ -89,6 +91,10 @@
     return {
       getValue: function () { return value; },
       setValue: function (v) { set(parseFloat(v)); },
+      setDisabled: function (v) {
+        root.toggleAttribute("data-disabled", !!v);
+        render();
+      },
       destroy: function () {
         stopHold();
         handlers.forEach(function (h) { h[0].removeEventListener(h[1], h[2], h[3]); });

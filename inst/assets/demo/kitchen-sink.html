@@ -454,23 +454,23 @@
       <input class="shad-combobox__input" type="text" placeholder="Search framework…" autocomplete="off" autocorrect="off" spellcheck="false" />
     </div>
     <div class="shad-combobox__list">
-      <div class="shad-combobox__item" data-value="next" data-state="unchecked">
+      <div class="shad-combobox__item" role="option" data-value="next" data-state="unchecked">
         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         Next.js
       </div>
-      <div class="shad-combobox__item" data-value="svelte" data-state="unchecked">
+      <div class="shad-combobox__item" role="option" data-value="svelte" data-state="unchecked">
         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         SvelteKit
       </div>
-      <div class="shad-combobox__item" data-value="nuxt" data-state="unchecked">
+      <div class="shad-combobox__item" role="option" data-value="nuxt" data-state="unchecked">
         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         Nuxt
       </div>
-      <div class="shad-combobox__item" data-value="remix" data-state="unchecked" data-disabled aria-disabled="true">
+      <div class="shad-combobox__item" role="option" data-value="remix" data-state="unchecked" data-disabled aria-disabled="true">
         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         Remix (deprecated)
       </div>
-      <div class="shad-combobox__item" data-value="astro" data-state="unchecked">
+      <div class="shad-combobox__item" role="option" data-value="astro" data-state="unchecked">
         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         Astro
       </div>
@@ -491,19 +491,19 @@
       <input class="shad-combobox__input" type="text" placeholder="Search language…" autocomplete="off" />
     </div>
     <div class="shad-combobox__list">
-      <div class="shad-combobox__item" data-value="r" data-state="checked">
+      <div class="shad-combobox__item" role="option" data-value="r" data-state="checked">
         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         R
       </div>
-      <div class="shad-combobox__item" data-value="python" data-state="unchecked">
+      <div class="shad-combobox__item" role="option" data-value="python" data-state="unchecked">
         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         Python
       </div>
-      <div class="shad-combobox__item" data-value="julia" data-state="unchecked">
+      <div class="shad-combobox__item" role="option" data-value="julia" data-state="unchecked">
         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         Julia
       </div>
-      <div class="shad-combobox__item" data-value="js" data-state="unchecked">
+      <div class="shad-combobox__item" role="option" data-value="js" data-state="unchecked">
         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         JavaScript
       </div>
@@ -807,11 +807,11 @@
   <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">input</h2>
   <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
 <input class="shad-input" type="email" placeholder="Email" />
-<input class="shad-input" type="text" value="With value" />
+<input class="shad-input" type="text" value="With value" aria-label="Text value" />
 <input class="shad-input" type="password" placeholder="Password" />
 <input class="shad-input" type="text" placeholder="Disabled" disabled />
-<input class="shad-input" type="email" aria-invalid="true" value="not-an-email" aria-describedby="email-err" />
-<input class="shad-input" type="file" />
+<input class="shad-input" type="email" aria-invalid="true" value="not-an-email" aria-describedby="email-err" aria-label="Invalid email" />
+<input class="shad-input" type="file" aria-label="Choose file" />
   </div>
 </section>
 <section id="c-input-otp" style="padding:2.5rem 0;border-bottom:1px solid var(--shad-border)">
@@ -1030,12 +1030,12 @@
   <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">progress</h2>
   <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
 <!-- determinate 60%: indicator translated by -(100-60)% -->
-<div class="shad-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" data-state="loading">
+<div class="shad-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" aria-label="Progress" data-state="loading">
   <div class="shad-progress__indicator" style="transform: translateX(-40%);"></div>
 </div>
 
 <!-- complete -->
-<div class="shad-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" data-state="complete">
+<div class="shad-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-label="Progress" data-state="complete">
   <div class="shad-progress__indicator" style="transform: translateX(0%);"></div>
 </div>
 
@@ -1119,7 +1119,7 @@
   <h2 class="shad-h3" style="margin-bottom:1.25rem;text-transform:capitalize">scroll area</h2>
   <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
 <div class="shad-scroll-area" data-shad="scroll-area" style="height:12rem;width:18rem;border:1px solid var(--shad-border);border-radius:var(--shad-radius-md)">
-  <div class="shad-scroll-area__viewport">
+  <div class="shad-scroll-area__viewport" tabindex="0">
     <div style="padding:1rem">
       <div class="shad-small" style="margin-bottom:0.75rem">Tags</div>
       <div style="display:grid;gap:0">
@@ -1528,7 +1528,7 @@
   <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem">
 <textarea class="shad-textarea" placeholder="Type your message here."></textarea>
 <textarea class="shad-textarea" placeholder="Disabled" disabled></textarea>
-<textarea class="shad-textarea" aria-invalid="true">Invalid content</textarea>
+<textarea class="shad-textarea" aria-invalid="true" aria-label="Invalid content">Invalid content</textarea>
 
 <!-- autosize -->
 <textarea class="shad-textarea" data-shad="textarea" data-autosize placeholder="Grows as you type…"></textarea>

@@ -57,6 +57,25 @@ flag_attr <- function(flag) {
   if (isTRUE(flag)) NA else NULL
 }
 
+#' Validate one scalar character value
+#' @noRd
+.shad_scalar_character <- function(value, name, allow_null = FALSE) {
+  if (allow_null && is.null(value)) return(NULL)
+  if (!is.character(value) || length(value) != 1L || is.na(value)) {
+    stop(name, " must be one non-missing character value.", call. = FALSE)
+  }
+  value
+}
+
+#' Validate one scalar logical value
+#' @noRd
+.shad_scalar_logical <- function(value, name) {
+  if (!is.logical(value) || length(value) != 1L || is.na(value)) {
+    stop(name, " must be one non-missing logical value.", call. = FALSE)
+  }
+  value
+}
+
 #' Split `...` into named attributes and unnamed children (htmltools style)
 #' @noRd
 split_dots <- function(...) {

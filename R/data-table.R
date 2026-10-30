@@ -257,6 +257,250 @@ shad_fmt_badge <- function(map) {
                    json_verbatim = TRUE, digits = NA)
 }
 
+.shad_dt_integer <- function(value, default, label, positive = FALSE) {
+  value <- value %||% default
+  numeric_value <- suppressWarnings(as.numeric(value))
+  lower_bound <- if (isTRUE(positive)) 1 else 0
+  if (length(value) != 1L || length(numeric_value) != 1L ||
+      is.na(numeric_value) || !is.finite(numeric_value) ||
+      numeric_value != floor(numeric_value) ||
+      numeric_value < lower_bound || numeric_value > .Machine$integer.max) {
+    qualifier <- if (isTRUE(positive)) "positive" else "non-negative"
+    stop(sprintf("server table %s must be %s integers", label, qualifier),
+         call. = FALSE)
+  }
+  as.integer(numeric_value)
+}
+
+.shad_dt_request <- function(value) {
+  value <- value %||% list()
+  if (!is.list(value)) {
+    stop("server table request must be a list", call. = FALSE)
+  }
+
+  sort <- value$sort %||% list()
+  if (!is.list(sort)) {
+    stop("server table sort must be a list", call. = FALSE)
+  }
+  sort <- lapply(sort, function(entry) {
+    if (!is.list(entry)) {
+      stop("server table sort entries must be lists", call. = FALSE)
+    }
+    column <- entry$column %||% entry$col
+    direction <- entry$direction %||% entry$dir
+    if (length(column) != 1L || is.na(column) || !nzchar(as.character(column))) {
+      stop("server table sort column must be a non-empty string", call. = FALSE)
+    }
+    direction <- as.character(direction)
+    if (length(direction) != 1L || is.na(direction) ||
+        !direction %in% c("asc", "desc")) {
+      stop("server table sort direction must be asc or desc", call. = FALSE)
+    }
+    list(column = as.character(column), direction = direction)
+  })
+
+  filter <- value$filter %||% list()
+  if (!is.list(filter)) {
+    stop("server table filter must be a list", call. = FALSE)
+  }
+  global <- filter$global %||% ""
+  if (length(global) != 1L || is.na(global)) {
+    stop("server table global filter must be a scalar string", call. = FALSE)
+  }
+  column_filters <- filter$columns %||% list()
+  if (!is.list(column_filters) ||
+      (length(column_filters) > 0L &&
+       (is.null(names(column_filters)) || any(!nzchar(names(column_filters)))))) {
+    stop("server table column filters must be a named list", call. = FALSE)
+  }
+  column_filters <- lapply(column_filters, function(entry) {
+    if (length(entry) != 1L || is.na(entry)) {
+      stop("server table column filters must contain scalar strings", call. = FALSE)
+    }
+    as.character(entry)
+  })
+
+  list(
+    request_id = .shad_dt_integer(value$requestId, 0L, "request id"),
+    page = .shad_dt_integer(value$page, 1L, "page", positive = TRUE),
+    page_size = .shad_dt_integer(value$pageSize, 25L, "page size", positive = TRUE),
+    sort = sort,
+    filter = list(global = as.character(global), columns = column_filters)
+  )
+}
+
+.shad_dt_response_count <- function(value, label) {
+  .shad_dt_integer(value, NULL, label)
+}
+
+.shad_dt_response <- function(value, request, columns, row_key) {
+  if (!is.list(value) || is.null(value$data) || !is.data.frame(value$data)) {
+    stop("server table response `data` must be a data.frame", call. = FALSE)
+  }
+  total_rows <- .shad_dt_response_count(value$total_rows, "total_rows")
+  filtered_rows <- .shad_dt_response_count(value$filtered_rows, "filtered_rows")
+  if (filtered_rows > total_rows) {
+    stop("server table filtered_rows cannot exceed total_rows", call. = FALSE)
+  }
+  if (nrow(value$data) > request$page_size) {
+    stop("server table response exceeds the requested page size", call. = FALSE)
+  }
+  if (!is.null(row_key)) {
+    response_keys <- as.character(value$data[[row_key]])
+    if (anyNA(response_keys) || any(!nzchar(response_keys))) {
+      stop("server table row keys must not be missing or empty", call. = FALSE)
+    }
+    if (anyDuplicated(response_keys)) {
+      stop("server table row keys must be unique", call. = FALSE)
+    }
+  }
+
+  model <- .shad_dt_model(
+    value$data, columns, row_key, TRUE, "none", FALSE, FALSE, "24rem",
+    request$page_size, request$page_size, "No results.", "Filter rows...",
+    "Columns", "Rows per page", FALSE
+  )
+  list(
+    requestId = request$request_id,
+    rows = model$rows,
+    columns = model$columns,
+    totalRows = total_rows,
+    filteredRows = filtered_rows
+  )
+}
+
+.shad_dt_server_columns <- function(columns) {
+  if (is.null(columns)) return(NULL)
+  if (!is.list(columns) || is.null(names(columns)) ||
+      any(!nzchar(names(columns))) || anyDuplicated(names(columns))) {
+    stop("server table `columns` must be a named list", call. = FALSE)
+  }
+  empty <- as.data.frame(
+    stats::setNames(lapply(names(columns), function(x) character()), names(columns)),
+    stringsAsFactors = FALSE
+  )
+  .shad_dt_model(
+    empty, columns, NULL, TRUE, "none", FALSE, FALSE, "24rem", 10L,
+    c(10L, 25L, 50L, 100L), "No results.", "Filter rows...",
+    "Columns", "Rows per page", FALSE
+  )$columns
+}
+
+.shad_dt_server_check_columns <- function(request, columns) {
+  if (is.null(columns)) return(invisible(NULL))
+  known <- names(columns)
+  sort_columns <- vapply(request$sort, `[[`, character(1), "column")
+  bad_sort <- setdiff(sort_columns, known)
+  bad_filter <- setdiff(names(request$filter$columns), known)
+  if (length(bad_sort) || length(bad_filter)) {
+    bad <- unique(c(bad_sort, bad_filter))[[1L]]
+    stop(sprintf("server table request refers to unknown column `%s`", bad), call. = FALSE)
+  }
+  invisible(NULL)
+}
+
+.shad_dt_server_error <- function(id, request_id, session) {
+  shad_invoke(id, "setServerError", list(list(
+    requestId = as.integer(request_id),
+    message = "Unable to load data."
+  )), session)
+}
+
+#' Server-backed interactive data table
+#'
+#' Experimental server-side paging for [shad_data_table()]. The table sends a
+#' normalized request to `source` whenever its page, page size, sort, or filter
+#' changes. `source` must return a list with `data` (a data frame containing at
+#' most the requested page), `total_rows`, and `filtered_rows`.
+#'
+#' The request passed to `source` has `page`, `page_size`, `sort` (a list of
+#' `column`/`direction` pairs), and `filter` (a global string plus named column
+#' filters). The response is serialized using the same [shad_col()] formatters
+#' and trusted-HTML rules as the client-side table.
+#'
+#' Supply a stable `row_key` column when selections must survive paging. With
+#' `row_key = NULL`, the existing page-local row-index behavior is retained and
+#' is not suitable for cross-page selection. This helper deliberately does not
+#' provide editing, grouping, pivoting, aggregation, downloads, or database
+#' adapter behavior; the source owns query construction and parameterization.
+#'
+#' @param id The data-table input id.
+#' @param source A function accepting one normalized request list and returning
+#'   `list(data = <data.frame>, total_rows = <integer>, filtered_rows =
+#'   <integer>)`.
+#' @param columns Optional named list of [shad_col()] specs. When omitted,
+#'   column metadata is inferred from the first response.
+#' @param row_key Optional stable id column in each response page.
+#' @param session The Shiny session.
+#' @returns Invisibly, the Shiny observer driving the source.
+#' @family shadshiny data table
+#' @export
+shad_data_table_server <- function(
+    id, source, columns = NULL, row_key = NULL,
+    session = shiny::getDefaultReactiveDomain()) {
+  if (!is.function(source)) stop("`source` must be a function.", call. = FALSE)
+  if (!is.null(row_key) &&
+      (length(row_key) != 1L || is.na(row_key) || !nzchar(as.character(row_key)))) {
+    stop("`row_key` must be a non-empty column name or NULL.", call. = FALSE)
+  }
+  column_meta <- .shad_dt_server_columns(columns)
+  shad_invoke(id, "enableServerMode", list(list(
+    columns = column_meta, totalRows = 0L, filteredRows = 0L
+  )), session)
+
+  last_request_id <- -1L
+  observer <- shiny::observeEvent(
+    session$input[[id]],
+    {
+      raw <- session$input[[id]]
+      raw_id <- suppressWarnings(as.numeric(raw$requestId %||% 0L))
+      request_id <- if (length(raw_id) == 1L && is.finite(raw_id) &&
+                        raw_id == floor(raw_id) && raw_id >= 0 &&
+                        raw_id <= .Machine$integer.max) as.integer(raw_id) else 0L
+      result <- tryCatch({
+        request <- .shad_dt_request(raw)
+        .shad_dt_server_check_columns(request, columns)
+        request
+      }, error = function(e) {
+        warning(conditionMessage(e), call. = FALSE)
+        .shad_dt_server_error(id, request_id, session)
+        NULL
+      })
+      if (is.null(result) || result$request_id < 1L ||
+          result$request_id <= last_request_id) return(invisible(NULL))
+      last_request_id <- result$request_id
+
+      answer <- tryCatch(source(result), error = function(e) {
+        warning(sprintf("server-backed data table source failed: %s", conditionMessage(e)),
+                call. = FALSE)
+        NULL
+      })
+      if (is.null(answer)) {
+        .shad_dt_server_error(id, result$request_id, session)
+        return(invisible(NULL))
+      }
+      response <- tryCatch(
+        .shad_dt_response(answer, result, columns, row_key),
+        error = function(e) {
+          warning(sprintf("server-backed data table response failed: %s", conditionMessage(e)),
+                  call. = FALSE)
+          NULL
+        }
+      )
+      if (is.null(response)) {
+        .shad_dt_server_error(id, result$request_id, session)
+        return(invisible(NULL))
+      }
+      shad_invoke(id, "setServerPage", list(response), session)
+      invisible(NULL)
+    },
+    ignoreNULL = TRUE,
+    domain = session
+  )
+  session$onSessionEnded(function() observer$destroy())
+  invisible(observer)
+}
+
 #' Interactive data table
 #'
 #' A shadcn-styled data table: client-side multi-sort (Shift+click), global and

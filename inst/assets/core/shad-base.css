@@ -62,6 +62,15 @@
 .shad-icon--sm { width: 0.875rem; height: 0.875rem; }
 .shad-icon--lg { width: 1.25rem; height: 1.25rem; }
 
+/* Directional icons opt in explicitly. The marker is intentionally narrow:
+   refresh, sort, play, and status icons must never be mirrored implicitly. */
+[dir="rtl"] .shad-icon--directional[data-direction="forward"],
+[dir="rtl"] .shad-icon--directional[data-direction="back"],
+[dir="rtl"] .shad-icon--directional[data-direction="start"],
+[dir="rtl"] .shad-icon--directional[data-direction="end"] {
+  transform: scaleX(-1);
+}
+
 /* ------------------------------------------------------------------ */
 /* Scope / canvas                                                      */
 /* ------------------------------------------------------------------ */
@@ -178,8 +187,8 @@
 }
 .shad-blockquote {
   margin-top: var(--shad-space-6);
-  border-left: 2px solid var(--shad-border);
-  padding-left: var(--shad-space-6);
+  border-inline-start: 2px solid var(--shad-border);
+  padding-inline-start: var(--shad-space-6);
   font-style: italic;
 }
 .shad-code {
@@ -207,7 +216,179 @@
 }
 .shad-list {
   margin: var(--shad-space-6) 0 0;
-  padding-left: var(--shad-space-6);
+  padding-inline-start: var(--shad-space-6);
   list-style: disc;
 }
 .shad-list > li + li { margin-top: var(--shad-space-2); }
+
+/* ------------------------------------------------------------------ */
+/* Utility elements: keyboard groups, code blocks, and scroll fades    */
+/* ------------------------------------------------------------------ */
+.shad-kbd-group {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--shad-space-1);
+}
+.shad-kbd-group__separator {
+  color: var(--shad-muted-foreground);
+  user-select: none;
+}
+
+.shad-code-block {
+  min-inline-size: 0;
+  overflow: hidden;
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  background: var(--shad-muted);
+  color: var(--shad-foreground);
+}
+.shad-code-block__header {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  min-block-size: 2.5rem;
+  padding: var(--shad-space-2) var(--shad-space-4);
+  border-block-end: 1px solid var(--shad-border);
+  font-size: var(--shad-text-sm);
+}
+.shad-code-block__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: var(--shad-font-weight-medium);
+}
+.shad-code-block__language {
+  color: var(--shad-muted-foreground);
+  font-family: var(--shad-font-mono);
+  font-size: var(--shad-text-xs);
+}
+.shad-code-block__controls {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  margin-inline-start: auto;
+}
+.shad-code-block__copy {
+  cursor: pointer;
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-sm);
+  background: var(--shad-background);
+  padding: var(--shad-space-1) var(--shad-space-2);
+  color: var(--shad-foreground);
+  font: inherit;
+  font-size: var(--shad-text-xs);
+}
+.shad-code-block__copy:focus-visible,
+.shad-scroll-fade:focus-visible {
+  outline: 2px solid var(--shad-ring);
+  outline-offset: 2px;
+}
+.shad-code-block__status {
+  min-inline-size: 4.5rem;
+  color: var(--shad-muted-foreground);
+  font-size: var(--shad-text-xs);
+}
+.shad-code-block__pre {
+  display: flex;
+  max-block-size: 30rem;
+  margin: 0;
+  overflow: auto;
+  padding: var(--shad-space-4);
+  font-family: var(--shad-font-mono);
+  font-size: var(--shad-text-sm);
+  line-height: 1.5;
+  tab-size: 2;
+}
+.shad-code-block__gutter {
+  flex: 0 0 auto;
+  min-inline-size: 2.5rem;
+  margin-inline-end: var(--shad-space-4);
+  padding-inline-end: var(--shad-space-3);
+  border-inline-end: 1px solid var(--shad-border);
+  color: var(--shad-muted-foreground);
+  text-align: end;
+  user-select: none;
+  white-space: pre;
+}
+.shad-code-block__code {
+  display: block;
+  min-inline-size: max-content;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  white-space: pre;
+}
+
+.shad-scroll-fade {
+  display: block;
+  inline-size: 100%;
+  min-block-size: 2rem;
+  min-inline-size: 2rem;
+  overflow: auto;
+  border: 1px solid transparent;
+  outline: 0;
+  scrollbar-color: var(--shad-muted-foreground) transparent;
+}
+.shad-scroll-fade[data-axis="vertical"] {
+  overflow-x: hidden;
+  mask-image: linear-gradient(
+    to bottom, transparent, black var(--shad-space-4),
+    black calc(100% - var(--shad-space-4)), transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom, transparent, black var(--shad-space-4),
+    black calc(100% - var(--shad-space-4)), transparent
+  );
+}
+.shad-scroll-fade[data-axis="horizontal"] {
+  --shad-scroll-fade-inline-direction: to right;
+  overflow-y: hidden;
+  mask-image: linear-gradient(
+    var(--shad-scroll-fade-inline-direction), transparent, black var(--shad-space-4),
+    black calc(100% - var(--shad-space-4)), transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    var(--shad-scroll-fade-inline-direction), transparent, black var(--shad-space-4),
+    black calc(100% - var(--shad-space-4)), transparent
+  );
+}
+.shad-scroll-fade[data-axis="both"] {
+  --shad-scroll-fade-inline-direction: to right;
+  mask-image:
+    linear-gradient(to bottom, transparent, black var(--shad-space-4), black calc(100% - var(--shad-space-4)), transparent),
+    linear-gradient(var(--shad-scroll-fade-inline-direction), transparent, black var(--shad-space-4), black calc(100% - var(--shad-space-4)), transparent);
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent, black var(--shad-space-4), black calc(100% - var(--shad-space-4)), transparent),
+    linear-gradient(var(--shad-scroll-fade-inline-direction), transparent, black var(--shad-space-4), black calc(100% - var(--shad-space-4)), transparent);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+:where([dir="rtl"]) .shad-scroll-fade[data-axis="horizontal"],
+:where([dir="rtl"]) .shad-scroll-fade[data-axis="both"] {
+  --shad-scroll-fade-inline-direction: to left;
+}
+
+@media (forced-colors: active) {
+  .shad-code-block {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+  .shad-code-block__copy {
+    border-color: ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+  }
+  .shad-scroll-fade[data-axis="vertical"],
+  .shad-scroll-fade[data-axis="horizontal"],
+  .shad-scroll-fade[data-axis="both"] {
+    border-color: CanvasText;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .shad-code-block__copy:focus-visible,
+  .shad-scroll-fade:focus-visible {
+    outline-color: Highlight;
+  }
+}

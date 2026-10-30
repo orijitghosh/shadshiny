@@ -100,6 +100,7 @@ if (interactive()) {
 \seealso{
 Other shadshiny data table:
 \code{\link[=shad_col]{shad_col()}},
+\code{\link[=shad_data_table_server]{shad_data_table_server()}},
 \code{\link{shad_fmt}},
 \code{\link[=update_shad_data_table]{update_shad_data_table()}}
 }

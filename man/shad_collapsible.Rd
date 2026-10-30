@@ -29,6 +29,8 @@ shad_collapsible("c", trigger = shad_button("Toggle"), "Hidden content",
                  open = TRUE)
 }
 \seealso{
+\code{\link[=update_shad_collapsible]{update_shad_collapsible()}}
+
 Other shadshiny tier-3 components:
 \code{\link[=shad_accordion]{shad_accordion()}},
 \code{\link[=shad_alert_dialog]{shad_alert_dialog()}},

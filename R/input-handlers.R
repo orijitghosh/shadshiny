@@ -19,11 +19,11 @@ register_shad_input_handlers <- function() {
     as.integer(value[[1]]) + 1L
   }, force = TRUE)
 
-  # data-table: compound interaction state {selected, sort, filter, page,
-  # pageSize}. Normalise `selected` to a plain character vector (JSON delivers
-  # an empty array as list()) and spell out the sort keys; leave the rest as the
-  # natural nested list so `input$tbl$filter`, `input$tbl$page`, etc. read
-  # cleanly.
+  # data-table: compound value {selected, sort, filter, page, pageSize}, plus
+  # requestId in experimental server mode. Normalise `selected` to a plain
+  # character vector (JSON delivers an empty array as list()) and spell out
+  # the sort keys; leave the rest as the natural nested list so
+  # `input$tbl$filter`, `input$tbl$page`, etc. read cleanly.
   shiny::registerInputHandler("shadshiny.dataTable", function(value, session, name) {
     if (is.null(value)) return(NULL)
     sel <- value$selected
@@ -36,6 +36,7 @@ register_shad_input_handlers <- function() {
     value$sort <- lapply(value$sort, function(k) {
       list(column = k$col, direction = k$dir)
     })
+    if (!is.null(value$requestId)) value$requestId <- as.integer(value$requestId)
     value
   }, force = TRUE)
 

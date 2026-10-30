@@ -11,7 +11,11 @@ All paths relative to `inst/assets/`. Every file is complete and self-parsable; 
 - `shad-animations.css` — every keyframe (fade/zoom/dialog/pop/slide/collapse/spin/skeleton/progress/caret/check-draw) + motion utility classes (`shad-anim-overlay/dialog/pop/sheet`) keyed to `data-state`/`data-side`/`data-align`; `prefers-reduced-motion` kill-switch.
 - `shad-runtime.js` — `window.shad`: FloatingEngine (flip/shift/offset/arrow, shared rAF-batched scroll/resize), DismissLayer (stack; Esc/outside topmost-only), FocusTrap, RovingTabindex (+1 s typeahead), Presence (animated unmount), ScrollLock (ref-counted, scrollbar-compensated), Portal (comment-marker restore), `uid/util`, registry (`register/init/get/destroy/autoInit`, plus the init-time `data-shad-open` / `data-shad-transient` attributes behind `shad_show_dialog()`). Load FIRST.
 
-## components/ (72 dirs)
+## components/
+
+The authoritative CSS and JavaScript input lists are recorded in
+`dist/manifest.json`; this document intentionally does not duplicate their
+counts.
 Tier 1 (CSS-only: css + html + README): `button` (6 variants × 4 sizes, loading), `badge` (4 variants), `card`, `alert` (default/destructive), `separator`, `skeleton`, `avatar` (sizes, group), `label`, `breadcrumb` (ellipsis), `table` (striped/hover/sticky), `typography` (thin pointer to base classes), `progress` (determinate/indeterminate), `aspect-ratio`, `spinner`, `item` (list-row: media/content/actions/header/footer, group + separator), `empty` (empty-state: media/title/description/content), `button-group` (segmented, horizontal/vertical, text + separator).
 
 Tier 2 (+ js): `input`, `textarea` (autosize), `checkbox` (indeterminate, check draw), `radio-group`, `switch`, `slider` (single/range/marks), `toggle`, `toggle-group` (single/multiple), `select` (listbox, typeahead, groups), `native-select` (styled real `<select>`, groups, sizes), `combobox` (single/multi + badges), `input-otp` (single hidden input), `form-field` (aria wiring), `calendar` (APG grid, range), `date-picker`, `input-group` (CSS-only field shell: inline/block addons, focus/invalid ring; wraps input/textarea).
@@ -34,7 +38,7 @@ Built by `npm run build:assets` (`tools/build-assets.mjs`) and committed, so ins
 Edit the per-component sources, never `dist/`. `shadshiny_dependency()` serves the bundle when present; `options(shadshiny.assets = "source")` forces the split files.
 
 ## demo/
-- `kitchen-sink.html` — every component/variant, sticky toolbar with dark toggle (flips `.dark` + `data-bs-theme` on `<html>`) and theme-preset select (`data-shad-theme` on the page root); loads all 49 CSS + runtime + 34 JS in dependency order; `shad.autoInit()`.
+- `kitchen-sink.html` — every component/variant, sticky toolbar with dark toggle (flips `.dark` + `data-bs-theme` on `<html>`) and theme-preset select (`data-shad-theme` on the page root); loads every input listed in `dist/manifest.json` in dependency order; `shad.autoInit()`.
 
 ## Deviations & decisions
 0. **Scrolling and focus are never page-level side effects.** No component

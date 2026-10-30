@@ -17,5 +17,5 @@
 :disabled + .shad-label,
 [data-disabled] .shad-label {
   cursor: not-allowed;
-  opacity: 0.5;
+  color: var(--shad-muted-foreground);
 }

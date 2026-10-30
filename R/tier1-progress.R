@@ -7,7 +7,7 @@
 #' @param indeterminate If `TRUE`, renders the indeterminate animation.
 #'   Defaults to `TRUE` when `value` is `NULL`.
 #' @param inputId Optional id (enables [update_shad_progress()]).
-#' @param label Accessible label (used for indeterminate bars).
+#' @param label Accessible label for the progress bar.
 #' @param class Extra CSS classes.
 #' @param ... Extra attributes.
 #' @returns A `<div class="shad-progress" role="progressbar">`.
@@ -33,7 +33,8 @@ shad_progress <- function(value = NULL, max = 100, indeterminate = is.null(value
       id = inputId,
       class = shad_class("shad-progress", extra = class),
       role = "progressbar", `aria-valuemin` = "0", `aria-valuemax` = as.character(max),
-      `aria-valuenow` = as.character(value), `data-state` = state, ...,
+      `aria-valuenow` = as.character(value), `aria-label` = label,
+      `data-state` = state, ...,
       htmltools::tags$div(
         class = "shad-progress__indicator",
         style = sprintf("transform: translateX(-%s%%);", format(100 - pct, digits = 6))

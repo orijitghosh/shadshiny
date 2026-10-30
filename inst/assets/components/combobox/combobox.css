@@ -23,7 +23,7 @@
   color: var(--shad-foreground);
   box-shadow: var(--shad-shadow-xs);
   cursor: pointer;
-  text-align: left;
+  text-align: start;
   transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
               box-shadow var(--shad-duration-fast) var(--shad-ease-out);
 }
@@ -43,7 +43,7 @@
   white-space: nowrap;
 }
 .shad-combobox__chevrons {
-  margin-left: auto;
+  margin-inline-start: auto;
   color: var(--shad-muted-foreground);
   width: 1rem;
   height: 1rem;

@@ -18,6 +18,8 @@ An icon tag carrying the shadshiny asset dependency.
 Wrap a raw \verb{<svg>} string (e.g. any Lucide glyph pasted from
 \url{https://lucide.dev}) with the \code{.shad-icon} sizing class, so icons beyond
 the built-in set can be used anywhere a \code{\link[=shad_icon]{shad_icon()}} is accepted.
+Because string input is inserted as trusted raw SVG, never pass untrusted or
+user-controlled content to this function.
 }
 \examples{
 shad_icon_raw('<svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>')
