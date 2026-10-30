@@ -66,11 +66,15 @@ test_that("server-created dialogs open themselves and clean up on close", {
   wait_for_dom("document.querySelector('.shad-dialog__content[data-state=\"open\"]') !== null")
   expect_true(app$get_value(input = "keptdlg"))
   app$run_js("document.getElementById('keptdlg').__shadInstance.close()")
-  wait_for_dom(paste0(
-    "Array.from(document.querySelectorAll('body > .shad-dialog__content[data-state=\"closed\"]'))",
-    ".some(function(x) { return x.textContent.indexOf('Kept') !== -1; })"
-  ))
+  # Wait for the settled state, not the exit animation: the closed panel only
+  # sits under <body> until Presence finishes, then returns to its root.
+  wait_for_dom("document.querySelector('#keptdlg > .shad-dialog__content[data-state=\"closed\"][hidden]') !== null")
   expect_equal(count("#keptdlg"), 1)
+  expect_false(app$wait_for_value(input = "keptdlg", ignore = list(TRUE, NULL)))
+
+  app$run_js("document.getElementById('keptdlg').__shadInstance.open()")
+  wait_for_dom("document.querySelector('body > .shad-dialog__content[data-state=\"open\"]') !== null")
+  expect_true(app$wait_for_value(input = "keptdlg", ignore = list(FALSE, NULL)))
 
   expect_no_js_errors(app)
 })

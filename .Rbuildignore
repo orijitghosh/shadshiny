@@ -11,6 +11,7 @@
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^HANDOFF\.md$
+^codecov\.yml$
 ^\.vscode$
 ^tests/testthat/_snaps$
 ^vignettes/articles$

@@ -31,6 +31,10 @@ navbar:
           href: articles/charts.html
         - text: Streaming chat
           href: articles/chat.html
+        - text: Structured chat workbench
+          href: articles/chat-workbench.html
+        - text: Questionnaire workflows
+          href: articles/questionnaire.html
         - text: Layout & composition
           href: articles/layout.html
         - text: The server API
@@ -51,6 +55,8 @@ articles:
       - data-tables
       - charts
       - chat
+      - chat-workbench
+      - questionnaire
       - layout
       - server-api
       - overlays-and-server
@@ -120,7 +126,11 @@ reference:
       - shad_table_cell
       - shad_table_caption
       - shad_kbd
+      - shad_kbd_group
       - shad_code
+      - shad_code_block
+      - shad_scroll_fade
+      - shad_shimmer
       - shad_h1
       - shad_h2
       - shad_h3
@@ -163,6 +173,9 @@ reference:
       - shad_calendar
       - shad_date_picker
       - shad_form_field
+      - shad_fieldset
+      - shad_field_group
+      - shad_field_separator
       - shad_input_group
       - shad_input_group_addon
       - shad_input_group_text
@@ -263,6 +276,7 @@ reference:
       - update_shad_sidebar
       - update_shad_progress
       - update_shad_button
+      - bind_shad_task_button
       - update_shad_data_table
       - update_shad_stepper
       - update_shad_tree
@@ -293,12 +307,14 @@ reference:
       - shad_toast_dismiss
 
   - title: Data table
-    desc: A full-featured, client-side data table with sorting, filtering, paging, and selection.
+    desc: A full-featured data table with sorting, filtering, paging, and
+      selection, client-side or (experimental) lazily paged from the server.
     contents:
       - shad_data_table
       - shad_col
       - shad_fmt
       - update_shad_data_table
+      - shad_data_table_server
 
   - title: Dashboard & charts
     desc: KPI cards, chart wrappers, timelines, and plot theming. Everything
@@ -330,6 +346,14 @@ reference:
       - shad_dropzone
       - shad_date_presets
 
+  - title: Questionnaire
+    desc: An experimental multi-step questionnaire of native fieldsets, with
+      branching, skips, and bookmark restoration.
+    contents:
+      - shad_questionnaire
+      - shad_question
+      - update_shad_questionnaire
+
   - title: Forms & validation
     desc: A server-side validator with shadcn-styled field messaging. The
       shadcn/ui equivalent validates on the client; `shad_form_summary()` has no
@@ -349,11 +373,14 @@ reference:
       - shad_theme_from_registry
 
   - title: Chat
-    desc: A streaming chat module built on the chat kit. A shadshiny addition,
-      with no shadcn/ui counterpart.
+    desc: A streaming chat module built on the chat kit, and an experimental
+      structured workbench for sources, tools, and attachments. Shadshiny
+      additions, with no shadcn/ui counterpart.
     contents:
       - shad_chat_ui
       - shad_chat_server
+      - shad_chat_workbench_ui
+      - shad_chat_workbench_server
 
   - title: Utilities
     desc: Icons and the asset dependency.
