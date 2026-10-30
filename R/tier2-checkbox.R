@@ -15,6 +15,12 @@
 #' A shadcn checkbox. `input$<inputId>` is `TRUE`, `FALSE`, or
 #' `"indeterminate"`.
 #'
+#' By default clicks follow shadcn/ui (Radix): an indeterminate box becomes
+#' checked, and from then on clicks only toggle checked and unchecked. Only the
+#' server can set it back with `update_shad_checkbox(id, "indeterminate")`,
+#' which suits a "select all" box whose state comes from other inputs. Set
+#' `tristate = TRUE` to let the user click through all three states instead.
+#'
 #' @param inputId Input id.
 #' @param label Optional label shown next to the box.
 #' @param value Initial value: `TRUE`, `FALSE`, or `"indeterminate"`.
@@ -22,16 +28,21 @@
 #' @param disabled If `TRUE`, disables the control.
 #' @param description Optional help text below the row.
 #' @param class Extra CSS classes.
+#' @param tristate If `TRUE`, clicks cycle unchecked, checked, indeterminate,
+#'   then back to unchecked. A shadshiny addition; shadcn/ui has no
+#'   equivalent.
 #' @param ... Extra attributes on the checkbox button.
 #' @returns A checkbox row tag.
 #' @family shadshiny tier-2 components
 #' @examples
 #' shad_checkbox("terms", "Accept terms and conditions")
 #' shad_checkbox("all", "Select all", indeterminate = TRUE)
+#' shad_checkbox("filter", "Include archived", tristate = TRUE)
 #' @export
 shad_checkbox <- function(inputId, label = NULL, value = FALSE,
                           indeterminate = FALSE, disabled = FALSE,
-                          description = NULL, class = NULL, ...) {
+                          description = NULL, class = NULL,
+                          tristate = FALSE, ...) {
   value <- shiny::restoreInput(id = inputId, default = value)
   if (identical(value, "indeterminate")) indeterminate <- TRUE
   state <- if (isTRUE(indeterminate)) {
@@ -51,6 +62,7 @@ shad_checkbox <- function(inputId, label = NULL, value = FALSE,
     id = inputId,
     `aria-labelledby` = if (!is.null(label)) label_id else NULL,
     `data-disabled` = flag_attr(disabled),
+    `data-tristate` = flag_attr(tristate),
     disabled = flag_attr(disabled),
     ...,
     .shad_checkbox_indicators

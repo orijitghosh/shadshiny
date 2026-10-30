@@ -72,6 +72,24 @@ test_that("toggle-group items retain icon and disabled metadata", {
   expect_match(html, "disabled")
 })
 
+test_that("select and combobox keep the placeholder when a value is preselected", {
+  # The value span shows the selected label, so the browser needs the
+  # placeholder separately to restore it when the value is cleared.
+  sel <- as.character(shad_select("s", choices = c(Apple = "a", Pear = "p"),
+                                  selected = "p", placeholder = "Fruit"))
+  expect_match(sel, 'class="shad-select__value" data-placeholder-text="Fruit">Pear<')
+
+  cbx <- as.character(shad_combobox("c", choices = c(Apple = "a", Pear = "p"),
+                                    selected = "p", placeholder = "Fruit"))
+  expect_match(cbx, 'class="shad-combobox__value" data-placeholder-text="Fruit">Pear<')
+})
+
+test_that("checkbox tri-state cycling is opt-in", {
+  expect_match(as.character(shad_checkbox("all", "Select all", tristate = TRUE)),
+               "data-tristate")
+  expect_false(grepl("data-tristate", as.character(shad_checkbox("all", "Select all"))))
+})
+
 test_that("calendar caption layouts and year bounds reach the markup", {
   html <- as.character(shad_calendar("dob", month = "1993-06",
                                      caption_layout = "dropdown",

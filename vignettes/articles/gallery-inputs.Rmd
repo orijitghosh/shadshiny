@@ -49,13 +49,16 @@ demo(
 ## Checkbox & switch
 
 Both hold a single logical. `shad_checkbox()` also supports an
-`indeterminate` third state.
+`indeterminate` third state. As in shadcn/ui, a click turns it into a plain
+checked box and only the server can set it back; add `tristate = TRUE` to let
+clicks cycle through all three states.
 
 ```{r}
 demo(
   columns = TRUE, {
   shad_checkbox("tos", label = "I accept the terms", value = TRUE)
   shad_checkbox("mix", label = "Select all", indeterminate = TRUE)
+  shad_checkbox("tri", label = "Include archived", tristate = TRUE)
   shad_switch("notify", label = "Email notifications", value = TRUE,
               description = "We'll only email about account activity.")
 })

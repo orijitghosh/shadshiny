@@ -111,6 +111,7 @@ shad_select <- function(inputId, label = NULL, choices, selected = NULL,
         disabled = flag_attr(disabled),
         htmltools::tags$span(
           class = "shad-select__value",
+          `data-placeholder-text` = placeholder,
           if (!is.null(sel_label)) sel_label else placeholder
         ),
         .shad_select_chevron

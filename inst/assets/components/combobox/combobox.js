@@ -17,7 +17,10 @@
     const list = content.querySelector(".shad-combobox__list");
     const empty = content.querySelector(".shad-combobox__empty");
     const multiple = root.hasAttribute("data-multiple");
-    const placeholder = valueEl ? valueEl.textContent : "";
+    // see select.js: the value span holds the selected label, not the placeholder
+    const placeholder = valueEl
+      ? (valueEl.getAttribute("data-placeholder-text") ?? valueEl.textContent)
+      : "";
 
     let value = multiple ? [] : null;
     let open = false;
@@ -137,11 +140,11 @@
         renderItems(); renderTrigger(); emit();
         // stay open in multi mode (shadcn multi-combobox behavior)
       } else {
-        const changed = v !== value;
-        value = v;
+        // picking the selected item again clears it (shadcn combobox behavior)
+        value = v === value ? null : v;
         renderItems(); renderTrigger();
         doClose(); trigger.focus({ preventScroll: true });
-        if (changed) emit();
+        emit();
       }
     }
 

@@ -12,6 +12,7 @@ shad_checkbox(
   disabled = FALSE,
   description = NULL,
   class = NULL,
+  tristate = FALSE,
   ...
 )
 }
@@ -30,6 +31,10 @@ shad_checkbox(
 
 \item{class}{Extra CSS classes.}
 
+\item{tristate}{If \code{TRUE}, clicks cycle unchecked, checked, indeterminate,
+then back to unchecked. A shadshiny addition; shadcn/ui has no
+equivalent.}
+
 \item{...}{Extra attributes on the checkbox button.}
 }
 \value{
@@ -39,9 +44,17 @@ A checkbox row tag.
 A shadcn checkbox. \verb{input$<inputId>} is \code{TRUE}, \code{FALSE}, or
 \code{"indeterminate"}.
 }
+\details{
+By default clicks follow shadcn/ui (Radix): an indeterminate box becomes
+checked, and from then on clicks only toggle checked and unchecked. Only the
+server can set it back with \code{update_shad_checkbox(id, "indeterminate")},
+which suits a "select all" box whose state comes from other inputs. Set
+\code{tristate = TRUE} to let the user click through all three states instead.
+}
 \examples{
 shad_checkbox("terms", "Accept terms and conditions")
 shad_checkbox("all", "Select all", indeterminate = TRUE)
+shad_checkbox("filter", "Include archived", tristate = TRUE)
 }
 \seealso{
 Other shadshiny tier-2 components:

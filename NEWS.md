@@ -1,5 +1,16 @@
 # shadshiny 0.3.0.9000 (development version)
 
+* `shad_checkbox()` gains `tristate = TRUE`, letting clicks cycle unchecked,
+  checked, and indeterminate. The default keeps the shadcn/ui behavior, where
+  only the server can set the indeterminate state again.
+
+* Inputs can now return to their empty state. Clearing a `shad_select()` or
+  single `shad_combobox()` restores its placeholder instead of the label it
+  was created with; picking the selected item of a single combobox, or the
+  selected day of a single-mode calendar or date picker, clears it as in
+  shadcn/ui; and a non-numeric `update_shad_number_input()` value is ignored
+  instead of showing `NaN`.
+
 * Development hardening now runs every fixture-gated browser suite in CI,
   enforces an 82% repository coverage floor plus 80% patch coverage, tests the
   declared R 4.1 minimum explicitly, and selects local `Rscript` from `PATH`

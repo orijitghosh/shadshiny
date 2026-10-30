@@ -14,6 +14,7 @@ Pair with `label.shad-label` inside `div.shad-checkbox-row`.
 |---|---|
 | `data-state` | `checked` / `unchecked` / `indeterminate` (initial + live) |
 | `data-disabled` + `disabled` | disabled |
+| `data-tristate` | clicks cycle unchecked → checked → indeterminate (shadshiny addition) |
 | `aria-invalid="true"` | destructive border |
 
 ## Methods / Events
@@ -25,7 +26,8 @@ Pair with `label.shad-label` inside `div.shad-checkbox-row`.
 | `shad:change` | `{value}` |
 
 ## Keyboard
-Space toggles (native button click). Enter is suppressed per APG. Indeterminate → click ⇒ checked.
+Space toggles (native button click). Enter is suppressed per APG. Indeterminate → click ⇒ checked,
+unless `data-tristate` is set.
 
 ## A11y
 `role="checkbox"`, `aria-checked` (`mixed` for indeterminate), label via `aria-labelledby`.

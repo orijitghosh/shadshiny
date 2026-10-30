@@ -178,7 +178,8 @@ Worth adopting on their own; there is nothing to migrate *from*:
 - **Dates are ISO strings.** Convert with `as.Date(input$id)` when you need a
   `Date`.
 - **Checkbox tri-state.** `shad_checkbox()` can report `"indeterminate"` in
-  addition to `TRUE`/`FALSE`; guard with `isTRUE(input$id)`.
+  addition to `TRUE`/`FALSE`; guard with `isTRUE(input$id)`. Users can only
+  click back to it when the checkbox has `tristate = TRUE`.
 - **Overlays are UI-defined, server-toggled.** Unlike `showModal()`, a
   `shad_dialog()` lives in the UI and you open/close it by `id`
   (`shad_dialog_open("confirm")`) — Shiny-module safe via the session's ns.

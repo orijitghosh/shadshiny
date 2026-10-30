@@ -28,7 +28,9 @@
     const valueEl = trigger.querySelector(".shad-select__value");
     const scrollUp = content.querySelector('.shad-select__scroll-btn[data-dir="up"]');
     const scrollDown = content.querySelector('.shad-select__scroll-btn[data-dir="down"]');
-    const placeholder = valueEl.textContent;
+    // The R constructor renders the selected label into the value span, so
+    // the placeholder travels separately; hand-written markup may omit it.
+    const placeholder = valueEl.getAttribute("data-placeholder-text") ?? valueEl.textContent;
 
     let value = null;
     let open = false;

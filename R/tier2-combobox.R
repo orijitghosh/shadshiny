@@ -88,7 +88,8 @@ shad_combobox <- function(inputId, label = NULL, choices, selected = NULL,
         type = "button", class = "shad-combobox__trigger",
         `data-placeholder` = if (length(sel) == 0) NA else NULL,
         disabled = flag_attr(disabled),
-        htmltools::tags$span(class = "shad-combobox__value", trigger_text),
+        htmltools::tags$span(class = "shad-combobox__value",
+                             `data-placeholder-text` = placeholder, trigger_text),
         .shad_combobox_chevrons
       ),
       htmltools::tags$div(

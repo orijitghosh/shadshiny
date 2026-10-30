@@ -90,7 +90,11 @@
 
     return {
       getValue: function () { return value; },
-      setValue: function (v) { set(parseFloat(v)); },
+      setValue: function (v) {
+        var n = parseFloat(v);
+        if (isNaN(n)) { render(); return; } // same rule as typed junk
+        set(n);
+      },
       setDisabled: function (v) {
         root.toggleAttribute("data-disabled", !!v);
         render();

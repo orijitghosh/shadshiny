@@ -183,7 +183,8 @@
     function pick(d) {
       if (disabled(d)) return;
       if (mode === "single") {
-        selStart = d;
+        // picking the selected day again clears it (react-day-picker behavior)
+        selStart = sameDay(d, selStart) ? null : d;
       } else {
         if (!selStart || (selStart && selEnd)) { selStart = d; selEnd = null; }
         else if (d < selStart) { selEnd = selStart; selStart = d; }

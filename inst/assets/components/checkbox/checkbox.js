@@ -2,7 +2,8 @@
 /* shadshiny — checkbox behavior.
    Markup: <button data-shad="checkbox" class="shad-checkbox" role="checkbox">
    Value model: true | false | "indeterminate".
-   Clicking an indeterminate box checks it (Radix behavior). */
+   Clicking an indeterminate box checks it (Radix behavior). With
+   [data-tristate], clicks cycle unchecked -> checked -> indeterminate. */
 (function () {
   "use strict";
 
@@ -28,7 +29,11 @@
     }
     function toggle() {
       if (el.hasAttribute("data-disabled") || el.disabled) return;
-      set(value === "indeterminate" ? true : !value);
+      if (el.hasAttribute("data-tristate")) {
+        set(value === true ? "indeterminate" : value !== "indeterminate");
+      } else {
+        set(value === "indeterminate" ? true : !value);
+      }
     }
     function onClick(ev) { ev.preventDefault(); toggle(); }
     function onKeydown(ev) {
