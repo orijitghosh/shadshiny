@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- FILE: inst/assets/components/form-message/form-message.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — form-message</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="../label/label.css">
+<link rel="stylesheet" href="../input/input.css">
+<link rel="stylesheet" href="../form-field/form-field.css">
+<link rel="stylesheet" href="form-message.css">
+<style>body { margin: 2rem; background: var(--shad-background); font-family: var(--shad-font-sans); color: var(--shad-foreground); } .demo { max-width: 26rem; margin: 0 auto 2.5rem; display: grid; gap: 1.5rem; }</style>
+</head>
+<body>
+<div class="demo">
+  <div class="shad-form-summary" role="alert" aria-labelledby="fs-title">
+    <div class="shad-form-summary__title" id="fs-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      2 fields need attention
+    </div>
+    <ul class="shad-form-summary__list">
+      <li><a href="#email">Email is not a valid address</a></li>
+      <li><a href="#pw">Password must be at least 8 characters</a></li>
+    </ul>
+  </div>
+
+  <div class="shad-form-field" data-invalid>
+    <label class="shad-label" for="email">Email</label>
+    <input class="shad-input" id="email" type="email" value="jane@" aria-invalid="true" aria-describedby="email-msg">
+    <div class="shad-form-message shad-form-message--error" id="email-msg">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Enter a valid email address.
+    </div>
+  </div>
+
+  <div class="shad-form-field">
+    <label class="shad-label" for="user">Username</label>
+    <input class="shad-input" id="user" value="jane-doe" aria-describedby="user-msg">
+    <div class="shad-form-message shad-form-message--success" id="user-msg">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 7"/></svg>
+      Username is available.
+    </div>
+  </div>
+
+  <div class="shad-form-field">
+    <label class="shad-label" for="pw">Password</label>
+    <input class="shad-input" id="pw" type="password" value="hunter2" aria-describedby="pw-msg">
+    <div class="shad-form-message shad-form-message--warning" id="pw-msg">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.7 3.86a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+      Weak password — add a symbol or number.
+    </div>
+  </div>
+
+  <div class="shad-form-field">
+    <label class="shad-label" for="bio">Bio</label>
+    <input class="shad-input" id="bio" value="R developer and cheese enthusiast" aria-describedby="bio-count">
+    <div class="shad-form-message shad-form-message--counter" id="bio-count" data-state="over">142 / 120</div>
+  </div>
+</div>
+</body>
+</html>

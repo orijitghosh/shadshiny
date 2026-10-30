@@ -1,0 +1,197 @@
+/* FILE: inst/assets/components/attachment/attachment.css */
+/* shadshiny — attachment. File/media chip for chat composers. CSS-only;
+   upload lifecycle driven by data-state (no JS binding).
+   Orientation: (none = horizontal) | --vertical. Sizes: --sm | --xs.
+   DECISION: shimmer/pulse keyframes live here (not shad-animations.css) so
+   the component passes the "tokens + base + component css only" rule. */
+
+.shad-attachment {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2_5);
+  padding: var(--shad-space-2);
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  background-color: var(--shad-background);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-foreground);
+  max-width: 20rem;
+  overflow: hidden;               /* clips the uploading shimmer */
+}
+
+/* ---- orientation ---- */
+.shad-attachment--vertical {
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  max-width: 10rem;
+  gap: var(--shad-space-2);
+}
+.shad-attachment--vertical .shad-attachment__media {
+  width: 100%;
+  height: 5rem;
+}
+.shad-attachment--vertical .shad-attachment__actions {
+  position: absolute;
+  inset-block-start: var(--shad-space-1);
+  inset-inline-end: var(--shad-space-1);
+  margin: 0;
+}
+
+/* ---- sizes ---- */
+.shad-attachment--sm { gap: var(--shad-space-2); padding: var(--shad-space-1_5); font-size: var(--shad-text-xs); line-height: var(--shad-leading-xs); }
+.shad-attachment--sm .shad-attachment__media { width: 2rem; height: 2rem; }
+.shad-attachment--xs { gap: var(--shad-space-1_5); padding: var(--shad-space-1); font-size: var(--shad-text-xs); line-height: var(--shad-leading-xs); }
+.shad-attachment--xs .shad-attachment__media { width: 1.5rem; height: 1.5rem; }
+
+/* ---- parts ---- */
+.shad-attachment__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--shad-radius-sm);
+  overflow: hidden;
+}
+.shad-attachment__media--icon {
+  background-color: var(--shad-muted);
+  color: var(--shad-muted-foreground);
+}
+.shad-attachment__media--image img,
+.shad-attachment__media--image svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.shad-attachment__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--shad-space-0_5);
+  min-width: 0;
+  flex: 1;
+}
+.shad-attachment__title {
+  font-weight: var(--shad-font-weight-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.shad-attachment__description {
+  font-size: var(--shad-text-xs);
+  line-height: var(--shad-leading-xs);
+  color: var(--shad-muted-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shad-attachment__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+  margin-inline-start: auto;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;                     /* above the __trigger overlay */
+}
+.shad-attachment__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--shad-radius-sm);
+  color: var(--shad-muted-foreground);
+  cursor: pointer;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out),
+              color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-attachment__action:hover {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-attachment__action:focus-visible {
+  outline: none;
+  box-shadow: var(--shad-focus-shadow);
+}
+
+/* full-card click overlay */
+.shad-attachment__trigger {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: transparent;
+  border: 0;
+  border-radius: inherit;
+  cursor: pointer;
+}
+.shad-attachment__trigger:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--shad-ring), var(--shad-focus-shadow);
+}
+.shad-attachment:has(.shad-attachment__trigger:hover) {
+  background-color: color-mix(in oklab, var(--shad-accent) 50%, transparent);
+}
+
+/* ---- upload lifecycle: data-state ---- */
+/* uploading: progress shimmer sweep + dimmed content */
+.shad-attachment[data-state="uploading"] .shad-attachment__content,
+.shad-attachment[data-state="uploading"] .shad-attachment__media { opacity: 0.7; }
+.shad-attachment[data-state="uploading"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in oklab, var(--shad-foreground) 8%, transparent) 50%,
+    transparent 100%);
+  transform: translateX(-100%);
+  animation: shad-attachment-shimmer 1.5s var(--shad-ease-in-out) infinite;
+}
+@keyframes shad-attachment-shimmer {
+  to { transform: translateX(100%); }
+}
+
+/* processing: pulse the media tile */
+.shad-attachment[data-state="processing"] .shad-attachment__media {
+  animation: shad-attachment-pulse 2s var(--shad-ease-in-out) infinite;
+}
+@keyframes shad-attachment-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+/* error: destructive tint */
+.shad-attachment[data-state="error"] {
+  border-color: color-mix(in oklab, var(--shad-destructive) 40%, transparent);
+  background-color: color-mix(in oklab, var(--shad-destructive) 5%, transparent);
+}
+.shad-attachment[data-state="error"] .shad-attachment__media--icon {
+  background-color: color-mix(in oklab, var(--shad-destructive) 10%, transparent);
+  color: var(--shad-destructive);
+}
+.shad-attachment[data-state="error"] .shad-attachment__description {
+  color: var(--shad-destructive);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shad-attachment::after,
+  .shad-attachment .shad-attachment__media { animation: none !important; }
+}
+
+/* ---- attachment-group: horizontally scrollable row ---- */
+.shad-attachment-group {
+  display: flex;
+  gap: var(--shad-space-2);
+  overflow-x: auto;
+  padding: var(--shad-space-1);   /* room for focus rings */
+  scrollbar-width: thin;
+}
+.shad-attachment-group > .shad-attachment { flex-shrink: 0; }

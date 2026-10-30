@@ -66,10 +66,14 @@ Other shadshiny tier-1 components:
 [`shad_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_button.md),
 [`shad_button_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_button_group.md),
 [`shad_card()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md),
+[`shad_code_block()`](https://orijitghosh.github.io/shadshiny/reference/shad_code_block.md),
 [`shad_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md),
+[`shad_kbd_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_kbd_group.md),
 [`shad_label()`](https://orijitghosh.github.io/shadshiny/reference/shad_label.md),
 [`shad_progress()`](https://orijitghosh.github.io/shadshiny/reference/shad_progress.md),
+[`shad_scroll_fade()`](https://orijitghosh.github.io/shadshiny/reference/shad_scroll_fade.md),
 [`shad_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_separator.md),
+[`shad_shimmer()`](https://orijitghosh.github.io/shadshiny/reference/shad_shimmer.md),
 [`shad_skeleton()`](https://orijitghosh.github.io/shadshiny/reference/shad_skeleton.md),
 [`shad_spinner()`](https://orijitghosh.github.io/shadshiny/reference/shad_spinner.md),
 [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md),
@@ -86,7 +90,9 @@ shad_empty(
 )
 #> <div class="shad-empty">
 #>   <div class="shad-empty__header">
-#>     <div class="shad-empty__media shad-empty__media--icon" aria-hidden="true"><svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg></div>
+#>     <div class="shad-empty__media shad-empty__media--icon" aria-hidden="true">
+#>       <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+#>     </div>
 #>     <div class="shad-empty__title">No projects yet</div>
 #>     <div class="shad-empty__description">Create your first project to get started.</div>
 #>   </div>

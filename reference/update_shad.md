@@ -54,6 +54,10 @@ update_shad_tabs(id, selected, session = shiny::getDefaultReactiveDomain())
 
 update_shad_accordion(id, value, session = shiny::getDefaultReactiveDomain())
 
+update_shad_collapsible(id, open, session = shiny::getDefaultReactiveDomain())
+
+update_shad_resizable(id, sizes, session = shiny::getDefaultReactiveDomain())
+
 update_shad_pagination(
   id,
   selected,
@@ -106,6 +110,14 @@ update_shad_button(
   For `update_shad_combobox()`, whether the combobox is in multiple mode
   (forces an array even for a single value).
 
+- open:
+
+  For `update_shad_collapsible()`, the logical open state.
+
+- sizes:
+
+  For `update_shad_resizable()`, the non-negative panel sizes.
+
 - collapsed, mobile_open, active:
 
   For `update_shad_sidebar()`; `NULL` leaves that facet unchanged.
@@ -129,6 +141,7 @@ Invisibly `NULL`; called for its side effect.
 ## See also
 
 Other shadshiny server API:
+[`bind_shad_task_button()`](https://orijitghosh.github.io/shadshiny/reference/bind_shad_task_button.md),
 [`shad_message_scroller_to_bottom()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller_to_bottom.md),
 [`shad_overlay_server`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md),
 [`shad_remove_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_remove_dialog.md),

@@ -1,0 +1,19 @@
+/* FILE: inst/assets/components/separator/separator.css */
+/* shadshiny — separator. Horizontal (default) and vertical. */
+
+.shad-separator {
+  flex-shrink: 0;
+  background-color: var(--shad-border);
+  border: 0;
+}
+.shad-separator[data-orientation="horizontal"],
+.shad-separator:not([data-orientation]) {
+  height: 1px;
+  width: 100%;
+}
+.shad-separator[data-orientation="vertical"] {
+  width: 1px;
+  height: auto;
+  align-self: stretch;
+  min-height: 1rem;
+}

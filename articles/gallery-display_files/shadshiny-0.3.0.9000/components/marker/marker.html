@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- FILE: inst/assets/components/marker/marker.html -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — marker</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="marker.css">
+<style>
+  html { background: var(--shad-background); }
+  body { margin: 0; }
+  .demo { padding: 2rem; max-width: 480px; display: grid; gap: 2.5rem; }
+  .demo-toolbar { display: flex; gap: .5rem; }
+  .demo-toolbar button { font: 500 .75rem/1 var(--shad-font-mono); padding: .375rem .625rem; border: 1px solid var(--shad-border); border-radius: .375rem; background: var(--shad-background); color: var(--shad-foreground); cursor: pointer; }
+  .demo-label { font: 500 .6875rem/1 var(--shad-font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--shad-muted-foreground); margin: 0 0 .75rem; }
+  .demo-col { display: grid; gap: 1rem; }
+</style>
+</head>
+<body class="shad-scope">
+<div class="demo">
+  <div class="demo-toolbar">
+    <button type="button" onclick="document.documentElement.classList.toggle('dark')">toggle dark</button>
+    <button type="button" onclick="var h=document.documentElement;h.dir=h.dir==='rtl'?'ltr':'rtl'">toggle rtl</button>
+  </div>
+
+  <section>
+    <p class="demo-label">default + icon</p>
+    <div class="demo-col">
+      <div class="shad-marker shad-marker--default">
+        <span class="shad-marker__icon" aria-hidden="true">
+          <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+        </span>
+        <span class="shad-marker__content">Conversation started at 9:41 AM</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="demo-label">border (bottom rule)</p>
+    <div class="demo-col">
+      <div class="shad-marker shad-marker--border">
+        <span class="shad-marker__icon" aria-hidden="true">
+          <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        </span>
+        <span class="shad-marker__content">Today</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="demo-label">separator (centered)</p>
+    <div class="demo-col">
+      <div class="shad-marker shad-marker--separator">
+        <span class="shad-marker__content">New messages</span>
+      </div>
+      <div class="shad-marker shad-marker--separator">
+        <span class="shad-marker__icon" aria-hidden="true">
+          <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        </span>
+        <span class="shad-marker__content">Yesterday</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="demo-label">streaming shimmer + role=status</p>
+    <div class="demo-col">
+      <div class="shad-marker shad-marker--default shad-marker--shimmer" role="status">
+        <span class="shad-marker__icon" aria-hidden="true">
+          <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </span>
+        <span class="shad-marker__content">Thinking&hellip;</span>
+      </div>
+      <div class="shad-marker shad-marker--default shad-marker--shimmer" role="status">
+        <span class="shad-marker__content">Searching the web for R release notes&hellip;</span>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

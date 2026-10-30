@@ -58,11 +58,15 @@ Other shadshiny tier-1 components:
 [`shad_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_button.md),
 [`shad_button_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_button_group.md),
 [`shad_card()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md),
+[`shad_code_block()`](https://orijitghosh.github.io/shadshiny/reference/shad_code_block.md),
 [`shad_empty()`](https://orijitghosh.github.io/shadshiny/reference/shad_empty.md),
 [`shad_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md),
+[`shad_kbd_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_kbd_group.md),
 [`shad_label()`](https://orijitghosh.github.io/shadshiny/reference/shad_label.md),
 [`shad_progress()`](https://orijitghosh.github.io/shadshiny/reference/shad_progress.md),
+[`shad_scroll_fade()`](https://orijitghosh.github.io/shadshiny/reference/shad_scroll_fade.md),
 [`shad_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_separator.md),
+[`shad_shimmer()`](https://orijitghosh.github.io/shadshiny/reference/shad_shimmer.md),
 [`shad_skeleton()`](https://orijitghosh.github.io/shadshiny/reference/shad_skeleton.md),
 [`shad_spinner()`](https://orijitghosh.github.io/shadshiny/reference/shad_spinner.md),
 [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md),
@@ -77,11 +81,15 @@ shad_breadcrumb(items = c(Home = "/", Docs = "/docs", Breadcrumb = NA))
 #>     <li class="shad-breadcrumb__item">
 #>       <a class="shad-breadcrumb__link" href="/">Home</a>
 #>     </li>
-#>     <li class="shad-breadcrumb__separator" role="presentation" aria-hidden="true"><svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></li>
+#>     <li class="shad-breadcrumb__separator" role="presentation" aria-hidden="true">
+#>       <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+#>     </li>
 #>     <li class="shad-breadcrumb__item">
 #>       <a class="shad-breadcrumb__link" href="/docs">Docs</a>
 #>     </li>
-#>     <li class="shad-breadcrumb__separator" role="presentation" aria-hidden="true"><svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></li>
+#>     <li class="shad-breadcrumb__separator" role="presentation" aria-hidden="true">
+#>       <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+#>     </li>
 #>     <li class="shad-breadcrumb__item">
 #>       <span class="shad-breadcrumb__page" role="link" aria-disabled="true" aria-current="page">Breadcrumb</span>
 #>     </li>

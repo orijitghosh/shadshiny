@@ -107,13 +107,17 @@ shad_attachment("q3-report.pdf", description = "PDF · 2.4 MB",
                 media = "file",
                 actions = shad_attachment_action("x", "Remove attachment"))
 #> <div class="shad-attachment">
-#>   <div class="shad-attachment__media shad-attachment__media--icon" aria-hidden="true"><svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg></div>
+#>   <div class="shad-attachment__media shad-attachment__media--icon" aria-hidden="true">
+#>     <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+#>   </div>
 #>   <div class="shad-attachment__content">
 #>     <div class="shad-attachment__title">q3-report.pdf</div>
 #>     <div class="shad-attachment__description">PDF · 2.4 MB</div>
 #>   </div>
 #>   <div class="shad-attachment__actions">
-#>     <button type="button" class="shad-attachment__action" aria-label="Remove attachment"><svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+#>     <button type="button" class="shad-attachment__action" aria-label="Remove attachment">
+#>       <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+#>     </button>
 #>   </div>
 #> </div>
 ```

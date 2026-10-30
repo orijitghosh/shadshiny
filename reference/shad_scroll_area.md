@@ -66,7 +66,7 @@ Other shadshiny tier-3 components:
 ``` r
 shad_scroll_area(height = "12rem", "Lots of content...")
 #> <div class="shad-scroll-area" data-shad="scroll-area" style="height:12rem;">
-#>   <div class="shad-scroll-area__viewport">Lots of content...</div>
+#>   <div class="shad-scroll-area__viewport" tabindex="0">Lots of content...</div>
 #>   <div class="shad-scroll-area__scrollbar" data-orientation="vertical">
 #>     <div class="shad-scroll-area__thumb"></div>
 #>   </div>

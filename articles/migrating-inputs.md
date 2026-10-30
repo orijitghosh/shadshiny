@@ -191,7 +191,8 @@ Worth adopting on their own; there is nothing to migrate *from*:
 - **Checkbox tri-state.**
   [`shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/shad_checkbox.md)
   can report `"indeterminate"` in addition to `TRUE`/`FALSE`; guard with
-  `isTRUE(input$id)`.
+  `isTRUE(input$id)`. Users can only click back to it when the checkbox
+  has `tristate = TRUE`.
 - **Overlays are UI-defined, server-toggled.** Unlike
   [`showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html), a
   [`shad_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_dialog.md)

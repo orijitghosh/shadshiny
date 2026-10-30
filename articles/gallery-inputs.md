@@ -50,7 +50,9 @@ Code
 
 Both hold a single logical.
 [`shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/shad_checkbox.md)
-also supports an `indeterminate` third state.
+also supports an `indeterminate` third state. As in shadcn/ui, a click
+turns it into a plain checked box and only the server can set it back;
+add `tristate = TRUE` to let clicks cycle through all three states.
 
 ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggcGF0aGxlbmd0aD0iMSIgZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tbWludXMiIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTUgMTJoMTQiIC8+PC9zdmc+)
 
@@ -59,6 +61,10 @@ I accept the terms
 ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggcGF0aGxlbmd0aD0iMSIgZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tbWludXMiIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTUgMTJoMTQiIC8+PC9zdmc+)
 
 Select all
+
+![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tY2hlY2siIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggcGF0aGxlbmd0aD0iMSIgZD0iTTIwIDYgOSAxN2wtNS01IiAvPjwvc3ZnPg==)![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1jaGVja2JveF9faW5kaWNhdG9yIHNoYWQtY2hlY2tib3hfX2luZGljYXRvci0tbWludXMiIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0iTTUgMTJoMTQiIC8+PC9zdmc+)
+
+Include archived
 
 Email notifications
 
@@ -69,6 +75,7 @@ Code
 
     shad_checkbox("tos", label = "I accept the terms", value = TRUE)
     shad_checkbox("mix", label = "Select all", indeterminate = TRUE)
+    shad_checkbox("tri", label = "Include archived", tristate = TRUE)
     shad_switch("notify", label = "Email notifications", value = TRUE, description = "We'll only email about account activity.")
 
 ## Radio group

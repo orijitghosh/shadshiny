@@ -6,7 +6,7 @@ streams replies into the transcript.
 ## Usage
 
 ``` r
-shad_chat_server(id, handler, markdown = TRUE)
+shad_chat_server(id, handler, markdown = TRUE, allow_html = FALSE)
 ```
 
 ## Arguments
@@ -24,10 +24,17 @@ shad_chat_server(id, handler, markdown = TRUE)
 
   If `TRUE` (default), render assistant replies as Markdown.
 
+- allow_html:
+
+  If `TRUE`, allow raw HTML in assistant Markdown. Defaults to `FALSE`;
+  only use with trusted content.
+
 ## Value
 
-A list with `messages` (a reactive of the transcript), `clear()`, and
-`append(role, content)`.
+A list with `messages` (a reactive of the transcript), `busy` (a
+read-only reactive), `clear()`, `cancel()`, and `append(role, content)`.
+`clear()` also cancels an in-flight stream; `cancel()` stops only the
+in-flight stream.
 
 ## Details
 
@@ -42,6 +49,12 @@ A list with `messages` (a reactive of the transcript), `clear()`, and
   way.
 
 `history` is the list of prior messages (`list(role, content)`).
+
+Raw HTML in assistant Markdown is escaped by default. Set
+`allow_html = TRUE` only when every reply is trusted
+developer-controlled content; never enable it for user or LLM output.
+Stream failures emit a warning and append a fixed user-safe error
+message without exposing the underlying condition.
 
 ## See also
 

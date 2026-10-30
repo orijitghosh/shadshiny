@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- FILE: inst/assets/components/date-range-presets/date-range-presets.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — date-range-presets</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="../../core/shad-animations.css">
+<link rel="stylesheet" href="../calendar/calendar.css">
+<link rel="stylesheet" href="../date-picker/date-picker.css">
+<link rel="stylesheet" href="date-range-presets.css">
+<style>body { margin: 2rem; background: var(--shad-background); font-family: var(--shad-font-sans); color: var(--shad-foreground); } .demo { max-width: 30rem; margin: 0 auto 3rem; } .demo h2 { font-size: var(--shad-text-lg); }</style>
+</head>
+<body>
+<div class="demo">
+  <h2>Range picker with preset rail</h2>
+  <div id="dp1" data-shad="date-picker" class="shad-date-picker">
+    <button type="button" class="shad-date-picker__trigger" data-placeholder>
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <span class="shad-date-picker__value">Pick a date range</span>
+    </button>
+    <div class="shad-date-picker__content shad-anim-pop" hidden>
+      <div class="shad-date-range-presets" data-shad="date-range-presets" role="group" aria-label="Quick ranges">
+        <button type="button" class="shad-date-range-presets__item" data-preset="today">Today</button>
+        <button type="button" class="shad-date-range-presets__item" data-preset="yesterday">Yesterday</button>
+        <button type="button" class="shad-date-range-presets__item" data-days="7">Last 7 days</button>
+        <button type="button" class="shad-date-range-presets__item" data-days="30">Last 30 days</button>
+        <div class="shad-date-range-presets__separator" role="separator"></div>
+        <button type="button" class="shad-date-range-presets__item" data-preset="this-week">This week</button>
+        <button type="button" class="shad-date-range-presets__item" data-preset="this-month">This month</button>
+        <button type="button" class="shad-date-range-presets__item" data-preset="last-month">Last month</button>
+        <button type="button" class="shad-date-range-presets__item" data-preset="this-year">This year</button>
+      </div>
+      <div class="shad-calendar" data-shad="calendar" data-mode="range"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../../core/shad-runtime.js"></script>
+<script src="../calendar/calendar.js"></script>
+<script src="../date-picker/date-picker.js"></script>
+<script src="date-range-presets.js"></script>
+<script>
+shad.autoInit();
+document.getElementById("dp1").addEventListener("shad:change", function (e) { console.log("range:", e.detail.value); });
+</script>
+</body>
+</html>

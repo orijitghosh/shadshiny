@@ -139,18 +139,31 @@ server <- function(input, output, session) {
 |----|----|
 | `messages()` | A reactive holding the transcript: a list of `list(role, content)`. |
 | `clear()` | Empty the transcript and drop any in-flight reply. |
+| `busy()` | A read-only reactive that is `TRUE` while a reply is streaming. |
+| `cancel()` | Stop an in-flight reply without clearing existing messages. |
 | `append(role, content)` | Push a message in directly, without going through the handler. |
 
 [`append()`](https://rdrr.io/r/base/append.html) is how you seed an
 opening line, replay a saved conversation, or inject a system notice
 mid-thread.
 
+## Utility elements for transcripts
+
+Use shad_code_block() for escaped fenced source shown in a transcript or
+tool result, and shad_shimmer() for a temporary loading label. The
+latter remains ordinary readable text when inactive or when reduced
+motion is requested.
+
+~{r} shad_shimmer(“Thinking…”, active = TRUE) shad_code_block( ‘answer
+\<- model\$complete(prompt)’, language = “r”, filename = “tool.R”, copy
+= TRUE ) ~
+
 ## Markdown
 
 Assistant replies render as Markdown by default — bold, italics, links,
-code spans, and fenced code blocks. User messages never do: they are
-escaped and rendered literally, so a user cannot inject markup into your
-page.
+code spans, and fenced code blocks. Raw HTML inside that Markdown is
+escaped. User messages are also escaped and rendered literally, so
+neither side can inject markup into your page by default.
 
 Turn it off with `markdown = FALSE` and assistant text is escaped too:
 
@@ -159,8 +172,13 @@ Turn it off with `markdown = FALSE` and assistant text is escaped too:
 shad_chat_server("chat", handler = my_handler, markdown = FALSE)
 ```
 
-Note what this means for a live LLM: model output *is* untrusted input.
-Leaving Markdown on is the normal choice, but it is a choice.
+For trusted, developer-controlled replies only, raw HTML can be enabled
+with `allow_html = TRUE`. Never enable it for user or LLM output: model
+output is untrusted input even when Markdown rendering is useful.
+
+If a streaming generator fails, the server emits a warning for
+operators, cancels the stream, and shows a fixed safe error message. The
+underlying error is never copied into the transcript.
 
 ## Try it
 

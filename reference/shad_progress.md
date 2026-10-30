@@ -38,7 +38,7 @@ shad_progress(
 
 - label:
 
-  Accessible label (used for indeterminate bars).
+  Accessible label for the progress bar.
 
 - class:
 
@@ -65,10 +65,14 @@ Other shadshiny tier-1 components:
 [`shad_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_button.md),
 [`shad_button_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_button_group.md),
 [`shad_card()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md),
+[`shad_code_block()`](https://orijitghosh.github.io/shadshiny/reference/shad_code_block.md),
 [`shad_empty()`](https://orijitghosh.github.io/shadshiny/reference/shad_empty.md),
 [`shad_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md),
+[`shad_kbd_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_kbd_group.md),
 [`shad_label()`](https://orijitghosh.github.io/shadshiny/reference/shad_label.md),
+[`shad_scroll_fade()`](https://orijitghosh.github.io/shadshiny/reference/shad_scroll_fade.md),
 [`shad_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_separator.md),
+[`shad_shimmer()`](https://orijitghosh.github.io/shadshiny/reference/shad_shimmer.md),
 [`shad_skeleton()`](https://orijitghosh.github.io/shadshiny/reference/shad_skeleton.md),
 [`shad_spinner()`](https://orijitghosh.github.io/shadshiny/reference/shad_spinner.md),
 [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md),
@@ -78,7 +82,7 @@ Other shadshiny tier-1 components:
 
 ``` r
 shad_progress(60)
-#> <div class="shad-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" data-state="loading">
+#> <div class="shad-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" aria-label="Loading" data-state="loading">
 #>   <div class="shad-progress__indicator" style="transform: translateX(-40%);"></div>
 #> </div>
 shad_progress(indeterminate = TRUE)

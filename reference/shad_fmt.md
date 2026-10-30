@@ -50,6 +50,7 @@ A `shad_fmt` object (a function of the column vector).
 Other shadshiny data table:
 [`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md),
 [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md),
+[`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md),
 [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md)
 
 ## Examples
@@ -64,8 +65,8 @@ shad_fmt_number(digits = 2, prefix = "$")
 #>         suffix))
 #>     .cell_num(disp, num)
 #> }
-#> <bytecode: 0x557fd1d87f78>
-#> <environment: 0x557fd2dc1760>
+#> <bytecode: 0x640ed3d2b8b8>
+#> <environment: 0x640ed1aceb90>
 #> attr(,"class")
 #> [1] "shad_fmt"
 shad_fmt_percent(digits = 1)
@@ -76,8 +77,8 @@ shad_fmt_percent(digits = 1)
 #>         num, format = "f", digits = digits), "%"))
 #>     .cell_num(disp, num)
 #> }
-#> <bytecode: 0x557fd2df0420>
-#> <environment: 0x557fd2df3568>
+#> <bytecode: 0x640ed1a3aff0>
+#> <environment: 0x640ed1a3bd48>
 #> attr(,"class")
 #> [1] "shad_fmt"
 shad_fmt_date("%b %d, %Y")
@@ -89,8 +90,8 @@ shad_fmt_date("%b %d, %Y")
 #>     disp <- ifelse(is.na(d), NA_character_, format(d, format))
 #>     .cell_num(disp, as.numeric(d))
 #> }
-#> <bytecode: 0x557fd2e22618>
-#> <environment: 0x557fd2e21818>
+#> <bytecode: 0x640ed1820220>
+#> <environment: 0x640ed181d6c0>
 #> attr(,"class")
 #> [1] "shad_fmt"
 shad_fmt_badge(c(active = "default", failed = "destructive"))
@@ -107,8 +108,8 @@ shad_fmt_badge(c(active = "default", failed = "destructive"))
 #>         list(html = html, text = v, sort = v)
 #>     })
 #> }
-#> <bytecode: 0x557fd2e7afa0>
-#> <environment: 0x557fd2e7cd70>
+#> <bytecode: 0x640ed16c95a8>
+#> <environment: 0x640ed16c4fe8>
 #> attr(,"class")
 #> [1] "shad_fmt"
 ```

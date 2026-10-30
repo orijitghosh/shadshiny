@@ -1,0 +1,14 @@
+/* FILE: inst/assets/components/spinner/spinner.css */
+/* shadshiny — spinner (lucide loader-circle rotating) */
+
+.shad-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  color: currentColor;
+  animation: shad-spin 1s linear infinite;
+}
+.shad-spinner--sm { width: 0.75rem; height: 0.75rem; }
+.shad-spinner--lg { width: 1.5rem; height: 1.5rem; }
+.shad-spinner--xl { width: 2rem; height: 2rem; }
+.shad-spinner--muted { color: var(--shad-muted-foreground); }

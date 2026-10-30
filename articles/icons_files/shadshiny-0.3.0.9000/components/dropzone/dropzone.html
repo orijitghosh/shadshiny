@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- FILE: inst/assets/components/dropzone/dropzone.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — dropzone</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="../attachment/attachment.css">
+<link rel="stylesheet" href="dropzone.css">
+<style>body { margin: 2rem; background: var(--shad-background); } .demo { max-width: 30rem; margin: 0 auto 3rem; } .demo h2 { font-family: var(--shad-font-sans); color: var(--shad-foreground); font-size: var(--shad-text-lg); }</style>
+</head>
+<body>
+<div class="demo">
+  <h2>Multiple, CSV only, max 1 MB (rejects show inline)</h2>
+  <div id="dz1" data-shad="dropzone" class="shad-dropzone" data-multiple data-accept=".csv,text/csv" data-max-size="1048576">
+    <div class="shad-dropzone__zone" tabindex="0" role="button" aria-label="Upload CSV files: click to browse or drag and drop">
+      <span class="shad-dropzone__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></span>
+      <div class="shad-dropzone__hint"><strong>Click to browse</strong> or drag files here</div>
+      <div class="shad-dropzone__meta">CSV up to 1 MB</div>
+    </div>
+    <input type="file" class="shad-dropzone__input" multiple accept=".csv,text/csv">
+    <div class="shad-dropzone__files"></div>
+  </div>
+</div>
+
+<div class="demo">
+  <h2>Single file, any type — simulated upload lifecycle</h2>
+  <div id="dz2" data-shad="dropzone" class="shad-dropzone">
+    <div class="shad-dropzone__zone" tabindex="0" role="button" aria-label="Upload a file">
+      <span class="shad-dropzone__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></span>
+      <div class="shad-dropzone__hint"><strong>Click to browse</strong> or drop one file</div>
+    </div>
+    <input type="file" class="shad-dropzone__input">
+    <div class="shad-dropzone__files"></div>
+  </div>
+</div>
+
+<div class="demo">
+  <h2>Disabled</h2>
+  <div data-shad="dropzone" class="shad-dropzone" data-disabled>
+    <div class="shad-dropzone__zone" tabindex="-1" role="button" aria-disabled="true" aria-label="Upload disabled">
+      <span class="shad-dropzone__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></span>
+      <div class="shad-dropzone__hint">Uploads disabled</div>
+    </div>
+    <input type="file" class="shad-dropzone__input" disabled>
+    <div class="shad-dropzone__files"></div>
+  </div>
+</div>
+
+<script src="../../core/shad-runtime.js"></script>
+<script src="dropzone.js"></script>
+<script>
+shad.autoInit();
+document.getElementById("dz1").addEventListener("shad:files", function (e) {
+  console.log("accepted:", e.detail.files, "rejected:", e.detail.rejected);
+});
+// dz2: fake an upload — uploading → processing → done (host normally does this)
+var dz2El = document.getElementById("dz2");
+var dz2 = shad.get(dz2El);
+dz2El.addEventListener("shad:files", function (e) {
+  e.detail.files.forEach(function (f) {
+    dz2.setState(f.name, "uploading", "Uploading…");
+    setTimeout(function () { dz2.setState(f.name, "processing", "Processing…"); }, 1200);
+    setTimeout(function () { dz2.setState(f.name, null, "Done · " + (f.size < 1048576 ? (f.size/1024).toFixed(1) + " KB" : (f.size/1048576).toFixed(1) + " MB")); }, 2400);
+  });
+});
+</script>
+</body>
+</html>

@@ -37,6 +37,8 @@ A collapsible tag.
 
 ## See also
 
+[`update_shad_collapsible()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+
 Other shadshiny tier-3 components:
 [`shad_accordion()`](https://orijitghosh.github.io/shadshiny/reference/shad_accordion.md),
 [`shad_alert_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_alert_dialog.md),

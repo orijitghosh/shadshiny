@@ -1,0 +1,98 @@
+/* FILE: inst/assets/components/tree/tree.css */
+/* shadshiny — tree (APG TreeView). Indent guides, chevron rotation, states. */
+
+.shad-tree {
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-foreground);
+  user-select: none;
+}
+.shad-tree__list,
+.shad-tree__group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* indent guides: nested groups get a hairline + indent */
+.shad-tree__group {
+  margin-inline-start: 1.0625rem; /* aligns guide under chevron center */
+  padding-inline-start: var(--shad-space-2);
+  border-inline-start: 1px solid var(--shad-border);
+}
+.shad-tree__item[aria-expanded="false"] > .shad-tree__group { display: none; }
+
+.shad-tree__row {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-1_5);
+  min-height: 2rem;
+  padding: 0 var(--shad-space-2);
+  border-radius: var(--shad-radius-sm);
+  cursor: pointer;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-tree__row:hover { background-color: var(--shad-accent); }
+.shad-tree__item:focus-visible { outline: none; }
+.shad-tree__item:focus-visible > .shad-tree__row {
+  box-shadow: var(--shad-focus-shadow);
+  border-radius: var(--shad-radius-sm);
+}
+.shad-tree__item[aria-selected="true"] > .shad-tree__row,
+.shad-tree__item[data-state="selected"] > .shad-tree__row {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+  font-weight: var(--shad-font-weight-medium);
+}
+.shad-tree__item[aria-disabled="true"] > .shad-tree__row {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.shad-tree__chevron {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  color: var(--shad-muted-foreground);
+  transition: transform var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-tree__item[aria-expanded="true"] > .shad-tree__row .shad-tree__chevron { transform: rotate(90deg); }
+/* leaf: keep alignment with an invisible chevron slot */
+.shad-tree__chevron--leaf { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) { .shad-tree__chevron { transition: none; } }
+
+.shad-tree__icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--shad-muted-foreground);
+}
+.shad-tree__icon > svg { width: 1rem; height: 1rem; }
+.shad-tree__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* lazy-branch spinner row (injected by JS while loading) */
+.shad-tree__spinner-row {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-1_5);
+  min-height: 2rem;
+  padding: 0 var(--shad-space-2);
+  color: var(--shad-muted-foreground);
+  font-size: var(--shad-text-xs);
+}
+.shad-tree__spinner {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex: none;
+  border: 2px solid var(--shad-border);
+  border-top-color: var(--shad-muted-foreground);
+  border-radius: var(--shad-radius-full);
+  animation: shad-tree-spin 0.8s linear infinite;
+}
+@keyframes shad-tree-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .shad-tree__spinner { animation-duration: 2s; }
+}

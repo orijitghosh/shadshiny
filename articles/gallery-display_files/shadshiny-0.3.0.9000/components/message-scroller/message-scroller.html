@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- FILE: inst/assets/components/message-scroller/message-scroller.html -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — message-scroller</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="../bubble/bubble.css">
+<link rel="stylesheet" href="../marker/marker.css">
+<link rel="stylesheet" href="message-scroller.css">
+<style>
+  html { background: var(--shad-background); }
+  body { margin: 0; }
+  .demo { padding: 2rem; max-width: 520px; display: grid; gap: 1rem; }
+  .demo-toolbar { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .demo-toolbar button { font: 500 .75rem/1 var(--shad-font-mono); padding: .375rem .625rem; border: 1px solid var(--shad-border); border-radius: .375rem; background: var(--shad-background); color: var(--shad-foreground); cursor: pointer; }
+  .demo-label { font: 500 .6875rem/1 var(--shad-font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--shad-muted-foreground); margin: 0; }
+  .demo-frame { border: 1px solid var(--shad-border); border-radius: var(--shad-radius-lg); height: 380px; display: flex; overflow: hidden; }
+  .demo-frame > * { flex: 1; }
+  .demo-out { font: 400 .75rem/1.4 var(--shad-font-mono); color: var(--shad-muted-foreground); }
+</style>
+</head>
+<body class="shad-scope">
+<div class="demo">
+  <div class="demo-toolbar">
+    <button type="button" onclick="document.documentElement.classList.toggle('dark')">toggle dark</button>
+    <button type="button" onclick="var h=document.documentElement;h.dir=h.dir==='rtl'?'ltr':'rtl'">toggle rtl</button>
+    <button type="button" id="ms-append">append message</button>
+    <button type="button" id="ms-prepend">prepend history</button>
+    <button type="button" id="ms-stream">start/stop stream</button>
+  </div>
+  <p class="demo-label">stick-to-bottom viewport — scroll up to detach</p>
+
+  <div class="demo-frame">
+    <div class="shad-message-scroller" data-shad="message-scroller"
+         data-auto-scroll data-default-position="end" id="ms-demo">
+      <div class="shad-message-scroller__viewport" aria-live="polite" tabindex="0">
+        <div class="shad-message-scroller__content">
+          <div class="shad-message-scroller__item" data-anchor>
+            <div class="shad-marker shad-marker--separator">
+              <span class="shad-marker__content">Today</span>
+            </div>
+          </div>
+          <div class="shad-message-scroller__item">
+            <div class="shad-bubble shad-bubble--muted shad-bubble--start">
+              <div class="shad-bubble__content">Welcome! Ask me anything about the dataset.</div>
+            </div>
+          </div>
+          <div class="shad-message-scroller__item">
+            <div class="shad-bubble shad-bubble--default shad-bubble--end">
+              <div class="shad-bubble__content">How many rows have missing values?</div>
+            </div>
+          </div>
+          <div class="shad-message-scroller__item">
+            <div class="shad-bubble shad-bubble--muted shad-bubble--start">
+              <div class="shad-bubble__content">1,284 of 50,000 rows (2.6%) contain at least one missing value — mostly in the income column.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="shad-message-scroller__button">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        Jump to latest
+      </button>
+    </div>
+  </div>
+
+  <p class="demo-out" id="ms-out">state: —</p>
+</div>
+
+<script src="../../core/shad-runtime.js"></script>
+<script src="message-scroller.js"></script>
+<script>
+(function () {
+  var scroller = document.getElementById("ms-demo");
+  var content = scroller.querySelector(".shad-message-scroller__content");
+  var out = document.getElementById("ms-out");
+  var n = 0, histN = 0, streamTimer = null;
+
+  function row(html) {
+    var d = document.createElement("div");
+    d.className = "shad-message-scroller__item";
+    d.innerHTML = html;
+    return d;
+  }
+  function bubble(side, variant, text) {
+    return '<div class="shad-bubble shad-bubble--' + variant + ' shad-bubble--' + side + '">' +
+      '<div class="shad-bubble__content">' + text + "</div></div>";
+  }
+
+  document.getElementById("ms-append").addEventListener("click", function () {
+    n += 1;
+    var mine = n % 2 === 0;
+    content.appendChild(row(bubble(mine ? "end" : "start", mine ? "default" : "muted",
+      "New message #" + n + " — appended while you " +
+      "(maybe) scrolled up.")));
+  });
+
+  document.getElementById("ms-prepend").addEventListener("click", function () {
+    histN += 1;
+    content.insertBefore(
+      row(bubble("start", "outline", "Older history item #" + histN + " (prepended — the viewport should not shift).")),
+      content.firstElementChild);
+  });
+
+  document.getElementById("ms-stream").addEventListener("click", function () {
+    if (streamTimer) { clearInterval(streamTimer); streamTimer = null; return; }
+    var target = row(bubble("start", "muted", ""));
+    content.appendChild(target);
+    var span = target.querySelector(".shad-bubble__content");
+    var words = ("Streaming tokens keep arriving and the viewport follows only while " +
+      "you are at the bottom — scroll up mid-stream and the jump button appears instead").split(" ");
+    var i = 0;
+    streamTimer = setInterval(function () {
+      span.textContent += (i ? " " : "") + words[i % words.length];
+      i += 1;
+      if (i > 120) { clearInterval(streamTimer); streamTimer = null; }
+    }, 120);
+  });
+
+  setInterval(function () {
+    var inst = shad.get(scroller);
+    if (inst && inst.getValue) {
+      var v = inst.getValue();
+      out.textContent = "state: " + scroller.getAttribute("data-state") +
+        " · atBottom: " + v.atBottom + " · scrollTop: " + Math.round(v.scrollTop);
+    }
+  }, 400);
+})();
+</script>
+</body>
+</html>

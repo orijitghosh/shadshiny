@@ -1,0 +1,48 @@
+<!-- FILE: inst/assets/components/questionnaire/questionnaire.html -->
+<div class="shad-questionnaire" data-shad="questionnaire" id="survey"
+     data-active="1" data-value='{"active":1,"answers":[],"skipped":[],"complete":false}'
+     data-progress-label="Question %s of %s"
+     data-previous-label="Previous" data-next-label="Next"
+     data-skip-label="Skip" data-submit-label="Submit">
+  <div class="shad-questionnaire__progress-wrap">
+    <div class="shad-questionnaire__progress" role="progressbar"
+         aria-valuemin="0" aria-valuemax="1" aria-valuenow="1"
+         aria-label="Question 1 of 1">
+      <span class="shad-questionnaire__progress-label">Question 1 of 1</span>
+    </div>
+  </div>
+  <div class="shad-questionnaire__questions">
+    <fieldset class="shad-questionnaire__question" id="survey-direction-question"
+              data-questionnaire-question data-question-name="direction"
+              data-question-index="1" data-question-type="single" data-required>
+      <legend id="survey-direction-legend" tabindex="-1">What should be built?</legend>
+      <div class="shad-questionnaire__choices">
+        <label class="shad-questionnaire__choice-label" for="survey-direction-1">
+          <input class="shad-questionnaire__choice" id="survey-direction-1"
+                 type="radio" name="survey-direction" value="data"
+                 aria-describedby="survey-direction-error">
+          <span class="shad-questionnaire__choice-text">Server table</span>
+        </label>
+        <label class="shad-questionnaire__choice-label" for="survey-direction-2">
+          <input class="shad-questionnaire__choice" id="survey-direction-2"
+                 type="radio" name="survey-direction" value="rtl"
+                 aria-describedby="survey-direction-error">
+          <span class="shad-questionnaire__choice-text">RTL</span>
+        </label>
+      </div>
+      <div id="survey-direction-error" class="shad-questionnaire__error"
+           data-question-error role="alert" hidden></div>
+    </fieldset>
+  </div>
+  <div class="shad-questionnaire__status" data-questionnaire-status role="status"
+       aria-live="polite" aria-atomic="true"></div>
+  <div class="shad-questionnaire__actions">
+    <button type="button" class="shad-btn shad-btn--outline" data-questionnaire-previous>Previous</button>
+    <button type="button" class="shad-btn shad-btn--default" data-questionnaire-next>Next</button>
+    <button type="button" class="shad-btn shad-btn--ghost" data-questionnaire-skip>Skip</button>
+    <button type="button" class="shad-btn shad-btn--default" data-questionnaire-submit hidden>Submit</button>
+  </div>
+</div>
+<script src="../../core/shad-runtime.js"></script>
+<script src="questionnaire.js"></script>
+<script>shad.autoInit();</script>

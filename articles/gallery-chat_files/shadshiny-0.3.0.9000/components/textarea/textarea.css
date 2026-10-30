@@ -1,0 +1,38 @@
+/* FILE: inst/assets/components/textarea/textarea.css */
+/* shadshiny — textarea. Autosize handled by textarea.js (data-autosize). */
+
+.shad-textarea {
+  display: flex;
+  width: 100%;
+  min-height: 4rem;
+  border-radius: var(--shad-radius-md);
+  border: 1px solid var(--shad-input);
+  background-color: transparent;
+  padding: var(--shad-space-2) var(--shad-space-3);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-foreground);
+  box-shadow: var(--shad-shadow-xs);
+  outline: none;
+  resize: vertical;
+  field-sizing: content;   /* progressive enhancement where supported */
+  transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-textarea::placeholder { color: var(--shad-muted-foreground); }
+.shad-textarea:focus-visible {
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-shadow-xs), var(--shad-focus-shadow);
+}
+.shad-textarea:disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.shad-textarea[aria-invalid="true"] { border-color: var(--shad-destructive); }
+.shad-textarea[aria-invalid="true"]:focus-visible {
+  border-color: var(--shad-destructive);
+  box-shadow: var(--shad-shadow-xs), var(--shad-focus-shadow-destructive);
+}
+.shad-textarea[data-autosize] { resize: none; overflow: hidden; }

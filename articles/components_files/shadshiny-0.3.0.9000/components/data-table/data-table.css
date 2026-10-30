@@ -1,0 +1,229 @@
+/* FILE: inst/assets/components/data-table/data-table.css */
+/* shadshiny — data-table. Composes table/table.css (load table.css FIRST),
+   pagination look via own classes, checkbox column composes checkbox.css.
+   JS renders only the current page to the DOM (5k×20 budget). */
+
+.shad-data-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--shad-space-4);
+  font-family: var(--shad-font-sans);
+  color: var(--shad-foreground);
+}
+
+/* -- toolbar (global filter + column visibility) ------------------------- */
+.shad-data-table__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+}
+.shad-data-table__filter {
+  flex: 0 1 24rem;
+  height: 2.25rem;
+  padding: 0 var(--shad-space-3);
+  border: 1px solid var(--shad-input);
+  border-radius: var(--shad-radius-md);
+  background-color: transparent;
+  font: inherit;
+  font-size: var(--shad-text-sm);
+  color: var(--shad-foreground);
+  box-shadow: var(--shad-shadow-xs);
+  transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-data-table__filter::placeholder { color: var(--shad-muted-foreground); }
+.shad-data-table__filter:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-data-table__toolbar-spacer { flex: 1; }
+
+/* -- viewport: horizontal scroll + bordered frame ------------------------ */
+.shad-data-table-viewport {
+  overflow-x: auto;
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+}
+/* sticky header opt-in: viewport must set a max-height */
+.shad-data-table--sticky .shad-data-table-viewport { overflow-y: auto; }
+.shad-data-table--sticky .shad-table__header .shad-table__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--shad-background);
+  box-shadow: inset 0 -1px 0 var(--shad-border);
+}
+
+/* -- sortable headers ----------------------------------------------------- */
+.shad-data-table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+  margin-inline: calc(-1 * var(--shad-space-2));
+  padding: 0 var(--shad-space-2);
+  height: 2rem;
+  border: 0;
+  border-radius: var(--shad-radius-sm);
+  background: none;
+  font: inherit;
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-muted-foreground);
+  cursor: pointer;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out),
+              color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-data-table__sort:hover {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-data-table__sort:focus-visible {
+  outline: none;
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-data-table__sort-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  opacity: 0.5;
+  transition: transform var(--shad-duration-fast) var(--shad-ease-out),
+              opacity var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-data-table__sort[data-sort="asc"] .shad-data-table__sort-icon,
+.shad-data-table__sort[data-sort="desc"] .shad-data-table__sort-icon {
+  opacity: 1;
+  color: var(--shad-foreground);
+}
+.shad-data-table__sort[data-sort="desc"] .shad-data-table__sort-icon { transform: rotate(180deg); }
+.shad-data-table__sort-index {
+  font-size: var(--shad-text-xs);
+  color: var(--shad-muted-foreground);
+}
+
+/* -- per-column filter row -------------------------------------------------- */
+.shad-data-table__col-filter {
+  width: 100%;
+  min-width: 6rem;
+  height: 1.75rem;
+  padding: 0 var(--shad-space-2);
+  border: 1px solid var(--shad-input);
+  border-radius: var(--shad-radius-sm);
+  background-color: transparent;
+  font: inherit;
+  font-size: var(--shad-text-xs);
+  color: var(--shad-foreground);
+}
+.shad-data-table__col-filter:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+
+/* -- selection column -------------------------------------------------------- */
+.shad-data-table .shad-table__head--select,
+.shad-data-table .shad-table__cell--select {
+  width: 2.5rem;
+  padding-inline-end: 0;
+}
+
+/* -- empty + loading ----------------------------------------------------------- */
+.shad-data-table__empty {
+  padding: var(--shad-space-8) var(--shad-space-4);
+  text-align: center;
+  font-size: var(--shad-text-sm);
+  color: var(--shad-muted-foreground);
+}
+.shad-data-table__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--shad-space-3);
+  padding: var(--shad-space-8) var(--shad-space-4);
+  text-align: center;
+  font-size: var(--shad-text-sm);
+  color: var(--shad-destructive);
+}
+.shad-data-table__skeleton {
+  display: block;
+  height: 1rem;
+  width: 100%;
+  border-radius: var(--shad-radius-sm);
+  background-color: var(--shad-muted);
+  animation: shad-data-table-pulse 1.5s var(--shad-ease-in-out) infinite;
+}
+@keyframes shad-data-table-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shad-data-table__skeleton { animation: none; opacity: 0.7; }
+}
+
+/* -- footer: summary + page-size + pager ------------------------------------------ */
+.shad-data-table__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-4);
+  flex-wrap: wrap;
+  font-size: var(--shad-text-sm);
+  color: var(--shad-muted-foreground);
+}
+.shad-data-table__summary { flex: 1; white-space: nowrap; }
+.shad-data-table__page-size {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  white-space: nowrap;
+}
+/* the page-size <select> reuses native-select classes; sizing tweak only */
+.shad-data-table__page-size .shad-native-select { width: auto; }
+
+.shad-data-table__pager {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+}
+.shad-data-table__page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 var(--shad-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--shad-radius-md);
+  background: none;
+  font: inherit;
+  font-size: var(--shad-text-sm);
+  color: var(--shad-foreground);
+  cursor: pointer;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-data-table__page-btn:hover {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-data-table__page-btn:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-data-table__page-btn[data-state="active"],
+.shad-data-table__page-btn[aria-current="page"] {
+  border-color: var(--shad-input);
+  background-color: var(--shad-background);
+  box-shadow: var(--shad-shadow-xs);
+}
+.shad-data-table__page-btn[data-disabled],
+.shad-data-table__page-btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.shad-data-table__page-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  color: var(--shad-muted-foreground);
+}

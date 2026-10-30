@@ -1,0 +1,14 @@
+/* FILE: inst/assets/components/skeleton/skeleton.css */
+/* shadshiny — skeleton. Pulse via shad-skeleton-pulse keyframe. */
+
+.shad-skeleton {
+  display: block;
+  background-color: var(--shad-accent);
+  border-radius: var(--shad-radius-md);
+  animation: shad-skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.shad-skeleton--circle { border-radius: var(--shad-radius-full); }
+.shad-skeleton--text {
+  height: 1rem;
+  border-radius: var(--shad-radius-sm);
+}

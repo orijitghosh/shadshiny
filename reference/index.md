@@ -91,6 +91,14 @@ Non-interactive display components and typographic helpers.
   [`shad_kbd()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
   [`shad_list()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
   : Typography helpers
+- [`shad_kbd_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_kbd_group.md)
+  : Keyboard shortcut group
+- [`shad_code_block()`](https://orijitghosh.github.io/shadshiny/reference/shad_code_block.md)
+  : Code block
+- [`shad_scroll_fade()`](https://orijitghosh.github.io/shadshiny/reference/shad_scroll_fade.md)
+  : Scroll fade container
+- [`shad_shimmer()`](https://orijitghosh.github.io/shadshiny/reference/shad_shimmer.md)
+  : Shimmer text
 - [`shad_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md)
   [`shad_item_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md)
   [`shad_item_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md)
@@ -141,6 +149,12 @@ Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
   : Date picker
 - [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md)
   : Form field wrapper
+- [`shad_fieldset()`](https://orijitghosh.github.io/shadshiny/reference/shad_fieldset.md)
+  : Semantic fieldset
+- [`shad_field_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_field_group.md)
+  : Field group
+- [`shad_field_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_field_separator.md)
+  : Field separator
 - [`shad_input_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md)
   [`shad_input_group_addon()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md)
   [`shad_input_group_text()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md)
@@ -279,12 +293,16 @@ is nothing in shadcn/ui to compare it against.
   [`update_shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_tabs()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_accordion()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_collapsible()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  [`update_shad_resizable()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_pagination()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_carousel()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_progress()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_button()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   : Update bound component values from the server
+- [`bind_shad_task_button()`](https://orijitghosh.github.io/shadshiny/reference/bind_shad_task_button.md)
+  : Bind an ExtendedTask status to a shadshiny button
 - [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md)
   : Update a data table from the server
 - [`update_shad_stepper()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_stepper.md)
@@ -334,8 +352,8 @@ Shiny-side API, so there is nothing in shadcn/ui to compare it against.
 
 ## Data table
 
-A full-featured, client-side data table with sorting, filtering, paging,
-and selection.
+A full-featured data table with sorting, filtering, paging, and
+selection, client-side or (experimental) lazily paged from the server.
 
 - [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
   : Interactive data table
@@ -357,6 +375,9 @@ and selection.
 
 - [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md)
   : Update a data table from the server
+
+- [`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md)
+  : Server-backed interactive data table
 
 ## Dashboard & charts
 
@@ -414,6 +435,18 @@ additions, with no shadcn/ui counterpart.
 - [`shad_date_presets()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_presets.md)
   : Default date-range presets
 
+## Questionnaire
+
+An experimental multi-step questionnaire of native fieldsets, with
+branching, skips, and bookmark restoration.
+
+- [`shad_questionnaire()`](https://orijitghosh.github.io/shadshiny/reference/shad_questionnaire.md)
+  : Questionnaire input
+- [`shad_question()`](https://orijitghosh.github.io/shadshiny/reference/shad_question.md)
+  : Define one questionnaire question
+- [`update_shad_questionnaire()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_questionnaire.md)
+  : Update a questionnaire from the server
+
 ## Forms & validation
 
 A server-side validator with shadcn-styled field messaging. The
@@ -452,13 +485,18 @@ Build, import, and switch custom themes.
 
 ## Chat
 
-A streaming chat module built on the chat kit. A shadshiny addition,
-with no shadcn/ui counterpart.
+A streaming chat module built on the chat kit, and an experimental
+structured workbench for sources, tools, and attachments. Shadshiny
+additions, with no shadcn/ui counterpart.
 
 - [`shad_chat_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_ui.md)
   : Chat UI
 - [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md)
   : Chat server
+- [`shad_chat_workbench_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_workbench_ui.md)
+  : Structured chat workbench UI
+- [`shad_chat_workbench_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_workbench_server.md)
+  : Structured chat workbench server
 
 ## Utilities
 

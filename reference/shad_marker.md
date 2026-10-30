@@ -64,7 +64,9 @@ Other shadshiny chat components:
 ``` r
 shad_marker("Conversation started at 9:41 AM", icon = "clock")
 #> <div class="shad-marker shad-marker--default">
-#>   <span class="shad-marker__icon" aria-hidden="true"><svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+#>   <span class="shad-marker__icon" aria-hidden="true">
+#>     <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+#>   </span>
 #>   <span class="shad-marker__content">Conversation started at 9:41 AM</span>
 #> </div>
 shad_marker("Today", variant = "separator")

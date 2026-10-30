@@ -1,0 +1,70 @@
+<!-- FILE: inst/assets/components/combobox/combobox.html -->
+<!-- single-select -->
+<div class="shad-combobox" data-shad="combobox" data-state="closed" style="width: 220px;">
+  <button type="button" class="shad-combobox__trigger" data-placeholder>
+    <span class="shad-combobox__value">Select framework…</span>
+    <svg class="shad-combobox__chevrons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+  </button>
+  <div class="shad-combobox__content shad-anim-pop" hidden>
+    <div class="shad-combobox__search">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input class="shad-combobox__input" type="text" placeholder="Search framework…" autocomplete="off" autocorrect="off" spellcheck="false" />
+    </div>
+    <div class="shad-combobox__list">
+      <div class="shad-combobox__item" role="option" data-value="next" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Next.js
+      </div>
+      <div class="shad-combobox__item" role="option" data-value="svelte" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        SvelteKit
+      </div>
+      <div class="shad-combobox__item" role="option" data-value="nuxt" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Nuxt
+      </div>
+      <div class="shad-combobox__item" role="option" data-value="remix" data-state="unchecked" data-disabled aria-disabled="true">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Remix (deprecated)
+      </div>
+      <div class="shad-combobox__item" role="option" data-value="astro" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Astro
+      </div>
+    </div>
+    <div class="shad-combobox__empty" hidden>No framework found.</div>
+  </div>
+</div>
+
+<!-- multi-select with inline badges -->
+<div class="shad-combobox" data-shad="combobox" data-multiple data-state="closed" style="width: 280px;">
+  <button type="button" class="shad-combobox__trigger" data-placeholder>
+    <span class="shad-combobox__value">Select languages…</span>
+    <svg class="shad-combobox__chevrons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+  </button>
+  <div class="shad-combobox__content shad-anim-pop" hidden>
+    <div class="shad-combobox__search">
+      <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input class="shad-combobox__input" type="text" placeholder="Search language…" autocomplete="off" />
+    </div>
+    <div class="shad-combobox__list">
+      <div class="shad-combobox__item" role="option" data-value="r" data-state="checked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        R
+      </div>
+      <div class="shad-combobox__item" role="option" data-value="python" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Python
+      </div>
+      <div class="shad-combobox__item" role="option" data-value="julia" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        Julia
+      </div>
+      <div class="shad-combobox__item" role="option" data-value="js" data-state="unchecked">
+        <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        JavaScript
+      </div>
+    </div>
+    <div class="shad-combobox__empty" hidden>No language found.</div>
+  </div>
+</div>

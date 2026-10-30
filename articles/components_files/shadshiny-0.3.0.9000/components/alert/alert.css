@@ -1,0 +1,50 @@
+/* FILE: inst/assets/components/alert/alert.css */
+/* shadshiny — alert. Variants: default/destructive. Icon slot via grid. */
+
+.shad-alert {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0 1fr;
+  gap: 0 var(--shad-space-2);
+  width: 100%;
+  border-radius: var(--shad-radius-lg);
+  border: 1px solid var(--shad-border);
+  background-color: var(--shad-card);
+  color: var(--shad-card-foreground);
+  padding: var(--shad-space-3) var(--shad-space-4);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+}
+/* icon present: make the first column real */
+.shad-alert:has(> .shad-alert__icon) {
+  grid-template-columns: calc(1rem + var(--shad-space-2)) 1fr;
+  gap: 0;
+}
+.shad-alert__icon {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.125rem;
+  color: currentColor;
+}
+.shad-alert__title {
+  grid-column: 2;
+  font-weight: var(--shad-font-weight-medium);
+  letter-spacing: -0.01em;
+  min-height: 1rem;
+}
+.shad-alert__description {
+  grid-column: 2;
+  color: var(--shad-muted-foreground);
+  margin-top: var(--shad-space-1);
+}
+
+.shad-alert--destructive {
+  color: var(--shad-destructive);
+  background-color: var(--shad-card);
+}
+.shad-alert--destructive .shad-alert__description {
+  color: color-mix(in oklab, var(--shad-destructive) 90%, transparent);
+}

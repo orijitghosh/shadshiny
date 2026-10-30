@@ -1,0 +1,31 @@
+<!-- FILE: inst/assets/components/input-group/input-group.html -->
+<!-- leading icon + trailing text -->
+<div class="shad-input-group shad-input-group--block" role="group">
+  <span class="shad-input-group__addon" data-align="inline-start">
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+  </span>
+  <input type="text" class="shad-input" placeholder="Search…" />
+  <span class="shad-input-group__addon" data-align="inline-end">
+    <kbd class="shad-kbd">⌘K</kbd>
+  </span>
+</div>
+
+<!-- prefix text + trailing button -->
+<div class="shad-input-group shad-input-group--block" role="group">
+  <span class="shad-input-group__addon" data-align="inline-start">
+    <span class="shad-input-group__text">https://</span>
+  </span>
+  <input type="text" class="shad-input" value="example.com" />
+  <span class="shad-input-group__addon" data-align="inline-end">
+    <button type="button" class="shad-btn shad-btn--ghost shad-input-group__button">Copy</button>
+  </span>
+</div>
+
+<!-- textarea with a block-end toolbar -->
+<div class="shad-input-group shad-input-group--block" role="group">
+  <textarea class="shad-textarea" rows="3" placeholder="Write a message…"></textarea>
+  <span class="shad-input-group__addon" data-align="block-end">
+    <span class="shad-input-group__text">Markdown supported</span>
+    <button type="button" class="shad-btn shad-btn--default shad-input-group__button" style="margin-inline-start:auto">Send</button>
+  </span>
+</div>

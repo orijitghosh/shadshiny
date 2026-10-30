@@ -83,6 +83,7 @@ A `shad_col` specification list.
 
 Other shadshiny data table:
 [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md),
+[`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md),
 [`shad_fmt`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md),
 [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md)
 
@@ -120,8 +121,8 @@ shad_col("Amount", format = shad_fmt_number(prefix = "$"))
 #>         suffix))
 #>     .cell_num(disp, num)
 #> }
-#> <bytecode: 0x557fd1d87f78>
-#> <environment: 0x557fd1d8af70>
+#> <bytecode: 0x640ed3d2b8b8>
+#> <environment: 0x640ed3d2a418>
 #> attr(,"class")
 #> [1] "shad_fmt"
 #> 
@@ -158,7 +159,7 @@ shad_col("Status", cell = function(v, row) shad_badge(v))
 #> $cell
 #> function (v, row) 
 #> shad_badge(v)
-#> <environment: 0x557fd1d77628>
+#> <environment: 0x640ed3d63468>
 #> 
 #> attr(,"class")
 #> [1] "shad_col"

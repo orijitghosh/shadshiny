@@ -101,10 +101,14 @@ Other shadshiny tier-1 components:
 [`shad_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_button.md),
 [`shad_button_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_button_group.md),
 [`shad_card()`](https://orijitghosh.github.io/shadshiny/reference/shad_card.md),
+[`shad_code_block()`](https://orijitghosh.github.io/shadshiny/reference/shad_code_block.md),
 [`shad_empty()`](https://orijitghosh.github.io/shadshiny/reference/shad_empty.md),
+[`shad_kbd_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_kbd_group.md),
 [`shad_label()`](https://orijitghosh.github.io/shadshiny/reference/shad_label.md),
 [`shad_progress()`](https://orijitghosh.github.io/shadshiny/reference/shad_progress.md),
+[`shad_scroll_fade()`](https://orijitghosh.github.io/shadshiny/reference/shad_scroll_fade.md),
 [`shad_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_separator.md),
+[`shad_shimmer()`](https://orijitghosh.github.io/shadshiny/reference/shad_shimmer.md),
 [`shad_skeleton()`](https://orijitghosh.github.io/shadshiny/reference/shad_skeleton.md),
 [`shad_spinner()`](https://orijitghosh.github.io/shadshiny/reference/shad_spinner.md),
 [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md),
@@ -117,7 +121,9 @@ shad_item("Nightly backup", description = "Runs every day at 02:00 UTC.",
           media = "clock", variant = "outline",
           actions = shad_button("Configure", variant = "outline", size = "sm"))
 #> <div class="shad-item shad-item--outline">
-#>   <div class="shad-item__media shad-item__media--icon" aria-hidden="true"><svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+#>   <div class="shad-item__media shad-item__media--icon" aria-hidden="true">
+#>     <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+#>   </div>
 #>   <div class="shad-item__content">
 #>     <div class="shad-item__title">Nightly backup</div>
 #>     <div class="shad-item__description">Runs every day at 02:00 UTC.</div>

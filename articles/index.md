@@ -15,6 +15,10 @@
   charts](https://orijitghosh.github.io/shadshiny/articles/charts.md):
 - [Streaming
   chat](https://orijitghosh.github.io/shadshiny/articles/chat.md):
+- [Structured chat
+  workbench](https://orijitghosh.github.io/shadshiny/articles/chat-workbench.md):
+- [Questionnaire
+  workflows](https://orijitghosh.github.io/shadshiny/articles/questionnaire.md):
 - [Layout &
   composition](https://orijitghosh.github.io/shadshiny/articles/layout.md):
 - [The server

@@ -14,6 +14,7 @@ shad_checkbox(
   disabled = FALSE,
   description = NULL,
   class = NULL,
+  tristate = FALSE,
   ...
 )
 ```
@@ -48,6 +49,11 @@ shad_checkbox(
 
   Extra CSS classes.
 
+- tristate:
+
+  If `TRUE`, clicks cycle unchecked, checked, indeterminate, then back
+  to unchecked. A shadshiny addition; shadcn/ui has no equivalent.
+
 - ...:
 
   Extra attributes on the checkbox button.
@@ -55,6 +61,15 @@ shad_checkbox(
 ## Value
 
 A checkbox row tag.
+
+## Details
+
+By default clicks follow shadcn/ui (Radix): an indeterminate box becomes
+checked, and from then on clicks only toggle checked and unchecked. Only
+the server can set it back with
+`update_shad_checkbox(id, "indeterminate")`, which suits a "select all"
+box whose state comes from other inputs. Set `tristate = TRUE` to let
+the user click through all three states instead.
 
 ## See also
 
@@ -88,5 +103,10 @@ shad_checkbox("all", "Select all", indeterminate = TRUE)
 #> <div class="shad-checkbox-row">
 #>   <button type="button" class="shad-checkbox" data-shad="checkbox" data-state="indeterminate" id="all" aria-labelledby="all-label"><svg class="shad-checkbox__indicator shad-checkbox__indicator--check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M20 6 9 17l-5-5"/></svg><svg class="shad-checkbox__indicator shad-checkbox__indicator--minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
 #>   <label class="shad-label" id="all-label" for="all">Select all</label>
+#> </div>
+shad_checkbox("filter", "Include archived", tristate = TRUE)
+#> <div class="shad-checkbox-row">
+#>   <button type="button" class="shad-checkbox" data-shad="checkbox" data-state="unchecked" id="filter" aria-labelledby="filter-label" data-tristate><svg class="shad-checkbox__indicator shad-checkbox__indicator--check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M20 6 9 17l-5-5"/></svg><svg class="shad-checkbox__indicator shad-checkbox__indicator--minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+#>   <label class="shad-label" id="filter-label" for="filter">Include archived</label>
 #> </div>
 ```

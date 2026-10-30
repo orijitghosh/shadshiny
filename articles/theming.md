@@ -37,6 +37,17 @@ Presets are applied through a `data-shad-theme` attribute on the page
 root, so they compose with — rather than replace — your custom token
 overrides.
 
+Scope a preset to one subtree when the rest of the page should keep its
+current palette:
+
+``` r
+
+shad_theme_preset(
+  "green",
+  shad_card(shad_card_content("Only this card uses the green preset."))
+)
+```
+
 ## Dark mode
 
 Dark mode keys off `.dark` **and** `[data-bs-theme="dark"]` on an
@@ -63,6 +74,26 @@ You can also force a mode at page level:
 
 page_shad(dark = TRUE, ...)   # start in dark mode
 ```
+
+## Directionality
+
+[`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
+accepts ordinary HTML attributes through `...`, so an RTL page does not
+add a new R API argument:
+
+``` r
+
+page_shad(dir = "rtl", lang = "ar", shad_p("واجهة عربية"))
+```
+
+The runtime keeps floating panels and other body portals synchronized
+with the nearest `dir` and `lang` owner, including direction changes
+made after the page loads. Layout spacing, borders, and alignment use
+CSS logical properties; physical coordinates remain explicit where a
+component’s named side is a geometry contract. For user content that can
+mix scripts, opt into browser script detection with `dir = "auto"` on
+the content wrapper, message content, or data-table root (for example,
+`shad_data_table("tbl", data, dir = "auto")`).
 
 ## Changing theme at runtime
 

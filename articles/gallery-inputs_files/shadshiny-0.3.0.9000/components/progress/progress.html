@@ -1,0 +1,15 @@
+<!-- FILE: inst/assets/components/progress/progress.html -->
+<!-- determinate 60%: indicator translated by -(100-60)% -->
+<div class="shad-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" aria-label="Progress" data-state="loading">
+  <div class="shad-progress__indicator" style="transform: translateX(-40%);"></div>
+</div>
+
+<!-- complete -->
+<div class="shad-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-label="Progress" data-state="complete">
+  <div class="shad-progress__indicator" style="transform: translateX(0%);"></div>
+</div>
+
+<!-- indeterminate -->
+<div class="shad-progress" role="progressbar" data-state="indeterminate" aria-label="Loading">
+  <div class="shad-progress__indicator"></div>
+</div>

@@ -1,0 +1,71 @@
+/* FILE: inst/assets/components/marker/marker.css */
+/* shadshiny — marker. Inline status/label row for chat streams. CSS-only.
+   Variants: --default | --border (bottom rule) | --separator (centered,
+   divider lines both sides). Shimmer utility for streaming text.
+   DECISION: the shimmer keyframe lives here (not shad-animations.css) so the
+   component passes the "tokens + base + component css only" isolation rule. */
+
+.shad-marker {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-muted-foreground);
+}
+
+.shad-marker__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.shad-marker__content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+  min-width: 0;
+}
+
+/* ---- variants ---- */
+.shad-marker--border {
+  border-block-end: 1px solid var(--shad-border);
+  padding-block-end: var(--shad-space-2);
+}
+
+.shad-marker--separator {
+  justify-content: center;
+  text-align: center;
+}
+.shad-marker--separator::before,
+.shad-marker--separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--shad-border);
+}
+
+/* ---- shimmer (streaming text) ---- */
+.shad-marker--shimmer .shad-marker__content {
+  background-image: linear-gradient(90deg,
+    var(--shad-muted-foreground) 0%,
+    var(--shad-foreground) 50%,
+    var(--shad-muted-foreground) 100%);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shad-marker-shimmer 2s linear infinite;
+}
+@keyframes shad-marker-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shad-marker--shimmer .shad-marker__content {
+    animation: none;
+    background-image: none;
+    color: var(--shad-muted-foreground);
+  }
+}

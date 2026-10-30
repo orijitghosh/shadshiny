@@ -173,13 +173,107 @@ update_shad_data_table("tbl", data = result(), loading = FALSE)
 
 `loading = TRUE` renders skeleton rows at the current page size.
 
+## Server-backed paging (experimental)
+
+For a large dataset, keep the constructor empty and let
+[`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md)
+request one page at a time. The helper is an experimental protocol layer
+around the same table anatomy; it does not choose a database package or
+construct queries for you.
+
+``` r
+
+ui <- page_shad(
+  shad_data_table(
+    "orders", data = NULL, selection = "multiple", filter = "both",
+    page_size = 25, loading = TRUE
+  )
+)
+
+server_rows <- data.frame(
+  order_id = sprintf("order-%03d", seq_len(100L)),
+  customer = paste("Customer", seq_len(100L)),
+  status = rep(c("paid", "pending", "refunded"), length.out = 100L),
+  amount = seq(12.50, by = 7.25, length.out = 100L),
+  stringsAsFactors = FALSE
+)
+
+server_source <- function(request) {
+  filtered <- server_rows
+  global <- trimws(request$filter$global)
+  if (nzchar(global)) {
+    hit <- Reduce(`|`, lapply(filtered, function(x) {
+      grepl(tolower(global), tolower(as.character(x)), fixed = TRUE)
+    }))
+    filtered <- filtered[hit, , drop = FALSE]
+  }
+  for (column in names(request$filter$columns)) {
+    needle <- trimws(request$filter$columns[[column]])
+    if (nzchar(needle) && column %in% names(filtered)) {
+      keep <- grepl(tolower(needle), tolower(as.character(filtered[[column]])), fixed = TRUE)
+      filtered <- filtered[keep, , drop = FALSE]
+    }
+  }
+  for (spec in rev(request$sort)) {
+    filtered <- filtered[order(
+      filtered[[spec$column]],
+      decreasing = identical(spec$direction, "desc"), method = "radix"
+    ), , drop = FALSE]
+  }
+  total <- nrow(server_rows)
+  filtered_total <- nrow(filtered)
+  first <- (request$page - 1L) * request$page_size + 1L
+  page <- if (first <= filtered_total) {
+    filtered[seq.int(first, min(first + request$page_size - 1L, filtered_total)), , drop = FALSE]
+  } else {
+    filtered[0, , drop = FALSE]
+  }
+  list(data = page, total_rows = total, filtered_rows = filtered_total)
+}
+
+server <- function(input, output, session) {
+  shad_data_table_server(
+    "orders",
+    source = server_source,
+    columns = list(
+      order_id = shad_col("Order"),
+      amount = shad_col("Amount", format = shad_fmt_number(2, prefix = "$"))
+    ),
+    row_key = "order_id",
+    session = session
+  )
+}
+```
+
+For a database source, map request sort names through a fixed allowlist
+and use bound parameters for global/column filters, page size, and
+offset, for example
+`DBI::dbGetQuery(conn, sql, params = list(global, page_size, offset))`.
+Never paste request values or unreviewed sort names directly into SQL.
+
+The request has validated positive `page` and `page_size` values, a
+`sort` list of `{column, direction}` pairs, and `filter` values
+containing a global string plus named column filters. The source must
+return a data frame with no more than `page_size` rows and non-negative
+`total_rows` and `filtered_rows` counts. Column formatters and trusted
+HTML use the same R serialization as the client-side table. A unique,
+non-missing `row_key` keeps selection stable across pages; a missing key
+retains only the constructor’s page-local fallback.
+
+Request IDs make stale responses harmless. Source failures show a fixed
+safe browser message and a retry action while the detailed condition is
+kept to a server warning. Editing, grouping, pivoting, aggregation,
+downloads, and spreadsheet behavior are intentionally outside this first
+experimental mode.
+
 ## When to keep `DT`
 
 [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
 ships the whole frame to the browser. That is the right trade for tables
-up to roughly the tens of thousands of rows. Past that — or when you
-need server-side paging, Excel export, or the JS DataTables plugin
-ecosystem — keep `DT::datatable()` and style its container.
+up to roughly the tens of thousands of rows. For a larger dataset, use
+the experimental server-backed helper when its intentionally narrow
+contract fits; keep `DT::datatable()` when you need Excel export or the
+JS DataTables plugin ecosystem.
 
 ## See also
 

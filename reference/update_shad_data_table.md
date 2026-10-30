@@ -69,4 +69,5 @@ Invisibly `NULL`.
 Other shadshiny data table:
 [`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md),
 [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md),
+[`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md),
 [`shad_fmt`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md)

@@ -1,0 +1,34 @@
+<!-- FILE: inst/assets/components/context-menu/context-menu.html -->
+<div data-shad="context-menu">
+  <div class="shad-context-menu__zone" style="display:grid;place-items:center;height:150px;width:300px;border:1px dashed var(--shad-border);border-radius:var(--shad-radius-md);font-size:var(--shad-text-sm);color:var(--shad-muted-foreground)">
+    Right click here
+  </div>
+  <div class="shad-menu__content shad-anim-pop" hidden>
+    <button type="button" class="shad-menu__item" data-value="back">
+      Back <span class="shad-menu__shortcut">⌘[</span>
+    </button>
+    <button type="button" class="shad-menu__item" data-value="forward" data-disabled>
+      Forward <span class="shad-menu__shortcut">⌘]</span>
+    </button>
+    <button type="button" class="shad-menu__item" data-value="reload">
+      Reload <span class="shad-menu__shortcut">⌘R</span>
+    </button>
+    <div data-shad-submenu>
+      <button type="button" class="shad-menu__item" data-shad-submenu-trigger aria-haspopup="menu" aria-expanded="false" data-state="closed">
+        More tools
+        <svg class="shad-menu__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+      <div class="shad-menu__content shad-anim-pop" hidden>
+        <button type="button" class="shad-menu__item" data-value="save-page">Save page…</button>
+        <button type="button" class="shad-menu__item" data-value="dev-tools">Developer tools</button>
+      </div>
+    </div>
+    <div class="shad-menu__separator"></div>
+    <button type="button" class="shad-menu__item" data-type="checkbox" data-state="checked" data-value="bookmarks">
+      <span class="shad-menu__indicator">
+        <svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      Show bookmarks
+    </button>
+  </div>
+</div>

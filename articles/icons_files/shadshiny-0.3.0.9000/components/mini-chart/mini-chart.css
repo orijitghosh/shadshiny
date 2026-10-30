@@ -1,0 +1,33 @@
+/* FILE: inst/assets/components/mini-chart/mini-chart.css */
+/* shadshiny — sparkline + mini donut. CSS-only; the R constructor emits the
+   geometry and paints every mark with var(--shad-chart-N), so theme presets and
+   dark mode restyle these with no re-render. */
+
+.shad-sparkline {
+  display: block;
+  overflow: visible; /* stroked marks at the extremes sit on the box edge */
+}
+
+.shad-donut {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--shad-font-sans);
+}
+.shad-donut__svg {
+  width: 100%;
+  height: 100%;
+  /* dash offsets are measured from 3 o'clock; charts read from 12 */
+  transform: rotate(-90deg);
+}
+.shad-donut__center {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  gap: var(--shad-space-0_5);
+  text-align: center;
+  font-size: var(--shad-text-lg);
+  line-height: var(--shad-leading-lg);
+  font-weight: var(--shad-font-weight-semibold);
+  color: var(--shad-foreground);
+}

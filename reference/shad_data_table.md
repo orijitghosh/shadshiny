@@ -135,6 +135,7 @@ Row identity comes from `row_key` (a column of stable ids) or the
 
 Other shadshiny data table:
 [`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md),
+[`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md),
 [`shad_fmt`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md),
 [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md)
 

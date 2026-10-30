@@ -1,0 +1,21 @@
+/* FILE: inst/assets/components/label/label.css */
+/* shadshiny — label */
+
+.shad-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: 1;
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-foreground);
+  user-select: none;
+}
+/* dim when its group/peer is disabled */
+.shad-label[data-disabled],
+:disabled + .shad-label,
+[data-disabled] .shad-label {
+  cursor: not-allowed;
+  color: var(--shad-muted-foreground);
+}

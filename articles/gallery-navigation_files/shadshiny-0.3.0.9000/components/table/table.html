@@ -1,0 +1,60 @@
+<!-- FILE: inst/assets/components/table/table.html -->
+<div class="shad-table-container">
+  <table class="shad-table shad-table--hover">
+    <caption class="shad-table__caption">A list of your recent invoices.</caption>
+    <thead class="shad-table__header">
+      <tr class="shad-table__row">
+        <th class="shad-table__head" scope="col">Invoice</th>
+        <th class="shad-table__head" scope="col">Status</th>
+        <th class="shad-table__head" scope="col">Method</th>
+        <th class="shad-table__head" scope="col" style="text-align:right;">Amount</th>
+      </tr>
+    </thead>
+    <tbody class="shad-table__body">
+      <tr class="shad-table__row">
+        <td class="shad-table__cell" style="font-weight:var(--shad-font-weight-medium);">INV001</td>
+        <td class="shad-table__cell"><span class="shad-badge shad-badge--outline">Paid</span></td>
+        <td class="shad-table__cell">Credit Card</td>
+        <td class="shad-table__cell" style="text-align:right;">$250.00</td>
+      </tr>
+      <tr class="shad-table__row" data-state="selected">
+        <td class="shad-table__cell" style="font-weight:var(--shad-font-weight-medium);">INV002</td>
+        <td class="shad-table__cell"><span class="shad-badge shad-badge--outline">Pending</span></td>
+        <td class="shad-table__cell">PayPal</td>
+        <td class="shad-table__cell" style="text-align:right;">$150.00</td>
+      </tr>
+      <tr class="shad-table__row">
+        <td class="shad-table__cell" style="font-weight:var(--shad-font-weight-medium);">INV003</td>
+        <td class="shad-table__cell"><span class="shad-badge shad-badge--secondary">Unpaid</span></td>
+        <td class="shad-table__cell">Bank Transfer</td>
+        <td class="shad-table__cell" style="text-align:right;">$350.00</td>
+      </tr>
+    </tbody>
+    <tfoot class="shad-table__footer">
+      <tr class="shad-table__row">
+        <td class="shad-table__cell" colspan="3">Total</td>
+        <td class="shad-table__cell" style="text-align:right;">$750.00</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!-- sticky header: cap the container height -->
+<div class="shad-table-container" style="max-height: 16rem;">
+  <table class="shad-table shad-table--sticky shad-table--striped">
+    <thead class="shad-table__header">
+      <tr class="shad-table__row">
+        <th class="shad-table__head" scope="col">Name</th>
+        <th class="shad-table__head" scope="col">Role</th>
+      </tr>
+    </thead>
+    <tbody class="shad-table__body">
+      <tr class="shad-table__row"><td class="shad-table__cell">Ada</td><td class="shad-table__cell">Engineer</td></tr>
+      <tr class="shad-table__row"><td class="shad-table__cell">Grace</td><td class="shad-table__cell">Admiral</td></tr>
+      <tr class="shad-table__row"><td class="shad-table__cell">Katherine</td><td class="shad-table__cell">Mathematician</td></tr>
+      <tr class="shad-table__row"><td class="shad-table__cell">Margaret</td><td class="shad-table__cell">Director</td></tr>
+      <tr class="shad-table__row"><td class="shad-table__cell">Radia</td><td class="shad-table__cell">Inventor</td></tr>
+      <tr class="shad-table__row"><td class="shad-table__cell">Annie</td><td class="shad-table__cell">Programmer</td></tr>
+    </tbody>
+  </table>
+</div>

@@ -4,7 +4,8 @@ Wrap a raw `<svg>` string (e.g. any Lucide glyph pasted from
 <https://lucide.dev>) with the `.shad-icon` sizing class, so icons
 beyond the built-in set can be used anywhere a
 [`shad_icon()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon.md)
-is accepted.
+is accepted. Because string input is inserted as trusted raw SVG, never
+pass untrusted or user-controlled content to this function.
 
 ## Usage
 

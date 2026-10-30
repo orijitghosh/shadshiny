@@ -41,6 +41,35 @@ case, so reach for
 [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md)
 when you need the error slot or a shared layout.
 
+## Composing related fields
+
+Use
+[`shad_fieldset()`](https://orijitghosh.github.io/shadshiny/reference/shad_fieldset.md)
+when several controls belong to one named group.
+[`shad_field_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_field_group.md)
+keeps the existing field wrapper as the single-control primitive and
+offers vertical, horizontal, or container-responsive layout.
+[`shad_field_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_field_separator.md)
+can add an optional labelled divider between controls.
+
+~{r} payment_fields \<- shad_fieldset( “Payment”, description = “Use the
+billing address associated with this card.”, shad_field_group(
+shad_form_field(shad_input(“card_number”), label = “Card number”),
+shad_form_field(shad_input(“card_name”), label = “Name on card”),
+orientation = “responsive” ) )
+
+settings_fields \<- shad_fieldset( “Settings”, variant = “label”,
+shad_field_group( shad_form_field(shad_switch(“notifications”), label =
+“Notifications”), shad_field_separator(“Optional”),
+shad_form_field(shad_input(“timezone”), label = “Time zone”) ) ) ~
+
+The responsive layout uses the field-group container rather than the
+viewport: it becomes a two-column logical label/control arrangement at
+`36rem`. Logical properties keep the same composition in RTL, and the
+native `fieldset`/`legend` relationship remains available to assistive
+technology. A radio group or choice-card control can be placed inside
+the same group without changing its input contract.
+
 ## Signalling invalid input
 
 Bound inputs take an `invalid` argument that switches them to the error

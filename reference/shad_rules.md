@@ -59,6 +59,9 @@ A rule function.
 ## See also
 
 Other shadshiny forms:
+[`shad_field_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_field_group.md),
+[`shad_field_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_field_separator.md),
+[`shad_fieldset()`](https://orijitghosh.github.io/shadshiny/reference/shad_fieldset.md),
 [`shad_form_counter()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_counter.md),
 [`shad_form_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_message.md),
 [`shad_form_summary()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_summary.md),

@@ -1,0 +1,84 @@
+/* FILE: inst/assets/components/sheet/sheet.css */
+/* shadshiny — sheet. Slide-in panel, 4 sides via data-side + shad-anim-sheet. */
+
+.shad-sheet__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background-color: var(--shad-overlay);
+}
+.shad-sheet__content {
+  position: fixed;
+  z-index: 1201;
+  display: flex;
+  flex-direction: column;
+  gap: var(--shad-space-4);
+  background-color: var(--shad-background);
+  color: var(--shad-foreground);
+  box-shadow: var(--shad-shadow-lg);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  padding: var(--shad-space-6);
+  overflow-y: auto;
+}
+.shad-sheet__content[data-side="right"] {
+  top: 0; right: 0; bottom: 0;
+  width: 75%; max-width: 24rem;
+  border-left: 1px solid var(--shad-border);
+}
+.shad-sheet__content[data-side="left"] {
+  top: 0; left: 0; bottom: 0;
+  width: 75%; max-width: 24rem;
+  border-right: 1px solid var(--shad-border);
+}
+.shad-sheet__content[data-side="top"] {
+  inset-block-start: 0;
+  inset-inline: 0;
+  max-height: 80dvh;
+  border-bottom: 1px solid var(--shad-border);
+}
+.shad-sheet__content[data-side="bottom"] {
+  inset-block-end: 0;
+  inset-inline: 0;
+  max-height: 80dvh;
+  border-top: 1px solid var(--shad-border);
+}
+.shad-sheet__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--shad-space-2);
+}
+.shad-sheet__title {
+  font-size: var(--shad-text-base);
+  font-weight: var(--shad-font-weight-semibold);
+}
+.shad-sheet__description {
+  color: var(--shad-muted-foreground);
+  font-size: var(--shad-text-sm);
+}
+.shad-sheet__footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--shad-space-2);
+}
+.shad-sheet__close {
+  position: absolute;
+  top: var(--shad-space-4);
+  inset-inline-end: var(--shad-space-4);
+  display: inline-flex;
+  border: 0;
+  border-radius: var(--shad-radius-sm);
+  background: transparent;
+  color: var(--shad-foreground);
+  opacity: 0.7;
+  cursor: pointer;
+  padding: 2px;
+}
+.shad-sheet__close:hover { opacity: 1; }
+.shad-sheet__close:focus-visible {
+  outline: none;
+  box-shadow: var(--shad-focus-shadow);
+  opacity: 1;
+}

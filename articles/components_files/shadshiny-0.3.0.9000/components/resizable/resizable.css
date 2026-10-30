@@ -1,0 +1,67 @@
+/* FILE: inst/assets/components/resizable/resizable.css */
+/* shadshiny — resizable panel group. */
+
+.shad-resizable {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  font-family: var(--shad-font-sans);
+}
+.shad-resizable[data-orientation="vertical"] { flex-direction: column; }
+.shad-resizable__panel {
+  overflow: hidden;
+  /* flex-basis set by JS from data-size percentages */
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.shad-resizable__handle {
+  position: relative;
+  flex: none;
+  background-color: var(--shad-border);
+  outline: none;
+  z-index: 1;
+}
+.shad-resizable[data-orientation="horizontal"] > .shad-resizable__handle {
+  width: 1px;
+  cursor: col-resize;
+}
+.shad-resizable[data-orientation="vertical"] > .shad-resizable__handle {
+  height: 1px;
+  cursor: row-resize;
+}
+/* widen the invisible hit area to 8px */
+.shad-resizable__handle::before {
+  content: "";
+  position: absolute;
+}
+.shad-resizable[data-orientation="horizontal"] > .shad-resizable__handle::before {
+  inset: 0 -4px;
+}
+.shad-resizable[data-orientation="vertical"] > .shad-resizable__handle::before {
+  inset: -4px 0;
+}
+.shad-resizable__handle:focus-visible {
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-resizable__handle[data-dragging] {
+  background-color: var(--shad-ring);
+}
+/* optional grip affordance */
+.shad-resizable__grip {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.75rem;
+  height: 1rem;
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-sm);
+  background-color: var(--shad-border);
+  color: var(--shad-muted-foreground);
+}
+.shad-resizable[data-orientation="vertical"] .shad-resizable__grip {
+  transform: translate(-50%, -50%) rotate(90deg);
+}

@@ -86,7 +86,9 @@ Other shadshiny tier-2 components:
 
 ``` r
 shad_toggle("bold", icon = "plus", value = TRUE)
-#> <button type="button" class="shad-toggle" data-shad="toggle" data-state="on" id="bold"><svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+#> <button type="button" class="shad-toggle" data-shad="toggle" data-state="on" id="bold">
+#>   <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+#> </button>
 shad_toggle("mode", "Outline", variant = "outline")
 #> <button type="button" class="shad-toggle shad-toggle--outline" data-shad="toggle" data-state="off" id="mode">Outline</button>
 ```

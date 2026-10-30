@@ -1,0 +1,539 @@
+/* FILE: inst/assets/tokens/shad-tokens.css */
+/* ==========================================================================
+   shadshiny — design tokens
+   --------------------------------------------------------------------------
+   - All colors in OKLCH. Values mirror shadcn/ui v4 semantic tokens (zinc-ish
+     "neutral" default), prefixed --shad-.
+   - Dark mode keys off BOTH `.dark` and bslib's `[data-bs-theme="dark"]`.
+     One toggle drives both systems.
+   - Theme presets override ONLY color tokens, via [data-shad-theme="..."].
+     slate/stone replace the whole neutral ramp; blue/green/rose/violet/orange
+     replace primary/ring (+sidebar-primary) and keep neutrals.
+   - DECISION: we do NOT use @layer for any shad styles. Bootstrap (bslib)
+     ships unlayered CSS; unlayered rules beat layered ones regardless of
+     specificity, so layering shad would let Reboot's bare-element rules win.
+     All shad rules are class-scoped and unlayered instead.
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ */
+/* Default theme (neutral) — LIGHT                                     */
+/* ------------------------------------------------------------------ */
+:root {
+  /* -- color: surfaces ------------------------------------------------ */
+  --shad-background: oklch(1 0 0);
+  --shad-foreground: oklch(0.145 0 0);
+  --shad-card: oklch(1 0 0);
+  --shad-card-foreground: oklch(0.145 0 0);
+  --shad-popover: oklch(1 0 0);
+  --shad-popover-foreground: oklch(0.145 0 0);
+
+  /* -- color: roles --------------------------------------------------- */
+  --shad-primary: oklch(0.205 0 0);
+  --shad-primary-foreground: oklch(0.985 0 0);
+  --shad-secondary: oklch(0.97 0 0);
+  --shad-secondary-foreground: oklch(0.205 0 0);
+  --shad-muted: oklch(0.97 0 0);
+  --shad-muted-foreground: oklch(0.5 0 0);
+  --shad-accent: oklch(0.97 0 0);
+  --shad-accent-foreground: oklch(0.205 0 0);
+  --shad-destructive: oklch(0.577 0.245 27.325);
+  --shad-destructive-foreground: oklch(0.985 0 0);
+
+  /* -- color: lines + focus ------------------------------------------- */
+  --shad-border: oklch(0.922 0 0);
+  --shad-input: oklch(0.922 0 0);
+  --shad-ring: oklch(0.708 0 0);
+
+  /* -- color: charts --------------------------------------------------- */
+  --shad-chart-1: oklch(0.646 0.222 41.116);
+  --shad-chart-2: oklch(0.6 0.118 184.704);
+  --shad-chart-3: oklch(0.398 0.07 227.392);
+  --shad-chart-4: oklch(0.828 0.189 84.429);
+  --shad-chart-5: oklch(0.769 0.188 70.08);
+
+  /* -- color: sidebar --------------------------------------------------- */
+  --shad-sidebar: oklch(0.985 0 0);
+  --shad-sidebar-foreground: oklch(0.145 0 0);
+  --shad-sidebar-primary: oklch(0.205 0 0);
+  --shad-sidebar-primary-foreground: oklch(0.985 0 0);
+  --shad-sidebar-accent: oklch(0.97 0 0);
+  --shad-sidebar-accent-foreground: oklch(0.205 0 0);
+  --shad-sidebar-border: oklch(0.922 0 0);
+  --shad-sidebar-ring: oklch(0.708 0 0);
+
+  /* -- radius ----------------------------------------------------------- */
+  /* Base 0.625rem = shadcn v4 default. Derived steps match tw calc()s.    */
+  --shad-radius: 0.625rem;
+  --shad-radius-sm: calc(var(--shad-radius) - 4px);
+  --shad-radius-md: calc(var(--shad-radius) - 2px);
+  --shad-radius-lg: var(--shad-radius);
+  --shad-radius-xl: calc(var(--shad-radius) + 4px);
+  --shad-radius-full: 9999px;
+
+  /* -- typography -------------------------------------------------------- */
+  --shad-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --shad-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  /* type scale — size + matched line-height */
+  --shad-text-xs: 0.75rem;    --shad-leading-xs: 1rem;
+  --shad-text-sm: 0.875rem;   --shad-leading-sm: 1.25rem;
+  --shad-text-base: 1rem;     --shad-leading-base: 1.5rem;
+  --shad-text-lg: 1.125rem;   --shad-leading-lg: 1.75rem;
+  --shad-text-xl: 1.25rem;    --shad-leading-xl: 1.75rem;
+  --shad-text-2xl: 1.5rem;    --shad-leading-2xl: 2rem;
+
+  --shad-font-weight-normal: 400;
+  --shad-font-weight-medium: 500;
+  --shad-font-weight-semibold: 600;
+  --shad-font-weight-bold: 700;
+
+  /* -- spacing scale (tw-compatible 4px grid) ----------------------------- */
+  --shad-space-0_5: 0.125rem;
+  --shad-space-1: 0.25rem;
+  --shad-space-1_5: 0.375rem;
+  --shad-space-2: 0.5rem;
+  --shad-space-2_5: 0.625rem;
+  --shad-space-3: 0.75rem;
+  --shad-space-4: 1rem;
+  --shad-space-5: 1.25rem;
+  --shad-space-6: 1.5rem;
+  --shad-space-8: 2rem;
+  --shad-space-10: 2.5rem;
+  --shad-space-12: 3rem;
+
+  /* -- shadows (shadcn's soft low-alpha look) ------------------------------ */
+  --shad-shadow-2xs: 0 1px rgb(0 0 0 / 0.05);
+  --shad-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shad-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shad-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shad-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shad-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* -- motion -------------------------------------------------------------- */
+  --shad-duration-fast: 150ms;
+  --shad-duration-normal: 200ms;
+  --shad-duration-slow: 300ms;
+  --shad-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --shad-ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  /* -- focus ring ------------------------------------------------------------ */
+  /* shadcn v4 look: border becomes ring color + 3px 50%-alpha halo outside.    */
+  --shad-focus-shadow: 0 0 0 3px color-mix(in oklab, var(--shad-ring) 50%, transparent);
+  --shad-focus-shadow-destructive: 0 0 0 3px color-mix(in oklab, var(--shad-destructive) 20%, transparent);
+
+  /* -- overlay scrim ------------------------------------------------------------ */
+  --shad-overlay: oklch(0 0 0 / 0.5);
+}
+
+/* ------------------------------------------------------------------ */
+/* Default theme (neutral) — DARK                                      */
+/* Applies from either `.dark` or bslib's [data-bs-theme="dark"], on   */
+/* the element itself and its subtree (custom props inherit).          */
+/* ------------------------------------------------------------------ */
+.dark,
+[data-bs-theme="dark"] {
+  --shad-background: oklch(0.145 0 0);
+  --shad-foreground: oklch(0.985 0 0);
+  --shad-card: oklch(0.205 0 0);
+  --shad-card-foreground: oklch(0.985 0 0);
+  --shad-popover: oklch(0.205 0 0);
+  --shad-popover-foreground: oklch(0.985 0 0);
+
+  --shad-primary: oklch(0.922 0 0);
+  --shad-primary-foreground: oklch(0.205 0 0);
+  --shad-secondary: oklch(0.269 0 0);
+  --shad-secondary-foreground: oklch(0.985 0 0);
+  --shad-muted: oklch(0.269 0 0);
+  --shad-muted-foreground: oklch(0.708 0 0);
+  --shad-accent: oklch(0.269 0 0);
+  --shad-accent-foreground: oklch(0.985 0 0);
+  --shad-destructive: oklch(0.704 0.191 22.216);
+  --shad-destructive-foreground: oklch(0.985 0 0);
+
+  /* translucent hairlines read better on dark surfaces */
+  --shad-border: oklch(1 0 0 / 0.1);
+  --shad-input: oklch(1 0 0 / 0.15);
+  --shad-ring: oklch(0.556 0 0);
+
+  --shad-chart-1: oklch(0.488 0.243 264.376);
+  --shad-chart-2: oklch(0.696 0.17 162.48);
+  --shad-chart-3: oklch(0.769 0.188 70.08);
+  --shad-chart-4: oklch(0.627 0.265 303.9);
+  --shad-chart-5: oklch(0.645 0.246 16.439);
+
+  --shad-sidebar: oklch(0.205 0 0);
+  --shad-sidebar-foreground: oklch(0.985 0 0);
+  --shad-sidebar-primary: oklch(0.488 0.243 264.376);
+  --shad-sidebar-primary-foreground: oklch(0.985 0 0);
+  --shad-sidebar-accent: oklch(0.269 0 0);
+  --shad-sidebar-accent-foreground: oklch(0.985 0 0);
+  --shad-sidebar-border: oklch(1 0 0 / 0.1);
+  --shad-sidebar-ring: oklch(0.556 0 0);
+
+  /* shadows are near-invisible on dark bg; keep but rely on borders */
+  --shad-overlay: oklch(0 0 0 / 0.7);
+}
+
+/* ==========================================================================
+   THEME PRESETS — [data-shad-theme="..."]
+   Selector convention used below for a preset's dark block:
+     :is(.dark, [data-bs-theme="dark"]) [data-shad-theme="X"]  (attr inside dark root)
+     [data-shad-theme="X"]:is(.dark, [data-bs-theme="dark"])   (attr on the dark root)
+   ========================================================================== */
+
+/* ---------------- slate: full neutral ramp, cool blue-grey ---------------- */
+[data-shad-theme="slate"] {
+  --shad-background: oklch(1 0 0);
+  --shad-foreground: oklch(0.129 0.042 264.695);
+  --shad-card: oklch(1 0 0);
+  --shad-card-foreground: oklch(0.129 0.042 264.695);
+  --shad-popover: oklch(1 0 0);
+  --shad-popover-foreground: oklch(0.129 0.042 264.695);
+  --shad-primary: oklch(0.208 0.042 265.755);
+  --shad-primary-foreground: oklch(0.984 0.003 247.858);
+  --shad-secondary: oklch(0.968 0.007 247.896);
+  --shad-secondary-foreground: oklch(0.208 0.042 265.755);
+  --shad-muted: oklch(0.968 0.007 247.896);
+  --shad-muted-foreground: oklch(0.5 0.046 257.417);
+  --shad-accent: oklch(0.968 0.007 247.896);
+  --shad-accent-foreground: oklch(0.208 0.042 265.755);
+  --shad-border: oklch(0.929 0.013 255.508);
+  --shad-input: oklch(0.929 0.013 255.508);
+  --shad-ring: oklch(0.704 0.04 256.788);
+  --shad-sidebar: oklch(0.984 0.003 247.858);
+  --shad-sidebar-foreground: oklch(0.129 0.042 264.695);
+  --shad-sidebar-primary: oklch(0.208 0.042 265.755);
+  --shad-sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --shad-sidebar-accent: oklch(0.968 0.007 247.896);
+  --shad-sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --shad-sidebar-border: oklch(0.929 0.013 255.508);
+  --shad-sidebar-ring: oklch(0.704 0.04 256.788);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="slate"],
+[data-shad-theme="slate"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-background: oklch(0.129 0.042 264.695);
+  --shad-foreground: oklch(0.984 0.003 247.858);
+  --shad-card: oklch(0.208 0.042 265.755);
+  --shad-card-foreground: oklch(0.984 0.003 247.858);
+  --shad-popover: oklch(0.208 0.042 265.755);
+  --shad-popover-foreground: oklch(0.984 0.003 247.858);
+  --shad-primary: oklch(0.929 0.013 255.508);
+  --shad-primary-foreground: oklch(0.208 0.042 265.755);
+  --shad-secondary: oklch(0.279 0.041 260.031);
+  --shad-secondary-foreground: oklch(0.984 0.003 247.858);
+  --shad-muted: oklch(0.279 0.041 260.031);
+  --shad-muted-foreground: oklch(0.704 0.04 256.788);
+  --shad-accent: oklch(0.279 0.041 260.031);
+  --shad-accent-foreground: oklch(0.984 0.003 247.858);
+  --shad-border: oklch(1 0 0 / 0.1);
+  --shad-input: oklch(1 0 0 / 0.15);
+  --shad-ring: oklch(0.551 0.027 264.364);
+  --shad-sidebar: oklch(0.208 0.042 265.755);
+  --shad-sidebar-foreground: oklch(0.984 0.003 247.858);
+  --shad-sidebar-primary: oklch(0.488 0.243 264.376);
+  --shad-sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --shad-sidebar-accent: oklch(0.279 0.041 260.031);
+  --shad-sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --shad-sidebar-border: oklch(1 0 0 / 0.1);
+  --shad-sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+/* ---------------- stone: full neutral ramp, warm grey ---------------- */
+[data-shad-theme="stone"] {
+  --shad-background: oklch(1 0 0);
+  --shad-foreground: oklch(0.147 0.004 49.25);
+  --shad-card: oklch(1 0 0);
+  --shad-card-foreground: oklch(0.147 0.004 49.25);
+  --shad-popover: oklch(1 0 0);
+  --shad-popover-foreground: oklch(0.147 0.004 49.25);
+  --shad-primary: oklch(0.216 0.006 56.043);
+  --shad-primary-foreground: oklch(0.985 0.001 106.423);
+  --shad-secondary: oklch(0.97 0.001 106.424);
+  --shad-secondary-foreground: oklch(0.216 0.006 56.043);
+  --shad-muted: oklch(0.97 0.001 106.424);
+  --shad-muted-foreground: oklch(0.5 0.013 58.071);
+  --shad-accent: oklch(0.97 0.001 106.424);
+  --shad-accent-foreground: oklch(0.216 0.006 56.043);
+  --shad-border: oklch(0.923 0.003 48.717);
+  --shad-input: oklch(0.923 0.003 48.717);
+  --shad-ring: oklch(0.709 0.01 56.259);
+  --shad-sidebar: oklch(0.985 0.001 106.423);
+  --shad-sidebar-foreground: oklch(0.147 0.004 49.25);
+  --shad-sidebar-primary: oklch(0.216 0.006 56.043);
+  --shad-sidebar-primary-foreground: oklch(0.985 0.001 106.423);
+  --shad-sidebar-accent: oklch(0.97 0.001 106.424);
+  --shad-sidebar-accent-foreground: oklch(0.216 0.006 56.043);
+  --shad-sidebar-border: oklch(0.923 0.003 48.717);
+  --shad-sidebar-ring: oklch(0.709 0.01 56.259);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="stone"],
+[data-shad-theme="stone"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-background: oklch(0.147 0.004 49.25);
+  --shad-foreground: oklch(0.985 0.001 106.423);
+  --shad-card: oklch(0.216 0.006 56.043);
+  --shad-card-foreground: oklch(0.985 0.001 106.423);
+  --shad-popover: oklch(0.216 0.006 56.043);
+  --shad-popover-foreground: oklch(0.985 0.001 106.423);
+  --shad-primary: oklch(0.923 0.003 48.717);
+  --shad-primary-foreground: oklch(0.216 0.006 56.043);
+  --shad-secondary: oklch(0.268 0.007 34.298);
+  --shad-secondary-foreground: oklch(0.985 0.001 106.423);
+  --shad-muted: oklch(0.268 0.007 34.298);
+  --shad-muted-foreground: oklch(0.709 0.01 56.259);
+  --shad-accent: oklch(0.268 0.007 34.298);
+  --shad-accent-foreground: oklch(0.985 0.001 106.423);
+  --shad-border: oklch(1 0 0 / 0.1);
+  --shad-input: oklch(1 0 0 / 0.15);
+  --shad-ring: oklch(0.553 0.013 58.071);
+  --shad-sidebar: oklch(0.216 0.006 56.043);
+  --shad-sidebar-foreground: oklch(0.985 0.001 106.423);
+  --shad-sidebar-primary: oklch(0.488 0.243 264.376);
+  --shad-sidebar-primary-foreground: oklch(0.985 0.001 106.423);
+  --shad-sidebar-accent: oklch(0.268 0.007 34.298);
+  --shad-sidebar-accent-foreground: oklch(0.985 0.001 106.423);
+  --shad-sidebar-border: oklch(1 0 0 / 0.1);
+  --shad-sidebar-ring: oklch(0.553 0.013 58.071);
+}
+
+/* --------------------------------------------------------------------------
+   Accent presets: override primary/ring (+ sidebar-primary, chart-1) only.
+   DECISION: light primary = tailwind <hue>-600, dark primary = <hue>-500;
+   primary-foreground = <hue>-50 in both modes (all pass ≥4.5:1 on primary).
+   -------------------------------------------------------------------------- */
+
+/* blue */
+[data-shad-theme="blue"] {
+  --shad-primary: oklch(0.546 0.245 262.881);            /* blue-600 */
+  --shad-primary-foreground: oklch(0.97 0.014 254.604);  /* blue-50  */
+  --shad-ring: oklch(0.623 0.214 259.815);               /* blue-500 */
+  --shad-sidebar-primary: oklch(0.546 0.245 262.881);
+  --shad-sidebar-primary-foreground: oklch(0.97 0.014 254.604);
+  --shad-sidebar-ring: oklch(0.623 0.214 259.815);
+  --shad-chart-1: oklch(0.546 0.245 262.881);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="blue"],
+[data-shad-theme="blue"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-primary: oklch(0.623 0.214 259.815);            /* blue-500 */
+  --shad-primary-foreground: oklch(0.97 0.014 254.604);
+  --shad-ring: oklch(0.488 0.243 264.376);               /* blue-700 */
+  --shad-sidebar-primary: oklch(0.623 0.214 259.815);
+  --shad-sidebar-primary-foreground: oklch(0.97 0.014 254.604);
+  --shad-sidebar-ring: oklch(0.488 0.243 264.376);
+  --shad-chart-1: oklch(0.623 0.214 259.815);
+}
+
+/* green */
+[data-shad-theme="green"] {
+  --shad-primary: oklch(0.627 0.194 149.214);            /* green-600 */
+  --shad-primary-foreground: oklch(0.982 0.018 155.826); /* green-50  */
+  --shad-ring: oklch(0.723 0.192 149.579);               /* green-500 */
+  --shad-sidebar-primary: oklch(0.627 0.194 149.214);
+  --shad-sidebar-primary-foreground: oklch(0.982 0.018 155.826);
+  --shad-sidebar-ring: oklch(0.723 0.192 149.579);
+  --shad-chart-1: oklch(0.627 0.194 149.214);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="green"],
+[data-shad-theme="green"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-primary: oklch(0.723 0.192 149.579);            /* green-500 */
+  --shad-primary-foreground: oklch(0.266 0.065 152.934); /* green-950 */
+  --shad-ring: oklch(0.527 0.154 150.069);               /* green-700 */
+  --shad-sidebar-primary: oklch(0.723 0.192 149.579);
+  --shad-sidebar-primary-foreground: oklch(0.266 0.065 152.934);
+  --shad-sidebar-ring: oklch(0.527 0.154 150.069);
+  --shad-chart-1: oklch(0.723 0.192 149.579);
+}
+
+/* rose */
+[data-shad-theme="rose"] {
+  --shad-primary: oklch(0.586 0.253 17.585);             /* rose-600 */
+  --shad-primary-foreground: oklch(0.969 0.015 12.422);  /* rose-50  */
+  --shad-ring: oklch(0.645 0.246 16.439);                /* rose-500 */
+  --shad-sidebar-primary: oklch(0.586 0.253 17.585);
+  --shad-sidebar-primary-foreground: oklch(0.969 0.015 12.422);
+  --shad-sidebar-ring: oklch(0.645 0.246 16.439);
+  --shad-chart-1: oklch(0.586 0.253 17.585);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="rose"],
+[data-shad-theme="rose"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-primary: oklch(0.645 0.246 16.439);             /* rose-500 */
+  --shad-primary-foreground: oklch(0.969 0.015 12.422);
+  --shad-ring: oklch(0.514 0.222 16.935);                /* rose-700 */
+  --shad-sidebar-primary: oklch(0.645 0.246 16.439);
+  --shad-sidebar-primary-foreground: oklch(0.969 0.015 12.422);
+  --shad-sidebar-ring: oklch(0.514 0.222 16.935);
+  --shad-chart-1: oklch(0.645 0.246 16.439);
+}
+
+/* violet */
+[data-shad-theme="violet"] {
+  --shad-primary: oklch(0.541 0.281 293.009);            /* violet-600 */
+  --shad-primary-foreground: oklch(0.969 0.016 293.756); /* violet-50  */
+  --shad-ring: oklch(0.606 0.25 292.717);                /* violet-500 */
+  --shad-sidebar-primary: oklch(0.541 0.281 293.009);
+  --shad-sidebar-primary-foreground: oklch(0.969 0.016 293.756);
+  --shad-sidebar-ring: oklch(0.606 0.25 292.717);
+  --shad-chart-1: oklch(0.541 0.281 293.009);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="violet"],
+[data-shad-theme="violet"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-primary: oklch(0.606 0.25 292.717);             /* violet-500 */
+  --shad-primary-foreground: oklch(0.969 0.016 293.756);
+  --shad-ring: oklch(0.491 0.27 292.581);                /* violet-700 */
+  --shad-sidebar-primary: oklch(0.606 0.25 292.717);
+  --shad-sidebar-primary-foreground: oklch(0.969 0.016 293.756);
+  --shad-sidebar-ring: oklch(0.491 0.27 292.581);
+  --shad-chart-1: oklch(0.606 0.25 292.717);
+}
+
+/* orange */
+[data-shad-theme="orange"] {
+  --shad-primary: oklch(0.646 0.222 41.116);             /* orange-600 */
+  --shad-primary-foreground: oklch(0.98 0.016 73.684);   /* orange-50  */
+  --shad-ring: oklch(0.705 0.213 47.604);                /* orange-500 */
+  --shad-sidebar-primary: oklch(0.646 0.222 41.116);
+  --shad-sidebar-primary-foreground: oklch(0.98 0.016 73.684);
+  --shad-sidebar-ring: oklch(0.705 0.213 47.604);
+  --shad-chart-1: oklch(0.646 0.222 41.116);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="orange"],
+[data-shad-theme="orange"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-primary: oklch(0.705 0.213 47.604);             /* orange-500 */
+  --shad-primary-foreground: oklch(0.266 0.079 36.259);  /* orange-950 */
+  --shad-ring: oklch(0.553 0.195 38.402);                /* orange-700 */
+  --shad-sidebar-primary: oklch(0.705 0.213 47.604);
+  --shad-sidebar-primary-foreground: oklch(0.266 0.079 36.259);
+  --shad-sidebar-ring: oklch(0.553 0.195 38.402);
+  --shad-chart-1: oklch(0.705 0.213 47.604);
+}
+
+/* ==========================================================================
+   V2 ADDITIONS — chart token extension
+   --------------------------------------------------------------------------
+   - --shad-chart-6 completes the categorical series set (upstream shadcn
+     ships 5; shadshiny adds a 6th for R plotting defaults).
+   - --shad-chart-grid / --shad-chart-label: muted axis/gridline + axis-label
+     colors for R plot theming (ggplot2/plotly themes read these via
+     tokens/shad-tokens.json).
+   - Accent presets re-key the whole series so chart-1 (== primary) leads a
+     harmonious 6-color categorical set; slate/stone keep the neutral-theme
+     series but re-tune grid/label to their neutral ramp.
+   ========================================================================== */
+:root {
+  --shad-chart-6: oklch(0.577 0.245 27.325);
+  --shad-chart-grid: oklch(0.922 0 0);
+  --shad-chart-label: oklch(0.5 0 0);
+}
+.dark,
+[data-bs-theme="dark"] {
+  --shad-chart-6: oklch(0.705 0.213 47.604);
+  --shad-chart-grid: oklch(1 0 0 / 0.1);
+  --shad-chart-label: oklch(0.708 0 0);
+}
+
+/* slate / stone: neutral-theme series retained; grid/label match ramp */
+[data-shad-theme="slate"] {
+  --shad-chart-grid: oklch(0.929 0.013 255.508);
+  --shad-chart-label: oklch(0.5 0.046 257.417);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="slate"],
+[data-shad-theme="slate"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-grid: oklch(1 0 0 / 0.1);
+  --shad-chart-label: oklch(0.704 0.04 256.788);
+}
+[data-shad-theme="stone"] {
+  --shad-chart-grid: oklch(0.923 0.003 48.717);
+  --shad-chart-label: oklch(0.5 0.013 58.071);
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="stone"],
+[data-shad-theme="stone"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-grid: oklch(1 0 0 / 0.1);
+  --shad-chart-label: oklch(0.709 0.01 56.259);
+}
+
+/* blue: chart-1 = primary (set above); series walks blue->cyan->violet */
+[data-shad-theme="blue"] {
+  --shad-chart-2: oklch(0.715 0.143 215.221);  /* cyan-500   */
+  --shad-chart-3: oklch(0.606 0.25 292.717);   /* violet-500 */
+  --shad-chart-4: oklch(0.723 0.192 149.579);  /* green-500  */
+  --shad-chart-5: oklch(0.769 0.188 70.08);    /* amber-500  */
+  --shad-chart-6: oklch(0.645 0.246 16.439);   /* rose-500   */
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="blue"],
+[data-shad-theme="blue"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-2: oklch(0.715 0.143 215.221);
+  --shad-chart-3: oklch(0.606 0.25 292.717);
+  --shad-chart-4: oklch(0.723 0.192 149.579);
+  --shad-chart-5: oklch(0.769 0.188 70.08);
+  --shad-chart-6: oklch(0.645 0.246 16.439);
+}
+
+/* green: series walks green->teal->lime + contrast hues */
+[data-shad-theme="green"] {
+  --shad-chart-2: oklch(0.704 0.14 182.503);   /* teal-500  */
+  --shad-chart-3: oklch(0.768 0.233 130.85);   /* lime-500  */
+  --shad-chart-4: oklch(0.623 0.214 259.815);  /* blue-500  */
+  --shad-chart-5: oklch(0.769 0.188 70.08);    /* amber-500 */
+  --shad-chart-6: oklch(0.645 0.246 16.439);   /* rose-500  */
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="green"],
+[data-shad-theme="green"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-2: oklch(0.704 0.14 182.503);
+  --shad-chart-3: oklch(0.768 0.233 130.85);
+  --shad-chart-4: oklch(0.623 0.214 259.815);
+  --shad-chart-5: oklch(0.769 0.188 70.08);
+  --shad-chart-6: oklch(0.645 0.246 16.439);
+}
+
+/* rose: series walks rose->pink->orange + contrast hues */
+[data-shad-theme="rose"] {
+  --shad-chart-2: oklch(0.656 0.241 354.308);  /* pink-500   */
+  --shad-chart-3: oklch(0.705 0.213 47.604);   /* orange-500 */
+  --shad-chart-4: oklch(0.606 0.25 292.717);   /* violet-500 */
+  --shad-chart-5: oklch(0.715 0.143 215.221);  /* cyan-500   */
+  --shad-chart-6: oklch(0.769 0.188 70.08);    /* amber-500  */
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="rose"],
+[data-shad-theme="rose"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-2: oklch(0.656 0.241 354.308);
+  --shad-chart-3: oklch(0.705 0.213 47.604);
+  --shad-chart-4: oklch(0.606 0.25 292.717);
+  --shad-chart-5: oklch(0.715 0.143 215.221);
+  --shad-chart-6: oklch(0.769 0.188 70.08);
+}
+
+/* violet: series walks violet->fuchsia->indigo + contrast hues */
+[data-shad-theme="violet"] {
+  --shad-chart-2: oklch(0.667 0.295 322.15);   /* fuchsia-500 */
+  --shad-chart-3: oklch(0.585 0.233 277.117);  /* indigo-500  */
+  --shad-chart-4: oklch(0.715 0.143 215.221);  /* cyan-500    */
+  --shad-chart-5: oklch(0.769 0.188 70.08);    /* amber-500   */
+  --shad-chart-6: oklch(0.645 0.246 16.439);   /* rose-500    */
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="violet"],
+[data-shad-theme="violet"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-2: oklch(0.667 0.295 322.15);
+  --shad-chart-3: oklch(0.585 0.233 277.117);
+  --shad-chart-4: oklch(0.715 0.143 215.221);
+  --shad-chart-5: oklch(0.769 0.188 70.08);
+  --shad-chart-6: oklch(0.645 0.246 16.439);
+}
+
+/* orange: series walks orange->amber->yellow + contrast hues */
+[data-shad-theme="orange"] {
+  --shad-chart-2: oklch(0.769 0.188 70.08);    /* amber-500  */
+  --shad-chart-3: oklch(0.795 0.184 86.047);   /* yellow-500 */
+  --shad-chart-4: oklch(0.623 0.214 259.815);  /* blue-500   */
+  --shad-chart-5: oklch(0.704 0.14 182.503);   /* teal-500   */
+  --shad-chart-6: oklch(0.645 0.246 16.439);   /* rose-500   */
+}
+:is(.dark, [data-bs-theme="dark"]) [data-shad-theme="orange"],
+[data-shad-theme="orange"]:is(.dark, [data-bs-theme="dark"]) {
+  --shad-chart-2: oklch(0.769 0.188 70.08);
+  --shad-chart-3: oklch(0.795 0.184 86.047);
+  --shad-chart-4: oklch(0.623 0.214 259.815);
+  --shad-chart-5: oklch(0.704 0.14 182.503);
+  --shad-chart-6: oklch(0.645 0.246 16.439);
+}

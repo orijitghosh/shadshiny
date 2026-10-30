@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- FILE: inst/assets/components/chart-container/chart-container.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — chart-container</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="chart-container.css">
+<style>body { margin: 2rem; background: var(--shad-background); } .demo { max-width: 40rem; margin: 0 auto 3rem; }</style>
+</head>
+<body>
+<div class="demo">
+  <figure class="shad-chart">
+    <div class="shad-chart__header">
+      <div class="shad-chart__title">Monthly revenue</div>
+      <div class="shad-chart__description">January – June 2026</div>
+    </div>
+    <div class="shad-chart__body" data-aspect="video">
+      <!-- opaque child: in Shiny this is plotOutput()/an htmlwidget div -->
+      <div style="display:flex;align-items:flex-end;gap:8%;padding:0 4%;">
+        <div style="flex:1;height:40%;background:var(--shad-chart-1);border-radius:4px 4px 0 0;"></div>
+        <div style="flex:1;height:65%;background:var(--shad-chart-2);border-radius:4px 4px 0 0;"></div>
+        <div style="flex:1;height:52%;background:var(--shad-chart-3);border-radius:4px 4px 0 0;"></div>
+        <div style="flex:1;height:80%;background:var(--shad-chart-4);border-radius:4px 4px 0 0;"></div>
+        <div style="flex:1;height:70%;background:var(--shad-chart-5);border-radius:4px 4px 0 0;"></div>
+        <div style="flex:1;height:92%;background:var(--shad-chart-6);border-radius:4px 4px 0 0;"></div>
+      </div>
+    </div>
+    <div class="shad-chart-legend">
+      <span class="shad-chart-legend__item"><span class="shad-chart-legend__swatch"></span>Jan</span>
+      <span class="shad-chart-legend__item"><span class="shad-chart-legend__swatch"></span>Feb</span>
+      <span class="shad-chart-legend__item"><span class="shad-chart-legend__swatch"></span>Mar</span>
+      <span class="shad-chart-legend__item"><span class="shad-chart-legend__swatch"></span>Apr</span>
+      <span class="shad-chart-legend__item"><span class="shad-chart-legend__swatch"></span>May</span>
+      <span class="shad-chart-legend__item"><span class="shad-chart-legend__swatch"></span>Jun</span>
+    </div>
+    <figcaption class="shad-chart__footer">Trending up 12% this quarter</figcaption>
+  </figure>
+</div>
+
+<div class="demo">
+  <div class="shad-chart shad-chart--plain">
+    <div class="shad-chart__header"><div class="shad-chart__title">Plain variant (square)</div></div>
+    <div class="shad-chart__body" data-aspect="square">
+      <div style="background:repeating-linear-gradient(45deg,var(--shad-muted),var(--shad-muted) 10px,transparent 10px,transparent 20px);border:1px dashed var(--shad-border);border-radius:var(--shad-radius-md);"></div>
+    </div>
+  </div>
+</div>
+
+<div class="demo">
+  <div class="shad-chart-tooltip" style="width:12rem;">
+    <div class="shad-chart-tooltip__label">March 2026</div>
+    <div class="shad-chart-tooltip__row"><span class="shad-chart-tooltip__swatch"></span>Revenue<span class="shad-chart-tooltip__value">$12,430</span></div>
+    <div class="shad-chart-tooltip__row"><span class="shad-chart-tooltip__swatch" style="--legend-color:var(--shad-chart-2)"></span>Costs<span class="shad-chart-tooltip__value">$8,150</span></div>
+  </div>
+</div>
+</body>
+</html>

@@ -106,7 +106,7 @@ Other shadshiny tier-2 components:
 shad_combobox("fw", choices = c("Next.js" = "next", "Astro" = "astro"))
 #> <div class="shad-combobox" data-shad="combobox" id="fw" data-state="closed">
 #>   <button type="button" class="shad-combobox__trigger" data-placeholder>
-#>     <span class="shad-combobox__value">Select...</span>
+#>     <span class="shad-combobox__value" data-placeholder-text="Select...">Select...</span>
 #>     <svg class="shad-combobox__chevrons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
 #>   </button>
 #>   <div class="shad-combobox__content shad-anim-pop" hidden>
@@ -115,11 +115,11 @@ shad_combobox("fw", choices = c("Next.js" = "next", "Astro" = "astro"))
 #>       <input class="shad-combobox__input" type="text" placeholder="Search..." autocomplete="off" autocorrect="off" spellcheck="false"/>
 #>     </div>
 #>     <div class="shad-combobox__list">
-#>       <div class="shad-combobox__item" data-value="next" data-state="unchecked">
+#>       <div class="shad-combobox__item" role="option" data-value="next" data-state="unchecked">
 #>         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
 #>         Next.js
 #>       </div>
-#>       <div class="shad-combobox__item" data-value="astro" data-state="unchecked">
+#>       <div class="shad-combobox__item" role="option" data-value="astro" data-state="unchecked">
 #>         <svg class="shad-combobox__item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
 #>         Astro
 #>       </div>

@@ -139,7 +139,9 @@ shad_sidebar_layout("sb",
 #>   </aside>
 #>   <main class="shad-sidebar-layout__main">
 #>     <div>
-#>       <button type="button" class="shad-sidebar__trigger" aria-label="Toggle sidebar"><svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg></button>
+#>       <button type="button" class="shad-sidebar__trigger" aria-label="Toggle sidebar">
+#>         <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+#>       </button>
 #>       Dashboard
 #>     </div>
 #>   </main>

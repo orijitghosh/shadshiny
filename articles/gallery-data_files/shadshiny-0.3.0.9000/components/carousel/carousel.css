@@ -1,0 +1,84 @@
+/* FILE: inst/assets/components/carousel/carousel.css */
+/* shadshiny — carousel. Scroll-snap track + prev/next + dots. */
+
+.shad-carousel {
+  position: relative;
+  font-family: var(--shad-font-sans);
+}
+.shad-carousel__viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.shad-carousel__viewport::-webkit-scrollbar { display: none; }
+.shad-carousel__track {
+  display: flex;
+  gap: var(--shad-space-4);
+}
+.shad-carousel__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+/* multi-per-view helper */
+.shad-carousel--thirds .shad-carousel__slide { flex-basis: calc((100% - 2 * var(--shad-space-4)) / 3); }
+.shad-carousel--halves .shad-carousel__slide { flex-basis: calc((100% - var(--shad-space-4)) / 2); }
+
+.shad-carousel__prev,
+.shad-carousel__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--shad-input);
+  border-radius: var(--shad-radius-full);
+  background-color: var(--shad-background);
+  color: var(--shad-foreground);
+  box-shadow: var(--shad-shadow-xs);
+  cursor: pointer;
+  outline: none;
+  transition: opacity var(--shad-duration-fast) var(--shad-ease-out);
+  z-index: 1;
+}
+.shad-carousel__prev { inset-inline-start: -2.75rem; }
+.shad-carousel__next { inset-inline-end: -2.75rem; }
+.shad-carousel--inset .shad-carousel__prev { inset-inline-start: var(--shad-space-2); }
+.shad-carousel--inset .shad-carousel__next { inset-inline-end: var(--shad-space-2); }
+.shad-carousel__prev:hover,
+.shad-carousel__next:hover { background-color: var(--shad-accent); }
+.shad-carousel__prev:focus-visible,
+.shad-carousel__next:focus-visible {
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-carousel__prev[data-disabled],
+.shad-carousel__next[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.shad-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--shad-space-2);
+  margin-top: var(--shad-space-4);
+}
+.shad-carousel__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--shad-radius-full);
+  background-color: var(--shad-border);
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-carousel__dot[data-state="active"] { background-color: var(--shad-primary); }
+.shad-carousel__dot:focus-visible { box-shadow: var(--shad-focus-shadow); }

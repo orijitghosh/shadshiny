@@ -1,10 +1,10 @@
 # shadshiny
 
 **shadshiny** brings the [shadcn/ui](https://ui.shadcn.com) design
-system to [Shiny](https://shiny.posit.co). It is a from-scratch port: 72
-accessible, themeable components rebuilt in framework-free CSS and
-vanilla JavaScript, then wrapped as ordinary R functions with native
-Shiny input bindings.
+system to [Shiny](https://shiny.posit.co). It is a broad, experimental
+reimplementation: 76 accessible, themeable components rebuilt in
+framework-free CSS and vanilla JavaScript, then wrapped as ordinary R
+functions with native Shiny input bindings.
 
 - **No build step, no npm, no React.** Components are plain `htmltools`
   tags backed by a single bundled asset dependency.
@@ -26,7 +26,9 @@ Shiny input bindings.
   [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
   does multi-column sort, global and per-column filtering, paging, and
   selection that survives paging, all client-side and themed, with no
-  `DT`.
+  `DT`. The experimental
+  [`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md)
+  adds lazy server-backed paging.
 - **Dashboards & charts.**
   [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
   and
@@ -52,6 +54,12 @@ Shiny input bindings.
   [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md)
   render a stick-to-bottom transcript from any token source, so an
   `ellmer` stream drops straight in.
+- **Structured AI workbench (experimental).**
+  [`shad_chat_workbench_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_workbench_ui.md)
+  /
+  [`shad_chat_workbench_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_workbench_server.md)
+  render provider-owned public text, source, tool, attachment, and
+  status events without an AI SDK or network call.
 - **Coexists with Bootstrap 5 / bslib.** Dark mode keys off the same
   signals
   [`bslib::input_dark_mode()`](https://rstudio.github.io/bslib/reference/input_dark_mode.html)
@@ -64,6 +72,23 @@ Shiny input bindings.
 > shadshiny is an independent reimplementation. It ships no shadcn/ui or
 > Radix source, only visually-compatible CSS/JS written for this
 > package. See [Attribution](#attribution).
+
+## API stability
+
+The package remains experimental as a whole while its release-facing
+core is being stabilized across R versions and platforms. The stable
+core boundary for the current development line is the documented page,
+layout, input, overlay, theme, client-side data-table, validation, chat,
+and `update_shad_*()` APIs, including their tested Shiny value and
+lifecycle contracts.
+
+The following remain experimental integration edges: importing themes
+from an external shadcn/tweakcn registry schema, optional chart adapters
+whose behavior also depends on third-party packages, live integrations
+with external chat stream providers, the server-backed/lazy data-table
+helper, the questionnaire workflow, and the `ExtendedTask` button
+lifecycle binding. These boundaries may change before a stable 1.0
+release.
 
 ## Installation
 
@@ -142,7 +167,8 @@ for by construction, so it goes unmarked throughout.
 | `shad_alert` | `shad_separator` | `shad_skeleton` | `shad_spinner` |
 | `shad_aspect_ratio` | `shad_label` | `shad_progress` | `shad_breadcrumb` |
 | `shad_table` | `shad_kbd` | `shad_code` | typography (`shad_h1` to `shad_p`) |
-| `shad_item` | `shad_empty` | `shad_button_group` |  |
+| `shad_item` | `shad_empty` | `shad_button_group` | `shad_kbd_group` + |
+| `shad_code_block` + | `shad_scroll_fade` + | `shad_shimmer` + |  |
 
 **Tier 2: form inputs**
 
@@ -152,6 +178,7 @@ for by construction, so it goes unmarked throughout.
 | `shad_radio_group` | `shad_toggle` | `shad_toggle_group` | `shad_slider` |
 | `shad_select` | `shad_native_select` | `shad_combobox` | `shad_input_otp` |
 | `shad_calendar` | `shad_date_picker` | `shad_form_field` | `shad_input_group` |
+| `shad_fieldset` `+` | `shad_field_group` `+` | `shad_field_separator` `+` |  |
 | `shad_number_input` `+` | `shad_rating` `+` | `shad_dropzone` `+` |  |
 
 **Tier 3: overlays**
@@ -171,7 +198,7 @@ for by construction, so it goes unmarked throughout.
 | `shad_scroll_area` | `shad_resizable` | `shad_carousel` | `shad_navigation_menu` |
 | `shad_sidebar_layout` | `shad_stepper` `+` | `shad_tree` `+` |  |
 | `shad_container` `+` | `shad_stack` `+` | `shad_grid` `+` | `shad_page_sidebar` `+` |
-| `shad_page_navbar` `+` |  |  |  |
+| `shad_page_navbar` `+` | `shad_questionnaire` `+` |  |  |
 
 **Data, dashboards & flow**
 
@@ -229,7 +256,200 @@ Formatters keep the raw value as the sort key, so a `$1,200.00` cell
 still sorts numerically. See
 [`vignette("data-tables")`](https://orijitghosh.github.io/shadshiny/articles/data-tables.md).
 
+### Server-backed paging (experimental)
+
+For datasets that should not be serialized into the browser, keep the
+constructor empty/loading and connect it to a source function:
+
+``` r
+
+ui <- page_shad(
+  shad_data_table(
+    "orders", data = NULL, selection = "multiple", filter = "both",
+    page_size = 25, loading = TRUE
+  )
+)
+
+server_rows <- data.frame(
+  order_id = sprintf("order-%03d", seq_len(100L)),
+  customer = paste("Customer", seq_len(100L)),
+  status = rep(c("paid", "pending", "refunded"), length.out = 100L),
+  amount = seq(12.50, by = 7.25, length.out = 100L),
+  stringsAsFactors = FALSE
+)
+
+server_source <- function(request) {
+  filtered <- server_rows
+  global <- trimws(request$filter$global)
+  if (nzchar(global)) {
+    hit <- Reduce(`|`, lapply(filtered, function(x) {
+      grepl(tolower(global), tolower(as.character(x)), fixed = TRUE)
+    }))
+    filtered <- filtered[hit, , drop = FALSE]
+  }
+  for (column in names(request$filter$columns)) {
+    needle <- trimws(request$filter$columns[[column]])
+    if (nzchar(needle) && column %in% names(filtered)) {
+      keep <- grepl(tolower(needle), tolower(as.character(filtered[[column]])), fixed = TRUE)
+      filtered <- filtered[keep, , drop = FALSE]
+    }
+  }
+  for (spec in rev(request$sort)) {
+    filtered <- filtered[order(
+      filtered[[spec$column]],
+      decreasing = identical(spec$direction, "desc"), method = "radix"
+    ), , drop = FALSE]
+  }
+  total <- nrow(server_rows)
+  filtered_total <- nrow(filtered)
+  first <- (request$page - 1L) * request$page_size + 1L
+  page <- if (first <= filtered_total) {
+    filtered[seq.int(first, min(first + request$page_size - 1L, filtered_total)), , drop = FALSE]
+  } else {
+    filtered[0, , drop = FALSE]
+  }
+  list(data = page, total_rows = total, filtered_rows = filtered_total)
+}
+
+server <- function(input, output, session) {
+  shad_data_table_server(
+    "orders",
+    source = server_source,
+    columns = list(
+      order_id = shad_col("Order"),
+      amount = shad_col("Amount", format = shad_fmt_number(2, prefix = "$")),
+      status = shad_col("Status", format = shad_fmt_badge(
+        c(paid = "default", pending = "secondary", refunded = "destructive")
+      ))
+    ),
+    row_key = "order_id",
+    session = session
+  )
+}
+```
+
+For a database source, keep the same response shape, allowlist sort
+columns before composing SQL, and bind every user value. For example,
+the query layer can use
+`DBI::dbGetQuery(conn, sql, params = list(global, page_size, offset))`;
+do not paste request filters or sort names directly into SQL.
+
+[`source()`](https://rdrr.io/r/base/source.html) receives validated
+1-based paging, multi-sort, global filtering, and named column filters.
+It must return no more than the requested page and the two total counts.
+The helper reuses
+[`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md)
+formatting, ignores stale responses, and shows a fixed safe error with
+retry if the source fails. Provide a unique, non-missing `row_key` for
+selections that survive paging; the helper does not provide database
+adapters, editing, grouping, pivoting, aggregation, downloads, or
+spreadsheet behavior. See
+[`vignette("data-tables")`](https://orijitghosh.github.io/shadshiny/articles/data-tables.md)
+for the full contract.
+
+## Questionnaire workflows (experimental)
+
+[`shad_questionnaire()`](https://orijitghosh.github.io/shadshiny/reference/shad_questionnaire.md)
+sequences native fieldsets for single-choice, multiple-choice, and text
+questions. It reports one bookmarkable value with `active`, named
+`answers`, explicit `skipped` question names, and `complete`. All
+questions remain mounted; inactive or conditionally hidden questions are
+`hidden` and `inert`, so preserved answers do not enter the keyboard
+order.
+
+``` r
+
+ui <- page_shad(
+  shad_questionnaire(
+    "onboarding",
+    shad_question(
+      "direction", "What should be built?",
+      choices = c(data = "Server table", rtl = "RTL"),
+      shortcuts = c(data = "1", rtl = "2")
+    ),
+    shad_question(
+      "details", "Describe the table", type = "text",
+      show_if = list(direction = "data")
+    )
+  )
+)
+```
+
+Use named equality data for `show_if`; the browser evaluates no
+application code.
+[`update_shad_questionnaire()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_questionnaire.md)
+patches active state, answers, or named errors, and `reset = TRUE`
+clears the workflow. The generic binding is module-safe and uses
+[`shiny::restoreInput()`](https://rdrr.io/pkg/shiny/man/restoreInput.html)
+for bookmark restoration. See
+[`vignette("questionnaire")`](https://orijitghosh.github.io/shadshiny/articles/questionnaire.md)
+for validation, branching, modules, and the full state contract.
+
+## Field composition
+
+Use native fieldsets for related controls, keeping
+[`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md)
+as the single-control wrapper.
+[`shad_field_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_field_group.md)
+supports vertical, horizontal, and container-responsive layouts; the
+responsive form switches to two logical columns at a 36rem container
+width and mirrors correctly in RTL.
+
+``` r
+
+shad_fieldset(
+  "Payment",
+  description = "Use the billing address associated with this card.",
+  shad_field_group(
+    shad_form_field(shad_input("card_number"), label = "Card number"),
+    shad_form_field(shad_input("card_name"), label = "Name on card"),
+    orientation = "responsive"
+  )
+)
+
+shad_fieldset(
+  "Settings",
+  variant = "label",
+  shad_field_group(
+    shad_form_field(shad_switch("notifications"), label = "Notifications"),
+    shad_field_separator("Optional"),
+    shad_form_field(shad_input("timezone"), label = "Time zone")
+  )
+)
+```
+
+The native `fieldset`/`legend` relationship remains available to
+assistive technology, while field descriptions and validator errors
+retain their existing `aria-describedby` and `aria-invalid` behavior.
+The constructors forward ordinary HTML attributes, so a choice-card or
+radio group can be placed inside the same composition primitives.
+
 ## Page shells and layout
+
+### Directionality
+
+Set the page direction with ordinary HTML attributes passed through
+`page_shad(...)`; this preserves the existing function signature:
+
+``` r
+
+page_shad(dir = "rtl", lang = "ar", shad_p("واجهة عربية"))
+```
+
+Floating panels inherit the nearest direction and language even after
+they are ported to `body`. For content that may mix scripts, use the
+browser’s automatic direction detection on the content wrapper or table
+root:
+
+``` r
+
+shad_message(tags$span(dir = "auto", "שלום / English"))
+shad_data_table("mixed", data, dir = "auto")
+```
+
+Named physical sides such as `data-side = "right"` remain explicit
+placement contracts; logical spacing, borders, alignment, and start/end
+controls mirror with the document direction.
 
 Three primitives cover page layout, on the same spacing scale the
 components use internally (`gap = 4` is `var(--shad-space-4)`):
@@ -381,6 +601,57 @@ shad_chat_server("chat", handler = function(user, history) {
 
 See
 [`vignette("chat")`](https://orijitghosh.github.io/shadshiny/articles/chat.md).
+
+## ExtendedTask buttons (experimental)
+
+[`bind_shad_task_button()`](https://orijitghosh.github.io/shadshiny/reference/bind_shad_task_button.md)
+connects an application-owned
+[`shiny::ExtendedTask`](https://rdrr.io/pkg/shiny/man/ExtendedTask.html)
+to an existing
+[`shad_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_button.md).
+It observes only `task$status()`: while the task is running the button
+shows a spinner and is disabled; after success or error it is enabled
+again, with optional labels. The helper never invokes the task, calls
+`task$result()`, creates workers, or imports an asynchronous backend.
+
+``` r
+
+task <- shiny::ExtendedTask$new(function(value) {
+  expensive_work(value)  # return a promise-compatible result
+})
+
+ui <- shad_button("Run", inputId = "run")
+server <- function(input, output, session) {
+  bind_shad_task_button(task, "run", label_success = "Complete",
+                        label_error = "Try again", session = session)
+  observeEvent(input$run, task$invoke(input$value), ignoreInit = TRUE)
+}
+```
+
+Task creation and asynchronous execution remain application concerns.
+For example, an application can use optional `mirai` or
+[`promises::future_promise()`](https://rstudio.github.io/promises/reference/future_promise.html)
+backends when installed:
+
+``` r
+
+if (requireNamespace("mirai", quietly = TRUE)) {
+  task <- shiny::ExtendedTask$new(function(value) {
+    mirai::mirai(expensive_work(value), value = value)
+  })
+}
+
+if (requireNamespace("promises", quietly = TRUE) &&
+    requireNamespace("future", quietly = TRUE)) {
+  task <- shiny::ExtendedTask$new(function(value) {
+    promises::future_promise(expensive_work(value))
+  })
+}
+```
+
+These optional packages are not shadshiny dependencies. See
+[`vignette("server-api")`](https://orijitghosh.github.io/shadshiny/articles/server-api.md)
+for the lifecycle contract.
 
 ## Theming
 
