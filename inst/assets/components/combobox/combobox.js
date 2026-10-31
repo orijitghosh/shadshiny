@@ -249,7 +249,10 @@
     return {
       getValue() { return multiple ? value.slice() : value; },
       setValue(v) {
-        const next = multiple ? (Array.isArray(v) ? v.slice() : [v].filter(Boolean)) : v;
+        const next = shad.util.choiceValue(
+          v, items().map((it) => it.getAttribute("data-value")), multiple,
+          "combobox " + root.id);
+        if (next === undefined) return;
         const same = multiple
           ? next.length === value.length && next.every((x) => value.includes(x))
           : next === value;

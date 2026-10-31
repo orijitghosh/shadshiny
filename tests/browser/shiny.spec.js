@@ -54,6 +54,26 @@ test("representative server updates reach the DOM and return through input value
   await expect(page.getByTestId("update-status")).toHaveText("checkbox=true; combobox=banana");
 });
 
+test("select and combobox updates match option strings and skip unknown values", async ({ page }) => {
+  const warnings = [];
+  page.on("console", (msg) => {
+    if (msg.type() === "warning") warnings.push(msg.text());
+  });
+  const status = page.getByTestId("choice-status");
+  const selectValue = page.locator("#num_select .shad-select__value");
+  await expect(status).toHaveText("select=1 (character); combo=cheese");
+
+  await page.getByRole("button", { name: "Send numeric values" }).click();
+  await expect(selectValue).toHaveText("Big");
+  await expect(status).toHaveText("select=1e+05 (character); combo=olives,basil");
+
+  await page.getByRole("button", { name: "Send unknown values" }).click();
+  await expect(status).toHaveText("select=1e+05 (character); combo=basil");
+  await expect(selectValue).toHaveText("Big");
+  await expect.poll(() => warnings.some((text) => text.includes("zzz"))).toBe(true);
+  expect(warnings.some((text) => text.includes("anchovy"))).toBe(true);
+});
+
 test("dynamic UI initializes, binds, and tears down an open portal", async ({ page }) => {
   await page.getByRole("button", { name: "Insert dynamic select" }).click();
 

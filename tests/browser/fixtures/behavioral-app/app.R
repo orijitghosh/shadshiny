@@ -51,6 +51,29 @@ ui <- page_shad(
     ),
 
     htmltools::tags$section(
+      `aria-labelledby` = "choices-heading",
+      htmltools::tags$h2(id = "choices-heading", "Choice values"),
+      shad_stack(
+        shad_select(
+          "num_select", label = "Numeric choice",
+          choices = c(One = 1, Two = 2, Big = 1e5), selected = 1
+        ),
+        shad_combobox(
+          "multi_combo", label = "Toppings",
+          choices = c(Cheese = "cheese", Olives = "olives", Basil = "basil"),
+          selected = "cheese", multiple = TRUE
+        ),
+        shad_stack(
+          shad_button(inputId = "send_numeric", "Send numeric values"),
+          shad_button(inputId = "send_unknown", "Send unknown values"),
+          direction = "horizontal", gap = 2, wrap = TRUE
+        ),
+        status_output("choice_status", "choice-status"),
+        gap = 3
+      )
+    ),
+
+    htmltools::tags$section(
       `aria-labelledby` = "dynamic-heading",
       htmltools::tags$h2(id = "dynamic-heading", "Dynamic UI"),
       shad_stack(
@@ -97,6 +120,23 @@ server <- function(input, output, session) {
     paste0(
       "checkbox=", tolower(as.character(isTRUE(input$server_check))),
       "; combobox=", input$server_combo %or% "<none>"
+    )
+  })
+
+  observeEvent(input$send_numeric, {
+    update_shad_select("num_select", 1e5)
+    update_shad_combobox("multi_combo", c("olives", "basil"), multiple = TRUE)
+  })
+  observeEvent(input$send_unknown, {
+    update_shad_select("num_select", "zzz")
+    update_shad_combobox("multi_combo", c("basil", "anchovy"), multiple = TRUE)
+  })
+
+  output$choice_status <- renderText({
+    paste0(
+      "select=", input$num_select %or% "<none>",
+      " (", class(input$num_select)[[1]], ")",
+      "; combo=", paste(input$multi_combo, collapse = ",")
     )
   })
 

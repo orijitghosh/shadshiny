@@ -26,6 +26,40 @@ test_that("single-combobox update leaves the value a scalar", {
   expect_identical(one_message(s)$message$value, "apple")
 })
 
+test_that("select and combobox updates send the strings the options carry", {
+  # The constructors write as.character(value) into data-value. A bare number
+  # would reach the browser as JSON 100000 and match neither "1e+05" nor
+  # anything else, so the updaters have to send the same string.
+  options <- function(tag) {
+    nodes <- xml2::xml_find_all(render_xml(tag), "//*[@data-value]")
+    xml2::xml_attr(nodes, "data-value")
+  }
+  choices <- c(Big = 1e5, Two = 2)
+  expect_identical(options(shad_select("s", choices = choices)), c("1e+05", "2"))
+  expect_identical(options(shad_combobox("c", choices = choices)), c("1e+05", "2"))
+
+  sent <- function(f) {
+    s <- new_fake_session()
+    f(s)
+    as.character(jsonlite::toJSON(one_message(s)$message$value, auto_unbox = TRUE))
+  }
+  expect_identical(sent(function(s) update_shad_select("s", 1e5, session = s)), "\"1e+05\"")
+  expect_identical(sent(function(s) update_shad_select("s", 2, session = s)), "\"2\"")
+  expect_identical(sent(function(s) update_shad_combobox("c", 1e5, session = s)), "\"1e+05\"")
+  expect_identical(
+    sent(function(s) update_shad_combobox("c", c(1e5, 2), multiple = TRUE, session = s)),
+    "[\"1e+05\",\"2\"]"
+  )
+})
+
+test_that("select and combobox updates still clear with NULL", {
+  s <- new_fake_session()
+  update_shad_select("s", NULL, session = s)
+  update_shad_combobox("c", NULL, session = s)
+  expect_null(s$messages[[1]]$message$value)
+  expect_null(s$messages[[2]]$message$value)
+})
+
 test_that("toast payload has the expected shape", {
   s <- new_fake_session()
   shad_toast_success("Saved", description = "All good", id = "t1", session = s)

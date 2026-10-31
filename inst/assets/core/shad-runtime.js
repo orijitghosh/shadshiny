@@ -99,7 +99,35 @@
       if (i.top < c.top + pad) container.scrollTop -= c.top + pad - i.top;
       else if (i.bottom > c.bottom - pad) container.scrollTop += i.bottom - c.bottom + pad;
     },
-    clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
+    clamp(v, min, max) { return Math.min(max, Math.max(min, v)); },
+    /**
+     * Normalise a value the server sent to a choice input (select, combobox)
+     * against the option values it has. Values compare as strings; null, ""
+     * and [] mean empty. Unknown entries are dropped with one warning, and an
+     * update that names no option at all is ignored, as is more than one value
+     * for a single choice. Returns a string or null (single), an array
+     * (multiple), or undefined to leave the input as it is.
+     */
+    choiceValue(v, options, multiple, who) {
+      const sent = [];
+      (v == null ? [] : [].concat(v)).forEach((x) => {
+        const s = x == null ? "" : String(x);
+        if (s !== "" && sent.indexOf(s) === -1) sent.push(s);
+      });
+      const warn = (why, list) =>
+        console.warn("[shadshiny] " + who + ": " + why + " " + JSON.stringify(list));
+      if (!multiple && sent.length > 1) {
+        warn("ignoring several values for a single choice", sent);
+        return undefined;
+      }
+      const known = sent.filter((s) => options.indexOf(s) !== -1);
+      if (known.length < sent.length) {
+        warn("ignoring values that are not options",
+          sent.filter((s) => known.indexOf(s) === -1));
+        if (!known.length) return undefined;
+      }
+      return multiple ? known : (known.length ? known[0] : null);
+    }
   };
 
   /* Delegated code copy: one document handler, safe for dynamic Shiny DOM. */

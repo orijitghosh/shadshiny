@@ -11,6 +11,12 @@
   shadcn/ui; and a non-numeric `update_shad_number_input()` value is ignored
   instead of showing `NaN`.
 
+* `update_shad_select()` and `update_shad_combobox()` only select real
+  choices. A numeric `selected` now matches its choice (it used to show the
+  placeholder while reporting the number), a value that is not a choice is
+  ignored with a browser console warning instead of being reported as the
+  input's value, and multiple mode drops unknown and duplicate entries.
+
 * Development hardening now runs every fixture-gated browser suite in CI,
   enforces an 82% repository coverage floor plus 80% patch coverage, tests the
   declared R 4.1 minimum explicitly, and selects local `Rscript` from `PATH`

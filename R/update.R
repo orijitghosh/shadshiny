@@ -72,6 +72,11 @@ shad_set_html <- function(id, ui, selector = NULL,
 #' Shiny's built-in `update*Input()` helpers. Changing the available *choices*
 #' of a component is a non-goal — re-render with [shiny::renderUI()] instead.
 #'
+#' [update_shad_select()] and [update_shad_combobox()] match `selected`
+#' against the choices as strings, and `NULL` clears the input. A value that is
+#' not one of the choices is ignored and the browser console says so; in
+#' multiple mode only the unknown entries are dropped.
+#'
 #' @param id The input id (namespaced automatically).
 #' @param value,selected The new value. See each component's UI constructor for
 #'   its value contract.
@@ -128,6 +133,8 @@ update_shad_toggle_group <- function(id, selected,
 #' @export
 update_shad_select <- function(id, selected,
                                session = shiny::getDefaultReactiveDomain()) {
+  # the options carry as.character(value); send that string, not a number
+  if (!is.null(selected)) selected <- as.character(selected)
   shad_set_value(id, selected, session)
 }
 
@@ -137,6 +144,7 @@ update_shad_select <- function(id, selected,
 #' @export
 update_shad_combobox <- function(id, selected, multiple = FALSE,
                                  session = shiny::getDefaultReactiveDomain()) {
+  if (!is.null(selected)) selected <- as.character(selected)
   if (isTRUE(multiple)) selected <- I(as.character(selected))
   shad_set_value(id, selected, session)
 }

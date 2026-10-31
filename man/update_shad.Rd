@@ -138,6 +138,12 @@ Each function sets the current value of a bound shadshiny input, mirroring
 Shiny's built-in \code{update*Input()} helpers. Changing the available \emph{choices}
 of a component is a non-goal — re-render with \code{\link[shiny:renderUI]{shiny::renderUI()}} instead.
 }
+\details{
+\code{\link[=update_shad_select]{update_shad_select()}} and \code{\link[=update_shad_combobox]{update_shad_combobox()}} match \code{selected}
+against the choices as strings, and \code{NULL} clears the input. A value that is
+not one of the choices is ignored and the browser console says so; in
+multiple mode only the unknown entries are dropped.
+}
 \seealso{
 Other shadshiny server API:
 \code{\link[=bind_shad_task_button]{bind_shad_task_button()}},

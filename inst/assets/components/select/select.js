@@ -241,8 +241,11 @@
     return {
       getValue() { return value; },
       setValue(v) {
-        if (v === value) return;
-        value = v;
+        const next = shad.util.choiceValue(
+          v, items().map((it) => it.getAttribute("data-value")), false,
+          "select " + root.id);
+        if (next === undefined || next === value) return;
+        value = next;
         renderValue();
         shad.util.emit(root, "shad:change", { value });
       },
