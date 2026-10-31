@@ -143,3 +143,74 @@ test("combobox keyboard filtering skips disabled options and commits selection",
   await expect(trigger).toHaveAttribute("aria-expanded", "false");
   await expect(root.getByRole("option", { name: "Nuxt" })).toHaveAttribute("aria-selected", "true");
 });
+
+test("multi combobox chips have real remove buttons outside the trigger", async ({ page }) => {
+  await openKitchenSink(page);
+  const root = page.locator("#c-combobox [data-shad='combobox'][data-multiple]");
+  const trigger = root.locator(".shad-combobox__trigger");
+  const remove = root.getByRole("button", { name: "Remove R" });
+
+  // a button's children are presentational, so nothing interactive may sit inside it
+  await expect(trigger.locator("button, [role='button'], [tabindex]")).toHaveCount(0);
+  await expect(remove).toBeVisible();
+
+  await trigger.focus();
+  await page.keyboard.press("Shift+Tab");
+  await expect(remove).toBeFocused();
+
+  await page.evaluate(() => {
+    window.__changes = [];
+    document.querySelector("#c-combobox [data-multiple]")
+      .addEventListener("shad:change", (ev) => window.__changes.push(ev.detail.value));
+  });
+  await page.keyboard.press("Enter");
+  expect(await page.evaluate(() => window.__changes)).toEqual([[]]);
+  await expect(root.locator(".shad-combobox__badge")).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+});
+
+test("Tab from an open combobox search closes it and continues from the trigger", async ({ page }) => {
+  await openKitchenSink(page);
+  const root = page.locator("#c-combobox [data-shad='combobox']").first();
+  const trigger = root.locator(".shad-combobox__trigger");
+  const search = page.getByRole("combobox", { name: "Search framework…" });
+  // the panel is portaled to the end of <body>; the next stop is the one after the trigger
+  await page.evaluate(() => {
+    const t = document.querySelector("#c-combobox .shad-combobox__trigger");
+    const all = window.shad.util.tabbables(document.body);
+    all[all.indexOf(t) + 1].setAttribute("data-test-next", "");
+  });
+
+  await trigger.focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(search).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  await expect(page.locator("[data-test-next]")).toBeFocused();
+
+  await trigger.focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(search).toBeFocused();
+  await page.keyboard.press("Shift+Tab");
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  await expect(trigger).toBeFocused();
+});
+
+test("an open multi combobox with chips has no serious or critical axe violations", async ({ page }) => {
+  const { default: AxeBuilder } = await import("@axe-core/playwright");
+  await openKitchenSink(page);
+  const root = page.locator("#c-combobox [data-shad='combobox'][data-multiple]");
+  await root.locator(".shad-combobox__trigger").click();
+  await page.getByRole("option", { name: "Python" }).click();
+  await expect(root.locator(".shad-combobox__badge")).toHaveCount(2);
+
+  const report = await new AxeBuilder({ page })
+    .include("#c-combobox")
+    .include("body > .shad-combobox__content")
+    .analyze();
+  const blocking = report.violations
+    .filter((v) => v.impact === "serious" || v.impact === "critical")
+    .map((v) => ({ id: v.id, targets: v.nodes.map((n) => n.target.join(" ")) }));
+  expect(blocking).toEqual([]);
+});

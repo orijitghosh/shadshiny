@@ -17,6 +17,13 @@
   ignored with a browser console warning instead of being reported as the
   input's value, and multiple mode drops unknown and duplicate entries.
 
+* A multiple `shad_combobox()` can be used from the keyboard alone. Each chip's
+  remove control is now a real button placed before the trigger rather than
+  inside it, so Tab reaches it and Enter, Space, Delete or Backspace removes
+  the value; the combobox root now draws the input box. Tab in the open search
+  closes the list and moves on from the trigger instead of losing focus, and
+  Shift+Tab returns to the trigger.
+
 * Development hardening now runs every fixture-gated browser suite in CI,
   enforces an 82% repository coverage floor plus 80% patch coverage, tests the
   declared R 4.1 minimum explicitly, and selects local `Rscript` from `PATH`

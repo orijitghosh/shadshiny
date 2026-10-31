@@ -47,6 +47,7 @@ describe("no asset scrolls the page", () => {
     // The exceptions are deliberate and few; if this list needs to grow, the
     // new case had better be keyboard navigation too.
     const allowed = [
+      "/components/combobox/combobox.js",   // leave(), Tab out of the portaled search
       "/components/rating/rating.js",       // focusCurrent(), arrow keys
       "/components/tree/tree.js",           // arrow-key tree walk
       "/core/shad-runtime.js"               // focus trap Tab wrap-around
