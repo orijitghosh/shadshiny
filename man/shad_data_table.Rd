@@ -42,9 +42,10 @@ uses the row index.}
 
 \item{filter}{\code{"none"} (default), \code{"global"}, \code{"columns"}, or \code{"both"}.}
 
-\item{page_size}{Initial rows per page.}
+\item{page_size}{Initial rows per page, a positive whole number.}
 
-\item{page_sizes}{Selectable page sizes.}
+\item{page_sizes}{Selectable page sizes, positive whole numbers. \code{page_size}
+is added when it is not among them.}
 
 \item{sortable}{Master switch for column sorting (per-column overridable in
 \code{\link[=shad_col]{shad_col()}}).}

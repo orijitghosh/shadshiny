@@ -47,6 +47,26 @@
   composition keeps Enter and the arrows. Focus traps (dialogs, sheets,
   popovers) now skip elements with a negative `tabindex`, as Tab does.
 
+* `shad_data_table_server()` gains `max_page_size = 1000` and checks every
+  request before `source` runs. A request for a larger page, a page whose
+  offset would overflow an R integer, a sort or filter value that is not a
+  single string, or a column sorted twice is refused with a server warning
+  and the table's error state, instead of reaching `source` (a crafted
+  request could ask for the whole dataset). With `columns`, a sort or filter
+  on a column declared `sortable = FALSE` or `filterable = FALSE` is refused
+  too, and undeclared columns in a page still show but no longer offer
+  sorting or filtering the server would refuse.
+
+* `update_shad_data_table()` on a server-backed table now asks the server for
+  the new `page` or `page_size` instead of relabelling the rows already shown.
+  A page size the table does not offer, or several `selected` keys for a
+  single-selection table, is ignored with a browser console warning, and
+  `page` and `page_size` must be positive whole numbers. `shad_data_table()`
+  adds its `page_size` to `page_sizes` when it is missing, so the select shows
+  the size in use, and refuses a `page_size` of 0, which hung the browser.
+  Filtering and sorting read HTML cells through an inert template, so they no
+  longer load images or run handlers for rows that are not on the page.
+
 * Development hardening now runs every fixture-gated browser suite in CI,
   enforces an 82% repository coverage floor plus 80% patch coverage, tests the
   declared R 4.1 minimum explicitly, and selects local `Rscript` from `PATH`

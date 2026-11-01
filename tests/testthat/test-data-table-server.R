@@ -1,3 +1,20 @@
+# Contract: what shad_data_table_server() lets through to `source`. Any other
+# request is refused before `source` runs: a warning with the detail on the
+# server, and the fixed "Unable to load data." state in the browser. The
+# browser half is at the top of tests/js/data-table-contract.test.js.
+# 1. page and page size are positive whole numbers, the page size is at most
+#    max_page_size (1000 by default), and (page - 1) * page_size fits in an R
+#    integer, so OFFSET arithmetic in `source` never turns into NA.
+# 2. Each sort entry names a column and "asc" or "desc", both scalar strings,
+#    and no column is sorted twice. With `columns`, a sort column must be
+#    declared and sortable.
+# 3. The global filter and each column filter are scalar strings. With
+#    `columns`, a filtered column must be declared and filterable.
+# 4. A response may not hold more rows than the page size asked for. With
+#    `columns`, it offers sorting and filtering only where 2 and 3 allow
+#    them; other columns still show, so the browser never asks for a sort or
+#    filter the server would refuse.
+
 test_that("server table requests normalize the public input shape", {
   request <- shadshiny:::.shad_dt_request(list(
     requestId = 7,
@@ -29,6 +46,58 @@ test_that("server table requests reject unsafe pagination and sort values", {
   expect_error(
     shadshiny:::.shad_dt_request(list(filter = list(columns = list("6")))),
     "named list"
+  )
+})
+
+test_that("server table pages stay within max_page_size and integer range (1)", {
+  request <- shadshiny:::.shad_dt_request
+  expect_identical(request(list(pageSize = 1000))$page_size, 1000L)
+  expect_error(request(list(pageSize = 1001)), "page size.*1000")
+  expect_identical(
+    request(list(pageSize = 5000), max_page_size = 5000L)$page_size, 5000L
+  )
+  # the offset of the millionth page of 1000 still fits an R integer
+  expect_identical(request(list(page = 1e6, pageSize = 1000))$page, 1000000L)
+  expect_error(
+    request(list(page = .Machine$integer.max, pageSize = 2)),
+    "page.*out of range"
+  )
+})
+
+test_that("server table requests take scalar strings and sort a column once (2, 3)", {
+  request <- shadshiny:::.shad_dt_request
+  expect_error(
+    request(list(sort = list(list(column = list("a"), direction = "asc")))),
+    "sort column"
+  )
+  expect_error(
+    request(list(sort = list(list(column = "a", direction = list("asc"))))),
+    "asc.*desc"
+  )
+  expect_error(
+    request(list(sort = list(list(column = "a", direction = "asc"),
+                             list(column = "a", direction = "desc")))),
+    "more than once"
+  )
+  expect_error(request(list(filter = list(global = list(x = "a")))), "global filter")
+  expect_error(
+    request(list(filter = list(columns = list(a = list(b = "x"))))),
+    "column filters"
+  )
+})
+
+test_that("server helper validates max_page_size (1)", {
+  expect_error(
+    shad_data_table_server("tbl", identity, max_page_size = 0, session = NULL),
+    "max_page_size.*positive whole number"
+  )
+  expect_error(
+    shad_data_table_server("tbl", identity, max_page_size = 2.5, session = NULL),
+    "max_page_size.*positive whole number"
+  )
+  expect_error(
+    shad_data_table_server("tbl", identity, max_page_size = NA, session = NULL),
+    "max_page_size.*positive whole number"
   )
 })
 
@@ -198,6 +267,95 @@ test_that("server helper rejects columns outside the declared allowlist", {
     expect_identical(calls, 0L)
     expect_identical(messages[[2L]]$message$method, "setServerError")
     expect_identical(messages[[2L]]$message$args[[1L]]$message, "Unable to load data.")
+  }, {})
+})
+
+test_that("server table responses offer sorts and filters only where allowed (4)", {
+  request <- shadshiny:::.shad_dt_request(list(pageSize = 2))
+  response <- shadshiny:::.shad_dt_response(
+    list(
+      data = data.frame(id = c("a", "b"), name = c("Alpha", "Beta"),
+                        note = c("x", "y")),
+      total_rows = 2L, filtered_rows = 2L
+    ),
+    request,
+    list(id = shad_col("ID"), name = shad_col("Name", sortable = FALSE)),
+    "id"
+  )
+  flags <- lapply(response$columns, `[`, c("key", "sortable", "filterable"))
+  expect_identical(flags, list(
+    list(key = "id", sortable = TRUE, filterable = TRUE),
+    list(key = "name", sortable = FALSE, filterable = TRUE),
+    # not declared: shown, but neither, as the request check refuses both
+    list(key = "note", sortable = FALSE, filterable = FALSE)
+  ))
+})
+
+test_that("server helper refuses sorts and filters the columns do not allow (2, 3)", {
+  messages <- list()
+  calls <- 0L
+  shiny::testServer(function(input, output, session) {
+    session$sendCustomMessage <- function(type, message) {
+      messages <<- append(messages, list(list(type = type, message = message)))
+      invisible(TRUE)
+    }
+    source <- function(request) {
+      calls <<- calls + 1L
+      list(data = data.frame(id = "a", name = "Alpha"), total_rows = 1L,
+           filtered_rows = 1L)
+    }
+    shad_data_table_server(
+      "tbl", source,
+      columns = list(
+        id = shad_col("ID"),
+        name = shad_col("Name", sortable = FALSE, filterable = FALSE)
+      ),
+      session = session
+    )
+    ask <- function(id, sort = list(), columns = list()) {
+      session$setInputs(tbl = list(
+        requestId = id, page = 1L, pageSize = 2L, sort = sort,
+        filter = list(global = "", columns = columns)
+      ))
+    }
+    last_method <- function() messages[[length(messages)]]$message$method
+
+    expect_warning(ask(1L, sort = list(list(col = "name", dir = "asc"))),
+                   "not sortable")
+    expect_identical(last_method(), "setServerError")
+    expect_warning(ask(2L, columns = list(name = "Al")), "not filterable")
+    expect_identical(last_method(), "setServerError")
+    expect_identical(calls, 0L)
+
+    ask(3L, sort = list(list(col = "id", dir = "desc")), columns = list(id = "a"))
+    expect_identical(calls, 1L)
+    expect_identical(last_method(), "setServerPage")
+  }, {})
+})
+
+test_that("server helper refuses a page larger than max_page_size (1)", {
+  messages <- list()
+  sizes <- integer()
+  shiny::testServer(function(input, output, session) {
+    session$sendCustomMessage <- function(type, message) {
+      messages <<- append(messages, list(list(type = type, message = message)))
+      invisible(TRUE)
+    }
+    source <- function(request) {
+      sizes <<- c(sizes, request$page_size)
+      list(data = data.frame(id = "a"), total_rows = 1L, filtered_rows = 1L)
+    }
+    shad_data_table_server("tbl", source, max_page_size = 50, session = session)
+    ask <- function(id, size) {
+      session$setInputs(tbl = list(
+        requestId = id, page = 1L, pageSize = size, sort = list(),
+        filter = list(global = "", columns = list())
+      ))
+    }
+    expect_warning(ask(1L, 51L), "page size.*50")
+    expect_identical(messages[[length(messages)]]$message$method, "setServerError")
+    ask(2L, 50L)
+    expect_identical(sizes, 50L)
   }, {})
 })
 

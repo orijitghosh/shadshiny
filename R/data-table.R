@@ -272,7 +272,23 @@ shad_fmt_badge <- function(map) {
   as.integer(numeric_value)
 }
 
-.shad_dt_request <- function(value) {
+# stop() unless `x` is one positive whole number (or, with `scalar = FALSE`,
+# at least one); for the page-size arguments a user passes
+.shad_dt_whole <- function(x, arg, scalar = TRUE) {
+  if (!is.numeric(x) || !length(x) || (scalar && length(x) != 1L) || anyNA(x) ||
+      any(x < 1 | x != floor(x) | x > .Machine$integer.max)) {
+    stop(sprintf("`%s` must be %s.", arg,
+                 if (scalar) "a positive whole number" else "positive whole numbers"),
+         call. = FALSE)
+  }
+  invisible(x)
+}
+
+.shad_dt_is_string <- function(x) is.character(x) && length(x) == 1L && !is.na(x)
+
+# The browser's request, checked before `source` sees it. Contract: the top of
+# tests/testthat/test-data-table-server.R.
+.shad_dt_request <- function(value, max_page_size = 1000L) {
   value <- value %||% list()
   if (!is.list(value)) {
     stop("server table request must be a list", call. = FALSE)
@@ -288,44 +304,57 @@ shad_fmt_badge <- function(map) {
     }
     column <- entry$column %||% entry$col
     direction <- entry$direction %||% entry$dir
-    if (length(column) != 1L || is.na(column) || !nzchar(as.character(column))) {
+    if (!.shad_dt_is_string(column) || !nzchar(column)) {
       stop("server table sort column must be a non-empty string", call. = FALSE)
     }
-    direction <- as.character(direction)
-    if (length(direction) != 1L || is.na(direction) ||
-        !direction %in% c("asc", "desc")) {
+    if (!.shad_dt_is_string(direction) || !direction %in% c("asc", "desc")) {
       stop("server table sort direction must be asc or desc", call. = FALSE)
     }
-    list(column = as.character(column), direction = direction)
+    list(column = column, direction = direction)
   })
+  if (anyDuplicated(vapply(sort, `[[`, character(1), "column"))) {
+    stop("server table sort names a column more than once", call. = FALSE)
+  }
 
   filter <- value$filter %||% list()
   if (!is.list(filter)) {
     stop("server table filter must be a list", call. = FALSE)
   }
   global <- filter$global %||% ""
-  if (length(global) != 1L || is.na(global)) {
+  if (!.shad_dt_is_string(global)) {
     stop("server table global filter must be a scalar string", call. = FALSE)
   }
   column_filters <- filter$columns %||% list()
   if (!is.list(column_filters) ||
       (length(column_filters) > 0L &&
-       (is.null(names(column_filters)) || any(!nzchar(names(column_filters)))))) {
+       (is.null(names(column_filters)) || any(!nzchar(names(column_filters))) ||
+        anyDuplicated(names(column_filters))))) {
     stop("server table column filters must be a named list", call. = FALSE)
   }
   column_filters <- lapply(column_filters, function(entry) {
-    if (length(entry) != 1L || is.na(entry)) {
+    if (!.shad_dt_is_string(entry)) {
       stop("server table column filters must contain scalar strings", call. = FALSE)
     }
-    as.character(entry)
+    entry
   })
+
+  page <- .shad_dt_integer(value$page, 1L, "page", positive = TRUE)
+  page_size <- .shad_dt_integer(value$pageSize, 25L, "page size", positive = TRUE)
+  if (page_size > max_page_size) {
+    stop(sprintf("server table page size %d is over max_page_size (%d)",
+                 page_size, as.integer(max_page_size)), call. = FALSE)
+  }
+  # a source computing OFFSET as (page - 1L) * page_size would get NA
+  if ((page - 1) * page_size > .Machine$integer.max) {
+    stop("server table page is out of range for its page size", call. = FALSE)
+  }
 
   list(
     request_id = .shad_dt_integer(value$requestId, 0L, "request id"),
-    page = .shad_dt_integer(value$page, 1L, "page", positive = TRUE),
-    page_size = .shad_dt_integer(value$pageSize, 25L, "page size", positive = TRUE),
+    page = page,
+    page_size = page_size,
     sort = sort,
-    filter = list(global = as.character(global), columns = column_filters)
+    filter = list(global = global, columns = column_filters)
   )
 }
 
@@ -360,6 +389,14 @@ shad_fmt_badge <- function(map) {
     request$page_size, request$page_size, "No results.", "Filter rows...",
     "Columns", "Rows per page", FALSE
   )
+  # with `columns`, an undeclared column still shows, but is offered for
+  # neither sorting nor filtering, which the request check would refuse
+  if (!is.null(columns)) {
+    model$columns <- lapply(model$columns, function(col) {
+      if (!col$key %in% names(columns)) col$sortable <- col$filterable <- FALSE
+      col
+    })
+  }
   list(
     requestId = request$request_id,
     rows = model$rows,
@@ -386,16 +423,24 @@ shad_fmt_badge <- function(map) {
   )$columns
 }
 
+# `columns` is the column metadata from .shad_dt_server_columns(): a sort
+# column must be declared and sortable, a filtered one declared and filterable
 .shad_dt_server_check_columns <- function(request, columns) {
   if (is.null(columns)) return(invisible(NULL))
-  known <- names(columns)
-  sort_columns <- vapply(request$sort, `[[`, character(1), "column")
-  bad_sort <- setdiff(sort_columns, known)
-  bad_filter <- setdiff(names(request$filter$columns), known)
-  if (length(bad_sort) || length(bad_filter)) {
-    bad <- unique(c(bad_sort, bad_filter))[[1L]]
-    stop(sprintf("server table request refers to unknown column `%s`", bad), call. = FALSE)
+  meta <- stats::setNames(columns, vapply(columns, `[[`, character(1), "key"))
+  check <- function(keys, flag) {
+    for (key in keys) {
+      if (is.null(meta[[key]])) {
+        stop(sprintf("server table request refers to unknown column `%s`", key),
+             call. = FALSE)
+      }
+      if (!isTRUE(meta[[key]][[flag]])) {
+        stop(sprintf("server table column `%s` is not %s", key, flag), call. = FALSE)
+      }
+    }
   }
+  check(vapply(request$sort, `[[`, character(1), "column"), "sortable")
+  check(names(request$filter$columns), "filterable")
   invisible(NULL)
 }
 
@@ -424,25 +469,38 @@ shad_fmt_badge <- function(map) {
 #' provide editing, grouping, pivoting, aggregation, downloads, or database
 #' adapter behavior; the source owns query construction and parameterization.
 #'
+#' Requests come from the browser, so they are checked before `source` runs.
+#' The page size is at most `max_page_size`, the page's first row fits in an R
+#' integer, every sort and filter value is a single string, and no column is
+#' sorted twice. With `columns`, a sort column must be declared and sortable,
+#' and a filtered column declared and filterable. A request that fails is
+#' never passed to `source`: the server logs a warning and the table shows
+#' its "Unable to load data." state.
+#'
 #' @param id The data-table input id.
 #' @param source A function accepting one normalized request list and returning
 #'   `list(data = <data.frame>, total_rows = <integer>, filtered_rows =
 #'   <integer>)`.
 #' @param columns Optional named list of [shad_col()] specs. When omitted,
-#'   column metadata is inferred from the first response.
+#'   column metadata is inferred from the first response, and requests are
+#'   not checked against the columns. Supply it so the server, not the
+#'   browser, decides which columns can be sorted and filtered.
 #' @param row_key Optional stable id column in each response page.
+#' @param max_page_size The largest page size a request may ask for. Keep it
+#'   at least the largest of the table's `page_sizes`.
 #' @param session The Shiny session.
 #' @returns Invisibly, the Shiny observer driving the source.
 #' @family shadshiny data table
 #' @export
 shad_data_table_server <- function(
-    id, source, columns = NULL, row_key = NULL,
+    id, source, columns = NULL, row_key = NULL, max_page_size = 1000,
     session = shiny::getDefaultReactiveDomain()) {
   if (!is.function(source)) stop("`source` must be a function.", call. = FALSE)
   if (!is.null(row_key) &&
       (length(row_key) != 1L || is.na(row_key) || !nzchar(as.character(row_key)))) {
     stop("`row_key` must be a non-empty column name or NULL.", call. = FALSE)
   }
+  .shad_dt_whole(max_page_size, "max_page_size")
   column_meta <- .shad_dt_server_columns(columns)
   shad_invoke(id, "enableServerMode", list(list(
     columns = column_meta, totalRows = 0L, filteredRows = 0L
@@ -458,8 +516,8 @@ shad_data_table_server <- function(
                         raw_id == floor(raw_id) && raw_id >= 0 &&
                         raw_id <= .Machine$integer.max) as.integer(raw_id) else 0L
       result <- tryCatch({
-        request <- .shad_dt_request(raw)
-        .shad_dt_server_check_columns(request, columns)
+        request <- .shad_dt_request(raw, max_page_size)
+        .shad_dt_server_check_columns(request, column_meta)
         request
       }, error = function(e) {
         warning(conditionMessage(e), call. = FALSE)
@@ -522,8 +580,9 @@ shad_data_table_server <- function(
 #'   uses the row index.
 #' @param selection `"none"` (default), `"single"`, or `"multiple"`.
 #' @param filter `"none"` (default), `"global"`, `"columns"`, or `"both"`.
-#' @param page_size Initial rows per page.
-#' @param page_sizes Selectable page sizes.
+#' @param page_size Initial rows per page, a positive whole number.
+#' @param page_sizes Selectable page sizes, positive whole numbers. `page_size`
+#'   is added when it is not among them.
 #' @param sortable Master switch for column sorting (per-column overridable in
 #'   [shad_col()]).
 #' @param column_visibility Show the column-visibility dropdown.
@@ -563,6 +622,10 @@ shad_data_table <- function(inputId, data, columns = NULL, row_key = NULL,
                             loading = FALSE, width = NULL, class = NULL, ...) {
   selection <- arg_match_shad(selection, c("none", "single", "multiple"), "selection")
   filter <- arg_match_shad(filter, c("none", "global", "columns", "both"), "filter")
+  # a page size of 0 made the browser's pager count pages to Infinity
+  .shad_dt_whole(page_size, "page_size")
+  .shad_dt_whole(page_sizes, "page_sizes", scalar = FALSE)
+  page_sizes <- sort(unique(c(page_sizes, page_size)))
 
   n_cells <- (if (is.null(data)) 0L else nrow(as.data.frame(data))) *
     (if (is.null(data)) 0L else ncol(as.data.frame(data)))
@@ -609,8 +672,13 @@ shad_data_table <- function(inputId, data, columns = NULL, row_key = NULL,
 #' @param columns The [shad_col()] specs used when re-serializing `data`. Supply
 #'   the same specs used at construction for consistent formatting.
 #' @param row_key Row-key column (as in [shad_data_table()]) for the new data.
-#' @param selected Optional character vector of row keys to select.
-#' @param page,page_size Optional pagination patch.
+#' @param selected Optional character vector of row keys to select. A
+#'   single-selection table ignores more than one key, with a browser console
+#'   warning.
+#' @param page,page_size Optional pagination patch, as positive whole numbers.
+#'   A page size the table does not offer is ignored, with a browser console
+#'   warning, and a new page size starts at page 1. On a server-backed table
+#'   ([shad_data_table_server()]) either one asks the server for that page.
 #' @param loading Optional logical to toggle the skeleton state.
 #' @param session The Shiny session.
 #' @returns Invisibly `NULL`.
@@ -621,6 +689,8 @@ update_shad_data_table <- function(id, data = NULL, columns = NULL,
                                     page = NULL, page_size = NULL,
                                     loading = NULL,
                                     session = shiny::getDefaultReactiveDomain()) {
+  if (!is.null(page)) .shad_dt_whole(page, "page")
+  if (!is.null(page_size)) .shad_dt_whole(page_size, "page_size")
   if (!is.null(data)) {
     model <- .shad_dt_model(
       data, columns, row_key, TRUE, "none", FALSE, FALSE, "24rem",

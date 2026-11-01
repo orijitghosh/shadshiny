@@ -298,3 +298,50 @@ test("an open command dialog keeps Tab on its search and has no serious axe viol
     .map((v) => ({ id: v.id, targets: v.nodes.map((n) => n.target.join(" ")) }));
   expect(blocking).toEqual([]);
 });
+
+test("data-table filtering and sorting never load the images in HTML cells off the page", async ({ page }) => {
+  await openKitchenSink(page);
+  const fetched = [];
+  await page.route("**/__probe/**", (route) => {
+    fetched.push(route.request().url().split("/").pop());
+    return route.fulfill({ status: 404, body: "" });
+  });
+  await page.addScriptTag({ url: "/inst/assets/components/data-table/data-table.js" });
+  await page.evaluate(() => {
+    window.__handled = [];
+    const cell = (key, name) => ({
+      html: `<img alt="" src="/__probe/${key}.png" onerror="__handled.push('${key}')">${name}`
+    });
+    const model = {
+      columns: [{ key: "name", label: "Name", sortable: true, filterable: true }],
+      rows: [["b", "Beta"], ["a", "Alpha"], ["c", "Gamma"]]
+        .map(([key, name]) => ({ key, cells: { name: cell(key, name) } })),
+      options: { pageSize: 1, pageSizes: [1], globalFilter: true }
+    };
+    const el = document.createElement("div");
+    el.id = "probe-table";
+    el.setAttribute("data-shad", "data-table");
+    const script = document.createElement("script");
+    script.type = "application/json";
+    script.textContent = JSON.stringify(model);
+    el.appendChild(script);
+    document.body.appendChild(el);
+    shad.init(el);
+  });
+  const table = page.locator("#probe-table");
+  const row = table.locator("tbody tr[data-key]");
+  const filter = table.getByRole("searchbox", { name: "Filter all columns" });
+  await expect(row).toHaveAttribute("data-key", "b");
+
+  // filtering reads every row's text; only the shown row's image may load
+  await filter.fill("zzz");
+  await expect(row).toHaveCount(0);
+  await filter.fill("");
+  await table.getByRole("button", { name: "Name" }).click();
+  await expect(row).toHaveAttribute("data-key", "a");
+  // the shown row's handler is the last to fire: any stray load came first
+  await expect.poll(() => page.evaluate(() => window.__handled.includes("a"))).toBe(true);
+
+  expect(await page.evaluate(() => window.__handled)).not.toContain("c");
+  expect(fetched).not.toContain("c.png");
+});

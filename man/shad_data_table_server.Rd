@@ -9,6 +9,7 @@ shad_data_table_server(
   source,
   columns = NULL,
   row_key = NULL,
+  max_page_size = 1000,
   session = shiny::getDefaultReactiveDomain()
 )
 }
@@ -19,9 +20,14 @@ shad_data_table_server(
 \verb{list(data = <data.frame>, total_rows = <integer>, filtered_rows = <integer>)}.}
 
 \item{columns}{Optional named list of \code{\link[=shad_col]{shad_col()}} specs. When omitted,
-column metadata is inferred from the first response.}
+column metadata is inferred from the first response, and requests are
+not checked against the columns. Supply it so the server, not the
+browser, decides which columns can be sorted and filtered.}
 
 \item{row_key}{Optional stable id column in each response page.}
+
+\item{max_page_size}{The largest page size a request may ask for. Keep it
+at least the largest of the table's \code{page_sizes}.}
 
 \item{session}{The Shiny session.}
 }
@@ -45,6 +51,14 @@ Supply a stable \code{row_key} column when selections must survive paging. With
 is not suitable for cross-page selection. This helper deliberately does not
 provide editing, grouping, pivoting, aggregation, downloads, or database
 adapter behavior; the source owns query construction and parameterization.
+
+Requests come from the browser, so they are checked before \code{source} runs.
+The page size is at most \code{max_page_size}, the page's first row fits in an R
+integer, every sort and filter value is a single string, and no column is
+sorted twice. With \code{columns}, a sort column must be declared and sortable,
+and a filtered column declared and filterable. A request that fails is
+never passed to \code{source}: the server logs a warning and the table shows
+its "Unable to load data." state.
 }
 \seealso{
 Other shadshiny data table:

@@ -26,9 +26,14 @@ the same specs used at construction for consistent formatting.}
 
 \item{row_key}{Row-key column (as in \code{\link[=shad_data_table]{shad_data_table()}}) for the new data.}
 
-\item{selected}{Optional character vector of row keys to select.}
+\item{selected}{Optional character vector of row keys to select. A
+single-selection table ignores more than one key, with a browser console
+warning.}
 
-\item{page, page_size}{Optional pagination patch.}
+\item{page, page_size}{Optional pagination patch, as positive whole numbers.
+A page size the table does not offer is ignored, with a browser console
+warning, and a new page size starts at page 1. On a server-backed table
+(\code{\link[=shad_data_table_server]{shad_data_table_server()}}) either one asks the server for that page.}
 
 \item{loading}{Optional logical to toggle the skeleton state.}
 

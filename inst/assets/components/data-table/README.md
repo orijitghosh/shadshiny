@@ -41,7 +41,7 @@ div.shad-data-table[data-shad=data-table]
               "loading": false, "emptyText": "", "emptyHtml": "", "filterPlaceholder": ""}
 }
 ```
-Cell values: plain string/number → text-escaped by construction. Object form: `html` is inserted verbatim (**pre-rendered by R** — the JS never generates cell markup), `text` powers filtering, `sort` powers ordering (falls back to `text`, then stripped html).
+Cell values: plain string/number → text-escaped by construction. Object form: `html` is inserted verbatim (**pre-rendered by R** — the JS never generates cell markup), `text` powers filtering, `sort` powers ordering (falls back to `text`, then the html's text). Without `text`, the html's text is read once from an inert `<template>`, so filtering and sorting never load an image or run a handler for rows off the page.
 
 ## Behavior
 - **Sort**: click cycles asc → desc → none; Shift+click adds multi-sort (numbered indicator); `aria-sort` on `<th>`. Numeric-aware `localeCompare` fallback.
@@ -54,13 +54,21 @@ Cell values: plain string/number → text-escaped by construction. Object form: 
 
 ### Server-backed mode (experimental)
 
-`shad_data_table_server(id, source, columns = NULL, row_key = NULL, session =
-shiny::getDefaultReactiveDomain())` reuses this anatomy while keeping the full
-dataset in the server. `source(request)` receives `page`, `page_size`,
+`shad_data_table_server(id, source, columns = NULL, row_key = NULL,
+max_page_size = 1000, session = shiny::getDefaultReactiveDomain())` reuses this
+anatomy while keeping the full dataset in the server. `source(request)` receives `page`, `page_size`,
 multi-sort keys, a global filter, and named column filters. It must return a
 data frame containing at most `page_size` rows plus `total_rows` and
 `filtered_rows`. The source owns query construction and must parameterize any
 database work; the package does not provide database adapters.
+
+Requests are checked before `source` runs: the page size is at most
+`max_page_size`, `(page - 1) * page_size` fits an R integer, sort and filter
+values are single strings, and no column is sorted twice. With `columns`, a
+sort or filter must name a declared column that allows it; undeclared columns
+in a response still show, but are offered for neither. A refused request logs
+a server warning and shows the fixed error state. Contract: the top of
+`tests/testthat/test-data-table-server.R`.
 
 Server responses use the existing R cell serialization and trusted-HTML rules.
 Request IDs are monotonic and stale responses are ignored. A supplied `row_key`
@@ -72,7 +80,7 @@ behavior remain outside this experimental mode.
 | Member | Description |
 |---|---|
 | `getValue()` | `{selected, sort, filter, page, pageSize}`; server mode also includes `requestId` |
-| `setValue(v)` | partial-state patch; re-renders + emits |
+| `setValue(v)` | partial-state patch; re-renders + emits. A `pageSize` the table does not offer, or several `selected` keys in single mode, is ignored with `console.warn`; a new `pageSize` starts at page 1. In server mode a page, page-size, sort or filter patch requests that page instead |
 | `setData(rows)` | server-pushed refresh; keeps selection keys; clears loading |
 | `enableServerMode(config)` | experimental server mode; requests the initial page |
 | `setServerPage(response)` | accepts only the current request ID and renders one page |

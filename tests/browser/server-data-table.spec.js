@@ -134,6 +134,26 @@ test("supports multi-sort, stable selection, and lifecycle teardown", async ({ p
   await expect.poll(() => page.evaluate(() => shad.get(window.__removedServerTable))).toBeNull();
 });
 
+test("refuses a crafted request over max_page_size without calling the source", async ({ page }) => {
+  const table = page.locator("#tbl");
+  const before = await requestCount(page);
+  // what the browser could send if someone bypassed the page-size select
+  const sent = await page.evaluate(() => {
+    const value = shad.get(document.getElementById("tbl")).getValue();
+    const crafted = { ...value, requestId: value.requestId + 1, pageSize: 100000 };
+    Shiny.setInputValue("tbl:shadshiny.dataTable", crafted, { priority: "event" });
+    return crafted.requestId;
+  });
+  await expect(page.locator("#last_request")).toHaveText(`id=${sent}; page=1; size=100000`);
+  expect(await requestCount(page)).toBe(before);
+  await expect(table.locator("tbody tr[data-key]")).toHaveCount(10);
+
+  // the table's own next request still goes through
+  await table.locator('[aria-label="Next page"]').click();
+  await waitForNextRequest(page, before);
+  await expect(table.locator(".shad-data-table__summary")).toContainText("11–20 of 100000 rows");
+});
+
 test("has no serious or critical accessibility violations", async ({ page }) => {
   const report = await new AxeBuilder({ page }).include("#tbl").analyze();
   const blocking = report.violations.filter(

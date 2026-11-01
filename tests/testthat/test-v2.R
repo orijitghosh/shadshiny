@@ -54,6 +54,28 @@ test_that("shad_data_table renders a bound input with the model script", {
   expect_match(html, 'type="application/json"')
 })
 
+test_that("shad_data_table offers its page size and refuses sizes the pager cannot use", {
+  sizes <- function(...) {
+    html <- as.character(shad_data_table("tbl", head(iris, 3), ...))
+    json <- sub('.*<script type="application/json">(.*)</script>.*', "\\1", html)
+    jsonlite::fromJSON(json)$options$pageSizes
+  }
+  # the select can only show a size it offers
+  expect_equal(sizes(page_size = 15), c(10, 15, 25, 50, 100))
+  expect_equal(sizes(page_size = 25), c(10, 25, 50, 100))
+
+  # a page size of 0 made the pager count to Infinity and hang the page
+  expect_error(shad_data_table("tbl", iris, page_size = 0), "page_size")
+  expect_error(shad_data_table("tbl", iris, page_size = 2.5), "page_size")
+  expect_error(shad_data_table("tbl", iris, page_sizes = c(10, -1)), "page_sizes")
+  expect_error(shad_data_table("tbl", iris, page_sizes = numeric()), "page_sizes")
+
+  expect_error(update_shad_data_table("tbl", page = 0, session = NULL), "page")
+  expect_error(update_shad_data_table("tbl", page = 1.5, session = NULL), "page")
+  expect_error(update_shad_data_table("tbl", page_size = "10", session = NULL),
+               "page_size")
+})
+
 # --- theming ------------------------------------------------------------------
 
 test_that("OKLCH converts to the expected hex", {
