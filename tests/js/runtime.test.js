@@ -202,6 +202,19 @@ describe("FocusTrap", () => {
     expect(document.activeElement).toBe(before);
   });
 
+  test("tabbables() leaves out what Tab skips, so Shift+Tab never wraps onto it", () => {
+    // a command palette's options are buttons with tabindex=-1, reached with
+    // the arrows; a roving group's inactive items are the same
+    const panel = document.createElement("div");
+    panel.innerHTML = '<input id="q"><button id="opt" tabindex="-1">opt</button>' +
+      '<a id="link" href="#" tabindex="-1">link</a><button id="last">last</button>';
+    document.body.appendChild(panel);
+    for (const id of ["q", "opt", "link", "last"]) {
+      rect(document.getElementById(id), { width: 10, height: 10 });
+    }
+    expect(shad.util.tabbables(panel).map((el) => el.id)).toEqual(["q", "last"]);
+  });
+
   test("initial focus prefers [data-shad-autofocus]", async () => {
     const panel = document.createElement("div");
     panel.innerHTML = '<button id="a">a</button>' +

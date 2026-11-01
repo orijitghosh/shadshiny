@@ -7,13 +7,15 @@
    Filtering (DECISION): case-insensitive substring on item text +
    data-keywords; groups hide when all their items hide; __empty shows when
    nothing matches. No fuzzy scoring — predictable and fast.
-   getValue() -> data-value of last activated item. */
+   getValue() -> data-value of last activated item.
+   Hotkey: "+"-separated modifiers (mod = Ctrl or Cmd, ctrl, meta/cmd,
+   alt/option, shift) then the key. Contract:
+   tests/js/command-contract.test.js. */
 (function () {
   "use strict";
   shad.register("command", function (root) {
     const input = root.querySelector(".shad-command__input");
     const list = root.querySelector(".shad-command__list");
-    const empty = root.querySelector(".shad-command__empty");
     const hotkey = root.getAttribute("data-hotkey"); // e.g. "mod+k"
     const isDialog = !!hotkey || root.hasAttribute("data-dialog");
     const state = { value: null };
@@ -29,8 +31,10 @@
     input.setAttribute("autocomplete", "off");
     input.setAttribute("spellcheck", "false");
     list.setAttribute("role", "listbox");
-    if (empty) empty.hidden = true;
 
+    // update_shad_command() replaces the list's contents, so look these up
+    // each time rather than once
+    function empty() { return list.querySelector(".shad-command__empty"); }
     function items() {
       return Array.from(list.querySelectorAll(".shad-command__item"))
         .filter((it) => !it.hidden && !it.hasAttribute("data-disabled"));
@@ -38,12 +42,28 @@
     function allItems() {
       return Array.from(list.querySelectorAll(".shad-command__item"));
     }
-    allItems().forEach((it) => {
-      it.setAttribute("role", "option");
-      it.id = it.id || shad.uid("cmd-item");
-    });
+    // Options are reached with the arrows through aria-activedescendant, so
+    // the search input stays the only tab stop. Runs again on refresh().
+    function prepare() {
+      allItems().forEach((it) => {
+        it.setAttribute("role", "option");
+        it.id = it.id || shad.uid("cmd-item");
+        it.setAttribute("tabindex", "-1");
+        if (it.hasAttribute("data-disabled")) it.setAttribute("aria-disabled", "true");
+        else it.removeAttribute("aria-disabled");
+      });
+      list.querySelectorAll(".shad-command__group").forEach((g) => {
+        const heading = g.querySelector(".shad-command__group-heading");
+        if (!heading) return;
+        heading.id = heading.id || shad.uid("cmd-group");
+        g.setAttribute("role", "group");
+        g.setAttribute("aria-labelledby", heading.id);
+      });
+    }
+    prepare();
 
     function highlight(item) {
+      if (!item) input.removeAttribute("aria-activedescendant");
       allItems().forEach((it) => {
         if (it === item) {
           it.setAttribute("data-highlighted", "");
@@ -79,7 +99,8 @@
         g.hidden = !g.querySelector(".shad-command__item:not([hidden])");
       });
       root.querySelectorAll(".shad-command__separator").forEach((s) => { s.hidden = !any; });
-      if (empty) empty.hidden = any;
+      const e = empty();
+      if (e) e.hidden = any;
       highlight(items()[0] || null);
     }
 
@@ -137,21 +158,24 @@
     }
 
     /* hotkey: "mod+k" → ⌘K on mac, Ctrl+K elsewhere */
-    function onHotkey(ev) {
-      if (!hotkey) return;
-      const parts = hotkey.toLowerCase().split("+");
-      const key = parts[parts.length - 1];
-      const needMod = parts.includes("mod");
-      const mod = ev.metaKey || ev.ctrlKey;
-      if (ev.key.toLowerCase() === key && (!needMod || mod)) {
-        ev.preventDefault();
-        open ? doClose() : doOpen();
-      }
+    const combo = hotkey ? parseHotkey(hotkey) : null;
+    if (hotkey && !combo) {
+      console.warn("[shadshiny] command " + root.id + ": ignoring hotkey " + JSON.stringify(hotkey));
     }
-    if (hotkey) document.addEventListener("keydown", onHotkey);
+    function onHotkey(ev) {
+      // autofill sends keydown without a key; the IME owns keys mid-composition
+      if (typeof ev.key !== "string" || ev.repeat || ev.isComposing) return;
+      if (!matches(combo, ev)) return;
+      // a plain key ("/") is typing while focus is in a field
+      if (!combo.mod && !combo.ctrl && !combo.meta && !combo.alt && editable(ev.target)) return;
+      ev.preventDefault();
+      open ? doClose() : doOpen();
+    }
+    if (combo) document.addEventListener("keydown", onHotkey);
 
     function onInput() { filter(); }
     function onKeydown(ev) {
+      if (ev.isComposing) return;
       switch (ev.key) {
         case "ArrowDown": ev.preventDefault(); move(1); break;
         case "ArrowUp": ev.preventDefault(); move(-1); break;
@@ -170,10 +194,15 @@
       const item = ev.target.closest(".shad-command__item");
       if (item && !item.hasAttribute("data-disabled")) { ev.preventDefault(); activate(item); }
     }
+    // keep focus in the search: the arrows only work from there
+    function onMouseDown(ev) {
+      if (ev.target.closest(".shad-command__item")) ev.preventDefault();
+    }
     input.addEventListener("input", onInput);
     input.addEventListener("keydown", onKeydown);
     list.addEventListener("pointermove", onPointerMove);
     list.addEventListener("click", onClick);
+    list.addEventListener("mousedown", onMouseDown);
 
     filter(); // initial highlight
 
@@ -183,18 +212,62 @@
       open: isDialog ? doOpen : function () {},
       close: isDialog ? doClose : function () {},
       get isOpen() { return open; },
-      /** re-run the filter after Shiny swaps items */
-      refresh: filter,
+      /** re-read the items after Shiny swaps them, then re-run the filter */
+      refresh() { prepare(); filter(); },
       destroy() {
         doClose();
-        if (hotkey) document.removeEventListener("keydown", onHotkey);
+        if (combo) document.removeEventListener("keydown", onHotkey);
         input.removeEventListener("input", onInput);
         input.removeEventListener("keydown", onKeydown);
         list.removeEventListener("pointermove", onPointerMove);
         list.removeEventListener("click", onClick);
+        list.removeEventListener("mousedown", onMouseDown);
       }
     };
   });
+
+  const MODIFIERS = { mod: "mod", ctrl: "ctrl", control: "ctrl", meta: "meta", cmd: "meta",
+    command: "meta", alt: "alt", option: "alt", shift: "shift" };
+
+  // "mod+shift+p" -> {key, mod, ctrl, meta, alt, shift}; null when it names
+  // an unknown modifier or no key. A trailing "+" is the plus key.
+  function parseHotkey(s) {
+    const parts = String(s).toLowerCase().split(/\+(?=.)/);
+    let key = parts.pop();
+    if (key === "space") key = " ";
+    const combo = { key, mod: false, ctrl: false, meta: false, alt: false, shift: false };
+    for (const p of parts) {
+      if (!MODIFIERS[p]) return null;
+      combo[MODIFIERS[p]] = true;
+    }
+    return key ? combo : null;
+  }
+
+  function matches(combo, ev) {
+    const k = ev.key.toLowerCase();
+    // a letter key that types another script (a Russian layout, Option on a
+    // Mac) still names its physical key
+    const physical = /^[^\x00-\x7f]$/.test(k) && /^[a-z0-9]$/.test(combo.key) &&
+      ev.code === (/\d/.test(combo.key) ? "Digit" : "Key") + combo.key.toUpperCase();
+    if (k !== combo.key && !physical) return false;
+    if (combo.mod ? !(ev.ctrlKey || ev.metaKey)
+      : !!ev.ctrlKey !== combo.ctrl || !!ev.metaKey !== combo.meta) return false;
+    if (!!ev.altKey !== combo.alt) return false;
+    // "/" or "?" may need Shift on some layouts; letters and named keys do not
+    const symbol = combo.key.length === 1 && !/[a-z0-9 ]/.test(combo.key);
+    return symbol ? !combo.shift || !!ev.shiftKey : !!ev.shiftKey === combo.shift;
+  }
+
+  // somewhere a plain key types: a text field, a select, or contenteditable
+  function editable(el) {
+    if (!el || el.nodeType !== 1) return false;
+    if (el.tagName === "INPUT") {
+      return !/^(button|checkbox|radio|submit|reset|image|file|range|color)$/i.test(el.type);
+    }
+    if (/^(textarea|select)$/i.test(el.tagName)) return true;
+    const ce = el.closest("[contenteditable]");
+    return !!ce && ce.getAttribute("contenteditable") !== "false";
+  }
 
   /* Any element with data-shad-command-open="<id>" opens that palette.
      Delegated from the document so a trigger rendered later (a navbar button,

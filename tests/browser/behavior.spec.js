@@ -258,3 +258,43 @@ test("an open date picker has no serious or critical axe violations", async ({ p
     .map((v) => ({ id: v.id, targets: v.nodes.map((n) => n.target.join(" ")) }));
   expect(blocking).toEqual([]);
 });
+
+test("an inline command palette has one tab stop and keeps focus in its search", async ({ page }) => {
+  await openKitchenSink(page);
+  const palette = page.locator("#c-command [data-shad='command']:not([data-hotkey])");
+  const search = palette.getByRole("combobox", { name: "Search commands" });
+  const profile = palette.getByRole("option", { name: /Profile/ });
+
+  await search.focus();
+  await page.keyboard.press("Tab");
+  // the next stop is past the options, not on one
+  expect(await palette.evaluate((el) => el.contains(document.activeElement))).toBe(false);
+
+  await search.focus();
+  await profile.click();
+  await expect(search).toBeFocused();
+  // the pointer highlighted Profile; the arrows carry on from there
+  await page.keyboard.press("ArrowDown");
+  await expect(palette.getByRole("option", { name: /Billing/ })).toHaveAttribute("data-highlighted", "");
+});
+
+test("an open command dialog keeps Tab on its search and has no serious axe violations", async ({ page }) => {
+  const { default: AxeBuilder } = await import("@axe-core/playwright");
+  await openKitchenSink(page);
+  await page.locator("body").press("Control+k");
+  const dialog = page.getByRole("dialog", { name: "Command palette" });
+  await expect(dialog).toBeVisible();
+  const search = dialog.getByRole("combobox");
+  await expect(search).toBeFocused();
+
+  await page.keyboard.press("Shift+Tab");
+  await expect(search).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(search).toBeFocused();
+
+  const report = await new AxeBuilder({ page }).include("body > .shad-command--dialog").analyze();
+  const blocking = report.violations
+    .filter((v) => v.impact === "serious" || v.impact === "critical")
+    .map((v) => ({ id: v.id, targets: v.nodes.map((n) => n.target.join(" ")) }));
+  expect(blocking).toEqual([]);
+});

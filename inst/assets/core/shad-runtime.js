@@ -53,6 +53,8 @@
       ].join(",");
       return Array.from(container.querySelectorAll(sel)).filter((el) => {
         if (el.closest("[hidden]") || el.getAttribute("aria-hidden") === "true") return false;
+        // a negative tabindex (roving items, command options) is skipped by Tab
+        if (parseInt(el.getAttribute("tabindex"), 10) < 0) return false;
         const r = el.getBoundingClientRect();
         return r.width > 0 || r.height > 0 || el === document.activeElement;
       });

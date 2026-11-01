@@ -46,7 +46,12 @@ control. List entries may also be lists carrying \code{value}, \code{label}, \co
 
 \item{hotkey}{Key that opens the palette, e.g. \code{"mod+k"} (default; ⌘K on
 macOS, Ctrl+K elsewhere). \code{NULL} for no hotkey — open it from a trigger or
-the server instead.}
+the server instead. Write \code{+}-separated modifiers, then the key: \code{mod}
+(⌘ or Ctrl), \code{ctrl}, \code{meta} / \code{cmd}, \code{alt} / \code{option}, \code{shift}, and
+\code{space} for the space bar, as in \code{"mod+shift+p"} or \code{"/"}. Exactly the
+named modifiers must be held. A hotkey without Ctrl, ⌘ or Alt is left to
+text fields, so \code{"/"} still types a slash there. A hotkey naming an
+unknown modifier never fires, with a browser console warning.}
 
 \item{placeholder}{Search-input placeholder.}
 

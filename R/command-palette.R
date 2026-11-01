@@ -67,7 +67,12 @@
 #' @param ... Extra content appended after `items`.
 #' @param hotkey Key that opens the palette, e.g. `"mod+k"` (default; ⌘K on
 #'   macOS, Ctrl+K elsewhere). `NULL` for no hotkey — open it from a trigger or
-#'   the server instead.
+#'   the server instead. Write `+`-separated modifiers, then the key: `mod`
+#'   (⌘ or Ctrl), `ctrl`, `meta` / `cmd`, `alt` / `option`, `shift`, and
+#'   `space` for the space bar, as in `"mod+shift+p"` or `"/"`. Exactly the
+#'   named modifiers must be held. A hotkey without Ctrl, ⌘ or Alt is left to
+#'   text fields, so `"/"` still types a slash there. A hotkey naming an
+#'   unknown modifier never fires, with a browser console warning.
 #' @param placeholder Search-input placeholder.
 #' @param empty_text Text shown when nothing matches.
 #' @param class Extra CSS classes.

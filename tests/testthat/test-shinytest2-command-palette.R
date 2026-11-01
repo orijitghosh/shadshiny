@@ -80,6 +80,20 @@ test_that("update_shad_command swaps the items and the filter follows", {
   # the replacement is re-filtered, so something is highlighted for Enter
   expect_true(app$get_js(
     "!!document.querySelector('#pal .shad-command__item[data-highlighted]')"))
+  # swapped-in items are options like the first ones: role, id, no tab stop
+  item <- app$get_js(paste0(
+    "(() => { const it = document.querySelector('#pal .shad-command__item');",
+    " const q = document.querySelector('#pal .shad-command__input');",
+    " return [it.getAttribute('role'), it.getAttribute('tabindex'),",
+    " String(it.id !== '' && q.getAttribute('aria-activedescendant') === it.id)]; })()"))
+  expect_equal(unlist(item), c("option", "-1", "true"))
+  # and the replacement empty text answers a query with no match
+  empty <- app$get_js(paste0(
+    "(() => { const q = document.querySelector('#pal .shad-command__input');",
+    " q.value = 'zzz'; q.dispatchEvent(new Event('input', {bubbles: true}));",
+    " const e = document.querySelector('#pal .shad-command__empty');",
+    " return e.hidden ? 'hidden' : e.textContent; })()"))
+  expect_equal(empty, "No results found.")
 
   expect_no_js_errors(app)
 })

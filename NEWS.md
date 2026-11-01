@@ -35,6 +35,18 @@
   calendars now disable every control, and date-range presets are cut to
   `min` / `max` (a preset wholly outside them is disabled).
 
+* `shad_command()` and `shad_command_palette()` are easier to use from the
+  keyboard. The search input is now the only tab stop (every item used to be
+  one too), an open palette keeps Tab on its search instead of wrapping onto an
+  item, and clicking an item keeps focus in the search. Items swapped in by
+  `update_shad_command()` are proper options, and their empty text now shows
+  when nothing matches. The `hotkey` needs exactly the modifiers it names, so
+  `"mod+k"` no longer fires on Ctrl+Shift+K, `"mod+shift+p"` leaves Ctrl+P
+  (Print) alone, and `"ctrl+k"` no longer fires on a plain K. A hotkey without
+  Ctrl, ⌘ or Alt, such as `"/"`, is left to text fields, and an IME
+  composition keeps Enter and the arrows. Focus traps (dialogs, sheets,
+  popovers) now skip elements with a negative `tabindex`, as Tab does.
+
 * Development hardening now runs every fixture-gated browser suite in CI,
   enforces an 82% repository coverage floor plus 80% patch coverage, tests the
   declared R 4.1 minimum explicitly, and selects local `Rscript` from `PATH`
