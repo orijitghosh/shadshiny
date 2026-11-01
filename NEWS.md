@@ -24,6 +24,17 @@
   closes the list and moves on from the trigger instead of losing focus, and
   Shift+Tab returns to the trigger.
 
+* `shad_calendar()` and `shad_date_picker()` handle dates more strictly and
+  keep focus. An impossible date such as `"2026-02-31"` no longer rolls into
+  the next month; `update_shad_calendar()` and `update_shad_date_picker()`
+  ignore a date outside `min` / `max` with a browser console warning and put
+  a reversed range in order; and a server value no longer closes the date
+  picker or moves focus to its trigger. Arrow keys move whole days across
+  daylight-saving changes, PageUp and PageDown stop at the end of a shorter
+  month, and the month buttons and selects keep focus. `disabled = TRUE`
+  calendars now disable every control, and date-range presets are cut to
+  `min` / `max` (a preset wholly outside them is disabled).
+
 * Development hardening now runs every fixture-gated browser suite in CI,
   enforces an 82% repository coverage floor plus 80% patch coverage, tests the
   declared R 4.1 minimum explicitly, and selects local `Rscript` from `PATH`

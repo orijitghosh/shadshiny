@@ -9,7 +9,8 @@
           [data-from-year] [data-to-year]></div>
    Value: single -> "YYYY-MM-DD"|null; range -> {start, end} (either null).
    Keyboard: arrows ±1day/±7days, PageUp/Down ±month (shift: ±year),
-   Home/End week start/end, Enter/Space select. Focus roves one day cell. */
+   Home/End week start/end, Enter/Space select. Focus roves one day cell.
+   Server values: see the contract in tests/js/calendar-contract.test.js. */
 (function () {
   "use strict";
 
@@ -19,22 +20,39 @@
     "July", "August", "September", "October", "November", "December"];
 
   function iso(d) {
-    return d.getFullYear() + "-" +
+    return String(d.getFullYear()).padStart(4, "0") + "-" +
       String(d.getMonth() + 1).padStart(2, "0") + "-" +
       String(d.getDate()).padStart(2, "0");
   }
+  // local midnight of y-m-d, or null when that day does not exist: the Date
+  // constructor would roll 2026-02-31 over to March 3
+  function ymd(y, m, d) {
+    const out = new Date(2000, 0, 1);
+    out.setFullYear(y, m, d);
+    return out.getFullYear() === y && out.getMonth() === m && out.getDate() === d
+      ? out : null;
+  }
   function parse(s) {
-    if (!s) return null;
-    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
-    return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(typeof s === "string" ? s : "");
+    return m ? ymd(+m[1], +m[2] - 1, +m[3]) : null;
+  }
+  // the same day of the month n months on, or that month's last day
+  function addMonths(d, n) {
+    const last = new Date(d.getFullYear(), d.getMonth() + n + 1, 0).getDate();
+    return new Date(d.getFullYear(), d.getMonth() + n, Math.min(d.getDate(), last));
   }
   function sameDay(a, b) { return a && b && iso(a) === iso(b); }
+  function same(a, b) { return (!a && !b) || sameDay(a, b); }
 
   shad.register("calendar", function (root) {
     const mode = root.getAttribute("data-mode") === "range" ? "range" : "single";
     const weekStart = parseInt(root.getAttribute("data-week-start") || "0", 10);
     const minDate = parse(root.getAttribute("data-min"));
     const maxDate = parse(root.getAttribute("data-max"));
+    // a date picker's calendar has no id of its own; warnings name the picker
+    const who = ("calendar " + (root.id ||
+      (root.closest('[data-shad="date-picker"]') || {}).id || "")).trim();
+    const off = () => root.hasAttribute("data-disabled");
 
     const captionLayout = (function (v) {
       return ["dropdown", "dropdown-months", "dropdown-years"].indexOf(v) > -1 ? v : "label";
@@ -89,7 +107,8 @@
         opts += '<option value="' + i + '"' + (i === m ? " selected" : "") +
           (dis ? " disabled" : "") + ">" + MONTHS[i] + "</option>";
       }
-      return wrap('<select class="shad-calendar__dropdown" data-caption="month" aria-label="Month">' +
+      return wrap('<select class="shad-calendar__dropdown" data-caption="month" aria-label="Month"' +
+        (off() ? " disabled" : "") + ">" +
         opts + "</select>");
     }
     function yearSelect(y) {
@@ -98,7 +117,8 @@
       for (let i = lo; i <= hi; i++) {
         opts += '<option value="' + i + '"' + (i === y ? " selected" : "") + ">" + i + "</option>";
       }
-      return wrap('<select class="shad-calendar__dropdown" data-caption="year" aria-label="Year">' +
+      return wrap('<select class="shad-calendar__dropdown" data-caption="year" aria-label="Year"' +
+        (off() ? " disabled" : "") + ">" +
         opts + "</select>");
     }
     // The caret is decorative and sits over the select's padding gutter, the
@@ -125,11 +145,17 @@
       const first = new Date(y, m, 1);
       let lead = (first.getDay() - weekStart + 7) % 7;
       const gridStart = new Date(y, m, 1 - lead);
+      // the grid's one tab stop must be a day it shows: after paging, the same
+      // day of the month shown (or its last day)
+      if (iso(focusDate) < iso(gridStart) || iso(focusDate) > iso(new Date(y, m, 42 - lead))) {
+        focusDate = addMonths(focusDate, (y - focusDate.getFullYear()) * 12 + m - focusDate.getMonth());
+      }
+      const dis = off() ? " disabled" : "";
 
       let html = '<div class="shad-calendar__header">' +
-        '<button type="button" class="shad-calendar__nav" data-nav="-1" aria-label="Previous month">' + CHEV_L + "</button>" +
+        '<button type="button" class="shad-calendar__nav" data-nav="-1" aria-label="Previous month"' + dis + ">" + CHEV_L + "</button>" +
         caption(y, m) +
-        '<button type="button" class="shad-calendar__nav" data-nav="1" aria-label="Next month">' + CHEV_R + "</button>" +
+        '<button type="button" class="shad-calendar__nav" data-nav="1" aria-label="Next month"' + dis + ">" + CHEV_R + "</button>" +
         "</div>";
       html += '<table class="shad-calendar__grid" role="grid" aria-labelledby="' + labelId + '"><thead><tr>';
       for (let i = 0; i < 7; i++) {
@@ -147,7 +173,7 @@
             : sameDay(d, selStart);
           const isEnd = mode === "range" && sameDay(d, selEnd);
           const mid = inRange(d);
-          const dis = disabled(d);
+          const out = disabled(d);
           const isFocus = sameDay(d, focusDate);
           let cellAttrs = "";
           if (mid) cellAttrs += " data-in-range";
@@ -160,7 +186,8 @@
           if (mode === "single" && isStart) dayAttrs += " data-selected";
           if (mode === "range" && isStart) dayAttrs += " data-range-start";
           if (isEnd) dayAttrs += " data-range-end";
-          if (dis) dayAttrs += ' data-disabled aria-disabled="true"';
+          if (out) dayAttrs += ' data-disabled aria-disabled="true"';
+          dayAttrs += dis;
           html += '<td class="shad-calendar__cell" role="gridcell"' + cellAttrs + ">" +
             '<button type="button" class="shad-calendar__day" data-date="' + iso(d) + '"' +
             dayAttrs +
@@ -171,7 +198,16 @@
         html += "</tr>";
       }
       html += "</tbody></table>";
+      // replacing the markup would drop focus to <body>; put it back on the
+      // matching control
+      const f = root.contains(document.activeElement) ? document.activeElement : null;
+      const again = !f ? null
+        : f.hasAttribute("data-nav") ? '[data-nav="' + f.getAttribute("data-nav") + '"]'
+          : f.hasAttribute("data-caption") ? '[data-caption="' + f.getAttribute("data-caption") + '"]'
+            : '.shad-calendar__day[tabindex="0"]';
       root.innerHTML = html;
+      const back = again && root.querySelector(again);
+      if (back) back.focus({ preventScroll: true });
     }
 
     function emit() {
@@ -181,7 +217,7 @@
       shad.util.emit(root, "shad:change", { value });
     }
     function pick(d) {
-      if (disabled(d)) return;
+      if (disabled(d) || off()) return;
       if (mode === "single") {
         // picking the selected day again clears it (react-day-picker behavior)
         selStart = sameDay(d, selStart) ? null : d;
@@ -195,11 +231,11 @@
       focusCurrent();
       emit();
     }
-    function moveFocus(days, months, years) {
-      let d = new Date(focusDate);
-      if (days) d = new Date(d.getTime() + days * DAY_MS);
-      if (months) d.setMonth(d.getMonth() + months);
-      if (years) d.setFullYear(d.getFullYear() + years);
+    // whole calendar days, never 24-hour steps: a daylight-saving day is 23
+    // or 25 hours long
+    function moveFocus(days, months) {
+      const d = months ? addMonths(focusDate, months)
+        : new Date(focusDate.getFullYear(), focusDate.getMonth(), focusDate.getDate() + days);
       focusDate = d;
       if (d.getMonth() !== view.getMonth() || d.getFullYear() !== view.getFullYear()) {
         view = new Date(d.getFullYear(), d.getMonth(), 1);
@@ -213,6 +249,7 @@
     }
 
     function onClick(ev) {
+      if (off()) return;
       const nav = ev.target.closest("[data-nav]");
       if (nav) {
         view.setMonth(view.getMonth() + parseInt(nav.getAttribute("data-nav"), 10));
@@ -224,7 +261,7 @@
     }
     function onChange(ev) {
       const sel = ev.target.closest(".shad-calendar__dropdown");
-      if (!sel) return;
+      if (!sel || off()) return;
       const which = sel.getAttribute("data-caption");
       const n = parseInt(sel.value, 10);
       // Clamp the day-of-month implicitly: view is always the 1st.
@@ -237,18 +274,16 @@
         view = new Date(maxDate.getFullYear(), maxDate.getMonth(), 1);
       }
       render();
-      const again = root.querySelector('.shad-calendar__dropdown[data-caption="' + which + '"]');
-      if (again) again.focus({ preventScroll: true });
     }
     function onKeydown(ev) {
-      if (!ev.target.closest(".shad-calendar__day")) return;
+      if (!ev.target.closest(".shad-calendar__day") || off()) return;
       switch (ev.key) {
         case "ArrowRight": ev.preventDefault(); moveFocus(1); break;
         case "ArrowLeft": ev.preventDefault(); moveFocus(-1); break;
         case "ArrowDown": ev.preventDefault(); moveFocus(7); break;
         case "ArrowUp": ev.preventDefault(); moveFocus(-7); break;
-        case "PageDown": ev.preventDefault(); moveFocus(0, ev.shiftKey ? 0 : 1, ev.shiftKey ? 1 : 0); break;
-        case "PageUp": ev.preventDefault(); moveFocus(0, ev.shiftKey ? 0 : -1, ev.shiftKey ? -1 : 0); break;
+        case "PageDown": ev.preventDefault(); moveFocus(0, ev.shiftKey ? 12 : 1); break;
+        case "PageUp": ev.preventDefault(); moveFocus(0, ev.shiftKey ? -12 : -1); break;
         case "Home": {
           ev.preventDefault();
           const dow = (focusDate.getDay() - weekStart + 7) % 7;
@@ -264,11 +299,32 @@
       }
     }
     function onPointerOver(ev) {
-      if (mode !== "range" || !selStart || selEnd) return;
+      if (mode !== "range" || !selStart || selEnd || off()) return;
       const day = ev.target.closest(".shad-calendar__day");
       if (!day) return;
       const d = parse(day.getAttribute("data-date"));
       if (!sameDay(d, hoverDate)) { hoverDate = d; render(); }
+    }
+
+    // A server value as {start, end} (end always null in single mode), or
+    // undefined when it has to be ignored.
+    function read(v) {
+      const warn = (why) =>
+        console.warn("[shadshiny] " + who + ": " + why + " " + JSON.stringify(v));
+      let s = v, e = null;
+      if (v != null && typeof v === "object") {
+        if (mode !== "range") return warn("ignoring a value that is not one date");
+        [s, e] = Array.isArray(v) ? v : [v.start, v.end];
+      }
+      const ds = parse(s), de = parse(e);
+      if ((s != null && s !== "" && !ds) || (e != null && e !== "" && !de)) {
+        return warn("ignoring a value that is not a date");
+      }
+      if ((ds && disabled(ds)) || (de && disabled(de))) {
+        return warn("ignoring a date outside min/max");
+      }
+      if (!ds) return { start: de, end: null };
+      return de && de < ds ? { start: de, end: ds } : { start: ds, end: de };
     }
 
     const labelId = shad.uid("cal-label");
@@ -285,15 +341,10 @@
           : (selStart ? iso(selStart) : null);
       },
       setValue(v) {
-        if (mode === "range") {
-          const ns = parse(v && v.start), ne = parse(v && v.end);
-          if (sameDay(ns, selStart) && sameDay(ne, selEnd)) return;
-          selStart = ns; selEnd = ne;
-        } else {
-          const nd = parse(v);
-          if (sameDay(nd, selStart)) return;
-          selStart = nd;
-        }
+        const next = read(v);
+        if (!next || (same(next.start, selStart) && same(next.end, selEnd))) return;
+        selStart = next.start;
+        selEnd = next.end;
         if (selStart) {
           view = new Date(selStart.getFullYear(), selStart.getMonth(), 1);
           focusDate = selStart;

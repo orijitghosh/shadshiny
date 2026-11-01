@@ -214,3 +214,47 @@ test("an open multi combobox with chips has no serious or critical axe violation
     .map((v) => ({ id: v.id, targets: v.nodes.map((n) => n.target.join(" ")) }));
   expect(blocking).toEqual([]);
 });
+
+test("calendar paging clamps to short months and nav buttons keep focus", async ({ page }) => {
+  await openKitchenSink(page);
+  const cal = page.locator("#c-calendar [data-shad='calendar']").first();
+  const stop = cal.locator(".shad-calendar__day[tabindex='0']");
+  await expect(stop).toHaveAttribute("data-date", "2026-07-11");
+
+  await stop.focus();
+  for (const k of ["ArrowDown", "ArrowDown", ...Array(6).fill("ArrowRight")]) {
+    await page.keyboard.press(k);
+  }
+  await expect(cal.locator("[data-date='2026-07-31']")).toBeFocused();
+  await page.keyboard.press("PageDown");
+  await expect(cal.locator("[data-date='2026-08-31']")).toBeFocused();
+  // September has 30 days: the 31st does not roll over into October
+  await page.keyboard.press("PageDown");
+  await expect(cal.locator("[data-date='2026-09-30']")).toBeFocused();
+
+  const next = cal.getByRole("button", { name: "Next month" });
+  await next.click();
+  await expect(next).toBeFocused();
+  // October's grid still shows Sep 30 as an outside day; November's does not
+  await expect(cal.locator(".shad-calendar__day[tabindex='0']")).toHaveAttribute("data-date", "2026-09-30");
+  await page.keyboard.press("Enter");
+  await expect(next).toBeFocused();
+  await expect(cal.locator(".shad-calendar__day[tabindex='0']")).toHaveAttribute("data-date", "2026-11-30");
+});
+
+test("an open date picker has no serious or critical axe violations", async ({ page }) => {
+  const { default: AxeBuilder } = await import("@axe-core/playwright");
+  await openKitchenSink(page);
+  await page.locator("#c-date-picker .shad-date-picker__trigger").first().click();
+  const content = page.locator("body > .shad-date-picker__content");
+  await expect(content).toBeVisible();
+
+  const report = await new AxeBuilder({ page })
+    .include("#c-date-picker")
+    .include("body > .shad-date-picker__content")
+    .analyze();
+  const blocking = report.violations
+    .filter((v) => v.impact === "serious" || v.impact === "critical")
+    .map((v) => ({ id: v.id, targets: v.nodes.map((n) => n.target.join(" ")) }));
+  expect(blocking).toEqual([]);
+});

@@ -74,6 +74,42 @@ test("select and combobox updates match option strings and skip unknown values",
   expect(warnings.some((text) => text.includes("anchovy"))).toBe(true);
 });
 
+test("server dates update without moving focus and skip dates outside min/max", async ({ page }) => {
+  const warnings = [];
+  page.on("console", (msg) => {
+    if (msg.type() === "warning") warnings.push(msg.text());
+  });
+  const status = page.getByTestId("date-status");
+  const picker = page.locator("#due");
+  const trigger = picker.locator(".shad-date-picker__trigger");
+  await expect(status).toHaveText("due=2026-10-14; span=<none>");
+
+  const send = page.getByRole("button", { name: "Send dates", exact: true });
+  await send.click();
+  // the range arrives reversed and comes back in order
+  await expect(status).toHaveText("due=2026-10-20; span=2026-10-05..2026-10-12");
+  await expect(trigger).toHaveText("October 20, 2026");
+  await expect(send).toBeFocused();
+  await expect(picker.locator(".shad-date-picker__content")).toBeHidden();
+
+  await page.getByRole("button", { name: "Send dates outside min/max" }).click();
+  await expect.poll(() => warnings.filter((text) => text.includes("min/max")).length).toBe(2);
+  await expect(status).toHaveText("due=2026-10-20; span=2026-10-05..2026-10-12");
+  await expect(trigger).toHaveText("October 20, 2026");
+
+  // an open picker stays open while a value arrives (the binding's update
+  // message calls setValue), and focus stays on the grid's tab stop
+  await trigger.click();
+  const content = page.locator(".shad-date-picker__content");
+  await expect(content).toBeVisible();
+  await page.evaluate(() => {
+    shad.get(document.getElementById("due")).setValue("2026-10-02");
+  });
+  await expect(status).toHaveText("due=2026-10-02; span=2026-10-05..2026-10-12");
+  await expect(content).toBeVisible();
+  await expect(content.locator(".shad-calendar__day[data-date='2026-10-02']")).toBeFocused();
+});
+
 test("dynamic UI initializes, binds, and tears down an open portal", async ({ page }) => {
   await page.getByRole("button", { name: "Insert dynamic select" }).click();
 

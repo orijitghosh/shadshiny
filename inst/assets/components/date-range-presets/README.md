@@ -17,7 +17,8 @@ div.shad-date-picker (range mode)
 ```
 
 ## Behavior
-- Click computes the range and writes it into the enclosing picker via its instance `setValue({start, end})` — single source of truth stays the calendar.
+- Click computes the range and writes it into the inner calendar via its instance `setValue({start, end})` — single source of truth stays the calendar, and the click counts as a pick, so the picker closes and refocuses its trigger.
+- Ranges are cut to the calendar's `data-min` / `data-max`; a preset wholly outside them is disabled.
 - The item whose computed range equals the picker's current value gets `data-state="active"` (re-checked on every picker `shad:change`).
 - `this-week` starts Monday; `data-days=N` = last N days ending today.
 - ≤480 px: rail stacks above the calendar as a wrapping row.

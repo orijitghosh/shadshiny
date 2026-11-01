@@ -77,6 +77,13 @@ shad_set_html <- function(id, ui, selector = NULL,
 #' not one of the choices is ignored and the browser console says so; in
 #' multiple mode only the unknown entries are dropped.
 #'
+#' [update_shad_calendar()] and [update_shad_date_picker()] take a `Date` or
+#' an ISO `"YYYY-MM-DD"` string. A length-2 value sets a range and is put in
+#' order; `NULL` or `NA` clears. A date outside the component's `min` / `max`
+#' is ignored and the browser console says so; a range with one such end is
+#' ignored whole. A date picker never opens, closes or takes focus because of a
+#' server value.
+#'
 #' @param id The input id (namespaced automatically).
 #' @param value,selected The new value. See each component's UI constructor for
 #'   its value contract.

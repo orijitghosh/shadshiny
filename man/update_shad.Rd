@@ -143,6 +143,13 @@ of a component is a non-goal — re-render with \code{\link[shiny:renderUI]{shin
 against the choices as strings, and \code{NULL} clears the input. A value that is
 not one of the choices is ignored and the browser console says so; in
 multiple mode only the unknown entries are dropped.
+
+\code{\link[=update_shad_calendar]{update_shad_calendar()}} and \code{\link[=update_shad_date_picker]{update_shad_date_picker()}} take a \code{Date} or
+an ISO \code{"YYYY-MM-DD"} string. A length-2 value sets a range and is put in
+order; \code{NULL} or \code{NA} clears. A date outside the component's \code{min} / \code{max}
+is ignored and the browser console says so; a range with one such end is
+ignored whole. A date picker never opens, closes or takes focus because of a
+server value.
 }
 \seealso{
 Other shadshiny server API:

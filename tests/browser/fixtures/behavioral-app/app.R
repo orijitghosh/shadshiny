@@ -74,6 +74,28 @@ ui <- page_shad(
     ),
 
     htmltools::tags$section(
+      `aria-labelledby` = "dates-heading",
+      htmltools::tags$h2(id = "dates-heading", "Date values"),
+      shad_stack(
+        shad_date_picker(
+          "due", label = "Due date", value = as.Date("2026-10-14"),
+          min = as.Date("2026-10-01"), max = as.Date("2026-10-31")
+        ),
+        shad_calendar(
+          "span", mode = "range", month = as.Date("2026-10-01"),
+          min = as.Date("2026-10-01"), max = as.Date("2026-10-31")
+        ),
+        shad_stack(
+          shad_button(inputId = "send_dates", "Send dates"),
+          shad_button(inputId = "send_bad_dates", "Send dates outside min/max"),
+          direction = "horizontal", gap = 2, wrap = TRUE
+        ),
+        status_output("date_status", "date-status"),
+        gap = 3
+      )
+    ),
+
+    htmltools::tags$section(
       `aria-labelledby` = "dynamic-heading",
       htmltools::tags$h2(id = "dynamic-heading", "Dynamic UI"),
       shad_stack(
@@ -130,6 +152,21 @@ server <- function(input, output, session) {
   observeEvent(input$send_unknown, {
     update_shad_select("num_select", "zzz")
     update_shad_combobox("multi_combo", c("basil", "anchovy"), multiple = TRUE)
+  })
+
+  observeEvent(input$send_dates, {
+    update_shad_date_picker("due", as.Date("2026-10-20"))
+    # reversed on purpose: the calendar puts a range in order
+    update_shad_calendar("span", as.Date(c("2026-10-12", "2026-10-05")))
+  })
+  observeEvent(input$send_bad_dates, {
+    update_shad_date_picker("due", as.Date("2026-11-15"))
+    update_shad_calendar("span", as.Date(c("2026-09-25", "2026-10-03")))
+  })
+
+  output$date_status <- renderText({
+    span <- if (length(input$span)) paste(format(input$span), collapse = "..") else "<none>"
+    paste0("due=", format(input$due %or% "<none>"), "; span=", span)
   })
 
   output$choice_status <- renderText({

@@ -22,7 +22,7 @@ Composition: the inner calendar owns selection; the picker owns the popover + tr
 | `shad:open` / `shad:close` | popover lifecycle |
 
 ## Behavior
-Single mode closes on pick; range mode stays open until the range completes. Long-date display format via `toLocaleDateString`.
+Single mode closes on pick; range mode stays open until the range completes. A `setValue()` (the server's path) only updates the value: it never opens, closes or moves focus. Long-date display format via `toLocaleDateString`.
 
 ## Keyboard
 Trigger: Enter/Space opens; focus lands on the roving day; Esc closes (DismissLayer) and refocuses trigger. Calendar keys per calendar README.
