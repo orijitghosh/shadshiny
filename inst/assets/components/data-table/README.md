@@ -71,7 +71,11 @@ a server warning and shows the fixed error state. Contract: the top of
 `tests/testthat/test-data-table-server.R`.
 
 Server responses use the existing R cell serialization and trusted-HTML rules.
-Request IDs are monotonic and stale responses are ignored. A supplied `row_key`
+The table enters server mode when its first value (one without a `requestId`)
+reaches the server, so a table drawn later by `renderUI()`, or drawn again,
+is served too; each drawing starts its request IDs again. Request IDs are
+monotonic: the server ignores a request older than the last it answered, and
+the table ignores a response to any but its latest. A supplied `row_key`
 must be unique and non-missing on each page to keep selection stable across
 requests. Editing, grouping, pivoting, aggregation, downloads, and spreadsheet
 behavior remain outside this experimental mode.
@@ -82,7 +86,7 @@ behavior remain outside this experimental mode.
 | `getValue()` | `{selected, sort, filter, page, pageSize}`; server mode also includes `requestId` |
 | `setValue(v)` | partial-state patch; re-renders + emits. A `pageSize` the table does not offer, or several `selected` keys in single mode, is ignored with `console.warn`; a new `pageSize` starts at page 1. In server mode a page, page-size, sort or filter patch requests that page instead |
 | `setData(rows)` | server-pushed refresh; keeps selection keys; clears loading |
-| `enableServerMode(config)` | experimental server mode; requests the initial page |
+| `enableServerMode(config)` | experimental server mode; requests the initial page. `shad_data_table_server()` sends it when the table's first value arrives |
 | `setServerPage(response)` | accepts only the current request ID and renders one page |
 | `setServerError(response)` | shows a fixed safe error and retry action |
 | `destroy()` | unbind + empty root |

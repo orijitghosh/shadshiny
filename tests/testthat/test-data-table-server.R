@@ -216,14 +216,15 @@ test_that("server helper enables the table and answers validated requests", {
       row_key = "id", session = session
     )
     expect_s3_class(observer, "Observer")
-    expect_identical(messages[[1L]]$type, "shadshiny:invoke")
-    expect_identical(messages[[1L]]$message$method, "enableServerMode")
+    expect_length(messages, 0L)
 
     session$setInputs(tbl = list(
       page = 1L, pageSize = 2L, sort = list(),
       filter = list(global = "", columns = list())
     ))
     expect_length(messages, 1L)
+    expect_identical(messages[[1L]]$type, "shadshiny:invoke")
+    expect_identical(messages[[1L]]$message$method, "enableServerMode")
 
     session$setInputs(tbl = list(
       requestId = 1L, page = 1L, pageSize = 2L,
@@ -247,6 +248,50 @@ test_that("server helper enables the table and answers validated requests", {
   }, {})
 })
 
+test_that("server helper enables each table as it arrives, rendered late or anew", {
+  # A table from renderUI() reaches the browser after the server function
+  # has run, and a re-rendered one starts again in client mode with request
+  # IDs from 1. Each sends its first value without a requestId; that value,
+  # not the server function's start, switches it to server mode. Within one
+  # table, a request older than the last one answered is stale.
+  messages <- list()
+  shiny::testServer(function(input, output, session) {
+    session$sendCustomMessage <- function(type, message) {
+      messages[[length(messages) + 1L]] <<- list(type = type, message = message)
+      invisible(TRUE)
+    }
+    source <- function(request) {
+      list(data = data.frame(id = "a"), total_rows = 1L, filtered_rows = 1L)
+    }
+    shad_data_table_server("tbl", source, session = session)
+    arrive <- function(page_size) {
+      session$setInputs(tbl = list(
+        page = 1L, pageSize = page_size, sort = list(),
+        filter = list(global = "", columns = list())
+      ))
+    }
+    ask <- function(id) {
+      session$setInputs(tbl = list(
+        requestId = id, page = 1L, pageSize = 2L, sort = list(),
+        filter = list(global = "", columns = list())
+      ))
+    }
+    methods <- function() vapply(messages, function(m) m$message$method, "")
+
+    expect_length(messages, 0L)
+    arrive(10L)
+    ask(1L)
+    ask(2L)
+    ask(1L)                         # stale
+    expect_identical(methods(), c("enableServerMode", "setServerPage", "setServerPage"))
+
+    arrive(25L)                     # rendered anew
+    ask(1L)
+    expect_identical(methods()[4:5], c("enableServerMode", "setServerPage"))
+    expect_identical(messages[[5L]]$message$args[[1L]]$requestId, 1L)
+  }, {})
+})
+
 test_that("server helper rejects columns outside the declared allowlist", {
   messages <- list()
   calls <- 0L
@@ -265,8 +310,8 @@ test_that("server helper rejects columns outside the declared allowlist", {
       filter = list(global = "", columns = list())
     )), "unknown column")
     expect_identical(calls, 0L)
-    expect_identical(messages[[2L]]$message$method, "setServerError")
-    expect_identical(messages[[2L]]$message$args[[1L]]$message, "Unable to load data.")
+    expect_identical(messages[[1L]]$message$method, "setServerError")
+    expect_identical(messages[[1L]]$message$args[[1L]]$message, "Unable to load data.")
   }, {})
 })
 
@@ -373,9 +418,9 @@ test_that("server helper emits a fixed error message and warns with internal det
       requestId = 1L, page = 1L, pageSize = 2L,
       sort = list(), filter = list(global = "", columns = list())
     )), "database password=secret")
-    expect_length(messages, 2L)
-    expect_identical(messages[[2L]]$message$method, "setServerError")
-    expect_identical(messages[[2L]]$message$args[[1L]]$requestId, 1L)
-    expect_identical(messages[[2L]]$message$args[[1L]]$message, "Unable to load data.")
+    expect_length(messages, 1L)
+    expect_identical(messages[[1L]]$message$method, "setServerError")
+    expect_identical(messages[[1L]]$message$args[[1L]]$requestId, 1L)
+    expect_identical(messages[[1L]]$message$args[[1L]]$message, "Unable to load data.")
   }, {})
 })

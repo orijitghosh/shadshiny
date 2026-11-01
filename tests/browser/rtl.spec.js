@@ -79,7 +79,7 @@ test("ports RTL direction through dialog, sheet, menu, select, combobox, popover
 
   const select = page.locator("#rtl-select");
   const selectPanel = page.locator("body > .shad-select__content");
-  await select.getByRole("button").click();
+  await select.getByRole("combobox").click();
   await assertPortal(selectPanel);
   await selectPanel.getByRole("option", { name: "أول" }).click();
   await expect(selectPanel).toBeHidden();

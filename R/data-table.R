@@ -477,6 +477,12 @@ shad_fmt_badge <- function(map) {
 #' never passed to `source`: the server logs a warning and the table shows
 #' its "Unable to load data." state.
 #'
+#' The table switches to server mode when its value first reaches the server,
+#' so a table rendered by [shiny::renderUI()], or rendered again, is served
+#' too: call `shad_data_table_server()` once, beside the render, not inside
+#' it. Each rendering starts its request IDs again; within one, a request
+#' older than the last one answered is ignored.
+#'
 #' @param id The data-table input id.
 #' @param source A function accepting one normalized request list and returning
 #'   `list(data = <data.frame>, total_rows = <integer>, filtered_rows =
@@ -502,15 +508,21 @@ shad_data_table_server <- function(
   }
   .shad_dt_whole(max_page_size, "max_page_size")
   column_meta <- .shad_dt_server_columns(columns)
-  shad_invoke(id, "enableServerMode", list(list(
-    columns = column_meta, totalRows = 0L, filteredRows = 0L
-  )), session)
+  enable <- list(list(columns = column_meta, totalRows = 0L, filteredRows = 0L))
 
   last_request_id <- -1L
   observer <- shiny::observeEvent(
     session$input[[id]],
     {
       raw <- session$input[[id]]
+      # A table's first value has no requestId: it has just reached the
+      # browser (rendered late by renderUI(), or rendered anew), so switch it
+      # to server mode, and its request IDs start again.
+      if (is.null(raw$requestId)) {
+        last_request_id <<- -1L
+        shad_invoke(id, "enableServerMode", enable, session)
+        return(invisible(NULL))
+      }
       raw_id <- suppressWarnings(as.numeric(raw$requestId %||% 0L))
       request_id <- if (length(raw_id) == 1L && is.finite(raw_id) &&
                         raw_id == floor(raw_id) && raw_id >= 0 &&
@@ -526,7 +538,7 @@ shad_data_table_server <- function(
       })
       if (is.null(result) || result$request_id < 1L ||
           result$request_id <= last_request_id) return(invisible(NULL))
-      last_request_id <- result$request_id
+      last_request_id <<- result$request_id
 
       answer <- tryCatch(source(result), error = function(e) {
         warning(sprintf("server-backed data table source failed: %s", conditionMessage(e)),

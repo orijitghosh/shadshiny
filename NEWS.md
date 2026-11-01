@@ -67,6 +67,28 @@
   Filtering and sorting read HTML cells through an inert template, so they no
   longer load images or run handlers for rows that are not on the page.
 
+* `shad_data_table_server()` now serves a table that `renderUI()` draws after
+  the server function has run, or draws again: the table switches to server
+  mode when its value first reaches the server, instead of the helper sending
+  the switch at startup, which such a table never received. It also ignores a
+  request older than the last one answered, as documented; it used to pass
+  stale requests to `source`.
+
+* Removing UI with a popup or dialog open no longer leaves it behind. A
+  command palette dialog that was open when `renderUI()` replaced its output
+  stayed on the page with its hotkey live, its scroll lock held and its input
+  still bound, and a second one appeared when the output came back. A menu
+  closed in the frame it opened (Escape pressed at once) keeps focus on its
+  trigger instead of moving it into the closing menu.
+
+* A label given to `shad_select()`, `shad_combobox()`, `shad_date_picker()`,
+  `shad_radio_group()`, `shad_rating()`, `shad_slider()` or
+  `shad_input_otp()` now names the part that takes focus, and the
+  description and error describe it; before, the label pointed at a wrapper
+  that cannot be labelled, so screen readers announced the control without
+  its label. The select trigger is now a combobox, which makes its open state
+  valid ARIA; with no label, its placeholder names it.
+
 * Development hardening now runs every fixture-gated browser suite in CI,
   enforces an 82% repository coverage floor plus 80% patch coverage, tests the
   declared R 4.1 minimum explicitly, and selects local `Rscript` from `PATH`

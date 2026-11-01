@@ -88,6 +88,67 @@ describe("autoInit observer", () => {
     expect(host.contains(el)).toBe(false);
     stop();
   });
+
+  test("a component portaled out of a removed subtree is torn down", async () => {
+    // Regression: a command dialog open while renderUI replaced its output
+    // stayed in <body>, its hotkey live and its Shiny binding stale, and a
+    // second root appeared beside it when the output came back.
+    const destroy = vi.fn();
+    shad.register("demo", (el) => ({ open() { shad.portal(el); }, destroy }));
+    window.Shiny = { unbindAll: vi.fn() };
+    mount('<div id="slot"><div data-shad="demo" id="d"></div></div>');
+    const el = document.getElementById("d");
+    const stop = shad.autoInit();
+    shad.get(el).open();
+    await Promise.resolve();
+    expect(destroy).not.toHaveBeenCalled();
+
+    document.getElementById("slot").innerHTML = "";   // the marker goes too
+    await Promise.resolve();
+    expect(window.Shiny.unbindAll).toHaveBeenCalledWith(el, true);
+    expect(destroy).toHaveBeenCalledTimes(1);
+    expect(el.isConnected).toBe(false);
+    expect(el.__shadInstance).toBeUndefined();
+
+    await Promise.resolve();                           // the move back is no second teardown
+    expect(destroy).toHaveBeenCalledTimes(1);
+    delete window.Shiny;
+    stop();
+  });
+
+  test("closing a portal is not a teardown", async () => {
+    // Regression: restore() removes the marker too, and reading that as the
+    // marker's subtree going away destroyed every dialog and palette on close.
+    const destroy = vi.fn();
+    shad.register("demo", (el) => ({ open() { this.restore = shad.portal(el); }, destroy }));
+    const slot = mount('<div id="slot"><div data-shad="demo" id="d"><div class="panel"></div></div></div>');
+    const el = document.getElementById("d");
+    const stop = shad.autoInit();
+    const inst = shad.get(el);
+    inst.open();
+    await Promise.resolve();
+    inst.restore();
+    await Promise.resolve();
+
+    expect(destroy).not.toHaveBeenCalled();
+    expect(shad.get(el)).toBe(inst);
+    expect(slot.contains(el)).toBe(true);
+    stop();
+  });
+
+  test("a panel portaled out of a removed component leaves with it", async () => {
+    shad.register("demo", (el) => ({ open() { shad.portal(el.querySelector(".panel")); } }));
+    const host = mount('<div id="host"><div data-shad="demo" id="d"><div class="panel"></div></div></div>');
+    const panel = host.querySelector(".panel");
+    const stop = shad.autoInit();
+    shad.get(document.getElementById("d")).open();
+    expect(panel.parentNode).toBe(document.body);
+
+    host.remove();
+    await Promise.resolve();
+    expect(panel.isConnected).toBe(false);
+    stop();
+  });
 });
 
 describe("init-time attributes for server-created overlays", () => {

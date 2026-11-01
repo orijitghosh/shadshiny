@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
 
 const APP_URL = "http://127.0.0.1:4174";
 
@@ -158,3 +159,39 @@ test("the fixture models usable vertical rhythm for stacked controls", async ({ 
 
   expect(gap).toBeGreaterThanOrEqual(12);
 });
+
+test("a field label names the part of each control that takes focus", async ({ page }) => {
+  // the select trigger is a combobox: the label alone, its text is its value
+  await expect(page.getByRole("combobox", { name: "Numeric choice", exact: true })).toHaveText(/One/);
+  // plain-button triggers: the label, then the value they show
+  await expect(page.getByRole("button", { name: "Server fruit Apple", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Toppings\b/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Due date\b/ })).toBeVisible();
+  await expect(page.getByRole("spinbutton", { name: "Quantity", exact: true })).toBeVisible();
+});
+
+// Each popup and dialog in the fixture, opened, with its own root and the
+// part portaled to <body> under axe.
+const openStates = [
+  ["select", "#num_select", ".shad-select__trigger", "body > .shad-select__content"],
+  ["combobox", "#server_combo", ".shad-combobox__trigger", "body > .shad-combobox__content"],
+  ["multi combobox", "#multi_combo", ".shad-combobox__trigger", "body > .shad-combobox__content"],
+  ["date picker", "#due", ".shad-date-picker__trigger", "body > .shad-date-picker__content"],
+  ["data-table column menu", "#people", ".shad-menu__trigger", "body > .shad-menu__content"],
+  ["command dialog", null, null, "body > .shad-command--dialog"]
+];
+for (const [name, root, trigger, portal] of openStates) {
+  test(`an open ${name} has no serious or critical axe violations`, async ({ page }) => {
+    if (trigger) await page.locator(`${root} ${trigger}`).click();
+    else await page.locator("body").press("Control+k");
+    await expect(page.locator(portal)).toBeVisible();
+
+    let axe = new AxeBuilder({ page }).include(portal);
+    if (root) axe = axe.include(root);
+    const report = await axe.analyze();
+    const blocking = report.violations
+      .filter((v) => v.impact === "serious" || v.impact === "critical")
+      .map((v) => ({ id: v.id, targets: v.nodes.map((n) => n.target.join(" ")) }));
+    expect(blocking).toEqual([]);
+  });
+}

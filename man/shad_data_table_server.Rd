@@ -59,6 +59,12 @@ sorted twice. With \code{columns}, a sort column must be declared and sortable,
 and a filtered column declared and filterable. A request that fails is
 never passed to \code{source}: the server logs a warning and the table shows
 its "Unable to load data." state.
+
+The table switches to server mode when its value first reaches the server,
+so a table rendered by \code{\link[shiny:renderUI]{shiny::renderUI()}}, or rendered again, is served
+too: call \code{shad_data_table_server()} once, beside the render, not inside
+it. Each rendering starts its request IDs again; within one, a request
+older than the last one answered is ignored.
 }
 \seealso{
 Other shadshiny data table:

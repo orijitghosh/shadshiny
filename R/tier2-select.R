@@ -106,7 +106,7 @@ shad_select <- function(inputId, label = NULL, choices, selected = NULL,
     ),
     list(
       htmltools::tags$button(
-        type = "button", class = "shad-select__trigger",
+        type = "button", class = "shad-select__trigger", role = "combobox",
         `data-placeholder` = if (is.null(selected)) NA else NULL,
         disabled = flag_attr(disabled),
         htmltools::tags$span(

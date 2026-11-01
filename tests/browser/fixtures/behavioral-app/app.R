@@ -111,6 +111,22 @@ ui <- page_shad(
     ),
 
     htmltools::tags$section(
+      `aria-labelledby` = "open-heading",
+      htmltools::tags$h2(id = "open-heading", "Command palette and table"),
+      shad_stack(
+        shad_command_palette("palette", items = c(Alpha = "alpha", Beta = "beta")),
+        shad_data_table(
+          "people", column_visibility = TRUE,
+          data = data.frame(
+            name = c("Ada", "Grace"), role = c("Engineer", "Admiral"),
+            stringsAsFactors = FALSE
+          )
+        ),
+        gap = 3
+      )
+    ),
+
+    htmltools::tags$section(
       `aria-labelledby` = "theme-heading",
       htmltools::tags$h2(id = "theme-heading", "Runtime theme"),
       shad_stack(

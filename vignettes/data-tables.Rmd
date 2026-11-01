@@ -259,7 +259,10 @@ counts. Column formatters and trusted HTML use the same R serialization as the
 client-side table. A unique, non-missing `row_key` keeps selection stable
 across pages; a missing key retains only the constructor's page-local fallback.
 
-Request IDs make stale responses harmless. Source failures show a fixed safe
+The table switches to server mode when its value first reaches the server, so
+a table that `renderUI()` draws later, or draws again, is served too. Call
+`shad_data_table_server()` once beside the render, not inside it. Request IDs
+make stale requests and responses harmless. Source failures show a fixed safe
 browser message and a retry action while the detailed condition is kept to a
 server warning. Editing, grouping, pivoting, aggregation, downloads, and
 spreadsheet behavior are intentionally outside this first experimental mode.
