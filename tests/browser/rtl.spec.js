@@ -112,6 +112,66 @@ test("ports RTL direction through dialog, sheet, menu, select, combobox, popover
   await expect(command).toBeHidden();
 });
 
+test("centres modal panels, handle grips, and vertical thumbs in RTL", async ({ page }) => {
+  const centreX = async (locator) => {
+    const box = await locator.boundingBox();
+    return box.x + box.width / 2;
+  };
+  const expectOnScreenAndCentred = async (panel) => {
+    await expect(panel).toBeVisible();
+    const box = await panel.boundingBox();
+    const width = page.viewportSize().width;
+    expect(box.x).toBeGreaterThanOrEqual(0);
+    expect(box.x + box.width).toBeLessThanOrEqual(width);
+    expect(Math.abs(box.x + box.width / 2 - width / 2)).toBeLessThanOrEqual(1);
+  };
+
+  const dialogPanel = page.locator("body > .shad-dialog__content");
+  await page.locator("#rtl-dialog .shad-dialog__trigger").click();
+  await expectOnScreenAndCentred(dialogPanel);
+  await dialogPanel.locator("[data-shad-dialog-close]").first().dispatchEvent("click");
+  await expect(dialogPanel).toBeHidden();
+
+  await page.keyboard.press("Control+k");
+  const command = page.locator("body > .shad-command--dialog");
+  await expectOnScreenAndCentred(command);
+  await page.keyboard.press("Escape");
+  await expect(command).toBeHidden();
+
+  const resizable = page.locator("#rtl-resizable");
+  await resizable.scrollIntoViewIfNeeded();
+  expect(Math.abs(
+    await centreX(resizable.locator(".shad-resizable__grip")) -
+      await centreX(resizable.locator(".shad-resizable__handle")),
+  )).toBeLessThanOrEqual(1);
+
+  const slider = page.locator("#rtl-vslider");
+  expect(Math.abs(
+    await centreX(slider.locator(".shad-slider__thumb")) -
+      await centreX(slider.locator(".shad-slider__track")),
+  )).toBeLessThanOrEqual(1);
+});
+
+test("chat shows its welcome until the first message and spans its width", async ({ page }) => {
+  const chat = page.locator("#rtl-chat .shad-chat");
+  const welcome = chat.locator(".shad-chat__welcome");
+  await chat.scrollIntoViewIfNeeded();
+  await expect(welcome).toHaveText("ابدأ محادثة");
+  await expect(welcome).toBeVisible();
+
+  const chatBox = await chat.boundingBox();
+  const composerBox = await chat.locator(".shad-input-group").boundingBox();
+  expect(Math.abs(composerBox.width - chatBox.width)).toBeLessThanOrEqual(1);
+  const sendBox = await chat.getByRole("button", { name: "Send" }).boundingBox();
+  expect(sendBox.x).toBeGreaterThanOrEqual(composerBox.x);
+  expect(sendBox.x + sendBox.width).toBeLessThanOrEqual(composerBox.x + composerBox.width);
+
+  await chat.locator("textarea").fill("مرحبا");
+  await chat.getByRole("button", { name: "Send" }).click();
+  await expect(chat.locator(".shad-chat__transcript")).toContainText("تم");
+  await expect(welcome).toBeHidden();
+});
+
 test("keeps focus and interaction direction-aware across navigation controls", async ({ page }) => {
   const pagination = page.locator("#rtl-pagination");
   await pagination.getByRole("button", { name: "Next page" }).click();

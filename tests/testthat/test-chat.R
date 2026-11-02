@@ -100,3 +100,14 @@ test_that("invalid handler returns become a fixed safe assistant error", {
     "chat handler failed"
   )
 })
+
+test_that("chat UI renders its welcome and a full-width composer", {
+  html <- as.character(shad_chat_ui(
+    "chat", welcome = shad_empty(title = "Start the conversation")
+  ))
+
+  expect_match(html, '<div class="shad-chat__welcome">', fixed = TRUE)
+  expect_match(html, "Start the conversation", fixed = TRUE)
+  expect_match(html, '<div class="shad-input-group shad-input-group--block"', fixed = TRUE)
+  expect_no_match(html, "data-welcome", fixed = TRUE)
+})

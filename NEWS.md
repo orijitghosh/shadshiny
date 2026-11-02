@@ -1,5 +1,25 @@
 # shadshiny 0.3.0.9000 (development version)
 
+* Fixes from a visual review in light, dark, right-to-left and reduced motion.
+  `shad_table()` given a data frame renders its body rows again. Dialogs,
+  alert dialogs and the command palette are centred on right-to-left pages,
+  where they sat partly off-screen, and so are resizable grips and vertical
+  slider thumbs. Breadcrumb lists drop Bootstrap's list indent, and the
+  checkbox tick no longer animates under reduced motion. The `.shad-scope`
+  link colour no longer overrides component link colours: breadcrumb links
+  are muted again, and an anchor styled as a button keeps its text colour on
+  hover. A short bubble in a message footer stays on one line, and
+  `shad_chart_container(aspect = "auto")` keeps the height of the plot output
+  inside it instead of collapsing it.
+
+* `shad_chat_ui()` shows its `welcome` until the first message (it was
+  accepted but never shown), and its composer now spans the chat's width.
+
+* The examples and the charts article pass `bg = "transparent"` to
+  `renderPlot()`, so plots sit on the card in dark mode. The LLM chat
+  example's Clear button works, and the examples' native selects have
+  accessible names.
+
 * The advertised component count now follows a documented rule: a component
   is an asset family with an exported constructor of its own, which gives 73.
   Every experimental function is labelled as such in its help page, in the

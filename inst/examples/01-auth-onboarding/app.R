@@ -63,8 +63,10 @@ step_profile <- function() {
     tags$div(style = "display:grid;grid-template-columns:1fr 1fr;gap:1rem",
       shad_select("ob_country", label = "Country", choices = countries,
         selected = "us"),
-      shad_native_select("ob_tz", choices = zones,
-        selected = "America/New_York")),
+      shad_form_field(
+        shad_native_select("ob_tz", choices = zones,
+          selected = "America/New_York", label = "Time zone"),
+        label = "Time zone")),
     shad_combobox("ob_role", label = "Primary role", choices = roles,
       placeholder = "Pick a role"),
     shad_switch("ob_news", "Send me product updates", value = TRUE))

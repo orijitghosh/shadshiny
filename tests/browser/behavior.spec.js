@@ -345,3 +345,117 @@ test("data-table filtering and sorting never load the images in HTML cells off t
   expect(await page.evaluate(() => window.__handled)).not.toContain("c");
   expect(fetched).not.toContain("c.png");
 });
+
+test("reduced motion draws a checked checkbox without animating its check", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await openKitchenSink(page);
+  const path = page.locator("#cb-news .shad-checkbox__indicator--check path");
+
+  const seconds = await path.evaluate((el) => {
+    const value = getComputedStyle(el).animationDuration;
+    return value.endsWith("ms") ? parseFloat(value) / 1000 : parseFloat(value);
+  });
+  expect(seconds).toBeLessThanOrEqual(0.001);
+});
+
+test("breadcrumb lists drop the Bootstrap list indent", async ({ page }) => {
+  await openKitchenSink(page);
+  // Bootstrap 5 Reboot's list rules, which every bslib page loads first.
+  await page.addStyleTag({
+    content: "ol, ul { padding-left: 2rem; } ol, ul, dl { margin-top: 0; margin-bottom: 1rem; }",
+  });
+  const list = page.locator("#c-breadcrumb .shad-breadcrumb__list");
+
+  expect(await list.evaluate((el) => {
+    const style = getComputedStyle(el);
+    return [style.paddingInlineStart, style.marginBlockStart, style.marginBlockEnd];
+  })).toEqual(["0px", "0px", "0px"]);
+});
+
+test("the scope link colour yields to component link and anchor-button colours", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await openKitchenSink(page);
+  const tokenColour = (token) => page.evaluate((token) => {
+    const probe = document.createElement("span");
+    probe.style.color = `var(${token})`;
+    document.getElementById("theme-root").append(probe);
+    const colour = getComputedStyle(probe).color;
+    probe.remove();
+    return colour;
+  }, token);
+  const colour = (locator) => locator.evaluate((el) => getComputedStyle(el).color);
+
+  const crumb = page.locator("#c-breadcrumb .shad-breadcrumb__link").first();
+  expect(await colour(crumb)).toBe(await tokenColour("--shad-muted-foreground"));
+
+  const anchor = page.locator("a.shad-btn--outline").first();
+  await anchor.scrollIntoViewIfNeeded();
+  await anchor.hover();
+  const accent = await tokenColour("--shad-accent-foreground");
+  await expect.poll(() => colour(anchor)).toBe(accent);
+
+  await page.evaluate(() => {
+    const link = document.createElement("a");
+    link.className = "shad-btn shad-btn--default";
+    link.id = "probe-anchor-default";
+    link.href = "#";
+    link.textContent = "Default anchor";
+    document.getElementById("theme-root").prepend(link);
+  });
+  const primary = page.locator("#probe-anchor-default");
+  await primary.hover();
+  const onPrimary = await tokenColour("--shad-primary-foreground");
+  await expect.poll(() => colour(primary)).toBe(onPrimary);
+});
+
+test("a bubble in a message footer keeps a short label on one line", async ({ page }) => {
+  await openKitchenSink(page);
+  await page.addStyleTag({ url: "/inst/assets/components/bubble/bubble.css" });
+  await page.addStyleTag({ url: "/inst/assets/components/message/message.css" });
+  await page.evaluate(() => {
+    const host = document.createElement("div");
+    host.id = "probe-message";
+    host.style.width = "40rem";
+    host.innerHTML = `
+      <div class="shad-message shad-message--start">
+        <div class="shad-message__content">
+          <div class="shad-bubble shad-bubble--muted"><div class="shad-bubble__content">Sure.</div></div>
+          <div class="shad-message__footer">
+            <div class="shad-bubble-group shad-bubble-group--start">
+              <div class="shad-bubble shad-bubble--outline shad-bubble--start">
+                <div class="shad-bubble__content">Q3-report.pdf</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    document.getElementById("theme-root").prepend(host);
+  });
+
+  const lines = await page.locator("#probe-message .shad-message__footer .shad-bubble__content")
+    .evaluate((el) => {
+      const range = document.createRange();
+      range.selectNodeContents(el.firstChild);
+      return range.getClientRects().length;
+    });
+  expect(lines).toBe(1);
+});
+
+test("an auto-height chart body keeps its plot output's own height", async ({ page }) => {
+  await openKitchenSink(page);
+  await page.addStyleTag({ url: "/inst/assets/components/chart-container/chart-container.css" });
+  await page.evaluate(() => {
+    const host = document.createElement("div");
+    host.style.width = "40rem";
+    host.innerHTML = `
+      <figure class="shad-chart">
+        <div class="shad-chart__body shad-chart__body--auto">
+          <div id="probe-plot" style="width:100%;height:260px;"></div>
+        </div>
+      </figure>`;
+    document.getElementById("theme-root").prepend(host);
+  });
+
+  const box = await page.locator("#probe-plot").boundingBox();
+  expect(box.height).toBe(260);
+});

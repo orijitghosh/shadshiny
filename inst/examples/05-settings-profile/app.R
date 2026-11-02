@@ -104,8 +104,10 @@ ui <- page_shad(
           shad_form_field(shad_input("email", type = "email",
             value = "ada@analytical.dev"), label = "Email"),
           tags$div(style = "display:grid;grid-template-columns:1fr 1fr;gap:1rem",
-            shad_native_select("datefmt", choices = datefmts, selected = "iso",
-              width = "100%"),
+            shad_form_field(
+              shad_native_select("datefmt", choices = datefmts, selected = "iso",
+                width = "100%", label = "Date format"),
+              label = "Date format"),
             shad_date_picker("dob", label = "Date of birth")),
           shad_separator(),
           tags$div(style = "display:flex;align-items:center;justify-content:space-between",

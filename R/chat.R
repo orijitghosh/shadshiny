@@ -45,23 +45,23 @@
 shad_chat_ui <- function(id, placeholder = "Message...", height = "60vh",
                          welcome = NULL, send_label = "Send") {
   ns <- shiny::NS(id)
+  # The welcome follows the transcript so CSS can hide it once the transcript
+  # has content.
   scroller <- shad_message_scroller(
     ns("scroller"), height = height,
-    shiny::uiOutput(ns("transcript"), class = "shad-chat__transcript")
+    shiny::uiOutput(ns("transcript"), class = "shad-chat__transcript"),
+    if (!is.null(welcome)) htmltools::tags$div(class = "shad-chat__welcome", welcome)
   )
   composer <- htmltools::tags$div(
     class = "shad-chat__composer",
     shad_input_group(
       shad_textarea(ns("text"), placeholder = placeholder, rows = 1),
-      shad_input_group_button(send_label, inputId = ns("send"), variant = "default")
+      shad_input_group_button(send_label, inputId = ns("send"), variant = "default"),
+      block = TRUE
     )
   )
   with_deps(htmltools::tagList(
-    htmltools::tags$div(
-      class = "shad-chat",
-      `data-welcome` = if (!is.null(welcome)) "" else NULL,
-      scroller, composer
-    ),
+    htmltools::tags$div(class = "shad-chat", scroller, composer),
     # Enter sends, Shift+Enter inserts a newline.
     htmltools::tags$script(htmltools::HTML(sprintf(
       "(function(){var t=document.getElementById('%s');if(!t)return;t.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();var b=document.getElementById('%s');if(b)b.click();}});})();",

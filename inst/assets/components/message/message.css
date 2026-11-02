@@ -70,6 +70,8 @@
 /* the bubble surface itself comes from bubble.css; inside a message the
    content column already handles alignment */
 .shad-message__content > .shad-bubble { max-width: 100%; }
+/* the footer shrinks to its bubbles, so an 80% cap would wrap them */
+.shad-message__footer .shad-bubble { max-width: 100%; }
 
 /* footer: delivery status / actions; follows the message side */
 .shad-message__footer {

@@ -37,7 +37,7 @@ ui <- page_shad(
       )
     ),
     div(style = "margin-top:.5rem;display:flex;gap:.5rem;",
-      shad_button("clear", "Clear", variant = "outline", size = "sm"))
+      shad_button("Clear", inputId = "clear", variant = "outline", size = "sm"))
   )
 )
 

@@ -98,6 +98,21 @@ ui <- page_shad(
         shad_chat_ui("chat", height = "12rem", welcome = "ابدأ محادثة")
       ),
       tags$section(
+        id = "rtl-geometry",
+        tags$h2("الهندسة"),
+        tags$div(
+          style = "height: 4rem;",
+          shad_resizable(
+            "rtl-resizable",
+            shad_resizable_panel("أ", default_size = 50),
+            shad_resizable_handle(),
+            shad_resizable_panel("ب", default_size = 50)
+          )
+        ),
+        shad_slider("rtl-vslider", label = "عمودي", value = 40,
+                    orientation = "vertical")
+      ),
+      tags$section(
         id = "ltr-nested", dir = "ltr",
         tags$h2("Nested LTR"),
         shad_popover(
@@ -115,4 +130,6 @@ ui <- page_shad(
   )
 )
 
-shinyApp(ui, function(input, output, session) {})
+shinyApp(ui, function(input, output, session) {
+  shad_chat_server("chat", function(user_text, history) "تم")
+})

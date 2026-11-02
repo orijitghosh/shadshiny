@@ -81,10 +81,13 @@ server <- function(input, output, session) {
         shad_theme_ggplot2(th$preset, th$dark) +
         ggplot2::labs(x = NULL, y = NULL)
     } else {
+      ink <- if (th$dark) "#A1A1A1" else "#737373"
+      op <- par(fg = ink, col.axis = ink)
+      on.exit(par(op), add = TRUE)
       barplot(tapply(df$amount, df$region, sum),
               col = shad_chart_colors(4, th$preset, th$dark), border = NA)
     }
-  })
+  }, bg = "transparent")
 }
 
 shinyApp(ui, server)

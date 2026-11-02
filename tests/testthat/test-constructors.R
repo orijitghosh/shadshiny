@@ -25,6 +25,17 @@ test_that("tier 1 display constructors render", {
   expect_renders(shad_h1("Title"))
 })
 
+test_that("a data frame renders one body cell per value", {
+  html <- as.character(shad_table(data.frame(metric = c("Revenue", "Churn"),
+                                             change = c("+12%", "-0.3pp"))))
+  body <- sub(".*<tbody[^>]*>(.*)</tbody>.*", "\\1", html)
+
+  expect_identical(lengths(regmatches(body, gregexpr("<td", body))), 4L)
+  expect_match(body, "<td[^>]*>Revenue</td>")
+  expect_match(body, "<td[^>]*>-0.3pp</td>")
+  expect_no_match(body, "<tr[^>]*metric=")
+})
+
 test_that("manual table composition retains every public section helper", {
   html <- as.character(shad_table(
     shad_table_caption("Quarterly totals"),

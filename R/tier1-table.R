@@ -29,7 +29,8 @@ shad_table <- function(x = NULL, ..., striped = FALSE, hover = FALSE,
       do.call(shad_table_row, lapply(names(x), function(nm) shad_table_head(nm)))
     )
     rows <- lapply(seq_len(nrow(x)), function(i) {
-      do.call(shad_table_row, lapply(x[i, , drop = FALSE], function(v) shad_table_cell(format(v))))
+      # unname: named arguments would become <tr> attributes, not cells
+      do.call(shad_table_row, unname(lapply(x[i, , drop = FALSE], function(v) shad_table_cell(format(v)))))
     })
     tbody <- do.call(shad_table_body, rows)
     list(caption_tag, header, tbody)
