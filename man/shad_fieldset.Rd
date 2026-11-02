@@ -28,6 +28,7 @@ treatment.}
 A native \if{html}{\out{<fieldset>}} tag.
 }
 \description{
+Experimental.
 Groups related controls under a native legend while keeping the existing
 shad_form_field() wrapper as the single-control primitive. The optional
 description is associated with the fieldset through aria-describedby.

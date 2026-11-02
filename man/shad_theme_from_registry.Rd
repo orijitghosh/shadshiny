@@ -13,6 +13,7 @@ shad_theme_from_registry(json)
 A \code{shad_theme} object.
 }
 \description{
+Experimental.
 Convert a shadcn registry item or tweakcn theme export (its \code{cssVars} blocks)
 into a \code{\link[=shad_theme]{shad_theme()}}, mapping upstream variable names to shadshiny tokens via
 the bundled theme map. Unmapped variables are skipped with a single warning.

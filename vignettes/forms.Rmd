@@ -47,6 +47,9 @@ reach for `shad_form_field()` when you need the error slot or a shared layout.
 
 ## Composing related fields
 
+The field composition family is experimental and may change before
+shadshiny 1.0.
+
 Use `shad_fieldset()` when several controls belong to one named group.
 `shad_field_group()` keeps the existing field wrapper as the single-control
 primitive and offers vertical, horizontal, or container-responsive layout.

@@ -41,6 +41,7 @@ shad_current_theme <- function(session = shiny::getDefaultReactiveDomain()) {
 
 #' ggplot2 theme matching the shadshiny design system
 #'
+#' Experimental.
 #' A complete \pkg{ggplot2} theme (transparent plot/panel backgrounds, tokenised
 #' grid and text colors) so plots sit correctly on any shadshiny surface. Pair
 #' with [shad_scale_color_shad()] / [shad_scale_fill_shad()] for the categorical
@@ -104,6 +105,7 @@ shad_scale_fill_shad <- function(preset = NULL, dark = FALSE, ...) {
 
 #' Apply the shadshiny theme to a plotly chart
 #'
+#' Experimental.
 #' Restyle a \pkg{plotly} plot with transparent backgrounds, tokenised fonts and
 #' gridlines, and the shadshiny categorical colorway. Requires \pkg{plotly}.
 #'
@@ -133,6 +135,7 @@ shad_theme_plotly <- function(p, preset = NULL, dark = FALSE) {
 
 #' Apply the shadshiny theme to an echarts4r chart
 #'
+#' Experimental.
 #' Set the shadshiny categorical colors and tokenised text on an \pkg{echarts4r}
 #' chart. Requires \pkg{echarts4r}.
 #'

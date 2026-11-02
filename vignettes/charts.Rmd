@@ -154,6 +154,10 @@ unrelated reactive happens to invalidate it.
 
 ## ggplot2
 
+The plot adapters in this and the next section are experimental: their
+behavior also depends on the third-party plotting packages, so they may change
+before shadshiny 1.0.
+
 | Helper | Does |
 |---|---|
 | `shad_theme_ggplot2(preset, dark, base_size)` | A `theme()` matching the page: background, grid, text, and border colours. |

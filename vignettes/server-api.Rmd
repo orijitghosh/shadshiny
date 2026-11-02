@@ -162,7 +162,7 @@ shad_toast_dismiss(id)     # or shad_toast_dismiss() to clear all
 
 ## Binding an ExtendedTask to a button
 
-`bind_shad_task_button()` is a presentation binding for an
+`bind_shad_task_button()` is an experimental presentation binding for an
 application-owned `shiny::ExtendedTask`. It observes `task$status()` and
 calls `update_shad_button()` for the four supported states:
 

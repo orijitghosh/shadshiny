@@ -170,7 +170,8 @@ scopes compose and nothing leaks out.
 
 The [shadcn theme registry](https://ui.shadcn.com/themes) publishes themes as
 JSON. `shad_theme_from_registry()` maps their token names onto shadshiny's and
-hands you back a `shad_theme()`:
+hands you back a `shad_theme()`. The import is experimental: the registry
+schema belongs to upstream and may move.
 
 ```{r}
 tw <- shad_theme_from_registry("https://tweakcn.com/r/themes/some-theme.json")

@@ -40,6 +40,7 @@ question and visible question count.}
 A questionnaire tag, bound as a Shiny input.
 }
 \description{
+Experimental.
 A bookmarkable, accessible sequence of single-choice, multiple-choice, and
 freeform questions. The bound Shiny value is a JSON-safe list with
 \code{active} (1-based index), \code{answers} (named list), \code{skipped} (question names),

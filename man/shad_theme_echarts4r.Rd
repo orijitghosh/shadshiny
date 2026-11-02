@@ -17,6 +17,7 @@ shad_theme_echarts4r(e, preset = NULL, dark = FALSE)
 The modified echarts4r object.
 }
 \description{
+Experimental.
 Set the shadshiny categorical colors and tokenised text on an \pkg{echarts4r}
 chart. Requires \pkg{echarts4r}.
 }

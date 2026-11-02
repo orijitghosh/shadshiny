@@ -1,5 +1,11 @@
 # shadshiny 0.3.0.9000 (development version)
 
+* The advertised component count now follows a documented rule: a component
+  is an asset family with an exported constructor of its own, which gives 73.
+  Every experimental function is labelled as such in its help page, in the
+  README's API stability list, and in each article that uses it. A test
+  derives these claims from the source so they cannot drift.
+
 * `shad_checkbox()` gains `tristate = TRUE`, letting clicks cycle unchecked,
   checked, and indeterminate. The default keeps the shadcn/ui behavior, where
   only the server can set the indeterminate state again.
@@ -118,8 +124,8 @@
   container-query CSS with logical properties for RTL; no JavaScript or new
   dependency is required. Existing `shad_form_field()` and validator contracts
   are unchanged.
-* The release-boundary work adds derived contract gates for the 240 exported
-  functions and 58 important signatures, including all server update helpers,
+* The release-boundary work adds derived contract gates for the 253 exported
+  functions and 71 important signatures, including all server update helpers,
   without adding a generated inventory. The approved additive API is
   `shad_data_table_server()`.
 * Browser coverage now exercises representative overlay, navigation, input,

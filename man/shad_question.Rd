@@ -45,6 +45,7 @@ must match for this question to be visible.}
 A serializable \code{shad_question} object.
 }
 \description{
+Experimental.
 Creates a serializable question definition consumed by
 \code{\link[=shad_questionnaire]{shad_questionnaire()}}. Conditions are named equality checks; they are data,
 not R or JavaScript callbacks.

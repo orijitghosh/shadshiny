@@ -31,6 +31,7 @@ completion.}
 Invisibly \code{NULL}.
 }
 \description{
+Experimental.
 Sends only the supplied state facets. \code{reset = TRUE} calls the client
 instance's reset method. Answer and error lists must be named so module
 instances and question definitions remain stable.

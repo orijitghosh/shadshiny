@@ -5,7 +5,7 @@ Authors@R:
     person("Arijit", "Ghosh", email = "arijitghosh2009@gmail.com",
            role = c("aut", "cre"))
 Description: A broad, experimental reimplementation of the 'shadcn/ui' design
-    system for 'Shiny' applications: 76 accessible, themeable components --
+    system for 'Shiny' applications: 73 accessible, themeable components --
     including semantic
     field composition primitives and a
     full-featured data table, questionnaire workflow, layout and page-shell primitives, dashboard

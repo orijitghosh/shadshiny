@@ -229,6 +229,7 @@ shad_theme_style_tag <- function(theme) {
 
 #' Import a theme from a shadcn / tweakcn registry export
 #'
+#' Experimental.
 #' Convert a shadcn registry item or tweakcn theme export (its `cssVars` blocks)
 #' into a [shad_theme()], mapping upstream variable names to shadshiny tokens via
 #' the bundled theme map. Unmapped variables are skipped with a single warning.

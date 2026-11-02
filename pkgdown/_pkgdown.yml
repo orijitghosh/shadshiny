@@ -152,6 +152,8 @@ reference:
 
   - title: Tier 2 — form inputs
     desc: Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
+      The field composition family (`shad_fieldset()` and its parts) is
+      experimental.
     contents:
       - shad_input
       - shad_textarea
@@ -256,6 +258,7 @@ reference:
   - title: Server — updates
     desc: Update bound component values from the server. Shiny-side API, so
       there is nothing in shadcn/ui to compare it against.
+      `bind_shad_task_button()` is experimental.
     contents:
       - update_shad_input_otp
       - update_shad_checkbox
@@ -318,7 +321,8 @@ reference:
 
   - title: Dashboard & charts
     desc: KPI cards, chart wrappers, timelines, and plot theming. Everything
-      here except `shad_chart_container()` is a shadshiny addition.
+      here except `shad_chart_container()` is a shadshiny addition. The
+      ggplot2, plotly, and echarts4r adapters are experimental.
     contents:
       - shad_value_box
       - shad_sparkline
@@ -366,7 +370,8 @@ reference:
       - shad_form_summary
 
   - title: Custom theming
-    desc: Build, import, and switch custom themes.
+    desc: Build, import, and switch custom themes. Registry import is
+      experimental.
     contents:
       - shad_theme
       - shad_theme_scope

@@ -15,6 +15,7 @@ shad_field_separator(label = NULL, class = NULL)
 A separator tag.
 }
 \description{
+Experimental.
 Inserts a labelled or unlabelled visual separator between fields. For a
 labelled separator, the visible label is deliberately outside the child
 separator node so assistive technology does not treat the text as the

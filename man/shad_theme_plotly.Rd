@@ -17,6 +17,7 @@ shad_theme_plotly(p, preset = NULL, dark = FALSE)
 The modified plotly object.
 }
 \description{
+Experimental.
 Restyle a \pkg{plotly} plot with transparent backgrounds, tokenised fonts and
 gridlines, and the shadshiny categorical colorway. Requires \pkg{plotly}.
 }

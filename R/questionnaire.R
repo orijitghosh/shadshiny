@@ -89,6 +89,7 @@
 
 #' Define one questionnaire question
 #'
+#' Experimental.
 #' Creates a serializable question definition consumed by
 #' [shad_questionnaire()]. Conditions are named equality checks; they are data,
 #' not R or JavaScript callbacks.
@@ -325,6 +326,7 @@ shad_question <- function(name, prompt, ..., type = c("single", "multiple", "tex
 
 #' Questionnaire input
 #'
+#' Experimental.
 #' A bookmarkable, accessible sequence of single-choice, multiple-choice, and
 #' freeform questions. The bound Shiny value is a JSON-safe list with
 #' `active` (1-based index), `answers` (named list), `skipped` (question names),
@@ -451,6 +453,7 @@ shad_questionnaire <- function(
 
 #' Update a questionnaire from the server
 #'
+#' Experimental.
 #' Sends only the supplied state facets. `reset = TRUE` calls the client
 #' instance's reset method. Answer and error lists must be named so module
 #' instances and question definitions remain stable.

@@ -56,6 +56,7 @@
 
 #' Bind an ExtendedTask status to a shadshiny button
 #'
+#' Experimental.
 #' Observes a compatible Shiny [shiny::ExtendedTask] status function and maps
 #' its lifecycle to [update_shad_button()]. The task remains application-owned;
 #' this helper does not invoke the task, inspect its result, or create an async

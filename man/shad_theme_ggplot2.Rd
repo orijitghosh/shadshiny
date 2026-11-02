@@ -26,6 +26,7 @@ shad_scale_fill_shad(preset = NULL, dark = FALSE, ...)
 A ggplot2 theme object.
 }
 \description{
+Experimental.
 A complete \pkg{ggplot2} theme (transparent plot/panel backgrounds, tokenised
 grid and text colors) so plots sit correctly on any shadshiny surface. Pair
 with \code{\link[=shad_scale_color_shad]{shad_scale_color_shad()}} / \code{\link[=shad_scale_fill_shad]{shad_scale_fill_shad()}} for the categorical

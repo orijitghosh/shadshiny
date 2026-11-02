@@ -21,6 +21,7 @@ shad_field_group(
 A \if{html}{\out{<div>}} field-group tag.
 }
 \description{
+Experimental.
 Arranges shad_form_field() children vertically, horizontally, or
 responsively inside a container-query-aware group.
 }

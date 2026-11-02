@@ -10,7 +10,7 @@
 
 **shadshiny** brings the [shadcn/ui](https://ui.shadcn.com) design system to
 [Shiny](https://shiny.posit.co). It is a broad, experimental reimplementation:
-76 accessible, themeable components rebuilt in framework-free CSS and vanilla
+73 accessible, themeable components rebuilt in framework-free CSS and vanilla
 JavaScript, then wrapped as ordinary R functions with native Shiny input
 bindings.
 
@@ -53,14 +53,27 @@ The package remains experimental as a whole while its release-facing core is
 being stabilized across R versions and platforms. The stable core boundary for
 the current development line is the documented page, layout, input, overlay,
 theme, client-side data-table, validation, chat, and `update_shad_*()` APIs,
-including their tested Shiny value and lifecycle contracts.
+including their tested Shiny value and lifecycle contracts, apart from the
+experimental functions below.
 
-The following remain experimental integration edges: importing themes from an
-external shadcn/tweakcn registry schema, optional chart adapters whose behavior
-also depends on third-party packages, live integrations with external chat
-stream providers, the server-backed/lazy data-table helper, the questionnaire
-workflow, and the `ExtendedTask` button lifecycle binding. These boundaries may
-change before a stable 1.0 release.
+These remain experimental and may change before a stable 1.0 release; each
+help page and article that documents them says so:
+
+- importing themes from an external shadcn/tweakcn registry schema,
+  `shad_theme_from_registry()`;
+- the optional chart adapters, whose behavior also depends on third-party
+  packages: `shad_theme_ggplot2()`, `shad_scale_color_shad()`,
+  `shad_scale_fill_shad()`, `shad_theme_plotly()`, and
+  `shad_theme_echarts4r()`;
+- the server-backed, lazily paged data table, `shad_data_table_server()`;
+- the questionnaire workflow, `shad_questionnaire()`, `shad_question()`, and
+  `update_shad_questionnaire()`;
+- the `ExtendedTask` button lifecycle binding, `bind_shad_task_button()`;
+- the structured AI workbench, `shad_chat_workbench_ui()` and
+  `shad_chat_workbench_server()`;
+- the field composition family, `shad_fieldset()`, `shad_field_group()`, and
+  `shad_field_separator()`;
+- live integrations with external chat stream providers.
 
 ## Installation
 

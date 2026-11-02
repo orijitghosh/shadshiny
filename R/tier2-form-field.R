@@ -61,6 +61,7 @@ shad_form_field <- function(..., label = NULL, description = NULL, error = NULL,
 
 #' Semantic fieldset
 #'
+#' Experimental.
 #' Groups related controls under a native legend while keeping the existing
 #' shad_form_field() wrapper as the single-control primitive. The optional
 #' description is associated with the fieldset through aria-describedby.
@@ -109,6 +110,7 @@ shad_fieldset <- function(legend, ..., description = NULL,
 
 #' Field group
 #'
+#' Experimental.
 #' Arranges shad_form_field() children vertically, horizontally, or
 #' responsively inside a container-query-aware group.
 #'
@@ -138,6 +140,7 @@ shad_field_group <- function(...,
 
 #' Field separator
 #'
+#' Experimental.
 #' Inserts a labelled or unlabelled visual separator between fields. For a
 #' labelled separator, the visible label is deliberately outside the child
 #' separator node so assistive technology does not treat the text as the
