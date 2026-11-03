@@ -6,3 +6,5 @@
 *.jpg binary
 *.gif binary
 *.ico binary
+# the frozen release candidate is checked byte for byte
+*.tar.gz binary
