@@ -15,6 +15,9 @@ on:
       - 'playwright.config.js'
       - 'vitest.config.js'
       - 'tools/*.mjs'
+      - '.Rbuildignore'
+      - '.github/workflows/R-CMD-check.yaml'
+      - '.github/workflows/candidate-check.yaml'
       - '.github/workflows/js-tests.yaml'
   pull_request:
     paths:
@@ -29,6 +32,9 @@ on:
       - 'playwright.config.js'
       - 'vitest.config.js'
       - 'tools/*.mjs'
+      - '.Rbuildignore'
+      - '.github/workflows/R-CMD-check.yaml'
+      - '.github/workflows/candidate-check.yaml'
       - '.github/workflows/js-tests.yaml'
 
 name: js-tests.yaml

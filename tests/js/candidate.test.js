@@ -13,6 +13,11 @@
 //    reflows and extends; DESCRIPTION is compared field by field, allowing only
 //    the fields build adds. Every commit file the archive lacks must be left
 //    out by rule 3.
+// 5. CI tests the committed bytes. One job verifies the archive against its
+//    record and its commit, which needs the full history, and uploads it.
+//    Every cell of R-CMD-check.yaml's matrix downloads that file, checks its
+//    SHA-256 before installing it, installs it into an empty library,
+//    smoke-tests the install and runs R CMD check on it, within a time limit.
 import { Buffer } from "node:buffer";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -207,5 +212,41 @@ describe("archive against source", () => {
       "DESCRIPTION (Extra)",
       "DESCRIPTION (Version)",
     ]);
+  });
+});
+
+describe("candidate CI workflow", () => {
+  const workflow = (name) => readFileSync(join(repoRoot, ".github", "workflows", name), "utf8");
+  const matrix = (text) => text.match(/^ +config:\n((?: +- \{.*\}\n)+)/m)?.[1];
+
+  test("checks every cell of the R CMD check matrix", () => {
+    const cells = matrix(workflow("candidate-check.yaml"));
+    expect(cells).toBeDefined();
+    expect(cells).toBe(matrix(workflow("R-CMD-check.yaml")));
+  });
+
+  test("verifies the commit with full history and checks the hash before install", () => {
+    const text = workflow("candidate-check.yaml");
+    expect(text).toMatch(/fetch-depth: 0\n/);
+
+    const steps = [
+      "node tools/run-candidate.mjs verify\n",
+      "actions/upload-artifact@",
+      "actions/download-artifact@",
+      "node tools/run-candidate.mjs verify --hash-only",
+      "R CMD INSTALL --library=candidate-lib",
+      "Rscript tools/smoke-installed.R candidate-lib",
+      "rcmdcheck::rcmdcheck(",
+    ].map((step) => text.indexOf(step));
+    expect(steps).not.toContain(-1);
+    expect(steps).toEqual([...steps].sort((a, b) => a - b));
+  });
+
+  test("every job has a time limit", () => {
+    const text = workflow("candidate-check.yaml");
+    const jobsBlock = text.slice(text.indexOf("\njobs:\n"));
+    const jobs = jobsBlock.match(/^ {2}[a-z-]+:\n/gm);
+    expect(jobs).toHaveLength(2);
+    expect(jobsBlock.match(/^ {4}timeout-minutes: \d+\n/gm)).toHaveLength(jobs.length);
   });
 });
