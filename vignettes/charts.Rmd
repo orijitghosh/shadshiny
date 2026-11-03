@@ -3,7 +3,7 @@ title: "Dashboards & charts"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Dashboards & charts}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
   %\VignetteEncoding{UTF-8}
 ---
 

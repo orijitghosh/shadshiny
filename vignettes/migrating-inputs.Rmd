@@ -3,7 +3,7 @@ title: "Migrating from base Shiny"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Migrating from base Shiny}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
   %\VignetteEncoding{UTF-8}
 ---
 

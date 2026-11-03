@@ -26,6 +26,12 @@
   constructor's help page, and counts `update_shad_command()` as the command's
   updater.
 
+* The twelve articles that show code without running it use the
+  `knitr::rmarkdown_notangle` engine. `R CMD check` on R versions that run
+  vignette code, such as R 4.3, ran their examples, which failed and in the
+  chat article started an app that never returned. A test now requires such
+  articles to tangle to no code.
+
 * The advertised component count now follows a documented rule: a component
   is an asset family with an exported constructor of its own, which gives 73.
   Every experimental function is labelled as such in its help page, in the

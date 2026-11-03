@@ -3,7 +3,7 @@ title: "Theming"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Theming}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
   %\VignetteEncoding{UTF-8}
 ---
 

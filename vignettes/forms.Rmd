@@ -3,7 +3,7 @@ title: "Forms & validation"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Forms & validation}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
   %\VignetteEncoding{UTF-8}
 ---
 
