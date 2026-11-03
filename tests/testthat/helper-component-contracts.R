@@ -89,6 +89,33 @@ contract_custom_bindings <- function(text) {
   )
 }
 
+contract_side_inputs <- function(text) {
+  pattern <- '\\[data-shad="([a-z-]+)"\\][^{}]*?root[.]id [+] "(_[A-Za-z]+)"'
+  raw <- regmatches(text, gregexpr(pattern, text, perl = TRUE))[[1]]
+  side <- data.frame(
+    component = sub(pattern, "\\1", raw, perl = TRUE),
+    suffix = sub(pattern, "\\2", raw, perl = TRUE),
+    stringsAsFactors = FALSE
+  )
+
+  suffix_pattern <- 'root[.]id [+] "(_[A-Za-z]+)"'
+  suffixes <- sub(
+    suffix_pattern,
+    "\\1",
+    regmatches(text, gregexpr(suffix_pattern, text, perl = TRUE))[[1]],
+    perl = TRUE
+  )
+  orphan <- setdiff(suffixes, side$suffix)
+  if (length(orphan)) {
+    stop(
+      "side input without a data-shad listener: ",
+      paste(orphan, collapse = ", "),
+      call. = FALSE
+    )
+  }
+  side
+}
+
 contract_r_functions <- function(paths) {
   functions <- list()
   for (path in paths) {
@@ -245,7 +272,13 @@ contract_exceptions <- function() {
   )
   add(
     c("dropdown-menu", "context-menu", "menubar", "command"),
-    c("bookmark", "updater"),
+    "bookmark",
+    "The value records the last activation event and is not persistent visible state.",
+    "new user activation emits the next event"
+  )
+  add(
+    c("dropdown-menu", "context-menu", "menubar"),
+    "updater",
     "The value records the last activation event and is not persistent visible state.",
     "new user activation emits the next event"
   )
@@ -473,16 +506,6 @@ build_component_contracts <- function(root = contract_project_root()) {
     },
     logical(1)
   )
-  event_components <- c(
-    "dropdown-menu",
-    "context-menu",
-    "menubar",
-    "command",
-    "navigation-menu",
-    "dropzone"
-  )
-  has_updater[components %in% event_components] <- FALSE
-
   has_bookmark <- grepl("shiny::restoreInput", constructor_source, fixed = TRUE)
 
   implementation_source <- paste(constructor_source, runtime_source, sep = "\n")
@@ -493,11 +516,13 @@ build_component_contracts <- function(root = contract_project_root()) {
     perl = TRUE
   )
 
-  rd_source <- contract_all_source(list.files(
+  rd_paths <- list.files(
     file.path(root, "man"),
     pattern = "[.]Rd$",
     full.names = TRUE
-  ))
+  )
+  rd_topics <- vapply(rd_paths, contract_all_source, character(1))
+  rd_source <- paste(rd_topics, collapse = "\n")
   has_documentation <- vapply(
     constructor,
     function(name) grepl(
@@ -515,6 +540,27 @@ build_component_contracts <- function(root = contract_project_root()) {
   )
   if (stale_otp_copy) {
     has_documentation[components == "input-otp"] <- FALSE
+  }
+  # a side input (command's _event, tree's _expanded) belongs on the
+  # constructor's own help page, not only in an article
+  side_inputs <- contract_side_inputs(binding_source)
+  for (index in seq_len(nrow(side_inputs))) {
+    row <- match(side_inputs$component[[index]], components)
+    if (is.na(row)) {
+      stop(
+        "side input for undiscovered component: ",
+        side_inputs$component[[index]],
+        call. = FALSE
+      )
+    }
+    topic <- rd_topics[grepl(
+      paste0("\\\\alias\\{", constructor[[row]], "\\}"),
+      rd_topics,
+      perl = TRUE
+    )]
+    if (!any(grepl(side_inputs$suffix[[index]], topic, fixed = TRUE))) {
+      has_documentation[[row]] <- FALSE
+    }
   }
 
   test_paths <- list.files(

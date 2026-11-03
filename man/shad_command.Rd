@@ -62,8 +62,9 @@ A command tag.
 }
 \description{
 A searchable command menu. \verb{input$<inputId>} is the value of the selected
-item. Compose contents with \code{\link[=shad_command_group]{shad_command_group()}}, \code{\link[=shad_command_item]{shad_command_item()}},
-and \code{\link[=shad_command_separator]{shad_command_separator()}}.
+item; \verb{input$<inputId>_event}, a list of \code{value} and \code{nonce}, fires on every
+activation, including a repeat of the same item. Compose contents with
+\code{\link[=shad_command_group]{shad_command_group()}}, \code{\link[=shad_command_item]{shad_command_item()}}, and \code{\link[=shad_command_separator]{shad_command_separator()}}.
 }
 \examples{
 shad_command("cmd",

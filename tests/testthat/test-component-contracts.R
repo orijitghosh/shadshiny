@@ -141,6 +141,47 @@ test_that("native adapters are narrow and point to exported constructors", {
   expect_true(all(nzchar(native$mechanism)))
 })
 
+test_that("side input discovery pairs each listener with its input suffix", {
+  source <- paste(
+    "if (!root.matches('[data-shad=\"command\"]')) return;",
+    "Shiny.setInputValue(root.id + \"_event\", {",
+    "});",
+    "if (!root.matches('[data-shad=\"tree\"]')) return;",
+    "Shiny.setInputValue(root.id + \"_expanded\", {",
+    sep = "\n"
+  )
+
+  side <- contract_side_inputs(source)
+
+  expect_identical(side$component, c("command", "tree"))
+  expect_identical(side$suffix, c("_event", "_expanded"))
+  expect_error(
+    contract_side_inputs('Shiny.setInputValue(root.id + "_orphan", 1);'),
+    "side input.*_orphan"
+  )
+})
+
+test_that("an exported updater is updater evidence for event-valued inputs too", {
+  audit <- build_component_contracts()
+  exports <- contract_exported_names(contract_project_root())
+  exported <- paste0("update_", audit$constructor) %in% exports
+
+  expect_identical(audit$component[exported & !audit$has_updater], character())
+})
+
+test_that("each side input is named on its constructor's help page", {
+  audit <- build_component_contracts()
+  side <- contract_side_inputs(contract_read(
+    "inst/assets/shiny/shadshiny-shiny.js"
+  ))
+
+  expect_gt(nrow(side), 0L)
+  expect_identical(
+    side$component[!audit$has_documentation[match(side$component, audit$component)]],
+    character()
+  )
+})
+
 test_that("exception policy rejects stale and vague records", {
   discovered <- c("checkbox", "dropzone")
   stale <- data.frame(

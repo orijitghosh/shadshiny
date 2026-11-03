@@ -20,6 +20,12 @@
   example's Clear button works, and the examples' native selects have
   accessible names.
 
+* `shad_command()`'s help page documents `input$<inputId>_event`, which every
+  command emits on each activation, not only the palette. The
+  component-contract test now requires each such side input on its
+  constructor's help page, and counts `update_shad_command()` as the command's
+  updater.
+
 * The advertised component count now follows a documented rule: a component
   is an asset family with an exported constructor of its own, which gives 73.
   Every experimental function is labelled as such in its help page, in the
