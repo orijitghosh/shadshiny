@@ -19,7 +19,9 @@
     "test:performance:assets": "node tools/check-performance-budgets.mjs",
     "test:performance:browser": "playwright test tests/browser/performance.spec.js",
     "build:assets": "node tools/build-assets.mjs",
-    "audit:directionality": "node tools/audit-directionality.mjs"
+    "audit:directionality": "node tools/audit-directionality.mjs",
+    "candidate:build": "node tools/run-candidate.mjs build",
+    "candidate:verify": "node tools/run-candidate.mjs verify"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
