@@ -137,7 +137,8 @@ shad_theme_plotly <- function(p, preset = NULL, dark = FALSE) {
 #'
 #' Experimental.
 #' Set the shadshiny categorical colors and tokenised text on an \pkg{echarts4r}
-#' chart. Requires \pkg{echarts4r}.
+#' chart. A text style already set on the chart, such as its font family, is
+#' kept; only its color changes. Requires \pkg{echarts4r}.
 #'
 #' @param e An echarts4r object.
 #' @param preset A preset name or [shad_current_theme()] list.
@@ -152,5 +153,9 @@ shad_theme_echarts4r <- function(e, preset = NULL, dark = FALSE) {
   ta <- .resolve_theme_args(preset, dark)
   fg <- .tok_hex("foreground", ta$preset, ta$dark)
   e <- echarts4r::e_color(e, color = shad_chart_colors(6, ta$preset, ta$dark))
-  echarts4r::e_text_style(e, color = fg)
+  # e_text_style() replaces the whole style, so carry over what is there.
+  opts <- if (isTRUE(e$x$tl)) e$x$opts$baseOption else e$x$opts
+  style <- opts$textStyle
+  style$color <- fg
+  do.call(echarts4r::e_text_style, c(list(e), style))
 }

@@ -19,7 +19,8 @@ The modified echarts4r object.
 \description{
 Experimental.
 Set the shadshiny categorical colors and tokenised text on an \pkg{echarts4r}
-chart. Requires \pkg{echarts4r}.
+chart. A text style already set on the chart, such as its font family, is
+kept; only its color changes. Requires \pkg{echarts4r}.
 }
 \seealso{
 Other shadshiny theming:

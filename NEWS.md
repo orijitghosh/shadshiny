@@ -1,5 +1,10 @@
 # shadshiny 0.3.0.9000 (development version)
 
+* `shad_theme_echarts4r()` keeps a text style already set on the chart, such
+  as its font family and size, and changes only its colour; it used to replace
+  the whole style. Tests now cover the chart adapters for ggplot2, plotly and
+  echarts4r, in light and dark mode.
+
 * Fixes from a visual review in light, dark, right-to-left and reduced motion.
   `shad_table()` given a data frame renders its body rows again. Dialogs,
   alert dialogs and the command palette are centred on right-to-left pages,
