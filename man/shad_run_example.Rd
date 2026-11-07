@@ -26,7 +26,7 @@ article/TOC split, rich typography and tabbed code examples.}
 \item{\code{"07-data-explorer"}}{\code{shad_data_table()} with KPI value boxes and
 theme-following plots.}
 \item{\code{"08-llm-chat"}}{streaming \code{shad_chat_server()}; swap the handler for
-an ellmer stream to go live.}
+an ellmer stream to go live (experimental).}
 \item{\code{"09-app-shell"}}{\code{shad_page_sidebar()} with the layout primitives,
 sparklines, a ⌘K palette that drives navigation, and dialogs built in
 the server.}

@@ -1,5 +1,10 @@
 # shadshiny 0.3.0.9000 (development version)
 
+* Live integrations with external chat stream providers, such as streaming an
+  `ellmer` chat, are experimental, and now say so wherever they are shown: the
+  README, the chat article, the `shad_chat_server()` and `shad_run_example()`
+  help, and the `08-llm-chat` example. A test requires it.
+
 * `shad_theme_echarts4r()` keeps a text style already set on the chart, such
   as its font family and size, and changes only its colour; it used to replace
   the whole style. Tests now cover the chart adapters for ggplot2, plotly and
@@ -188,8 +193,9 @@
   and application-specific submission remain out of scope.
 * Chat failure finalization, trusted raw-icon handling, bookmarking, and
   component lifecycle behavior now have focused regression coverage. External
-  registry-theme schemas and optional third-party chart integrations remain
-  explicitly outside the stable core boundary.
+  registry-theme schemas, optional third-party chart integrations and live
+  integrations with external chat stream providers remain explicitly outside
+  the stable core boundary.
 
 * `shad_calendar()` and `shad_date_picker()` gain `caption_layout` and
   `year_range`. The header previously stepped one month per click, so reaching a

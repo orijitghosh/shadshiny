@@ -34,7 +34,7 @@ bindings.
   `aria-invalid` and inline, shadcn-styled field messages.
 - **Streaming chat.** `shad_chat_ui()` / `shad_chat_server()` render a
   stick-to-bottom transcript from any token source, so an `ellmer` stream drops
-  straight in.
+  straight in. Live provider integrations like that are experimental.
 - **Structured AI workbench (experimental).** `shad_chat_workbench_ui()` /
   `shad_chat_workbench_server()` render provider-owned public text, source,
   tool, attachment, and status events without an AI SDK or network call.
@@ -519,7 +519,8 @@ than a format complaint. See `vignette("forms")`.
 ## Streaming chat
 
 The handler may return a complete string, a chunk-yielding function, or a coro
-generator, so an `ellmer` stream drops straight in.
+generator, so an `ellmer` stream drops straight in. Live provider integrations
+are experimental.
 
 ```r
 shad_chat_server("chat", handler = function(user, history) {
@@ -607,7 +608,7 @@ Each is a real app, launchable with `shad_run_example()`:
 | `05-settings-profile` | Vertical tabs, profile and notification forms, a live appearance panel |
 | `06-docs-reader` | Sidebar nav, ⌘K palette, resizable article/TOC split, prev/next paging |
 | `07-data-explorer` | `shad_data_table()` with value boxes and theme-following plots |
-| `08-llm-chat` | Streaming `shad_chat_server()`; swap the handler for `ellmer` to go live |
+| `08-llm-chat` | Streaming `shad_chat_server()`; swap the handler for `ellmer` to go live (experimental) |
 | `09-app-shell` | `shad_page_sidebar()`, layout primitives, sparklines, a ⌘K palette that navigates, and server-built dialogs |
 
 ## Guides

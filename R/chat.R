@@ -81,7 +81,8 @@ shad_chat_ui <- function(id, placeholder = "Message...", height = "60vh",
 #'   \item a function of no arguments returning the next chunk, or `NULL` when
 #'     done (the simple streaming protocol);
 #'   \item a \pkg{coro} generator (e.g. an \pkg{ellmer} `chat$stream()`), drained
-#'     the same way.
+#'     the same way. Live provider integrations such as \pkg{ellmer} are
+#'     experimental.
 #' }
 #' `history` is the list of prior messages (`list(role, content)`).
 #'

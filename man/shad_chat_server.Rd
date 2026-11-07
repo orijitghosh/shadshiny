@@ -33,7 +33,8 @@ streams replies into the transcript.
 \item a function of no arguments returning the next chunk, or \code{NULL} when
 done (the simple streaming protocol);
 \item a \pkg{coro} generator (e.g. an \pkg{ellmer} \code{chat$stream()}), drained
-the same way.
+the same way. Live provider integrations such as \pkg{ellmer} are
+experimental.
 }
 \code{history} is the list of prior messages (\code{list(role, content)}).
 

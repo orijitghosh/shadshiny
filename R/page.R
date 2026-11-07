@@ -126,7 +126,7 @@ update_shad_theme <- function(preset = NULL, dark = NULL, theme = NULL,
 #'     \item{`"07-data-explorer"`}{`shad_data_table()` with KPI value boxes and
 #'       theme-following plots.}
 #'     \item{`"08-llm-chat"`}{streaming `shad_chat_server()`; swap the handler for
-#'       an ellmer stream to go live.}
+#'       an ellmer stream to go live (experimental).}
 #'     \item{`"09-app-shell"`}{`shad_page_sidebar()` with the layout primitives,
 #'       sparklines, a ⌘K palette that drives navigation, and dialogs built in
 #'       the server.}

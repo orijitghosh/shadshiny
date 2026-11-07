@@ -1,5 +1,6 @@
 # 08 — Streaming chat. Runs fully offline with a fake token-streaming "LLM".
 # Swap the handler's generator for ellmer's `chat$stream(prompt)` to go live.
+# Live provider integrations are experimental.
 library(shiny)
 library(shadshiny)
 
@@ -19,7 +20,7 @@ fake_llm <- function(prompt, history) {
     if (i > length(words)) return(NULL)
     paste0(if (i > 1) " " else "", words[i])
   }
-  # --- live version (requires the 'ellmer' package + an API key) --------------
+  # --- live version, experimental (needs the 'ellmer' package + an API key) ---
   # chat <- ellmer::chat_openai(model = "gpt-4o-mini")
   # chat$stream(prompt)
 }

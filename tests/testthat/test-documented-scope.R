@@ -26,6 +26,33 @@ documented_experimental <- c(
   "shad_fieldset", "shad_field_group", "shad_field_separator"
 )
 
+# Live integrations with external chat stream providers are experimental too,
+# though no function of their own carries them. They are named by provider
+# package.
+documented_providers <- "ellmer"
+
+# Split a document into the blocks a reader takes in at once: paragraphs,
+# headings, list items and table rows of prose, each with any code chunk it
+# introduces; items of a help page; and comment runs of an R script.
+documented_blocks <- function(text, kind) {
+  lines <- strsplit(text, "\n", fixed = TRUE)[[1]]
+  if (identical(kind, "markdown")) {
+    fence <- grepl("^\\s*(```|~~~)", lines)
+    code <- fence | cumsum(fence) %% 2 == 1
+    opens <- c(fence & cumsum(fence) %% 2 == 1, FALSE)[-1]
+    starts <- !code & !(grepl("^\\s*$", lines) & opens) &
+      grepl("^\\s*$|^#|^\\s*([-*]|\\d+[.]) |^\\|", lines)
+  } else if (identical(kind, "rd")) {
+    starts <- grepl("^\\s*$|\\\\item|^\\\\[a-zA-Z]+\\{", lines)
+  } else {
+    lines[!grepl("^\\s*#", lines)] <- ""
+    starts <- grepl("^\\s*$", lines)
+  }
+  blocks <- vapply(split(lines, cumsum(starts)), paste, character(1),
+                   collapse = " ")
+  unname(blocks[grepl("\\S", blocks)])
+}
+
 documented_text <- function(path, root) {
   text <- gsub("(?m)^#' ?", "", contract_read(path, root), perl = TRUE)
   gsub("\\s+", " ", text)
@@ -121,4 +148,47 @@ test_that("experimental functions are labelled wherever they are documented", {
                    info = paste(file, "uses", toString(names(uses)[uses])))
     }
   }
+})
+
+test_that("live chat-provider integrations are labelled experimental where shown", {
+  root <- contract_project_root()
+  listed <- function(dir, pattern) {
+    file.path(dir, list.files(file.path(root, dir), pattern = pattern,
+                              recursive = TRUE))
+  }
+  files <- c("README.md", listed("vignettes", "[.]Rmd$"),
+             listed("man", "[.]Rd$"), listed(file.path("inst", "examples"), "[.]R$"))
+  provider <- paste0("\\b(", paste(documented_providers, collapse = "|"), ")\\b")
+
+  shown <- character()
+  for (path in files) {
+    kind <- if (grepl("[.]Rd$", path)) "rd" else if (grepl("[.]R$", path)) "r" else "markdown"
+    blocks <- documented_blocks(contract_read(path, root), kind)
+    hits <- blocks[grepl(provider, blocks, ignore.case = TRUE, perl = TRUE)]
+    if (length(hits)) shown <- c(shown, path)
+    for (block in hits) {
+      expect_match(block, "experimental", ignore.case = TRUE,
+                   info = paste0(path, ": ", block))
+    }
+  }
+  # The places the package shows a provider today, so the check finds them.
+  expect_true(all(c("README.md", "vignettes/chat.Rmd", "man/shad_chat_server.Rd",
+                    "man/shad_run_example.Rd", "inst/examples/08-llm-chat/app.R")
+                  %in% shown))
+
+  readme <- documented_text("README.md", root)
+  stability <- regmatches(
+    readme,
+    regexpr("## API stability.*?(?= ## )", readme, perl = TRUE)
+  )
+  expect_match(stability, "live integrations with external chat stream providers",
+               fixed = TRUE)
+
+  news <- strsplit(contract_read("NEWS.md", root), "\n(?=# shadshiny)",
+                   perl = TRUE)[[1]][[1]]
+  bullets <- strsplit(gsub("\\s+", " ", news), " (?=\\* )", perl = TRUE)[[1]]
+  boundary <- grep("outside the stable core boundary", bullets, value = TRUE,
+                   fixed = TRUE)
+  expect_length(boundary, 1)
+  expect_match(boundary, "chat stream providers", fixed = TRUE)
 })
