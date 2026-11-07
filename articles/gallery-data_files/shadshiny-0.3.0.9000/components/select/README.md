@@ -41,4 +41,7 @@ div.shad-select[data-shad=select]
 Closed: ArrowDown/Up/Enter/Space open; printable char opens + typeahead. Open: arrows move highlight, Home/End, typeahead (1s buffer), Enter/Space select, Esc close, Tab closes. Focus stays on the trigger; `aria-activedescendant` tracks highlight. pointermove (not hover) highlights.
 
 ## A11y
-APG listbox-popup. Scroll buttons are `aria-hidden` conveniences; keyboard scrolls via highlight.
+APG select-only combobox: the trigger is `role=combobox` (set by R and by the
+JS for hand-written markup), so it may carry `aria-activedescendant`. A field
+label names it (`aria-labelledby`, from form-field); with none, the
+placeholder is its `aria-label`. Its text is the value, read after the name. Scroll buttons are `aria-hidden` conveniences; keyboard scrolls via highlight.

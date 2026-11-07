@@ -1,10 +1,18 @@
 # shadshiny: 'shadcn/ui' Components for 'Shiny'
 
-A complete port of the shadcn/ui design system for Shiny: 72 accessible,
-themeable components implemented in framework-free CSS and vanilla
-JavaScript, wrapped as native R functions with Shiny input bindings. It
-coexists with Bootstrap 5 and bslib, including automatic dark-mode
-synchronization.
+A broad, experimental reimplementation of the shadcn/ui design system
+for Shiny: 73 accessible, themeable components implemented in
+framework-free CSS and vanilla JavaScript, wrapped as native R functions
+with Shiny input bindings. It coexists with Bootstrap 5 and bslib,
+including automatic dark-mode synchronization.
+
+## Details
+
+A component is one asset family with an exported constructor of its own.
+Page wrappers, aliases, server helpers, and parts that render only
+inside another component (the workbench's sources, tools, prompt, and
+branch switcher, or the date picker's preset rail) are not counted
+separately.
 
 ## Getting started
 

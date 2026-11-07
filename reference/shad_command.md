@@ -1,8 +1,10 @@
 # Command palette
 
 A searchable command menu. `input$<inputId>` is the value of the
-selected item. Compose contents with `shad_command_group()`,
-`shad_command_item()`, and `shad_command_separator()`.
+selected item; `input$<inputId>_event`, a list of `value` and `nonce`,
+fires on every activation, including a repeat of the same item. Compose
+contents with `shad_command_group()`, `shad_command_item()`, and
+`shad_command_separator()`.
 
 ## Usage
 

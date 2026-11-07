@@ -18,8 +18,8 @@
 .shad-command--dialog {
   position: fixed;
   top: 20%;
-  inset-inline-start: 50%;
-  transform: translateX(-50%);
+  inset-inline: 0;
+  margin-inline: auto;
   z-index: 1301;
   width: calc(100% - 2rem);
   max-width: 32rem;

@@ -69,11 +69,12 @@ shad_data_table(
 
 - page_size:
 
-  Initial rows per page.
+  Initial rows per page, a positive whole number.
 
 - page_sizes:
 
-  Selectable page sizes.
+  Selectable page sizes, positive whole numbers. `page_size` is added
+  when it is not among them.
 
 - sortable:
 

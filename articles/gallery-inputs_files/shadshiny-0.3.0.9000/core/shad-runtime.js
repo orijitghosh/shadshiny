@@ -53,6 +53,8 @@
       ].join(",");
       return Array.from(container.querySelectorAll(sel)).filter((el) => {
         if (el.closest("[hidden]") || el.getAttribute("aria-hidden") === "true") return false;
+        // a negative tabindex (roving items, command options) is skipped by Tab
+        if (parseInt(el.getAttribute("tabindex"), 10) < 0) return false;
         const r = el.getBoundingClientRect();
         return r.width > 0 || r.height > 0 || el === document.activeElement;
       });
@@ -99,7 +101,35 @@
       if (i.top < c.top + pad) container.scrollTop -= c.top + pad - i.top;
       else if (i.bottom > c.bottom - pad) container.scrollTop += i.bottom - c.bottom + pad;
     },
-    clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
+    clamp(v, min, max) { return Math.min(max, Math.max(min, v)); },
+    /**
+     * Normalise a value the server sent to a choice input (select, combobox)
+     * against the option values it has. Values compare as strings; null, ""
+     * and [] mean empty. Unknown entries are dropped with one warning, and an
+     * update that names no option at all is ignored, as is more than one value
+     * for a single choice. Returns a string or null (single), an array
+     * (multiple), or undefined to leave the input as it is.
+     */
+    choiceValue(v, options, multiple, who) {
+      const sent = [];
+      (v == null ? [] : [].concat(v)).forEach((x) => {
+        const s = x == null ? "" : String(x);
+        if (s !== "" && sent.indexOf(s) === -1) sent.push(s);
+      });
+      const warn = (why, list) =>
+        console.warn("[shadshiny] " + who + ": " + why + " " + JSON.stringify(list));
+      if (!multiple && sent.length > 1) {
+        warn("ignoring several values for a single choice", sent);
+        return undefined;
+      }
+      const known = sent.filter((s) => options.indexOf(s) !== -1);
+      if (known.length < sent.length) {
+        warn("ignoring values that are not options",
+          sent.filter((s) => known.indexOf(s) === -1));
+        if (!known.length) return undefined;
+      }
+      return multiple ? known : (known.length ? known[0] : null);
+    }
   };
 
   /* Delegated code copy: one document handler, safe for dynamic Shiny DOM. */
@@ -610,6 +640,7 @@
     const previousDir = el.getAttribute("dir");
     const previousLang = el.getAttribute("lang");
     const marker = document.createComment("shad-portal");
+    marker.__shadPortaled = el; // autoInit takes el down if the marker is removed
     shad.syncPortalDirection(source || document.documentElement, el);
     el.parentNode.insertBefore(marker, el);
     document.body.appendChild(el);
@@ -631,6 +662,7 @@
       if (restored) return;
       restored = true;
       if (directionObserver) directionObserver.disconnect();
+      delete marker.__shadPortaled; // removing it here is no teardown
       if (marker.parentNode) marker.parentNode.replaceChild(el, marker);
       if (previousDir == null) el.removeAttribute("dir");
       else el.setAttribute("dir", previousDir);
@@ -739,6 +771,16 @@
    * Recommended for Shiny: shad.autoInit() right after scripts load.
    */
   let observer = null;
+  function roots(n) {
+    const found = n.matches("[data-shad]") ? [n] : [];
+    n.querySelectorAll("[data-shad]").forEach((e) => found.push(e));
+    return found;
+  }
+  function teardown(e) {
+    const inst = e.__shadInstance;
+    if (inst && typeof inst.destroy === "function") inst.destroy();
+    delete e.__shadInstance;
+  }
   shad.autoInit = function () {
     // Initialise whatever exists right now. Safe to call repeatedly —
     // shad.init caches instances on the element, so this is idempotent.
@@ -754,19 +796,24 @@
         for (const m of mutations) {
           m.addedNodes.forEach((n) => { if (n.nodeType === 1) shad.init(n); });
           m.removedNodes.forEach((n) => {
-            if (n.nodeType !== 1) return;
-            const roots = [];
-            if (n.matches && n.matches("[data-shad]")) roots.push(n);
-            if (n.querySelectorAll) n.querySelectorAll("[data-shad]").forEach((e) => roots.push(e));
-            roots.forEach((e) => {
-              // A move is a removal plus an insertion, and shad.portal() moves
-              // panels (and, for a command dialog, the root itself) to <body>
-              // on open. Tearing those down here would destroy the component
-              // mid-open. Anything still in the document was moved, not removed.
-              if (e.isConnected) return;
-              const inst = e.__shadInstance;
-              if (inst && typeof inst.destroy === "function") inst.destroy();
-              delete e.__shadInstance;
+            // A move is a removal plus an insertion, and shad.portal() moves
+            // panels (and, for a command dialog, the root itself) to <body>
+            // on open. Tearing those down here would destroy the component
+            // mid-open. Anything still in the document was moved, not removed.
+            if (n.nodeType === 1) roots(n).forEach((e) => { if (!e.isConnected) teardown(e); });
+            // What was portaled out of the removed subtree is still in <body>;
+            // its marker was removed. Take it down too: unbind its inputs,
+            // destroy it, and return it to its removed place.
+            const portaled = [];
+            const walk = document.createTreeWalker(n, NodeFilter.SHOW_COMMENT);
+            for (let c = walk.currentNode; c; c = walk.nextNode()) {
+              if (c.__shadPortaled && c.__shadPortaled.isConnected) portaled.push(c.__shadPortaled);
+            }
+            portaled.forEach((el) => {
+              if (window.Shiny && Shiny.unbindAll) Shiny.unbindAll(el, true);
+              roots(el).forEach(teardown);
+              if (el.__shadPortalRestore) el.__shadPortalRestore();
+              if (el.isConnected) el.remove();
             });
           });
         }

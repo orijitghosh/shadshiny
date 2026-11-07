@@ -1,7 +1,8 @@
 # Apply the shadshiny theme to a plotly chart
 
-Restyle a plotly plot with transparent backgrounds, tokenised fonts and
-gridlines, and the shadshiny categorical colorway. Requires plotly.
+Experimental. Restyle a plotly plot with transparent backgrounds,
+tokenised fonts and gridlines, and the shadshiny categorical colorway.
+Requires plotly.
 
 ## Usage
 

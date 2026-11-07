@@ -29,6 +29,8 @@
 }
 
 .shad-message-scroller__item { min-width: 0; }
+/* shad_chat_ui(): the welcome shows until the transcript has content */
+.shad-chat__transcript:not(:empty) + .shad-chat__welcome { display: none; }
 
 /* jump-to-latest button — shown while detached from the bottom */
 .shad-message-scroller__button {

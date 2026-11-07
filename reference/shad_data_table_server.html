@@ -76,6 +76,7 @@ most the requested page), <code>total_rows</code>, and <code>filtered_rows</code
 <span>  <span class="va">source</span>,</span>
 <span>  columns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  row_key <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_page_size <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  session <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -95,11 +96,18 @@ most the requested page), <code>total_rows</code>, and <code>filtered_rows</code
 
 <dt id="arg-columns">columns<a class="anchor" aria-label="anchor" href="#arg-columns"></a></dt>
 <dd><p>Optional named list of <code><a href="shad_col.html">shad_col()</a></code> specs. When omitted,
-column metadata is inferred from the first response.</p></dd>
+column metadata is inferred from the first response, and requests are
+not checked against the columns. Supply it so the server, not the
+browser, decides which columns can be sorted and filtered.</p></dd>
 
 
 <dt id="arg-row-key">row_key<a class="anchor" aria-label="anchor" href="#arg-row-key"></a></dt>
 <dd><p>Optional stable id column in each response page.</p></dd>
+
+
+<dt id="arg-max-page-size">max_page_size<a class="anchor" aria-label="anchor" href="#arg-max-page-size"></a></dt>
+<dd><p>The largest page size a request may ask for. Keep it
+at least the largest of the table's <code>page_sizes</code>.</p></dd>
 
 
 <dt id="arg-session">session<a class="anchor" aria-label="anchor" href="#arg-session"></a></dt>
@@ -121,6 +129,18 @@ and trusted-HTML rules as the client-side table.</p>
 is not suitable for cross-page selection. This helper deliberately does not
 provide editing, grouping, pivoting, aggregation, downloads, or database
 adapter behavior; the source owns query construction and parameterization.</p>
+<p>Requests come from the browser, so they are checked before <code>source</code> runs.
+The page size is at most <code>max_page_size</code>, the page's first row fits in an R
+integer, every sort and filter value is a single string, and no column is
+sorted twice. With <code>columns</code>, a sort column must be declared and sortable,
+and a filtered column declared and filterable. A request that fails is
+never passed to <code>source</code>: the server logs a warning and the table shows
+its "Unable to load data." state.</p>
+<p>The table switches to server mode when its value first reaches the server,
+so a table rendered by <code><a href="https://rdrr.io/pkg/shiny/man/renderUI.html" class="external-link">shiny::renderUI()</a></code>, or rendered again, is served
+too: call <code>shad_data_table_server()</code> once, beside the render, not inside
+it. Each rendering starts its request IDs again; within one, a request
+older than the last one answered is ignored.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

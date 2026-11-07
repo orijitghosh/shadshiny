@@ -12,7 +12,8 @@
      rows:    [{key, cells: {colKey: value}}]  value = string|number|
               {html: "..."} (pre-rendered from R; never generated here)
    Performance: only the current page is in the DOM. Client-side sort/filter
-   operate on the JS array; server mode keeps the full dataset out of the DOM. */
+   operate on the JS array; server mode keeps the full dataset out of the DOM.
+   Contract: tests/js/data-table-contract.test.js. */
 (function () {
   "use strict";
   var SVG_NS = "http://www.w3.org/2000/svg";
@@ -59,6 +60,19 @@
     if (v == null) return "";
     if (typeof v === "object") return v.html != null ? String(v.html) : "";
     return String(v);
+  }
+  // An HTML cell's text, read once from an inert template: parsing there
+  // fetches no image and runs no handler, for rows on the page or off it.
+  function htmlText(v) {
+    if (v.text == null) {
+      var t = document.createElement("template");
+      t.innerHTML = v.html || "";
+      v.text = t.content.textContent;
+    }
+    return v.text;
+  }
+  function textOf(v) {
+    return v != null && typeof v === "object" && v.html != null ? String(htmlText(v)) : cellText(v);
   }
   function cmp(a, b) {
     var na = typeof a === "number", nb = typeof b === "number";
@@ -294,29 +308,17 @@
       return rows.filter(function (r) {
         for (var i = 0; i < colFs.length; i++) {
           var k = colFs[i];
-          var t = cellText(r.cells[k]).toLowerCase();
-          if (typeof r.cells[k] === "object" && r.cells[k] && r.cells[k].html != null) {
-            t = String(r.cells[k].text != null ? r.cells[k].text : stripTags(r.cells[k].html)).toLowerCase();
-          }
+          var t = textOf(r.cells[k]).toLowerCase();
           if (t.indexOf(state.filter.columns[k].trim().toLowerCase()) === -1) return false;
         }
         if (g) {
           var hit = columns.some(function (c) {
-            var v = r.cells[c.key];
-            var s = (typeof v === "object" && v && v.html != null)
-              ? String(v.text != null ? v.text : stripTags(v.html))
-              : cellText(v);
-            return s.toLowerCase().indexOf(g) !== -1;
+            return textOf(r.cells[c.key]).toLowerCase().indexOf(g) !== -1;
           });
           if (!hit) return false;
         }
         return true;
       });
-    }
-    function stripTags(html) {
-      var d = document.createElement("div");
-      d.innerHTML = html;
-      return d.textContent || "";
     }
     function sortedRows(list) {
       if (!state.sort.length) return list;
@@ -325,8 +327,8 @@
         for (var i = 0; i < s.length; i++) {
           var v = s[i];
           var av = a.cells[v.col], bv = b.cells[v.col];
-          if (typeof av === "object" && av) av = av.sort != null ? av.sort : (av.text != null ? av.text : stripTags(av.html || ""));
-          if (typeof bv === "object" && bv) bv = bv.sort != null ? bv.sort : (bv.text != null ? bv.text : stripTags(bv.html || ""));
+          if (typeof av === "object" && av) av = av.sort != null ? av.sort : htmlText(av);
+          if (typeof bv === "object" && bv) bv = bv.sort != null ? bv.sort : htmlText(bv);
           var c = cmp(av, bv);
           if (c) return v.dir === "desc" ? -c : c;
         }
@@ -632,9 +634,11 @@
         debouncedRefilter();
       });
     }
+    function clampPage(p) {
+      return Math.min(Math.max(1, p), Math.max(1, Math.ceil(derived.total / state.pageSize)));
+    }
     function goTo(p) {
-      var pages = Math.max(1, Math.ceil(derived.total / state.pageSize));
-      var np = Math.min(Math.max(1, p), pages);
+      var np = clampPage(p);
       if (np === state.page) return;
       state.page = np;
       if (serverMode) serverRequest();
@@ -696,6 +700,11 @@
       },
       setValue: function (v) { // accepts partial state
         if (!v) return;
+        function warn(why, x) {
+          console.warn("[shadshiny] data table " + root.id + ": ignoring " + why + " " + JSON.stringify(x));
+        }
+        // in server mode these change the rows, so they ask the server
+        var ask = !!(v.sort || v.filter);
         if (v.sort) state.sort = v.sort.map(function (s) { return { col: s.col, dir: s.dir }; });
         if (v.filter) {
           if (v.filter.global != null) {
@@ -704,14 +713,25 @@
           }
           if (v.filter.columns) state.filter.columns = Object.assign({}, v.filter.columns);
         }
-        if (v.selected) state.selected = v.selected.slice();
-        if (v.pageSize) {
-          state.pageSize = v.pageSize;
-          if (els.pageSizeSel) els.pageSizeSel.value = String(v.pageSize);
+        if (v.selected) {
+          if (selection === "single" && v.selected.length > 1) warn("several keys for a single selection", v.selected);
+          else state.selected = v.selected.slice();
         }
-        if (v.page) state.page = v.page;
+        if (v.pageSize) {
+          // the select can only show a size it offers
+          if (pageSizes.indexOf(+v.pageSize) === -1) warn("a page size it does not offer", v.pageSize);
+          else {
+            state.pageSize = +v.pageSize;
+            els.pageSizeSel.value = String(state.pageSize);
+            state.page = 1; // as the select does
+            ask = true;
+          }
+        }
+        if (v.page) { state.page = clampPage(v.page); ask = true; }
         if (v.loading != null) state.loading = !!v.loading;
-        renderHead(); renderBody(); emit();
+        renderHead();
+        if (serverMode && ask) serverRequest();
+        else { renderBody(); emit(); }
       },
       setData: function (newRows) { // server-pushed refresh; selection keys kept
         rows = newRows || [];

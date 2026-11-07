@@ -1,7 +1,7 @@
 # Import a theme from a shadcn / tweakcn registry export
 
-Convert a shadcn registry item or tweakcn theme export (its `cssVars`
-blocks) into a
+Experimental. Convert a shadcn registry item or tweakcn theme export
+(its `cssVars` blocks) into a
 [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md),
 mapping upstream variable names to shadshiny tokens via the bundled
 theme map. Unmapped variables are skipped with a single warning.

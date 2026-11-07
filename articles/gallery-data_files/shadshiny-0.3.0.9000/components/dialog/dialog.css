@@ -7,11 +7,12 @@
   z-index: 1200;
   background-color: var(--shad-overlay);
 }
+/* centred by auto margins, not a translate, so it holds in RTL */
 .shad-dialog__content {
   position: fixed;
-  top: 50%;
-  inset-inline-start: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  margin: auto;
+  height: fit-content;
   z-index: 1201;
   display: grid;
   gap: var(--shad-space-4);

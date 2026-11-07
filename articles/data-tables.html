@@ -387,18 +387,29 @@ SQL.</p>
 <p>The request has validated positive <code>page</code> and
 <code>page_size</code> values, a <code>sort</code> list of
 <code>{column, direction}</code> pairs, and <code>filter</code> values
-containing a global string plus named column filters. The source must
-return a data frame with no more than <code>page_size</code> rows and
-non-negative <code>total_rows</code> and <code>filtered_rows</code>
-counts. Column formatters and trusted HTML use the same R serialization
-as the client-side table. A unique, non-missing <code>row_key</code>
-keeps selection stable across pages; a missing key retains only the
-constructor’s page-local fallback.</p>
-<p>Request IDs make stale responses harmless. Source failures show a
-fixed safe browser message and a retry action while the detailed
-condition is kept to a server warning. Editing, grouping, pivoting,
-aggregation, downloads, and spreadsheet behavior are intentionally
-outside this first experimental mode.</p>
+containing a global string plus named column filters. The browser sends
+it, so it is checked before <code>source</code> runs:
+<code>page_size</code> is at most <code>max_page_size</code> (1,000
+unless you change it), every sort and filter value is a single string,
+and no column is sorted twice. When you pass <code>columns</code>, they
+are the allowlist: a request may sort or filter only declared columns
+that allow it, and other columns in the page still show but offer
+neither. A request that fails a check never reaches <code>source</code>.
+The source must return a data frame with no more than
+<code>page_size</code> rows and non-negative <code>total_rows</code> and
+<code>filtered_rows</code> counts. Column formatters and trusted HTML
+use the same R serialization as the client-side table. A unique,
+non-missing <code>row_key</code> keeps selection stable across pages; a
+missing key retains only the constructor’s page-local fallback.</p>
+<p>The table switches to server mode when its value first reaches the
+server, so a table that <code><a href="https://rdrr.io/pkg/shiny/man/renderUI.html" class="external-link">renderUI()</a></code> draws later, or draws
+again, is served too. Call <code><a href="../reference/shad_data_table_server.html">shad_data_table_server()</a></code> once
+beside the render, not inside it. Request IDs make stale requests and
+responses harmless. Source failures show a fixed safe browser message
+and a retry action while the detailed condition is kept to a server
+warning. Editing, grouping, pivoting, aggregation, downloads, and
+spreadsheet behavior are intentionally outside this first experimental
+mode.</p>
 </div>
 <div class="section level2">
 <h2 id="when-to-keep-dt">When to keep <code>DT</code><a class="anchor" aria-label="anchor" href="#when-to-keep-dt"></a>

@@ -171,16 +171,18 @@ is the simple streaming protocol:</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p><strong>A coro generator</strong> — drained the same way, which is
-what makes <code>ellmer</code> a one-liner:</p>
+what makes <code>ellmer</code> a one-liner. Live provider integrations
+like this one are experimental: they depend on the provider’s package
+and API, and may change before a stable 1.0 release.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chat</span> <span class="op">&lt;-</span> <span class="fu">ellmer</span><span class="fu">::</span><span class="fu">chat_openai</span><span class="op">(</span>model <span class="op">=</span> <span class="st">"gpt-4o-mini"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/shad_chat_server.html">shad_chat_server</a></span><span class="op">(</span><span class="st">"chat"</span>, handler <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">user_text</span>, <span class="va">history</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">chat</span><span class="op">$</span><span class="fu">stream</span><span class="op">(</span><span class="va">user_text</span><span class="op">)</span>     <span class="co"># a coro generator; streams straight through</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<p><code>ellmer</code> keeps its own conversation state, so you can
-ignore <code>history</code> there. Use <code>history</code> when you’re
-calling an API yourself and need to send the prior turns along.</p>
+<p>That chat object keeps its own conversation state, so you can ignore
+<code>history</code> there. Use <code>history</code> when you’re calling
+an API yourself and need to send the prior turns along.</p>
 <p>Chunks are pulled on a short timer and appended to the partial reply,
 so the transcript renders progressively. Because the pump runs in the
 Shiny event loop, a chunk function that blocks blocks the whole session
@@ -275,7 +277,7 @@ underlying error is never copied into the transcript.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_run_example.html">shad_run_example</a></span><span class="op">(</span><span class="st">"08-llm-chat"</span><span class="op">)</span></span></code></pre></div>
 <p>Runs offline against a fake token-streaming model, with the
-<code>ellmer</code> swap commented in the source.</p>
+experimental <code>ellmer</code> swap commented in the source.</p>
 </div>
 <div class="section level2">
 <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a>

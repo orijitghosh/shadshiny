@@ -100,11 +100,16 @@ the same specs used at construction for consistent formatting.</p></dd>
 
 
 <dt id="arg-selected">selected<a class="anchor" aria-label="anchor" href="#arg-selected"></a></dt>
-<dd><p>Optional character vector of row keys to select.</p></dd>
+<dd><p>Optional character vector of row keys to select. A
+single-selection table ignores more than one key, with a browser console
+warning.</p></dd>
 
 
 <dt id="arg-page-page-size">page, page_size<a class="anchor" aria-label="anchor" href="#arg-page-page-size"></a></dt>
-<dd><p>Optional pagination patch.</p></dd>
+<dd><p>Optional pagination patch, as positive whole numbers.
+A page size the table does not offer is ignored, with a browser console
+warning, and a new page size starts at page 1. On a server-backed table
+(<code><a href="shad_data_table_server.html">shad_data_table_server()</a></code>) either one asks the server for that page.</p></dd>
 
 
 <dt id="arg-loading">loading<a class="anchor" aria-label="anchor" href="#arg-loading"></a></dt>

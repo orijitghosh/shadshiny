@@ -1,7 +1,8 @@
 # Apply the shadshiny theme to an echarts4r chart
 
-Set the shadshiny categorical colors and tokenised text on an echarts4r
-chart. Requires echarts4r.
+Experimental. Set the shadshiny categorical colors and tokenised text on
+an echarts4r chart. A text style already set on the chart, such as its
+font family, is kept; only its color changes. Requires echarts4r.
 
 ## Usage
 

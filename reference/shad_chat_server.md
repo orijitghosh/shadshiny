@@ -46,7 +46,7 @@ in-flight stream.
   done (the simple streaming protocol);
 
 - a coro generator (e.g. an ellmer `chat$stream()`), drained the same
-  way.
+  way. Live provider integrations such as ellmer are experimental.
 
 `history` is the list of prior messages (`list(role, content)`).
 

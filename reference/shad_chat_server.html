@@ -102,7 +102,8 @@ in-flight stream.</p>
 <li><p>a function of no arguments returning the next chunk, or <code>NULL</code> when
 done (the simple streaming protocol);</p></li>
 <li><p>a <span class="pkg">coro</span> generator (e.g. an <span class="pkg">ellmer</span> <code>chat$stream()</code>), drained
-the same way.</p></li>
+the same way. Live provider integrations such as <span class="pkg">ellmer</span> are
+experimental.</p></li>
 </ul><p><code>history</code> is the list of prior messages (<code>list(role, content)</code>).</p>
 <p>Raw HTML in assistant Markdown is escaped by default. Set <code>allow_html = TRUE</code>
 only when every reply is trusted developer-controlled content; never enable

@@ -16,8 +16,8 @@
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="shadcn/ui Components for Shiny">
-<meta name="description" content="A broad, experimental reimplementation of the shadcn/ui design system for Shiny applications: 76 accessible, themeable components -- including semantic field composition primitives and a full-featured data table, questionnaire workflow, layout and page-shell primitives, dashboard value boxes, sparklines and chart theming, keyboard/code/scroll/shimmer utility elements, and a server-side form validator, custom and registry-imported themes, and a streaming chat module -- implemented in framework-free CSS and vanilla JavaScript, wrapped as native R functions with Shiny input bindings. Coexists with Bootstrap 5 and bslib, including automatic dark-mode synchronization.">
-<meta property="og:description" content="A broad, experimental reimplementation of the shadcn/ui design system for Shiny applications: 76 accessible, themeable components -- including semantic field composition primitives and a full-featured data table, questionnaire workflow, layout and page-shell primitives, dashboard value boxes, sparklines and chart theming, keyboard/code/scroll/shimmer utility elements, and a server-side form validator, custom and registry-imported themes, and a streaming chat module -- implemented in framework-free CSS and vanilla JavaScript, wrapped as native R functions with Shiny input bindings. Coexists with Bootstrap 5 and bslib, including automatic dark-mode synchronization.">
+<meta name="description" content="A broad, experimental reimplementation of the shadcn/ui design system for Shiny applications: 73 accessible, themeable components -- including semantic field composition primitives and a full-featured data table, questionnaire workflow, layout and page-shell primitives, dashboard value boxes, sparklines and chart theming, keyboard/code/scroll/shimmer utility elements, and a server-side form validator, custom and registry-imported themes, and a streaming chat module -- implemented in framework-free CSS and vanilla JavaScript, wrapped as native R functions with Shiny input bindings. Coexists with Bootstrap 5 and bslib, including automatic dark-mode synchronization.">
+<meta property="og:description" content="A broad, experimental reimplementation of the shadcn/ui design system for Shiny applications: 73 accessible, themeable components -- including semantic field composition primitives and a full-featured data table, questionnaire workflow, layout and page-shell primitives, dashboard value boxes, sparklines and chart theming, keyboard/code/scroll/shimmer utility elements, and a server-side form validator, custom and registry-imported themes, and a streaming chat module -- implemented in framework-free CSS and vanilla JavaScript, wrapped as native R functions with Shiny input bindings. Coexists with Bootstrap 5 and bslib, including automatic dark-mode synchronization.">
 <meta property="og:image" content="https://orijitghosh.github.io/shadshiny/logo.svg">
 </head>
 <body>
@@ -87,7 +87,7 @@
 </div>
 <!-- badges: start -->
 
-<p><strong>shadshiny</strong> brings the <a href="https://ui.shadcn.com" class="external-link">shadcn/ui</a> design system to <a href="https://shiny.posit.co" class="external-link">Shiny</a>. It is a broad, experimental reimplementation: 76 accessible, themeable components rebuilt in framework-free CSS and vanilla JavaScript, then wrapped as ordinary R functions with native Shiny input bindings.</p>
+<p><strong>shadshiny</strong> brings the <a href="https://ui.shadcn.com" class="external-link">shadcn/ui</a> design system to <a href="https://shiny.posit.co" class="external-link">Shiny</a>. It is a broad, experimental reimplementation: 73 accessible, themeable components rebuilt in framework-free CSS and vanilla JavaScript, then wrapped as ordinary R functions with native Shiny input bindings.</p>
 <ul>
 <li>
 <strong>No build step, no npm, no React.</strong> Components are plain <code>htmltools</code> tags backed by a single bundled asset dependency.</li>
@@ -102,7 +102,7 @@
 <li>
 <strong>Server-side validation.</strong> <code><a href="reference/shad_validator.html">shad_validator()</a></code> plus a rule set drive <code>aria-invalid</code> and inline, shadcn-styled field messages.</li>
 <li>
-<strong>Streaming chat.</strong> <code><a href="reference/shad_chat_ui.html">shad_chat_ui()</a></code> / <code><a href="reference/shad_chat_server.html">shad_chat_server()</a></code> render a stick-to-bottom transcript from any token source, so an <code>ellmer</code> stream drops straight in.</li>
+<strong>Streaming chat.</strong> <code><a href="reference/shad_chat_ui.html">shad_chat_ui()</a></code> / <code><a href="reference/shad_chat_server.html">shad_chat_server()</a></code> render a stick-to-bottom transcript from any token source, so an <code>ellmer</code> stream drops straight in. Live provider integrations like that are experimental.</li>
 <li>
 <strong>Structured AI workbench (experimental).</strong> <code><a href="reference/shad_chat_workbench_ui.html">shad_chat_workbench_ui()</a></code> / <code><a href="reference/shad_chat_workbench_server.html">shad_chat_workbench_server()</a></code> render provider-owned public text, source, tool, attachment, and status events without an AI SDK or network call.</li>
 <li>
@@ -116,8 +116,18 @@
 <div class="section level2">
 <h2 id="api-stability">API stability<a class="anchor" aria-label="anchor" href="#api-stability"></a>
 </h2>
-<p>The package remains experimental as a whole while its release-facing core is being stabilized across R versions and platforms. The stable core boundary for the current development line is the documented page, layout, input, overlay, theme, client-side data-table, validation, chat, and <code>update_shad_*()</code> APIs, including their tested Shiny value and lifecycle contracts.</p>
-<p>The following remain experimental integration edges: importing themes from an external shadcn/tweakcn registry schema, optional chart adapters whose behavior also depends on third-party packages, live integrations with external chat stream providers, the server-backed/lazy data-table helper, the questionnaire workflow, and the <code>ExtendedTask</code> button lifecycle binding. These boundaries may change before a stable 1.0 release.</p>
+<p>The package remains experimental as a whole while its release-facing core is being stabilized across R versions and platforms. The stable core boundary for the current development line is the documented page, layout, input, overlay, theme, client-side data-table, validation, chat, and <code>update_shad_*()</code> APIs, including their tested Shiny value and lifecycle contracts, apart from the experimental functions below.</p>
+<p>These remain experimental and may change before a stable 1.0 release; each help page and article that documents them says so:</p>
+<ul>
+<li>importing themes from an external shadcn/tweakcn registry schema, <code><a href="reference/shad_theme_from_registry.html">shad_theme_from_registry()</a></code>;</li>
+<li>the optional chart adapters, whose behavior also depends on third-party packages: <code><a href="reference/shad_theme_ggplot2.html">shad_theme_ggplot2()</a></code>, <code><a href="reference/shad_theme_ggplot2.html">shad_scale_color_shad()</a></code>, <code><a href="reference/shad_theme_ggplot2.html">shad_scale_fill_shad()</a></code>, <code><a href="reference/shad_theme_plotly.html">shad_theme_plotly()</a></code>, and <code><a href="reference/shad_theme_echarts4r.html">shad_theme_echarts4r()</a></code>;</li>
+<li>the server-backed, lazily paged data table, <code><a href="reference/shad_data_table_server.html">shad_data_table_server()</a></code>;</li>
+<li>the questionnaire workflow, <code><a href="reference/shad_questionnaire.html">shad_questionnaire()</a></code>, <code><a href="reference/shad_question.html">shad_question()</a></code>, and <code><a href="reference/update_shad_questionnaire.html">update_shad_questionnaire()</a></code>;</li>
+<li>the <code>ExtendedTask</code> button lifecycle binding, <code><a href="reference/bind_shad_task_button.html">bind_shad_task_button()</a></code>;</li>
+<li>the structured AI workbench, <code><a href="reference/shad_chat_workbench_ui.html">shad_chat_workbench_ui()</a></code> and <code><a href="reference/shad_chat_workbench_server.html">shad_chat_workbench_server()</a></code>;</li>
+<li>the field composition family, <code><a href="reference/shad_fieldset.html">shad_fieldset()</a></code>, <code><a href="reference/shad_field_group.html">shad_field_group()</a></code>, and <code><a href="reference/shad_field_separator.html">shad_field_separator()</a></code>;</li>
+<li>live integrations with external chat stream providers.</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -686,7 +696,7 @@
 <div class="section level2">
 <h2 id="streaming-chat">Streaming chat<a class="anchor" aria-label="anchor" href="#streaming-chat"></a>
 </h2>
-<p>The handler may return a complete string, a chunk-yielding function, or a coro generator, so an <code>ellmer</code> stream drops straight in.</p>
+<p>The handler may return a complete string, a chunk-yielding function, or a coro generator, so an <code>ellmer</code> stream drops straight in. Live provider integrations are experimental.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/shad_chat_server.html">shad_chat_server</a></span><span class="op">(</span><span class="st">"chat"</span>, handler <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">user</span>, <span class="va">history</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">chat</span><span class="op">$</span><span class="fu">stream</span><span class="op">(</span><span class="va">user</span><span class="op">)</span></span>
@@ -781,7 +791,7 @@
 </tr>
 <tr>
 <td><code>08-llm-chat</code></td>
-<td>Streaming <code><a href="reference/shad_chat_server.html">shad_chat_server()</a></code>; swap the handler for <code>ellmer</code> to go live</td>
+<td>Streaming <code><a href="reference/shad_chat_server.html">shad_chat_server()</a></code>; swap the handler for <code>ellmer</code> to go live (experimental)</td>
 </tr>
 <tr>
 <td><code>09-app-shell</code></td>

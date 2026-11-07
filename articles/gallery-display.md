@@ -194,11 +194,11 @@ Code
 [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md)
 renders a data frame with optional striping, hover, and a sticky header.
 
-| Invoice | Status | Amount |
-|---------|--------|--------|
-|         |        |        |
-|         |        |        |
-|         |        |        |
+| Invoice | Status  | Amount   |
+|---------|---------|----------|
+| INV-001 | Paid    | \$250.00 |
+| INV-002 | Pending | \$150.00 |
+| INV-003 | Paid    | \$350.00 |
 
 Code
 

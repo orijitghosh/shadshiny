@@ -46,11 +46,16 @@ update_shad_data_table(
 
 - selected:
 
-  Optional character vector of row keys to select.
+  Optional character vector of row keys to select. A single-selection
+  table ignores more than one key, with a browser console warning.
 
 - page, page_size:
 
-  Optional pagination patch.
+  Optional pagination patch, as positive whole numbers. A page size the
+  table does not offer is ignored, with a browser console warning, and a
+  new page size starts at page 1. On a server-backed table
+  ([`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md))
+  either one asks the server for that page.
 
 - loading:
 

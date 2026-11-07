@@ -138,6 +138,20 @@ update_shad_button(
 
 Invisibly `NULL`; called for its side effect.
 
+## Details
+
+`update_shad_select()` and `update_shad_combobox()` match `selected`
+against the choices as strings, and `NULL` clears the input. A value
+that is not one of the choices is ignored and the browser console says
+so; in multiple mode only the unknown entries are dropped.
+
+`update_shad_calendar()` and `update_shad_date_picker()` take a `Date`
+or an ISO `"YYYY-MM-DD"` string. A length-2 value sets a range and is
+put in order; `NULL` or `NA` clears. A date outside the component's
+`min` / `max` is ignored and the browser console says so; a range with
+one such end is ignored whole. A date picker never opens, closes or
+takes focus because of a server value.
+
 ## See also
 
 Other shadshiny server API:

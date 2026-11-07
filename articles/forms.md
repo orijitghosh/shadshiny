@@ -43,6 +43,9 @@ when you need the error slot or a shared layout.
 
 ## Composing related fields
 
+The field composition family is experimental and may change before
+shadshiny 1.0.
+
 Use
 [`shad_fieldset()`](https://orijitghosh.github.io/shadshiny/reference/shad_fieldset.md)
 when several controls belong to one named group.

@@ -1,8 +1,8 @@
 # Update a questionnaire from the server
 
-Sends only the supplied state facets. `reset = TRUE` calls the client
-instance's reset method. Answer and error lists must be named so module
-instances and question definitions remain stable.
+Experimental. Sends only the supplied state facets. `reset = TRUE` calls
+the client instance's reset method. Answer and error lists must be named
+so module instances and question definitions remain stable.
 
 ## Usage
 

@@ -84,8 +84,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
-.shad-scope a { color: var(--shad-foreground); }
-.shad-scope a:hover { color: var(--shad-muted-foreground); }
+/* :where() keeps these at one class, so component link colours win */
+.shad-scope :where(a) { color: var(--shad-foreground); }
+.shad-scope :where(a:hover) { color: var(--shad-muted-foreground); }
 
 /* ------------------------------------------------------------------ */
 /* Focus ring                                                          */

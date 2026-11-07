@@ -1,6 +1,6 @@
 # Define one questionnaire question
 
-Creates a serializable question definition consumed by
+Experimental. Creates a serializable question definition consumed by
 [`shad_questionnaire()`](https://orijitghosh.github.io/shadshiny/reference/shad_questionnaire.md).
 Conditions are named equality checks; they are data, not R or JavaScript
 callbacks.

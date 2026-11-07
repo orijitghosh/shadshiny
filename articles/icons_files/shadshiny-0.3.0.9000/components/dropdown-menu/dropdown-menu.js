@@ -206,9 +206,12 @@
           if (restore) { restore(); restore = null; }
         });
       },
-      highlightFirst() { requestAnimationFrame(() => highlight(items()[0])); },
+      // One frame late, so the panel is placed first. A panel closed in
+      // between is still on screen for its exit animation: leave focus be.
+      highlightFirst() { requestAnimationFrame(() => { if (open) highlight(items()[0]); }); },
       highlightLast() {
         requestAnimationFrame(() => {
+          if (!open) return;
           const all = items();
           highlight(all[all.length - 1]);
         });

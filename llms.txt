@@ -2,7 +2,7 @@
 
 **shadshiny** brings the [shadcn/ui](https://ui.shadcn.com) design
 system to [Shiny](https://shiny.posit.co). It is a broad, experimental
-reimplementation: 76 accessible, themeable components rebuilt in
+reimplementation: 73 accessible, themeable components rebuilt in
 framework-free CSS and vanilla JavaScript, then wrapped as ordinary R
 functions with native Shiny input bindings.
 
@@ -53,7 +53,8 @@ functions with native Shiny input bindings.
   /
   [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md)
   render a stick-to-bottom transcript from any token source, so an
-  `ellmer` stream drops straight in.
+  `ellmer` stream drops straight in. Live provider integrations like
+  that are experimental.
 - **Structured AI workbench (experimental).**
   [`shad_chat_workbench_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_workbench_ui.md)
   /
@@ -80,15 +81,40 @@ core is being stabilized across R versions and platforms. The stable
 core boundary for the current development line is the documented page,
 layout, input, overlay, theme, client-side data-table, validation, chat,
 and `update_shad_*()` APIs, including their tested Shiny value and
-lifecycle contracts.
+lifecycle contracts, apart from the experimental functions below.
 
-The following remain experimental integration edges: importing themes
-from an external shadcn/tweakcn registry schema, optional chart adapters
-whose behavior also depends on third-party packages, live integrations
-with external chat stream providers, the server-backed/lazy data-table
-helper, the questionnaire workflow, and the `ExtendedTask` button
-lifecycle binding. These boundaries may change before a stable 1.0
-release.
+These remain experimental and may change before a stable 1.0 release;
+each help page and article that documents them says so:
+
+- importing themes from an external shadcn/tweakcn registry schema,
+  [`shad_theme_from_registry()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_from_registry.md);
+- the optional chart adapters, whose behavior also depends on
+  third-party packages:
+  [`shad_theme_ggplot2()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md),
+  [`shad_scale_color_shad()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md),
+  [`shad_scale_fill_shad()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md),
+  [`shad_theme_plotly()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_plotly.md),
+  and
+  [`shad_theme_echarts4r()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_echarts4r.md);
+- the server-backed, lazily paged data table,
+  [`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md);
+- the questionnaire workflow,
+  [`shad_questionnaire()`](https://orijitghosh.github.io/shadshiny/reference/shad_questionnaire.md),
+  [`shad_question()`](https://orijitghosh.github.io/shadshiny/reference/shad_question.md),
+  and
+  [`update_shad_questionnaire()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_questionnaire.md);
+- the `ExtendedTask` button lifecycle binding,
+  [`bind_shad_task_button()`](https://orijitghosh.github.io/shadshiny/reference/bind_shad_task_button.md);
+- the structured AI workbench,
+  [`shad_chat_workbench_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_workbench_ui.md)
+  and
+  [`shad_chat_workbench_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_workbench_server.md);
+- the field composition family,
+  [`shad_fieldset()`](https://orijitghosh.github.io/shadshiny/reference/shad_fieldset.md),
+  [`shad_field_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_field_group.md),
+  and
+  [`shad_field_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_field_separator.md);
+- live integrations with external chat stream providers.
 
 ## Installation
 
@@ -590,7 +616,8 @@ complaint. See
 ## Streaming chat
 
 The handler may return a complete string, a chunk-yielding function, or
-a coro generator, so an `ellmer` stream drops straight in.
+a coro generator, so an `ellmer` stream drops straight in. Live provider
+integrations are experimental.
 
 ``` r
 
@@ -693,7 +720,7 @@ Each is a real app, launchable with
 | `05-settings-profile` | Vertical tabs, profile and notification forms, a live appearance panel |
 | `06-docs-reader` | Sidebar nav, ⌘K palette, resizable article/TOC split, prev/next paging |
 | `07-data-explorer` | [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md) with value boxes and theme-following plots |
-| `08-llm-chat` | Streaming [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md); swap the handler for `ellmer` to go live |
+| `08-llm-chat` | Streaming [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md); swap the handler for `ellmer` to go live (experimental) |
 | `09-app-shell` | [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md), layout primitives, sparklines, a ⌘K palette that navigates, and server-built dialogs |
 
 ## Guides
@@ -833,6 +860,9 @@ Non-interactive display components and typographic helpers.
 ## Tier 2 — form inputs
 
 Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
+The field composition family
+([`shad_fieldset()`](https://orijitghosh.github.io/shadshiny/reference/shad_fieldset.md)
+and its parts) is experimental.
 
 - [`shad_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_input.md)
   : Text input
@@ -998,6 +1028,8 @@ Tabs, accordion, pagination, carousel, and the sidebar layout family.
 
 Update bound component values from the server. Shiny-side API, so there
 is nothing in shadcn/ui to compare it against.
+[`bind_shad_task_button()`](https://orijitghosh.github.io/shadshiny/reference/bind_shad_task_button.md)
+is experimental.
 
 - [`update_shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_radio_group()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
@@ -1104,7 +1136,8 @@ selection, client-side or (experimental) lazily paged from the server.
 KPI cards, chart wrappers, timelines, and plot theming. Everything here
 except
 [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md)
-is a shadshiny addition.
+is a shadshiny addition. The ggplot2, plotly, and echarts4r adapters are
+experimental.
 
 - [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
   : KPI / value box
@@ -1194,7 +1227,8 @@ has no counterpart at all.
 
 ## Custom theming
 
-Build, import, and switch custom themes.
+Build, import, and switch custom themes. Registry import is
+experimental.
 
 - [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
   : Define a custom theme

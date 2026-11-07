@@ -200,6 +200,19 @@ facet unchanged.</p></dd>
     <p>Invisibly <code>NULL</code>; called for its side effect.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>update_shad_select()</code> and <code>update_shad_combobox()</code> match <code>selected</code>
+against the choices as strings, and <code>NULL</code> clears the input. A value that is
+not one of the choices is ignored and the browser console says so; in
+multiple mode only the unknown entries are dropped.</p>
+<p><code>update_shad_calendar()</code> and <code>update_shad_date_picker()</code> take a <code>Date</code> or
+an ISO <code>"YYYY-MM-DD"</code> string. A length-2 value sets a range and is put in
+order; <code>NULL</code> or <code>NA</code> clears. A date outside the component's <code>min</code> / <code>max</code>
+is ignored and the browser console says so; a range with one such end is
+ignored whole. A date picker never opens, closes or takes focus because of a
+server value.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other shadshiny server API:
 <code><a href="bind_shad_task_button.html">bind_shad_task_button()</a></code>,

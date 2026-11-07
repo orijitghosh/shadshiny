@@ -2,7 +2,7 @@
 /* shadshiny — select behavior (APG listbox popup pattern).
    Markup:
      <div data-shad="select" class="shad-select">
-       <button class="shad-select__trigger" [data-placeholder]>
+       <button class="shad-select__trigger" role="combobox" [data-placeholder]>
          <span class="shad-select__value">…</span> <svg chevron>
        </button>
        <div class="shad-select__content shad-anim-pop" hidden>
@@ -41,6 +41,12 @@
 
     // ids + roles
     const listboxId = content.id || (content.id = shad.uid("select-list"));
+    // a combobox, so aria-activedescendant is allowed on it; its text is the
+    // value, so a field label (form-field.js) or the placeholder names it
+    trigger.setAttribute("role", "combobox");
+    if (!trigger.hasAttribute("aria-labelledby") && !trigger.hasAttribute("aria-label")) {
+      trigger.setAttribute("aria-label", placeholder);
+    }
     trigger.setAttribute("aria-haspopup", "listbox");
     trigger.setAttribute("aria-expanded", "false");
     trigger.setAttribute("aria-controls", listboxId);
@@ -241,8 +247,11 @@
     return {
       getValue() { return value; },
       setValue(v) {
-        if (v === value) return;
-        value = v;
+        const next = shad.util.choiceValue(
+          v, items().map((it) => it.getAttribute("data-value")), false,
+          "select " + root.id);
+        if (next === undefined || next === value) return;
+        value = next;
         renderValue();
         shad.util.emit(root, "shad:change", { value });
       },

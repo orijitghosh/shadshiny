@@ -253,18 +253,31 @@ Never paste request values or unreviewed sort names directly into SQL.
 
 The request has validated positive `page` and `page_size` values, a
 `sort` list of `{column, direction}` pairs, and `filter` values
-containing a global string plus named column filters. The source must
-return a data frame with no more than `page_size` rows and non-negative
-`total_rows` and `filtered_rows` counts. Column formatters and trusted
-HTML use the same R serialization as the client-side table. A unique,
-non-missing `row_key` keeps selection stable across pages; a missing key
-retains only the constructor’s page-local fallback.
+containing a global string plus named column filters. The browser sends
+it, so it is checked before `source` runs: `page_size` is at most
+`max_page_size` (1,000 unless you change it), every sort and filter
+value is a single string, and no column is sorted twice. When you pass
+`columns`, they are the allowlist: a request may sort or filter only
+declared columns that allow it, and other columns in the page still show
+but offer neither. A request that fails a check never reaches `source`.
+The source must return a data frame with no more than `page_size` rows
+and non-negative `total_rows` and `filtered_rows` counts. Column
+formatters and trusted HTML use the same R serialization as the
+client-side table. A unique, non-missing `row_key` keeps selection
+stable across pages; a missing key retains only the constructor’s
+page-local fallback.
 
-Request IDs make stale responses harmless. Source failures show a fixed
-safe browser message and a retry action while the detailed condition is
-kept to a server warning. Editing, grouping, pivoting, aggregation,
-downloads, and spreadsheet behavior are intentionally outside this first
-experimental mode.
+The table switches to server mode when its value first reaches the
+server, so a table that
+[`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) draws later,
+or draws again, is served too. Call
+[`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md)
+once beside the render, not inside it. Request IDs make stale requests
+and responses harmless. Source failures show a fixed safe browser
+message and a retry action while the detailed condition is kept to a
+server warning. Editing, grouping, pivoting, aggregation, downloads, and
+spreadsheet behavior are intentionally outside this first experimental
+mode.
 
 ## When to keep `DT`
 

@@ -97,7 +97,9 @@ function(user_text, history) {
 ```
 
 **A coro generator** — drained the same way, which is what makes
-`ellmer` a one-liner:
+`ellmer` a one-liner. Live provider integrations like this one are
+experimental: they depend on the provider’s package and API, and may
+change before a stable 1.0 release.
 
 ``` r
 
@@ -108,9 +110,9 @@ shad_chat_server("chat", handler = function(user_text, history) {
 })
 ```
 
-`ellmer` keeps its own conversation state, so you can ignore `history`
-there. Use `history` when you’re calling an API yourself and need to
-send the prior turns along.
+That chat object keeps its own conversation state, so you can ignore
+`history` there. Use `history` when you’re calling an API yourself and
+need to send the prior turns along.
 
 Chunks are pulled on a short timer and appended to the partial reply, so
 the transcript renders progressively. Because the pump runs in the Shiny
@@ -187,8 +189,8 @@ underlying error is never copied into the transcript.
 shad_run_example("08-llm-chat")
 ```
 
-Runs offline against a fake token-streaming model, with the `ellmer`
-swap commented in the source.
+Runs offline against a fake token-streaming model, with the experimental
+`ellmer` swap commented in the source.
 
 ## See also
 

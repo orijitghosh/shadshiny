@@ -15,6 +15,7 @@ shad_data_table_server(
   source,
   columns = NULL,
   row_key = NULL,
+  max_page_size = 1000,
   session = shiny::getDefaultReactiveDomain()
 )
 ```
@@ -35,11 +36,18 @@ shad_data_table_server(
   Optional named list of
   [`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md)
   specs. When omitted, column metadata is inferred from the first
-  response.
+  response, and requests are not checked against the columns. Supply it
+  so the server, not the browser, decides which columns can be sorted
+  and filtered.
 
 - row_key:
 
   Optional stable id column in each response page.
+
+- max_page_size:
+
+  The largest page size a request may ask for. Keep it at least the
+  largest of the table's `page_sizes`.
 
 - session:
 
@@ -63,6 +71,22 @@ retained and is not suitable for cross-page selection. This helper
 deliberately does not provide editing, grouping, pivoting, aggregation,
 downloads, or database adapter behavior; the source owns query
 construction and parameterization.
+
+Requests come from the browser, so they are checked before `source`
+runs. The page size is at most `max_page_size`, the page's first row
+fits in an R integer, every sort and filter value is a single string,
+and no column is sorted twice. With `columns`, a sort column must be
+declared and sortable, and a filtered column declared and filterable. A
+request that fails is never passed to `source`: the server logs a
+warning and the table shows its "Unable to load data." state.
+
+The table switches to server mode when its value first reaches the
+server, so a table rendered by
+[`shiny::renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html), or
+rendered again, is served too: call `shad_data_table_server()` once,
+beside the render, not inside it. Each rendering starts its request IDs
+again; within one, a request older than the last one answered is
+ignored.
 
 ## See also
 

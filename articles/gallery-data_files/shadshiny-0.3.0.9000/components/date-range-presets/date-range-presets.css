@@ -53,6 +53,8 @@
   outline: none;
   box-shadow: var(--shad-focus-shadow);
 }
+/* a preset wholly outside the calendar's min/max */
+.shad-date-range-presets__item:disabled { opacity: 0.5; pointer-events: none; }
 .shad-date-range-presets__item[data-state="active"] {
   background-color: var(--shad-primary);
   color: var(--shad-primary-foreground);

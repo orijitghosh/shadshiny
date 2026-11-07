@@ -1,9 +1,9 @@
 # ggplot2 theme matching the shadshiny design system
 
-A complete ggplot2 theme (transparent plot/panel backgrounds, tokenised
-grid and text colors) so plots sit correctly on any shadshiny surface.
-Pair with `shad_scale_color_shad()` / `shad_scale_fill_shad()` for the
-categorical palette. Requires ggplot2.
+Experimental. A complete ggplot2 theme (transparent plot/panel
+backgrounds, tokenised grid and text colors) so plots sit correctly on
+any shadshiny surface. Pair with `shad_scale_color_shad()` /
+`shad_scale_fill_shad()` for the categorical palette. Requires ggplot2.
 
 ## Usage
 

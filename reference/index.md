@@ -113,6 +113,9 @@ Non-interactive display components and typographic helpers.
 ## Tier 2 — form inputs
 
 Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
+The field composition family
+([`shad_fieldset()`](https://orijitghosh.github.io/shadshiny/reference/shad_fieldset.md)
+and its parts) is experimental.
 
 - [`shad_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_input.md)
   : Text input
@@ -278,6 +281,8 @@ Tabs, accordion, pagination, carousel, and the sidebar layout family.
 
 Update bound component values from the server. Shiny-side API, so there
 is nothing in shadcn/ui to compare it against.
+[`bind_shad_task_button()`](https://orijitghosh.github.io/shadshiny/reference/bind_shad_task_button.md)
+is experimental.
 
 - [`update_shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
   [`update_shad_radio_group()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
@@ -384,7 +389,8 @@ selection, client-side or (experimental) lazily paged from the server.
 KPI cards, chart wrappers, timelines, and plot theming. Everything here
 except
 [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md)
-is a shadshiny addition.
+is a shadshiny addition. The ggplot2, plotly, and echarts4r adapters are
+experimental.
 
 - [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
   : KPI / value box
@@ -474,7 +480,8 @@ has no counterpart at all.
 
 ## Custom theming
 
-Build, import, and switch custom themes.
+Build, import, and switch custom themes. Registry import is
+experimental.
 
 - [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
   : Define a custom theme

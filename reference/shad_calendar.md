@@ -104,7 +104,7 @@ Other shadshiny tier-2 components:
 
 ``` r
 shad_calendar("day", value = Sys.Date())
-#> <div class="shad-calendar" data-shad="calendar" id="day" data-mode="single" data-value="2026-10-30" data-week-start="0"></div>
+#> <div class="shad-calendar" data-shad="calendar" id="day" data-mode="single" data-value="2026-11-07" data-week-start="0"></div>
 shad_calendar("range", mode = "range", week_starts_on = 1)
 #> <div class="shad-calendar" data-shad="calendar" id="range" data-mode="range" data-week-start="1"></div>
 shad_calendar("dob", caption_layout = "dropdown", year_range = c(1900, 2025))

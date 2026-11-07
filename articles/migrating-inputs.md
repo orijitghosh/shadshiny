@@ -120,7 +120,7 @@ markup, that is noted too.
 | [`tableOutput()`](https://rdrr.io/pkg/shiny/man/renderTable.html) / [`renderTable()`](https://rdrr.io/pkg/shiny/man/renderTable.html) | [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md) (+ parts) via [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) | restyle | `shad_table` is static markup; build rows from your data and [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html). |
 | [`dataTableOutput()`](https://rdrr.io/pkg/shiny/man/renderDataTable.html) / `DT` / `reactable` | [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md) | drop-in | Client-side sort/filter/page/select, styled to the theme. `input$id` reports `{selected, sort, filter, page, pageSize}`; refresh with [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md). Keep `DT` when you need server-side paging over large data. |
 | [`plotOutput()`](https://rdrr.io/pkg/shiny/man/plotOutput.html) / [`renderPlot()`](https://rdrr.io/pkg/shiny/man/renderPlot.html) | keep base, inside [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md) | keep base | Card wrapper with title/description/legend. Theme the plot with [`shad_theme_ggplot2()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md) + [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md). |
-| `plotly` / `echarts4r` widgets | keep base, inside [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md) | keep base | Restyle with [`shad_theme_plotly()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_plotly.md) / [`shad_theme_echarts4r()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_echarts4r.md). |
+| `plotly` / `echarts4r` widgets | keep base, inside [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md) | keep base | Restyle with [`shad_theme_plotly()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_plotly.md) / [`shad_theme_echarts4r()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_echarts4r.md). The plot adapters are experimental. |
 | event log / activity feed (manual) | [`shad_timeline()`](https://orijitghosh.github.io/shadshiny/reference/shad_timeline.md) (+ item) | new | — |
 | [`uiOutput()`](https://rdrr.io/pkg/shiny/man/htmlOutput.html) / [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) | keep base | keep base | Render slot; emit shadshiny tags into it — they auto-initialise. |
 | [`textOutput()`](https://rdrr.io/pkg/shiny/man/textOutput.html) / [`verbatimTextOutput()`](https://rdrr.io/pkg/shiny/man/textOutput.html) | keep base | keep base | Wrap in [`shad_code()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md) / typography for styling. |
@@ -169,8 +169,8 @@ Worth adopting on their own; there is nothing to migrate *from*:
 - [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
   /
   [`shad_theme_from_registry()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_from_registry.md)
-  — build a custom palette, or import one from the shadcn theme
-  registry.
+  — build a custom palette, or import one from the shadcn theme registry
+  (experimental).
 - [`shad_empty()`](https://orijitghosh.github.io/shadshiny/reference/shad_empty.md)
   — empty-state panel;
   [`shad_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md)

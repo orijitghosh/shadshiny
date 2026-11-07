@@ -2,8 +2,9 @@
 /* shadshiny — combobox behavior (APG combobox w/ listbox popup).
    Modes: data-multiple absent -> single (string|null); present -> string[].
    Filtering: case-insensitive substring on item text.
-   Markup: see combobox.html. Value chips (multi) rendered by JS into the
-   trigger before the chevrons. */
+   Markup: see combobox.html. Value chips (multi) are rendered by JS into
+   div.shad-combobox__chips before the trigger, never inside it: a button's
+   children are presentational, so a remove control there is unreachable. */
 (function () {
   "use strict";
 
@@ -17,6 +18,17 @@
     const list = content.querySelector(".shad-combobox__list");
     const empty = content.querySelector(".shad-combobox__empty");
     const multiple = root.hasAttribute("data-multiple");
+    // multi mode: the root draws the box and the panel hangs off all of it
+    const anchor = multiple ? root : trigger;
+    let chips = null;
+    if (multiple) {
+      // a rebind finds the container the last init left behind
+      const prev = trigger.previousElementSibling;
+      chips = prev && prev.classList.contains("shad-combobox__chips")
+        ? prev : document.createElement("div");
+      chips.className = "shad-combobox__chips";
+      trigger.parentNode.insertBefore(chips, trigger);
+    }
     // see select.js: the value span holds the selected label, not the placeholder
     const placeholder = valueEl
       ? (valueEl.getAttribute("data-placeholder-text") ?? valueEl.textContent)
@@ -66,31 +78,30 @@
       });
     }
     function renderTrigger() {
-      // remove existing chips
-      trigger.querySelectorAll(".shad-combobox__badge").forEach((b) => b.remove());
       if (multiple) {
-        if (value.length === 0) {
-          valueEl.hidden = false;
-          valueEl.textContent = placeholder;
-          trigger.setAttribute("data-placeholder", "");
-        } else {
-          valueEl.hidden = true;
-          trigger.removeAttribute("data-placeholder");
-          value.forEach((v) => {
-            const it = items().find((x) => x.getAttribute("data-value") === v);
-            const chip = document.createElement("span");
-            chip.className = "shad-combobox__badge";
-            chip.appendChild(document.createTextNode(it ? labelOf(it) : v));
-            const x = document.createElement("span");
-            x.className = "shad-combobox__badge-x";
-            x.setAttribute("role", "button");
-            x.setAttribute("aria-label", "Remove " + (it ? labelOf(it) : v));
-            x.setAttribute("data-remove", v);
-            x.innerHTML = X_ICON;
-            chip.appendChild(x);
-            trigger.insertBefore(chip, valueEl);
-          });
-        }
+        chips.textContent = "";
+        const labels = value.map((v) => {
+          const it = items().find((x) => x.getAttribute("data-value") === v);
+          return it ? labelOf(it) : v;
+        });
+        // with chips showing, the value span stays as the trigger's name
+        valueEl.classList.toggle("shad-sr-only", value.length > 0);
+        valueEl.textContent = value.length ? labels.join(", ") : placeholder;
+        trigger.toggleAttribute("data-placeholder", !value.length);
+        labels.forEach((label, i) => {
+          const chip = document.createElement("span");
+          chip.className = "shad-combobox__badge";
+          chip.appendChild(document.createTextNode(label));
+          const x = document.createElement("button");
+          x.type = "button";
+          x.className = "shad-combobox__badge-x";
+          x.disabled = trigger.disabled;
+          x.setAttribute("aria-label", "Remove " + label);
+          x.setAttribute("data-remove", value[i]);
+          x.innerHTML = X_ICON;
+          chip.appendChild(x);
+          chips.appendChild(chip);
+        });
       } else {
         const it = items().find((x) => x.getAttribute("data-value") === value);
         if (it) {
@@ -154,13 +165,13 @@
       root.setAttribute("data-state", "open");
       restorePortal = shad.portal(content);
       shad.presence.show(content);
-      content.style.minWidth = trigger.offsetWidth + "px";
-      disposeFloat = shad.floating.track(trigger, content, {
+      content.style.minWidth = anchor.offsetWidth + "px";
+      disposeFloat = shad.floating.track(anchor, content, {
         side: "bottom", align: "start", offset: 4
       });
       disposeDismiss = shad.dismiss.push({
         el: content,
-        extraElements: [trigger],
+        extraElements: [anchor],
         onDismiss: () => { doClose(); trigger.focus({ preventScroll: true }); }
       });
       trigger.setAttribute("aria-expanded", "true");
@@ -182,16 +193,38 @@
       shad.util.emit(root, "shad:close", {});
     }
 
-    function onTriggerClick(ev) {
-      const removeChip = ev.target.closest("[data-remove]");
-      if (removeChip) {
-        ev.stopPropagation();
-        const v = removeChip.getAttribute("data-remove");
-        value = value.filter((x) => x !== v);
-        renderItems(); renderTrigger(); emit();
-        return;
-      }
+    // the panel sits at the end of <body>; leave it as if it followed the trigger
+    function leave(back) {
+      const scope = trigger.closest("[aria-modal='true']") || document.body;
+      const next = !back && shad.util.tabbables(scope).find((el) => !content.contains(el) &&
+        (trigger.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING));
+      (next || trigger).focus();
+    }
+    function removeChip(x) {
+      const v = x.getAttribute("data-remove");
+      const i = Array.from(chips.querySelectorAll("[data-remove]")).indexOf(x);
+      const focused = document.activeElement === x;
+      value = value.filter((y) => y !== v);
+      renderItems(); renderTrigger(); emit();
+      const left = chips.querySelectorAll("[data-remove]");
+      if (open) input.focus({ preventScroll: true });
+      else if (focused) (left[i] || left[i - 1] || trigger).focus({ preventScroll: true });
+    }
+
+    function onTriggerClick() {
       open ? doClose() : doOpen();
+    }
+    function onChipsClick(ev) {
+      if (trigger.disabled) return;
+      const x = ev.target.closest("[data-remove]");
+      // the chip text opens the list, as the trigger does
+      if (x) removeChip(x); else onTriggerClick();
+    }
+    function onChipsKeydown(ev) {
+      const x = ev.target.closest("[data-remove]");
+      if (x && (ev.key === "Delete" || ev.key === "Backspace")) {
+        ev.preventDefault(); removeChip(x);
+      }
     }
     function onTriggerKeydown(ev) {
       if (["ArrowDown", "ArrowUp", "Enter", " "].includes(ev.key) && !open) {
@@ -218,7 +251,7 @@
           if (highlighted) toggleItem(highlighted);
           break;
         case "Escape": break; // DismissLayer handles
-        case "Tab": doClose(); break;
+        case "Tab": ev.preventDefault(); doClose(); leave(ev.shiftKey); break;
         case "Backspace":
           if (multiple && input.value === "" && value.length) {
             value = value.slice(0, -1);
@@ -242,6 +275,10 @@
     input.addEventListener("keydown", onInputKeydown);
     list.addEventListener("pointermove", onPointerMove);
     list.addEventListener("click", onListClick);
+    if (chips) {
+      chips.addEventListener("click", onChipsClick);
+      chips.addEventListener("keydown", onChipsKeydown);
+    }
 
     renderItems();
     renderTrigger();
@@ -249,7 +286,10 @@
     return {
       getValue() { return multiple ? value.slice() : value; },
       setValue(v) {
-        const next = multiple ? (Array.isArray(v) ? v.slice() : [v].filter(Boolean)) : v;
+        const next = shad.util.choiceValue(
+          v, items().map((it) => it.getAttribute("data-value")), multiple,
+          "combobox " + root.id);
+        if (next === undefined) return;
         const same = multiple
           ? next.length === value.length && next.every((x) => value.includes(x))
           : next === value;
@@ -268,6 +308,10 @@
         input.removeEventListener("keydown", onInputKeydown);
         list.removeEventListener("pointermove", onPointerMove);
         list.removeEventListener("click", onListClick);
+        if (chips) {
+          chips.removeEventListener("click", onChipsClick);
+          chips.removeEventListener("keydown", onChipsKeydown);
+        }
       }
     };
   });

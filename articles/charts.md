@@ -161,15 +161,21 @@ output$trend <- renderPlot({
     ggplot2::geom_line(linewidth = 1) +
     shad_scale_color_shad(th$preset, th$dark) +
     shad_theme_ggplot2(th$preset, th$dark)
-})
+}, bg = "transparent")                 # let the card show through in dark mode
 ```
 
 Forget
 [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md)
 and your chart keeps its old colours until some unrelated reactive
-happens to invalidate it.
+happens to invalidate it. Forget `bg = "transparent"` and
+[`renderPlot()`](https://rdrr.io/pkg/shiny/man/renderPlot.html) paints a
+white PNG behind the plot, so dark-mode text lands on white.
 
 ## ggplot2
+
+The plot adapters in this and the next section are experimental: their
+behavior also depends on the third-party plotting packages, so they may
+change before shadshiny 1.0.
 
 | Helper | Does |
 |----|----|
@@ -223,9 +229,12 @@ There is no theme helper, but the palette is just hex, so:
 
 output$bar <- renderPlot({
   th <- shad_current_theme()
+  ink <- if (th$dark) "#A1A1A1" else "#737373"   # axis text for either card
+  op <- par(fg = ink, col.axis = ink)
+  on.exit(par(op), add = TRUE)
   barplot(values, col = shad_chart_colors(length(values), th$preset, th$dark),
           border = NA)
-})
+}, bg = "transparent")
 ```
 
 ## Timelines

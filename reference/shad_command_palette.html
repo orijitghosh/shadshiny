@@ -121,7 +121,12 @@ control. List entries may also be lists carrying <code>value</code>, <code>label
 <dt id="arg-hotkey">hotkey<a class="anchor" aria-label="anchor" href="#arg-hotkey"></a></dt>
 <dd><p>Key that opens the palette, e.g. <code>"mod+k"</code> (default; ⌘K on
 macOS, Ctrl+K elsewhere). <code>NULL</code> for no hotkey — open it from a trigger or
-the server instead.</p></dd>
+the server instead. Write <code>+</code>-separated modifiers, then the key: <code>mod</code>
+(⌘ or Ctrl), <code>ctrl</code>, <code>meta</code> / <code>cmd</code>, <code>alt</code> / <code>option</code>, <code>shift</code>, and
+<code>space</code> for the space bar, as in <code>"mod+shift+p"</code> or <code>"/"</code>. Exactly the
+named modifiers must be held. A hotkey without Ctrl, ⌘ or Alt is left to
+text fields, so <code>"/"</code> still types a slash there. A hotkey naming an
+unknown modifier never fires, with a browser console warning.</p></dd>
 
 
 <dt id="arg-placeholder">placeholder<a class="anchor" aria-label="anchor" href="#arg-placeholder"></a></dt>

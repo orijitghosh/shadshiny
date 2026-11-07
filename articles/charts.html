@@ -222,13 +222,18 @@ changes.</p>
 <span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/shad_theme_ggplot2.html">shad_scale_color_shad</a></span><span class="op">(</span><span class="va">th</span><span class="op">$</span><span class="va">preset</span>, <span class="va">th</span><span class="op">$</span><span class="va">dark</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="../reference/shad_theme_ggplot2.html">shad_theme_ggplot2</a></span><span class="op">(</span><span class="va">th</span><span class="op">$</span><span class="va">preset</span>, <span class="va">th</span><span class="op">$</span><span class="va">dark</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">}</span>, bg <span class="op">=</span> <span class="st">"transparent"</span><span class="op">)</span>                 <span class="co"># let the card show through in dark mode</span></span></code></pre></div>
 <p>Forget <code><a href="../reference/shad_current_theme.html">shad_current_theme()</a></code> and your chart keeps its old
-colours until some unrelated reactive happens to invalidate it.</p>
+colours until some unrelated reactive happens to invalidate it. Forget
+<code>bg = "transparent"</code> and <code><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot()</a></code> paints a
+white PNG behind the plot, so dark-mode text lands on white.</p>
 </div>
 <div class="section level2">
 <h2 id="ggplot2">ggplot2<a class="anchor" aria-label="anchor" href="#ggplot2"></a>
 </h2>
+<p>The plot adapters in this and the next section are experimental:
+their behavior also depends on the third-party plotting packages, so
+they may change before shadshiny 1.0.</p>
 <table class="table">
 <colgroup>
 <col width="50%">
@@ -294,9 +299,12 @@ installed.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span><span class="op">$</span><span class="va">bar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">th</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_current_theme.html">shad_current_theme</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">ink</span> <span class="op">&lt;-</span> <span class="kw">if</span> <span class="op">(</span><span class="va">th</span><span class="op">$</span><span class="va">dark</span><span class="op">)</span> <span class="st">"#A1A1A1"</span> <span class="kw">else</span> <span class="st">"#737373"</span>   <span class="co"># axis text for either card</span></span>
+<span>  <span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>fg <span class="op">=</span> <span class="va">ink</span>, col.axis <span class="op">=</span> <span class="va">ink</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">values</span>, col <span class="op">=</span> <span class="fu"><a href="../reference/shad_chart_colors.html">shad_chart_colors</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span>, <span class="va">th</span><span class="op">$</span><span class="va">preset</span>, <span class="va">th</span><span class="op">$</span><span class="va">dark</span><span class="op">)</span>,</span>
 <span>          border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">}</span>, bg <span class="op">=</span> <span class="st">"transparent"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="timelines">Timelines<a class="anchor" aria-label="anchor" href="#timelines"></a>

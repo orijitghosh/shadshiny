@@ -2,6 +2,64 @@
 
 ## shadshiny 0.3.0.9000 (development version)
 
+- Live integrations with external chat stream providers, such as
+  streaming an `ellmer` chat, are experimental, and now say so wherever
+  they are shown: the README, the chat article, the
+  [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md)
+  and
+  [`shad_run_example()`](https://orijitghosh.github.io/shadshiny/reference/shad_run_example.md)
+  help, and the `08-llm-chat` example. A test requires it.
+
+- [`shad_theme_echarts4r()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_echarts4r.md)
+  keeps a text style already set on the chart, such as its font family
+  and size, and changes only its colour; it used to replace the whole
+  style. Tests now cover the chart adapters for ggplot2, plotly and
+  echarts4r, in light and dark mode.
+
+- Fixes from a visual review in light, dark, right-to-left and reduced
+  motion.
+  [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md)
+  given a data frame renders its body rows again. Dialogs, alert dialogs
+  and the command palette are centred on right-to-left pages, where they
+  sat partly off-screen, and so are resizable grips and vertical slider
+  thumbs. Breadcrumb lists drop Bootstrap’s list indent, and the
+  checkbox tick no longer animates under reduced motion. The
+  `.shad-scope` link colour no longer overrides component link colours:
+  breadcrumb links are muted again, and an anchor styled as a button
+  keeps its text colour on hover. A short bubble in a message footer
+  stays on one line, and `shad_chart_container(aspect = "auto")` keeps
+  the height of the plot output inside it instead of collapsing it.
+
+- [`shad_chat_ui()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_ui.md)
+  shows its `welcome` until the first message (it was accepted but never
+  shown), and its composer now spans the chat’s width.
+
+- The examples and the charts article pass `bg = "transparent"` to
+  [`renderPlot()`](https://rdrr.io/pkg/shiny/man/renderPlot.html), so
+  plots sit on the card in dark mode. The LLM chat example’s Clear
+  button works, and the examples’ native selects have accessible names.
+
+- [`shad_command()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)’s
+  help page documents `input$<inputId>_event`, which every command emits
+  on each activation, not only the palette. The component-contract test
+  now requires each such side input on its constructor’s help page, and
+  counts
+  [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
+  as the command’s updater.
+
+- The twelve articles that show code without running it use the
+  `knitr::rmarkdown_notangle` engine. `R CMD check` on R versions that
+  run vignette code, such as R 4.3, ran their examples, which failed and
+  in the chat article started an app that never returned. A test now
+  requires such articles to tangle to no code.
+
+- The advertised component count now follows a documented rule: a
+  component is an asset family with an exported constructor of its own,
+  which gives 73. Every experimental function is labelled as such in its
+  help page, in the README’s API stability list, and in each article
+  that uses it. A test derives these claims from the source so they
+  cannot drift.
+
 - [`shad_checkbox()`](https://orijitghosh.github.io/shadshiny/reference/shad_checkbox.md)
   gains `tristate = TRUE`, letting clicks cycle unchecked, checked, and
   indeterminate. The default keeps the shadcn/ui behavior, where only
@@ -17,6 +75,115 @@
   a non-numeric
   [`update_shad_number_input()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_number_input.md)
   value is ignored instead of showing `NaN`.
+
+- [`update_shad_select()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  and
+  [`update_shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  only select real choices. A numeric `selected` now matches its choice
+  (it used to show the placeholder while reporting the number), a value
+  that is not a choice is ignored with a browser console warning instead
+  of being reported as the input’s value, and multiple mode drops
+  unknown and duplicate entries.
+
+- A multiple
+  [`shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/shad_combobox.md)
+  can be used from the keyboard alone. Each chip’s remove control is now
+  a real button placed before the trigger rather than inside it, so Tab
+  reaches it and Enter, Space, Delete or Backspace removes the value;
+  the combobox root now draws the input box. Tab in the open search
+  closes the list and moves on from the trigger instead of losing focus,
+  and Shift+Tab returns to the trigger.
+
+- [`shad_calendar()`](https://orijitghosh.github.io/shadshiny/reference/shad_calendar.md)
+  and
+  [`shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_picker.md)
+  handle dates more strictly and keep focus. An impossible date such as
+  `"2026-02-31"` no longer rolls into the next month;
+  [`update_shad_calendar()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  and
+  [`update_shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+  ignore a date outside `min` / `max` with a browser console warning and
+  put a reversed range in order; and a server value no longer closes the
+  date picker or moves focus to its trigger. Arrow keys move whole days
+  across daylight-saving changes, PageUp and PageDown stop at the end of
+  a shorter month, and the month buttons and selects keep focus.
+  `disabled = TRUE` calendars now disable every control, and date-range
+  presets are cut to `min` / `max` (a preset wholly outside them is
+  disabled).
+
+- [`shad_command()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
+  and
+  [`shad_command_palette()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
+  are easier to use from the keyboard. The search input is now the only
+  tab stop (every item used to be one too), an open palette keeps Tab on
+  its search instead of wrapping onto an item, and clicking an item
+  keeps focus in the search. Items swapped in by
+  [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
+  are proper options, and their empty text now shows when nothing
+  matches. The `hotkey` needs exactly the modifiers it names, so
+  `"mod+k"` no longer fires on Ctrl+Shift+K, `"mod+shift+p"` leaves
+  Ctrl+P (Print) alone, and `"ctrl+k"` no longer fires on a plain K. A
+  hotkey without Ctrl, ⌘ or Alt, such as `"/"`, is left to text fields,
+  and an IME composition keeps Enter and the arrows. Focus traps
+  (dialogs, sheets, popovers) now skip elements with a negative
+  `tabindex`, as Tab does.
+
+- [`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md)
+  gains `max_page_size = 1000` and checks every request before `source`
+  runs. A request for a larger page, a page whose offset would overflow
+  an R integer, a sort or filter value that is not a single string, or a
+  column sorted twice is refused with a server warning and the table’s
+  error state, instead of reaching `source` (a crafted request could ask
+  for the whole dataset). With `columns`, a sort or filter on a column
+  declared `sortable = FALSE` or `filterable = FALSE` is refused too,
+  and undeclared columns in a page still show but no longer offer
+  sorting or filtering the server would refuse.
+
+- [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md)
+  on a server-backed table now asks the server for the new `page` or
+  `page_size` instead of relabelling the rows already shown. A page size
+  the table does not offer, or several `selected` keys for a
+  single-selection table, is ignored with a browser console warning, and
+  `page` and `page_size` must be positive whole numbers.
+  [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md)
+  adds its `page_size` to `page_sizes` when it is missing, so the select
+  shows the size in use, and refuses a `page_size` of 0, which hung the
+  browser. Filtering and sorting read HTML cells through an inert
+  template, so they no longer load images or run handlers for rows that
+  are not on the page.
+
+- [`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md)
+  now serves a table that
+  [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) draws
+  after the server function has run, or draws again: the table switches
+  to server mode when its value first reaches the server, instead of the
+  helper sending the switch at startup, which such a table never
+  received. It also ignores a request older than the last one answered,
+  as documented; it used to pass stale requests to `source`.
+
+- Removing UI with a popup or dialog open no longer leaves it behind. A
+  command palette dialog that was open when
+  [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) replaced
+  its output stayed on the page with its hotkey live, its scroll lock
+  held and its input still bound, and a second one appeared when the
+  output came back. A menu closed in the frame it opened (Escape pressed
+  at once) keeps focus on its trigger instead of moving it into the
+  closing menu.
+
+- A label given to
+  [`shad_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_select.md),
+  [`shad_combobox()`](https://orijitghosh.github.io/shadshiny/reference/shad_combobox.md),
+  [`shad_date_picker()`](https://orijitghosh.github.io/shadshiny/reference/shad_date_picker.md),
+  [`shad_radio_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_radio_group.md),
+  [`shad_rating()`](https://orijitghosh.github.io/shadshiny/reference/shad_rating.md),
+  [`shad_slider()`](https://orijitghosh.github.io/shadshiny/reference/shad_slider.md)
+  or
+  [`shad_input_otp()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_otp.md)
+  now names the part that takes focus, and the description and error
+  describe it; before, the label pointed at a wrapper that cannot be
+  labelled, so screen readers announced the control without its label.
+  The select trigger is now a combobox, which makes its open state valid
+  ARIA; with no label, its placeholder names it.
 
 - Development hardening now runs every fixture-gated browser suite in
   CI, enforces an 82% repository coverage floor plus 80% patch coverage,
@@ -61,8 +228,8 @@
   [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md)
   and validator contracts are unchanged.
 
-- The release-boundary work adds derived contract gates for the 240
-  exported functions and 58 important signatures, including all server
+- The release-boundary work adds derived contract gates for the 253
+  exported functions and 71 important signatures, including all server
   update helpers, without adding a generated inventory. The approved
   additive API is
   [`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md).
@@ -98,8 +265,9 @@
 
 - Chat failure finalization, trusted raw-icon handling, bookmarking, and
   component lifecycle behavior now have focused regression coverage.
-  External registry-theme schemas and optional third-party chart
-  integrations remain explicitly outside the stable core boundary.
+  External registry-theme schemas, optional third-party chart
+  integrations and live integrations with external chat stream providers
+  remain explicitly outside the stable core boundary.
 
 - [`shad_calendar()`](https://orijitghosh.github.io/shadshiny/reference/shad_calendar.md)
   and

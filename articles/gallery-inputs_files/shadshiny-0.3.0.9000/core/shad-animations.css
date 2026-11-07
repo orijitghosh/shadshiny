@@ -27,15 +27,6 @@
   to   { opacity: 0; transform: scale(0.95); }
 }
 
-/* dialog panel is centered with translate(-50%,-50%); keep it in frames */
-@keyframes shad-dialog-in {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
-  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-@keyframes shad-dialog-out {
-  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  to   { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
-}
 
 /* side-aware popover/menu/tooltip pop. --shad-enter-x/y set per data-side */
 @keyframes shad-pop-in {
@@ -110,10 +101,10 @@
 
 /* centered dialog panel: fade + zoom */
 .shad-anim-dialog[data-state="open"] {
-  animation: shad-dialog-in var(--shad-duration-normal) var(--shad-ease-out);
+  animation: shad-zoom-in var(--shad-duration-normal) var(--shad-ease-out);
 }
 .shad-anim-dialog[data-state="closed"] {
-  animation: shad-dialog-out var(--shad-duration-fast) var(--shad-ease-out) forwards;
+  animation: shad-zoom-out var(--shad-duration-fast) var(--shad-ease-out) forwards;
 }
 
 /* floating panels (popover/menu/tooltip/select/hover-card):
@@ -190,7 +181,8 @@
 @media (prefers-reduced-motion: reduce) {
   :where([class^="shad-"], [class*=" shad-"]),
   :where([class^="shad-"], [class*=" shad-"])::before,
-  :where([class^="shad-"], [class*=" shad-"])::after {
+  :where([class^="shad-"], [class*=" shad-"])::after,
+  :where([class*="shad-"] svg *) {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

@@ -1,7 +1,7 @@
 /* FILE: inst/assets/components/date-range-presets/date-range-presets.js */
 /* shadshiny — date-range-presets behavior (tiny). Slots inside a range-mode
    date-picker's __content; clicking a preset writes {start,end} into the
-   picker via its instance. Load AFTER date-picker.js.
+   picker's calendar, as a pick. Load AFTER date-picker.js.
    Markup (inside .shad-date-picker__content, BEFORE the calendar):
      <div class="shad-date-range-presets" data-shad="date-range-presets" role="group" aria-label="Quick ranges">
        <button type="button" class="shad-date-range-presets__item" data-days="7">Last 7 days</button>
@@ -13,7 +13,8 @@
      </div>
    Range sources (first match wins): data-start+data-end (ISO) |
    data-preset (today, yesterday, this-week, this-month, last-month,
-   this-year) | data-days=N (last N days, ending today). */
+   this-year) | data-days=N (last N days, ending today). The range is cut
+   to the calendar's data-min/data-max; a preset wholly outside is disabled. */
 (function () {
   "use strict";
   function iso(d) {
@@ -60,13 +61,26 @@
   shad.register("date-range-presets", function (root) {
     var pickerEl = root.closest('[data-shad="date-picker"]');
     var items = Array.from(root.querySelectorAll(".shad-date-range-presets__item"));
+    var calEl = pickerEl && pickerEl.querySelector('[data-shad="calendar"]');
+    var min = calEl && calEl.getAttribute("data-min");
+    var max = calEl && calEl.getAttribute("data-max");
+
+    // ISO dates compare as strings
+    function rangeOf(btn) {
+      var r = computeRange(btn);
+      if (!r) return null;
+      if (min && r.start < min) r.start = min;
+      if (max && r.end > max) r.end = max;
+      return r.start <= r.end ? r : null;
+    }
 
     function picker() { return pickerEl ? shad.get(pickerEl) : null; }
     function markActive() {
       var pk = picker();
       var v = pk && pk.getValue ? pk.getValue() : null;
       items.forEach(function (b) {
-        var r = computeRange(b);
+        var r = rangeOf(b);
+        b.disabled = !r;
         var on = r && v && v.start === r.start && v.end === r.end;
         if (on) b.setAttribute("data-state", "active");
         else b.removeAttribute("data-state");
@@ -76,10 +90,12 @@
     function onClick(ev) {
       var btn = ev.target.closest(".shad-date-range-presets__item");
       if (!btn || !root.contains(btn)) return;
-      var r = computeRange(btn);
+      var r = rangeOf(btn);
       if (!r) return;
-      var pk = picker();
-      if (pk && pk.setValue) pk.setValue(r);
+      // through the calendar, as a pick: the picker's own setValue() is the
+      // server's path and would leave the panel open
+      var c = calEl ? shad.get(calEl) : null;
+      if (c && c.setValue) c.setValue(r);
       markActive();
       shad.util.emit(root, "shad:change", { value: r });
     }
@@ -90,7 +106,7 @@
     return {
       getValue: function () {
         var b = root.querySelector('[data-state="active"]');
-        return b ? computeRange(b) : null;
+        return b ? rangeOf(b) : null;
       },
       setValue: function () {}, // presets derive from the picker's value
       destroy: function () {

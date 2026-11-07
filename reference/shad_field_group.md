@@ -1,7 +1,7 @@
 # Field group
 
-Arranges shad_form_field() children vertically, horizontally, or
-responsively inside a container-query-aware group.
+Experimental. Arranges shad_form_field() children vertically,
+horizontally, or responsively inside a container-query-aware group.
 
 ## Usage
 

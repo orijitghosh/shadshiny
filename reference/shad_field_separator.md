@@ -1,9 +1,9 @@
 # Field separator
 
-Inserts a labelled or unlabelled visual separator between fields. For a
-labelled separator, the visible label is deliberately outside the child
-separator node so assistive technology does not treat the text as the
-separator's accessible name.
+Experimental. Inserts a labelled or unlabelled visual separator between
+fields. For a labelled separator, the visible label is deliberately
+outside the child separator node so assistive technology does not treat
+the text as the separator's accessible name.
 
 ## Usage
 

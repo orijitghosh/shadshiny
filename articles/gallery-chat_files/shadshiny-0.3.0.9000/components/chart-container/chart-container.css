@@ -29,22 +29,23 @@
 .shad-chart__body[data-aspect="video"] { aspect-ratio: 16 / 9; }
 .shad-chart__body[data-aspect="square"] { aspect-ratio: 1 / 1; }
 .shad-chart__body[data-aspect="wide"] { aspect-ratio: 21 / 9; }
-.shad-chart__body > img,
-.shad-chart__body > canvas,
-.shad-chart__body > svg,
-.shad-chart__body > div {
+.shad-chart__body[data-aspect] > img,
+.shad-chart__body[data-aspect] > canvas,
+.shad-chart__body[data-aspect] > svg,
+.shad-chart__body[data-aspect] > div {
   position: absolute;
   inset: 0;
   width: 100% !important;   /* htmlwidgets set inline sizes; documented exception */
   height: 100% !important;
   object-fit: contain;
 }
-/* natural-height body (no aspect lock): children flow normally */
+/* natural-height body (no aspect lock): children flow normally and an output
+   div keeps its own height (plotOutput and htmlwidgets set it inline) */
 .shad-chart__body--auto { position: static; }
 .shad-chart__body--auto > img, .shad-chart__body--auto > canvas,
-.shad-chart__body--auto > svg, .shad-chart__body--auto > div {
-  position: static; width: 100% !important; height: auto !important;
-}
+.shad-chart__body--auto > svg, .shad-chart__body--auto > div { width: 100% !important; }
+.shad-chart__body--auto > img, .shad-chart__body--auto > canvas,
+.shad-chart__body--auto > svg { height: auto !important; }
 
 .shad-chart__footer {
   display: flex;

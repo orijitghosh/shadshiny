@@ -1,10 +1,11 @@
 # Questionnaire input
 
-A bookmarkable, accessible sequence of single-choice, multiple-choice,
-and freeform questions. The bound Shiny value is a JSON-safe list with
-`active` (1-based index), `answers` (named list), `skipped` (question
-names), and `complete` (logical). All questions remain in the DOM;
-inactive or conditionally hidden questions are hidden and inert.
+Experimental. A bookmarkable, accessible sequence of single-choice,
+multiple-choice, and freeform questions. The bound Shiny value is a
+JSON-safe list with `active` (1-based index), `answers` (named list),
+`skipped` (question names), and `complete` (logical). All questions
+remain in the DOM; inactive or conditionally hidden questions are hidden
+and inert.
 
 ## Usage
 

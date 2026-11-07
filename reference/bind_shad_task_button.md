@@ -1,6 +1,6 @@
 # Bind an ExtendedTask status to a shadshiny button
 
-Observes a compatible Shiny
+Experimental. Observes a compatible Shiny
 [shiny::ExtendedTask](https://rdrr.io/pkg/shiny/man/ExtendedTask.html)
 status function and maps its lifecycle to
 [`update_shad_button()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md).

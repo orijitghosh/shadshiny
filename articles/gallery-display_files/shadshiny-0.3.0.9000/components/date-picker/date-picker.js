@@ -10,7 +10,8 @@
        </div>
      </div>
    Value mirrors the inner calendar. Single mode closes on pick; range mode
-   closes when the range completes. */
+   closes when the range completes. A server value only updates the value: it
+   never opens, closes or moves focus. */
 (function () {
   "use strict";
 
@@ -31,6 +32,7 @@
     const placeholder = valueEl.textContent;
 
     let open = false;
+    let syncing = false; // inside setValue(): the change is the server's
     let disposeDismiss = null, disposeFloat = null, restorePortal = null;
 
     content.hidden = true;
@@ -91,12 +93,14 @@
     function onTriggerClick() { open ? doClose() : doOpen(); }
     function onCalChange(ev) {
       if (ev.target !== calEl) return;
+      // re-emit from the picker root with the same value, once: while closed
+      // the calendar's own event would bubble through the root as well
+      ev.stopPropagation();
       renderValue();
-      // re-emit from the picker root with the same value
       shad.util.emit(root, "shad:change", { value: ev.detail.value });
       const v = ev.detail.value;
       const complete = isRange ? (v && v.start && v.end) : !!v;
-      if (complete) { doClose(); trigger.focus({ preventScroll: true }); }
+      if (complete && open && !syncing) { doClose(); trigger.focus({ preventScroll: true }); }
     }
 
     trigger.addEventListener("click", onTriggerClick);
@@ -106,7 +110,13 @@
 
     return {
       getValue() { const c = cal(); return c ? c.getValue() : null; },
-      setValue(v) { const c = cal(); if (c) { c.setValue(v); renderValue(); } },
+      setValue(v) {
+        const c = cal();
+        if (!c) return;
+        syncing = true;
+        try { c.setValue(v); } finally { syncing = false; }
+        renderValue();
+      },
       open: doOpen,
       close: doClose,
       get isOpen() { return open; },

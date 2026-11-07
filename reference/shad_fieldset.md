@@ -1,8 +1,9 @@
 # Semantic fieldset
 
-Groups related controls under a native legend while keeping the existing
-shad_form_field() wrapper as the single-control primitive. The optional
-description is associated with the fieldset through aria-describedby.
+Experimental. Groups related controls under a native legend while
+keeping the existing shad_form_field() wrapper as the single-control
+primitive. The optional description is associated with the fieldset
+through aria-describedby.
 
 ## Usage
 

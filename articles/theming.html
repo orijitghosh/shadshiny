@@ -241,7 +241,8 @@ CSS for it, so nested scopes compose and nothing leaks out.</p>
 <p>The <a href="https://ui.shadcn.com/themes" class="external-link">shadcn theme registry</a>
 publishes themes as JSON. <code><a href="../reference/shad_theme_from_registry.html">shad_theme_from_registry()</a></code> maps
 their token names onto shadshiny’s and hands you back a
-<code><a href="../reference/shad_theme.html">shad_theme()</a></code>:</p>
+<code><a href="../reference/shad_theme.html">shad_theme()</a></code>. The import is experimental: the registry
+schema belongs to upstream and may move.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shad_theme_from_registry.html">shad_theme_from_registry</a></span><span class="op">(</span><span class="st">"https://tweakcn.com/r/themes/some-theme.json"</span><span class="op">)</span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/page_shad.html">page_shad</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="va">tw</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>

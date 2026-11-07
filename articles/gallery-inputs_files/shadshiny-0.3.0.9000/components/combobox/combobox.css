@@ -3,8 +3,9 @@
 
 .shad-combobox { position: relative; display: inline-block; }
 
-/* trigger is a button styled like an outline select; multi mode renders
-   badges inline before the input */
+/* trigger is a button styled like an outline select; in multi mode the root
+   draws that box instead, so the chips' remove buttons sit beside the
+   trigger rather than inside it */
 .shad-combobox__trigger {
   display: flex;
   align-items: center;
@@ -49,6 +50,36 @@
   height: 1rem;
   flex-shrink: 0;
 }
+/* multi mode: the box moves to the root; chips and trigger wrap together */
+.shad-combobox[data-multiple] {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--shad-space-1);
+  min-width: 10rem;
+  min-height: 2.25rem;
+  padding: var(--shad-space-1) var(--shad-space-3);
+  border: 1px solid var(--shad-input);
+  border-radius: var(--shad-radius-md);
+  box-shadow: var(--shad-shadow-xs);
+  transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-combobox[data-multiple]:has(> .shad-combobox__trigger:focus-visible),
+.shad-combobox[data-multiple][data-state="open"] {
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-combobox[data-multiple] .shad-combobox__trigger {
+  flex: 1;
+  width: auto;
+  min-width: 1rem;
+  min-height: 1.5rem;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+.shad-combobox__chips { display: contents; }
 /* multi-select badges */
 .shad-combobox__badge {
   display: inline-flex;
@@ -63,11 +94,16 @@
 }
 .shad-combobox__badge-x {
   display: inline-flex;
+  padding: 0;
+  border: 0;
   border-radius: 2px;
+  background: none;
   color: var(--shad-muted-foreground);
   cursor: pointer;
 }
 .shad-combobox__badge-x:hover { color: var(--shad-foreground); }
+.shad-combobox__badge-x:focus-visible { outline: 2px solid var(--shad-ring); }
+.shad-combobox__badge-x:disabled { cursor: not-allowed; }
 .shad-combobox__badge-x .shad-icon { width: 0.75rem; height: 0.75rem; pointer-events: auto; }
 
 /* panel */

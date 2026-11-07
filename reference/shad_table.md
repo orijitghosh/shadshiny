@@ -108,12 +108,84 @@ shad_table(head(mtcars), striped = TRUE)
 #>       </tr>
 #>     </thead>
 #>     <tbody class="shad-table__body">
-#>       <tr class="shad-table__row" mpg="&lt;td class=&quot;shad-table__cell&quot;&gt;21&lt;/td&gt;" cyl="&lt;td class=&quot;shad-table__cell&quot;&gt;6&lt;/td&gt;" disp="&lt;td class=&quot;shad-table__cell&quot;&gt;160&lt;/td&gt;" hp="&lt;td class=&quot;shad-table__cell&quot;&gt;110&lt;/td&gt;" drat="&lt;td class=&quot;shad-table__cell&quot;&gt;3.9&lt;/td&gt;" wt="&lt;td class=&quot;shad-table__cell&quot;&gt;2.62&lt;/td&gt;" qsec="&lt;td class=&quot;shad-table__cell&quot;&gt;16.46&lt;/td&gt;" vs="&lt;td class=&quot;shad-table__cell&quot;&gt;0&lt;/td&gt;" am="&lt;td class=&quot;shad-table__cell&quot;&gt;1&lt;/td&gt;" gear="&lt;td class=&quot;shad-table__cell&quot;&gt;4&lt;/td&gt;" carb="&lt;td class=&quot;shad-table__cell&quot;&gt;4&lt;/td&gt;"></tr>
-#>       <tr class="shad-table__row" mpg="&lt;td class=&quot;shad-table__cell&quot;&gt;21&lt;/td&gt;" cyl="&lt;td class=&quot;shad-table__cell&quot;&gt;6&lt;/td&gt;" disp="&lt;td class=&quot;shad-table__cell&quot;&gt;160&lt;/td&gt;" hp="&lt;td class=&quot;shad-table__cell&quot;&gt;110&lt;/td&gt;" drat="&lt;td class=&quot;shad-table__cell&quot;&gt;3.9&lt;/td&gt;" wt="&lt;td class=&quot;shad-table__cell&quot;&gt;2.875&lt;/td&gt;" qsec="&lt;td class=&quot;shad-table__cell&quot;&gt;17.02&lt;/td&gt;" vs="&lt;td class=&quot;shad-table__cell&quot;&gt;0&lt;/td&gt;" am="&lt;td class=&quot;shad-table__cell&quot;&gt;1&lt;/td&gt;" gear="&lt;td class=&quot;shad-table__cell&quot;&gt;4&lt;/td&gt;" carb="&lt;td class=&quot;shad-table__cell&quot;&gt;4&lt;/td&gt;"></tr>
-#>       <tr class="shad-table__row" mpg="&lt;td class=&quot;shad-table__cell&quot;&gt;22.8&lt;/td&gt;" cyl="&lt;td class=&quot;shad-table__cell&quot;&gt;4&lt;/td&gt;" disp="&lt;td class=&quot;shad-table__cell&quot;&gt;108&lt;/td&gt;" hp="&lt;td class=&quot;shad-table__cell&quot;&gt;93&lt;/td&gt;" drat="&lt;td class=&quot;shad-table__cell&quot;&gt;3.85&lt;/td&gt;" wt="&lt;td class=&quot;shad-table__cell&quot;&gt;2.32&lt;/td&gt;" qsec="&lt;td class=&quot;shad-table__cell&quot;&gt;18.61&lt;/td&gt;" vs="&lt;td class=&quot;shad-table__cell&quot;&gt;1&lt;/td&gt;" am="&lt;td class=&quot;shad-table__cell&quot;&gt;1&lt;/td&gt;" gear="&lt;td class=&quot;shad-table__cell&quot;&gt;4&lt;/td&gt;" carb="&lt;td class=&quot;shad-table__cell&quot;&gt;1&lt;/td&gt;"></tr>
-#>       <tr class="shad-table__row" mpg="&lt;td class=&quot;shad-table__cell&quot;&gt;21.4&lt;/td&gt;" cyl="&lt;td class=&quot;shad-table__cell&quot;&gt;6&lt;/td&gt;" disp="&lt;td class=&quot;shad-table__cell&quot;&gt;258&lt;/td&gt;" hp="&lt;td class=&quot;shad-table__cell&quot;&gt;110&lt;/td&gt;" drat="&lt;td class=&quot;shad-table__cell&quot;&gt;3.08&lt;/td&gt;" wt="&lt;td class=&quot;shad-table__cell&quot;&gt;3.215&lt;/td&gt;" qsec="&lt;td class=&quot;shad-table__cell&quot;&gt;19.44&lt;/td&gt;" vs="&lt;td class=&quot;shad-table__cell&quot;&gt;1&lt;/td&gt;" am="&lt;td class=&quot;shad-table__cell&quot;&gt;0&lt;/td&gt;" gear="&lt;td class=&quot;shad-table__cell&quot;&gt;3&lt;/td&gt;" carb="&lt;td class=&quot;shad-table__cell&quot;&gt;1&lt;/td&gt;"></tr>
-#>       <tr class="shad-table__row" mpg="&lt;td class=&quot;shad-table__cell&quot;&gt;18.7&lt;/td&gt;" cyl="&lt;td class=&quot;shad-table__cell&quot;&gt;8&lt;/td&gt;" disp="&lt;td class=&quot;shad-table__cell&quot;&gt;360&lt;/td&gt;" hp="&lt;td class=&quot;shad-table__cell&quot;&gt;175&lt;/td&gt;" drat="&lt;td class=&quot;shad-table__cell&quot;&gt;3.15&lt;/td&gt;" wt="&lt;td class=&quot;shad-table__cell&quot;&gt;3.44&lt;/td&gt;" qsec="&lt;td class=&quot;shad-table__cell&quot;&gt;17.02&lt;/td&gt;" vs="&lt;td class=&quot;shad-table__cell&quot;&gt;0&lt;/td&gt;" am="&lt;td class=&quot;shad-table__cell&quot;&gt;0&lt;/td&gt;" gear="&lt;td class=&quot;shad-table__cell&quot;&gt;3&lt;/td&gt;" carb="&lt;td class=&quot;shad-table__cell&quot;&gt;2&lt;/td&gt;"></tr>
-#>       <tr class="shad-table__row" mpg="&lt;td class=&quot;shad-table__cell&quot;&gt;18.1&lt;/td&gt;" cyl="&lt;td class=&quot;shad-table__cell&quot;&gt;6&lt;/td&gt;" disp="&lt;td class=&quot;shad-table__cell&quot;&gt;225&lt;/td&gt;" hp="&lt;td class=&quot;shad-table__cell&quot;&gt;105&lt;/td&gt;" drat="&lt;td class=&quot;shad-table__cell&quot;&gt;2.76&lt;/td&gt;" wt="&lt;td class=&quot;shad-table__cell&quot;&gt;3.46&lt;/td&gt;" qsec="&lt;td class=&quot;shad-table__cell&quot;&gt;20.22&lt;/td&gt;" vs="&lt;td class=&quot;shad-table__cell&quot;&gt;1&lt;/td&gt;" am="&lt;td class=&quot;shad-table__cell&quot;&gt;0&lt;/td&gt;" gear="&lt;td class=&quot;shad-table__cell&quot;&gt;3&lt;/td&gt;" carb="&lt;td class=&quot;shad-table__cell&quot;&gt;1&lt;/td&gt;"></tr>
+#>       <tr class="shad-table__row">
+#>         <td class="shad-table__cell">21</td>
+#>         <td class="shad-table__cell">6</td>
+#>         <td class="shad-table__cell">160</td>
+#>         <td class="shad-table__cell">110</td>
+#>         <td class="shad-table__cell">3.9</td>
+#>         <td class="shad-table__cell">2.62</td>
+#>         <td class="shad-table__cell">16.46</td>
+#>         <td class="shad-table__cell">0</td>
+#>         <td class="shad-table__cell">1</td>
+#>         <td class="shad-table__cell">4</td>
+#>         <td class="shad-table__cell">4</td>
+#>       </tr>
+#>       <tr class="shad-table__row">
+#>         <td class="shad-table__cell">21</td>
+#>         <td class="shad-table__cell">6</td>
+#>         <td class="shad-table__cell">160</td>
+#>         <td class="shad-table__cell">110</td>
+#>         <td class="shad-table__cell">3.9</td>
+#>         <td class="shad-table__cell">2.875</td>
+#>         <td class="shad-table__cell">17.02</td>
+#>         <td class="shad-table__cell">0</td>
+#>         <td class="shad-table__cell">1</td>
+#>         <td class="shad-table__cell">4</td>
+#>         <td class="shad-table__cell">4</td>
+#>       </tr>
+#>       <tr class="shad-table__row">
+#>         <td class="shad-table__cell">22.8</td>
+#>         <td class="shad-table__cell">4</td>
+#>         <td class="shad-table__cell">108</td>
+#>         <td class="shad-table__cell">93</td>
+#>         <td class="shad-table__cell">3.85</td>
+#>         <td class="shad-table__cell">2.32</td>
+#>         <td class="shad-table__cell">18.61</td>
+#>         <td class="shad-table__cell">1</td>
+#>         <td class="shad-table__cell">1</td>
+#>         <td class="shad-table__cell">4</td>
+#>         <td class="shad-table__cell">1</td>
+#>       </tr>
+#>       <tr class="shad-table__row">
+#>         <td class="shad-table__cell">21.4</td>
+#>         <td class="shad-table__cell">6</td>
+#>         <td class="shad-table__cell">258</td>
+#>         <td class="shad-table__cell">110</td>
+#>         <td class="shad-table__cell">3.08</td>
+#>         <td class="shad-table__cell">3.215</td>
+#>         <td class="shad-table__cell">19.44</td>
+#>         <td class="shad-table__cell">1</td>
+#>         <td class="shad-table__cell">0</td>
+#>         <td class="shad-table__cell">3</td>
+#>         <td class="shad-table__cell">1</td>
+#>       </tr>
+#>       <tr class="shad-table__row">
+#>         <td class="shad-table__cell">18.7</td>
+#>         <td class="shad-table__cell">8</td>
+#>         <td class="shad-table__cell">360</td>
+#>         <td class="shad-table__cell">175</td>
+#>         <td class="shad-table__cell">3.15</td>
+#>         <td class="shad-table__cell">3.44</td>
+#>         <td class="shad-table__cell">17.02</td>
+#>         <td class="shad-table__cell">0</td>
+#>         <td class="shad-table__cell">0</td>
+#>         <td class="shad-table__cell">3</td>
+#>         <td class="shad-table__cell">2</td>
+#>       </tr>
+#>       <tr class="shad-table__row">
+#>         <td class="shad-table__cell">18.1</td>
+#>         <td class="shad-table__cell">6</td>
+#>         <td class="shad-table__cell">225</td>
+#>         <td class="shad-table__cell">105</td>
+#>         <td class="shad-table__cell">2.76</td>
+#>         <td class="shad-table__cell">3.46</td>
+#>         <td class="shad-table__cell">20.22</td>
+#>         <td class="shad-table__cell">1</td>
+#>         <td class="shad-table__cell">0</td>
+#>         <td class="shad-table__cell">3</td>
+#>         <td class="shad-table__cell">1</td>
+#>       </tr>
 #>     </tbody>
 #>   </table>
 #> </div>

@@ -61,7 +61,7 @@ shad_run_example(example = "kitchen-sink")
 
   :   streaming
       [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md);
-      swap the handler for an ellmer stream to go live.
+      swap the handler for an ellmer stream to go live (experimental).
 
   `"09-app-shell"`
 

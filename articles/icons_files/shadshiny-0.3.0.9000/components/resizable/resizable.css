@@ -49,9 +49,10 @@
 /* optional grip affordance */
 .shad-resizable__grip {
   position: absolute;
-  top: 50%;
-  inset-inline-start: 50%;
-  transform: translate(-50%, -50%);
+  /* auto margins centre it in either direction; the negative inset gives the
+     grip room, since it is wider than the 1px handle */
+  inset: -1rem;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,5 +64,5 @@
   color: var(--shad-muted-foreground);
 }
 .shad-resizable[data-orientation="vertical"] .shad-resizable__grip {
-  transform: translate(-50%, -50%) rotate(90deg);
+  transform: rotate(90deg);
 }

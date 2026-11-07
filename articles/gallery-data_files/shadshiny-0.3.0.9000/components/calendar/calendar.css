@@ -90,6 +90,8 @@
   border-color: var(--shad-ring);
   box-shadow: var(--shad-focus-shadow);
 }
+/* shad_calendar(disabled = TRUE): the JS also disables every control */
+.shad-calendar[data-disabled] { opacity: 0.5; pointer-events: none; }
 .shad-calendar__grid { border-collapse: collapse; }
 .shad-calendar__weekday {
   width: 2.25rem;

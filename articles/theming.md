@@ -184,7 +184,9 @@ The [shadcn theme registry](https://ui.shadcn.com/themes) publishes
 themes as JSON.
 [`shad_theme_from_registry()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_from_registry.md)
 maps their token names onto shadshiny’s and hands you back a
-[`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md):
+[`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md).
+The import is experimental: the registry schema belongs to upstream and
+may move.
 
 ``` r
 
