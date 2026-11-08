@@ -1,4 +1,15 @@
-# shadshiny 0.3.0.9000 (development version)
+# shadshiny 0.4.0
+
+* Prepared for a first CRAN release. Every exported help page now has an
+  example; those that need a running app build one inside `if (interactive())`.
+  The `shad_theme_from_registry()` and toast examples no longer use
+  `\dontrun{}`, and the `shad_current_theme()` and `shad_chat_server()`
+  examples are now complete apps: they called server functions outside a
+  session, so they failed when run. The package now ships a `COPYRIGHTS` file
+  with the licence notices for the Lucide icons (ISC; some derive from
+  Feather, MIT) and the shadcn/ui colour token values (MIT), and DESCRIPTION
+  points to it in a `Copyright:` field. The README and the package help say
+  the same.
 
 * Five more full-ramp colour presets from shadcn/ui: `"zinc"`, `"mauve"`,
   `"olive"`, `"mist"` and `"taupe"`. Like `"slate"` and `"stone"`, each one

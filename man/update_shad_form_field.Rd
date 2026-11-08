@@ -26,6 +26,21 @@ toggling \code{data-invalid}, \code{aria-invalid}, and \code{aria-describedby} a
 creating/removing the message element. This is the primitive that
 \code{\link[=shad_validator]{shad_validator()}} and shinyvalidate bridges build on.
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_form_field(shad_input("email"), label = "Email", inputId = "email"),
+    shad_button("Check", inputId = "check")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$check, {
+      ok <- grepl("@", input$email, fixed = TRUE)
+      update_shad_form_field("email", if (!ok) "Enter a valid email address.")
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny forms:
 \code{\link[=shad_field_group]{shad_field_group()}},

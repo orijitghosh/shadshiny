@@ -47,6 +47,14 @@ runtime with \code{\link[=update_shad_theme]{update_shad_theme()}}. Dark mode ke
 \verb{[data-bs-theme="dark"]}, so \code{bslib::input_dark_mode()} works with no glue.
 }
 
+\section{Copyright}{
+
+The colour token values follow those published by shadcn/ui (MIT, copyright
+shadcn), and the icons are from Lucide (ISC; some derive from Feather, MIT).
+Their licence notices are in the installed file \code{COPYRIGHTS}:
+\code{system.file("COPYRIGHTS", package = "shadshiny")}.
+}
+
 \seealso{
 Useful links:
 \itemize{

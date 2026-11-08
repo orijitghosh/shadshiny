@@ -90,6 +90,8 @@ shad_message_group <- function(..., class = NULL) {
 #'
 #' @returns A spinner span for use in [shad_message()]'s `footer`.
 #' @family shadshiny chat components
+#' @examples
+#' shad_message(shad_message_spinner(), sender = "Assistant")
 #' @export
 shad_message_spinner <- function() {
   htmltools::tags$span(

@@ -19,6 +19,10 @@ A span tag.
 \description{
 Render readable text with an optional loading shimmer.
 }
+\examples{
+shad_shimmer("Thinking...")
+shad_shimmer("Finished", active = FALSE)
+}
 \seealso{
 Other shadshiny tier-1 components:
 \code{\link[=shad_alert]{shad_alert()}},

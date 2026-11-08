@@ -32,6 +32,10 @@ An htmltools figure tag.
 \description{
 Render escaped source text with optional metadata, copy controls, and line numbers.
 }
+\examples{
+shad_code_block("fit <- lm(mpg ~ wt, data = mtcars)",
+                language = "r", filename = "model.R")
+}
 \seealso{
 Other shadshiny tier-1 components:
 \code{\link[=shad_alert]{shad_alert()}},

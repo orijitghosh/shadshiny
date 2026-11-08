@@ -44,6 +44,13 @@ shad_timeline <- function(..., align = c("left", "alternate"), class = NULL) {
 #' @param class Extra CSS classes.
 #' @returns A timeline item `<li>` tag.
 #' @family shadshiny dashboard
+#' @examples
+#' shad_timeline(
+#'   shad_timeline_item("Deployed", time = "10:42", status = "active",
+#'                      description = "Version 2.1 is live."),
+#'   shad_timeline_item("Tests passed", time = "10:30", status = "muted",
+#'                      last = TRUE)
+#' )
 #' @export
 shad_timeline_item <- function(title, ..., time = NULL, description = NULL,
                                icon = NULL, status = c("default", "active", "muted"),

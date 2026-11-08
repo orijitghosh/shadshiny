@@ -40,7 +40,7 @@
 #' @returns A chat UI tag.
 #' @family shadshiny chat
 #' @examples
-#' if (interactive()) shad_chat_ui("chat", height = "60vh")
+#' shad_chat_ui("chat", height = "60vh", welcome = "How can I help?")
 #' @export
 shad_chat_ui <- function(id, placeholder = "Message...", height = "60vh",
                          welcome = NULL, send_label = "Send") {
@@ -103,9 +103,13 @@ shad_chat_ui <- function(id, placeholder = "Message...", height = "60vh",
 #' @family shadshiny chat
 #' @examples
 #' if (interactive()) {
-#'   shad_chat_server("chat", function(user_text, history) {
-#'     paste("You said:", user_text)
-#'   })
+#'   ui <- page_shad(shad_chat_ui("chat"))
+#'   server <- function(input, output, session) {
+#'     shad_chat_server("chat", function(user_text, history) {
+#'       paste("You said:", user_text)
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
 #' }
 #' @export
 shad_chat_server <- function(id, handler, markdown = TRUE, allow_html = FALSE) {

@@ -53,6 +53,17 @@ shad_rating <- function(inputId, label = NULL, value = 0, max = 5, half = FALSE,
 #' @param session The Shiny session.
 #' @returns Invisibly `NULL`.
 #' @family shadshiny flow
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_rating("stars", "Your rating", value = 3),
+#'     shad_button("Lock rating", inputId = "lock")
+#'   )
+#'   server <- function(input, output, session) {
+#'     shiny::observeEvent(input$lock, update_shad_rating("stars", readonly = TRUE))
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 update_shad_rating <- function(id, value = NULL, readonly = NULL,
                                session = shiny::getDefaultReactiveDomain()) {

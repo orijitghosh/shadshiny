@@ -15,6 +15,17 @@
 NULL
 
 #' @rdname shad_overlay_server
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_button("Open settings", inputId = "open"),
+#'     shad_sheet("settings", title = "Settings", "Sheet content")
+#'   )
+#'   server <- function(input, output, session) {
+#'     shiny::observeEvent(input$open, shad_sheet_open("settings"))
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 shad_dialog_open <- function(id, session = shiny::getDefaultReactiveDomain()) {
   shad_invoke(id, "open", session = session)

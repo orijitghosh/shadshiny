@@ -3,7 +3,8 @@
    shadshiny — design tokens
    --------------------------------------------------------------------------
    - All colors in OKLCH. Values mirror shadcn/ui v4 semantic tokens (zinc-ish
-     "neutral" default), prefixed --shad-.
+     "neutral" default), prefixed --shad-. shadcn/ui is MIT, copyright
+     shadcn: see inst/COPYRIGHTS.
    - Dark mode keys off BOTH `.dark` and bslib's `[data-bs-theme="dark"]`.
      One toggle drives both systems.
    - Theme presets override ONLY color tokens, via [data-shad-theme="..."].

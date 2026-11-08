@@ -45,9 +45,13 @@ user-safe error message without exposing the underlying condition.
 }
 \examples{
 if (interactive()) {
-  shad_chat_server("chat", function(user_text, history) {
-    paste("You said:", user_text)
-  })
+  ui <- page_shad(shad_chat_ui("chat"))
+  server <- function(input, output, session) {
+    shad_chat_server("chat", function(user_text, history) {
+      paste("You said:", user_text)
+    })
+  }
+  shiny::shinyApp(ui, server)
 }
 }
 \seealso{

@@ -19,6 +19,9 @@ A counter form-message tag.
 \description{
 Character counter message
 }
+\examples{
+shad_form_counter(42, 280)
+}
 \seealso{
 Other shadshiny forms:
 \code{\link[=shad_field_group]{shad_field_group()}},

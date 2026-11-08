@@ -36,6 +36,26 @@ Sends only the supplied state facets. \code{reset = TRUE} calls the client
 instance's reset method. Answer and error lists must be named so module
 instances and question definitions remain stable.
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_questionnaire(
+      "survey",
+      shad_question("plan", "Choose a plan",
+                    choices = c(Free = "free", Pro = "pro")),
+      shad_question("notes", "Anything else?", type = "text",
+                    required = FALSE)
+    ),
+    shad_button("Start over", inputId = "restart")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$restart, {
+      update_shad_questionnaire("survey", reset = TRUE)
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny questionnaire:
 \code{\link[=shad_question]{shad_question()}},

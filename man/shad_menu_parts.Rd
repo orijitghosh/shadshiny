@@ -60,6 +60,22 @@ Building blocks for \code{\link[=shad_dropdown_menu]{shad_dropdown_menu()}}, \co
 \code{\link[=shad_menubar]{shad_menubar()}} menus. Activating an item reports its \code{value} as the menu's
 input value.
 }
+\examples{
+shad_dropdown_menu(
+  "view", trigger = shad_button("View", variant = "outline"),
+  shad_menu_label("Panels"),
+  shad_menu_checkbox_item("sidebar", "Sidebar", checked = TRUE),
+  shad_menu_separator(),
+  shad_menu_radio_group(
+    "comfortable",
+    shad_menu_radio_item("compact", "Compact"),
+    shad_menu_radio_item("comfortable", "Comfortable")
+  ),
+  shad_menu_separator(),
+  shad_menu_sub("More", shad_menu_item("reset", "Reset layout")),
+  shad_menu_item("close", "Close window", destructive = TRUE)
+)
+}
 \seealso{
 Other shadshiny tier-3 components:
 \code{\link[=shad_accordion]{shad_accordion()}},

@@ -31,6 +31,24 @@ Invisibly \code{NULL}.
 \description{
 Update a number input from the server
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_number_input("qty", "Quantity", value = 1, min = 1, max = 10),
+    shad_switch("bulk", "Bulk order")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$bulk, {
+      if (isTRUE(input$bulk)) {
+        update_shad_number_input("qty", value = 10, max = 100, step = 10)
+      } else {
+        update_shad_number_input("qty", value = 1, max = 10, step = 1)
+      }
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny flow:
 \code{\link[=shad_dropzone]{shad_dropzone()}},

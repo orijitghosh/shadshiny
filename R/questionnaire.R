@@ -467,6 +467,25 @@ shad_questionnaire <- function(
 #' @param session The Shiny session.
 #' @returns Invisibly `NULL`.
 #' @family shadshiny questionnaire
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_questionnaire(
+#'       "survey",
+#'       shad_question("plan", "Choose a plan",
+#'                     choices = c(Free = "free", Pro = "pro")),
+#'       shad_question("notes", "Anything else?", type = "text",
+#'                     required = FALSE)
+#'     ),
+#'     shad_button("Start over", inputId = "restart")
+#'   )
+#'   server <- function(input, output, session) {
+#'     shiny::observeEvent(input$restart, {
+#'       update_shad_questionnaire("survey", reset = TRUE)
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 update_shad_questionnaire <- function(
     id, active = NULL, answers = NULL, errors = NULL, reset = FALSE,

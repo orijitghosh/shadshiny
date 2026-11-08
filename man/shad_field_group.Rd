@@ -25,6 +25,13 @@ Experimental.
 Arranges shad_form_field() children vertically, horizontally, or
 responsively inside a container-query-aware group.
 }
+\examples{
+shad_field_group(
+  shad_input("first", "First name"),
+  shad_input("last", "Last name"),
+  orientation = "responsive"
+)
+}
 \seealso{
 Other shadshiny forms:
 \code{\link[=shad_field_separator]{shad_field_separator()}},

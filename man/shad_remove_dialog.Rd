@@ -26,6 +26,21 @@ Overlays close themselves on Esc, on a backdrop press, and via
 server decides to dismiss one (a completed job, a timeout, a successful
 save).
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(shad_button("Save", inputId = "save"))
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$save, {
+      shad_show_dialog(shad_dialog(
+        "saved", title = "Saved", "Your changes were saved.",
+        footer = shad_button("Done", inputId = "done")
+      ))
+    })
+    shiny::observeEvent(input$done, shad_remove_dialog("saved"))
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 \code{\link[=shad_show_dialog]{shad_show_dialog()}}
 

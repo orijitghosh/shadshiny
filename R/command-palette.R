@@ -152,6 +152,21 @@ shad_command_trigger <- function(id, label = "Search...", icon = "search",
 #' @returns Invisibly `NULL`; called for its side effect.
 #' @family shadshiny server API
 #' @seealso [shad_command_palette()]
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_command_palette("palette", items = c(Home = "home")),
+#'     shad_switch("admin", "Admin mode")
+#'   )
+#'   server <- function(input, output, session) {
+#'     shiny::observeEvent(input$admin, {
+#'       items <- c(Home = "home")
+#'       if (isTRUE(input$admin)) items <- c(items, Users = "users")
+#'       update_shad_command("palette", items)
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 update_shad_command <- function(id, items, empty_text = "No results found.",
                                 session = shiny::getDefaultReactiveDomain()) {

@@ -24,6 +24,21 @@ Invisibly \code{NULL}; called for its side effect.
 Re-attaches to the live edge and scrolls to the bottom. Call after appending
 rows (e.g. via \code{\link[shiny:insertUI]{shiny::insertUI()}}) to follow a streaming reply.
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_message_scroller(
+      "log", height = 300,
+      shad_message_scroller_item(shad_bubble("First message"))
+    ),
+    shad_button("Jump to latest", inputId = "jump")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$jump, shad_message_scroller_to_bottom("log"))
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny server API:
 \code{\link[=bind_shad_task_button]{bind_shad_task_button()}},

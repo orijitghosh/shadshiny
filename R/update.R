@@ -94,6 +94,24 @@ shad_set_html <- function(id, ui, selector = NULL,
 NULL
 
 #' @rdname update_shad
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_switch("notify", "Email notifications", value = TRUE),
+#'     shad_slider("volume", "Volume", value = 20),
+#'     shad_select("size", "Size", choices = c("S", "M", "L")),
+#'     shad_button("Reset", inputId = "reset")
+#'   )
+#'   server <- function(input, output, session) {
+#'     shiny::observeEvent(input$reset, {
+#'       update_shad_switch("notify", FALSE)
+#'       update_shad_slider("volume", 50)
+#'       update_shad_select("size", "M")
+#'       update_shad_button("reset", label = "Reset again")
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 update_shad_checkbox <- function(id, value,
                                  session = shiny::getDefaultReactiveDomain()) {

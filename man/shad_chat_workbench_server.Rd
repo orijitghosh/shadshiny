@@ -30,3 +30,14 @@ A structured transcript controller.
 Experimental server module accepting provider-owned structured events. The
 handler receives public prompt text and attachment metadata only.
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(shad_chat_workbench_ui("assistant"))
+  server <- function(input, output, session) {
+    shad_chat_workbench_server("assistant", function(prompt, history) {
+      paste("You asked:", prompt$text)
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+}

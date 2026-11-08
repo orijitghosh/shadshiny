@@ -21,6 +21,13 @@ Experimental.
 Restyle a \pkg{plotly} plot with transparent backgrounds, tokenised fonts and
 gridlines, and the shadshiny categorical colorway. Requires \pkg{plotly}.
 }
+\examples{
+if (requireNamespace("plotly", quietly = TRUE)) {
+  p <- plotly::plot_ly(mtcars, x = ~wt, y = ~mpg,
+                       type = "scatter", mode = "markers")
+  p <- shad_theme_plotly(p, preset = "green", dark = TRUE)
+}
+}
 \seealso{
 Other shadshiny theming:
 \code{\link[=shad_chart_colors]{shad_chart_colors()}},

@@ -19,6 +19,9 @@ An htmltools tag.
 \description{
 Render keyboard keys with an accessible group wrapper and visual separators.
 }
+\examples{
+shad_kbd_group(shad_kbd("Ctrl"), shad_kbd("Shift"), shad_kbd("P"))
+}
 \seealso{
 Other shadshiny tier-1 components:
 \code{\link[=shad_alert]{shad_alert()}},

@@ -21,6 +21,15 @@ A \code{shad_step} object consumed by \code{\link[=shad_stepper]{shad_stepper()}
 \description{
 A stepper step
 }
+\examples{
+shad_stepper(
+  "checkout",
+  shad_step("Cart"),
+  shad_step("Payment", description = "Card declined", error = TRUE),
+  shad_step("Review"),
+  active = 2
+)
+}
 \seealso{
 Other shadshiny flow:
 \code{\link[=shad_dropzone]{shad_dropzone()}},

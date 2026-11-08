@@ -31,7 +31,7 @@ The UI half of a streaming chat module: a stick-to-bottom transcript plus a
 composer (auto-sizing textarea + send button). Pair with \code{\link[=shad_chat_server]{shad_chat_server()}}.
 }
 \examples{
-if (interactive()) shad_chat_ui("chat", height = "60vh")
+shad_chat_ui("chat", height = "60vh", welcome = "How can I help?")
 }
 \seealso{
 Other shadshiny chat:

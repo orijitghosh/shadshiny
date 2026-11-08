@@ -84,6 +84,12 @@ shad_tree <- function(inputId, ..., selected = NULL,
 #'   navigation.
 #' @returns A tree item `<li>` tag.
 #' @family shadshiny flow
+#' @examples
+#' shad_tree_item(
+#'   "docs", "docs", expanded = TRUE,
+#'   shad_tree_item("docs/intro.md", "intro.md"),
+#'   shad_tree_item("docs/draft.md", "draft.md", disabled = TRUE)
+#' )
 #' @export
 shad_tree_item <- function(value, label, ..., icon = NULL, expanded = FALSE,
                            lazy = FALSE, disabled = FALSE) {
@@ -139,6 +145,28 @@ shad_tree_item <- function(value, label, ..., icon = NULL, expanded = FALSE,
 #' @param session The Shiny session.
 #' @returns Invisibly `NULL`.
 #' @family shadshiny flow
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_tree("files", shad_tree_item("data", "data", lazy = TRUE))
+#'   )
+#'   server <- function(input, output, session) {
+#'     # A lazy branch asks for its children the first time it opens.
+#'     shiny::observeEvent(input$files_expanded, {
+#'       event <- input$files_expanded
+#'       if (identical(event$key, "data") && isTRUE(event$expanded)) {
+#'         update_shad_tree("files", children = list(
+#'           value = "data",
+#'           items = htmltools::tagList(
+#'             shad_tree_item("data/a.csv", "a.csv"),
+#'             shad_tree_item("data/b.csv", "b.csv")
+#'           )
+#'         ))
+#'       }
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 update_shad_tree <- function(id, selected = NULL, expanded = NULL,
                              children = NULL,

@@ -1,22 +1,22 @@
 Package: shadshiny
 Title: 'shadcn/ui' Components for 'Shiny'
-Version: 0.3.0.9000
+Version: 0.4.0
 Authors@R:
     person("Arijit", "Ghosh", email = "arijitghosh2009@gmail.com",
            role = c("aut", "cre"))
 Description: A broad, experimental reimplementation of the 'shadcn/ui' design
-    system for 'Shiny' applications: 73 accessible, themeable components --
-    including semantic
-    field composition primitives and a
-    full-featured data table, questionnaire workflow, layout and page-shell primitives, dashboard
-    value boxes, sparklines and chart theming, keyboard/code/scroll/shimmer
-    utility elements, and a server-side form validator,
-    custom and registry-imported themes, and a streaming chat module --
-    implemented in framework-free CSS and vanilla
-    JavaScript, wrapped as native R functions with 'Shiny' input bindings.
-    Coexists with 'Bootstrap 5' and 'bslib', including automatic dark-mode
-    synchronization.
+    system for 'Shiny' applications. It provides 73 accessible, themeable
+    components, written in plain CSS and JavaScript with no front-end
+    framework and wrapped as R functions with 'Shiny' input bindings. They
+    include field composition primitives, a data table, a questionnaire
+    workflow, layout and page-shell primitives, dashboard value boxes,
+    sparklines and chart theming, keyboard, code, scroll and shimmer
+    utilities, a server-side form validator, custom and registry-imported
+    themes, and a streaming chat module. The components coexist with
+    'Bootstrap 5' and 'bslib', and follow their dark mode automatically.
 License: MIT + file LICENSE
+Copyright: Arijit Ghosh. The Lucide icon paths and the 'shadcn/ui' colour
+    token values belong to their copyright holders; see file COPYRIGHTS.
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Depends:

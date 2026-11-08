@@ -33,6 +33,18 @@ Groups related controls under a native legend while keeping the existing
 shad_form_field() wrapper as the single-control primitive. The optional
 description is associated with the fieldset through aria-describedby.
 }
+\examples{
+shad_fieldset(
+  "Shipping address",
+  shad_input("street", "Street"),
+  shad_field_group(
+    shad_input("city", "City"),
+    shad_input("postcode", "Postcode"),
+    orientation = "horizontal"
+  ),
+  description = "Where should we send your order?"
+)
+}
 \seealso{
 Other shadshiny forms:
 \code{\link[=shad_field_group]{shad_field_group()}},

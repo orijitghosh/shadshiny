@@ -86,6 +86,20 @@ shad_message_scroller_item <- function(..., anchor = FALSE, class = NULL) {
 #' @param session The Shiny session.
 #' @returns Invisibly `NULL`; called for its side effect.
 #' @family shadshiny server API
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_message_scroller(
+#'       "log", height = 300,
+#'       shad_message_scroller_item(shad_bubble("First message"))
+#'     ),
+#'     shad_button("Jump to latest", inputId = "jump")
+#'   )
+#'   server <- function(input, output, session) {
+#'     shiny::observeEvent(input$jump, shad_message_scroller_to_bottom("log"))
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 shad_message_scroller_to_bottom <- function(id, smooth = TRUE,
                                             session = shiny::getDefaultReactiveDomain()) {

@@ -48,6 +48,8 @@ shad_form_message <- function(message, type = c("info", "error", "success", "war
 #' @param id Optional id.
 #' @returns A counter form-message tag.
 #' @family shadshiny forms
+#' @examples
+#' shad_form_counter(42, 280)
 #' @export
 shad_form_counter <- function(current, max, id = NULL) {
   with_deps(htmltools::tags$div(
@@ -109,6 +111,20 @@ shad_form_summary <- function(id, title = "Please fix the errors below",
 #' @param session The Shiny session.
 #' @returns Invisibly `NULL`.
 #' @family shadshiny forms
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_form_field(shad_input("email"), label = "Email", inputId = "email"),
+#'     shad_button("Check", inputId = "check")
+#'   )
+#'   server <- function(input, output, session) {
+#'     shiny::observeEvent(input$check, {
+#'       ok <- grepl("@", input$email, fixed = TRUE)
+#'       update_shad_form_field("email", if (!ok) "Enter a valid email address.")
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 update_shad_form_field <- function(inputId, error = NULL,
                                    session = shiny::getDefaultReactiveDomain()) {

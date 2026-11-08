@@ -49,6 +49,18 @@ Invisibly \code{NULL}; called for its side effect.
 Imperatively open or close a dialog, alert dialog, sheet, drawer, or popover.
 The open state is also available reactively as \verb{input$<id>}.
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_button("Open settings", inputId = "open"),
+    shad_sheet("settings", title = "Settings", "Sheet content")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$open, shad_sheet_open("settings"))
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny server API:
 \code{\link[=bind_shad_task_button]{bind_shad_task_button()}},

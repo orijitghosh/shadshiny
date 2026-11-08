@@ -37,3 +37,6 @@ Experimental, provider-neutral UI for structured chat events. Pair with
 \code{\link[=shad_chat_workbench_server]{shad_chat_workbench_server()}}. Native uploads are handled by Shiny; no
 server-side file paths are rendered into this UI.
 }
+\examples{
+shad_chat_workbench_ui("assistant", welcome = "Ask me anything.")
+}

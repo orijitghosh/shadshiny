@@ -40,6 +40,14 @@ A timeline item \verb{<li>} tag.
 \description{
 Timeline item
 }
+\examples{
+shad_timeline(
+  shad_timeline_item("Deployed", time = "10:42", status = "active",
+                     description = "Version 2.1 is live."),
+  shad_timeline_item("Tests passed", time = "10:30", status = "muted",
+                     last = TRUE)
+)
+}
 \seealso{
 Other shadshiny dashboard:
 \code{\link[=shad_chart_container]{shad_chart_container()}},

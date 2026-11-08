@@ -497,6 +497,22 @@ shad_fmt_badge <- function(map) {
 #' @param session The Shiny session.
 #' @returns Invisibly, the Shiny observer driving the source.
 #' @family shadshiny data table
+#' @examples
+#' if (interactive()) {
+#'   rows <- data.frame(id = 1:500, score = rev(seq_len(500)))
+#'   ui <- page_shad(
+#'     shad_data_table("rows", data = NULL, page_size = 25, loading = TRUE)
+#'   )
+#'   server <- function(input, output, session) {
+#'     shad_data_table_server("rows", row_key = "id", source = function(request) {
+#'       first <- (request$page - 1L) * request$page_size + 1L
+#'       last <- min(first + request$page_size - 1L, nrow(rows))
+#'       list(data = rows[seq.int(first, last), , drop = FALSE],
+#'            total_rows = nrow(rows), filtered_rows = nrow(rows))
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 shad_data_table_server <- function(
     id, source, columns = NULL, row_key = NULL, max_page_size = 1000,
@@ -695,6 +711,19 @@ shad_data_table <- function(inputId, data, columns = NULL, row_key = NULL,
 #' @param session The Shiny session.
 #' @returns Invisibly `NULL`.
 #' @family shadshiny data table
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_button("Only four cylinders", inputId = "four"),
+#'     shad_data_table("cars", mtcars)
+#'   )
+#'   server <- function(input, output, session) {
+#'     shiny::observeEvent(input$four, {
+#'       update_shad_data_table("cars", data = mtcars[mtcars$cyl == 4, ], page = 1)
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 update_shad_data_table <- function(id, data = NULL, columns = NULL,
                                     row_key = NULL, selected = NULL,

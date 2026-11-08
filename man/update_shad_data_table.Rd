@@ -46,6 +46,20 @@ Invisibly \code{NULL}.
 Push new rows to a \code{\link[=shad_data_table]{shad_data_table()}} (replacing its data while keeping
 selection keys) and/or patch its interaction state.
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_button("Only four cylinders", inputId = "four"),
+    shad_data_table("cars", mtcars)
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$four, {
+      update_shad_data_table("cars", data = mtcars[mtcars$cyl == 4, ], page = 1)
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny data table:
 \code{\link[=shad_col]{shad_col()}},

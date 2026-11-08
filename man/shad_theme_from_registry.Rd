@@ -19,9 +19,12 @@ into a \code{\link[=shad_theme]{shad_theme()}}, mapping upstream variable names 
 the bundled theme map. Unmapped variables are skipped with a single warning.
 }
 \examples{
-\dontrun{
-shad_theme_from_registry("https://tweakcn.com/r/themes/my-theme.json")
-}
+# A registry export as JSON text; a file path or URL works too.
+registry <- '{"cssVars": {
+  "light": {"--primary": "oklch(0.6 0.2 250)", "--radius": "0.5rem"},
+  "dark": {"--primary": "oklch(0.7 0.2 250)"}
+}}'
+shad_theme_from_registry(registry)
 }
 \seealso{
 Other shadshiny theming:

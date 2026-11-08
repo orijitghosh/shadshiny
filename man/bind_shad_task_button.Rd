@@ -37,6 +37,23 @@ its lifecycle to \code{\link[=update_shad_button]{update_shad_button()}}. The ta
 this helper does not invoke the task, inspect its result, or create an async
 backend.
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_button("Run report", inputId = "run"),
+    shad_button("Finish", inputId = "finish", variant = "outline")
+  )
+  server <- function(input, output, session) {
+    # Usually a shiny::ExtendedTask; any object with a $status() works.
+    state <- shiny::reactiveVal("initial")
+    task <- list(status = function() state())
+    bind_shad_task_button(task, "run", label_success = "Done")
+    shiny::observeEvent(input$run, state("running"))
+    shiny::observeEvent(input$finish, state("success"))
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny server API:
 \code{\link[=shad_message_scroller_to_bottom]{shad_message_scroller_to_bottom()}},

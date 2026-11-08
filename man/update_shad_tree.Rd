@@ -30,6 +30,29 @@ Invisibly \code{NULL}.
 \description{
 Update a tree from the server
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_tree("files", shad_tree_item("data", "data", lazy = TRUE))
+  )
+  server <- function(input, output, session) {
+    # A lazy branch asks for its children the first time it opens.
+    shiny::observeEvent(input$files_expanded, {
+      event <- input$files_expanded
+      if (identical(event$key, "data") && isTRUE(event$expanded)) {
+        update_shad_tree("files", children = list(
+          value = "data",
+          items = htmltools::tagList(
+            shad_tree_item("data/a.csv", "a.csv"),
+            shad_tree_item("data/b.csv", "b.csv")
+          )
+        ))
+      }
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny flow:
 \code{\link[=shad_dropzone]{shad_dropzone()}},

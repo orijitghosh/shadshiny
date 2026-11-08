@@ -99,6 +99,14 @@ shad_stepper <- function(inputId, ..., active = 1,
 #' @param error If `TRUE`, seed the step in an error state.
 #' @returns A `shad_step` object consumed by [shad_stepper()].
 #' @family shadshiny flow
+#' @examples
+#' shad_stepper(
+#'   "checkout",
+#'   shad_step("Cart"),
+#'   shad_step("Payment", description = "Card declined", error = TRUE),
+#'   shad_step("Review"),
+#'   active = 2
+#' )
 #' @export
 shad_step <- function(title, description = NULL, content = NULL, error = FALSE) {
   structure(
@@ -117,6 +125,22 @@ shad_step <- function(title, description = NULL, content = NULL, error = FALSE) 
 #' @param session The Shiny session.
 #' @returns Invisibly `NULL`.
 #' @family shadshiny flow
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_stepper("wizard", shad_step("Account"), shad_step("Profile"),
+#'                  shad_step("Review")),
+#'     shad_button("Continue", inputId = "forward")
+#'   )
+#'   server <- function(input, output, session) {
+#'     step <- shiny::reactiveVal(1)
+#'     shiny::observeEvent(input$forward, {
+#'       step(min(step() + 1, 3))
+#'       update_shad_stepper("wizard", active = step())
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 update_shad_stepper <- function(id, active = NULL, error = NULL,
                                 session = shiny::getDefaultReactiveDomain()) {

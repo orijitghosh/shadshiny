@@ -238,9 +238,12 @@ shad_theme_style_tag <- function(theme) {
 #' @returns A `shad_theme` object.
 #' @family shadshiny theming
 #' @examples
-#' \dontrun{
-#' shad_theme_from_registry("https://tweakcn.com/r/themes/my-theme.json")
-#' }
+#' # A registry export as JSON text; a file path or URL works too.
+#' registry <- '{"cssVars": {
+#'   "light": {"--primary": "oklch(0.6 0.2 250)", "--radius": "0.5rem"},
+#'   "dark": {"--primary": "oklch(0.7 0.2 250)"}
+#' }}'
+#' shad_theme_from_registry(registry)
 #' @export
 shad_theme_from_registry <- function(json) {
   data <- jsonlite::fromJSON(json, simplifyVector = TRUE)

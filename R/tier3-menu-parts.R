@@ -37,6 +37,21 @@
 NULL
 
 #' @rdname shad_menu_parts
+#' @examples
+#' shad_dropdown_menu(
+#'   "view", trigger = shad_button("View", variant = "outline"),
+#'   shad_menu_label("Panels"),
+#'   shad_menu_checkbox_item("sidebar", "Sidebar", checked = TRUE),
+#'   shad_menu_separator(),
+#'   shad_menu_radio_group(
+#'     "comfortable",
+#'     shad_menu_radio_item("compact", "Compact"),
+#'     shad_menu_radio_item("comfortable", "Comfortable")
+#'   ),
+#'   shad_menu_separator(),
+#'   shad_menu_sub("More", shad_menu_item("reset", "Reset layout")),
+#'   shad_menu_item("close", "Close window", destructive = TRUE)
+#' )
 #' @export
 shad_menu_item <- function(value, label = NULL, icon = NULL, shortcut = NULL,
                            disabled = FALSE, destructive = FALSE) {

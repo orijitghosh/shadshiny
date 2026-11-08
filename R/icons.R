@@ -2,7 +2,8 @@
 # Structural icons are embedded directly in component anatomy; this registry
 # powers the exported shad_icon() helper and leading/trailing icons on buttons,
 # badges, menu items, etc. All icons are 24x24, stroke-width 2, currentColor,
-# matching the markup baked into inst/assets anatomy files (Lucide, MIT).
+# matching the markup baked into inst/assets anatomy files. The paths are
+# Lucide's (ISC; some derive from Feather, MIT): see inst/COPYRIGHTS.
 
 .shad_icon_paths <- list(
   "chevron-down"      = '<path d="m6 9 6 6 6-6"/>',

@@ -19,6 +19,12 @@ A scrolling div tag.
 \description{
 Add CSS-only edge fades to a keyboard-focusable scrolling container.
 }
+\examples{
+shad_scroll_fade(
+  style = "max-height: 8rem",
+  htmltools::tags$ul(lapply(1:20, function(i) htmltools::tags$li("Item ", i)))
+)
+}
 \seealso{
 Other shadshiny tier-1 components:
 \code{\link[=shad_alert]{shad_alert()}},

@@ -76,6 +76,8 @@ shad_kbd <- function(..., class = NULL) with_deps(htmltools::tags$kbd(class = sh
 #' @param class Extra CSS classes.
 #' @returns An htmltools tag.
 #' @family shadshiny tier-1 components
+#' @examples
+#' shad_kbd_group(shad_kbd("Ctrl"), shad_kbd("Shift"), shad_kbd("P"))
 #' @export
 shad_kbd_group <- function(..., separator = "+", class = NULL) {
   separator <- .shad_scalar_character(separator, "separator")
@@ -114,6 +116,9 @@ shad_kbd_group <- function(..., separator = "+", class = NULL) {
 #' @param class Extra CSS classes.
 #' @returns An htmltools figure tag.
 #' @family shadshiny tier-1 components
+#' @examples
+#' shad_code_block("fit <- lm(mpg ~ wt, data = mtcars)",
+#'                 language = "r", filename = "model.R")
 #' @export
 shad_code_block <- function(code, language = NULL, filename = NULL, copy = TRUE,
                             line_numbers = FALSE, class = NULL) {

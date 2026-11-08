@@ -12,6 +12,9 @@ A spinner span for use in \code{\link[=shad_message]{shad_message()}}'s \code{fo
 \description{
 A spinner glyph for a message footer (in-progress state)
 }
+\examples{
+shad_message(shad_message_spinner(), sender = "Assistant")
+}
 \seealso{
 Other shadshiny chat components:
 \code{\link[=shad_attachment]{shad_attachment()}},

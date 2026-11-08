@@ -39,6 +39,13 @@ A tree item \verb{<li>} tag.
 \description{
 Tree item
 }
+\examples{
+shad_tree_item(
+  "docs", "docs", expanded = TRUE,
+  shad_tree_item("docs/intro.md", "intro.md"),
+  shad_tree_item("docs/draft.md", "draft.md", disabled = TRUE)
+)
+}
 \seealso{
 Other shadshiny flow:
 \code{\link[=shad_dropzone]{shad_dropzone()}},

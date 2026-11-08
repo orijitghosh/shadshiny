@@ -121,6 +121,11 @@ shad_aspect_ratio <- function(..., ratio = 16 / 9, class = NULL) {
 #' @param class Extra CSS classes.
 #' @returns A scrolling div tag.
 #' @family shadshiny tier-1 components
+#' @examples
+#' shad_scroll_fade(
+#'   style = "max-height: 8rem",
+#'   htmltools::tags$ul(lapply(1:20, function(i) htmltools::tags$li("Item ", i)))
+#' )
 #' @export
 shad_scroll_fade <- function(..., axis = c("vertical", "horizontal", "both"), class = NULL) {
   if (!length(axis) || is.na(axis[[1L]])) {
@@ -148,6 +153,9 @@ shad_scroll_fade <- function(..., axis = c("vertical", "horizontal", "both"), cl
 #' @param class Extra CSS classes.
 #' @returns A span tag.
 #' @family shadshiny tier-1 components
+#' @examples
+#' shad_shimmer("Thinking...")
+#' shad_shimmer("Finished", active = FALSE)
 #' @export
 shad_shimmer <- function(..., active = TRUE, class = NULL) {
   active <- .shad_scalar_logical(active, "active")

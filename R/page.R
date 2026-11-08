@@ -89,6 +89,18 @@ shad_theme_preset <- function(preset, ...) {
 #' @param session The Shiny session.
 #' @returns Invisibly `NULL`, called for its side effect.
 #' @family shadshiny page & theming
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(
+#'     shad_select("preset", "Theme", selected = "slate",
+#'                 choices = c("slate", "zinc", "mauve", "blue", "green")),
+#'     shad_switch("dark", "Dark mode")
+#'   )
+#'   server <- function(input, output, session) {
+#'     shiny::observe(update_shad_theme(preset = input$preset, dark = input$dark))
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 update_shad_theme <- function(preset = NULL, dark = NULL, theme = NULL,
                               session = shiny::getDefaultReactiveDomain()) {
@@ -139,6 +151,13 @@ update_shad_theme <- function(preset = NULL, dark = NULL, theme = NULL,
 #'   component library.
 #' @returns Called for its side effect (launches a Shiny app).
 #' @family shadshiny utilities
+#' @examples
+#' # The bundled apps:
+#' list.files(system.file("examples", package = "shadshiny"))
+#'
+#' if (interactive()) {
+#'   shad_run_example("07-data-explorer")
+#' }
 #' @export
 shad_run_example <- function(example = "kitchen-sink") {
   dir <- system.file("examples", example, package = "shadshiny")

@@ -34,5 +34,11 @@
 #' runtime with [update_shad_theme()]. Dark mode keys off both `.dark` and
 #' `[data-bs-theme="dark"]`, so `bslib::input_dark_mode()` works with no glue.
 #'
+#' @section Copyright:
+#' The colour token values follow those published by shadcn/ui (MIT, copyright
+#' shadcn), and the icons are from Lucide (ISC; some derive from Feather, MIT).
+#' Their licence notices are in the installed file `COPYRIGHTS`:
+#' `system.file("COPYRIGHTS", package = "shadshiny")`.
+#'
 #' @keywords internal
 "_PACKAGE"

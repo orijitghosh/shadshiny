@@ -626,8 +626,19 @@ other Lucide glyph via `shad_icon_raw()`).
 
 shadshiny is inspired by and visually compatible with
 [shadcn/ui](https://ui.shadcn.com) (MIT) by shadcn, which itself builds on
-[Radix UI](https://www.radix-ui.com) primitives. **No upstream source code is
-vendored.** All CSS and JavaScript in this package were reimplemented from
-scratch to be framework-free and Shiny-native. shadcn/ui and Radix are
-trademarks of their respective owners. shadshiny is released under the
+[Radix UI](https://www.radix-ui.com) primitives. **No shadcn/ui or Radix
+source code is vendored.** All CSS and JavaScript in this package were
+reimplemented from scratch to be framework-free and Shiny-native.
+
+Two things do come from other projects:
+
+- The colour token values, for the default theme and the presets, follow
+  those published by shadcn/ui (MIT, copyright shadcn).
+- The icons are from [Lucide](https://lucide.dev) (ISC, copyright Lucide
+  Icons and Contributors). Some of them derive from
+  [Feather](https://feathericons.com) (MIT, copyright Cole Bemis).
+
+Their licence notices ship with the package in
+[`inst/COPYRIGHTS`](inst/COPYRIGHTS). shadcn/ui and Radix are trademarks of
+their respective owners. shadshiny is released under the
 [MIT License](LICENSE).

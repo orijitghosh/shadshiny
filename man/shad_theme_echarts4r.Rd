@@ -22,6 +22,13 @@ Set the shadshiny categorical colors and tokenised text on an \pkg{echarts4r}
 chart. A text style already set on the chart, such as its font family, is
 kept; only its color changes. Requires \pkg{echarts4r}.
 }
+\examples{
+if (requireNamespace("echarts4r", quietly = TRUE)) {
+  chart <- echarts4r::e_charts(mtcars, wt)
+  chart <- echarts4r::e_scatter(chart, mpg)
+  chart <- shad_theme_echarts4r(chart, preset = "blue")
+}
+}
 \seealso{
 Other shadshiny theming:
 \code{\link[=shad_chart_colors]{shad_chart_colors()}},

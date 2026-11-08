@@ -40,6 +40,14 @@ Called for its side effect (launches a Shiny app).
 \description{
 Run a bundled shadshiny example app
 }
+\examples{
+# The bundled apps:
+list.files(system.file("examples", package = "shadshiny"))
+
+if (interactive()) {
+  shad_run_example("07-data-explorer")
+}
+}
 \seealso{
 Other shadshiny utilities:
 \code{\link[=shad_icon]{shad_icon()}},

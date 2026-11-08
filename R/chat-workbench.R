@@ -289,6 +289,8 @@
 #' @param accept Native file-input accept value.
 #' @param multiple Whether native upload accepts multiple files.
 #' @returns A workbench UI tag.
+#' @examples
+#' shad_chat_workbench_ui("assistant", welcome = "Ask me anything.")
 #' @export
 shad_chat_workbench_ui <- function(id, placeholder = "Message...", height = "60vh",
                                    welcome = NULL, send_label = "Send", accept = NULL,
@@ -321,6 +323,16 @@ shad_chat_workbench_ui <- function(id, placeholder = "Message...", height = "60v
 #' @param allow_html Trusted-content escape hatch for assistant Markdown.
 #' @param render_part Optional renderer for one validated part.
 #' @returns A structured transcript controller.
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(shad_chat_workbench_ui("assistant"))
+#'   server <- function(input, output, session) {
+#'     shad_chat_workbench_server("assistant", function(prompt, history) {
+#'       paste("You asked:", prompt$text)
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 shad_chat_workbench_server <- function(id, handler, markdown = TRUE, allow_html = FALSE,
                                        render_part = NULL) {

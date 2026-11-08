@@ -102,6 +102,20 @@ shad_show_dialog <- function(overlay, transient = TRUE,
 #' @returns Invisibly `NULL`; called for its side effect.
 #' @family shadshiny server API
 #' @seealso [shad_show_dialog()]
+#' @examples
+#' if (interactive()) {
+#'   ui <- page_shad(shad_button("Save", inputId = "save"))
+#'   server <- function(input, output, session) {
+#'     shiny::observeEvent(input$save, {
+#'       shad_show_dialog(shad_dialog(
+#'         "saved", title = "Saved", "Your changes were saved.",
+#'         footer = shad_button("Done", inputId = "done")
+#'       ))
+#'     })
+#'     shiny::observeEvent(input$done, shad_remove_dialog("saved"))
+#'   }
+#'   shiny::shinyApp(ui, server)
+#' }
 #' @export
 shad_remove_dialog <- function(id, session = shiny::getDefaultReactiveDomain()) {
   shad_invoke(id, "close", session = session)

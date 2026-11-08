@@ -27,6 +27,23 @@ Invisibly \code{NULL}.
 \description{
 Update a stepper from the server
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_stepper("wizard", shad_step("Account"), shad_step("Profile"),
+                 shad_step("Review")),
+    shad_button("Continue", inputId = "forward")
+  )
+  server <- function(input, output, session) {
+    step <- shiny::reactiveVal(1)
+    shiny::observeEvent(input$forward, {
+      step(min(step() + 1, 3))
+      update_shad_stepper("wizard", active = step())
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny flow:
 \code{\link[=shad_dropzone]{shad_dropzone()}},

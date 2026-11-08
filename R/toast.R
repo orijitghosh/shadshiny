@@ -45,10 +45,15 @@
 #' @returns The toast id (character), invisibly.
 #' @family shadshiny server API
 #' @examples
-#' \dontrun{
-#' shad_toast("Saved", variant = "success")
-#' id <- shad_toast_loading("Uploading...")
-#' shad_toast_update(id, message = "Uploaded", variant = "success")
+#' if (interactive()) {
+#'   ui <- page_shad(shad_button("Upload", inputId = "upload"))
+#'   server <- function(input, output, session) {
+#'     shiny::observeEvent(input$upload, {
+#'       id <- shad_toast_loading("Uploading...")
+#'       shad_toast_update(id, message = "Uploaded", variant = "success")
+#'     })
+#'   }
+#'   shiny::shinyApp(ui, server)
 #' }
 #' @export
 shad_toast <- function(message = NULL, title = NULL, description = NULL,

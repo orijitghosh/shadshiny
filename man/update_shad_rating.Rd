@@ -26,6 +26,18 @@ Invisibly \code{NULL}.
 \description{
 Update a rating from the server
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_rating("stars", "Your rating", value = 3),
+    shad_button("Lock rating", inputId = "lock")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$lock, update_shad_rating("stars", readonly = TRUE))
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny flow:
 \code{\link[=shad_dropzone]{shad_dropzone()}},

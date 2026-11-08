@@ -33,17 +33,17 @@ jobs:
 
     steps:
       # The record's commit precedes the commit that adds the archive.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
 
       - run: node tools/run-candidate.mjs verify
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: candidate
           path: candidate/shadshiny_*.tar.gz
@@ -81,14 +81,14 @@ jobs:
     steps:
       # The checkout supplies candidate/CANDIDATE and tools/ only; the package
       # comes from the uploaded archive.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: candidate
           path: candidate-artifact
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
 
@@ -138,7 +138,7 @@ jobs:
 
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: candidate-check-${{ matrix.config.os }}-r${{ matrix.config.r }}
           path: check

@@ -30,6 +30,19 @@ Invisibly \code{NULL}, called for its side effect.
 Sends a custom message that sets/removes \code{data-shad-theme} and toggles
 \code{.dark} + \code{data-bs-theme} on \code{document.documentElement}.
 }
+\examples{
+if (interactive()) {
+  ui <- page_shad(
+    shad_select("preset", "Theme", selected = "slate",
+                choices = c("slate", "zinc", "mauve", "blue", "green")),
+    shad_switch("dark", "Dark mode")
+  )
+  server <- function(input, output, session) {
+    shiny::observe(update_shad_theme(preset = input$preset, dark = input$dark))
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny page & theming:
 \code{\link[=page_shad]{page_shad()}},

@@ -66,6 +66,23 @@ too: call \code{shad_data_table_server()} once, beside the render, not inside
 it. Each rendering starts its request IDs again; within one, a request
 older than the last one answered is ignored.
 }
+\examples{
+if (interactive()) {
+  rows <- data.frame(id = 1:500, score = rev(seq_len(500)))
+  ui <- page_shad(
+    shad_data_table("rows", data = NULL, page_size = 25, loading = TRUE)
+  )
+  server <- function(input, output, session) {
+    shad_data_table_server("rows", row_key = "id", source = function(request) {
+      first <- (request$page - 1L) * request$page_size + 1L
+      last <- min(first + request$page_size - 1L, nrow(rows))
+      list(data = rows[seq.int(first, last), , drop = FALSE],
+           total_rows = nrow(rows), filtered_rows = nrow(rows))
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+}
 \seealso{
 Other shadshiny data table:
 \code{\link[=shad_col]{shad_col()}},

@@ -74,6 +74,17 @@ shad_form_field <- function(..., label = NULL, description = NULL, error = NULL,
 #' @param class Extra CSS classes.
 #' @returns A native <fieldset> tag.
 #' @family shadshiny forms
+#' @examples
+#' shad_fieldset(
+#'   "Shipping address",
+#'   shad_input("street", "Street"),
+#'   shad_field_group(
+#'     shad_input("city", "City"),
+#'     shad_input("postcode", "Postcode"),
+#'     orientation = "horizontal"
+#'   ),
+#'   description = "Where should we send your order?"
+#' )
 #' @export
 shad_fieldset <- function(legend, ..., description = NULL,
                           variant = c("legend", "label"), class = NULL) {
@@ -119,6 +130,12 @@ shad_fieldset <- function(legend, ..., description = NULL,
 #' @param class Extra CSS classes.
 #' @returns A <div> field-group tag.
 #' @family shadshiny forms
+#' @examples
+#' shad_field_group(
+#'   shad_input("first", "First name"),
+#'   shad_input("last", "Last name"),
+#'   orientation = "responsive"
+#' )
 #' @export
 shad_field_group <- function(...,
                              orientation = c("vertical", "horizontal", "responsive"),
@@ -150,6 +167,13 @@ shad_field_group <- function(...,
 #' @param class Extra CSS classes.
 #' @returns A separator tag.
 #' @family shadshiny forms
+#' @examples
+#' shad_fieldset(
+#'   "Sign in",
+#'   shad_input("email", "Email"),
+#'   shad_field_separator("or"),
+#'   shad_button("Continue with a passkey", variant = "outline")
+#' )
 #' @export
 shad_field_separator <- function(label = NULL, class = NULL) {
   if (is.null(label)) {

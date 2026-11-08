@@ -26,10 +26,19 @@
 #' @family shadshiny theming
 #' @examples
 #' if (interactive()) {
-#'   output$plot <- shiny::renderPlot({
-#'     th <- shad_current_theme()
-#'     plot(1:10, col = shad_chart_colors(1, th$preset, th$dark))
-#'   })
+#'   ui <- page_shad(
+#'     shad_select("preset", "Theme", selected = "slate",
+#'                 choices = c("slate", "blue", "rose")),
+#'     shiny::plotOutput("plot")
+#'   )
+#'   server <- function(input, output, session) {
+#'     shiny::observe(update_shad_theme(preset = input$preset))
+#'     output$plot <- shiny::renderPlot({
+#'       th <- shad_current_theme()
+#'       plot(1:10, pch = 19, col = shad_chart_colors(1, th$preset, th$dark))
+#'     }, bg = "transparent")
+#'   }
+#'   shiny::shinyApp(ui, server)
 #' }
 #' @export
 shad_current_theme <- function(session = shiny::getDefaultReactiveDomain()) {
@@ -114,6 +123,12 @@ shad_scale_fill_shad <- function(preset = NULL, dark = FALSE, ...) {
 #' @param dark If `TRUE`, use dark-mode colors.
 #' @returns The modified plotly object.
 #' @family shadshiny theming
+#' @examples
+#' if (requireNamespace("plotly", quietly = TRUE)) {
+#'   p <- plotly::plot_ly(mtcars, x = ~wt, y = ~mpg,
+#'                        type = "scatter", mode = "markers")
+#'   p <- shad_theme_plotly(p, preset = "green", dark = TRUE)
+#' }
 #' @export
 shad_theme_plotly <- function(p, preset = NULL, dark = FALSE) {
   if (!requireNamespace("plotly", quietly = TRUE)) {
@@ -145,6 +160,12 @@ shad_theme_plotly <- function(p, preset = NULL, dark = FALSE) {
 #' @param dark If `TRUE`, use dark-mode colors.
 #' @returns The modified echarts4r object.
 #' @family shadshiny theming
+#' @examples
+#' if (requireNamespace("echarts4r", quietly = TRUE)) {
+#'   chart <- echarts4r::e_charts(mtcars, wt)
+#'   chart <- echarts4r::e_scatter(chart, mpg)
+#'   chart <- shad_theme_echarts4r(chart, preset = "blue")
+#' }
 #' @export
 shad_theme_echarts4r <- function(e, preset = NULL, dark = FALSE) {
   if (!requireNamespace("echarts4r", quietly = TRUE)) {

@@ -21,6 +21,14 @@ labelled separator, the visible label is deliberately outside the child
 separator node so assistive technology does not treat the text as the
 separator's accessible name.
 }
+\examples{
+shad_fieldset(
+  "Sign in",
+  shad_input("email", "Email"),
+  shad_field_separator("or"),
+  shad_button("Continue with a passkey", variant = "outline")
+)
+}
 \seealso{
 Other shadshiny forms:
 \code{\link[=shad_field_group]{shad_field_group()}},
