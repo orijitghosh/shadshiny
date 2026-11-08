@@ -16,9 +16,14 @@ describe("compressed distribution budgets", () => {
     const result = measureBundlePerformance(repoRoot);
 
     expect(result.ok, result.violations.join("\n")).toBe(true);
-    expect(result.assets.css.gzipBytes).toBeLessThanOrEqual(22 * 1024);
+    // Budgets as decided for 0.4.0: CSS rose from 22 to 23 KiB (and the
+    // combined from 64 to 65 KiB) to ship five more full-ramp palettes.
+    expect(bundlePerformanceBudgets.assets.css.gzipBytes).toBe(23 * 1024);
+    expect(bundlePerformanceBudgets.assets.javascript.gzipBytes).toBe(42 * 1024);
+    expect(bundlePerformanceBudgets.combinedGzipBytes).toBe(65 * 1024);
+    expect(result.assets.css.gzipBytes).toBeLessThanOrEqual(23 * 1024);
     expect(result.assets.javascript.gzipBytes).toBeLessThanOrEqual(42 * 1024);
-    expect(result.combinedGzipBytes).toBeLessThanOrEqual(64 * 1024);
+    expect(result.combinedGzipBytes).toBeLessThanOrEqual(65 * 1024);
     expect(result.assets.css.brotliBytes).toBeGreaterThan(0);
     expect(result.assets.javascript.brotliBytes).toBeGreaterThan(0);
   });
@@ -36,17 +41,17 @@ describe("compressed distribution budgets", () => {
   test("an over-budget asset reports the asset and exact excess", () => {
     const result = evaluateBundleBudgets(
       {
-        css: { rawBytes: 30_000, gzipBytes: 23 * 1024, brotliBytes: 18_000 },
+        css: { rawBytes: 30_000, gzipBytes: 24 * 1024, brotliBytes: 18_000 },
         javascript: { rawBytes: 1_000, gzipBytes: 1_000, brotliBytes: 900 },
       },
       bundlePerformanceBudgets,
     );
 
     expect(result.ok).toBe(false);
-    expect(result.assets.css.gzipBytes).toBe(23 * 1024);
-    expect(result.combinedGzipBytes).toBe(23 * 1024 + 1_000);
+    expect(result.assets.css.gzipBytes).toBe(24 * 1024);
+    expect(result.combinedGzipBytes).toBe(24 * 1024 + 1_000);
     expect(result.violations).toEqual([
-      "CSS gzip 23.00 KiB exceeds its 22.00 KiB budget by 1.00 KiB",
+      "CSS gzip 24.00 KiB exceeds its 23.00 KiB budget by 1.00 KiB",
     ]);
   });
 });

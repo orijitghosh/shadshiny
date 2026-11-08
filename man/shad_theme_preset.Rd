@@ -7,8 +7,9 @@
 shad_theme_preset(preset, ...)
 }
 \arguments{
-\item{preset}{One of \code{"slate"}, \code{"stone"}, \code{"blue"}, \code{"green"}, \code{"rose"},
-\code{"violet"}, \code{"orange"}.}
+\item{preset}{One of the full neutral ramps \code{"slate"}, \code{"stone"}, \code{"zinc"},
+\code{"mauve"}, \code{"olive"}, \code{"mist"}, \code{"taupe"}, or the accents \code{"blue"},
+\code{"green"}, \code{"rose"}, \code{"violet"}, \code{"orange"}.}
 
 \item{...}{UI children (and optional named attributes).}
 }

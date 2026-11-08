@@ -26,7 +26,7 @@ pak::pak("orijitghosh/shadshiny")
 
 Every app starts with `page_shad()`. It attaches the shadshiny asset bundle,
 establishes the theme scope, and otherwise behaves like a Shiny page. Pass a
-`theme_preset` to choose one of the seven palettes.
+`theme_preset` to choose one of the twelve palettes.
 
 ```{r}
 library(shiny)

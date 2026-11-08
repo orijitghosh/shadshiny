@@ -4,7 +4,7 @@
 All paths relative to `inst/assets/`. Every file is complete and self-parsable; component dirs follow `<name>/<name>.css|.js|.html` + `README.md` (JS omitted for CSS-only components).
 
 ## tokens/
-- `shad-tokens.css` — all `--shad-*` custom properties: OKLCH color tokens (light + dark via `.dark` AND `[data-bs-theme="dark"]`), radius/type/spacing/shadow/motion/focus tokens, 7 theme presets (`slate`/`stone` full neutral ramps; `blue`/`green`/`rose`/`violet`/`orange` accent overrides) via `[data-shad-theme]`.
+- `shad-tokens.css` — all `--shad-*` custom properties: OKLCH color tokens (light + dark via `.dark` AND `[data-bs-theme="dark"]`), radius/type/spacing/shadow/motion/focus tokens, 12 theme presets (`slate`/`stone`/`zinc`/`mauve`/`olive`/`mist`/`taupe` full neutral ramps; `blue`/`green`/`rose`/`violet`/`orange` accent overrides) via `[data-shad-theme]`.
 
 ## core/
 - `shad-base.css` — `:where()`-scoped reset-lite (shad-classed elements only), icon sizing, `.shad-scope` canvas, `.shad-focusable` ring recipe, `.shad-sr-only`, typography utilities (`.shad-h1…h4/p/lead/large/small/muted/blockquote/code/kbd/list`).

@@ -7,9 +7,9 @@
 shad_tokens(preset = NULL, dark = FALSE, overrides = NULL)
 }
 \arguments{
-\item{preset}{One of the seven presets (\code{"slate"}, \code{"stone"}, \code{"blue"},
-\code{"green"}, \code{"rose"}, \code{"violet"}, \code{"orange"}), or \code{NULL} for the base (zinc)
-theme.}
+\item{preset}{One of the twelve presets (\code{"slate"}, \code{"stone"}, \code{"zinc"},
+\code{"mauve"}, \code{"olive"}, \code{"mist"}, \code{"taupe"}, \code{"blue"}, \code{"green"}, \code{"rose"},
+\code{"violet"}, \code{"orange"}), or \code{NULL} for the base (neutral) theme.}
 
 \item{dark}{If \code{TRUE}, return dark-mode values.}
 

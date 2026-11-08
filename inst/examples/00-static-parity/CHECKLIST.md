@@ -18,8 +18,9 @@ Compare the two windows and tick each row. Note any pixel/behaviour drift.
 
 - [ ] Light mode: surfaces, borders, and text tokens match.
 - [ ] Dark mode toggle recolours every component (no light-mode leaks).
-- [ ] Each preset — slate, stone, blue, green, rose, violet, orange — shifts the
-      accent consistently across buttons, switches, sliders, and focus rings.
+- [ ] Each preset — slate, stone, zinc, mauve, olive, mist, taupe, blue, green,
+      rose, violet, orange — shifts the accent consistently across buttons,
+      switches, sliders, and focus rings.
 - [ ] Focus-visible rings use `--shad-ring` and are keyboard-reachable.
 
 ## Overlays (one of each)

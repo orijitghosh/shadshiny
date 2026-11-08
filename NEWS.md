@@ -1,5 +1,17 @@
 # shadshiny 0.3.0.9000 (development version)
 
+* Five more full-ramp colour presets from shadcn/ui: `"zinc"`, `"mauve"`,
+  `"olive"`, `"mist"` and `"taupe"`. Like `"slate"` and `"stone"`, each one
+  recolours every surface, border and text token, in light and dark mode, and
+  tunes the chart grid and labels to match. Use them with
+  `page_shad(theme_preset=)`, `shad_theme_preset()`, `update_shad_theme()`
+  and `shad_tokens()`. Muted text is darkened in light mode, as in the other
+  presets, so that it keeps a 4.5:1 contrast. Tests now check that the CSS and
+  `shad-tokens.json` agree for every preset, and that the text in each
+  full-ramp preset stays at 4.5:1 on its surfaces. The bundle's gzip budget
+  for the CSS rises from 22 KiB to 23 KiB, and for CSS and JavaScript
+  together from 64 KiB to 65 KiB.
+
 * Live integrations with external chat stream providers, such as streaming an
   `ellmer` chat, are experimental, and now say so wherever they are shown: the
   README, the chat article, the `shad_chat_server()` and `shad_run_example()`

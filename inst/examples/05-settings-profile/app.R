@@ -25,8 +25,10 @@ zones_flat <- c("New York" = "America/New_York", "Sao Paulo" = "America/Sao_Paul
   "Tokyo" = "Asia/Tokyo", "Kolkata" = "Asia/Kolkata")  # flat: for combobox
 datefmts <- c("2026-07-12" = "iso", "07/12/2026" = "us", "12.07.2026" = "eu")
 presets  <- c("Default" = "default", "Slate" = "slate", "Stone" = "stone",
-              "Blue" = "blue", "Green" = "green", "Rose" = "rose",
-              "Violet" = "violet", "Orange" = "orange")
+              "Zinc" = "zinc", "Mauve" = "mauve", "Olive" = "olive",
+              "Mist" = "mist", "Taupe" = "taupe", "Blue" = "blue",
+              "Green" = "green", "Rose" = "rose", "Violet" = "violet",
+              "Orange" = "orange")
 
 sessions <- data.frame(
   id     = c("s1", "s2", "s3"),

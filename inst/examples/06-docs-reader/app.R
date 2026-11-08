@@ -58,7 +58,7 @@ page_intro <- function() tagList(
   shad_h3("Why?"),
   shad_list(
     tags$li("Drop into any existing Shiny or bslib app."),
-    tags$li("Theme with OKLCH tokens and seven presets."),
+    tags$li("Theme with OKLCH tokens and twelve presets."),
     tags$li("Full dark-mode support out of the box.")))
 
 page_install <- function() tagList(

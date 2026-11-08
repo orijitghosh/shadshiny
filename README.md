@@ -40,7 +40,7 @@ bindings.
   tool, attachment, and status events without an AI SDK or network call.
 - **Coexists with Bootstrap 5 / bslib.** Dark mode keys off the same signals
   `bslib::input_dark_mode()` uses, so theme sync needs no glue.
-- **OKLCH token theming.** Seven presets out of the box, switchable at runtime,
+- **OKLCH token theming.** Twelve presets out of the box, switchable at runtime,
   plus custom palettes via `shad_theme()` and the shadcn theme registry.
 
 > shadshiny is an independent reimplementation. It ships no shadcn/ui or Radix
@@ -580,7 +580,9 @@ Colours are OKLCH `--shad-*` custom properties, so never hard-code hex. Pick a
 preset at page level or swap it live:
 
 ```r
-page_shad(theme_preset = "green")            # slate stone blue green rose violet orange
+page_shad(theme_preset = "green")
+# neutral ramps: slate stone zinc mauve olive mist taupe
+# accents:       blue green rose violet orange
 
 # server-side, e.g. from a shad_select + shad_switch toolbar
 update_shad_theme(preset = input$preset, dark = input$dark)

@@ -68,8 +68,10 @@ ui <- page_shad(
     tags$div(style = "flex:1"),
     tags$div(style = "width:12rem",
       shad_select("preset", choices = c("Default" = "default", "Slate" = "slate",
-        "Stone" = "stone", "Blue" = "blue", "Green" = "green", "Rose" = "rose",
-        "Violet" = "violet", "Orange" = "orange"), selected = "default",
+        "Stone" = "stone", "Zinc" = "zinc", "Mauve" = "mauve", "Olive" = "olive",
+        "Mist" = "mist", "Taupe" = "taupe", "Blue" = "blue", "Green" = "green",
+        "Rose" = "rose", "Violet" = "violet", "Orange" = "orange"),
+        selected = "default",
         placeholder = "Theme preset")),
     shad_switch("dark", "Dark")
   ),

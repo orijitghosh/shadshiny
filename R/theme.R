@@ -51,9 +51,9 @@
 #' available for custom plotting. Names are the token keys without the `--shad-`
 #' prefix (e.g. `primary`, `chart-1`, `chart-grid`).
 #'
-#' @param preset One of the seven presets (`"slate"`, `"stone"`, `"blue"`,
-#'   `"green"`, `"rose"`, `"violet"`, `"orange"`), or `NULL` for the base (zinc)
-#'   theme.
+#' @param preset One of the twelve presets (`"slate"`, `"stone"`, `"zinc"`,
+#'   `"mauve"`, `"olive"`, `"mist"`, `"taupe"`, `"blue"`, `"green"`, `"rose"`,
+#'   `"violet"`, `"orange"`), or `NULL` for the base (neutral) theme.
 #' @param dark If `TRUE`, return dark-mode values.
 #' @param overrides Optional named list of token overrides (without `--shad-`),
 #'   e.g. from a [shad_theme()] object, applied on top.

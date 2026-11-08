@@ -18,9 +18,11 @@ page_shad(
 
 \item{title}{Page title (browser tab).}
 
-\item{theme_preset}{One of \code{NULL} (default zinc), \code{"slate"}, \code{"stone"},
-\code{"blue"}, \code{"green"}, \code{"rose"}, \code{"violet"}, \code{"orange"}. Sets
-\code{data-shad-theme} on the scope container.}
+\item{theme_preset}{\code{NULL} (the default neutral theme) or one of the colour
+presets: the full neutral ramps \code{"slate"}, \code{"stone"}, \code{"zinc"}, \code{"mauve"},
+\code{"olive"}, \code{"mist"}, \code{"taupe"}, or the accents \code{"blue"}, \code{"green"},
+\code{"rose"}, \code{"violet"}, \code{"orange"}. Sets \code{data-shad-theme} on the scope
+container.}
 
 \item{dark}{\code{NULL} to follow bslib/OS, \code{TRUE} to force dark, \code{FALSE} to
 force light.}

@@ -101,7 +101,8 @@ test_that("shad_tokens merges preset overrides", {
 })
 
 test_that("all theme presets resolve through page and token APIs", {
-  presets <- c("slate", "stone", "blue", "green", "rose", "violet", "orange")
+  presets <- c("slate", "stone", "zinc", "mauve", "olive", "mist", "taupe",
+               "blue", "green", "rose", "violet", "orange")
 
   for (preset in presets) {
     expect_match(

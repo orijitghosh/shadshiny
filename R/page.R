@@ -1,6 +1,7 @@
 # Page + theming --------------------------------------------------------------
 
-.shad_presets <- c("slate", "stone", "blue", "green", "rose", "violet", "orange")
+.shad_presets <- c("slate", "stone", "zinc", "mauve", "olive", "mist", "taupe",
+                   "blue", "green", "rose", "violet", "orange")
 
 #' A shadshiny page
 #'
@@ -12,9 +13,11 @@
 #'
 #' @param ... UI elements, or named HTML attributes for the scope container.
 #' @param title Page title (browser tab).
-#' @param theme_preset One of `NULL` (default zinc), `"slate"`, `"stone"`,
-#'   `"blue"`, `"green"`, `"rose"`, `"violet"`, `"orange"`. Sets
-#'   `data-shad-theme` on the scope container.
+#' @param theme_preset `NULL` (the default neutral theme) or one of the colour
+#'   presets: the full neutral ramps `"slate"`, `"stone"`, `"zinc"`, `"mauve"`,
+#'   `"olive"`, `"mist"`, `"taupe"`, or the accents `"blue"`, `"green"`,
+#'   `"rose"`, `"violet"`, `"orange"`. Sets `data-shad-theme` on the scope
+#'   container.
 #' @param dark `NULL` to follow bslib/OS, `TRUE` to force dark, `FALSE` to
 #'   force light.
 #' @param theme An optional custom [shad_theme()] applied page-wide (layered over
@@ -58,8 +61,9 @@ page_shad <- function(..., title = NULL, theme_preset = NULL, dark = NULL,
 #' Applies a shadshiny colour preset to a subtree via `data-shad-theme`. Nest
 #' freely; the nearest ancestor wins.
 #'
-#' @param preset One of `"slate"`, `"stone"`, `"blue"`, `"green"`, `"rose"`,
-#'   `"violet"`, `"orange"`.
+#' @param preset One of the full neutral ramps `"slate"`, `"stone"`, `"zinc"`,
+#'   `"mauve"`, `"olive"`, `"mist"`, `"taupe"`, or the accents `"blue"`,
+#'   `"green"`, `"rose"`, `"violet"`, `"orange"`.
 #' @param ... UI children (and optional named attributes).
 #' @returns A `<div>` tag carrying `data-shad-theme`.
 #' @family shadshiny page & theming

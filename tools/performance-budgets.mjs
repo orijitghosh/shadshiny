@@ -13,7 +13,7 @@ export const bundlePerformanceBudgets = Object.freeze({
     css: Object.freeze({
       label: "CSS",
       path: "inst/assets/dist/shadshiny.min.css",
-      gzipBytes: 22 * kibibyte,
+      gzipBytes: 23 * kibibyte,
     }),
     javascript: Object.freeze({
       label: "JavaScript",
@@ -21,7 +21,7 @@ export const bundlePerformanceBudgets = Object.freeze({
       gzipBytes: 42 * kibibyte,
     }),
   }),
-  combinedGzipBytes: 64 * kibibyte,
+  combinedGzipBytes: 65 * kibibyte,
 });
 
 // Each timing gate keeps 20 samples after its warmups, so p95 is the
