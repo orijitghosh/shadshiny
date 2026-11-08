@@ -1,6 +1,6 @@
 /* FILE: inst/assets/shiny/shadshiny-shiny.js */
 /* ==========================================================================
-   shadshiny — Shiny input bindings + custom message handlers
+   shadshiny – Shiny input bindings + custom message handlers
    --------------------------------------------------------------------------
    Loads LAST (after core/shad-runtime.js and every component JS). Builds one
    generic InputBinding per stateful component on top of the uniform contract:
@@ -303,7 +303,7 @@
 
   /* command: forward every activation to `input$<id>_event` as an event.
      input$<id> holds the selected value, and Shiny drops a repeat of the same
-     value — fine for a filter, wrong for navigation, where picking "Settings"
+     value – fine for a filter, wrong for navigation, where picking "Settings"
      twice has to run twice. Delegated so palettes inserted later work too. */
   document.addEventListener("shad:change", function (ev) {
     var root = ev.target;

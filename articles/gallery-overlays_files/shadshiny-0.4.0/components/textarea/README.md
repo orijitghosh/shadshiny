@@ -2,7 +2,7 @@
 # textarea (Tier 2)
 
 ## Anatomy
-`textarea.shad-textarea[data-shad="textarea"][data-autosize]` — `data-shad` only needed for autosize/JS API.
+`textarea.shad-textarea[data-shad="textarea"][data-autosize]` – `data-shad` only needed for autosize/JS API.
 
 ## Data-attribute API
 | Attribute | Effect |

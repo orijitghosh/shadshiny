@@ -2,7 +2,7 @@
 
 shadshiny is a port of the [shadcn/ui](https://ui.shadcn.com) design
 system to Shiny. Components are plain `htmltools` tags backed by one
-bundled asset dependency — there is no npm step and no React. Bound
+bundled asset dependency – there is no npm step and no React. Bound
 components behave like ordinary Shiny inputs.
 
 ## Install
@@ -97,7 +97,7 @@ shinyApp(ui, server)
 ## Reading and updating values
 
 - **Read:** `input$email`, `input$plan`, `input$tos`. Value shapes match
-  what the component holds — a string, a logical, a vector for
+  what the component holds – a string, a logical, a vector for
   multi-selects.
 - **Update:** each valued component has an `update_shad_*()` twin
   ([`update_shad_select()`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md),
@@ -130,7 +130,7 @@ A dialog can also be built in the server and shown with
 [`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md),
 the way
 [`shiny::showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html)
-works — useful when its content depends on what the user just did.
+works – useful when its content depends on what the user just did.
 
 ## Laying out a page
 
@@ -159,17 +159,17 @@ and
 [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
 replace
 [`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
-and assemble the shell — bar, navigation and scrolling main region — in
+and assemble the shell – bar, navigation and scrolling main region – in
 one call.
 
 ## Where to next
 
 - [`vignette("theming")`](https://orijitghosh.github.io/shadshiny/articles/theming.md)
-  — the token system, presets, and dark mode.
+  – the token system, presets, and dark mode.
 - [`vignette("layout")`](https://orijitghosh.github.io/shadshiny/articles/layout.md)
-  — containers, grids, and the page shells.
+  – containers, grids, and the page shells.
 - [`vignette("overlays-and-server")`](https://orijitghosh.github.io/shadshiny/articles/overlays-and-server.md)
-  — dialogs, confirm flows, and toasts.
+  – dialogs, confirm flows, and toasts.
 - [`vignette("migrating-inputs")`](https://orijitghosh.github.io/shadshiny/articles/migrating-inputs.md)
-  — moving from base Shiny inputs.
-- `shad_run_example("kitchen-sink")` — a live tour of every component.
+  – moving from base Shiny inputs.
+- `shad_run_example("kitchen-sink")` – a live tour of every component.

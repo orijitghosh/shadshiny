@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>shadshiny — dropzone</title>
+<title>shadshiny – dropzone</title>
 <link rel="stylesheet" href="../../tokens/shad-tokens.css">
 <link rel="stylesheet" href="../../core/shad-base.css">
 <link rel="stylesheet" href="../attachment/attachment.css">
@@ -26,7 +26,7 @@
 </div>
 
 <div class="demo">
-  <h2>Single file, any type — simulated upload lifecycle</h2>
+  <h2>Single file, any type – simulated upload lifecycle</h2>
   <div id="dz2" data-shad="dropzone" class="shad-dropzone">
     <div class="shad-dropzone__zone" tabindex="0" role="button" aria-label="Upload a file">
       <span class="shad-dropzone__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></span>
@@ -56,7 +56,7 @@ shad.autoInit();
 document.getElementById("dz1").addEventListener("shad:files", function (e) {
   console.log("accepted:", e.detail.files, "rejected:", e.detail.rejected);
 });
-// dz2: fake an upload — uploading → processing → done (host normally does this)
+// dz2: fake an upload – uploading → processing → done (host normally does this)
 var dz2El = document.getElementById("dz2");
 var dz2 = shad.get(dz2El);
 dz2El.addEventListener("shad:files", function (e) {

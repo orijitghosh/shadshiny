@@ -1,7 +1,7 @@
 <!-- FILE: inst/assets/components/carousel/README.md -->
 # carousel (Tier 3)
 
-Scroll-snap based — dragging/swiping is native scrolling; JS adds paging buttons, dots, index tracking.
+Scroll-snap based – dragging/swiping is native scrolling; JS adds paging buttons, dots, index tracking.
 
 ## Anatomy
 ```

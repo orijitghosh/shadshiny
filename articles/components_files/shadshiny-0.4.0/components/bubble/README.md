@@ -22,10 +22,10 @@ div.shad-bubble-group[.shad-bubble-group--start|--end]        (optional wrapper)
 | `data-align="top\|bottom"` | `__reactions` | block edge the chips overhang (default bottom) |
 
 ## Methods / Events
-None — display-only. R wrapper: `shad_bubble(..., variant = "default", align = c("start", "end"), reactions = NULL)` + `shad_bubble_group(..., align = "start")`.
+None – display-only. R wrapper: `shad_bubble(..., variant = "default", align = c("start", "end"), reactions = NULL)` + `shad_bubble_group(..., align = "start")`.
 
 ## Keyboard
-None — static content. Interactive reactions should be rendered as `<button class="shad-bubble__reaction">`.
+None – static content. Interactive reactions should be rendered as `<button class="shad-bubble__reaction">`.
 
 ## A11y
 - Alignment is visual; reading order stays DOM order. Convey the sender in text (see `message`), not by position alone.

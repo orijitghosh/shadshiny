@@ -17,7 +17,7 @@ pak::pak("orijitghosh/shadshiny")
 remotes::install_github("orijitghosh/shadshiny")
 ```
 
-There is **no build step** — no npm, no Node, no bundler. All CSS and
+There is **no build step** – no npm, no Node, no bundler. All CSS and
 JavaScript ship precompiled inside the package as a single
 `htmlDependency()`.
 
@@ -94,7 +94,7 @@ bslib app rather than replace it:
   collide with Bootstrap variables.
 - Dark mode listens for `[data-bs-theme="dark"]`, which is exactly what
   [`bslib::input_dark_mode()`](https://rstudio.github.io/bslib/reference/input_dark_mode.html)
-  toggles — so one switch drives both systems.
+  toggles – so one switch drives both systems.
 
 That means you can drop shadshiny components into an existing dashboard
 incrementally. If you’re already inside a bslib page and don’t want the
@@ -134,12 +134,12 @@ with an unknown name prints the available example directories.
 
 - [Get
   started](https://orijitghosh.github.io/shadshiny/articles/shadshiny.md)
-  — a fuller tour of reading and updating values.
+  – a fuller tour of reading and updating values.
 - [Component
   gallery](https://orijitghosh.github.io/shadshiny/articles/components.html)
-  — every component, live.
+  – every component, live.
 - [Theming](https://orijitghosh.github.io/shadshiny/articles/theming.md)
-  — presets, tokens, and dark mode.
+  – presets, tokens, and dark mode.
 - [Forms &
   validation](https://orijitghosh.github.io/shadshiny/articles/forms.md)
-  — build and validate real forms. \`\`\`
+  – build and validate real forms. \`\`\`

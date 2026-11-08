@@ -93,7 +93,7 @@
     
 <p>shadshiny’s look is entirely token-driven. Every colour, radius, and
 surface is a CSS custom property, so theming means overriding properties
-— never editing component CSS or hard-coding hex values.</p>
+– never editing component CSS or hard-coding hex values.</p>
 <div class="section level2">
 <h2 id="the-token-system">The token system<a class="anchor" aria-label="anchor" href="#the-token-system"></a>
 </h2>
@@ -102,7 +102,7 @@ the page root, for example <code>--shad-background</code>,
 <code>--shad-foreground</code>, <code>--shad-primary</code>,
 <code>--shad-muted</code>, <code>--shad-border</code>,
 <code>--shad-ring</code>. Components reference these tokens exclusively.
-To restyle, set the token — not the element.</p>
+To restyle, set the token – not the element.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">/* your own CSS, included via page_shad(..., tags$head(...)) or a www/ file */</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="in">:root</span> {</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="va">--shad-primary</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">0.55</span> <span class="dv">0.22</span> <span class="dv">265</span><span class="fu">)</span><span class="op">;</span></span>
@@ -124,7 +124,7 @@ at the page level:</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/orijitghosh/shadshiny" class="external-link">shadshiny</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/page_shad.html">page_shad</a></span><span class="op">(</span>theme_preset <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span></code></pre></div>
 <p>Presets are applied through a <code>data-shad-theme</code> attribute
-on the page root, so they compose with — rather than replace — your
+on the page root, so they compose with – rather than replace – your
 custom token overrides.</p>
 <p>Scope a preset to one subtree when the rest of the page should keep
 its current palette:</p>
@@ -176,7 +176,7 @@ data-table root (for example,
 <h2 id="changing-theme-at-runtime">Changing theme at runtime<a class="anchor" aria-label="anchor" href="#changing-theme-at-runtime"></a>
 </h2>
 <p><code><a href="../reference/update_shad_theme.html">update_shad_theme()</a></code> swaps the preset and/or dark state
-live from the server — ideal for a settings toolbar built from a
+live from the server – ideal for a settings toolbar built from a
 <code><a href="../reference/shad_select.html">shad_select()</a></code> and a <code><a href="../reference/shad_switch.html">shad_switch()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/page_shad.html">page_shad</a></span><span class="op">(</span></span>
@@ -212,7 +212,7 @@ care about, leave the rest to the base.</p>
 <span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/page_shad.html">page_shad</a></span><span class="op">(</span>theme <span class="op">=</span> <span class="va">brand</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
 <p>Colours may be hex (<code>"#7c3aed"</code>), <code><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb()</a></code>, a
-named CSS colour, or OKLCH (<code>"oklch(0.55 0.24 285)"</code>) —
+named CSS colour, or OKLCH (<code>"oklch(0.55 0.24 285)"</code>) –
 everything is normalised on the way in. <code>dark =</code> takes a list
 of the same token names, applied only under <code>.dark</code>; tokens
 you don’t name there inherit the light value, which is almost never what
@@ -222,8 +222,8 @@ you want for <code>background</code> and <code>foreground</code>.</p>
 <code>muted</code>, <code>accent</code>, <code>destructive</code>,
 <code>border</code>, <code>input</code>, <code>ring</code>,
 <code>radius</code>, <code>font_sans</code>, <code>font_mono</code>, and
-their <code>*_foreground</code> pairs). Anything else — including the
-<code>--shad-sidebar-*</code> family — goes through <code>...</code>
+their <code>*_foreground</code> pairs). Anything else – including the
+<code>--shad-sidebar-*</code> family – goes through <code>...</code>
 with the <code>--shad-</code> prefix dropped:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_theme.html">shad_theme</a></span><span class="op">(</span>primary <span class="op">=</span> <span class="st">"#7c3aed"</span>, `sidebar-background` <span class="op">=</span> <span class="st">"oklch(0.98 0.01 285)"</span><span class="op">)</span></span></code></pre></div>
@@ -270,7 +270,7 @@ name, and <code>theme = NA</code> clears back to the page’s own:</p>
 </h3>
 <p><code>shad_tokens(preset, dark)</code> returns the resolved token
 set, and <code>shad_chart_colors(n, preset, dark)</code> the chart ramp
-as hex — both useful when you need to hand a colour to something that
+as hex – both useful when you need to hand a colour to something that
 isn’t CSS, like a plot. See <code><a href="../articles/charts.html">vignette("charts")</a></code>.</p>
 </div>
 </div>

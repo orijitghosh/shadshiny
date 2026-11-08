@@ -1,7 +1,7 @@
 <!-- FILE: inst/assets/components/typography/README.md -->
 # typography (Tier 1, CSS-only)
 
-Rules live in `core/shad-base.css` (loaded everywhere); `typography.css` here is a documented stub — see its header.
+Rules live in `core/shad-base.css` (loaded everywhere); `typography.css` here is a documented stub – see its header.
 
 ## Classes
 | Class | Use |

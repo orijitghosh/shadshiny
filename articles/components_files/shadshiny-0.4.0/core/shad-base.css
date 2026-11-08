@@ -1,10 +1,10 @@
 /* FILE: inst/assets/core/shad-base.css */
 /* ==========================================================================
-   shadshiny — base layer
+   shadshiny – base layer
    --------------------------------------------------------------------------
    - Scoped reset-lite: applies ONLY to .shad-* classed elements, never bare
      element selectors (Bootstrap Reboot owns those).
-   - DECISION: no @layer (see shad-tokens.css header) — Bootstrap is unlayered
+   - DECISION: no @layer (see shad-tokens.css header) – Bootstrap is unlayered
      and unlayered beats layered. Everything here is class-scoped instead.
    - .shad-scope is an OPTIONAL wrapper (used by demos / non-bslib pages) that
      establishes bg/fg/font. Inside a bslib app you normally skip it and let

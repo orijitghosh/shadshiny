@@ -40,7 +40,7 @@ in-flight stream.
 
 `handler` is `function(user_text, history)` returning one of:
 
-- a character string — the complete reply;
+- a character string – the complete reply;
 
 - a function of no arguments returning the next chunk, or `NULL` when
   done (the simple streaming protocol);

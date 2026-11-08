@@ -6,7 +6,7 @@
 div.shad-toggle-group[.shad-toggle-group--outline][data-shad=toggle-group][data-type][role=group]
 └─ button.shad-toggle[data-value][data-state=on|off] × n
 ```
-Do NOT put `data-shad="toggle"` on items — the group owns them.
+Do NOT put `data-shad="toggle"` on items – the group owns them.
 
 ## Data-attribute API
 | Attribute | On | Values |

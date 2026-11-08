@@ -2,8 +2,8 @@
 
 A styled native HTML `<select>`. Unlike
 [`shad_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_select.md)
-(a custom listbox), this keeps full browser-native behaviour — mobile
-pickers, form participation, typeahead — and only bridges the value to
+(a custom listbox), this keeps full browser-native behaviour – mobile
+pickers, form participation, typeahead – and only bridges the value to
 Shiny. `input$<inputId>` is the selected option value (a string).
 
 ## Usage

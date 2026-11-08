@@ -1,6 +1,6 @@
 /* FILE: inst/assets/components/dropzone/dropzone.css */
-/* shadshiny — dropzone. Composes attachment/attachment.css for the file list
-   (load attachment.css first). No upload logic — host wires Shiny/FileReader. */
+/* shadshiny – dropzone. Composes attachment/attachment.css for the file list
+   (load attachment.css first). No upload logic – host wires Shiny/FileReader. */
 
 .shad-dropzone {
   display: flex;

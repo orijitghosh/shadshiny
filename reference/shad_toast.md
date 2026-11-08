@@ -90,7 +90,7 @@ The toast id (character), invisibly.
 ## Details
 
 Text is injected client-side via `textContent`; pass plain strings, not
-HTML. There is no R analogue of `shad.toast.promise()` — use the loading
+HTML. There is no R analogue of `shad.toast.promise()` – use the loading
 → `shad_toast_update()` flow instead.
 
 ## See also

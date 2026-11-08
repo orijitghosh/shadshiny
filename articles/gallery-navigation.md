@@ -49,12 +49,12 @@ Yes. It comes with sensible defaults you can theme.
 Is it animated?
 ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1hY2NvcmRpb25fX2NoZXZyb24iIHZpZXdib3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZD0ibTYgOSA2IDYgNi02IiAvPjwvc3ZnPg==)
 
-Yes — height transitions come for free.
+Yes – height transitions come for free.
 
 Code
 
 
-    shad_accordion("demo_acc", type = "single", collapsible = TRUE, value = "a1", shad_accordion_item("a1", "Is it accessible?", shad_p("Yes. It follows the WAI-ARIA disclosure pattern.")), shad_accordion_item("a2", "Is it styled?", shad_p("Yes. It comes with sensible defaults you can theme.")), shad_accordion_item("a3", "Is it animated?", shad_p("Yes — height transitions come for free.")))
+    shad_accordion("demo_acc", type = "single", collapsible = TRUE, value = "a1", shad_accordion_item("a1", "Is it accessible?", shad_p("Yes. It follows the WAI-ARIA disclosure pattern.")), shad_accordion_item("a2", "Is it styled?", shad_p("Yes. It comes with sensible defaults you can theme.")), shad_accordion_item("a3", "Is it animated?", shad_p("Yes – height transitions come for free.")))
 
 ## Collapsible
 
@@ -176,9 +176,9 @@ Code
 [`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
 and
 [`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
-cover page layout without hand-written CSS. Spacing takes a token step —
+cover page layout without hand-written CSS. Spacing takes a token step –
 `gap = 4` is `var(--shad-space-4)`, the same scale the components use
-internally — or any CSS length.
+internally – or any CSS length.
 
 `shad_grid(min_width = )` fits as many equal columns as will fit, with
 no breakpoints to maintain. **Resize the window** to watch this reflow:
@@ -204,7 +204,7 @@ Code
 
     shad_grid(shad_value_box("$45,231", "Revenue", delta = "+20.1%"), shad_value_box("2,350", "Subscribers", delta = "+180"), shad_value_box("573", "Active now"), min_width = "13rem")
 
-For an exact column count, pass `cols` — optionally per breakpoint
+For an exact column count, pass `cols` – optionally per breakpoint
 (`base`, `sm` 40rem, `md` 48rem, `lg` 64rem), where each falls back to
 the one below it. `shad_grid_item(span = )` spans cells, and `template`
 takes a raw track list:
@@ -221,7 +221,7 @@ Code
     shad_grid(shad_card(shad_card_content("1fr")), shad_card(shad_card_content("2fr")), shad_grid_item(shad_card(shad_card_content("full row")), span = "full"), template = "1fr 2fr")
 
 [`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
-is the one-dimensional version — a column by default, a row when asked,
+is the one-dimensional version – a column by default, a row when asked,
 with `align`, `justify`, `wrap` and `fill`:
 
 Save
@@ -274,12 +274,12 @@ that scrolls away is a sidebar with a drifting rail and footer.
 
 The full app shell: a collapsible sidebar with grouped, badged nav items
 and a main region. `input$id` reports `{collapsed, mobileOpen, active}`
-— observe `input$id$active` for the selected item.
+– observe `input$id$active` for the selected item.
 
 In a Shiny app you observe `input$demo_shell$active` and swap the main
 pane server-side. This static preview does the same thing client-side
 (listening for the sidebar’s `shad:change` event) so you can see
-navigation work — **click Home, Inbox, Search, Settings.**
+navigation work – **click Home, Inbox, Search, Settings.**
 
 ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwb2x5bGluZSBwb2ludHM9IjQgMTcgMTAgMTEgNCA1Ij48L3BvbHlsaW5lPjxsaW5lIHgxPSIxMiIgeDI9IjIwIiB5MT0iMTkiIHkyPSIxOSI+PC9saW5lPjwvc3ZnPg==)**Acme**
 

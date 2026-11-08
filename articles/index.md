@@ -39,43 +39,43 @@
 - [Gallery: display &
   typography](https://orijitghosh.github.io/shadshiny/articles/gallery-display.md):
 
-  Every Tier 1 display component — buttons, badges, avatars, cards,
-  alerts, tables, progress, and the typography set — rendered live with
+  Every Tier 1 display component – buttons, badges, avatars, cards,
+  alerts, tables, progress, and the typography set – rendered live with
   its source.
 
 - [Gallery: form
   inputs](https://orijitghosh.github.io/shadshiny/articles/gallery-inputs.md):
 
-  Tier 2 bound inputs — text, select, combobox, checkbox, switch, radio,
-  toggle, slider, OTP and date pickers — rendered live with their
+  Tier 2 bound inputs – text, select, combobox, checkbox, switch, radio,
+  toggle, slider, OTP and date pickers – rendered live with their
   source.
 
 - [Gallery: overlays &
   menus](https://orijitghosh.github.io/shadshiny/articles/gallery-overlays.md):
 
-  Tier 3 overlays — dialog, sheet, drawer, popover, tooltip, hover-card,
-  dropdown, context-menu, menubar and the command palette — live and
+  Tier 3 overlays – dialog, sheet, drawer, popover, tooltip, hover-card,
+  dropdown, context-menu, menubar and the command palette – live and
   clickable.
 
 - [Gallery: navigation &
   structure](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.md):
 
-  Tier 3 layout — tabs, accordion, collapsible, pagination, carousel,
+  Tier 3 layout – tabs, accordion, collapsible, pagination, carousel,
   scroll-area, resizable panels, the layout primitives and the sidebar
-  family — rendered live.
+  family – rendered live.
 
 - [Gallery: data, dashboards &
   flow](https://orijitghosh.github.io/shadshiny/articles/gallery-data.md):
 
-  The V2 kit — data table, value boxes, sparklines, donuts, chart
+  The V2 kit – data table, value boxes, sparklines, donuts, chart
   containers, timelines, stepper, tree, rating, number input and
-  dropzone — rendered live with their source.
+  dropzone – rendered live with their source.
 
 - [Gallery: chat & AI
   kit](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.md):
 
-  The streaming-transcript primitives — bubbles, messages, attachments,
-  markers and the stick-to-bottom scroller — rendered live with their
+  The streaming-transcript primitives – bubbles, messages, attachments,
+  markers and the stick-to-bottom scroller – rendered live with their
   source.
 
 - [Icons](https://orijitghosh.github.io/shadshiny/articles/icons.md):

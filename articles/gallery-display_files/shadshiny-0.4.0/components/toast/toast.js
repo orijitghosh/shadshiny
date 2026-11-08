@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/toast/toast.js */
-/* shadshiny — toast system (sonner-style), IMPERATIVE API (no data-shad).
+/* shadshiny – toast system (sonner-style), IMPERATIVE API (no data-shad).
    API:
      shad.toast(message | {title, description, variant, duration, action:{label,onClick}})
        -> id

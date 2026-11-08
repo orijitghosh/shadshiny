@@ -1,7 +1,7 @@
 <!-- FILE: inst/assets/components/dropdown-menu/README.md -->
 # dropdown-menu (Tier 3)
 
-Registers the **shared menu core** (`shad.__menuCore`) reused by context-menu and menubar — load this file (css+js) before those.
+Registers the **shared menu core** (`shad.__menuCore`) reused by context-menu and menubar – load this file (css+js) before those.
 
 ## Anatomy
 ```
@@ -27,7 +27,7 @@ Modifiers: `.shad-menu__item--destructive`. Disabled: `data-disabled` or `aria-d
 | `data-type` | item | `checkbox` \| `radio` (omit = plain) |
 | `data-state` | item | `checked`/`unchecked` (author sets initial; JS maintains + mirrors `aria-checked`) |
 | `data-group` | radio item | radio group key |
-| `data-highlighted` | item | runtime highlight (pointermove/arrows — **not** `:hover`) |
+| `data-highlighted` | item | runtime highlight (pointermove/arrows – **not** `:hover`) |
 | `data-shad-submenu` / `data-shad-submenu-trigger` | wrapper/item | nested submenu |
 
 ## Methods / Events

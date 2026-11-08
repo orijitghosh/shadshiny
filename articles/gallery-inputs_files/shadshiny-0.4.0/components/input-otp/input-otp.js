@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/input-otp/input-otp.js */
-/* shadshiny — input-otp behavior (input-otp library pattern).
+/* shadshiny – input-otp behavior (input-otp library pattern).
    One REAL <input> overlays the whole control (opacity 0); cells are a pure
    rendering of its value + caret position. Paste splits automatically;
    typing auto-advances (native, since it's one input).

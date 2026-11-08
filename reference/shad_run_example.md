@@ -49,8 +49,8 @@ shad_run_example(example = "kitchen-sink")
 
   `"06-docs-reader"`
 
-  :   documentation site: sidebar nav, ⌘K search, resizable article/TOC
-      split, rich typography and tabbed code examples.
+  :   documentation site: sidebar nav, Cmd+K search, resizable
+      article/TOC split, rich typography and tabbed code examples.
 
   `"07-data-explorer"`
 
@@ -66,8 +66,8 @@ shad_run_example(example = "kitchen-sink")
   `"09-app-shell"`
 
   :   [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
-      with the layout primitives, sparklines, a ⌘K palette that drives
-      navigation, and dialogs built in the server.
+      with the layout primitives, sparklines, a Cmd+K palette that
+      drives navigation, and dialogs built in the server.
 
   The numbered apps are real-world examples that together exercise the
   whole component library.

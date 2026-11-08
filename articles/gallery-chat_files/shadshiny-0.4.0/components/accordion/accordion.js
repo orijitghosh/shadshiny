@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/accordion/accordion.js */
-/* shadshiny — accordion behavior (APG accordion).
+/* shadshiny – accordion behavior (APG accordion).
    data-type="single" (default; data-collapsible allows closing the open one)
    or data-type="multiple". Height animation: measure scrollHeight into
    --shad-collapsible-height, run keyframes, then let Presence hide.

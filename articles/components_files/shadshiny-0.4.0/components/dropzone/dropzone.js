@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/dropzone/dropzone.js */
-/* shadshiny — dropzone behavior. NO upload — emits shad:files; the host
+/* shadshiny – dropzone behavior. NO upload – emits shad:files; the host
    (Shiny binding / FileReader) does the transfer and drives per-file state
    via setState(). File list rows compose attachment/ markup.
    Markup:

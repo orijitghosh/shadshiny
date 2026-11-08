@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/context-menu/context-menu.js */
-/* shadshiny — context-menu. Requires dropdown-menu.js (shad.__menuCore).
+/* shadshiny – context-menu. Requires dropdown-menu.js (shad.__menuCore).
    Opens at pointer coords via a virtual anchor rect; contextmenu event is
    prevented inside the zone. Same items/submenus/keyboard as dropdown-menu. */
 (function () {

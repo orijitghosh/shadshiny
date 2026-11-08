@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/textarea/textarea.js */
-/* shadshiny — textarea autosize behavior.
+/* shadshiny – textarea autosize behavior.
    Markup: <textarea class="shad-textarea" data-shad="textarea" data-autosize>
    JS fallback for browsers without field-sizing:content. */
 (function () {

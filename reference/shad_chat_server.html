@@ -98,7 +98,7 @@ in-flight stream.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>handler</code> is <code>function(user_text, history)</code> returning one of:</p><ul><li><p>a character string — the complete reply;</p></li>
+    <p><code>handler</code> is <code>function(user_text, history)</code> returning one of:</p><ul><li><p>a character string – the complete reply;</p></li>
 <li><p>a function of no arguments returning the next chunk, or <code>NULL</code> when
 done (the simple streaming protocol);</p></li>
 <li><p>a <span class="pkg">coro</span> generator (e.g. an <span class="pkg">ellmer</span> <code>chat$stream()</code>), drained

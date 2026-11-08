@@ -1,6 +1,6 @@
 /* FILE: inst/assets/components/alert-dialog/alert-dialog.css */
-/* shadshiny — alert-dialog. Reuses dialog.css classes entirely.
-   DECISION: no duplicate rules; this file only carries the one difference —
+/* shadshiny – alert-dialog. Reuses dialog.css classes entirely.
+   DECISION: no duplicate rules; this file only carries the one difference –
    alert dialogs have no top-right ✕ (destructive flows must be explicit).
    Load dialog/dialog.css alongside this file. */
 

@@ -16,8 +16,8 @@
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Gallery: data, dashboards &amp; flow">
-<meta name="description" content="The V2 kit — data table, value boxes, sparklines, donuts, chart containers, timelines, stepper, tree, rating, number input and dropzone — rendered live with their source.">
-<meta property="og:description" content="The V2 kit — data table, value boxes, sparklines, donuts, chart containers, timelines, stepper, tree, rating, number input and dropzone — rendered live with their source.">
+<meta name="description" content="The V2 kit – data table, value boxes, sparklines, donuts, chart containers, timelines, stepper, tree, rating, number input and dropzone – rendered live with their source.">
+<meta property="og:description" content="The V2 kit – data table, value boxes, sparklines, donuts, chart containers, timelines, stepper, tree, rating, number input and dropzone – rendered live with their source.">
 <meta property="og:image" content="https://orijitghosh.github.io/shadshiny/logo.svg">
 </head>
 <body>
@@ -96,8 +96,8 @@
     
 <p>The components on this page turn shadshiny from a component library
 into an application toolkit: a client-side data table, the dashboard
-shells, and the flow inputs. The previews are live — sort the table,
-drag the rating, hold the stepper — but with no Shiny server attached
+shells, and the flow inputs. The previews are live – sort the table,
+drag the rating, hold the stepper – but with no Shiny server attached
 they won’t echo values back.</p>
 <p>For the reactive side, see <a href="../articles/data-tables.html">Data tables</a>, <a href="../articles/charts.html">Dashboards &amp; charts</a>, and <a href="../articles/forms.html">Forms &amp; validation</a>.</p>
 <div class="section level2">
@@ -148,7 +148,7 @@ chronologically.</p>
 <p><code><a href="../reference/shad_value_box.html">shad_value_box()</a></code> is the KPI card.
 <code>delta_direction = "auto"</code> (the default) reads the sign off
 the <code>delta</code> string, so <code>"+12.5%"</code> is up and
-<code>"-3%"</code> is down — pass <code>delta_direction</code>
+<code>"-3%"</code> is down – pass <code>delta_direction</code>
 explicitly when the arrow shouldn’t follow the sign (a falling error
 rate is good news).</p>
 <div class="shad-demo">
@@ -212,7 +212,7 @@ $45,231
 </h2>
 <p><em>A shadshiny addition: no shadcn/ui counterpart.</em></p>
 <p><code><a href="../reference/shad_sparkline.html">shad_sparkline()</a></code> is a tiny inline chart with no axes, no
-labels, and no plotting stack — one SVG path (or a row of bars) that
+labels, and no plotting stack – one SVG path (or a row of bars) that
 stretches to fill its box. Every mark is painted with the theme’s chart
 tokens, so the light/dark switch at the top of this page restyles these
 in CSS, with no re-render.</p>
@@ -675,7 +675,7 @@ whose children arrive later via
 <p><code><a href="../reference/shad_dropzone.html">shad_dropzone()</a></code> bridges to a hidden
 <code><a href="https://rdrr.io/pkg/shiny/man/fileInput.html" class="external-link">fileInput()</a></code>, so <code>input$&lt;id&gt;</code> is the
 <strong>standard Shiny files data frame</strong> (<code>name</code>,
-<code>size</code>, <code>type</code>, <code>datapath</code>) — every
+<code>size</code>, <code>type</code>, <code>datapath</code>) – every
 <code>renderTable(input$files)</code> you already have keeps
 working.</p>
 <div class="shad-demo">
@@ -742,8 +742,8 @@ Browse...
 <p><em><code><a href="../reference/shad_form_summary.html">shad_form_summary()</a></code> is a shadshiny addition; the
 rest mirrors shadcn/ui’s Form messaging.</em></p>
 <p>The pieces <code><a href="../reference/shad_validator.html">shad_validator()</a></code> drives from the server. In
-an app you rarely place these by hand — the validator sets them for you
-— but they’re plain components.</p>
+an app you rarely place these by hand – the validator sets them for you
+– but they’re plain components.</p>
 <div class="shad-demo">
 <div class="shad-demo__stage shad-demo__stage--center shad-demo__stage--col">
 <div class="shad-form-message shad-form-message--success">
@@ -789,13 +789,13 @@ Please fix the errors below
 </h2>
 <ul>
 <li>
-<a href="../articles/data-tables.html">Data tables</a> — the full
+<a href="../articles/data-tables.html">Data tables</a> – the full
 table API.</li>
 <li>
-<a href="../articles/charts.html">Dashboards &amp; charts</a> — plot
+<a href="../articles/charts.html">Dashboards &amp; charts</a> – plot
 theming and the <code><a href="../reference/shad_current_theme.html">shad_current_theme()</a></code> reactive bridge.</li>
 <li>
-<a href="../articles/forms.html">Forms &amp; validation</a> — wiring
+<a href="../articles/forms.html">Forms &amp; validation</a> – wiring
 <code><a href="../reference/shad_validator.html">shad_validator()</a></code>.</li>
 <li>
 <code>shad_run_example("07-data-explorer")</code> and

@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/pagination/pagination.js */
-/* shadshiny — pagination behavior (optional; markup works without it).
+/* shadshiny – pagination behavior (optional; markup works without it).
    With data-shad="pagination" + data-pages="N" + data-page="i", JS renders
    the windowed page list (1 … i-1 i i+1 … N), maintains aria-current,
    wires prev/next, and reports page changes.

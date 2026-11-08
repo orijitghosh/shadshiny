@@ -1,5 +1,5 @@
 <!-- FILE: inst/assets/components/attachment/README.md -->
-# attachment (Tier 1, CSS-only — lifecycle via data-state)
+# attachment (Tier 1, CSS-only – lifecycle via data-state)
 
 ## Anatomy
 ```
@@ -30,13 +30,13 @@ div.shad-attachment-group                                     (optional scrollab
 | `data-state="done"` | resting (semantic hook only) |
 
 ## Methods / Events
-None — no JS binding; the server (or composer JS) flips `data-state`. R wrapper: `shad_attachment(title, description = NULL, media = NULL, actions = NULL, orientation = c("horizontal", "vertical"), size = NULL, state = "idle", href = NULL)` + `shad_attachment_group(...)`.
+None – no JS binding; the server (or composer JS) flips `data-state`. R wrapper: `shad_attachment(title, description = NULL, media = NULL, actions = NULL, orientation = c("horizontal", "vertical"), size = NULL, state = "idle", href = NULL)` + `shad_attachment_group(...)`.
 
 ## Keyboard
-`__trigger` and `__action` are native buttons — Tab/Enter/Space work natively. Actions sit above the trigger overlay (`z-index`), so both are reachable.
+`__trigger` and `__action` are native buttons – Tab/Enter/Space work natively. Actions sit above the trigger overlay (`z-index`), so both are reachable.
 
 ## A11y
 - `__trigger` needs an `aria-label` naming the file ("Open report.pdf") since its text is empty.
 - `__action` buttons need `aria-label` ("Remove attachment").
 - Media is decorative when the title names the file: `aria-hidden="true"`.
-- Announce upload progress separately (e.g. `role="status"` text updated by the server) — the shimmer is visual only.
+- Announce upload progress separately (e.g. `role="status"` text updated by the server) – the shimmer is visual only.

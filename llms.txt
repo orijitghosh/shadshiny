@@ -790,7 +790,7 @@ additions, with no shadcn/ui counterpart.
 - [`shad_page_navbar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_navbar.md)
   : Page shell with a tabbed navbar
 
-## Tier 1 — display & typography
+## Tier 1 – display & typography
 
 Non-interactive display components and typographic helpers.
 
@@ -870,7 +870,7 @@ Non-interactive display components and typographic helpers.
   [`shad_button_group_text()`](https://orijitghosh.github.io/shadshiny/reference/shad_button_group.md)
   : Button group
 
-## Tier 2 — form inputs
+## Tier 2 – form inputs
 
 Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
 The field composition family
@@ -926,7 +926,7 @@ and its parts) is experimental.
 
 ## Chat & AI kit
 
-Streaming transcript primitives — bubbles, messages, attachments,
+Streaming transcript primitives – bubbles, messages, attachments,
 markers, and a stick-to-bottom scroller.
 
 - [`shad_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md)
@@ -947,7 +947,7 @@ markers, and a stick-to-bottom scroller.
   [`shad_message_scroller_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller.md)
   : Message scroller
 
-## Tier 3 — overlays
+## Tier 3 – overlays
 
 Dialogs, popovers, menus, command palette, and toasts (UI side).
 
@@ -1004,7 +1004,7 @@ Dialogs, popovers, menus, command palette, and toasts (UI side).
   [`shad_command_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
   : Command palette for app navigation
 
-## Tier 3 — navigation & structure
+## Tier 3 – navigation & structure
 
 Tabs, accordion, pagination, carousel, and the sidebar layout family.
 
@@ -1037,7 +1037,7 @@ Tabs, accordion, pagination, carousel, and the sidebar layout family.
   [`shad_sidebar_trigger()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
   : Sidebar layout
 
-## Server — updates
+## Server – updates
 
 Update bound component values from the server. Shiny-side API, so there
 is nothing in shadcn/ui to compare it against.
@@ -1083,7 +1083,7 @@ is experimental.
 - [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
   : Replace a command palette's items from the server
 
-## Server — overlays & toast
+## Server – overlays & toast
 
 Open/close overlays and raise toast notifications from the server.
 Shiny-side API, so there is nothing in shadcn/ui to compare it against.
@@ -1319,43 +1319,43 @@ Icons and the asset dependency.
 - [Gallery: display &
   typography](https://orijitghosh.github.io/shadshiny/articles/gallery-display.md):
 
-  Every Tier 1 display component — buttons, badges, avatars, cards,
-  alerts, tables, progress, and the typography set — rendered live with
+  Every Tier 1 display component – buttons, badges, avatars, cards,
+  alerts, tables, progress, and the typography set – rendered live with
   its source.
 
 - [Gallery: form
   inputs](https://orijitghosh.github.io/shadshiny/articles/gallery-inputs.md):
 
-  Tier 2 bound inputs — text, select, combobox, checkbox, switch, radio,
-  toggle, slider, OTP and date pickers — rendered live with their
+  Tier 2 bound inputs – text, select, combobox, checkbox, switch, radio,
+  toggle, slider, OTP and date pickers – rendered live with their
   source.
 
 - [Gallery: overlays &
   menus](https://orijitghosh.github.io/shadshiny/articles/gallery-overlays.md):
 
-  Tier 3 overlays — dialog, sheet, drawer, popover, tooltip, hover-card,
-  dropdown, context-menu, menubar and the command palette — live and
+  Tier 3 overlays – dialog, sheet, drawer, popover, tooltip, hover-card,
+  dropdown, context-menu, menubar and the command palette – live and
   clickable.
 
 - [Gallery: navigation &
   structure](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.md):
 
-  Tier 3 layout — tabs, accordion, collapsible, pagination, carousel,
+  Tier 3 layout – tabs, accordion, collapsible, pagination, carousel,
   scroll-area, resizable panels, the layout primitives and the sidebar
-  family — rendered live.
+  family – rendered live.
 
 - [Gallery: data, dashboards &
   flow](https://orijitghosh.github.io/shadshiny/articles/gallery-data.md):
 
-  The V2 kit — data table, value boxes, sparklines, donuts, chart
+  The V2 kit – data table, value boxes, sparklines, donuts, chart
   containers, timelines, stepper, tree, rating, number input and
-  dropzone — rendered live with their source.
+  dropzone – rendered live with their source.
 
 - [Gallery: chat & AI
   kit](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.md):
 
-  The streaming-transcript primitives — bubbles, messages, attachments,
-  markers and the stick-to-bottom scroller — rendered live with their
+  The streaming-transcript primitives – bubbles, messages, attachments,
+  markers and the stick-to-bottom scroller – rendered live with their
   source.
 
 - [Icons](https://orijitghosh.github.io/shadshiny/articles/icons.md):

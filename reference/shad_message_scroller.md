@@ -29,7 +29,7 @@ shad_message_scroller_item(..., anchor = FALSE, class = NULL)
 
 - ...:
 
-  Rows — typically `shad_message_scroller_item()` wrapping a
+  Rows – typically `shad_message_scroller_item()` wrapping a
   [`shad_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md),
   [`shad_bubble()`](https://orijitghosh.github.io/shadshiny/reference/shad_bubble.md),
   or

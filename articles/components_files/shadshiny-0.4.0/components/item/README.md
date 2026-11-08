@@ -22,15 +22,15 @@ div.shad-item-group[role=list]
 - Media: `shad-item__media--icon` (2rem bordered muted tile) | `shad-item__media--image` (2.5rem rounded thumb) | none (avatar / free-form)
 
 ## Data-attribute API
-None — layout is fully class-driven. Rendering as `<a class="shad-item" href>` (or `<button>`) enables hover/focus states automatically.
+None – layout is fully class-driven. Rendering as `<a class="shad-item" href>` (or `<button>`) enables hover/focus states automatically.
 
 ## Methods / Events
-None — display-only. R wrapper: `shad_item(title, description = NULL, media = NULL, actions = NULL, variant = c("default", "outline", "muted"), size = c("default", "sm", "xs"), href = NULL)` + `shad_item_group(...)` + `shad_item_separator()`.
+None – display-only. R wrapper: `shad_item(title, description = NULL, media = NULL, actions = NULL, variant = c("default", "outline", "muted"), size = c("default", "sm", "xs"), href = NULL)` + `shad_item_group(...)` + `shad_item_separator()`.
 
 ## Keyboard
-Native — link/button items are single tab stops; controls in `__actions` keep their own tab order.
+Native – link/button items are single tab stops; controls in `__actions` keep their own tab order.
 
 ## A11y
 - Use `role="list"` / `role="listitem"` on group/items when the collection is semantic.
 - `shad-item-separator` is decorative: `aria-hidden="true"`.
-- Don't nest interactive `__actions` inside an `<a>` item — pick one interaction model per row.
+- Don't nest interactive `__actions` inside an `<a>` item – pick one interaction model per row.

@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/typography/typography.css */
-/* shadshiny — typography.
+/* shadshiny – typography.
    DECISION: the actual rules live in core/shad-base.css (they are base-layer
    utilities loaded on every page). This file exists so the per-component
    file layout stays uniform for the downstream agent; it intentionally

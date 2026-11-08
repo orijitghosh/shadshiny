@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/date-range-presets/date-range-presets.css */
-/* shadshiny — date-range-presets. Preset rail that slots INSIDE a range-mode
+/* shadshiny – date-range-presets. Preset rail that slots INSIDE a range-mode
    date-picker's __content, beside the calendar. Load date-picker.css first. */
 
 /* content becomes a row when presets are present (:not([hidden]) keeps the

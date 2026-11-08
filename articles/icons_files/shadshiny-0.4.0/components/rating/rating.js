@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/rating/rating.js */
-/* shadshiny — rating behavior.
+/* shadshiny – rating behavior.
    Markup: <div data-shad="rating" class="shad-rating" [data-value="3.5"]
                 [data-max="5"] [data-half] [data-readonly] [data-size=sm|lg]
                 [aria-label="Rating"]></div>

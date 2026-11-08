@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/data-table/data-table.js */
-/* shadshiny — data-table behavior. Client-side or server-backed over a JSON row model.
+/* shadshiny – data-table behavior. Client-side or server-backed over a JSON row model.
    DEPENDENCY: load dropdown-menu.css/.js first if using column visibility.
    Markup:
      <div data-shad="data-table" class="shad-data-table"

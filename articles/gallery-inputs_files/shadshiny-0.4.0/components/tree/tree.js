@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/tree/tree.js */
-/* shadshiny — tree behavior (APG TreeView pattern; reuses shad.roving).
+/* shadshiny – tree behavior (APG TreeView pattern; reuses shad.roving).
    Markup:
      <div data-shad="tree" class="shad-tree" [data-selection="single|multiple"]>
        <ul class="shad-tree__list" role="tree" aria-label="…">

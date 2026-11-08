@@ -7,7 +7,7 @@ or
 together with leading/trailing addons (icons, prefixes, buttons) or
 block toolbars. The shell owns the border, shadow, and focus/invalid
 ring; the wrapped control drops its own chrome so the group reads as one
-field. The control keeps its native Shiny binding — read it with
+field. The control keeps its native Shiny binding – read it with
 `input$<inputId>` as usual.
 
 ## Usage

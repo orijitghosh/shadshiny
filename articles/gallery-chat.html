@@ -16,8 +16,8 @@
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Gallery: chat &amp; AI kit">
-<meta name="description" content="The streaming-transcript primitives — bubbles, messages, attachments, markers and the stick-to-bottom scroller — rendered live with their source.">
-<meta property="og:description" content="The streaming-transcript primitives — bubbles, messages, attachments, markers and the stick-to-bottom scroller — rendered live with their source.">
+<meta name="description" content="The streaming-transcript primitives – bubbles, messages, attachments, markers and the stick-to-bottom scroller – rendered live with their source.">
+<meta property="og:description" content="The streaming-transcript primitives – bubbles, messages, attachments, markers and the stick-to-bottom scroller – rendered live with their source.">
 <meta property="og:image" content="https://orijitghosh.github.io/shadshiny/logo.svg">
 </head>
 <body>
@@ -112,12 +112,12 @@ example</a> wires them into a working inbox.</p>
 <div class="shad-bubble__content">Hey! Are we still on for 3pm?</div>
 </div>
 <div class="shad-bubble shad-bubble--tinted shad-bubble--end">
-<div class="shad-bubble__content">Absolutely — see you then.</div>
+<div class="shad-bubble__content">Absolutely – see you then.</div>
 </div>
 </div>
 <details class="shad-demo__code"><summary>Code</summary><pre>
 <code class="language-r"><span><span class="fu"><a href="../reference/shad_bubble.html">shad_bubble</a></span><span class="op">(</span><span class="st">"Hey! Are we still on for 3pm?"</span>, align <span class="op">=</span> <span class="st">"start"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/shad_bubble.html">shad_bubble</a></span><span class="op">(</span><span class="st">"Absolutely — see you then."</span>, variant <span class="op">=</span> <span class="st">"tinted"</span>, align <span class="op">=</span> <span class="st">"end"</span><span class="op">)</span></span></code>
+<span><span class="fu"><a href="../reference/shad_bubble.html">shad_bubble</a></span><span class="op">(</span><span class="st">"Absolutely – see you then."</span>, variant <span class="op">=</span> <span class="st">"tinted"</span>, align <span class="op">=</span> <span class="st">"end"</span><span class="op">)</span></span></code>
 </pre>
 </details>
 </div>
@@ -213,7 +213,7 @@ turns with <code><a href="../reference/shad_message.html">shad_message_group()</
 <div class="section level2">
 <h2 id="marker">Marker<a class="anchor" aria-label="anchor" href="#marker"></a>
 </h2>
-<p>A slim inline annotation for the stream — a date break, a
+<p>A slim inline annotation for the stream – a date break, a
 “streaming…” cue, or a status note.</p>
 <div class="shad-demo">
 <div class="shad-demo__stage shad-demo__stage--center">
@@ -299,7 +299,7 @@ affordance. Append to it and pin it from the server with
 <div class="shad-bubble shad-bubble--muted">
 <div class="shad-bubble__content">
 <div class="shad-bubble shad-bubble--default shad-bubble--start">
-<div class="shad-bubble__content">Welcome to support — how can I help?</div>
+<div class="shad-bubble__content">Welcome to support – how can I help?</div>
 </div>
 </div>
 </div>
@@ -357,7 +357,7 @@ Jump to latest
 </div>
 </div>
 <details class="shad-demo__code"><summary>Code</summary><pre>
-<code class="language-r"><span><span class="fu"><a href="../reference/shad_message_scroller.html">shad_message_scroller</a></span><span class="op">(</span><span class="st">"demo_scroller"</span>, height <span class="op">=</span> <span class="st">"16rem"</span>, auto_scroll <span class="op">=</span> <span class="cn">TRUE</span>, <span class="fu"><a href="../reference/shad_message_scroller.html">shad_message_scroller_item</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_message.html">shad_message</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_bubble.html">shad_bubble</a></span><span class="op">(</span><span class="st">"Welcome to support — how can I help?"</span><span class="op">)</span>, align <span class="op">=</span> <span class="st">"start"</span>, avatar <span class="op">=</span> <span class="fu"><a href="../reference/shad_avatar.html">shad_avatar</a></span><span class="op">(</span>fallback <span class="op">=</span> <span class="st">"AI"</span><span class="op">)</span>, sender <span class="op">=</span> <span class="st">"Assistant"</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_message_scroller.html">shad_message_scroller_item</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_message.html">shad_message</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_bubble.html">shad_bubble</a></span><span class="op">(</span><span class="st">"My invoice looks wrong."</span>, variant <span class="op">=</span> <span class="st">"tinted"</span><span class="op">)</span>, align <span class="op">=</span> <span class="st">"end"</span>, avatar <span class="op">=</span> <span class="fu"><a href="../reference/shad_avatar.html">shad_avatar</a></span><span class="op">(</span>fallback <span class="op">=</span> <span class="st">"You"</span><span class="op">)</span>, sender <span class="op">=</span> <span class="st">"You"</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_message_scroller.html">shad_message_scroller_item</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_message.html">shad_message</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_bubble.html">shad_bubble</a></span><span class="op">(</span><span class="st">"I can help with that. What's the invoice number?"</span><span class="op">)</span>, </span>
+<code class="language-r"><span><span class="fu"><a href="../reference/shad_message_scroller.html">shad_message_scroller</a></span><span class="op">(</span><span class="st">"demo_scroller"</span>, height <span class="op">=</span> <span class="st">"16rem"</span>, auto_scroll <span class="op">=</span> <span class="cn">TRUE</span>, <span class="fu"><a href="../reference/shad_message_scroller.html">shad_message_scroller_item</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_message.html">shad_message</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_bubble.html">shad_bubble</a></span><span class="op">(</span><span class="st">"Welcome to support – how can I help?"</span><span class="op">)</span>, align <span class="op">=</span> <span class="st">"start"</span>, avatar <span class="op">=</span> <span class="fu"><a href="../reference/shad_avatar.html">shad_avatar</a></span><span class="op">(</span>fallback <span class="op">=</span> <span class="st">"AI"</span><span class="op">)</span>, sender <span class="op">=</span> <span class="st">"Assistant"</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_message_scroller.html">shad_message_scroller_item</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_message.html">shad_message</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_bubble.html">shad_bubble</a></span><span class="op">(</span><span class="st">"My invoice looks wrong."</span>, variant <span class="op">=</span> <span class="st">"tinted"</span><span class="op">)</span>, align <span class="op">=</span> <span class="st">"end"</span>, avatar <span class="op">=</span> <span class="fu"><a href="../reference/shad_avatar.html">shad_avatar</a></span><span class="op">(</span>fallback <span class="op">=</span> <span class="st">"You"</span><span class="op">)</span>, sender <span class="op">=</span> <span class="st">"You"</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/shad_message_scroller.html">shad_message_scroller_item</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_message.html">shad_message</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_bubble.html">shad_bubble</a></span><span class="op">(</span><span class="st">"I can help with that. What's the invoice number?"</span><span class="op">)</span>, </span>
 <span>    align <span class="op">=</span> <span class="st">"start"</span>, avatar <span class="op">=</span> <span class="fu"><a href="../reference/shad_avatar.html">shad_avatar</a></span><span class="op">(</span>fallback <span class="op">=</span> <span class="st">"AI"</span><span class="op">)</span>, sender <span class="op">=</span> <span class="st">"Assistant"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code>
 </pre>
 </details>

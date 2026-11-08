@@ -140,7 +140,7 @@ looking at:</p>
 <td>character vector</td>
 <td>Row keys, in selection order, and persisting across pages. By
 default a key is the row’s 1-based index in the data you passed, as a
-string — so <code>as.integer(input$tbl$selected)</code> indexes the
+string – so <code>as.integer(input$tbl$selected)</code> indexes the
 frame. Set <code>row_key</code> to use a column instead.</td>
 </tr>
 <tr class="even">
@@ -206,7 +206,7 @@ it errors. Pre-aggregate or page server-side before you get there.</p>
 <div class="section level2">
 <h2 id="columns-and-formatting">Columns and formatting<a class="anchor" aria-label="anchor" href="#columns-and-formatting"></a>
 </h2>
-<p>Pass <code>columns</code> — a named list of <code><a href="../reference/shad_col.html">shad_col()</a></code>
+<p>Pass <code>columns</code> – a named list of <code><a href="../reference/shad_col.html">shad_col()</a></code>
 specs, keyed by column name. Anything you leave out keeps its
 default.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -224,12 +224,12 @@ default.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><code><a href="../reference/shad_col.html">shad_col()</a></code> takes <code>header</code> (the first argument
-— the displayed label), plus <code>width</code>, <code>align</code>,
+– the displayed label), plus <code>width</code>, <code>align</code>,
 <code>sortable</code>, <code>filterable</code>, <code>visible</code>,
 <code>html</code>, and one of <code>format</code> or <code>cell</code>.
 <code>format</code> and <code>cell</code> are mutually exclusive, and
 neither combines with <code>html = TRUE</code> (which passes the
-column’s strings through as raw HTML — only do that with values you
+column’s strings through as raw HTML – only do that with values you
 generated).</p>
 <p>The bundled formatters are:</p>
 <table class="table">
@@ -280,7 +280,7 @@ row, and returns a tag or a string:</p>
 <span>    <span class="fu"><a href="../reference/shad_typography.html">shad_p</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<p>Cell functions run in R at render time, not on the client — so they
+<p>Cell functions run in R at render time, not on the client – so they
 cost one call per visible row of the frame you pass, and they cannot see
 later filter state. Keep them cheap.</p>
 </div>

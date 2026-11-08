@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/select/select.js */
-/* shadshiny — select behavior (APG listbox popup pattern).
+/* shadshiny – select behavior (APG listbox popup pattern).
    Markup:
      <div data-shad="select" class="shad-select">
        <button class="shad-select__trigger" role="combobox" [data-placeholder]>

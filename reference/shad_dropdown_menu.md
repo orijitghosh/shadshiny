@@ -78,7 +78,7 @@ Other shadshiny tier-3 components:
 ``` r
 shad_dropdown_menu("m", trigger = shad_button("Open"),
   shad_menu_label("My Account"), shad_menu_separator(),
-  shad_menu_item("profile", "Profile", shortcut = "⇧⌘P"))
+  shad_menu_item("profile", "Profile", shortcut = "\u21e7\u2318P"))
 #> <div data-shad="dropdown-menu" data-align="start" id="m" style="display:inline-block">
 #>   <button class="shad-btn shad-btn--default shad-menu__trigger" type="button">Open</button>
 #>   <div class="shad-menu__content shad-anim-pop" hidden>

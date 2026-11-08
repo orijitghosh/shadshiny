@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/tooltip/tooltip.js */
-/* shadshiny — tooltip behavior (APG tooltip pattern).
+/* shadshiny – tooltip behavior (APG tooltip pattern).
    Delay group (module-level): first open waits 700ms; if a tooltip closed
    within the last 1.5s, the next opens after 300ms (feels like one group).
    Skipped entirely for touch pointers. Opens on focus-visible immediately.

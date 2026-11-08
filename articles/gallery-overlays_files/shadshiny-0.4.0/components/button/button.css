@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/button/button.css */
-/* shadshiny — button. CSS-only. Variants: default/secondary/destructive/
+/* shadshiny – button. CSS-only. Variants: default/secondary/destructive/
    outline/ghost/link. Sizes: sm/default/lg/icon. Loading: data-loading. */
 
 .shad-btn {
@@ -34,7 +34,7 @@
   box-shadow: var(--shad-focus-shadow);
 }
 
-/* disabled — attribute or aria (for <a> buttons) */
+/* disabled – attribute or aria (for <a> buttons) */
 .shad-btn:disabled,
 .shad-btn[data-disabled],
 .shad-btn[aria-disabled="true"] {

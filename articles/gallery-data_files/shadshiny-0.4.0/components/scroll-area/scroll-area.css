@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/scroll-area/scroll-area.css */
-/* shadshiny — scroll-area. Native scrolling, custom overlay scrollbar. */
+/* shadshiny – scroll-area. Native scrolling, custom overlay scrollbar. */
 
 .shad-scroll-area {
   position: relative;
@@ -10,7 +10,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  /* hide native scrollbars — the custom thumb replaces them */
+  /* hide native scrollbars – the custom thumb replaces them */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }

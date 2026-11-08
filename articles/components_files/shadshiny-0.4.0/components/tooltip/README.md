@@ -14,14 +14,14 @@ div[data-shad=tooltip][data-side][data-align]
 - **Touch pointers never open tooltips** (pen included).
 - Keyboard focus (`:focus-visible`) opens immediately; blur closes.
 - `pointerdown` on the trigger closes (pressing hides).
-- Esc closes. Content is `pointer-events:none` — never traps focus or hover.
+- Esc closes. Content is `pointer-events:none` – never traps focus or hover.
 - Portaled to body; positioned by FloatingEngine (flip + shift); `data-side`/`data-align` drive the pop animation origin.
 
 ## Data-attribute API
 `data-side` (default `top`), `data-align` (default `center`) on root.
 
 ## Methods / Events
-`getValue()/setValue(bool)/open()/close()/isOpen/destroy()`; `shad:open`/`shad:close`. (No `shad:change` — tooltips carry no value.)
+`getValue()/setValue(bool)/open()/close()/isOpen/destroy()`; `shad:open`/`shad:close`. (No `shad:change` – tooltips carry no value.)
 
 ## A11y
 `role=tooltip`; trigger gets `aria-describedby` → content id.

@@ -22,7 +22,7 @@ div.shad-rating[data-shad=rating][role=radiogroup|img(readonly)]
 | `data-readonly` | root | display-only: `role=img`, no tab stops |
 | `data-size` | root | `sm` 1rem / default 1.25rem / `lg` 1.5rem |
 
-Colors via `--shad-rating-on` (default yellow-500 literal — no success/warn token; documented like value-box's delta green) and `--shad-rating-off` (border token); override per-instance with inline style.
+Colors via `--shad-rating-on` (default yellow-500 literal – no success/warn token; documented like value-box's delta green) and `--shad-rating-off` (border token); override per-instance with inline style.
 
 ## Methods / Events
 | Member | Description |

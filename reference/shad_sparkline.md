@@ -60,7 +60,7 @@ shad_sparkline(
 - label:
 
   Accessible name. When `NULL` (default) the chart is decorative and
-  hidden from assistive technology — correct when the number it
+  hidden from assistive technology – correct when the number it
   illustrates is already on screen.
 
 - class:
@@ -78,7 +78,7 @@ An SVG tag.
 ## Details
 
 Marks are painted with the theme's chart tokens, so dark mode and preset
-switches restyle them in CSS — nothing re-renders, and no Shiny session
+switches restyle them in CSS – nothing re-renders, and no Shiny session
 is involved. Non-finite values (`NA`, `NaN`, `Inf`) break the series
 into separate runs rather than being interpolated across.
 

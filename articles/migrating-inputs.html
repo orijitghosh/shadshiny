@@ -98,7 +98,7 @@ This page is the <strong>complete map</strong> of base Shiny (and common
 <code>shiny</code>/<code>bslib</code>) UI to its shadshiny counterpart,
 grouped by area, with the value-shape differences flagged so nothing
 surprises you server-side.</p>
-<p>A handful of base functions have <strong>no drop-in</strong> — they
+<p>A handful of base functions have <strong>no drop-in</strong> – they
 are render slots (<code>plotOutput</code>, <code>uiOutput</code>) or
 wiring (<code>fileInput</code>, <code>downloadButton</code>) that
 shadshiny deliberately doesn’t re-implement. Those rows say so and tell
@@ -139,7 +139,7 @@ function.</p>
 <td><code><a href="https://rdrr.io/pkg/shiny/man/passwordInput.html" class="external-link">passwordInput()</a></code></td>
 <td><code>shad_input(type = "password")</code></td>
 <td>drop-in</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/shiny/man/textAreaInput.html" class="external-link">textAreaInput()</a></code></td>
@@ -193,7 +193,7 @@ alternative.</td>
 <code><a href="https://rdrr.io/pkg/shiny/man/selectInput.html" class="external-link">selectInput()</a></code> (plain <code>&lt;select&gt;</code>)</td>
 <td><code><a href="../reference/shad_native_select.html">shad_native_select()</a></code></td>
 <td>drop-in</td>
-<td>A styled real <code>&lt;select&gt;</code> — lightest option.</td>
+<td>A styled real <code>&lt;select&gt;</code> – lightest option.</td>
 </tr>
 <tr class="odd">
 <td><code>selectInput(multiple = TRUE)</code></td>
@@ -243,13 +243,13 @@ that <code><a href="https://rdrr.io/pkg/shiny/man/dateInput.html" class="externa
 <td>Value is <code>list(start, end)</code>.</td>
 </tr>
 <tr class="even">
-<td>— (calendar surface)</td>
+<td>– (calendar surface)</td>
 <td><code><a href="../reference/shad_calendar.html">shad_calendar()</a></code></td>
 <td>new</td>
 <td>Inline month grid; <code>input$id</code> is the picked date.</td>
 </tr>
 <tr class="odd">
-<td>— (segmented code)</td>
+<td>– (segmented code)</td>
 <td><code><a href="../reference/shad_input_otp.html">shad_input_otp()</a></code></td>
 <td>new</td>
 <td>One-time-code entry; no base analogue.</td>
@@ -263,20 +263,20 @@ that <code><a href="https://rdrr.io/pkg/shiny/man/dateInput.html" class="externa
 <code><a href="../reference/shad_attachment.html">shad_attachment()</a></code> to render the uploaded-file list.</td>
 </tr>
 <tr class="odd">
-<td>— (star rating)</td>
+<td>– (star rating)</td>
 <td><code><a href="../reference/shad_rating.html">shad_rating()</a></code></td>
 <td>new</td>
 <td>Numeric rating; <code>half = TRUE</code> for half-stars.</td>
 </tr>
 <tr class="even">
-<td>— (wizard)</td>
+<td>– (wizard)</td>
 <td>
 <code><a href="../reference/shad_stepper.html">shad_stepper()</a></code> (+ <code><a href="../reference/shad_step.html">shad_step()</a></code>)</td>
 <td>new</td>
 <td>Multi-step flow; <code>input$id</code> is the active step.</td>
 </tr>
 <tr class="odd">
-<td>— (hierarchy picker)</td>
+<td>– (hierarchy picker)</td>
 <td>
 <code><a href="../reference/shad_tree.html">shad_tree()</a></code> (+ <code><a href="../reference/shad_tree_item.html">shad_tree_item()</a></code>)</td>
 <td>new</td>
@@ -386,7 +386,7 @@ palette.</td>
 <td>
 <code><a href="../reference/shad_typography.html">shad_h1()</a></code> (typography set)</td>
 <td>restyle</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="odd">
 <td>
@@ -516,7 +516,7 @@ JS-expression gating.</td>
 <code><a href="../reference/shad_tabs.html">shad_tabs()</a></code> / <code><a href="../reference/shad_navigation_menu.html">shad_navigation_menu()</a></code>
 </td>
 <td>restyle</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="odd">
 <td>
@@ -524,7 +524,7 @@ JS-expression gating.</td>
 <td>
 <code><a href="../reference/shad_breadcrumb.html">shad_breadcrumb()</a></code> (+ item/separator)</td>
 <td>new</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="even">
 <td>paging controls (manual)</td>
@@ -591,7 +591,7 @@ server (not built server-side).</td>
 <code>_close()</code>
 </td>
 <td>new</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rstudio.github.io/bslib/reference/popover.html" class="external-link">bslib::popover()</a></code></td>
@@ -600,7 +600,7 @@ server (not built server-side).</td>
 <code>_close()</code>
 </td>
 <td>drop-in</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rstudio.github.io/bslib/reference/tooltip.html" class="external-link">bslib::tooltip()</a></code></td>
@@ -625,14 +625,14 @@ server (not built server-side).</td>
 <td>right-click menu</td>
 <td><code><a href="../reference/shad_context_menu.html">shad_context_menu()</a></code></td>
 <td>new</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="even">
 <td>app menubar</td>
 <td>
 <code><a href="../reference/shad_menubar.html">shad_menubar()</a></code> (+ menu)</td>
 <td>new</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="odd">
 <td>⌘K palette</td>
@@ -685,7 +685,7 @@ callbacks.</td>
 <td><code><a href="https://rdrr.io/pkg/shiny/man/showNotification.html" class="external-link">removeNotification()</a></code></td>
 <td><code><a href="../reference/shad_toast.html">shad_toast_dismiss()</a></code></td>
 <td>drop-in</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="even">
 <td>
@@ -706,7 +706,7 @@ loop.</td>
 </td>
 <td>keep base</td>
 <td>keep base</td>
-<td>Works as-is — inserted shadshiny components auto-initialise.</td>
+<td>Works as-is – inserted shadshiny components auto-initialise.</td>
 </tr>
 <tr class="even">
 <td>
@@ -791,7 +791,7 @@ experimental.</td>
 <td>
 <code><a href="../reference/shad_timeline.html">shad_timeline()</a></code> (+ item)</td>
 <td>new</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="even">
 <td>
@@ -799,7 +799,7 @@ experimental.</td>
 </td>
 <td>keep base</td>
 <td>keep base</td>
-<td>Render slot; emit shadshiny tags into it — they
+<td>Render slot; emit shadshiny tags into it – they
 auto-initialise.</td>
 </tr>
 <tr class="odd">
@@ -831,7 +831,7 @@ accepted.</td>
 <code><a href="../reference/shad_avatar.html">shad_avatar()</a></code> / <code><a href="../reference/shad_badge.html">shad_badge()</a></code>
 </td>
 <td>new</td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="odd">
 <td>skeleton / spinner (manual)</td>
@@ -871,12 +871,12 @@ accepted.</td>
 <tr class="even">
 <td><code><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p()</a></code></td>
 <td><code><a href="../reference/shad_typography.html">shad_p()</a></code></td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="odd">
 <td><code>tags$blockquote()</code></td>
 <td><code><a href="../reference/shad_typography.html">shad_blockquote()</a></code></td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/shiny/man/helpText.html" class="external-link">helpText()</a></code></td>
@@ -891,7 +891,7 @@ accepted.</td>
 <td>
 <code><a href="../reference/shad_typography.html">shad_lead()</a></code> / <code><a href="../reference/shad_typography.html">shad_large()</a></code>
 </td>
-<td>—</td>
+<td>–</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">code()</a></code></td>
@@ -915,34 +915,34 @@ accepted.</td>
 </table>
 </div>
 <div class="section level2">
-<h2 id="shadshiny-only-no-base-equivalent">shadshiny-only — no base equivalent<a class="anchor" aria-label="anchor" href="#shadshiny-only-no-base-equivalent"></a>
+<h2 id="shadshiny-only-no-base-equivalent">shadshiny-only – no base equivalent<a class="anchor" aria-label="anchor" href="#shadshiny-only-no-base-equivalent"></a>
 </h2>
 <p>Worth adopting on their own; there is nothing to migrate
 <em>from</em>:</p>
 <ul>
 <li>
-<code><a href="../reference/shad_command.html">shad_command()</a></code> — ⌘K command palette with grouped,
+<code><a href="../reference/shad_command.html">shad_command()</a></code> – ⌘K command palette with grouped,
 keyword-searchable items.</li>
 <li>
-<code><a href="../reference/shad_input_otp.html">shad_input_otp()</a></code> — segmented one-time-code entry.</li>
+<code><a href="../reference/shad_input_otp.html">shad_input_otp()</a></code> – segmented one-time-code entry.</li>
 <li>
-<code><a href="../reference/shad_sidebar_layout.html">shad_sidebar_layout()</a></code> — full collapsible application
+<code><a href="../reference/shad_sidebar_layout.html">shad_sidebar_layout()</a></code> – full collapsible application
 sidebar with groups, items, badges, and a server-toggled state.</li>
 <li>
-<code><a href="../reference/shad_toast.html">shad_toast()</a></code> — server-raised notifications, including
+<code><a href="../reference/shad_toast.html">shad_toast()</a></code> – server-raised notifications, including
 loading→done flows.</li>
-<li>The <strong>chat / AI kit</strong> — <code><a href="../reference/shad_bubble.html">shad_bubble()</a></code>,
+<li>The <strong>chat / AI kit</strong> – <code><a href="../reference/shad_bubble.html">shad_bubble()</a></code>,
 <code><a href="../reference/shad_message.html">shad_message()</a></code> (+ scroller),
-<code><a href="../reference/shad_attachment.html">shad_attachment()</a></code>, <code><a href="../reference/shad_marker.html">shad_marker()</a></code> — a
+<code><a href="../reference/shad_attachment.html">shad_attachment()</a></code>, <code><a href="../reference/shad_marker.html">shad_marker()</a></code> – a
 stick-to-bottom streaming transcript, or <code><a href="../reference/shad_chat_ui.html">shad_chat_ui()</a></code> /
 <code><a href="../reference/shad_chat_server.html">shad_chat_server()</a></code> for the whole module at once.</li>
 <li>
 <code><a href="../reference/shad_theme.html">shad_theme()</a></code> / <code><a href="../reference/shad_theme_from_registry.html">shad_theme_from_registry()</a></code>
-— build a custom palette, or import one from the shadcn theme registry
+– build a custom palette, or import one from the shadcn theme registry
 (experimental).</li>
 <li>
-<code><a href="../reference/shad_empty.html">shad_empty()</a></code> — empty-state panel;
-<code><a href="../reference/shad_item.html">shad_item()</a></code> — flex list-row primitive.</li>
+<code><a href="../reference/shad_empty.html">shad_empty()</a></code> – empty-state panel;
+<code><a href="../reference/shad_item.html">shad_item()</a></code> – flex list-row primitive.</li>
 </ul>
 </div>
 <div class="section level2">
@@ -972,7 +972,7 @@ checkbox has <code>tristate = TRUE</code>.</li>
 <strong>Overlays are UI-defined, server-toggled.</strong> Unlike
 <code><a href="https://rdrr.io/pkg/shiny/man/showModal.html" class="external-link">showModal()</a></code>, a <code><a href="../reference/shad_dialog.html">shad_dialog()</a></code> lives in the UI
 and you open/close it by <code>id</code>
-(<code>shad_dialog_open("confirm")</code>) — Shiny-module safe via the
+(<code>shad_dialog_open("confirm")</code>) – Shiny-module safe via the
 session’s ns.</li>
 </ul>
 </div>
@@ -1016,11 +1016,11 @@ controllers and the <code><a href="../reference/shad_toast.html">shad_toast()</a
 </h2>
 <ul>
 <li>
-<code><a href="../articles/shadshiny.html">vignette("shadshiny")</a></code> — get started.</li>
-<li>The <strong>Component gallery</strong> — every component rendered
+<code><a href="../articles/shadshiny.html">vignette("shadshiny")</a></code> – get started.</li>
+<li>The <strong>Component gallery</strong> – every component rendered
 live next to its source.</li>
 <li>
-<code>shad_run_example("kitchen-sink")</code> — a live tour of the
+<code>shad_run_example("kitchen-sink")</code> – a live tour of the
 whole library.</li>
 </ul>
 </div>

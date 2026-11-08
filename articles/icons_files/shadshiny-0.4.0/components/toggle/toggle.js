@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/toggle/toggle.js */
-/* shadshiny — toggle behavior (two-state pressed button).
+/* shadshiny – toggle behavior (two-state pressed button).
    Markup: <button data-shad="toggle" class="shad-toggle" aria-pressed> */
 (function () {
   "use strict";

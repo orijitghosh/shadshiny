@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/dialog/dialog.js */
-/* shadshiny — dialog behavior (APG modal dialog).
+/* shadshiny – dialog behavior (APG modal dialog).
    Also registers "alert-dialog": identical machinery, but no outside-press
    dismiss, no Esc dismiss unless data-escape-close, no __close button req.
    Markup:

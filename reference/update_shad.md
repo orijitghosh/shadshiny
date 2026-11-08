@@ -2,7 +2,7 @@
 
 Each function sets the current value of a bound shadshiny input,
 mirroring Shiny's built-in `update*Input()` helpers. Changing the
-available *choices* of a component is a non-goal — re-render with
+available *choices* of a component is a non-goal – re-render with
 [`shiny::renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html)
 instead.
 

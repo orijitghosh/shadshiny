@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/message-scroller/message-scroller.js */
-/* shadshiny — message-scroller behavior.
+/* shadshiny – message-scroller behavior.
    Markup:
      <div data-shad="message-scroller" class="shad-message-scroller"
           data-auto-scroll data-default-position="end">
@@ -17,7 +17,7 @@
      appears instead.
    - Prepended history preserves the scroll anchor (no visual shift).
    Options (data-attributes on the root):
-   - data-auto-scroll="false"  — never auto-follow (default true)
+   - data-auto-scroll="false"  – never auto-follow (default true)
    - data-default-position="start|end|last-anchor" (default "end")
    - data-anchor on items marks turn boundaries for "last-anchor". */
 (function () {
@@ -149,7 +149,7 @@
     });
 
     return {
-      /* position state — consumed by the Shiny binding as the input value */
+      /* position state – consumed by the Shiny binding as the input value */
       getValue() {
         return {
           following: following,

@@ -53,7 +53,7 @@ shad_command_separator()
 
 - dialog:
 
-  If `TRUE`, render the ⌘K/Ctrl+K dialog variant.
+  If `TRUE`, render the Cmd+K / Ctrl+K dialog variant.
 
 - hotkey:
 

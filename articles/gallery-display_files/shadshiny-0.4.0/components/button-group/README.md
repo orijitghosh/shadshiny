@@ -17,14 +17,14 @@ div.shad-button-group[role=group][data-orientation=horizontal|vertical][aria-lab
   hovered/focused/open child raises via `z-index` so its full border shows.
 
 ## Data-attribute API
-`data-orientation` on the root only. All segmentation is class/selector driven —
+`data-orientation` on the root only. All segmentation is class/selector driven –
 drop in ordinary `.shad-btn` buttons and they adopt the joined look.
 
 ## Methods / Events
-None — layout only. R wrapper: `shad_button_group(..., orientation = c("horizontal", "vertical"), aria_label = NULL)` + `shad_button_group_separator()` + `shad_button_group_text(...)`.
+None – layout only. R wrapper: `shad_button_group(..., orientation = c("horizontal", "vertical"), aria_label = NULL)` + `shad_button_group_separator()` + `shad_button_group_text(...)`.
 
 ## Keyboard
-Native — each button is its own tab stop. For a single-select segmented control,
+Native – each button is its own tab stop. For a single-select segmented control,
 give the buttons `role="radio"` inside `role="radiogroup"` yourself and manage
 `aria-checked` (out of scope for the CSS layer).
 

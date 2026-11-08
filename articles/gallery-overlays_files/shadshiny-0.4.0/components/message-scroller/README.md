@@ -11,7 +11,7 @@ div.shad-message-scroller[data-shad=message-scroller][data-state=following|detac
 ```
 
 ## Modifier classes
-None — state is data-attribute driven.
+None – state is data-attribute driven.
 
 ## Data-attribute API
 | Attribute | On | Effect |
@@ -30,13 +30,13 @@ None — state is data-attribute driven.
 | `scrollToBottom(smooth = TRUE)` | re-attach + scroll; callable through the `shadshiny:invoke` channel |
 | `destroy()` | disconnect observers + listeners |
 
-No `shad:change` — position is not a form value; the Shiny binding polls `getValue()` on scroll settle if needed.
+No `shad:change` – position is not a form value; the Shiny binding polls `getValue()` on scroll settle if needed.
 
 R wrapper: `shad_message_scroller(id, ..., auto_scroll = TRUE, default_position = c("end", "start", "last-anchor"), height = NULL)`.
 
 ## Behavior contract
 - Sticks to the bottom ONLY while the user is at the bottom; wheel-up, ArrowUp/PageUp/Home, or selecting text detaches immediately.
-- Content arriving while detached never moves the viewport — the jump button appears instead.
+- Content arriving while detached never moves the viewport – the jump button appears instead.
 - Prepended history (infinite scroll) preserves the visible scroll anchor: `scrollTop` is compensated by the height delta in the same frame.
 - Uses one ResizeObserver (content growth) + one MutationObserver (prepend detection); no external libs.
 
@@ -45,5 +45,5 @@ Viewport is natively scrollable (arrows/PageUp/PageDown/Home when focused); End 
 
 ## A11y
 - `aria-live="polite"` on the viewport announces appended messages without stealing focus.
-- Give the jump button a label ("Jump to latest") — icon-only needs `aria-label`.
+- Give the jump button a label ("Jump to latest") – icon-only needs `aria-label`.
 - Smooth scrolling is disabled under `prefers-reduced-motion`.

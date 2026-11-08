@@ -19,7 +19,7 @@ div.shad-sidebar-layout[data-shad=sidebar]
 ```
 
 ## Modes
-- **Desktop (≥768 px)**: trigger (or ⌘/Ctrl+B) toggles `data-collapsed` — 16rem ↔ 3rem icon rail (labels/badges hide, items center).
+- **Desktop (≥768 px)**: trigger (or ⌘/Ctrl+B) toggles `data-collapsed` – 16rem ↔ 3rem icon rail (labels/badges hide, items center).
 - **Mobile (<768 px)**: trigger opens an off-canvas sheet (`data-mobile-open`) with overlay, focus trap, scroll lock, Esc/outside dismiss; item click closes it. Crossing back to desktop width auto-closes.
 
 ## Data-attribute API
@@ -32,4 +32,4 @@ div.shad-sidebar-layout[data-shad=sidebar]
 ⌘/Ctrl+B toggles. Items are native buttons/links (Tab + Enter). Mobile sheet traps focus, Esc closes.
 
 ## Theming
-Uses the `--shad-sidebar-*` token family exclusively — presets restyle it independently of the main surface.
+Uses the `--shad-sidebar-*` token family exclusively – presets restyle it independently of the main surface.

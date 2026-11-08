@@ -2,7 +2,7 @@
 
 Closes the overlay; if it was shown with `transient = TRUE` (the
 default), closing is also what removes it from the document, so this is
-all you need. For a `transient = FALSE` overlay this only closes it — it
+all you need. For a `transient = FALSE` overlay this only closes it – it
 stays available for
 [`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md).
 

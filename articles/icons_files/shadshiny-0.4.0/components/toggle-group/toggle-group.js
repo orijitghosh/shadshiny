@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/toggle-group/toggle-group.js */
-/* shadshiny — toggle group behavior.
+/* shadshiny – toggle group behavior.
    Markup: <div data-shad="toggle-group" data-type="single|multiple">
              <button class="shad-toggle" data-value="a">…
    Value: single -> string|null; multiple -> array of strings.

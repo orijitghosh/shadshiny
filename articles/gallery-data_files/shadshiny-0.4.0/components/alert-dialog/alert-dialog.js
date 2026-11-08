@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/alert-dialog/alert-dialog.js */
-/* shadshiny — alert-dialog.
+/* shadshiny – alert-dialog.
    DECISION: the "alert-dialog" factory is registered by dialog/dialog.js
    (shared machinery: no outside-press dismiss, no Esc unless
    data-escape-close, role=alertdialog). This file exists for layout
@@ -8,7 +8,7 @@
    in any order (register is last-write-wins with identical factories). */
 (function () {
   "use strict";
-  // If dialog.js loaded first, "alert-dialog" is already registered — done.
+  // If dialog.js loaded first, "alert-dialog" is already registered – done.
   // Otherwise document the dependency loudly.
   if (!window.shad) { console.error("[shad] runtime missing"); return; }
   // Probe: shad has no public registry getter; attempt init on a detached

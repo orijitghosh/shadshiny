@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/calendar/calendar.js */
-/* shadshiny — calendar behavior (APG date-grid pattern).
+/* shadshiny – calendar behavior (APG date-grid pattern).
    Markup (JS renders the grid; container is the whole API):
      <div data-shad="calendar" class="shad-calendar"
           [data-mode="single|range"] [data-value="YYYY-MM-DD"]

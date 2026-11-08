@@ -1,8 +1,8 @@
 /* FILE: inst/assets/components/hover-card/hover-card.js */
-/* shadshiny — hover-card behavior.
+/* shadshiny – hover-card behavior.
    Pointer-only supplementary preview: open after 700ms hover, close after
    300ms once the pointer leaves BOTH trigger and panel. Also opens on
-   keyboard focus (immediate) and closes on blur/Esc. Not a tooltip role —
+   keyboard focus (immediate) and closes on blur/Esc. Not a tooltip role –
    content is rich; screen readers reach it via the trigger link itself. */
 (function () {
   "use strict";

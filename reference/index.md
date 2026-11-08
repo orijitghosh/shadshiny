@@ -30,7 +30,7 @@ additions, with no shadcn/ui counterpart.
 - [`shad_page_navbar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_navbar.md)
   : Page shell with a tabbed navbar
 
-## Tier 1 — display & typography
+## Tier 1 – display & typography
 
 Non-interactive display components and typographic helpers.
 
@@ -110,7 +110,7 @@ Non-interactive display components and typographic helpers.
   [`shad_button_group_text()`](https://orijitghosh.github.io/shadshiny/reference/shad_button_group.md)
   : Button group
 
-## Tier 2 — form inputs
+## Tier 2 – form inputs
 
 Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
 The field composition family
@@ -166,7 +166,7 @@ and its parts) is experimental.
 
 ## Chat & AI kit
 
-Streaming transcript primitives — bubbles, messages, attachments,
+Streaming transcript primitives – bubbles, messages, attachments,
 markers, and a stick-to-bottom scroller.
 
 - [`shad_message()`](https://orijitghosh.github.io/shadshiny/reference/shad_message.md)
@@ -187,7 +187,7 @@ markers, and a stick-to-bottom scroller.
   [`shad_message_scroller_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller.md)
   : Message scroller
 
-## Tier 3 — overlays
+## Tier 3 – overlays
 
 Dialogs, popovers, menus, command palette, and toasts (UI side).
 
@@ -244,7 +244,7 @@ Dialogs, popovers, menus, command palette, and toasts (UI side).
   [`shad_command_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
   : Command palette for app navigation
 
-## Tier 3 — navigation & structure
+## Tier 3 – navigation & structure
 
 Tabs, accordion, pagination, carousel, and the sidebar layout family.
 
@@ -277,7 +277,7 @@ Tabs, accordion, pagination, carousel, and the sidebar layout family.
   [`shad_sidebar_trigger()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
   : Sidebar layout
 
-## Server — updates
+## Server – updates
 
 Update bound component values from the server. Shiny-side API, so there
 is nothing in shadcn/ui to compare it against.
@@ -323,7 +323,7 @@ is experimental.
 - [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
   : Replace a command palette's items from the server
 
-## Server — overlays & toast
+## Server – overlays & toast
 
 Open/close overlays and raise toast notifications from the server.
 Shiny-side API, so there is nothing in shadcn/ui to compare it against.

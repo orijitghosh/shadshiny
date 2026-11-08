@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/attachment/attachment.css */
-/* shadshiny — attachment. File/media chip for chat composers. CSS-only;
+/* shadshiny – attachment. File/media chip for chat composers. CSS-only;
    upload lifecycle driven by data-state (no JS binding).
    Orientation: (none = horizontal) | --vertical. Sizes: --sm | --xs.
    DECISION: shimmer/pulse keyframes live here (not shad-animations.css) so

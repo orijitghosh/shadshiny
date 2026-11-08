@@ -15,7 +15,10 @@
   file with the licence notices for the Lucide icons (ISC; some derive
   from Feather, MIT) and the shadcn/ui colour token values (MIT), and
   DESCRIPTION points to it in a `Copyright:` field. The README and the
-  package help say the same.
+  package help say the same. Help pages now write the Cmd and Shift keys
+  as text, or as R escapes in example code, because the PDF manual could
+  not typeset their key symbols. A test keeps help pages to characters
+  the manual can typeset.
 
 - Five more full-ramp colour presets from shadcn/ui: `"zinc"`,
   `"mauve"`, `"olive"`, `"mist"` and `"taupe"`. Like `"slate"` and
@@ -446,7 +449,7 @@ shadshiny from a component library into a full application toolkit.
   `document.body` and `Shiny.setInputValue` unguarded, and ran even with
   no Shiny on the page. Since the asset bundle loads in `<head>`, both
   were absent on the first pass, so it threw and aborted the rest of
-  `shadshiny-shiny.js` — taking `shad.autoInit()` with it.
+  `shadshiny-shiny.js` – taking `shad.autoInit()` with it.
   [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md)
   therefore never fired (charts could not follow runtime theme changes),
   components inserted by
@@ -481,10 +484,10 @@ shadshiny from a component library into a full application toolkit.
   variables to `initial`.
 
 - `update_shad_sidebar(active=)` selects a sidebar item from the server,
-  so navigating from elsewhere — a command palette, a link — moves the
+  so navigating from elsewhere – a command palette, a link – moves the
   rail too.
 
-- **New example:** `shad_run_example("09-app-shell")` —
+- **New example:** `shad_run_example("09-app-shell")` –
   [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
   with the layout primitives, sparklines, a ⌘K palette that drives
   navigation, and dialogs built in the server.
@@ -502,7 +505,7 @@ shadshiny from a component library into a full application toolkit.
   [`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md)
   (line/area/bar/step) and
   [`shad_mini_donut()`](https://orijitghosh.github.io/shadshiny/reference/shad_mini_donut.md)
-  — inline SVG painted with the chart tokens, so they follow dark mode
+  – inline SVG painted with the chart tokens, so they follow dark mode
   and preset switches in CSS with no re-render. Fills
   `shad_value_box(sparkline=)`.
 
@@ -513,12 +516,12 @@ shadshiny from a component library into a full application toolkit.
   opens one from anywhere, and
   [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
   refreshes the items from the server. Read selections from
-  `input$<id>_event` — `input$<id>` alone cannot tell one selection of
+  `input$<id>_event` – `input$<id>` alone cannot tell one selection of
   “Settings” from two.
 
 - **Bug fix (command dialog):**
   `shad_command(dialog = TRUE, hotkey = FALSE)` rendered a visible
-  inline palette — the asset infers dialog mode from `data-hotkey` or
+  inline palette – the asset infers dialog mode from `data-hotkey` or
   `data-dialog`, and the constructor emitted neither.
 
 - **Bug fix (runtime):** opening a command dialog destroyed it.
@@ -528,7 +531,7 @@ shadshiny from a component library into a full application toolkit.
   the document.
 
 - **Scroll/focus sweep:** no component calls `scrollIntoView()` any more
-  — it walks every scrollable ancestor, so a component in ordinary
+  – it walks every scrollable ancestor, so a component in ordinary
   document flow drags the whole page to itself. Highlights now scroll
   their own container via `shad.util.keepInView()`, and pointer-driven
   `focus()` passes `preventScroll`. Keyboard roving focus still scrolls,
@@ -538,14 +541,14 @@ shadshiny from a component library into a full application toolkit.
   [`shad_command()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
   scrolled the page to itself on load, and again on every keystroke. Its
   highlight used `scrollIntoView()`/`scrollIntoViewIfNeeded()`, which
-  scroll *every* scrollable ancestor — harmless in dialog mode, but an
+  scroll *every* scrollable ancestor – harmless in dialog mode, but an
   inline palette is part of the document, so a page containing one
   opened wherever the palette sat (in the kitchen sink, a long way down
-  at *Tier 3 — overlays*). The highlight now scrolls only the command
+  at *Tier 3 – overlays*). The highlight now scrolls only the command
   list itself.
 
 - **Gallery:** a new *Data, dashboards & flow* page renders the V2 kit
-  live — data table, value boxes, chart container, timeline, stepper,
+  live – data table, value boxes, chart container, timeline, stepper,
   tree, rating, number input, dropzone, and the form-messaging
   components.
 
@@ -555,7 +558,7 @@ shadshiny from a component library into a full application toolkit.
   and a live
   [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
   form. Its `update_*()` / scroll / sidebar controls moved next to the
-  components they drive — previously they sat in a card at the foot of
+  components they drive – previously they sat in a card at the foot of
   the page and appeared to do nothing, because the component they
   changed was scrolled far out of view.
 
@@ -593,10 +596,10 @@ shadshiny from a component library into a full application toolkit.
   [`shad_carousel()`](https://orijitghosh.github.io/shadshiny/reference/shad_carousel.md),
   and
   [`shad_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_sidebar_layout.md)
-  — their values are still *saved*, only not seeded back on restore.
+  – their values are still *saved*, only not seeded back on restore.
 
 - **Docs:** the *Migrating from base Shiny* guide is now a **complete**
-  base-Shiny→shadshiny reference — sectioned tables covering inputs,
+  base-Shiny→shadshiny reference – sectioned tables covering inputs,
   buttons, layout, navigation, overlays, notifications, outputs, and
   typography, each row tagged drop-in / restyle / keep-base, plus the
   value-shape gotchas and the full `update_shad_*()` map. (Previously an
@@ -606,7 +609,7 @@ shadshiny from a component library into a full application toolkit.
   [`shad_icon()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon.md)
   now carries the shadshiny asset dependency, so a standalone icon still
   loads its `.shad-icon` sizing CSS when it is the only shadshiny output
-  on a page (previously such icons rendered size-less / invisible —
+  on a page (previously such icons rendered size-less / invisible –
   e.g. the icon previews in the pkgdown *Icons* article). Nested in a
   component, the duplicate dependency is de-duplicated as before.
 
@@ -618,12 +621,12 @@ shadshiny from a component library into a full application toolkit.
   initialise immediately and the observer attaches on DOM ready.
 
 - **Bug fix (input group):** the wrapped control’s `width: 100%` no
-  longer forces leading/trailing addons onto their own rows — the
+  longer forces leading/trailing addons onto their own rows – the
   control now flexes from a zero basis so icons, prefixes and buttons
   sit inline as intended.
 
 - **More icons:** the built-in set grows from 32 to 78, adding common
-  glyphs — `home`, `user`, `users`, `settings`, `bell`, `trash`,
+  glyphs – `home`, `user`, `users`, `settings`, `bell`, `trash`,
   `pencil`, `download`, `upload`, `external-link`, `eye`, `eye-off`,
   `lock`, `unlock`, `heart`, `star`, `bookmark`, `filter`, `refresh-cw`,
   `log-in`, `log-out`, `copy`, `clipboard`, `save`, `sun`, `moon`,
@@ -638,8 +641,8 @@ shadshiny from a component library into a full application toolkit.
   round-trip is visible.
 
 - **Documentation site.** The pkgdown site is now a full handbook. A new
-  **Component gallery** renders every component *live* — the real
-  component next to the exact source that made it — across pages for
+  **Component gallery** renders every component *live* – the real
+  component next to the exact source that made it – across pages for
   display, inputs, overlays, navigation and the chat kit, plus a live
   **Icons** reference. The previews initialise client-side (dialogs,
   tabs and carousels work) and follow the site’s light/dark switch. New
@@ -660,7 +663,7 @@ shadshiny from a component library into a full application toolkit.
   [`shad_message_scroller()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller.md)
   (+ item, and the
   [`shad_message_scroller_to_bottom()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller_to_bottom.md)
-  server helper) — a stick-to-bottom streaming transcript.
+  server helper) – a stick-to-bottom streaming transcript.
 
 - **New components (layout & inputs):**
   [`shad_native_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_native_select.md)
@@ -669,11 +672,11 @@ shadshiny from a component library into a full application toolkit.
   [`shad_empty()`](https://orijitghosh.github.io/shadshiny/reference/shad_empty.md)
   (empty-state panel),
   [`shad_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md)
-  (+ group, separator) — the flex list-row primitive,
+  (+ group, separator) – the flex list-row primitive,
   [`shad_button_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_button_group.md)
-  (+ text, separator) — segmented button controls, and
+  (+ text, separator) – segmented button controls, and
   [`shad_input_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md)
-  (+ addon, text, button) — a field shell for icon/prefix/button affixes
+  (+ addon, text, button) – a field shell for icon/prefix/button affixes
   around
   [`shad_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_input.md)
   /
@@ -712,22 +715,22 @@ Initial release.
 - A framework-free port of the [shadcn/ui](https://ui.shadcn.com) design
   system for Shiny: 49 components across three tiers, shipped as a
   single bundled `htmlDependency()` (no npm, no React, no build step).
-- **Tier 1 — display & typography:** button, badge, avatar (+ group),
+- **Tier 1 – display & typography:** button, badge, avatar (+ group),
   card (+ parts), alert, separator, skeleton, spinner, aspect-ratio,
   label, progress, breadcrumb, table (+ parts), kbd, code, and the
   [`shad_h1()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)–
   [`shad_p()`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
   typography set.
-- **Tier 2 — form inputs:** input, textarea, checkbox, switch, radio
+- **Tier 2 – form inputs:** input, textarea, checkbox, switch, radio
   group, toggle, toggle group, slider, select, combobox, input-OTP,
   calendar, date-picker, and the
   [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md)
   wrapper. All expose native Shiny input values via a generic
   `data-shad` binding.
-- **Tier 3 — overlays:** dialog, alert-dialog, sheet, drawer, popover,
+- **Tier 3 – overlays:** dialog, alert-dialog, sheet, drawer, popover,
   tooltip, hover-card, dropdown-menu, context-menu, menubar, command
   palette, and toast.
-- **Tier 3 — navigation & structure:** tabs, accordion, collapsible,
+- **Tier 3 – navigation & structure:** tabs, accordion, collapsible,
   pagination, scroll-area, resizable, carousel, navigation-menu, and the
   sidebar layout family.
 - **Server API:** `update_shad_*()` helpers for every valued component,

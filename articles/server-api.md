@@ -2,7 +2,7 @@
 
 Everything shadshiny does from the server falls into four groups:
 **update** input values, **open/close** overlays, **raise** toasts, and
-— for the few cases without a wrapper — send a **custom message**
+– for the few cases without a wrapper – send a **custom message**
 directly. All helpers are Shiny-module safe and default to the current
 reactive domain.
 
@@ -101,7 +101,7 @@ observeEvent(input$confirm_delete, {      # the dialog's confirm action
 
 Overlays only reachable this way have to exist in the UI. When the
 content depends on what just happened, build the dialog in the server
-and show it —
+and show it –
 [`shiny::showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html)’s
 shape:
 
@@ -119,7 +119,7 @@ observeEvent(input$delete, {
 ```
 
 It opens itself and, by default, destroys and removes itself once it
-closes — so inputs inside it are live while open and gone afterwards.
+closes – so inputs inside it are live while open and gone afterwards.
 Pass `transient = FALSE` to keep it (and its values) in the document for
 a later
 [`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md).
@@ -129,14 +129,14 @@ a later
 [`shad_sheet()`](https://orijitghosh.github.io/shadshiny/reference/shad_sheet.md)
 and
 [`shad_drawer()`](https://orijitghosh.github.io/shadshiny/reference/shad_drawer.md)
-— not
+– not
 [`shad_popover()`](https://orijitghosh.github.io/shadshiny/reference/shad_popover.md),
 which has no trigger to anchor to.
 
 > **Dialog and sheet content portals to `<body>` on open.** The open
 > element carries `data-state="open"` on `.shad-dialog__content` (not on
 > the root `#id`). This matters if you probe open state from JavaScript
-> — query the content globally, not as a descendant of the id.
+> – query the content globally, not as a descendant of the id.
 
 ## Toasts
 
@@ -261,7 +261,7 @@ update_shad_command("palette", items = list(
 ```
 
 Read selections from **`input$<id>_event`**, a list of `value` and
-`nonce` — not `input$<id>`:
+`nonce` – not `input$<id>`:
 
 ``` r
 
@@ -277,7 +277,7 @@ value. That is fine for a filter and wrong for navigation: choosing
 “Reports” twice has to work twice. `_event` fires every time.
 
 The `shadshiny:attr` message sets or removes an attribute on any element
-— handy for, say, a password reveal that flips an input’s `type`:
+– handy for, say, a password reveal that flips an input’s `type`:
 
 ``` r
 
@@ -297,7 +297,7 @@ shapes are worth calling out:
   `list(collapsed=, mobileOpen=, active=)`. Observe `input$shell$active`
   for the selected nav item.
 - **Menus and command items** report the chosen item’s value as an event
-  — observe `input$menu` / `input$cmd` and switch on it.
+  – observe `input$menu` / `input$cmd` and switch on it.
 
 ## Bookmarking
 
@@ -323,7 +323,7 @@ exists.
 
 ## Gotchas checklist
 
-- No `update_shad_input()` — use
+- No `update_shad_input()` – use
   [`updateTextInput()`](https://rdrr.io/pkg/shiny/man/updateTextInput.html)
   for
   [`shad_input()`](https://orijitghosh.github.io/shadshiny/reference/shad_input.md).
@@ -335,17 +335,17 @@ exists.
   [`withReactiveDomain()`](https://rdrr.io/pkg/shiny/man/domains.html).
 - `shad_item(media = )` treats a **string as an icon name**. Pass
   `"file"` with `media_variant = "icon"`, or wrap non-icon content in a
-  tag — never a rendered
+  tag – never a rendered
   [`shad_icon()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon.md).
 
 ## Where to next
 
 - [Forms &
   validation](https://orijitghosh.github.io/shadshiny/articles/forms.md)
-  — updating and validating a real form.
+  – updating and validating a real form.
 - [Overlays & the
   server](https://orijitghosh.github.io/shadshiny/articles/overlays-and-server.md)
-  — dialogs and confirm flows in depth.
+  – dialogs and confirm flows in depth.
 - [Layout &
   composition](https://orijitghosh.github.io/shadshiny/articles/layout.md)
-  — driving tabs and sidebars. \`\`\`
+  – driving tabs and sidebars. \`\`\`

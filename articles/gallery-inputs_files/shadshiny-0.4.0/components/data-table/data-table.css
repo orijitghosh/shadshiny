@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/data-table/data-table.css */
-/* shadshiny — data-table. Composes table/table.css (load table.css FIRST),
+/* shadshiny – data-table. Composes table/table.css (load table.css FIRST),
    pagination look via own classes, checkbox column composes checkbox.css.
    JS renders only the current page to the DOM (5k×20 budget). */
 

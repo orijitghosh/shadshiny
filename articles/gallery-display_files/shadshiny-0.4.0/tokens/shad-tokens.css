@@ -1,6 +1,6 @@
 /* FILE: inst/assets/tokens/shad-tokens.css */
 /* ==========================================================================
-   shadshiny — design tokens
+   shadshiny – design tokens
    --------------------------------------------------------------------------
    - All colors in OKLCH. Values mirror shadcn/ui v4 semantic tokens (zinc-ish
      "neutral" default), prefixed --shad-. shadcn/ui is MIT, copyright
@@ -18,7 +18,7 @@
    ========================================================================== */
 
 /* ------------------------------------------------------------------ */
-/* Default theme (neutral) — LIGHT                                     */
+/* Default theme (neutral) – LIGHT                                     */
 /* ------------------------------------------------------------------ */
 :root {
   /* -- color: surfaces ------------------------------------------------ */
@@ -79,7 +79,7 @@
   --shad-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
-  /* type scale — size + matched line-height */
+  /* type scale – size + matched line-height */
   --shad-text-xs: 0.75rem;    --shad-leading-xs: 1rem;
   --shad-text-sm: 0.875rem;   --shad-leading-sm: 1.25rem;
   --shad-text-base: 1rem;     --shad-leading-base: 1.5rem;
@@ -131,7 +131,7 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Default theme (neutral) — DARK                                      */
+/* Default theme (neutral) – DARK                                      */
 /* Applies from either `.dark` or bslib's [data-bs-theme="dark"], on   */
 /* the element itself and its subtree (custom props inherit).          */
 /* ------------------------------------------------------------------ */
@@ -180,7 +180,7 @@
 }
 
 /* ==========================================================================
-   THEME PRESETS — [data-shad-theme="..."]
+   THEME PRESETS – [data-shad-theme="..."]
    Selector convention used below for a preset's dark block:
      :is(.dark, [data-bs-theme="dark"]) [data-shad-theme="X"]  (attr inside dark root)
      [data-shad-theme="X"]:is(.dark, [data-bs-theme="dark"])   (attr on the dark root)
@@ -697,7 +697,7 @@
 }
 
 /* ==========================================================================
-   V2 ADDITIONS — chart token extension
+   V2 ADDITIONS – chart token extension
    --------------------------------------------------------------------------
    - --shad-chart-6 completes the categorical series set (upstream shadcn
      ships 5; shadshiny adds a 6th for R plotting defaults).

@@ -15,7 +15,7 @@ div.shad-progress[role=progressbar][aria-valuenow][data-state]
 Indeterminate ignores the transform and runs the sweep animation.
 
 ## Methods / Events
-None (server updates re-render the transform + aria-valuenow). R wrapper: `shad_progress(value = NULL)` — `NULL` ⇒ indeterminate. `update_shad_progress()` patches style + aria via Shiny message.
+None (server updates re-render the transform + aria-valuenow). R wrapper: `shad_progress(value = NULL)` – `NULL` ⇒ indeterminate. `update_shad_progress()` patches style + aria via Shiny message.
 
 ## A11y
 `role="progressbar"` + `aria-valuemin/max/now`; `aria-label` when indeterminate.

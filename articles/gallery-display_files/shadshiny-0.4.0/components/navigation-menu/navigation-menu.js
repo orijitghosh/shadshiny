@@ -1,9 +1,9 @@
 /* FILE: inst/assets/components/navigation-menu/navigation-menu.js */
-/* shadshiny — navigation-menu behavior.
+/* shadshiny – navigation-menu behavior.
    One shared viewport under the trigger row; opening a different trigger
    cross-fades panels while the viewport animates width/height between
    panel sizes. Hover opens (150ms intent delay), click toggles, Esc closes.
-   Panels stay in place (no portal — nav sits at page level). */
+   Panels stay in place (no portal – nav sits at page level). */
 (function () {
   "use strict";
   shad.register("navigation-menu", function (root) {

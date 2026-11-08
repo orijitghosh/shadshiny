@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/number-stepper/number-stepper.css */
-/* shadshiny — number-stepper. Composes input-group (load input-group.css first):
+/* shadshiny – number-stepper. Composes input-group (load input-group.css first):
    the group owns the chrome; this adds the −/+ button styling + centered input. */
 
 .shad-number-stepper { width: 8.5rem; }

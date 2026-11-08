@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/menubar/menubar.js */
-/* shadshiny — menubar (APG menubar). Requires dropdown-menu.js.
+/* shadshiny – menubar (APG menubar). Requires dropdown-menu.js.
    Roving focus across triggers (←/→); click opens; once any menu is open,
    hovering another trigger switches to it; ←/→ inside an open menu move
    between adjacent menus (unless → opens a submenu). */

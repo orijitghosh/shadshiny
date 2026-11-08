@@ -1,6 +1,6 @@
 /* FILE: inst/assets/core/shad-animations.css */
 /* ==========================================================================
-   shadshiny — motion layer
+   shadshiny – motion layer
    --------------------------------------------------------------------------
    Contract with shad-runtime.js Presence:
    - Panels animate ENTER when data-state="open" is set (element visible).

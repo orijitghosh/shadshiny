@@ -23,15 +23,15 @@ div.shad-native-select[data-shad=native-select][.shad-native-select--{size}]
 | `getValue()` | `select.value` (string) |
 | `setValue(v)` | sets `select.value`; emits on change |
 | `destroy()` | unbind |
-| `shad:change` | `{value: string}` — fired on native `change` and API mutation |
+| `shad:change` | `{value: string}` – fired on native `change` and API mutation |
 
-R wrapper: `shad_native_select(inputId, choices, selected = NULL, size = NULL, disabled = FALSE, invalid = FALSE, width = NULL)` — `choices` may be a named list of named lists for `<optgroup>`.
+R wrapper: `shad_native_select(inputId, choices, selected = NULL, size = NULL, disabled = FALSE, invalid = FALSE, width = NULL)` – `choices` may be a named list of named lists for `<optgroup>`.
 
 ## Keyboard
-Fully native: Space/Enter open the picker, arrows move, typeahead matches — nothing is intercepted.
+Fully native: Space/Enter open the picker, arrows move, typeahead matches – nothing is intercepted.
 
 ## A11y
-- Real `<select>` — native semantics, mobile pickers, form participation all intact.
+- Real `<select>` – native semantics, mobile pickers, form participation all intact.
 - Chevron is decorative (`aria-hidden="true"`, `pointer-events: none`).
 - Invalid fields should set `aria-invalid="true"` on the `<select>` (root `data-invalid` follows).
 - Label via `<label for>` or `aria-label` on the `<select>`.

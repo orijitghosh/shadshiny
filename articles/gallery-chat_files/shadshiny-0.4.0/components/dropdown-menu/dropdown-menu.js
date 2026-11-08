@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/dropdown-menu/dropdown-menu.js */
-/* shadshiny — dropdown-menu (APG menu-button). Registers a shared menu core
+/* shadshiny – dropdown-menu (APG menu-button). Registers a shared menu core
    on shad.__menuCore reused by context-menu and menubar.
    Markup:
      <div data-shad="dropdown-menu">
@@ -149,7 +149,7 @@
       opts.onActivate(item);
       opts.onRequestClose("activate");
     }
-    /* pointermove (not hover) drives highlight — shadcn detail */
+    /* pointermove (not hover) drives highlight – shadcn detail */
     function onPointerMove(ev) {
       const item = ev.target.closest(".shad-menu__item");
       if (!item || item.closest(".shad-menu__content") !== panel) return;

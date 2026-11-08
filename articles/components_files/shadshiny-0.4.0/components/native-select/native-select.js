@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/native-select/native-select.js */
-/* shadshiny — native-select behavior.
+/* shadshiny – native-select behavior.
    Markup: <div data-shad="native-select" class="shad-native-select">
              <select class="shad-native-select__select">…</select>
              <svg class="shad-icon shad-native-select__chevron" aria-hidden="true">…</svg>

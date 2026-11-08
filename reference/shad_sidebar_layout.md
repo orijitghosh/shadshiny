@@ -2,7 +2,7 @@
 
 A collapsible application sidebar with a main content area.
 `input$<inputId>` is a list `list(collapsed=, mobileOpen=, active=)`.
-Toggle with the ⌘/Ctrl+B shortcut, a `shad_sidebar_trigger()`, or
+Toggle with the Cmd+B / Ctrl+B shortcut, a `shad_sidebar_trigger()`, or
 [`shad_sidebar_toggle()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md).
 
 ## Usage

@@ -1,7 +1,7 @@
 # KPI / value box
 
 A compact stat card: a label, a large value, an optional trend delta
-chip, an optional icon, caption, and sparkline slot. Grid-friendly —
+chip, an optional icon, caption, and sparkline slot. Grid-friendly –
 drop several into a CSS grid for a KPI row.
 
 ## Usage
@@ -38,7 +38,7 @@ shad_value_box(
 
 - delta_direction:
 
-  Trend for the chip: `"auto"` (default — inferred from a leading
+  Trend for the chip: `"auto"` (default – inferred from a leading
   `+`/`-` in `delta`), `"up"`, `"down"`, or `"neutral"`.
 
 - icon:

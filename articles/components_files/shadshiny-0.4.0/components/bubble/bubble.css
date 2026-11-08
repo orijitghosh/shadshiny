@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/bubble/bubble.css */
-/* shadshiny — bubble. Chat message surface. CSS-only.
+/* shadshiny – bubble. Chat message surface. CSS-only.
    Variants: --default --secondary --muted --tinted --outline --ghost
    --destructive. Alignment: --start (received) / --end (sent).
    Reactions chips + bubble-group (consecutive same-sender). */

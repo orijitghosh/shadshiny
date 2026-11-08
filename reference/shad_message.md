@@ -27,7 +27,7 @@ shad_message_group(..., class = NULL)
 
 - ...:
 
-  The message body — placed inside the bubble content. For
+  The message body – placed inside the bubble content. For
   `state = "typing"` the body is replaced by an animated typing
   indicator.
 

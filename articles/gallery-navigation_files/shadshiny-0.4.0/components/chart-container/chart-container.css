@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/chart-container/chart-container.css */
-/* shadshiny — chart-container. CSS-only wrapper giving R plot outputs
+/* shadshiny – chart-container. CSS-only wrapper giving R plot outputs
    (renderPlot <img>, htmlwidget <div>, canvas) the shadcn chart look.
    Card typography mirrors card/card.css. Uses --shad-chart-* tokens. */
 

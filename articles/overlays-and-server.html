@@ -91,8 +91,8 @@
 
     
     
-<p>This vignette covers the overlay family — dialog, sheet, drawer,
-alert-dialog — and the server-side helpers that open them and raise
+<p>This vignette covers the overlay family – dialog, sheet, drawer,
+alert-dialog – and the server-side helpers that open them and raise
 toasts.</p>
 <div class="section level2">
 <h2 id="trigger-driven-vs-server-driven">Trigger-driven vs server-driven<a class="anchor" aria-label="anchor" href="#trigger-driven-vs-server-driven"></a>
@@ -113,7 +113,7 @@ is reported as a logical <code>input$id</code>.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>The same overlay can be opened (or closed) from the server without
 any trigger, using <code><a href="../reference/shad_overlay_server.html">shad_dialog_open()</a></code> /
-<code><a href="../reference/shad_overlay_server.html">shad_dialog_close()</a></code>. Each overlay has a matching pair —
+<code><a href="../reference/shad_overlay_server.html">shad_dialog_close()</a></code>. Each overlay has a matching pair –
 <code><a href="../reference/shad_overlay_server.html">shad_sheet_open()</a></code>, <code><a href="../reference/shad_overlay_server.html">shad_drawer_open()</a></code>,
 <code><a href="../reference/shad_overlay_server.html">shad_alert_dialog_open()</a></code>, <code><a href="../reference/shad_overlay_server.html">shad_popover_open()</a></code>,
 and so on.</p>
@@ -132,8 +132,8 @@ and so on.</p>
 <h2 id="dialogs-built-in-the-server">Dialogs built in the server<a class="anchor" aria-label="anchor" href="#dialogs-built-in-the-server"></a>
 </h2>
 <p>Both forms above need the overlay to exist in the UI. When the
-dialog’s content depends on what just happened — the row you clicked,
-the file that failed — build it in the server and show it, the way
+dialog’s content depends on what just happened – the row you clicked,
+the file that failed – build it in the server and show it, the way
 <code><a href="https://rdrr.io/pkg/shiny/man/showModal.html" class="external-link">shiny::showModal()</a></code> works:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
@@ -151,7 +151,7 @@ the file that failed — build it in the server and show it, the way
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>The overlay is appended to <code>&lt;body&gt;</code>, opens itself,
-and — by default — destroys and removes itself once it closes. Nothing
+and – by default – destroys and removes itself once it closes. Nothing
 to clean up, and no ids left behind. <code><a href="../reference/shad_show_dialog.html">shad_show_dialog()</a></code>
 also takes <code><a href="../reference/shad_alert_dialog.html">shad_alert_dialog()</a></code>, <code><a href="../reference/shad_sheet.html">shad_sheet()</a></code>
 and <code><a href="../reference/shad_drawer.html">shad_drawer()</a></code>.</p>
@@ -161,7 +161,7 @@ UI-declared dialog. They vanish with the dialog, though: read what you
 need in the observer, or pass <code>transient = FALSE</code> to keep the
 overlay (and its values) in the document so it can be reopened with
 <code><a href="../reference/shad_overlay_server.html">shad_dialog_open()</a></code>.</p>
-<p><code>shad_remove_dialog(id)</code> closes one from the server — for
+<p><code>shad_remove_dialog(id)</code> closes one from the server – for
 a job that finished or a save that succeeded. Esc, the backdrop and
 <code><a href="../reference/shad_dialog.html">shad_dialog_close_button()</a></code> all still work on their own.</p>
 </div>
@@ -207,7 +207,7 @@ set the variant for you.</p>
 </h3>
 <p><code><a href="../reference/shad_toast.html">shad_toast_loading()</a></code> shows an indefinite spinner and
 returns an id. Feed that id to <code><a href="../reference/shad_toast.html">shad_toast_update()</a></code> when the
-work finishes to morph the same toast into a result — no second toast,
+work finishes to morph the same toast into a result – no second toast,
 no flicker.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
@@ -235,7 +235,7 @@ no flicker.</p>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>All <code>inputId</code>s pass through <code>session$ns()</code>, so
 components and their <code>update_shad_*()</code> /
-<code>shad_*_open()</code> helpers are safe inside Shiny modules — use
+<code>shad_*_open()</code> helpers are safe inside Shiny modules – use
 the same bare id in UI and server as you would with base inputs.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

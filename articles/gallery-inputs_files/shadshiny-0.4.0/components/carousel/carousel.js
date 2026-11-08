@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/carousel/carousel.js */
-/* shadshiny — carousel behavior. Scroll-snap native scrolling; JS adds
+/* shadshiny – carousel behavior. Scroll-snap native scrolling; JS adds
    prev/next paging, generated dots, index tracking via scroll position,
    and arrow-key support. getValue()/setValue() and the shad:change payload
    are 1-based slide numbers (the R contract); `index` is 0-based internally. */
@@ -72,7 +72,7 @@
         d.setAttribute("data-state", j === index ? "active" : "inactive");
       });
       // Report immediately: the smooth scroll settles asynchronously, but the
-      // value is already known — this keeps server-driven navigation and tests
+      // value is already known – this keeps server-driven navigation and tests
       // deterministic instead of waiting on the scroll animation.
       programmatic = true;
       viewport.scrollTo({ left: all[i].offsetLeft, behavior: "smooth" });

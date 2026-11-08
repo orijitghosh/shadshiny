@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/switch/switch.js */
-/* shadshiny — switch behavior (APG switch pattern).
+/* shadshiny – switch behavior (APG switch pattern).
    Markup: <button data-shad="switch" class="shad-switch" role="switch"> */
 (function () {
   "use strict";

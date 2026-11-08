@@ -11,18 +11,18 @@ div.shad-marker.shad-marker--{variant}[.shad-marker--shimmer][role=status]
 
 ## Modifier classes
 - Variants: `(none = default row) | shad-marker--border (bottom rule) | shad-marker--separator (centered label, divider lines both sides)`
-- `shad-marker--shimmer` — animated gradient sweep over `__content` for streaming/"thinking" text; falls back to static muted text under `prefers-reduced-motion`
+- `shad-marker--shimmer` – animated gradient sweep over `__content` for streaming/"thinking" text; falls back to static muted text under `prefers-reduced-motion`
 
 ## Data-attribute API
-None — appearance is fully class-driven.
+None – appearance is fully class-driven.
 
 ## Methods / Events
-None — display-only. R wrapper: `shad_marker(label, icon = NULL, variant = c("default", "border", "separator"), streaming = FALSE)` — `streaming = TRUE` adds `--shimmer` + `role="status"`.
+None – display-only. R wrapper: `shad_marker(label, icon = NULL, variant = c("default", "border", "separator"), streaming = FALSE)` – `streaming = TRUE` adds `--shimmer` + `role="status"`.
 
 ## Keyboard
-None — static content.
+None – static content.
 
 ## A11y
 - Streaming markers ("Thinking…") should carry `role="status"` so updates are announced politely.
 - `__icon` is decorative: `aria-hidden="true"`.
-- Separator/border rules are drawn with `::before`/`::after`/borders — nothing extra is announced.
+- Separator/border rules are drawn with `::before`/`::after`/borders – nothing extra is announced.

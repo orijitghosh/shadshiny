@@ -1,10 +1,10 @@
 /* FILE: inst/assets/core/shad-runtime.js */
 /* ==========================================================================
-   shadshiny — shared runtime
+   shadshiny – shared runtime
    --------------------------------------------------------------------------
    Single global: window.shad. No modules, no build step. ES2020.
 
-   Component contract (uniform across the kit — Shiny InputBindings are built
+   Component contract (uniform across the kit – Shiny InputBindings are built
    purely on this):
      - Markup is declarative: root element carries data-shad="<name>".
      - shad.init(root?) scans and wires; idempotent (instances cached on the
@@ -180,7 +180,7 @@
   wireCodeCopy();
 
   /* ================================================================
-     FloatingEngine — popover/menu/tooltip positioning
+     FloatingEngine – popover/menu/tooltip positioning
      ----------------------------------------------------------------
      position:fixed math (viewport coords == fixed coords). Supports:
        side: top|right|bottom|left      (preferred)
@@ -324,14 +324,14 @@
   shad.floating = Floating;
 
   /* ================================================================
-     DismissLayer — global overlay stack
+     DismissLayer – global overlay stack
      ----------------------------------------------------------------
      push({el, onDismiss, closeOnEscape=true, closeOnOutside=true,
            extraElements=[]}) -> disposer.
      - Escape dismisses ONLY the topmost layer.
      - pointerdown outside dismisses the topmost layer IFF the target is
        not inside that layer's el/extraElements AND not inside any layer
-       ABOVE it (there are none, it's topmost) — nested case works because
+       ABOVE it (there are none, it's topmost) – nested case works because
        an inner layer (menu in dialog) is pushed later, so it is topmost
        and receives the dismissal first; the click that closed it does not
        also close the dialog (we stop after topmost).
@@ -388,7 +388,7 @@
   shad.dismiss = Dismiss;
 
   /* ================================================================
-     FocusTrap — modal focus containment
+     FocusTrap – modal focus containment
      ----------------------------------------------------------------
      trap(container) -> release(). Saves document.activeElement, moves
      focus to [data-shad-autofocus] || first tabbable || container, keeps
@@ -441,7 +441,7 @@
   };
 
   /* ================================================================
-     RovingTabindex — arrow-key item navigation
+     RovingTabindex – arrow-key item navigation
      ----------------------------------------------------------------
      roving(container, {
        selector,                  // item selector (required)
@@ -533,7 +533,7 @@
   };
 
   /* ================================================================
-     Presence — animated unmount
+     Presence – animated unmount
      ----------------------------------------------------------------
      show(el): removes [hidden], forces reflow, sets data-state="open".
      hide(el, done?): sets data-state="closed"; when the exit animation
@@ -571,7 +571,7 @@
   };
 
   /* ================================================================
-     ScrollLock — reference-counted body scroll lock
+     ScrollLock – reference-counted body scroll lock
      ----------------------------------------------------------------
      Compensates for scrollbar width so layout doesn't shift.
      ================================================================ */
@@ -603,7 +603,7 @@
   shad.scrollLock = ScrollLock;
 
   /* ================================================================
-     Portal — move panel to document.body, restore on close
+     Portal – move panel to document.body, restore on close
      ----------------------------------------------------------------
      portal(el) -> restore(). A comment node marks the original slot so
      the element returns to the exact position (Shiny fragments keep
@@ -713,7 +713,7 @@
     el.addEventListener("shad:close", function () {
       // shad:close fires when the close STARTS; Presence is still animating the
       // element out and only then applies [hidden]. Its own fallback timer caps
-      // that at 500ms, so waiting past it needs no per-component knowledge —
+      // that at 500ms, so waiting past it needs no per-component knowledge –
       // and the element is invisible for the whole wait either way.
       setTimeout(function () {
         if (window.Shiny && Shiny.unbindAll) Shiny.unbindAll(el);
@@ -736,7 +736,7 @@
       if (el.__shadInstance) return;
       const name = el.getAttribute("data-shad");
       const factory = registry.get(name);
-      if (!factory) return; // component JS not loaded — silently skip
+      if (!factory) return; // component JS not loaded – silently skip
       try {
         const instance = factory(el) || {};
         instance.el = el;
@@ -782,7 +782,7 @@
     delete e.__shadInstance;
   }
   shad.autoInit = function () {
-    // Initialise whatever exists right now. Safe to call repeatedly —
+    // Initialise whatever exists right now. Safe to call repeatedly –
     // shad.init caches instances on the element, so this is idempotent.
     shad.init(document);
 

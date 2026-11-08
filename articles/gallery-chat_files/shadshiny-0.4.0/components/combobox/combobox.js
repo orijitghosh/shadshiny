@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/combobox/combobox.js */
-/* shadshiny — combobox behavior (APG combobox w/ listbox popup).
+/* shadshiny – combobox behavior (APG combobox w/ listbox popup).
    Modes: data-multiple absent -> single (string|null); present -> string[].
    Filtering: case-insensitive substring on item text.
    Markup: see combobox.html. Value chips (multi) are rendered by JS into

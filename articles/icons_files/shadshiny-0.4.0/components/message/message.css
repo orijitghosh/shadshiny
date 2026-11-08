@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/message/message.css */
-/* shadshiny — message. Chat row composing bubble (load bubble.css first).
+/* shadshiny – message. Chat row composing bubble (load bubble.css first).
    Alignment: --start / --end. States via data-state: typing | in-progress |
    failed. message-group wraps consecutive rows from one sender.
    DECISION: typing/spin keyframes live here (not shad-animations.css) so the
@@ -52,7 +52,7 @@
 .shad-message--end .shad-message__content { align-items: flex-end; }
 
 /* header: sender + meta. Follows the message side but keeps LTR content
-   order (sender before meta) — it is NOT row-reversed on --end. */
+   order (sender before meta) – it is NOT row-reversed on --end. */
 .shad-message__header {
   display: flex;
   align-items: baseline;

@@ -1,7 +1,7 @@
 # Attachment
 
 A file/image attachment chip with media, metadata, an upload-lifecycle
-state, and action buttons. Part of the chat/AI kit — for composers,
+state, and action buttons. Part of the chat/AI kit – for composers,
 message threads, and upload lists. Row up with
 `shad_attachment_group()`.
 
@@ -45,7 +45,7 @@ shad_attachment_group(..., class = NULL)
 
 - actions:
 
-  Optional action buttons — see `shad_attachment_action()`.
+  Optional action buttons – see `shad_attachment_action()`.
 
 - orientation:
 
@@ -86,7 +86,7 @@ shad_attachment_group(..., class = NULL)
 
 - aria_label:
 
-  Accessible label (required — the button is icon-only).
+  Accessible label (required – the button is icon-only).
 
 ## Value
 

@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/stepper/stepper.js */
-/* shadshiny — stepper behavior.
+/* shadshiny – stepper behavior.
    Markup:
      <div data-shad="stepper" class="shad-stepper" data-orientation="horizontal"
           [data-linear] [data-clickable] [data-active="0"]>

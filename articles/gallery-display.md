@@ -5,7 +5,7 @@ code you see under each preview. Expand *Code* to copy it. The previews
 recolour with the light/dark switch in the navbar, exactly as they would
 in your app.
 
-These are the non-interactive building blocks — the display layer of
+These are the non-interactive building blocks – the display layer of
 Tier 1. For inputs see [Gallery: form
 inputs](https://orijitghosh.github.io/shadshiny/articles/gallery-inputs.md);
 for dialogs and menus see [Gallery:
@@ -208,7 +208,7 @@ Code
 ## Item
 
 [`shad_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md)
-is the flexible list row — media, title, description and actions — used
+is the flexible list row – media, title, description and actions – used
 for settings lists, results, and menus. Group them with
 [`shad_item_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_item.md).
 

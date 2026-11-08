@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/progress/progress.css */
-/* shadshiny — progress. Determinate via --shad-progress (0-100) or JS-free
+/* shadshiny – progress. Determinate via --shad-progress (0-100) or JS-free
    inline style on the indicator; indeterminate via data-state. */
 
 .shad-progress {
@@ -16,7 +16,7 @@
   height: 100%;
   background-color: var(--shad-primary);
   border-radius: inherit;
-  /* determinate: translateX(-(100 - value)%) — set via inline style:
+  /* determinate: translateX(-(100 - value)%) – set via inline style:
      style="transform: translateX(-40%)" for value 60 */
   transition: transform var(--shad-duration-slow) var(--shad-ease-out);
 }

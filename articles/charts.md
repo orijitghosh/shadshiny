@@ -1,10 +1,10 @@
 # Dashboards & charts
 
-shadshiny does not draw charts. It gives you the shell around them —
+shadshiny does not draw charts. It gives you the shell around them –
 [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
 and
 [`shad_chart_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_chart_container.md)
-— and the palette inside them, so a ggplot2, plotly, or echarts4r figure
+– and the palette inside them, so a ggplot2, plotly, or echarts4r figure
 matches the page instead of fighting it.
 
 ## KPI cards
@@ -26,7 +26,7 @@ shad_value_box(
 
 `delta_direction = "auto"` reads the sign off the `delta` string: a
 leading `-` or `−` renders the down/destructive chip, anything else
-renders up. Set it explicitly whenever “up” isn’t the good direction —
+renders up. Set it explicitly whenever “up” isn’t the good direction –
 churn going up is not a win.
 
 `sparkline` takes any tag. Reach for
@@ -35,7 +35,7 @@ before a
 [`plotOutput()`](https://rdrr.io/pkg/shiny/man/plotOutput.html): it is
 inline SVG with no plotting stack and, more usefully, its marks are
 painted with the theme’s chart tokens, so a dark-mode toggle or a preset
-switch restyles it *in CSS* — no re-render, no server round-trip.
+switch restyles it *in CSS* – no re-render, no server round-trip.
 
 ``` r
 
@@ -48,7 +48,7 @@ link.
 
 Lay them out with
 [`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
-— `min_width` fits as many equal columns as will fit, with no
+– `min_width` fits as many equal columns as will fit, with no
 breakpoints to maintain:
 
 ``` r
@@ -66,7 +66,7 @@ shad_grid(
 [`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md)
 draws `"line"`, `"area"`, `"bar"`, or `"step"` from a numeric vector,
 with no axes and no labels. It stretches to fill whatever box it is
-dropped into — a value box strip, a table cell, an item row:
+dropped into – a value box strip, a table cell, an item row:
 
 ``` r
 
@@ -88,7 +88,7 @@ shad_mini_donut(c(3, 1), thickness = 1)   # thickness = 1 is a pie
 
 `color` (and the donut’s `colors`) take a chart-token index `1`–`5`, or
 any CSS colour when you need to step outside the palette. Both charts
-are decorative by default and hidden from screen readers — the number
+are decorative by default and hidden from screen readers – the number
 they illustrate is normally right next to them. Pass `label` when the
 chart is the only carrier of the information.
 
@@ -106,7 +106,7 @@ shad_chart_container(
 ```
 
 `aspect` locks the card’s ratio. Use `"auto"` when you set an explicit
-height on the plot yourself — otherwise the two fight and you get
+height on the plot yourself – otherwise the two fight and you get
 letterboxing. `plain = TRUE` drops the card chrome and keeps only the
 sizing wrapper, which is what you want when the container already sits
 inside a
@@ -144,9 +144,9 @@ strings if you need something the chart ramp doesn’t cover
 
 This is the part that matters.
 [`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md)
-themes are switched at *runtime* — by
+themes are switched at *runtime* – by
 [`update_shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_theme.md)
-or the user’s dark-mode toggle — and a plot rendered in R has no idea.
+or the user’s dark-mode toggle – and a plot rendered in R has no idea.
 [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md)
 is the bridge: a reactive read of the browser’s current theme that
 returns `list(preset = , dark = )`. Touch it inside
@@ -218,7 +218,7 @@ output$e <- echarts4r::renderEcharts4r({
 })
 ```
 
-Both `plotly` and `echarts4r` are Suggests — the helpers error with a
+Both `plotly` and `echarts4r` are Suggests – the helpers error with a
 clear message if the package isn’t installed.
 
 ## Base graphics
@@ -247,7 +247,7 @@ shad_timeline(
   shad_timeline_item("Order placed", time = "09:12", icon = "check",
                      description = "Payment authorised"),
   shad_timeline_item("Shipped", time = "14:40", status = "active"),
-  shad_timeline_item("Delivered", time = "—", status = "muted", last = TRUE),
+  shad_timeline_item("Delivered", time = "–", status = "muted", last = TRUE),
   align = "left"   # or "alternate"
 )
 ```

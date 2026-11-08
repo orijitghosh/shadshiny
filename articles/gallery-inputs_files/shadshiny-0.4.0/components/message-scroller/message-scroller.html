@@ -4,7 +4,7 @@
 <!-- FILE: inst/assets/components/message-scroller/message-scroller.html -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>shadshiny — message-scroller</title>
+<title>shadshiny – message-scroller</title>
 <link rel="stylesheet" href="../../tokens/shad-tokens.css">
 <link rel="stylesheet" href="../../core/shad-base.css">
 <link rel="stylesheet" href="../bubble/bubble.css">
@@ -31,7 +31,7 @@
     <button type="button" id="ms-prepend">prepend history</button>
     <button type="button" id="ms-stream">start/stop stream</button>
   </div>
-  <p class="demo-label">stick-to-bottom viewport — scroll up to detach</p>
+  <p class="demo-label">stick-to-bottom viewport – scroll up to detach</p>
 
   <div class="demo-frame">
     <div class="shad-message-scroller" data-shad="message-scroller"
@@ -55,7 +55,7 @@
           </div>
           <div class="shad-message-scroller__item">
             <div class="shad-bubble shad-bubble--muted shad-bubble--start">
-              <div class="shad-bubble__content">1,284 of 50,000 rows (2.6%) contain at least one missing value — mostly in the income column.</div>
+              <div class="shad-bubble__content">1,284 of 50,000 rows (2.6%) contain at least one missing value – mostly in the income column.</div>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
     </div>
   </div>
 
-  <p class="demo-out" id="ms-out">state: —</p>
+  <p class="demo-out" id="ms-out">state: –</p>
 </div>
 
 <script src="../../core/shad-runtime.js"></script>
@@ -94,14 +94,14 @@
     n += 1;
     var mine = n % 2 === 0;
     content.appendChild(row(bubble(mine ? "end" : "start", mine ? "default" : "muted",
-      "New message #" + n + " — appended while you " +
+      "New message #" + n + " – appended while you " +
       "(maybe) scrolled up.")));
   });
 
   document.getElementById("ms-prepend").addEventListener("click", function () {
     histN += 1;
     content.insertBefore(
-      row(bubble("start", "outline", "Older history item #" + histN + " (prepended — the viewport should not shift).")),
+      row(bubble("start", "outline", "Older history item #" + histN + " (prepended – the viewport should not shift).")),
       content.firstElementChild);
   });
 
@@ -111,7 +111,7 @@
     content.appendChild(target);
     var span = target.querySelector(".shad-bubble__content");
     var words = ("Streaming tokens keep arriving and the viewport follows only while " +
-      "you are at the bottom — scroll up mid-stream and the jump button appears instead").split(" ");
+      "you are at the bottom – scroll up mid-stream and the jump button appears instead").split(" ");
     var i = 0;
     streamTimer = setInterval(function () {
       span.textContent += (i ? " " : "") + words[i % words.length];

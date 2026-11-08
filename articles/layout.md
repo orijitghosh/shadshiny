@@ -1,7 +1,7 @@
 # Layout & composition
 
-shadshiny gives you surfaces and structure — cards, tabs, a sidebar
-shell, resizable panes — but leaves page layout to plain CSS. This guide
+shadshiny gives you surfaces and structure – cards, tabs, a sidebar
+shell, resizable panes – but leaves page layout to plain CSS. This guide
 shows how to assemble them into real app shells.
 
 ## Cards as the base surface
@@ -32,7 +32,7 @@ wrappers: each argument becomes a custom property on the root, so there
 is no utility-class soup and no JavaScript.
 
 [`shad_container()`](https://orijitghosh.github.io/shadshiny/reference/shad_container.md)
-is the outermost wrapper — a centred, max-width column:
+is the outermost wrapper – a centred, max-width column:
 
 ``` r
 
@@ -40,7 +40,7 @@ shad_container(page_content, size = "lg")   # sm/md/lg/xl/full, or a CSS length
 ```
 
 [`shad_stack()`](https://orijitghosh.github.io/shadshiny/reference/shad_stack.md)
-is “these things, spaced” — a flex column by default, a row when you
+is “these things, spaced” – a flex column by default, a row when you
 ask:
 
 ``` r
@@ -54,7 +54,7 @@ shad_stack(
 ```
 
 [`shad_grid()`](https://orijitghosh.github.io/shadshiny/reference/shad_grid.md)
-handles two dimensions. Reach for `min_width` first — it fits as many
+handles two dimensions. Reach for `min_width` first – it fits as many
 equal columns as will fit, with no breakpoints to reason about:
 
 ``` r
@@ -84,8 +84,8 @@ shad_grid(
 )
 ```
 
-Gaps and padding accept a **spacing token step** — `gap = 4` is
-`var(--shad-space-4)`, the same scale the components use internally — or
+Gaps and padding accept a **spacing token step** – `gap = 4` is
+`var(--shad-space-4)`, the same scale the components use internally – or
 any CSS length when you need to escape the scale.
 
 ## Tabs
@@ -109,7 +109,7 @@ shad_tabs(
 > [`textOutput()`](https://rdrr.io/pkg/shiny/man/textOutput.html) or
 > [`plotOutput()`](https://rdrr.io/pkg/shiny/man/plotOutput.html) in a
 > tab that isn’t the `selected` one won’t render until you switch to it
-> — and sometimes not even then. Force it with
+> – and sometimes not even then. Force it with
 > `outputOptions(output, "id", suspendWhenHidden = FALSE)`. The same
 > applies to outputs inside a dialog or sheet that opens later.
 
@@ -123,7 +123,7 @@ content in a
 unless you pass `container = FALSE`.
 
 [`shad_page_navbar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_navbar.md)
-— a title bar carrying a tab strip, panels below. The window scrolls;
+– a title bar carrying a tab strip, panels below. The window scrolls;
 the bar is sticky. `input$<inputId>` is the active tab.
 
 ``` r
@@ -137,7 +137,7 @@ ui <- shad_page_navbar(
 ```
 
 [`shad_page_sidebar()`](https://orijitghosh.github.io/shadshiny/reference/shad_page_sidebar.md)
-— the application frame: a collapsible sidebar, a bar with its trigger,
+– the application frame: a collapsible sidebar, a bar with its trigger,
 and a scrolling main region. This shell takes the full viewport height
 and scrolls its main region rather than the window, so the sidebar rail
 and footer stay put.
@@ -158,7 +158,7 @@ ui <- shad_page_sidebar(
 
 [`shad_command_palette()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
 is the “jump anywhere” pattern: a modal, searchable list of everything
-the app can do, opened with ⌘K / Ctrl+K. Items come from data — a named
+the app can do, opened with ⌘K / Ctrl+K. Items come from data – a named
 vector, or a named list of them for grouped sections:
 
 ``` r
@@ -173,7 +173,7 @@ shad_command_palette("palette", items = list(
 ```
 
 Drop `shad_command_trigger("palette")` in the page bar for people who do
-not know the shortcut, and observe **`input$palette_event`** — not
+not know the shortcut, and observe **`input$palette_event`** – not
 `input$palette`:
 
 ``` r
@@ -190,7 +190,7 @@ server <- function(input, output, session) {
 ```
 
 `input$palette` holds the last value, but Shiny drops a repeat of the
-same value — so choosing “Reports” twice would only fire once. `_event`
+same value – so choosing “Reports” twice would only fire once. `_event`
 carries `value` plus a `nonce` and fires every time, which is what
 navigation needs.
 
@@ -275,7 +275,7 @@ shad_resizable(
 ## Scrollable regions
 
 `shad_scroll_area(height = )` gives a fixed-height region a styled
-scrollbar — useful for long lists inside a card or a chat transcript.
+scrollbar – useful for long lists inside a card or a chat transcript.
 For a growing conversation that should pin to the bottom, reach for
 [`shad_message_scroller()`](https://orijitghosh.github.io/shadshiny/reference/shad_message_scroller.md)
 instead (see the [chat
@@ -285,7 +285,7 @@ gallery](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html)).
 
 [`shad_separator()`](https://orijitghosh.github.io/shadshiny/reference/shad_separator.md)
 draws a divider. Horizontal separators span the full width by default,
-which overflows inside a flex row — give them `style = "flex:1"` when
+which overflows inside a flex row – give them `style = "flex:1"` when
 using one as a rule between inline items (for example an “OR” divider).
 
 ``` r
@@ -301,9 +301,9 @@ tags$div(style = "display:flex;align-items:center;gap:0.75rem",
 
 - [Gallery: navigation &
   structure](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.html)
-  — these components, live.
+  – these components, live.
 - [Server
-  API](https://orijitghosh.github.io/shadshiny/articles/server-api.md) —
+  API](https://orijitghosh.github.io/shadshiny/articles/server-api.md) –
   driving tabs, sidebars and overlays.
-- `shad_run_example("02-analytics-dashboard")` — a full sidebar +
+- `shad_run_example("02-analytics-dashboard")` – a full sidebar +
   menubar shell. \`\`\`

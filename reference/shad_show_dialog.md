@@ -4,7 +4,7 @@ Build a
 [`shad_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_dialog.md)
 (or alert dialog, sheet, drawer) in the server function and show it, the
 way [`shiny::showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html)
-works — no need to place it in the UI up front and no `trigger`.
+works – no need to place it in the UI up front and no `trigger`.
 
 ## Usage
 
@@ -48,7 +48,7 @@ Invisibly the overlay's input id.
 The overlay is inserted at the end of `<body>`, opens itself once its
 JavaScript instance exists, and by default removes itself from the
 document after it closes (`transient = TRUE`). Its inputs are live while
-it is open — read `input$<id>` inside it as usual — so
+it is open – read `input$<id>` inside it as usual – so
 `transient = FALSE` is the right call when you need those values to
 survive the close.
 

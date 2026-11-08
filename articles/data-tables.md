@@ -36,7 +36,7 @@ and characters print as text.
 
 | Field | Type | Meaning |
 |----|----|----|
-| `selected` | character vector | Row keys, in selection order, and persisting across pages. By default a key is the row’s 1-based index in the data you passed, as a string — so `as.integer(input$tbl$selected)` indexes the frame. Set `row_key` to use a column instead. |
+| `selected` | character vector | Row keys, in selection order, and persisting across pages. By default a key is the row’s 1-based index in the data you passed, as a string – so `as.integer(input$tbl$selected)` indexes the frame. Set `row_key` to use a column instead. |
 | `sort` | list of `{column, direction}` | Active sort keys, outermost first. `direction` is `"asc"` or `"desc"`. |
 | `filter` | list | `global` (string) plus one entry per filtered column. |
 | `page` | integer | Current 1-based page. |
@@ -85,7 +85,7 @@ server-side before you get there.
 
 ## Columns and formatting
 
-Pass `columns` — a named list of
+Pass `columns` – a named list of
 [`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md)
 specs, keyed by column name. Anything you leave out keeps its default.
 
@@ -107,11 +107,11 @@ shad_data_table(
 ```
 
 [`shad_col()`](https://orijitghosh.github.io/shadshiny/reference/shad_col.md)
-takes `header` (the first argument — the displayed label), plus `width`,
+takes `header` (the first argument – the displayed label), plus `width`,
 `align`, `sortable`, `filterable`, `visible`, `html`, and one of
 `format` or `cell`. `format` and `cell` are mutually exclusive, and
 neither combines with `html = TRUE` (which passes the column’s strings
-through as raw HTML — only do that with values you generated).
+through as raw HTML – only do that with values you generated).
 
 The bundled formatters are:
 
@@ -142,7 +142,7 @@ shad_col("Owner", cell = function(value, row) {
 })
 ```
 
-Cell functions run in R at render time, not on the client — so they cost
+Cell functions run in R at render time, not on the client – so they cost
 one call per visible row of the frame you pass, and they cannot see
 later filter state. Keep them cheap.
 

@@ -1,7 +1,7 @@
 # Gallery: overlays & menus
 
 Overlays open and close **entirely client-side**, so every trigger on
-this page works — click the buttons and try the menus. Each overlay also
+this page works – click the buttons and try the menus. Each overlay also
 has an `inputId` so you can open it from the server with
 [`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
 /
@@ -69,7 +69,7 @@ Code
 
 ## Popover
 
-A small floating panel anchored to its trigger — good for pickers and
+A small floating panel anchored to its trigger – good for pickers and
 quick forms.
 
 Dimensions
@@ -147,7 +147,7 @@ Code
 
 ## Menubar
 
-An application menu bar — each
+An application menu bar – each
 [`shad_menubar_menu()`](https://orijitghosh.github.io/shadshiny/reference/shad_menubar.md)
 opens a dropdown; hovering across the bar moves between them.
 
@@ -179,8 +179,8 @@ Code
 ## Dialogs built in the server
 
 Everything above declares its overlay in the UI. When the content
-depends on what just happened — the row that was clicked, the upload
-that failed — build the dialog in the server instead and show it, the
+depends on what just happened – the row that was clicked, the upload
+that failed – build the dialog in the server instead and show it, the
 way [`shiny::showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html)
 works:
 
@@ -200,7 +200,7 @@ observeEvent(input$delete, {
 ```
 
 It is appended to `<body>`, opens itself, and by default removes itself
-once it closes — nothing to clean up and no ids left behind. Inputs
+once it closes – nothing to clean up and no ids left behind. Inputs
 inside it are live while it is open, so read them in the observer; pass
 `transient = FALSE` to keep the overlay (and its values) around for
 [`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md).
@@ -219,7 +219,7 @@ closes one from the server.
 [`shad_command()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
 is a searchable action list. Inline it (below) or use
 [`shad_command_palette()`](https://orijitghosh.github.io/shadshiny/reference/shad_command_palette.md)
-for the ⌘K spotlight overlay — same component, items supplied as data:
+for the ⌘K spotlight overlay – same component, items supplied as data:
 
 ``` r
 
@@ -237,7 +237,7 @@ observeEvent(input$palette_event, { ... })
 ```
 
 [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
-swaps the items from the server — recent documents, search hits,
+swaps the items from the server – recent documents, search hits,
 commands gated on the signed-in user.
 
 Inline, the same component looks like this. Type to filter.

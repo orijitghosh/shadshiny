@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/sheet/sheet.js */
-/* shadshiny — sheet behavior. Dialog machinery + side slide.
+/* shadshiny – sheet behavior. Dialog machinery + side slide.
    Markup:
      <div data-shad="sheet" data-side="right|left|top|bottom">
        <button class="shad-sheet__trigger">…</button>

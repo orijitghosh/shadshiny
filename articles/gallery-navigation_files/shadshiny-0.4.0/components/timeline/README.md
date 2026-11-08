@@ -1,5 +1,5 @@
 <!-- FILE: inst/assets/components/timeline/README.md -->
-# timeline (Tier 1, V2 — CSS-only)
+# timeline (Tier 1, V2 – CSS-only)
 
 Vertical timeline: dot + connector + content per item. Left-aligned (default) or alternating.
 
@@ -24,4 +24,4 @@ ol.shad-timeline[--alternate?]
 | (class) `--alternate` | root | items alternate left/right of a center spine |
 
 ## A11y
-Semantic `<ol>`/`<li>` conveys order; connectors and dot icons are `aria-hidden`. Use `<time datetime>` for machine-readable dates. Pure CSS — no roles, no JS.
+Semantic `<ol>`/`<li>` conveys order; connectors and dot icons are `aria-hidden`. Use `<time datetime>` for machine-readable dates. Pure CSS – no roles, no JS.

@@ -1,7 +1,7 @@
 # Icons
 
 shadshiny ships a small, curated icon set drawn from
-[Lucide](https://lucide.dev) — enough to cover the components without
+[Lucide](https://lucide.dev) – enough to cover the components without
 pulling in a font or an icon package. Reference an icon **by name**
 anywhere a component takes an `icon` argument, or render one directly
 with
@@ -190,7 +190,7 @@ exactly what you pass to `icon =`.
 ## Sizing & colour
 
 Icons inherit the current text colour (`currentColor`), so they tint
-themselves to whatever context they sit in — wrap one in a coloured
+themselves to whatever context they sit in – wrap one in a coloured
 element and it follows. They render at `1rem` by default; to resize a
 standalone icon, pass an inline `style` through `...` (it overrides the
 default sizing), or attach the `shad-icon--sm` / `shad-icon--lg` class.
@@ -209,7 +209,7 @@ Code
 ## Missing an icon?
 
 The set is intentionally minimal. For anything outside it, pass your own
-SVG (or any tag) wherever an `icon` argument is accepted — the
+SVG (or any tag) wherever an `icon` argument is accepted – the
 constructors take a tag just as readily as a name:
 
 ``` r

@@ -2,8 +2,8 @@
 
 Every component here is a **bound Shiny input**: pass an `inputId`, then
 read the value with `input$id` and set it from the server with the
-matching `update_shad_*()` helper. The previews below are live — you can
-type, toggle and open them — but with no Shiny server attached they
+matching `update_shad_*()` helper. The previews below are live – you can
+type, toggle and open them – but with no Shiny server attached they
 won’t echo values. See [Forms &
 validation](https://orijitghosh.github.io/shadshiny/articles/forms.md)
 for the reactive side, and the [Server
@@ -168,7 +168,7 @@ Code
     shad_select("fruit", label = "Favourite fruit", choices = c(Apple = "apple", Banana = "banana", Cherry = "cherry"), selected = "banana", placeholder = "Pick one")
 
 [`shad_native_select()`](https://orijitghosh.github.io/shadshiny/reference/shad_native_select.md)
-is the same look over a real `<select>` — better on mobile and inside
+is the same look over a real `<select>` – better on mobile and inside
 dense forms.
 
 United States India
@@ -271,7 +271,7 @@ Code
 wraps any control with a label, description, required marker and error
 slot.
 [`shad_input_group()`](https://orijitghosh.github.io/shadshiny/reference/shad_input_group.md)
-fuses affixes — icons, text, buttons — onto an input.
+fuses affixes – icons, text, buttons – onto an input.
 
 Website \*
 

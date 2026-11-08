@@ -23,7 +23,7 @@ observe(print(input$email))     # the current string
 
 [`shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_field.md)
 gives any control a label, description, a required marker and an error
-slot — the standard anatomy of a form row. Wrap the input and pass the
+slot – the standard anatomy of a form row. Wrap the input and pass the
 metadata to the wrapper:
 
 ``` r
@@ -117,7 +117,7 @@ server <- function(input, output, session) {
 Hand-rolling that per field gets old fast.
 [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
 does the same thing declaratively: you register rules per input, and it
-drives the field’s `aria-invalid` state and inline error text for you —
+drives the field’s `aria-invalid` state and inline error text for you –
 no `error =` slot or
 [`textOutput()`](https://rdrr.io/pkg/shiny/man/textOutput.html) needed
 in the UI.
@@ -145,7 +145,7 @@ server <- function(input, output, session) {
 
 `enable()` starts live validation: errors appear as the user changes a
 field. [`validate()`](https://rdrr.io/pkg/shiny/man/validate.html) runs
-a full pass — it shows *every* error and returns a logical, which is
+a full pass – it shows *every* error and returns a logical, which is
 what you want in a submit handler, since a field the user never touched
 has never been checked.
 
@@ -165,7 +165,7 @@ has never been checked.
 Every rule takes a `message` you can override. Rules for one field run
 in the order you added them and the first failure wins, so put
 [`shad_rule_required()`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md)
-first — every other rule passes an empty value on purpose, leaving “is
+first – every other rule passes an empty value on purpose, leaving “is
 this mandatory?” as a separate decision.
 
 ``` r
@@ -225,7 +225,7 @@ shad_form_counter(nchar(input$bio %||% ""), 280)   # a 42/280 counter chip
 
 ### Base `validate()` / `need()`
 
-Still fine, and still the right tool for *outputs* —
+Still fine, and still the right tool for *outputs* –
 [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
 is about inputs. The two coexist.
 
@@ -276,8 +276,8 @@ Two things to note:
   /
   [`updateTextAreaInput()`](https://rdrr.io/pkg/shiny/man/updateTextAreaInput.html),
   *not* a `update_shad_*()` function (there isn’t one).
-- Everything else — select, combobox, checkbox, switch, radio,
-  toggle(s), slider, OTP, calendar, date-picker — has a dedicated
+- Everything else – select, combobox, checkbox, switch, radio,
+  toggle(s), slider, OTP, calendar, date-picker – has a dedicated
   `update_shad_*()` helper. See the [Server
   API](https://orijitghosh.github.io/shadshiny/articles/server-api.md)
   guide for the full list.
@@ -338,11 +338,11 @@ shinyApp(ui, server)
 ## Where to next
 
 - [Server
-  API](https://orijitghosh.github.io/shadshiny/articles/server-api.md) —
+  API](https://orijitghosh.github.io/shadshiny/articles/server-api.md) –
   updating inputs, overlays and toasts.
 - [Gallery: form
   inputs](https://orijitghosh.github.io/shadshiny/articles/gallery-inputs.html)
-  — every input, live.
+  – every input, live.
 - [Migrating from base Shiny
   inputs](https://orijitghosh.github.io/shadshiny/articles/migrating-inputs.md).
   \`\`\`

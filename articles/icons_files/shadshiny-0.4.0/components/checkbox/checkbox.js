@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/checkbox/checkbox.js */
-/* shadshiny — checkbox behavior.
+/* shadshiny – checkbox behavior.
    Markup: <button data-shad="checkbox" class="shad-checkbox" role="checkbox">
    Value model: true | false | "indeterminate".
    Clicking an indeterminate box checks it (Radix behavior). With

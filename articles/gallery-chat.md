@@ -15,13 +15,13 @@ it left (received) or right (sent).
 
 Hey! Are we still on for 3pm?
 
-Absolutely — see you then.
+Absolutely – see you then.
 
 Code
 
 
     shad_bubble("Hey! Are we still on for 3pm?", align = "start")
-    shad_bubble("Absolutely — see you then.", variant = "tinted", align = "end")
+    shad_bubble("Absolutely – see you then.", variant = "tinted", align = "end")
 
 ## Message
 
@@ -65,7 +65,7 @@ Code
 
 ## Marker
 
-A slim inline annotation for the stream — a date break, a “streaming…”
+A slim inline annotation for the stream – a date break, a “streaming…”
 cue, or a status note.
 
 ![](data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic2hhZC1pY29uIiB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik04IDJ2NCIgLz48cGF0aCBkPSJNMTYgMnY0IiAvPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgeD0iMyIgeT0iNCIgcng9IjIiIC8+PHBhdGggZD0iTTMgMTBoMTgiIC8+PC9zdmc+)
@@ -117,7 +117,7 @@ AI
 
 Assistant
 
-Welcome to support — how can I help?
+Welcome to support – how can I help?
 
 You
 
@@ -137,5 +137,5 @@ Jump to latest
 Code
 
 
-    shad_message_scroller("demo_scroller", height = "16rem", auto_scroll = TRUE, shad_message_scroller_item(shad_message(shad_bubble("Welcome to support — how can I help?"), align = "start", avatar = shad_avatar(fallback = "AI"), sender = "Assistant")), shad_message_scroller_item(shad_message(shad_bubble("My invoice looks wrong.", variant = "tinted"), align = "end", avatar = shad_avatar(fallback = "You"), sender = "You")), shad_message_scroller_item(shad_message(shad_bubble("I can help with that. What's the invoice number?"), 
+    shad_message_scroller("demo_scroller", height = "16rem", auto_scroll = TRUE, shad_message_scroller_item(shad_message(shad_bubble("Welcome to support – how can I help?"), align = "start", avatar = shad_avatar(fallback = "AI"), sender = "Assistant")), shad_message_scroller_item(shad_message(shad_bubble("My invoice looks wrong.", variant = "tinted"), align = "end", avatar = shad_avatar(fallback = "You"), sender = "You")), shad_message_scroller_item(shad_message(shad_bubble("I can help with that. What's the invoice number?"), 
         align = "start", avatar = shad_avatar(fallback = "AI"), sender = "Assistant")))

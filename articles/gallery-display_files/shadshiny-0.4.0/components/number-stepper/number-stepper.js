@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/number-stepper/number-stepper.js */
-/* shadshiny — number-stepper behavior.
+/* shadshiny – number-stepper behavior.
    Markup (composes input-group; group owns chrome):
      <div data-shad="number-stepper" class="shad-input-group shad-number-stepper"
           [data-min] [data-max] [data-step="1"] [data-precision]>

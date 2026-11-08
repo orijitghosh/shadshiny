@@ -2,7 +2,7 @@
 # skeleton (Tier 1, CSS-only)
 
 ## Anatomy
-`div.shad-skeleton[.shad-skeleton--circle|.shad-skeleton--text]` — size via inline style or context.
+`div.shad-skeleton[.shad-skeleton--circle|.shad-skeleton--text]` – size via inline style or context.
 
 ## Modifier classes
 - `--circle` full radius

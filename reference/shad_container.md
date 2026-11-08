@@ -1,6 +1,6 @@
 # Centred content container
 
-A max-width, horizontally centred column with inline padding — the
+A max-width, horizontally centred column with inline padding – the
 outermost wrapper for page content.
 
 ## Usage

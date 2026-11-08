@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/date-picker/date-picker.js */
-/* shadshiny — date-picker: composes calendar inside a floating panel.
+/* shadshiny – date-picker: composes calendar inside a floating panel.
    Markup:
      <div data-shad="date-picker" class="shad-date-picker" [data-format="..."]>
        <button class="shad-date-picker__trigger" data-placeholder>

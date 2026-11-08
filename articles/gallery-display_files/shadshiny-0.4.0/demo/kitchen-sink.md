@@ -367,7 +367,7 @@ VC
 
 @nextjs
 
-The React Framework — created and maintained by Vercel.
+The React Framework – created and maintained by Vercel.
 
 Joined December 2021
 
@@ -769,7 +769,7 @@ plan](#).
 - 2nd level of jokes: 10 gold coins
 - 3rd level of one-liners: 20 gold coins
 
-Install it with `npm install shadshiny` — or press ⌘ K.
+Install it with `npm install shadshiny` – or press ⌘ K.
 
 Are you absolutely sure?
 

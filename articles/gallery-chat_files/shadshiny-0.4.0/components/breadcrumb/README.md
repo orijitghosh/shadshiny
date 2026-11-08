@@ -12,7 +12,7 @@ nav.shad-breadcrumb[aria-label=Breadcrumb]
 ```
 
 ## Methods / Events
-None. R wrapper: `shad_breadcrumb(items, collapse_after)` — wrapper decides which middle items to replace with the ellipsis (static collapse; pair with dropdown-menu for interactive expansion).
+None. R wrapper: `shad_breadcrumb(items, collapse_after)` – wrapper decides which middle items to replace with the ellipsis (static collapse; pair with dropdown-menu for interactive expansion).
 
 ## A11y
 `nav[aria-label]`, separators `aria-hidden`, current page `aria-current="page"`.

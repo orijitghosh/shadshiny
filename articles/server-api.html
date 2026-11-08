@@ -93,8 +93,8 @@
     
 <p>Everything shadshiny does from the server falls into four groups:
 <strong>update</strong> input values, <strong>open/close</strong>
-overlays, <strong>raise</strong> toasts, and — for the few cases without
-a wrapper — send a <strong>custom message</strong> directly. All helpers
+overlays, <strong>raise</strong> toasts, and – for the few cases without
+a wrapper – send a <strong>custom message</strong> directly. All helpers
 are Shiny-module safe and default to the current reactive domain.</p>
 <div class="section level2">
 <h2 id="updating-inputs">Updating inputs<a class="anchor" aria-label="anchor" href="#updating-inputs"></a>
@@ -170,7 +170,7 @@ by <code>inputId</code>:</p>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Overlays only reachable this way have to exist in the UI. When the
 content depends on what just happened, build the dialog in the server
-and show it — <code><a href="https://rdrr.io/pkg/shiny/man/showModal.html" class="external-link">shiny::showModal()</a></code>’s shape:</p>
+and show it – <code><a href="https://rdrr.io/pkg/shiny/man/showModal.html" class="external-link">shiny::showModal()</a></code>’s shape:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">delete</span>, <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/shad_show_dialog.html">shad_show_dialog</a></span><span class="op">(</span><span class="fu"><a href="../reference/shad_dialog.html">shad_dialog</a></span><span class="op">(</span></span>
@@ -182,19 +182,19 @@ and show it — <code><a href="https://rdrr.io/pkg/shiny/man/showModal.html" cla
 <span>  <span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>It opens itself and, by default, destroys and removes itself once it
-closes — so inputs inside it are live while open and gone afterwards.
+closes – so inputs inside it are live while open and gone afterwards.
 Pass <code>transient = FALSE</code> to keep it (and its values) in the
 document for a later <code><a href="../reference/shad_overlay_server.html">shad_dialog_open()</a></code>.
 <code>shad_remove_dialog(id)</code> closes one from the server. Accepts
 <code><a href="../reference/shad_dialog.html">shad_dialog()</a></code>, <code><a href="../reference/shad_alert_dialog.html">shad_alert_dialog()</a></code>,
-<code><a href="../reference/shad_sheet.html">shad_sheet()</a></code> and <code><a href="../reference/shad_drawer.html">shad_drawer()</a></code> — not
+<code><a href="../reference/shad_sheet.html">shad_sheet()</a></code> and <code><a href="../reference/shad_drawer.html">shad_drawer()</a></code> – not
 <code><a href="../reference/shad_popover.html">shad_popover()</a></code>, which has no trigger to anchor to.</p>
 <blockquote>
 <p><strong>Dialog and sheet content portals to <code>&lt;body&gt;</code>
 on open.</strong> The open element carries
 <code>data-state="open"</code> on <code>.shad-dialog__content</code>
 (not on the root <code>#id</code>). This matters if you probe open state
-from JavaScript — query the content globally, not as a descendant of the
+from JavaScript – query the content globally, not as a descendant of the
 id.</p>
 </blockquote>
 </div>
@@ -318,7 +318,7 @@ lifecycle into button state.</p>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Read selections from
 <strong><code>input$&lt;id&gt;_event</code></strong>, a list of
-<code>value</code> and <code>nonce</code> — not
+<code>value</code> and <code>nonce</code> – not
 <code>input$&lt;id&gt;</code>:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">palette_event</span>, <span class="op">{</span></span>
@@ -331,7 +331,7 @@ repeat of the same value. That is fine for a filter and wrong for
 navigation: choosing “Reports” twice has to work twice.
 <code>_event</code> fires every time.</p>
 <p>The <code>shadshiny:attr</code> message sets or removes an attribute
-on any element — handy for, say, a password reveal that flips an input’s
+on any element – handy for, say, a password reveal that flips an input’s
 <code>type</code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">reveal</span>, <span class="op">{</span></span>
@@ -353,7 +353,7 @@ any Shiny input. Two shapes are worth calling out:</p>
 <code>input$shell$active</code> for the selected nav item.</li>
 <li>
 <strong>Menus and command items</strong> report the chosen item’s
-value as an event — observe <code>input$menu</code> /
+value as an event – observe <code>input$menu</code> /
 <code>input$cmd</code> and switch on it.</li>
 </ul>
 </div>
@@ -381,7 +381,7 @@ imperative helper when one exists.</p>
 <h2 id="gotchas-checklist">Gotchas checklist<a class="anchor" aria-label="anchor" href="#gotchas-checklist"></a>
 </h2>
 <ul>
-<li>No <code>update_shad_input()</code> — use
+<li>No <code>update_shad_input()</code> – use
 <code><a href="https://rdrr.io/pkg/shiny/man/updateTextInput.html" class="external-link">updateTextInput()</a></code> for <code><a href="../reference/shad_input.html">shad_input()</a></code>.</li>
 <li>Outputs inside an initially-hidden tab, dialog or sheet are
 <strong>suspended</strong>; set
@@ -393,7 +393,7 @@ imperative helper when one exists.</p>
 <li>
 <code>shad_item(media = )</code> treats a <strong>string as an icon
 name</strong>. Pass <code>"file"</code> with
-<code>media_variant = "icon"</code>, or wrap non-icon content in a tag —
+<code>media_variant = "icon"</code>, or wrap non-icon content in a tag –
 never a rendered <code><a href="../reference/shad_icon.html">shad_icon()</a></code>.</li>
 </ul>
 </div>
@@ -402,13 +402,13 @@ never a rendered <code><a href="../reference/shad_icon.html">shad_icon()</a></co
 </h2>
 <ul>
 <li>
-<a href="forms.html">Forms &amp; validation</a> — updating and
+<a href="forms.html">Forms &amp; validation</a> – updating and
 validating a real form.</li>
 <li>
-<a href="overlays-and-server.html">Overlays &amp; the server</a> —
+<a href="overlays-and-server.html">Overlays &amp; the server</a> –
 dialogs and confirm flows in depth.</li>
 <li>
-<a href="layout.html">Layout &amp; composition</a> — driving tabs
+<a href="layout.html">Layout &amp; composition</a> – driving tabs
 and sidebars. ```</li>
 </ul>
 </div>

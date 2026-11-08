@@ -2,8 +2,8 @@
 
 The components on this page turn shadshiny from a component library into
 an application toolkit: a client-side data table, the dashboard shells,
-and the flow inputs. The previews are live — sort the table, drag the
-rating, hold the stepper — but with no Shiny server attached they won’t
+and the flow inputs. The previews are live – sort the table, drag the
+rating, hold the stepper – but with no Shiny server attached they won’t
 echo values back.
 
 For the reactive side, see [Data
@@ -45,7 +45,7 @@ Code
 
 [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
 is the KPI card. `delta_direction = "auto"` (the default) reads the sign
-off the `delta` string, so `"+12.5%"` is up and `"-3%"` is down — pass
+off the `delta` string, so `"+12.5%"` is up and `"-3%"` is down – pass
 `delta_direction` explicitly when the arrow shouldn’t follow the sign (a
 falling error rate is good news).
 
@@ -96,7 +96,7 @@ Code
 *A shadshiny addition: no shadcn/ui counterpart.*
 
 [`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md)
-is a tiny inline chart with no axes, no labels, and no plotting stack —
+is a tiny inline chart with no axes, no labels, and no plotting stack –
 one SVG path (or a row of bars) that stretches to fill its box. Every
 mark is painted with the theme’s chart tokens, so the light/dark switch
 at the top of this page restyles these in CSS, with no re-render.
@@ -380,7 +380,7 @@ Code
 bridges to a hidden
 [`fileInput()`](https://rdrr.io/pkg/shiny/man/fileInput.html), so
 `input$<id>` is the **standard Shiny files data frame** (`name`, `size`,
-`type`, `datapath`) — every `renderTable(input$files)` you already have
+`type`, `datapath`) – every `renderTable(input$files)` you already have
 keeps working.
 
 Browse...
@@ -412,8 +412,8 @@ is a shadshiny addition; the rest mirrors shadcn/ui’s Form messaging.*
 
 The pieces
 [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
-drives from the server. In an app you rarely place these by hand — the
-validator sets them for you — but they’re plain components.
+drives from the server. In an app you rarely place these by hand – the
+validator sets them for you – but they’re plain components.
 
 ![](data:image/svg+xml;base64,PHN2ZyB2aWV3Ym94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik00IDEybDUgNUwyMCA3IiAvPjwvc3ZnPg==)
 Looks good.
@@ -445,15 +445,15 @@ Code
 
 - [Data
   tables](https://orijitghosh.github.io/shadshiny/articles/data-tables.md)
-  — the full table API.
+  – the full table API.
 - [Dashboards &
-  charts](https://orijitghosh.github.io/shadshiny/articles/charts.md) —
+  charts](https://orijitghosh.github.io/shadshiny/articles/charts.md) –
   plot theming and the
   [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md)
   reactive bridge.
 - [Forms &
   validation](https://orijitghosh.github.io/shadshiny/articles/forms.md)
-  — wiring
+  – wiring
   [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md).
 - `shad_run_example("07-data-explorer")` and
   `shad_run_example("08-llm-chat")` are full apps built on this kit.

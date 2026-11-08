@@ -91,8 +91,8 @@
 
     
     
-<p>shadshiny gives you surfaces and structure — cards, tabs, a sidebar
-shell, resizable panes — but leaves page layout to plain CSS. This guide
+<p>shadshiny gives you surfaces and structure – cards, tabs, a sidebar
+shell, resizable panes – but leaves page layout to plain CSS. This guide
 shows how to assemble them into real app shells.</p>
 <div class="section level2">
 <h2 id="cards-as-the-base-surface">Cards as the base surface<a class="anchor" aria-label="anchor" href="#cards-as-the-base-surface"></a>
@@ -119,11 +119,11 @@ its parts; each is optional:</p>
 <p>Three primitives cover almost all page layout. They are CSS-only
 wrappers: each argument becomes a custom property on the root, so there
 is no utility-class soup and no JavaScript.</p>
-<p><code><a href="../reference/shad_container.html">shad_container()</a></code> is the outermost wrapper — a centred,
+<p><code><a href="../reference/shad_container.html">shad_container()</a></code> is the outermost wrapper – a centred,
 max-width column:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_container.html">shad_container</a></span><span class="op">(</span><span class="va">page_content</span>, size <span class="op">=</span> <span class="st">"lg"</span><span class="op">)</span>   <span class="co"># sm/md/lg/xl/full, or a CSS length</span></span></code></pre></div>
-<p><code><a href="../reference/shad_stack.html">shad_stack()</a></code> is “these things, spaced” — a flex column
+<p><code><a href="../reference/shad_stack.html">shad_stack()</a></code> is “these things, spaced” – a flex column
 by default, a row when you ask:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_stack.html">shad_stack</a></span><span class="op">(</span><span class="va">section_one</span>, <span class="va">section_two</span>, gap <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
@@ -133,7 +133,7 @@ by default, a row when you ask:</p>
 <span>  direction <span class="op">=</span> <span class="st">"horizontal"</span>, gap <span class="op">=</span> <span class="fl">2</span>, align <span class="op">=</span> <span class="st">"center"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><code><a href="../reference/shad_grid.html">shad_grid()</a></code> handles two dimensions. Reach for
-<code>min_width</code> first — it fits as many equal columns as will
+<code>min_width</code> first – it fits as many equal columns as will
 fit, with no breakpoints to reason about:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_grid.html">shad_grid</a></span><span class="op">(</span><span class="va">card_one</span>, <span class="va">card_two</span>, <span class="va">card_three</span>, min_width <span class="op">=</span> <span class="st">"16rem"</span><span class="op">)</span></span></code></pre></div>
@@ -151,9 +151,9 @@ back to the one below it, so you only name the ones that change:</p>
 <span>  <span class="fu"><a href="../reference/shad_grid.html">shad_grid_item</a></span><span class="op">(</span><span class="va">wide_chart</span>, span <span class="op">=</span> <span class="st">"full"</span><span class="op">)</span>,</span>
 <span>  template <span class="op">=</span> <span class="st">"2fr 1fr"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Gaps and padding accept a <strong>spacing token step</strong> —
+<p>Gaps and padding accept a <strong>spacing token step</strong> –
 <code>gap = 4</code> is <code>var(--shad-space-4)</code>, the same scale
-the components use internally — or any CSS length when you need to
+the components use internally – or any CSS length when you need to
 escape the scale.</p>
 </div>
 <div class="section level2">
@@ -173,7 +173,7 @@ is <code>input$id</code>; switch it from the server with
 <p><strong>Outputs inside an initially-hidden tab are
 suspended.</strong> A <code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput()</a></code> or
 <code><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput()</a></code> in a tab that isn’t the <code>selected</code>
-one won’t render until you switch to it — and sometimes not even then.
+one won’t render until you switch to it – and sometimes not even then.
 Force it with
 <code>outputOptions(output, "id", suspendWhenHidden = FALSE)</code>. The
 same applies to outputs inside a dialog or sheet that opens later.</p>
@@ -187,7 +187,7 @@ same applies to outputs inside a dialog or sheet that opens later.</p>
 <code>dark</code>, <code>theme</code>) and wrap their content in a
 <code><a href="../reference/shad_container.html">shad_container()</a></code> unless you pass
 <code>container = FALSE</code>.</p>
-<p><code><a href="../reference/shad_page_navbar.html">shad_page_navbar()</a></code> — a title bar carrying a tab strip,
+<p><code><a href="../reference/shad_page_navbar.html">shad_page_navbar()</a></code> – a title bar carrying a tab strip,
 panels below. The window scrolls; the bar is sticky.
 <code>input$&lt;inputId&gt;</code> is the active tab.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -197,7 +197,7 @@ panels below. The window scrolls; the bar is sticky.
 <span>  title <span class="op">=</span> <span class="st">"Acme"</span>, inputId <span class="op">=</span> <span class="st">"nav"</span>,</span>
 <span>  header_end <span class="op">=</span> <span class="fu">bslib</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/input_dark_mode.html" class="external-link">input_dark_mode</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><code><a href="../reference/shad_page_sidebar.html">shad_page_sidebar()</a></code> — the application frame: a
+<p><code><a href="../reference/shad_page_sidebar.html">shad_page_sidebar()</a></code> – the application frame: a
 collapsible sidebar, a bar with its trigger, and a scrolling main
 region. This shell takes the full viewport height and scrolls its main
 region rather than the window, so the sidebar rail and footer stay
@@ -217,7 +217,7 @@ put.</p>
 </h2>
 <p><code><a href="../reference/shad_command_palette.html">shad_command_palette()</a></code> is the “jump anywhere” pattern: a
 modal, searchable list of everything the app can do, opened with ⌘K /
-Ctrl+K. Items come from data — a named vector, or a named list of them
+Ctrl+K. Items come from data – a named vector, or a named list of them
 for grouped sections:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_command_palette.html">shad_command_palette</a></span><span class="op">(</span><span class="st">"palette"</span>, items <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -229,7 +229,7 @@ for grouped sections:</p>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Drop <code>shad_command_trigger("palette")</code> in the page bar for
 people who do not know the shortcut, and observe
-<strong><code>input$palette_event</code></strong> — not
+<strong><code>input$palette_event</code></strong> – not
 <code>input$palette</code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
@@ -242,7 +242,7 @@ people who do not know the shortcut, and observe
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p><code>input$palette</code> holds the last value, but Shiny drops a
-repeat of the same value — so choosing “Reports” twice would only fire
+repeat of the same value – so choosing “Reports” twice would only fire
 once. <code>_event</code> carries <code>value</code> plus a
 <code>nonce</code> and fires every time, which is what navigation
 needs.</p>
@@ -318,7 +318,7 @@ a scalar. Observe the active item specifically:</p>
 <h2 id="scrollable-regions">Scrollable regions<a class="anchor" aria-label="anchor" href="#scrollable-regions"></a>
 </h2>
 <p><code>shad_scroll_area(height = )</code> gives a fixed-height region
-a styled scrollbar — useful for long lists inside a card or a chat
+a styled scrollbar – useful for long lists inside a card or a chat
 transcript. For a growing conversation that should pin to the bottom,
 reach for <code><a href="../reference/shad_message_scroller.html">shad_message_scroller()</a></code> instead (see the <a href="https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html">chat
 gallery</a>).</p>
@@ -327,7 +327,7 @@ gallery</a>).</p>
 <h2 id="separators">Separators<a class="anchor" aria-label="anchor" href="#separators"></a>
 </h2>
 <p><code><a href="../reference/shad_separator.html">shad_separator()</a></code> draws a divider. Horizontal separators
-span the full width by default, which overflows inside a flex row — give
+span the full width by default, which overflows inside a flex row – give
 them <code>style = "flex:1"</code> when using one as a rule between
 inline items (for example an “OR” divider).</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -343,12 +343,12 @@ inline items (for example an “OR” divider).</p>
 <ul>
 <li>
 <a href="https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.html">Gallery:
-navigation &amp; structure</a> — these components, live.</li>
+navigation &amp; structure</a> – these components, live.</li>
 <li>
-<a href="server-api.html">Server API</a> — driving tabs, sidebars
+<a href="server-api.html">Server API</a> – driving tabs, sidebars
 and overlays.</li>
 <li>
-<code>shad_run_example("02-analytics-dashboard")</code> — a full
+<code>shad_run_example("02-analytics-dashboard")</code> – a full
 sidebar + menubar shell. ```</li>
 </ul>
 </div>

@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/empty/empty.css */
-/* shadshiny — empty. Centered no-data / 404 / onboarding state. CSS-only. */
+/* shadshiny – empty. Centered no-data / 404 / onboarding state. CSS-only. */
 
 .shad-empty {
   display: flex;
@@ -24,7 +24,7 @@
   text-align: center;
 }
 
-/* media — icon tile vs free-form (illustration / avatar) */
+/* media – icon tile vs free-form (illustration / avatar) */
 .shad-empty__media {
   display: flex;
   align-items: center;

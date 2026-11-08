@@ -5,7 +5,7 @@
 `label.shad-label[for]`
 
 ## Data-attribute API
-`data-disabled` — dimmed + not-allowed cursor.
+`data-disabled` – dimmed + not-allowed cursor.
 
 ## Methods / Events
 None. R wrapper: `shad_label(text, for_id, disabled)`.

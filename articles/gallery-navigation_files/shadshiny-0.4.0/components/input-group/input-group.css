@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/input-group/input-group.css */
-/* shadshiny — input-group. CSS-only. A bordered shell that adopts the focus /
+/* shadshiny – input-group. CSS-only. A bordered shell that adopts the focus /
    invalid chrome so the wrapped control can drop its own. Addons align inline
    (leading/trailing) or block (stacked toolbars, e.g. above a textarea) via
    data-align. */
@@ -29,7 +29,7 @@
   box-shadow: var(--shad-shadow-xs), var(--shad-focus-shadow-destructive);
 }
 
-/* Wrapped control sheds its own border/shadow/background — the shell owns them. */
+/* Wrapped control sheds its own border/shadow/background – the shell owns them. */
 .shad-input-group > .shad-input,
 .shad-input-group > .shad-textarea {
   flex: 1 1 0%;

@@ -111,7 +111,7 @@ for multi-selects and toggle groups.</p>
 <h2 id="the-field-wrapper">The field wrapper<a class="anchor" aria-label="anchor" href="#the-field-wrapper"></a>
 </h2>
 <p><code><a href="../reference/shad_form_field.html">shad_form_field()</a></code> gives any control a label,
-description, a required marker and an error slot — the standard anatomy
+description, a required marker and an error slot – the standard anatomy
 of a form row. Wrap the input and pass the metadata to the wrapper:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_form_field.html">shad_form_field</a></span><span class="op">(</span></span>
@@ -199,7 +199,7 @@ import it from rlang.</p>
 <p>Hand-rolling that per field gets old fast.
 <code><a href="../reference/shad_validator.html">shad_validator()</a></code> does the same thing declaratively: you
 register rules per input, and it drives the field’s
-<code>aria-invalid</code> state and inline error text for you — no
+<code>aria-invalid</code> state and inline error text for you – no
 <code>error =</code> slot or <code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput()</a></code> needed in the
 UI.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -221,7 +221,7 @@ UI.</p>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p><code>enable()</code> starts live validation: errors appear as the
-user changes a field. <code><a href="https://rdrr.io/pkg/shiny/man/validate.html" class="external-link">validate()</a></code> runs a full pass — it
+user changes a field. <code><a href="https://rdrr.io/pkg/shiny/man/validate.html" class="external-link">validate()</a></code> runs a full pass – it
 shows <em>every</em> error and returns a logical, which is what you want
 in a submit handler, since a field the user never touched has never been
 checked.</p>
@@ -277,7 +277,7 @@ checkbox/switch.</td>
 </table>
 <p>Every rule takes a <code>message</code> you can override. Rules for
 one field run in the order you added them and the first failure wins, so
-put <code><a href="../reference/shad_rules.html">shad_rule_required()</a></code> first — every other rule passes an
+put <code><a href="../reference/shad_rules.html">shad_rule_required()</a></code> first – every other rule passes an
 empty value on purpose, leaving “is this mandatory?” as a separate
 decision.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -367,7 +367,7 @@ you want one without the machinery:</p>
 <div class="section level3">
 <h3 id="base-validate-need">Base <code>validate()</code> / <code>need()</code><a class="anchor" aria-label="anchor" href="#base-validate-need"></a>
 </h3>
-<p>Still fine, and still the right tool for <em>outputs</em> —
+<p>Still fine, and still the right tool for <em>outputs</em> –
 <code><a href="../reference/shad_validator.html">shad_validator()</a></code> is about inputs. The two coexist.</p>
 </div>
 </div>
@@ -410,8 +410,8 @@ elements and use Shiny’s native text bindings.</strong> Update them with
 <code><a href="https://rdrr.io/pkg/shiny/man/updateTextInput.html" class="external-link">shiny::updateTextInput()</a></code> /
 <code><a href="https://rdrr.io/pkg/shiny/man/updateTextAreaInput.html" class="external-link">updateTextAreaInput()</a></code>, <em>not</em> a
 <code>update_shad_*()</code> function (there isn’t one).</li>
-<li>Everything else — select, combobox, checkbox, switch, radio,
-toggle(s), slider, OTP, calendar, date-picker — has a dedicated
+<li>Everything else – select, combobox, checkbox, switch, radio,
+toggle(s), slider, OTP, calendar, date-picker – has a dedicated
 <code>update_shad_*()</code> helper. See the <a href="server-api.html">Server API</a> guide for the full list.</li>
 </ul>
 </div>
@@ -472,11 +472,11 @@ toggle(s), slider, OTP, calendar, date-picker — has a dedicated
 </h2>
 <ul>
 <li>
-<a href="server-api.html">Server API</a> — updating inputs, overlays
+<a href="server-api.html">Server API</a> – updating inputs, overlays
 and toasts.</li>
 <li>
 <a href="https://orijitghosh.github.io/shadshiny/articles/gallery-inputs.html">Gallery:
-form inputs</a> — every input, live.</li>
+form inputs</a> – every input, live.</li>
 <li>
 <a href="migrating-inputs.html">Migrating from base Shiny
 inputs</a>. ```</li>

@@ -36,7 +36,7 @@ Branch = item with `aria-expanded`. Lazy branch = `data-lazy` with no group: exp
 | `expand(key, on)` | programmatic expand/collapse |
 | `destroy()` | unbind |
 | `shad:change` | `{value: selectedKeys}` |
-| `shad:expand` | `{key, expanded}` — also the lazy-load request signal |
+| `shad:expand` | `{key, expanded}` – also the lazy-load request signal |
 
 ## Keyboard
 Up/Down move (roving tabindex), Home/End jump, typeahead (1 s buffer). Right: expand, or move into first child. Left: collapse, or move to parent. Enter/Space: select (Ctrl/Cmd toggles in multiple mode).

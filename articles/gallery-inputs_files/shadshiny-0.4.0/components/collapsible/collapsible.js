@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/collapsible/collapsible.js */
-/* shadshiny — collapsible behavior (APG disclosure). */
+/* shadshiny – collapsible behavior (APG disclosure). */
 (function () {
   "use strict";
   shad.register("collapsible", function (root) {

@@ -1,4 +1,4 @@
-/* shadshiny pkgdown site — live-demo frames, swatches, gallery polish.
+/* shadshiny pkgdown site – live-demo frames, swatches, gallery polish.
    Loaded on every page (pkgdown auto-includes pkgdown/extra.css). All colours
    read shadshiny tokens, which the embedded component dependency defines on
    :root, so the demo chrome recolours with the site's light/dark switch. */

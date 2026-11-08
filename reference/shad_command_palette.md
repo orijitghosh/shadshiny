@@ -1,7 +1,7 @@
 # Command palette for app navigation
 
-The ⌘K / Ctrl+K pattern: a modal, searchable list of everything the app
-can do. A thin shape over
+The Cmd+K / Ctrl+K pattern: a modal, searchable list of everything the
+app can do. A thin shape over
 [`shad_command()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
 that takes its items as data, opens on the hotkey (or from
 `shad_command_trigger()`, or from the server), and reports every
@@ -44,7 +44,7 @@ shad_command_close(id, session = shiny::getDefaultReactiveDomain())
 
 - items:
 
-  The commands. Either a named character vector (`c(Home = "home")` —
+  The commands. Either a named character vector (`c(Home = "home")` –
   names are labels, values are what you observe), a named list of such
   vectors (each name becomes a group heading, separated), or a list of
   [`shad_command_item()`](https://orijitghosh.github.io/shadshiny/reference/shad_command.md)
@@ -59,14 +59,15 @@ shad_command_close(id, session = shiny::getDefaultReactiveDomain())
 
 - hotkey:
 
-  Key that opens the palette, e.g. `"mod+k"` (default; ⌘K on macOS,
-  Ctrl+K elsewhere). `NULL` for no hotkey — open it from a trigger or
+  Key that opens the palette, e.g. `"mod+k"` (default; Cmd+K on macOS,
+  Ctrl+K elsewhere). `NULL` for no hotkey – open it from a trigger or
   the server instead. Write `+`-separated modifiers, then the key: `mod`
-  (⌘ or Ctrl), `ctrl`, `meta` / `cmd`, `alt` / `option`, `shift`, and
+  (Cmd or Ctrl), `ctrl`, `meta` / `cmd`, `alt` / `option`, `shift`, and
   `space` for the space bar, as in `"mod+shift+p"` or `"/"`. Exactly the
-  named modifiers must be held. A hotkey without Ctrl, ⌘ or Alt is left
-  to text fields, so `"/"` still types a slash there. A hotkey naming an
-  unknown modifier never fires, with a browser console warning.
+  named modifiers must be held. A hotkey without Ctrl, Cmd or Alt is
+  left to text fields, so `"/"` still types a slash there. A hotkey
+  naming an unknown modifier never fires, with a browser console
+  warning.
 
 - placeholder:
 
@@ -83,7 +84,7 @@ shad_command_close(id, session = shiny::getDefaultReactiveDomain())
 - id:
 
   The palette's input id. In a module, namespace it yourself with `ns()`
-  — this is a UI-side attribute, not a server message.
+  – this is a UI-side attribute, not a server message.
 
 - label:
 
@@ -95,7 +96,8 @@ shad_command_close(id, session = shiny::getDefaultReactiveDomain())
 
 - shortcut:
 
-  Hint shown at the end of the trigger, e.g. `"⌘K"`. `NULL` for none.
+  Hint shown at the end of the trigger, e.g. `"Ctrl K"`, or `"\u2318K"`
+  for the macOS key symbols of Cmd+K. `NULL` for none.
 
 - variant, size:
 
@@ -114,12 +116,12 @@ A command tag, hidden until opened.
 
 Read selections from `input$<inputId>_event`, a list of `value` and
 `nonce`. `input$<inputId>` also holds the last value, but Shiny drops a
-repeat of the same value — which is wrong for navigation, where choosing
+repeat of the same value – which is wrong for navigation, where choosing
 "Settings" twice has to work twice. The `_event` input fires every time.
 
 Refresh the items from the server with
 [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
-— a recent-docs list, search results, whatever the session knows.
+– a recent-docs list, search results, whatever the session knows.
 
 ## See also
 

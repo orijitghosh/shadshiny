@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/radio-group/radio-group.js */
-/* shadshiny — radio group behavior (APG radio pattern).
+/* shadshiny – radio group behavior (APG radio pattern).
    Markup: <div data-shad="radio-group" role="radiogroup">
              <button class="shad-radio" role="radio" data-value="a">…
    Arrow keys move AND select (APG). Roving tabindex. */

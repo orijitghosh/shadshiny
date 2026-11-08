@@ -2,7 +2,7 @@
 # alert-dialog (Tier 3)
 
 ## Anatomy
-Same classes as dialog (see dialog/README.md), with `data-shad="alert-dialog"` on the root. No `__close` ✕ button — decisions must be explicit via footer actions.
+Same classes as dialog (see dialog/README.md), with `data-shad="alert-dialog"` on the root. No `__close` ✕ button – decisions must be explicit via footer actions.
 
 Requires `components/dialog/dialog.css` and `components/dialog/dialog.js` to be loaded (dialog.js registers both factories; this dir's files are thin shims documented in their headers).
 

@@ -2,7 +2,7 @@
 
 Every shadshiny component, rendered live on one of the gallery pages
 below. Each preview shows the real component alongside the exact source
-that produced it — these are not screenshots. Previews follow the site’s
+that produced it – these are not screenshots. Previews follow the site’s
 light/dark switch, so you can see both modes without leaving the page.
 
 New to the package? Read [Get
@@ -32,7 +32,7 @@ scroller.](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.md)
 
 ## A taste
 
-A few components, live — expand *Code* under any preview to see how it’s
+A few components, live – expand *Code* under any preview to see how it’s
 built.
 
 Get started
@@ -67,7 +67,7 @@ Code
 shadshiny components are plain `htmltools` tags that each carry the
 bundled asset dependency. Rendering one in an article embeds the real
 CSS and JavaScript, so the component initialises client-side exactly as
-it would in a running app — dialogs open, tabs switch, carousels slide.
+it would in a running app – dialogs open, tabs switch, carousels slide.
 Because dark mode keys off `[data-bs-theme="dark"]` (which the navbar’s
 light-switch toggles), the previews recolour with the rest of the site.
 The

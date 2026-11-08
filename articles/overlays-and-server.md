@@ -1,7 +1,7 @@
 # Overlays and the server API
 
-This vignette covers the overlay family — dialog, sheet, drawer,
-alert-dialog — and the server-side helpers that open them and raise
+This vignette covers the overlay family – dialog, sheet, drawer,
+alert-dialog – and the server-side helpers that open them and raise
 toasts.
 
 ## Trigger-driven vs server-driven
@@ -29,7 +29,7 @@ trigger, using
 [`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md)
 /
 [`shad_dialog_close()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md).
-Each overlay has a matching pair —
+Each overlay has a matching pair –
 [`shad_sheet_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md),
 [`shad_drawer_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md),
 [`shad_alert_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md),
@@ -52,8 +52,8 @@ server <- function(input, output, session) {
 ## Dialogs built in the server
 
 Both forms above need the overlay to exist in the UI. When the dialog’s
-content depends on what just happened — the row you clicked, the file
-that failed — build it in the server and show it, the way
+content depends on what just happened – the row you clicked, the file
+that failed – build it in the server and show it, the way
 [`shiny::showModal()`](https://rdrr.io/pkg/shiny/man/showModal.html)
 works:
 
@@ -75,7 +75,7 @@ server <- function(input, output, session) {
 }
 ```
 
-The overlay is appended to `<body>`, opens itself, and — by default —
+The overlay is appended to `<body>`, opens itself, and – by default –
 destroys and removes itself once it closes. Nothing to clean up, and no
 ids left behind.
 [`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md)
@@ -92,7 +92,7 @@ dialog, though: read what you need in the observer, or pass
 so it can be reopened with
 [`shad_dialog_open()`](https://orijitghosh.github.io/shadshiny/reference/shad_overlay_server.md).
 
-`shad_remove_dialog(id)` closes one from the server — for a job that
+`shad_remove_dialog(id)` closes one from the server – for a job that
 finished or a save that succeeded. Esc, the backdrop and
 [`shad_dialog_close_button()`](https://orijitghosh.github.io/shadshiny/reference/shad_dialog.md)
 all still work on their own.
@@ -148,7 +148,7 @@ shad_toast_error("Upload failed", description = "Check your connection.")
 [`shad_toast_loading()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
 shows an indefinite spinner and returns an id. Feed that id to
 [`shad_toast_update()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md)
-when the work finishes to morph the same toast into a result — no second
+when the work finishes to morph the same toast into a result – no second
 toast, no flicker.
 
 ``` r
@@ -184,5 +184,5 @@ output$panel <- renderUI({
 
 All `inputId`s pass through `session$ns()`, so components and their
 `update_shad_*()` / `shad_*_open()` helpers are safe inside Shiny
-modules — use the same bare id in UI and server as you would with base
+modules – use the same bare id in UI and server as you would with base
 inputs.

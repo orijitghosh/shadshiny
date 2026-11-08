@@ -1,12 +1,12 @@
 /* FILE: inst/assets/components/layout/layout.css */
-/* shadshiny — layout primitives (CSS-only): container, stack, grid, and the
+/* shadshiny – layout primitives (CSS-only): container, stack, grid, and the
    two page shells. Every knob is a custom property set inline by the R
    constructor, so there is exactly one rule per primitive and no utility-class
    explosion.
 
    Breakpoints (shared with the page shells): sm 40rem, md 48rem, lg 64rem.
-   The responsive column chain falls back outward —
-   lg -> md -> sm -> base -> 1 — so `cols = c(sm = 2, lg = 4)` behaves the way
+   The responsive column chain falls back outward –
+   lg -> md -> sm -> base -> 1 – so `cols = c(sm = 2, lg = 4)` behaves the way
    it reads. */
 
 /* Every primitive resets its own knobs to `initial` first. Custom properties

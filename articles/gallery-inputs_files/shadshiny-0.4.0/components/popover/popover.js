@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/popover/popover.js */
-/* shadshiny — popover behavior (non-modal; APG disclosure-ish + dismiss).
+/* shadshiny – popover behavior (non-modal; APG disclosure-ish + dismiss).
    Focus moves into the panel on open (first tabbable / autofocus / panel),
    NOT trapped (Tab past the end leaves + closes). Esc / outside press close.
    Trigger toggles. Focus returns to trigger on close-by-keyboard. */

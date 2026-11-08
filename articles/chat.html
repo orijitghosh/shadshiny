@@ -95,11 +95,11 @@
 (<code><a href="../reference/shad_bubble.html">shad_bubble()</a></code>, <code><a href="../reference/shad_message.html">shad_message()</a></code>,
 <code><a href="../reference/shad_message_scroller.html">shad_message_scroller()</a></code>, <code><a href="../reference/shad_attachment.html">shad_attachment()</a></code>,
 <code><a href="../reference/shad_marker.html">shad_marker()</a></code>) is a set of transcript primitives you
-compose yourself — see <a href="https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html">Gallery:
+compose yourself – see <a href="https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html">Gallery:
 chat</a>. This guide is about the level above it:
 <code><a href="../reference/shad_chat_ui.html">shad_chat_ui()</a></code> / <code><a href="../reference/shad_chat_server.html">shad_chat_server()</a></code>, a Shiny
-module that gives you the whole thing — scroller, composer, streaming,
-Markdown — for two calls.</p>
+module that gives you the whole thing – scroller, composer, streaming,
+Markdown – for two calls.</p>
 <div class="section level2">
 <h2 id="the-whole-app">The whole app<a class="anchor" aria-label="anchor" href="#the-whole-app"></a>
 </h2>
@@ -122,7 +122,7 @@ Markdown — for two calls.</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
 <p>It is an ordinary Shiny module, so the <code>id</code> is the only
 wiring: pass the same string to both halves. Nesting it inside another
-module works without thought — all the namespacing is internal.</p>
+module works without thought – all the namespacing is internal.</p>
 </div>
 <div class="section level2">
 <h2 id="the-ui-half">The UI half<a class="anchor" aria-label="anchor" href="#the-ui-half"></a>
@@ -142,7 +142,7 @@ module works without thought — all the namespacing is internal.</p>
 disappears on the first message. The composer is a
 <code><a href="../reference/shad_textarea.html">shad_textarea()</a></code> that grows with the content; <strong>Enter
 sends, Shift+Enter inserts a newline</strong>. The scroller sticks to
-the bottom while streaming unless the user has scrolled up — then it
+the bottom while streaming unless the user has scrolled up – then it
 stays put, which is what you want when someone is reading back.</p>
 </div>
 <div class="section level2">
@@ -153,12 +153,12 @@ where <code>history</code> is the transcript so far as a list of
 <code>list(role, content)</code> with <code>role</code> being
 <code>"user"</code> or <code>"assistant"</code>. It may return any of
 three things.</p>
-<p><strong>A string</strong> — the complete reply, rendered at once:</p>
+<p><strong>A string</strong> – the complete reply, rendered at once:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">function</span><span class="op">(</span><span class="va">user_text</span>, <span class="va">history</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"You said:"</span>, <span class="va">user_text</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><strong>A chunk function</strong> — a function of no arguments
+<p><strong>A chunk function</strong> – a function of no arguments
 returning the next piece of text, or <code>NULL</code> when done. This
 is the simple streaming protocol:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -170,7 +170,7 @@ is the simple streaming protocol:</p>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">words</span><span class="op">)</span><span class="op">)</span> <span class="cn">NULL</span> <span class="kw">else</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="st">" "</span>, <span class="va">words</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><strong>A coro generator</strong> — drained the same way, which is
+<p><strong>A coro generator</strong> – drained the same way, which is
 what makes <code>ellmer</code> a one-liner. Live provider integrations
 like this one are experimental: they depend on the provider’s package
 and API, and may change before a stable 1.0 release.</p>
@@ -186,7 +186,7 @@ an API yourself and need to send the prior turns along.</p>
 <p>Chunks are pulled on a short timer and appended to the partial reply,
 so the transcript renders progressively. Because the pump runs in the
 Shiny event loop, a chunk function that blocks blocks the whole session
-— never <code><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep()</a></code> inside one, and never do a synchronous
+– never <code><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep()</a></code> inside one, and never do a synchronous
 HTTP call per chunk.</p>
 </div>
 <div class="section level2">
@@ -255,7 +255,7 @@ filename = “tool.R”, copy = TRUE ) <sub></sub>~</p>
 <div class="section level2">
 <h2 id="markdown">Markdown<a class="anchor" aria-label="anchor" href="#markdown"></a>
 </h2>
-<p>Assistant replies render as Markdown by default — bold, italics,
+<p>Assistant replies render as Markdown by default – bold, italics,
 links, code spans, and fenced code blocks. Raw HTML inside that Markdown
 is escaped. User messages are also escaped and rendered literally, so
 neither side can inject markup into your page by default.</p>
@@ -285,7 +285,7 @@ experimental <code>ellmer</code> swap commented in the source.</p>
 <ul>
 <li>
 <a href="https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html">Gallery:
-chat</a> — the primitives, if you want to build a transcript by hand
+chat</a> – the primitives, if you want to build a transcript by hand
 instead.</li>
 </ul>
 </div>

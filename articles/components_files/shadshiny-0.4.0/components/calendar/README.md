@@ -45,4 +45,4 @@ div.shad-calendar[data-shad=calendar][data-mode][data-value][data-value-end]
 Arrows ±1 day / ±1 week · PageUp/Down ±1 month (Shift: ±1 year), stopping at the last day of a shorter month · Home/End week start/end · Enter/Space select. Shift+PageUp/Down is the only year jump in the default `label` layout; `data-caption-layout` adds a pointer-reachable one. Arrows step whole days, so a daylight-saving day is no different. One roving tab stop, always on a day the grid shows; month auto-flips when focus crosses boundaries. Range: first pick sets start, second sets end (auto-swaps if earlier); pointer hover previews the band.
 
 ## Deviation
-Grid re-renders via innerHTML on each interaction — simple and fast at this size; focus is restored to the matching control (nav button, caption select or roving day) after each render. Contract: `tests/js/calendar-contract.test.js`.
+Grid re-renders via innerHTML on each interaction – simple and fast at this size; focus is restored to the matching control (nav button, caption select or roving day) after each render. Contract: `tests/js/calendar-contract.test.js`.

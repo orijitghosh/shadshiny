@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/marker/marker.css */
-/* shadshiny — marker. Inline status/label row for chat streams. CSS-only.
+/* shadshiny – marker. Inline status/label row for chat streams. CSS-only.
    Variants: --default | --border (bottom rule) | --separator (centered,
    divider lines both sides). Shimmer utility for streaming text.
    DECISION: the shimmer keyframe lives here (not shad-animations.css) so the

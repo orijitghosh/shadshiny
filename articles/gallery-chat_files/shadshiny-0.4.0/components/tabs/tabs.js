@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/tabs/tabs.js */
-/* shadshiny — tabs behavior (APG tabs, automatic activation).
+/* shadshiny – tabs behavior (APG tabs, automatic activation).
    Markup:
      <div data-shad="tabs" data-value="account">
        <div class="shad-tabs__list">

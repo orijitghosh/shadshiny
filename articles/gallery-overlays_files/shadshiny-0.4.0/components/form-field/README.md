@@ -11,7 +11,7 @@ div.shad-form-field[data-shad=form-field][data-invalid?]
 ```
 
 ## Data-attribute API
-`data-invalid` (set by JS when error shown) — colors label; the control and the part that takes focus get `aria-invalid="true"`.
+`data-invalid` (set by JS when error shown) – colors label; the control and the part that takes focus get `aria-invalid="true"`.
 
 ## Methods / Events
 | Member | Description |

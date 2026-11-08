@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/mini-chart/mini-chart.css */
-/* shadshiny — sparkline + mini donut. CSS-only; the R constructor emits the
+/* shadshiny – sparkline + mini donut. CSS-only; the R constructor emits the
    geometry and paints every mark with var(--shad-chart-N), so theme presets and
    dark mode restyle these with no re-render. */
 

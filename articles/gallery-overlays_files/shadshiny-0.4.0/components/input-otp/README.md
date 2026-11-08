@@ -27,7 +27,7 @@ One real hidden input over the control (input-otp library approach) instead of n
 | `getValue()` | current string |
 | `setValue(v)` | sanitized to pattern+length; emits |
 | `destroy()` | unbind |
-| `shad:change` | `{value, complete}` — `complete` true at full length |
+| `shad:change` | `{value, complete}` – `complete` true at full length |
 
 ## Keyboard
 Native single-input editing: type to advance, Backspace deletes, paste splits, Cmd/Ctrl-V anywhere in control.

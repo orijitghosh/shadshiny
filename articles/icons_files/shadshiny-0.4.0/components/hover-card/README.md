@@ -15,4 +15,4 @@ Pointer-only preview: opens after **700 ms** hover, closes **300 ms** after the 
 `getValue()/setValue(bool)/open()/close()/isOpen/destroy()`; `shad:open`/`shad:close`.
 
 ## A11y
-No tooltip role — content is rich/supplementary; ensure the trigger itself carries the essential information (hover-cards are progressive enhancement).
+No tooltip role – content is rich/supplementary; ensure the trigger itself carries the essential information (hover-cards are progressive enhancement).

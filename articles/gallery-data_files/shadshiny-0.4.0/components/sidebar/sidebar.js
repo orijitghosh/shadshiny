@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/sidebar/sidebar.js */
-/* shadshiny — sidebar behavior.
+/* shadshiny – sidebar behavior.
    Desktop (≥768px): trigger toggles data-collapsed (icon rail).
    Mobile (<768px): trigger opens off-canvas sheet (data-mobile-open) with
    overlay + dismiss layer + focus trap.

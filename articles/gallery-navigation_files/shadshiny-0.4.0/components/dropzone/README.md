@@ -1,7 +1,7 @@
 <!-- FILE: inst/assets/components/dropzone/README.md -->
 # dropzone (Tier 2, V2)
 
-Drag-and-drop file picker. **No upload logic** — emits `shad:files` with the raw `File` objects; the host (Shiny binding / FileReader) does the transfer and drives per-file lifecycle via `setState()`. File rows **compose attachment/** (load `attachment.css` first).
+Drag-and-drop file picker. **No upload logic** – emits `shad:files` with the raw `File` objects; the host (Shiny binding / FileReader) does the transfer and drives per-file lifecycle via `setState()`. File rows **compose attachment/** (load `attachment.css` first).
 
 ## Anatomy
 ```
@@ -26,7 +26,7 @@ div.shad-dropzone[data-shad=dropzone]
 | `data-max-size` | root | per-file byte cap |
 | `data-disabled` | root | inert zone (also `disabled` the input + `tabindex=-1`) |
 
-Rejected files (type/size/duplicate) render as `data-state="error"` rows with the reason in the description — they are NOT in the value.
+Rejected files (type/size/duplicate) render as `data-state="error"` rows with the reason in the description – they are NOT in the value.
 
 ## Methods / Events
 | Member | Description |
@@ -36,8 +36,8 @@ Rejected files (type/size/duplicate) render as `data-state="error"` rows with th
 | `setState(name, state, desc)` | drive a row through `uploading` / `processing` / `error` / `null` (done) + description text |
 | `clear()` | empty the list |
 | `destroy()` | unbind |
-| `shad:files` | `{files: [{name,size,type,file}], rejected: [{name,size,type,reason}]}` — fires per add |
-| `shad:change` | `{value: acceptedNames}` — fires on add/remove/clear |
+| `shad:files` | `{files: [{name,size,type,file}], rejected: [{name,size,type,reason}]}` – fires per add |
+| `shad:change` | `{value: acceptedNames}` – fires on add/remove/clear |
 
 ## Keyboard
 Zone is a `role=button` tab stop; Enter/Space opens the native picker. Row remove buttons are standard tabbable buttons.

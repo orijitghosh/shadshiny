@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/scroll-area/scroll-area.js */
-/* shadshiny — scroll-area behavior. Syncs custom thumbs to native scroll;
+/* shadshiny – scroll-area behavior. Syncs custom thumbs to native scroll;
    thumb drag scrolls; scrollbars fade in on hover/scroll, out after 800ms. */
 (function () {
   "use strict";

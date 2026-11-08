@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/checkbox/checkbox.css */
-/* shadshiny — checkbox. States via data-state=checked|unchecked|indeterminate.
+/* shadshiny – checkbox. States via data-state=checked|unchecked|indeterminate.
    Check draw animation via shad-check-draw on the path (pathLength=1). */
 
 .shad-checkbox {

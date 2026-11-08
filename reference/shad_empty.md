@@ -41,7 +41,7 @@ shad_empty(
 
 - content:
 
-  Optional actions area — buttons, an input, links.
+  Optional actions area – buttons, an input, links.
 
 - class:
 

@@ -2,14 +2,14 @@
 # data-table (Tier 2, V2)
 
 Full shadcn Data Table over a client-side JSON row model, with an experimental
-server-backed mode. **Composes** `table/table.css` (load first), `checkbox/checkbox.css` (selection), `native-select/` (page size), and `dropdown-menu/` css+js (column visibility) — declare these as load-order dependencies like context-menu does.
+server-backed mode. **Composes** `table/table.css` (load first), `checkbox/checkbox.css` (selection), `native-select/` (page size), and `dropdown-menu/` css+js (column visibility) – declare these as load-order dependencies like context-menu does.
 
 ## Anatomy (JS-built from the JSON model)
 ```
 div.shad-data-table[data-shad=data-table]
 │    [data-selection=none|single|multiple] [data-sticky]
 │    [data-global-filter] [data-column-filters] [data-page-size=N]
-├─ script[type=application/json]        (row model — consumed at init)
+├─ script[type=application/json]        (row model – consumed at init)
 ├─ div.shad-data-table__toolbar
 │  ├─ input.shad-data-table__filter     (global, debounced 150ms)
 │  └─ div[data-shad=dropdown-menu]      (column visibility checkboxes)
@@ -41,7 +41,7 @@ div.shad-data-table[data-shad=data-table]
               "loading": false, "emptyText": "", "emptyHtml": "", "filterPlaceholder": ""}
 }
 ```
-Cell values: plain string/number → text-escaped by construction. Object form: `html` is inserted verbatim (**pre-rendered by R** — the JS never generates cell markup), `text` powers filtering, `sort` powers ordering (falls back to `text`, then the html's text). Without `text`, the html's text is read once from an inert `<template>`, so filtering and sorting never load an image or run a handler for rows off the page.
+Cell values: plain string/number → text-escaped by construction. Object form: `html` is inserted verbatim (**pre-rendered by R** – the JS never generates cell markup), `text` powers filtering, `sort` powers ordering (falls back to `text`, then the html's text). Without `text`, the html's text is read once from an inert `<template>`, so filtering and sorting never load an image or run a handler for rows off the page.
 
 ## Behavior
 - **Sort**: click cycles asc → desc → none; Shift+click adds multi-sort (numbered indicator); `aria-sort` on `<th>`. Numeric-aware `localeCompare` fallback.
@@ -90,10 +90,10 @@ behavior remain outside this experimental mode.
 | `setServerPage(response)` | accepts only the current request ID and renders one page |
 | `setServerError(response)` | shows a fixed safe error and retry action |
 | `destroy()` | unbind + empty root |
-| `shad:change` | `{value}` — fires on sort/filter/page/pageSize/selection change |
+| `shad:change` | `{value}` – fires on sort/filter/page/pageSize/selection change |
 
 ## Keyboard
-Sort buttons, filter inputs, checkboxes, page-size select, and pager buttons are all native focusables in DOM order — Tab traverses; Enter/Space activates; Shift+Enter on a sort header multi-sorts (Shift+click equivalent).
+Sort buttons, filter inputs, checkboxes, page-size select, and pager buttons are all native focusables in DOM order – Tab traverses; Enter/Space activates; Shift+Enter on a sort header multi-sorts (Shift+click equivalent).
 
 ## A11y
 `aria-sort` on sortable headers; selection checkboxes are `role=checkbox` (`radio` in single mode) with `aria-checked` (mixed for tri-state); pager is a `nav[aria-label=Pagination]` with `aria-current="page"`; filters carry `aria-label`s. Empty/loading states are real table rows so screen readers stay in table context.

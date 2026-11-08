@@ -16,8 +16,8 @@
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Gallery: overlays &amp; menus">
-<meta name="description" content="Tier 3 overlays — dialog, sheet, drawer, popover, tooltip, hover-card, dropdown, context-menu, menubar and the command palette — live and clickable.">
-<meta property="og:description" content="Tier 3 overlays — dialog, sheet, drawer, popover, tooltip, hover-card, dropdown, context-menu, menubar and the command palette — live and clickable.">
+<meta name="description" content="Tier 3 overlays – dialog, sheet, drawer, popover, tooltip, hover-card, dropdown, context-menu, menubar and the command palette – live and clickable.">
+<meta property="og:description" content="Tier 3 overlays – dialog, sheet, drawer, popover, tooltip, hover-card, dropdown, context-menu, menubar and the command palette – live and clickable.">
 <meta property="og:image" content="https://orijitghosh.github.io/shadshiny/logo.svg">
 </head>
 <body>
@@ -95,7 +95,7 @@
     
     
 <p>Overlays open and close <strong>entirely client-side</strong>, so
-every trigger on this page works — click the buttons and try the menus.
+every trigger on this page works – click the buttons and try the menus.
 Each overlay also has an <code>inputId</code> so you can open it from
 the server with <code><a href="../reference/shad_overlay_server.html">shad_dialog_open()</a></code> /
 <code><a href="../reference/shad_overlay_server.html">shad_sheet_open()</a></code> / etc., and read menu selections with
@@ -184,7 +184,7 @@ panes.</p>
 <div class="section level2">
 <h2 id="popover">Popover<a class="anchor" aria-label="anchor" href="#popover"></a>
 </h2>
-<p>A small floating panel anchored to its trigger — good for pickers and
+<p>A small floating panel anchored to its trigger – good for pickers and
 quick forms.</p>
 <div class="shad-demo">
 <div class="shad-demo__stage shad-demo__stage--center">
@@ -311,7 +311,7 @@ Reload
 <div class="section level2">
 <h2 id="menubar">Menubar<a class="anchor" aria-label="anchor" href="#menubar"></a>
 </h2>
-<p>An application menu bar — each <code><a href="../reference/shad_menubar.html">shad_menubar_menu()</a></code> opens
+<p>An application menu bar – each <code><a href="../reference/shad_menubar.html">shad_menubar_menu()</a></code> opens
 a dropdown; hovering across the bar moves between them.</p>
 <div class="shad-demo">
 <div class="shad-demo__stage shad-demo__stage--center">
@@ -366,8 +366,8 @@ Redo
 <h2 id="dialogs-built-in-the-server">Dialogs built in the server<a class="anchor" aria-label="anchor" href="#dialogs-built-in-the-server"></a>
 </h2>
 <p>Everything above declares its overlay in the UI. When the content
-depends on what just happened — the row that was clicked, the upload
-that failed — build the dialog in the server instead and show it, the
+depends on what just happened – the row that was clicked, the upload
+that failed – build the dialog in the server instead and show it, the
 way <code><a href="https://rdrr.io/pkg/shiny/man/showModal.html" class="external-link">shiny::showModal()</a></code> works:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">delete</span>, <span class="op">{</span></span>
@@ -382,7 +382,7 @@ way <code><a href="https://rdrr.io/pkg/shiny/man/showModal.html" class="external
 <span>  <span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>It is appended to <code>&lt;body&gt;</code>, opens itself, and by
-default removes itself once it closes — nothing to clean up and no ids
+default removes itself once it closes – nothing to clean up and no ids
 left behind. Inputs inside it are live while it is open, so read them in
 the observer; pass <code>transient = FALSE</code> to keep the overlay
 (and its values) around for <code><a href="../reference/shad_overlay_server.html">shad_dialog_open()</a></code>.
@@ -396,7 +396,7 @@ one from the server.</p>
 </h2>
 <p><code><a href="../reference/shad_command.html">shad_command()</a></code> is a searchable action list. Inline it
 (below) or use <code><a href="../reference/shad_command_palette.html">shad_command_palette()</a></code> for the ⌘K spotlight
-overlay — same component, items supplied as data:</p>
+overlay – same component, items supplied as data:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/shad_command_palette.html">shad_command_palette</a></span><span class="op">(</span><span class="st">"palette"</span>, items <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Go to"</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Dashboard <span class="op">=</span> <span class="st">"dashboard"</span>, Reports <span class="op">=</span> <span class="st">"reports"</span><span class="op">)</span>,</span>
@@ -409,7 +409,7 @@ overlay — same component, items supplied as data:</p>
 <span><span class="co"># observe input$palette_event, NOT input$palette: Shiny drops a repeat of the</span></span>
 <span><span class="co"># same value, so picking "Reports" twice would only fire once</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">palette_event</span>, <span class="op">{</span> <span class="va">...</span> <span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<p><code><a href="../reference/update_shad_command.html">update_shad_command()</a></code> swaps the items from the server —
+<p><code><a href="../reference/update_shad_command.html">update_shad_command()</a></code> swaps the items from the server –
 recent documents, search hits, commands gated on the signed-in user.</p>
 <p>Inline, the same component looks like this. Type to filter.</p>
 <div class="shad-demo">

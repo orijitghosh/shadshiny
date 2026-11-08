@@ -22,11 +22,11 @@ div.shad-input-group[.shad-input-group--block][role=group][data-invalid]
   Block addons occupy their own row (order-controlled) for toolbar strips.
 
 ## Methods / Events
-None — layout only. The wrapped control keeps its native Shiny binding
+None – layout only. The wrapped control keeps its native Shiny binding
 (`shad_input()` / `shad_textarea()`). R wrapper: `shad_input_group(..., block = FALSE, invalid = FALSE)` + `shad_input_group_addon(..., align = c("inline-start", "inline-end", "block-start", "block-end"))` + `shad_input_group_text(...)` + `shad_input_group_button(...)`.
 
 ## Keyboard
-Native — focus flows to the wrapped control and any addon buttons in DOM order.
+Native – focus flows to the wrapped control and any addon buttons in DOM order.
 
 ## A11y
 - Root carries `role="group"`; label it via `aria-label` or an associated `shad_label()`.

@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/dropdown-menu/dropdown-menu.css */
-/* shadshiny — menu surface + items. SHARED: context-menu and menubar reuse
+/* shadshiny – menu surface + items. SHARED: context-menu and menubar reuse
    these .shad-menu* classes (documented dependency; load this file first). */
 
 .shad-menu__content {

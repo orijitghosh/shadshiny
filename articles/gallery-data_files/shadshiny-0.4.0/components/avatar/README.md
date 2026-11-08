@@ -20,4 +20,4 @@ None. R wrapper: `shad_avatar(src, fallback, alt, size)`, `shad_avatar_group(...
 Meaningful images need `alt`; decorative fallback initials `aria-hidden="true"` when an image is present.
 
 ## Deviation
-Radix delays fallback render; we layer fallback under the image + `onerror` hide — same visual result, zero JS.
+Radix delays fallback render; we layer fallback under the image + `onerror` hide – same visual result, zero JS.
