@@ -35,6 +35,14 @@ test_that("five components survive insert, remove and re-render (1-3)", {
                paste0("'", ids, "'", collapse = ",")))
   }
   table_rows <- function() js("document.querySelectorAll('#l_tbl tbody tr[data-key]').length")
+  # The server-backed table asks for its page through a debounced binding and
+  # the server answers, so wait for its rows rather than for idleness.
+  wait_for_rows <- function() {
+    app$wait_for_js(
+      "document.querySelectorAll('#l_tbl tbody tr[data-key]').length === 10",
+      timeout = 5000
+    )
+  }
   open_all <- function() {
     app$run_js("['l_sel', 'l_cbx', 'l_dp'].forEach(id => shad.get(document.getElementById(id)).open());
       shad.get(document.querySelector('#l_tbl [data-shad=\"dropdown-menu\"]')).open();
@@ -61,6 +69,7 @@ test_that("five components survive insert, remove and re-render (1-3)", {
   expect_equal(app$get_value(input = "l_sel"), "a")
   expect_equal(app$get_value(input = "l_cbx"), "red")
   expect_equal(as.character(app$get_value(input = "l_dp")), "2026-10-14")
+  wait_for_rows()
   expect_equal(table_rows(), 10L)
   update()
   expect_equal(app$get_value(input = "l_sel"), "b")
@@ -76,6 +85,7 @@ test_that("five components survive insert, remove and re-render (1-3)", {
   expect_equal(unlist(roots()), rep(1L, 5))
   expect_length(leftovers(), 0L)
   expect_equal(js("document.body.style.overflow"), "")
+  wait_for_rows()
   expect_equal(table_rows(), 10L)
   expect_equal(app$get_value(input = "l_sel"), "a")
   update()
@@ -98,6 +108,7 @@ test_that("five components survive insert, remove and re-render (1-3)", {
   phase("show")
   expect_equal(unlist(roots()), rep(1L, 5))
   expect_equal(app$get_value(input = "l_sel"), "a")
+  wait_for_rows()
   expect_equal(table_rows(), 10L)
   expect_equal(hotkey(), 1L)
 

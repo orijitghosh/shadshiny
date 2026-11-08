@@ -24,16 +24,25 @@ export const bundlePerformanceBudgets = Object.freeze({
   combinedGzipBytes: 64 * kibibyte,
 });
 
+// Each timing gate keeps 20 samples after its warmups, so p95 is the
+// second-slowest sample and one scheduler hiccup cannot fail it alone.
 export const browserPerformanceBudgets = Object.freeze({
-  startupRuns: 9,
+  startupRuns: 21,
   startupWarmups: 1,
   kitchenSinkP95Ms: 125,
-  dynamicRuns: 12,
+  dynamicRuns: 22,
   dynamicWarmups: 2,
   dynamicBatchSize: 20,
   dynamicInitP95Ms: 25,
   dynamicTeardownP95Ms: 25,
 });
+
+// The nearest-rank 95th percentile. With fewer than 20 samples it is the
+// slowest sample, so a single scheduler hiccup decides the result.
+export function percentile95(values) {
+  const ordered = [...values].sort((a, b) => a - b);
+  return ordered[Math.ceil(ordered.length * 0.95) - 1];
+}
 
 export function formatKibibytes(bytes) {
   return `${(bytes / kibibyte).toFixed(2)} KiB`;

@@ -1,12 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { browserPerformanceBudgets } from "../../tools/performance-budgets.mjs";
+import {
+  browserPerformanceBudgets,
+  percentile95,
+} from "../../tools/performance-budgets.mjs";
 
 const kitchenSinkUrl = "/inst/assets/demo/kitchen-sink.html";
-
-function percentile95(values) {
-  const ordered = [...values].sort((a, b) => a - b);
-  return ordered[Math.ceil(ordered.length * 0.95) - 1];
-}
 
 function reportSamples(label, values, budget) {
   const p95 = percentile95(values);

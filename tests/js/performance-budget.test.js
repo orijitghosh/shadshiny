@@ -2,9 +2,11 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { describe, expect, test } from "vitest";
 import {
+  browserPerformanceBudgets,
   bundlePerformanceBudgets,
   evaluateBundleBudgets,
   measureBundlePerformance,
+  percentile95,
 } from "../../tools/performance-budgets.mjs";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -46,5 +48,27 @@ describe("compressed distribution budgets", () => {
     expect(result.violations).toEqual([
       "CSS gzip 23.00 KiB exceeds its 22.00 KiB budget by 1.00 KiB",
     ]);
+  });
+});
+
+describe("browser timing budgets", () => {
+  test("p95 is the nearest-rank 95th percentile", () => {
+    const samples = Array.from({ length: 20 }, (_, index) => index + 1);
+    expect(percentile95(samples)).toBe(19);
+    expect(percentile95([...samples].reverse())).toBe(19);
+    expect(percentile95([5, 1, 3])).toBe(5);
+  });
+
+  test("each timing gate measures enough samples that one outlier cannot decide it", () => {
+    const gates = {
+      startup: browserPerformanceBudgets.startupRuns - browserPerformanceBudgets.startupWarmups,
+      dynamic: browserPerformanceBudgets.dynamicRuns - browserPerformanceBudgets.dynamicWarmups,
+    };
+    for (const [gate, count] of Object.entries(gates)) {
+      // Typical samples with one scheduler hiccup far over any budget.
+      const samples = Array.from({ length: count }, () => 5);
+      samples[Math.floor(count / 2)] = 1_000;
+      expect(percentile95(samples), gate).toBe(5);
+    }
   });
 });

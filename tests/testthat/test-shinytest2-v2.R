@@ -13,14 +13,16 @@ test_that("v2 inputs seed correctly and reflect server updates", {
   expect_equal(tbl$pageSize, 5)
   expect_length(tbl$selected, 0)
 
-  # server-driven updates propagate back to input$
+  # server-driven updates propagate back to input$. The table reports through
+  # a debounced binding, so wait for its new value rather than for idleness.
   app$click("do_update")
   app$wait_for_idle()
   expect_equal(app$get_value(input = "rate"), 4)
   expect_equal(app$get_value(input = "num"), 7)
   expect_equal(app$get_value(input = "step"), 2)
   expect_equal(app$get_value(input = "tree"), "pear")
-  expect_equal(as.integer(app$get_value(input = "tbl")$selected), c(1L, 3L))
+  tbl <- app$wait_for_value(input = "tbl", ignore = list(NULL, tbl))
+  expect_equal(as.integer(tbl$selected), c(1L, 3L))
 
   expect_no_js_errors(app)
 })
@@ -35,13 +37,16 @@ test_that("the data table sorts and filters on the client", {
     app$get_js("document.querySelectorAll('#tbl tbody tr').length")
   }
   expect_equal(n_rows(), 5)
+  # The table reports through a debounced binding (and debounces its filter),
+  # so each step waits for input$tbl to change instead of for idleness: on a
+  # slow runner Shiny can sit idle for the whole wait before the value lands.
+  tbl <- app$get_value(input = "tbl")
 
   # a header click sorts client-side and reports back through input$
   app$run_js("document.querySelector('#tbl .shad-data-table__sort').click()")
-  app$wait_for_idle()
-  srt <- app$get_value(input = "tbl")$sort
-  expect_equal(srt[[1]]$column, "model")
-  expect_equal(srt[[1]]$direction, "asc")
+  tbl <- app$wait_for_value(input = "tbl", ignore = list(NULL, tbl))
+  expect_equal(tbl$sort[[1]]$column, "model")
+  expect_equal(tbl$sort[[1]]$direction, "asc")
 
   # the global filter narrows the rendered rows without a server round-trip
   app$run_js(paste0(
@@ -49,9 +54,9 @@ test_that("the data table sorts and filters on the client", {
     "i.value = 'Mazda';",
     "i.dispatchEvent(new Event('input', { bubbles: true }));"
   ))
-  app$wait_for_idle()
+  tbl <- app$wait_for_value(input = "tbl", ignore = list(NULL, tbl))
+  expect_equal(tbl$filter$global, "Mazda")
   expect_equal(n_rows(), 2)
-  expect_equal(app$get_value(input = "tbl")$filter$global, "Mazda")
 
   expect_no_js_errors(app)
 })

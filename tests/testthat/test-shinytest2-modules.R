@@ -30,7 +30,12 @@ test_that("a module's server table, rendered by its renderUI, is served", {
                   timeout = 5000)
   expect_equal(app$get_value(input = "w1-tbl")$requestId, 1L)
   app$run_js("shad.get(document.getElementById('w1-tbl')).setValue({page: 2})")
-  app$wait_for_idle()
+  # The page request leaves through a debounced binding and the rows come back
+  # from the server, so wait for them rather than for idleness.
+  app$wait_for_js(
+    "document.querySelector('#w1-tbl tbody tr[data-key]')?.dataset.key === 'r06'",
+    timeout = 5000
+  )
   expect_equal(app$get_js("document.querySelector('#w1-tbl tbody tr').dataset.key"), "r06")
 
   app$click("w1-open_cmd")
