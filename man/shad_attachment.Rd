@@ -31,7 +31,7 @@ shad_attachment_group(..., class = NULL)
 
 \item{media}{Optional \code{\link[=shad_icon]{shad_icon()}} name or a tag (icon or image thumb).}
 
-\item{actions}{Optional action buttons — see \code{\link[=shad_attachment_action]{shad_attachment_action()}}.}
+\item{actions}{Optional action buttons – see \code{\link[=shad_attachment_action]{shad_attachment_action()}}.}
 
 \item{orientation}{\code{"horizontal"} (default) or \code{"vertical"} (media on top).}
 
@@ -52,14 +52,14 @@ Defaults to \code{"icon"} when \code{media} is an icon name.}
 
 \item{icon}{A \code{\link[=shad_icon]{shad_icon()}} name or a tag for the action button.}
 
-\item{aria_label}{Accessible label (required — the button is icon-only).}
+\item{aria_label}{Accessible label (required – the button is icon-only).}
 }
 \value{
 An attachment tag.
 }
 \description{
 A file/image attachment chip with media, metadata, an upload-lifecycle
-state, and action buttons. Part of the chat/AI kit — for composers, message
+state, and action buttons. Part of the chat/AI kit – for composers, message
 threads, and upload lists. Row up with \code{\link[=shad_attachment_group]{shad_attachment_group()}}.
 }
 \examples{

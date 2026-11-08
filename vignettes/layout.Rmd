@@ -11,8 +11,8 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE, purl = FALSE)
 ```
 
-shadshiny gives you surfaces and structure — cards, tabs, a sidebar shell,
-resizable panes — but leaves page layout to plain CSS. This guide shows how to
+shadshiny gives you surfaces and structure – cards, tabs, a sidebar shell,
+resizable panes – but leaves page layout to plain CSS. This guide shows how to
 assemble them into real app shells.
 
 ## Cards as the base surface
@@ -41,13 +41,13 @@ Three primitives cover almost all page layout. They are CSS-only wrappers: each
 argument becomes a custom property on the root, so there is no utility-class
 soup and no JavaScript.
 
-`shad_container()` is the outermost wrapper — a centred, max-width column:
+`shad_container()` is the outermost wrapper – a centred, max-width column:
 
 ```{r}
 shad_container(page_content, size = "lg")   # sm/md/lg/xl/full, or a CSS length
 ```
 
-`shad_stack()` is "these things, spaced" — a flex column by default, a row when
+`shad_stack()` is "these things, spaced" – a flex column by default, a row when
 you ask:
 
 ```{r}
@@ -59,7 +59,7 @@ shad_stack(
 )
 ```
 
-`shad_grid()` handles two dimensions. Reach for `min_width` first — it fits as
+`shad_grid()` handles two dimensions. Reach for `min_width` first – it fits as
 many equal columns as will fit, with no breakpoints to reason about:
 
 ```{r}
@@ -84,8 +84,8 @@ shad_grid(
 )
 ```
 
-Gaps and padding accept a **spacing token step** — `gap = 4` is
-`var(--shad-space-4)`, the same scale the components use internally — or any CSS
+Gaps and padding accept a **spacing token step** – `gap = 4` is
+`var(--shad-space-4)`, the same scale the components use internally – or any CSS
 length when you need to escape the scale.
 
 ## Tabs
@@ -104,7 +104,7 @@ shad_tabs(
 
 > **Outputs inside an initially-hidden tab are suspended.** A `textOutput()` or
 > `plotOutput()` in a tab that isn't the `selected` one won't render until you
-> switch to it — and sometimes not even then. Force it with
+> switch to it – and sometimes not even then. Force it with
 > `outputOptions(output, "id", suspendWhenHidden = FALSE)`. The same applies to
 > outputs inside a dialog or sheet that opens later.
 
@@ -114,7 +114,7 @@ Two wrappers assemble a whole page in one call. Both take the `page_shad()`
 theming arguments (`theme_preset`, `dark`, `theme`) and wrap their content in a
 `shad_container()` unless you pass `container = FALSE`.
 
-`shad_page_navbar()` — a title bar carrying a tab strip, panels below. The
+`shad_page_navbar()` – a title bar carrying a tab strip, panels below. The
 window scrolls; the bar is sticky. `input$<inputId>` is the active tab.
 
 ```{r}
@@ -126,7 +126,7 @@ ui <- shad_page_navbar(
 )
 ```
 
-`shad_page_sidebar()` — the application frame: a collapsible sidebar, a bar with
+`shad_page_sidebar()` – the application frame: a collapsible sidebar, a bar with
 its trigger, and a scrolling main region. This shell takes the full viewport
 height and scrolls its main region rather than the window, so the sidebar rail
 and footer stay put.
@@ -146,7 +146,7 @@ ui <- shad_page_sidebar(
 
 `shad_command_palette()` is the "jump anywhere" pattern: a modal, searchable
 list of everything the app can do, opened with ⌘K / Ctrl+K. Items come from
-data — a named vector, or a named list of them for grouped sections:
+data – a named vector, or a named list of them for grouped sections:
 
 ```{r}
 shad_command_palette("palette", items = list(
@@ -159,7 +159,7 @@ shad_command_palette("palette", items = list(
 ```
 
 Drop `shad_command_trigger("palette")` in the page bar for people who do not
-know the shortcut, and observe **`input$palette_event`** — not `input$palette`:
+know the shortcut, and observe **`input$palette_event`** – not `input$palette`:
 
 ```{r}
 server <- function(input, output, session) {
@@ -174,7 +174,7 @@ server <- function(input, output, session) {
 ```
 
 `input$palette` holds the last value, but Shiny drops a repeat of the same
-value — so choosing "Reports" twice would only fire once. `_event` carries
+value – so choosing "Reports" twice would only fire once. `_event` carries
 `value` plus a `nonce` and fires every time, which is what navigation needs.
 
 `update_shad_command()` replaces the items from the server: recent documents,
@@ -251,7 +251,7 @@ shad_resizable(
 
 ## Scrollable regions
 
-`shad_scroll_area(height = )` gives a fixed-height region a styled scrollbar —
+`shad_scroll_area(height = )` gives a fixed-height region a styled scrollbar –
 useful for long lists inside a card or a chat transcript. For a growing
 conversation that should pin to the bottom, reach for
 `shad_message_scroller()` instead (see the
@@ -260,7 +260,7 @@ conversation that should pin to the bottom, reach for
 ## Separators
 
 `shad_separator()` draws a divider. Horizontal separators span the full width by
-default, which overflows inside a flex row — give them `style = "flex:1"` when
+default, which overflows inside a flex row – give them `style = "flex:1"` when
 using one as a rule between inline items (for example an "OR" divider).
 
 ```{r}
@@ -273,8 +273,8 @@ tags$div(style = "display:flex;align-items:center;gap:0.75rem",
 
 ## Where to next
 
-- [Gallery: navigation & structure](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.html) — these
+- [Gallery: navigation & structure](https://orijitghosh.github.io/shadshiny/articles/gallery-navigation.html) – these
   components, live.
-- [Server API](server-api.html) — driving tabs, sidebars and overlays.
-- `shad_run_example("02-analytics-dashboard")` — a full sidebar + menubar shell.
+- [Server API](server-api.html) – driving tabs, sidebars and overlays.
+- `shad_run_example("02-analytics-dashboard")` – a full sidebar + menubar shell.
 ```

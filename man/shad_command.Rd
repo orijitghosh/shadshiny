@@ -39,7 +39,7 @@ shad_command_separator()
 
 \item{empty_text}{Text shown when no item matches.}
 
-\item{dialog}{If \code{TRUE}, render the ⌘K/Ctrl+K dialog variant.}
+\item{dialog}{If \code{TRUE}, render the Cmd+K / Ctrl+K dialog variant.}
 
 \item{hotkey}{If \code{TRUE}, bind the \code{mod+k} open hotkey (defaults to \code{dialog}).}
 

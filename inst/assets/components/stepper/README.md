@@ -40,7 +40,7 @@ div.shad-stepper[data-shad=stepper]
 | `shad:change` | `{value: stepIndex}` |
 
 ## Keyboard
-Clickable triggers are real buttons — Tab reaches each enabled trigger, Enter/Space activates. In linear mode unreachable steps are `disabled` (skipped by Tab). Non-clickable steppers remove triggers from the tab order.
+Clickable triggers are real buttons – Tab reaches each enabled trigger, Enter/Space activates. In linear mode unreachable steps are `disabled` (skipped by Tab). Non-clickable steppers remove triggers from the tab order.
 
 ## A11y
 `aria-current="step"` on the active trigger; connectors and indicator icons are `aria-hidden`; state is conveyed by the label + `data-state` styling and, for errors, the description text. Panels show/hide with `hidden` + a fade honored by `prefers-reduced-motion`.

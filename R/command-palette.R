@@ -44,33 +44,33 @@
 
 #' Command palette for app navigation
 #'
-#' The ⌘K / Ctrl+K pattern: a modal, searchable list of everything the app can
-#' do. A thin shape over [shad_command()] that takes its items as data, opens on
-#' the hotkey (or from [shad_command_trigger()], or from the server), and reports
-#' every activation.
+#' The Cmd+K / Ctrl+K pattern: a modal, searchable list of everything the app
+#' can do. A thin shape over [shad_command()] that takes its items as data,
+#' opens on the hotkey (or from [shad_command_trigger()], or from the server),
+#' and reports every activation.
 #'
 #' Read selections from `input$<inputId>_event`, a list of `value` and `nonce`.
 #' `input$<inputId>` also holds the last value, but Shiny drops a repeat of the
-#' same value — which is wrong for navigation, where choosing "Settings" twice
+#' same value – which is wrong for navigation, where choosing "Settings" twice
 #' has to work twice. The `_event` input fires every time.
 #'
-#' Refresh the items from the server with [update_shad_command()] — a recent-docs
+#' Refresh the items from the server with [update_shad_command()] – a recent-docs
 #' list, search results, whatever the session knows.
 #'
 #' @param inputId Input id.
 #' @param items The commands. Either a named character vector
-#'   (`c(Home = "home")` — names are labels, values are what you observe), a
+#'   (`c(Home = "home")` – names are labels, values are what you observe), a
 #'   named list of such vectors (each name becomes a group heading, separated),
 #'   or a list of [shad_command_item()] / [shad_command_group()] tags for full
 #'   control. List entries may also be lists carrying `value`, `label`, `icon`,
 #'   `shortcut`, `keywords`, `disabled`.
 #' @param ... Extra content appended after `items`.
-#' @param hotkey Key that opens the palette, e.g. `"mod+k"` (default; ⌘K on
-#'   macOS, Ctrl+K elsewhere). `NULL` for no hotkey — open it from a trigger or
-#'   the server instead. Write `+`-separated modifiers, then the key: `mod`
-#'   (⌘ or Ctrl), `ctrl`, `meta` / `cmd`, `alt` / `option`, `shift`, and
+#' @param hotkey Key that opens the palette, e.g. `"mod+k"` (default; Cmd+K
+#'   on macOS, Ctrl+K elsewhere). `NULL` for no hotkey – open it from a trigger
+#'   or the server instead. Write `+`-separated modifiers, then the key: `mod`
+#'   (Cmd or Ctrl), `ctrl`, `meta` / `cmd`, `alt` / `option`, `shift`, and
 #'   `space` for the space bar, as in `"mod+shift+p"` or `"/"`. Exactly the
-#'   named modifiers must be held. A hotkey without Ctrl, ⌘ or Alt is left to
+#'   named modifiers must be held. A hotkey without Ctrl, Cmd or Alt is left to
 #'   text fields, so `"/"` still types a slash there. A hotkey naming an
 #'   unknown modifier never fires, with a browser console warning.
 #' @param placeholder Search-input placeholder.
@@ -107,11 +107,11 @@ shad_command_palette <- function(inputId, items = NULL, ..., hotkey = "mod+k",
 
 #' @rdname shad_command_palette
 #' @param id The palette's input id. In a module, namespace it yourself with
-#'   `ns()` — this is a UI-side attribute, not a server message.
+#'   `ns()` – this is a UI-side attribute, not a server message.
 #' @param label Trigger text.
 #' @param icon Leading icon name or tag.
-#' @param shortcut Hint shown at the end of the trigger, e.g. `"⌘K"`.
-#'   `NULL` for none.
+#' @param shortcut Hint shown at the end of the trigger, e.g. `"Ctrl K"`, or
+#'   `"\u2318K"` for the macOS key symbols of Cmd+K. `NULL` for none.
 #' @param variant,size Passed to [shad_button()].
 #' @usage
 #' shad_command_trigger(

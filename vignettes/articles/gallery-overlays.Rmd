@@ -1,8 +1,8 @@
 ---
 title: "Gallery: overlays & menus"
 description: >
-  Tier 3 overlays — dialog, sheet, drawer, popover, tooltip, hover-card,
-  dropdown, context-menu, menubar and the command palette — live and clickable.
+  Tier 3 overlays – dialog, sheet, drawer, popover, tooltip, hover-card,
+  dropdown, context-menu, menubar and the command palette – live and clickable.
 ---
 
 ```{r setup, include = FALSE}
@@ -11,7 +11,7 @@ for (p in c("_common.R", "../_common.R", "vignettes/_common.R"))
 ```
 
 Overlays open and close **entirely client-side**, so every trigger on this page
-works — click the buttons and try the menus. Each overlay also has an `inputId`
+works – click the buttons and try the menus. Each overlay also has an `inputId`
 so you can open it from the server with `shad_dialog_open()` /
 `shad_sheet_open()` / etc., and read menu selections with `input$id`. The
 [Overlays & the server](overlays-and-server.html) guide covers the reactive
@@ -63,7 +63,7 @@ demo({
 
 ## Popover
 
-A small floating panel anchored to its trigger — good for pickers and quick
+A small floating panel anchored to its trigger – good for pickers and quick
 forms.
 
 ```{r}
@@ -144,7 +144,7 @@ demo(
 
 ## Menubar
 
-An application menu bar — each `shad_menubar_menu()` opens a dropdown; hovering
+An application menu bar – each `shad_menubar_menu()` opens a dropdown; hovering
 across the bar moves between them.
 
 ```{r}
@@ -169,7 +169,7 @@ demo(
 ## Dialogs built in the server
 
 Everything above declares its overlay in the UI. When the content depends on
-what just happened — the row that was clicked, the upload that failed — build
+what just happened – the row that was clicked, the upload that failed – build
 the dialog in the server instead and show it, the way `shiny::showModal()`
 works:
 
@@ -188,7 +188,7 @@ observeEvent(input$delete, {
 ```
 
 It is appended to `<body>`, opens itself, and by default removes itself once it
-closes — nothing to clean up and no ids left behind. Inputs inside it are live
+closes – nothing to clean up and no ids left behind. Inputs inside it are live
 while it is open, so read them in the observer; pass `transient = FALSE` to keep
 the overlay (and its values) around for `shad_dialog_open()`.
 `shad_show_dialog()` also takes `shad_alert_dialog()`, `shad_sheet()` and
@@ -197,7 +197,7 @@ the overlay (and its values) around for `shad_dialog_open()`.
 ## Command palette
 
 `shad_command()` is a searchable action list. Inline it (below) or use
-`shad_command_palette()` for the ⌘K spotlight overlay — same component, items
+`shad_command_palette()` for the ⌘K spotlight overlay – same component, items
 supplied as data:
 
 ```r
@@ -214,7 +214,7 @@ shad_command_trigger("palette")
 observeEvent(input$palette_event, { ... })
 ```
 
-`update_shad_command()` swaps the items from the server — recent documents,
+`update_shad_command()` swaps the items from the server – recent documents,
 search hits, commands gated on the signed-in user.
 
 Inline, the same component looks like this. Type to filter.

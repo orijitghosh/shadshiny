@@ -1,4 +1,4 @@
-# shadshiny example 01 — Auth & onboarding ------------------------------------
+# shadshiny example 01 – Auth & onboarding ------------------------------------
 # A working sign-in / create-account flow: tabbed auth card that validates
 # against demo accounts, a 4-step onboarding wizard with a live progress bar and
 # input-OTP 2FA, password reveal, a forgot-password dialog, simulated social
@@ -28,7 +28,7 @@ zones <- list(
 )
 roles <- c("Engineering" = "eng", "Design" = "design", "Product" = "product",
   "Marketing" = "marketing", "Operations" = "ops", "Sales" = "sales")
-plans <- c(free = "Free", pro = "Pro — $12/mo", team = "Team — $49/mo")
+plans <- c(free = "Free", pro = "Pro – $12/mo", team = "Team – $49/mo")
 
 WIZARD_STEPS <- c("Account", "Profile", "Verify", "Done")
 
@@ -57,8 +57,8 @@ step_account <- function() {
 step_profile <- function() {
   tags$div(style = "display:grid;gap:1.25rem",
     shad_radio_group("ob_plan", label = "Choose a plan",
-      choices = c("Free — for individuals" = "free",
-        "Pro — $12/mo" = "pro", "Team — $49/mo" = "team"),
+      choices = c("Free – for individuals" = "free",
+        "Pro – $12/mo" = "pro", "Team – $49/mo" = "team"),
       selected = "pro"),
     tags$div(style = "display:grid;grid-template-columns:1fr 1fr;gap:1rem",
       shad_select("ob_country", label = "Country", choices = countries,
@@ -84,11 +84,11 @@ step_verify <- function() {
     uiOutput("ob_otp_msg"))
 }
 
-# Final review step — echoes back everything the user picked.
+# Final review step – echoes back everything the user picked.
 step_done <- function(name, plan, country, tz, role, news) {
   who <- if (nzchar(name)) name else "there"
   row <- function(label, value) shad_item(
-    tags$span(style = "font-weight:500", value %||% "—"),
+    tags$span(style = "font-weight:500", value %||% "–"),
     header = shad_muted(label), size = "sm", variant = "outline")
   tags$div(style = "display:grid;gap:1rem;justify-items:center;text-align:center",
     shad_avatar(fallback = toupper(substr(who, 1, 2)), size = "xl"),
@@ -99,7 +99,7 @@ step_done <- function(name, plan, country, tz, role, news) {
       shad_item_group(
         row("Plan", plans[[plan %||% "pro"]]),
         row("Country", names(countries)[match(country %||% "us", countries)]),
-        row("Timezone", tz %||% "—"),
+        row("Timezone", tz %||% "–"),
         row("Role", if (!is.null(role) && nzchar(role))
           names(roles)[match(role, roles)] else "Not set"),
         row("Product updates", if (isTRUE(news)) "On" else "Off"))))
@@ -199,7 +199,7 @@ auth_view <- function() {
 }
 
 ui <- page_shad(
-  title = "Acme — Sign in",
+  title = "Acme – Sign in",
   theme_preset = "violet",
 
   tags$head(tags$style(htmltools::HTML(paste(
@@ -332,7 +332,7 @@ server <- function(input, output, session) {
 
   output$ob_title <- renderText(
     if (step() == n) "You're all set" else "Create your account")
-  output$ob_subtitle <- renderText(sprintf("Step %d of %d — %s",
+  output$ob_subtitle <- renderText(sprintf("Step %d of %d – %s",
     step(), n, WIZARD_STEPS[step()]))
   output$ob_step_badge <- renderText(WIZARD_STEPS[step()])
 
@@ -357,7 +357,7 @@ server <- function(input, output, session) {
     }
   })
 
-  observeEvent(input$ob_resend, shad_toast("New code sent — it's 123456."))
+  observeEvent(input$ob_resend, shad_toast("New code sent – it's 123456."))
 
   observeEvent(input$ob_back, if (step() > 1) step(step() - 1L))
 
@@ -379,7 +379,7 @@ server <- function(input, output, session) {
     }
     if (s == n) {                       # final step → enter workspace
       authed(tolower(trimws(input$ob_email %||% "new@acme.io")))
-      shad_toast_success("Account created — welcome aboard!")
+      shad_toast_success("Account created – welcome aboard!")
       return()
     }
     if (s == 3L) shad_toast_success("Email verified.")

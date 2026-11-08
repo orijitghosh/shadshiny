@@ -17,7 +17,7 @@ Invisibly \code{NULL}; called for its side effect.
 \description{
 Closes the overlay; if it was shown with \code{transient = TRUE} (the default),
 closing is also what removes it from the document, so this is all you need.
-For a \code{transient = FALSE} overlay this only closes it — it stays available
+For a \code{transient = FALSE} overlay this only closes it – it stays available
 for \code{\link[=shad_dialog_open]{shad_dialog_open()}}.
 }
 \details{

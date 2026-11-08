@@ -12,7 +12,7 @@
 #'   shown above the title.
 #' @param media_variant `"icon"` (rounded muted tile) or `"default"`
 #'   (free-form illustration). Ignored when `media` is `NULL`.
-#' @param content Optional actions area — buttons, an input, links.
+#' @param content Optional actions area – buttons, an input, links.
 #' @param class Extra CSS classes.
 #' @param ... Extra attributes on the root.
 #' @returns An empty-state tag.

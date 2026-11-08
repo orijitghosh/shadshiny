@@ -1,4 +1,4 @@
-# shadshiny example 06 — Documentation site ---------------------------------
+# shadshiny example 06 – Documentation site ---------------------------------
 # A docs/knowledge-base reader: sidebar navigation, a ⌘K search palette, a
 # resizable article / table-of-contents split, rich typography, tabbed code
 # examples, a props table, FAQ accordion, and prev/next pagination.
@@ -46,7 +46,7 @@ props_tbl <- data.frame(
 
 # --- Page bodies -------------------------------------------------------------
 page_intro <- function() tagList(
-  shad_lead(paste("shadshiny is a framework-free port of shadcn/ui for Shiny —",
+  shad_lead(paste("shadshiny is a framework-free port of shadcn/ui for Shiny –",
     "no npm, no React, no build step.")),
   shad_p("It ships every component as a single bundled HTML dependency. Style",
     " comes from plain CSS custom properties; behaviour from vanilla JS."),
@@ -92,7 +92,7 @@ page_button <- function() tagList(
       shad_p("Pass ", shad_code("loading = TRUE"),
         " or toggle it from the server.")),
     shad_accordion_item("f2", "Can I use an icon-only button?",
-      shad_p("Yes — set ", shad_code('size = "icon"'),
+      shad_p("Yes – set ", shad_code('size = "icon"'),
         " and pass ", shad_code("icon="), ".")),
     value = "f1"),
   shad_collapsible("btn_adv",
@@ -134,7 +134,7 @@ app_sidebar <- shad_sidebar(
   footer = shad_muted(style = "padding:0.25rem", "v1.0.0"))
 
 ui <- page_shad(
-  title = "shadshiny — Docs",
+  title = "shadshiny – Docs",
   theme_preset = "violet",
 
   shad_command("docs_cmd", dialog = TRUE, placeholder = "Search docs…",

@@ -1,7 +1,7 @@
-# shadshiny example 02 — Analytics dashboard ---------------------------------
+# shadshiny example 02 – Analytics dashboard ---------------------------------
 # A working admin/analytics console. Every control does something: the metric
 # select redraws the chart, the date range updates the period, the command
-# palette opens from the server, and the team directory is fully mutable —
+# palette opens from the server, and the team directory is fully mutable –
 # invite adds a member, remove deletes one, edit changes a role, all through
 # real dialogs and sheets. New reports accumulate in the Reports tab.
 # Run with shadshiny::shad_run_example("02-analytics-dashboard").

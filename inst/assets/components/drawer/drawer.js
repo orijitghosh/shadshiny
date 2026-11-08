@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/drawer/drawer.js */
-/* shadshiny — drawer behavior (bottom sheet w/ drag-to-dismiss).
+/* shadshiny – drawer behavior (bottom sheet w/ drag-to-dismiss).
    Drag physics (DECISION): dismiss when release velocity > 0.5 px/ms downward
    OR travel > 50% of panel height; otherwise spring back (CSS transition).
    Upward drag is resisted (rubber-band /3). Overlay opacity tracks progress. */

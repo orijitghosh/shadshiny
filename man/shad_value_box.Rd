@@ -25,7 +25,7 @@ shad_value_box(
 
 \item{delta}{Optional delta text (e.g. \code{"+20.1\%"}). Rendered as a chip.}
 
-\item{delta_direction}{Trend for the chip: \code{"auto"} (default — inferred from a
+\item{delta_direction}{Trend for the chip: \code{"auto"} (default – inferred from a
 leading \code{+}/\code{-} in \code{delta}), \code{"up"}, \code{"down"}, or \code{"neutral"}.}
 
 \item{icon}{Optional icon: a \code{\link[=shad_icon]{shad_icon()}} name or a tag, pinned top-right.}
@@ -48,7 +48,7 @@ A value-box tag.
 }
 \description{
 A compact stat card: a label, a large value, an optional trend delta chip, an
-optional icon, caption, and sparkline slot. Grid-friendly — drop several into
+optional icon, caption, and sparkline slot. Grid-friendly – drop several into
 a CSS grid for a KPI row.
 }
 \examples{

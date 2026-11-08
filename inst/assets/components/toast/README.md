@@ -1,7 +1,7 @@
 <!-- FILE: inst/assets/components/toast/README.md -->
 # toast (Tier 3)
 
-Sonner-style imperative toast system. **No `data-shad` markup** — call `shad.toast()`; the bottom-right container is created lazily.
+Sonner-style imperative toast system. **No `data-shad` markup** – call `shad.toast()`; the bottom-right container is created lazily.
 
 ## API
 | Call | Description |
@@ -20,7 +20,7 @@ Sonner-style imperative toast system. **No `data-shad` markup** — call `shad.t
 - Exit animates before removal (Presence). Titles/descriptions injected via `textContent` (no HTML injection).
 
 ## Events
-None on document — toasts are fire-and-forget UI. Action buttons call your `onClick`.
+None on document – toasts are fire-and-forget UI. Action buttons call your `onClick`.
 
 ## A11y
 Container `aria-live=polite`; error toasts `role=alert`, others `role=status`; close button labelled.

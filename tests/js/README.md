@@ -1,6 +1,6 @@
 # JS unit tests
 
-Unit tests for `inst/assets` — the runtime and the component behaviours — run
+Unit tests for `inst/assets` – the runtime and the component behaviours – run
 in jsdom with [vitest](https://vitest.dev).
 
 ```bash
@@ -14,7 +14,7 @@ the build tarball via `.Rbuildignore`.
 
 ## How the harness works
 
-The assets are plain scripts that assign to `window.shad` — no modules, no build
+The assets are plain scripts that assign to `window.shad` – no modules, no build
 step. `helpers.js` does what a `<script>` tag does: reads the file and evaluates
 it in the current jsdom window. So a test reads like the real page:
 
@@ -31,7 +31,7 @@ module-level state (the component registry, the dismiss stack).
 
 jsdom has no layout engine. `getBoundingClientRect()` returns zeros,
 `offsetWidth` is 0, and `scrollIntoView` is a stub. Use `rect(el, box)` to stub
-a box when the logic under test reads geometry — that is enough for
+a box when the logic under test reads geometry – that is enough for
 "is this out of view" arithmetic, but not for anything that depends on real
 layout, painting, or animation timing.
 

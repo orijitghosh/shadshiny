@@ -1,7 +1,7 @@
 <!-- FILE: inst/assets/components/context-menu/README.md -->
 # context-menu (Tier 3)
 
-**Depends on dropdown-menu** (load `dropdown-menu/dropdown-menu.css` + `.js` first — supplies all `.shad-menu*` styles and `shad.__menuCore`).
+**Depends on dropdown-menu** (load `dropdown-menu/dropdown-menu.css` + `.js` first – supplies all `.shad-menu*` styles and `shad.__menuCore`).
 
 ## Anatomy
 ```

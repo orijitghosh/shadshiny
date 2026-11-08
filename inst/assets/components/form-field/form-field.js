@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/form-field/form-field.js */
-/* shadshiny — form-field wiring.
+/* shadshiny – form-field wiring.
    Markup:
      <div data-shad="form-field">
        <label class="shad-label">…</label>

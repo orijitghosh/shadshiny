@@ -3,13 +3,13 @@
 #' KPI / value box
 #'
 #' A compact stat card: a label, a large value, an optional trend delta chip, an
-#' optional icon, caption, and sparkline slot. Grid-friendly — drop several into
+#' optional icon, caption, and sparkline slot. Grid-friendly – drop several into
 #' a CSS grid for a KPI row.
 #'
 #' @param value The headline value (string or number; tags allowed).
 #' @param label The stat label.
 #' @param delta Optional delta text (e.g. `"+20.1%"`). Rendered as a chip.
-#' @param delta_direction Trend for the chip: `"auto"` (default — inferred from a
+#' @param delta_direction Trend for the chip: `"auto"` (default – inferred from a
 #'   leading `+`/`-` in `delta`), `"up"`, `"down"`, or `"neutral"`.
 #' @param icon Optional icon: a [shad_icon()] name or a tag, pinned top-right.
 #' @param caption Optional muted caption line below the value.

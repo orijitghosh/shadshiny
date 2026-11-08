@@ -17,7 +17,7 @@ replace of the UI constructor. This page is the **complete map** of base Shiny
 (and common `shiny`/`bslib`) UI to its shadshiny counterpart, grouped by area,
 with the value-shape differences flagged so nothing surprises you server-side.
 
-A handful of base functions have **no drop-in** — they are render slots
+A handful of base functions have **no drop-in** – they are render slots
 (`plotOutput`, `uiOutput`) or wiring (`fileInput`, `downloadButton`) that
 shadshiny deliberately doesn't re-implement. Those rows say so and tell you what
 to keep. Where shadshiny only restyles the surrounding markup, that is noted
@@ -32,7 +32,7 @@ too.
 | base Shiny | shadshiny | Kind | Notes |
 |---|---|---|---|
 | `textInput()` | `shad_input()` | drop-in | `type=` for email/password/number/search. |
-| `passwordInput()` | `shad_input(type = "password")` | drop-in | — |
+| `passwordInput()` | `shad_input(type = "password")` | drop-in | – |
 | `textAreaInput()` | `shad_textarea()` | drop-in | `autosize = TRUE` grows with content. |
 | `numericInput()` | `shad_number_input()` | drop-in | Numeric value with stepper buttons, `min`/`max`/`step`, and clamping. `shad_input(type = "number")` is the plainer alternative. |
 | `checkboxInput()` | `shad_checkbox()` | drop-in | Adds a tri-state `"indeterminate"`. |
@@ -40,7 +40,7 @@ too.
 | `checkboxGroupInput()` | `shad_toggle_group(type = "multiple")` | drop-in | Returns a character vector of selected values. |
 | `radioButtons()` | `shad_radio_group()` | drop-in | Single string value. |
 | `selectInput()` | `shad_select()` | drop-in | Single value; styled listbox. |
-| `selectInput()` (plain `<select>`) | `shad_native_select()` | drop-in | A styled real `<select>` — lightest option. |
+| `selectInput()` (plain `<select>`) | `shad_native_select()` | drop-in | A styled real `<select>` – lightest option. |
 | `selectInput(multiple = TRUE)` | `shad_combobox(multiple = TRUE)` | drop-in | Searchable; returns a character vector. |
 | `selectizeInput()` | `shad_combobox()` | drop-in | Type-ahead search; `multiple =` for tags. |
 | `varSelectInput()` | `shad_select()` / `shad_combobox()` | restyle | Feed `choices = names(data)` yourself. |
@@ -48,12 +48,12 @@ too.
 | `sliderInput()` (range) | `shad_slider(value = c(lo, hi))` | drop-in | Returns a length-2 numeric. |
 | `dateInput()` | `shad_date_picker()` | drop-in | Value is an ISO `"YYYY-MM-DD"` string. `caption_layout = "dropdown"` gives the month/year selects that `dateInput()` has by default. |
 | `dateRangeInput()` | `shad_date_picker(mode = "range")` | drop-in | Value is `list(start, end)`. |
-| — (calendar surface) | `shad_calendar()` | new | Inline month grid; `input$id` is the picked date. |
-| — (segmented code) | `shad_input_otp()` | new | One-time-code entry; no base analogue. |
+| – (calendar surface) | `shad_calendar()` | new | Inline month grid; `input$id` is the picked date. |
+| – (segmented code) | `shad_input_otp()` | new | One-time-code entry; no base analogue. |
 | `fileInput()` | `shad_dropzone()` | drop-in | Drag-and-drop surface over a hidden `fileInput()`, so `input$id` is the same files data frame. Pair with `shad_attachment()` to render the uploaded-file list. |
-| — (star rating) | `shad_rating()` | new | Numeric rating; `half = TRUE` for half-stars. |
-| — (wizard) | `shad_stepper()` (+ `shad_step()`) | new | Multi-step flow; `input$id` is the active step. |
-| — (hierarchy picker) | `shad_tree()` (+ `shad_tree_item()`) | new | Tree with selection and `input$<id>_expanded`. |
+| – (star rating) | `shad_rating()` | new | Numeric rating; `half = TRUE` for half-stars. |
+| – (wizard) | `shad_stepper()` (+ `shad_step()`) | new | Multi-step flow; `input$id` is the active step. |
+| – (hierarchy picker) | `shad_tree()` (+ `shad_tree_item()`) | new | Tree with selection and `input$<id>_expanded`. |
 | `dateRangeInput()` + preset buttons | `shad_date_picker(mode = "range", presets = shad_date_presets())` | drop-in | Adds a preset rail ("Last 7 days", "This month", …). |
 
 ## Buttons & actions
@@ -72,7 +72,7 @@ too.
 | base Shiny / bslib | shadshiny | Kind | Notes |
 |---|---|---|---|
 | `fluidPage()` / `fillPage()` | `page_shad()` | drop-in | Loads tokens + assets; `theme_preset =` sets the palette. |
-| `titlePanel()` | `shad_h1()` (typography set) | restyle | — |
+| `titlePanel()` | `shad_h1()` (typography set) | restyle | – |
 | `sidebarLayout()` / `sidebarPanel()` / `mainPanel()` | `shad_sidebar_layout()` | drop-in | Collapsible app sidebar; `input$id` reports `{collapsed, mobileOpen, active}`. |
 | `wellPanel()` | `shad_card()` (+ parts) | restyle | Panel/box surface. |
 | `fluidRow()` / `column()` | CSS grid/flex or `page_shad()` body | restyle | Use Bootstrap grid or your own CSS; shadshiny doesn't reimplement the grid. |
@@ -91,8 +91,8 @@ too.
 | `tabsetPanel()` / `tabPanel()` | `shad_tabs()` / `shad_tab()` | drop-in | `input$id` is the active tab value. |
 | `navbarPage()` | `page_shad()` + `shad_navigation_menu()` or `shad_sidebar_layout()` | restyle | Compose the shell yourself. |
 | `navlistPanel()` | `shad_sidebar_layout()` | restyle | Sidebar nav; observe `input$id$active`. |
-| `bslib::navset_*()` | `shad_tabs()` / `shad_navigation_menu()` | restyle | — |
-| `breadcrumb` (manual) | `shad_breadcrumb()` (+ item/separator) | new | — |
+| `bslib::navset_*()` | `shad_tabs()` / `shad_navigation_menu()` | restyle | – |
+| `breadcrumb` (manual) | `shad_breadcrumb()` (+ item/separator) | new | – |
 | paging controls (manual) | `shad_pagination()` | new | `input$id` is the current page. |
 
 ## Overlays & modals
@@ -102,13 +102,13 @@ too.
 | `modalDialog()` + `showModal()` / `removeModal()` | `shad_dialog()` in UI + `shad_dialog_open()` / `shad_dialog_close()` | pattern shift | Define the dialog in the UI, toggle by `id` from the server (not built server-side). |
 | destructive confirm modal | `shad_alert_dialog()` + `_open()` / `_close()` | new | Purpose-built confirm/cancel dialog. |
 | off-canvas / `bslib::*_sidebar` slide-over | `shad_sheet()` + `_open()` / `_close()` | new | Edge sheet panel. |
-| bottom sheet | `shad_drawer()` + `_open()` / `_close()` | new | — |
-| `bslib::popover()` | `shad_popover()` + `_open()` / `_close()` | drop-in | — |
+| bottom sheet | `shad_drawer()` + `_open()` / `_close()` | new | – |
+| `bslib::popover()` | `shad_popover()` + `_open()` / `_close()` | drop-in | – |
 | `bslib::tooltip()` | `shad_tooltip()` | drop-in | Hover/focus tooltip. |
 | hover preview | `shad_hover_card()` | new | Rich hover card. |
 | dropdown menu | `shad_dropdown_menu()` (+ items) | new | Menu, checkbox/radio items, submenus. |
-| right-click menu | `shad_context_menu()` | new | — |
-| app menubar | `shad_menubar()` (+ menu) | new | — |
+| right-click menu | `shad_context_menu()` | new | – |
+| app menubar | `shad_menubar()` (+ menu) | new | – |
 | ⌘K palette | `shad_command()` (+ group/item) | new | Grouped, keyword-searchable command palette. |
 
 ## Notifications & feedback
@@ -117,9 +117,9 @@ too.
 |---|---|---|---|
 | `showNotification()` | `shad_toast()` (+ `_success`/`_error`/`_warning`) | drop-in | Server-raised toasts. |
 | `showNotification(type = "message", duration = NULL)` (loading) | `shad_toast_loading()` → `shad_toast_update()` | drop-in | Loading→done flow; pass `session` from deferred callbacks. |
-| `removeNotification()` | `shad_toast_dismiss()` | drop-in | — |
+| `removeNotification()` | `shad_toast_dismiss()` | drop-in | – |
 | `withProgress()` / `Progress$new()` / `incProgress()` | `shad_progress()` + `update_shad_progress()` | pattern shift | Determinate bar you drive by `id`; wrap your own loop. |
-| `insertUI()` / `removeUI()` | keep base | keep base | Works as-is — inserted shadshiny components auto-initialise. |
+| `insertUI()` / `removeUI()` | keep base | keep base | Works as-is – inserted shadshiny components auto-initialise. |
 | `validate()` / `need()` | `shad_validator()` (+ `shad_rules`) | pattern shift | Declare rules per field; the validator drives `aria-invalid` and inline `shad_form_message()` text. Base `validate()`/`need()` still works for output gating. |
 
 ## Outputs & display
@@ -130,12 +130,12 @@ too.
 | `dataTableOutput()` / `DT` / `reactable` | `shad_data_table()` | drop-in | Client-side sort/filter/page/select, styled to the theme. `input$id` reports `{selected, sort, filter, page, pageSize}`; refresh with `update_shad_data_table()`. Keep `DT` when you need server-side paging over large data. |
 | `plotOutput()` / `renderPlot()` | keep base, inside `shad_chart_container()` | keep base | Card wrapper with title/description/legend. Theme the plot with `shad_theme_ggplot2()` + `shad_current_theme()`. |
 | `plotly` / `echarts4r` widgets | keep base, inside `shad_chart_container()` | keep base | Restyle with `shad_theme_plotly()` / `shad_theme_echarts4r()`. The plot adapters are experimental. |
-| event log / activity feed (manual) | `shad_timeline()` (+ item) | new | — |
-| `uiOutput()` / `renderUI()` | keep base | keep base | Render slot; emit shadshiny tags into it — they auto-initialise. |
+| event log / activity feed (manual) | `shad_timeline()` (+ item) | new | – |
+| `uiOutput()` / `renderUI()` | keep base | keep base | Render slot; emit shadshiny tags into it – they auto-initialise. |
 | `textOutput()` / `verbatimTextOutput()` | keep base | keep base | Wrap in `shad_code()` / typography for styling. |
 | `icon()` (Font Awesome) | `shad_icon()` | drop-in | Lucide set; see `vignette("icons")`. Any custom SVG also accepted. |
 | `progressBar` (manual) | `shad_progress()` | new | Determinate progress bar. |
-| avatar / badge (manual) | `shad_avatar()` / `shad_badge()` | new | — |
+| avatar / badge (manual) | `shad_avatar()` / `shad_badge()` | new | – |
 | skeleton / spinner (manual) | `shad_skeleton()` / `shad_spinner()` | new | Loading placeholders. |
 
 ## Typography & static content
@@ -143,29 +143,29 @@ too.
 | base Shiny / htmltools | shadshiny | Notes |
 |---|---|---|
 | `h1()`–`h4()` | `shad_h1()`–`shad_h4()` | Tuned type scale. |
-| `p()` | `shad_p()` | — |
-| `tags$blockquote()` | `shad_blockquote()` | — |
+| `p()` | `shad_p()` | – |
+| `tags$blockquote()` | `shad_blockquote()` | – |
 | `helpText()` | `shad_muted()` / `shad_small()` | Muted helper text. |
-| `strong()` / lead text | `shad_lead()` / `shad_large()` | — |
+| `strong()` / lead text | `shad_lead()` / `shad_large()` | – |
 | `code()` | `shad_code()` | Inline code. |
 | `tags$kbd()` | `shad_kbd()` | Keyboard key. |
 | `tags$ul()` / `tags$li()` | `shad_list()` | Styled list; pass `tags$li()` children, `ordered = TRUE` for `<ol>`. |
 
-## shadshiny-only — no base equivalent
+## shadshiny-only – no base equivalent
 
 Worth adopting on their own; there is nothing to migrate *from*:
 
-- `shad_command()` — ⌘K command palette with grouped, keyword-searchable items.
-- `shad_input_otp()` — segmented one-time-code entry.
-- `shad_sidebar_layout()` — full collapsible application sidebar with groups,
+- `shad_command()` – ⌘K command palette with grouped, keyword-searchable items.
+- `shad_input_otp()` – segmented one-time-code entry.
+- `shad_sidebar_layout()` – full collapsible application sidebar with groups,
   items, badges, and a server-toggled state.
-- `shad_toast()` — server-raised notifications, including loading→done flows.
-- The **chat / AI kit** — `shad_bubble()`, `shad_message()` (+ scroller),
-  `shad_attachment()`, `shad_marker()` — a stick-to-bottom streaming transcript,
+- `shad_toast()` – server-raised notifications, including loading→done flows.
+- The **chat / AI kit** – `shad_bubble()`, `shad_message()` (+ scroller),
+  `shad_attachment()`, `shad_marker()` – a stick-to-bottom streaming transcript,
   or `shad_chat_ui()` / `shad_chat_server()` for the whole module at once.
-- `shad_theme()` / `shad_theme_from_registry()` — build a custom palette, or
+- `shad_theme()` / `shad_theme_from_registry()` – build a custom palette, or
   import one from the shadcn theme registry (experimental).
-- `shad_empty()` — empty-state panel; `shad_item()` — flex list-row primitive.
+- `shad_empty()` – empty-state panel; `shad_item()` – flex list-row primitive.
 
 ## Value-shape differences to watch
 
@@ -182,7 +182,7 @@ Worth adopting on their own; there is nothing to migrate *from*:
   click back to it when the checkbox has `tristate = TRUE`.
 - **Overlays are UI-defined, server-toggled.** Unlike `showModal()`, a
   `shad_dialog()` lives in the UI and you open/close it by `id`
-  (`shad_dialog_open("confirm")`) — Shiny-module safe via the session's ns.
+  (`shad_dialog_open("confirm")`) – Shiny-module safe via the session's ns.
 
 ## Updating from the server
 
@@ -215,6 +215,6 @@ controllers and the `shad_toast()` family.
 
 ## See also
 
-- `vignette("shadshiny")` — get started.
-- The **Component gallery** — every component rendered live next to its source.
-- `shad_run_example("kitchen-sink")` — a live tour of the whole library.
+- `vignette("shadshiny")` – get started.
+- The **Component gallery** – every component rendered live next to its source.
+- `shad_run_example("kitchen-sink")` – a live tour of the whole library.

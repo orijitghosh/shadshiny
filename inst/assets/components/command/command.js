@@ -1,12 +1,12 @@
 /* FILE: inst/assets/components/command/command.js */
-/* shadshiny — command palette behavior (cmdk-style).
+/* shadshiny – command palette behavior (cmdk-style).
    Two modes:
      inline:  <div data-shad="command"> (always visible, filters as you type)
      dialog:  root also has data-hotkey="mod+k" → hidden until hotkey/open();
               root gets .shad-command--dialog + sibling overlay created by JS.
    Filtering (DECISION): case-insensitive substring on item text +
    data-keywords; groups hide when all their items hide; __empty shows when
-   nothing matches. No fuzzy scoring — predictable and fast.
+   nothing matches. No fuzzy scoring – predictable and fast.
    getValue() -> data-value of last activated item.
    Hotkey: "+"-separated modifiers (mod = Ctrl or Cmd, ctrl, meta/cmd,
    alt/option, shift) then the key. Contract:
@@ -69,7 +69,7 @@
           it.setAttribute("data-highlighted", "");
           it.setAttribute("aria-selected", "true");
           input.setAttribute("aria-activedescendant", it.id);
-          // scrolls the list only — never the page (see shad.util.keepInView)
+          // scrolls the list only – never the page (see shad.util.keepInView)
           shad.util.keepInView(list, it);
         } else {
           it.removeAttribute("data-highlighted");

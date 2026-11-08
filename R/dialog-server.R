@@ -40,13 +40,13 @@
 #' Show an overlay created on the server
 #'
 #' Build a [shad_dialog()] (or alert dialog, sheet, drawer) in the server
-#' function and show it, the way [shiny::showModal()] works — no need to place
+#' function and show it, the way [shiny::showModal()] works – no need to place
 #' it in the UI up front and no `trigger`.
 #'
 #' The overlay is inserted at the end of `<body>`, opens itself once its
 #' JavaScript instance exists, and by default removes itself from the document
-#' after it closes (`transient = TRUE`). Its inputs are live while it is open —
-#' read `input$<id>` inside it as usual — so `transient = FALSE` is the right
+#' after it closes (`transient = TRUE`). Its inputs are live while it is open –
+#' read `input$<id>` inside it as usual – so `transient = FALSE` is the right
 #' call when you need those values to survive the close.
 #'
 #' Because the tag is built in the server, its ids are namespaced by the module
@@ -89,7 +89,7 @@ shad_show_dialog <- function(overlay, transient = TRUE,
 #'
 #' Closes the overlay; if it was shown with `transient = TRUE` (the default),
 #' closing is also what removes it from the document, so this is all you need.
-#' For a `transient = FALSE` overlay this only closes it — it stays available
+#' For a `transient = FALSE` overlay this only closes it – it stays available
 #' for [shad_dialog_open()].
 #'
 #' Overlays close themselves on Esc, on a backdrop press, and via

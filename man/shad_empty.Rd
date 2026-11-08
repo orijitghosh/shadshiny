@@ -25,7 +25,7 @@ shown above the title.}
 \item{media_variant}{\code{"icon"} (rounded muted tile) or \code{"default"}
 (free-form illustration). Ignored when \code{media} is \code{NULL}.}
 
-\item{content}{Optional actions area — buttons, an input, links.}
+\item{content}{Optional actions area – buttons, an input, links.}
 
 \item{class}{Extra CSS classes.}
 

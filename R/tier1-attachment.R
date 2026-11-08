@@ -5,13 +5,13 @@
 #' Attachment
 #'
 #' A file/image attachment chip with media, metadata, an upload-lifecycle
-#' state, and action buttons. Part of the chat/AI kit — for composers, message
+#' state, and action buttons. Part of the chat/AI kit – for composers, message
 #' threads, and upload lists. Row up with [shad_attachment_group()].
 #'
 #' @param title The file name (truncated when long).
 #' @param description Optional metadata (type, size, status).
 #' @param media Optional [shad_icon()] name or a tag (icon or image thumb).
-#' @param actions Optional action buttons — see [shad_attachment_action()].
+#' @param actions Optional action buttons – see [shad_attachment_action()].
 #' @param orientation `"horizontal"` (default) or `"vertical"` (media on top).
 #' @param size One of `NULL` (default), `"sm"`, `"xs"`.
 #' @param state Upload lifecycle: `"idle"`, `"uploading"`, `"processing"`,
@@ -84,7 +84,7 @@ shad_attachment <- function(title, description = NULL, media = NULL,
 
 #' @rdname shad_attachment
 #' @param icon A [shad_icon()] name or a tag for the action button.
-#' @param aria_label Accessible label (required — the button is icon-only).
+#' @param aria_label Accessible label (required – the button is icon-only).
 #' @param ... For `shad_attachment_action()`, extra attributes on the button.
 #' @export
 shad_attachment_action <- function(icon, aria_label, ...) {

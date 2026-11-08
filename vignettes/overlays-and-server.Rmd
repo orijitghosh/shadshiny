@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE, purl = FALSE)
 ```
 
-This vignette covers the overlay family — dialog, sheet, drawer, alert-dialog —
+This vignette covers the overlay family – dialog, sheet, drawer, alert-dialog –
 and the server-side helpers that open them and raise toasts.
 
 ## Trigger-driven vs server-driven
@@ -34,7 +34,7 @@ shad_dialog(
 
 The same overlay can be opened (or closed) from the server without any trigger,
 using `shad_dialog_open()` / `shad_dialog_close()`. Each overlay has a matching
-pair — `shad_sheet_open()`, `shad_drawer_open()`, `shad_alert_dialog_open()`,
+pair – `shad_sheet_open()`, `shad_drawer_open()`, `shad_alert_dialog_open()`,
 `shad_popover_open()`, and so on.
 
 ```{r}
@@ -52,7 +52,7 @@ server <- function(input, output, session) {
 ## Dialogs built in the server
 
 Both forms above need the overlay to exist in the UI. When the dialog's content
-depends on what just happened — the row you clicked, the file that failed —
+depends on what just happened – the row you clicked, the file that failed –
 build it in the server and show it, the way `shiny::showModal()` works:
 
 ```{r}
@@ -72,7 +72,7 @@ server <- function(input, output, session) {
 }
 ```
 
-The overlay is appended to `<body>`, opens itself, and — by default — destroys
+The overlay is appended to `<body>`, opens itself, and – by default – destroys
 and removes itself once it closes. Nothing to clean up, and no ids left behind.
 `shad_show_dialog()` also takes `shad_alert_dialog()`, `shad_sheet()` and
 `shad_drawer()`.
@@ -83,7 +83,7 @@ though: read what you need in the observer, or pass `transient = FALSE` to keep
 the overlay (and its values) in the document so it can be reopened with
 `shad_dialog_open()`.
 
-`shad_remove_dialog(id)` closes one from the server — for a job that finished or
+`shad_remove_dialog(id)` closes one from the server – for a job that finished or
 a save that succeeded. Esc, the backdrop and `shad_dialog_close_button()` all
 still work on their own.
 
@@ -128,7 +128,7 @@ shad_toast_error("Upload failed", description = "Check your connection.")
 
 `shad_toast_loading()` shows an indefinite spinner and returns an id. Feed that
 id to `shad_toast_update()` when the work finishes to morph the same toast into
-a result — no second toast, no flicker.
+a result – no second toast, no flicker.
 
 ```{r}
 server <- function(input, output, session) {
@@ -158,5 +158,5 @@ output$panel <- renderUI({
 ```
 
 All `inputId`s pass through `session$ns()`, so components and their
-`update_shad_*()` / `shad_*_open()` helpers are safe inside Shiny modules — use
+`update_shad_*()` / `shad_*_open()` helpers are safe inside Shiny modules – use
 the same bare id in UI and server as you would with base inputs.

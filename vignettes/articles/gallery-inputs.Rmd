@@ -1,8 +1,8 @@
 ---
 title: "Gallery: form inputs"
 description: >
-  Tier 2 bound inputs — text, select, combobox, checkbox, switch, radio,
-  toggle, slider, OTP and date pickers — rendered live with their source.
+  Tier 2 bound inputs – text, select, combobox, checkbox, switch, radio,
+  toggle, slider, OTP and date pickers – rendered live with their source.
 ---
 
 ```{r setup, include = FALSE}
@@ -12,8 +12,8 @@ for (p in c("_common.R", "../_common.R", "vignettes/_common.R"))
 
 Every component here is a **bound Shiny input**: pass an `inputId`, then read the
 value with `input$id` and set it from the server with the matching
-`update_shad_*()` helper. The previews below are live — you can type, toggle and
-open them — but with no Shiny server attached they won't echo values. See
+`update_shad_*()` helper. The previews below are live – you can type, toggle and
+open them – but with no Shiny server attached they won't echo values. See
 [Forms & validation](forms.html) for the reactive side, and the
 [Server API](server-api.html) guide for updating inputs.
 
@@ -118,7 +118,7 @@ demo(
 )
 ```
 
-`shad_native_select()` is the same look over a real `<select>` — better on
+`shad_native_select()` is the same look over a real `<select>` – better on
 mobile and inside dense forms.
 
 ```{r}
@@ -183,7 +183,7 @@ demo({
 ## Form field & input group
 
 `shad_form_field()` wraps any control with a label, description, required marker
-and error slot. `shad_input_group()` fuses affixes — icons, text, buttons —
+and error slot. `shad_input_group()` fuses affixes – icons, text, buttons –
 onto an input.
 
 ```{r}

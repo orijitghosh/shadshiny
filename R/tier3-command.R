@@ -18,7 +18,7 @@
 #' @param ... Command content (groups, items, separators).
 #' @param placeholder Search-input placeholder.
 #' @param empty_text Text shown when no item matches.
-#' @param dialog If `TRUE`, render the ⌘K/Ctrl+K dialog variant.
+#' @param dialog If `TRUE`, render the Cmd+K / Ctrl+K dialog variant.
 #' @param hotkey If `TRUE`, bind the `mod+k` open hotkey (defaults to `dialog`).
 #' @param class Extra CSS classes.
 #' @returns A command tag.

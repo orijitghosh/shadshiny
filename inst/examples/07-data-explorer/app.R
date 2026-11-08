@@ -1,4 +1,4 @@
-# 07 — Data explorer: data table + value boxes + chart theming + custom theme.
+# 07 – Data explorer: data table + value boxes + chart theming + custom theme.
 # Exercises shad_data_table(), shad_value_box(), shad_chart_container(),
 # shad_theme_ggplot2(), and runtime theming.
 library(shiny)

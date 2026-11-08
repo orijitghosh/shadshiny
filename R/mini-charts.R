@@ -84,7 +84,7 @@ shad_chart_paint <- function(color) {
 #' [shad_value_box()]'s `sparkline` slot, a table cell, or an item row.
 #'
 #' Marks are painted with the theme's chart tokens, so dark mode and preset
-#' switches restyle them in CSS — nothing re-renders, and no Shiny session is
+#' switches restyle them in CSS – nothing re-renders, and no Shiny session is
 #' involved. Non-finite values (`NA`, `NaN`, `Inf`) break the series into
 #' separate runs rather than being interpolated across.
 #'
@@ -99,7 +99,7 @@ shad_chart_paint <- function(color) {
 #'   `NULL` (default) picks automatically: zero-anchored if any value is
 #'   negative, otherwise bars grow from the floor.
 #' @param label Accessible name. When `NULL` (default) the chart is decorative
-#'   and hidden from assistive technology — correct when the number it
+#'   and hidden from assistive technology – correct when the number it
 #'   illustrates is already on screen.
 #' @param class Extra CSS classes.
 #' @param ... Extra attributes for the root `<svg>`.

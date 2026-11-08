@@ -11,7 +11,7 @@
 #' surface, and a footer (status, actions). Part of the chat/AI kit. Group
 #' consecutive same-sender rows with [shad_message_group()].
 #'
-#' @param ... The message body — placed inside the bubble content. For
+#' @param ... The message body – placed inside the bubble content. For
 #'   `state = "typing"` the body is replaced by an animated typing indicator.
 #' @param align `"start"` (received) or `"end"` (sent).
 #' @param avatar Optional avatar: a tag (e.g. [shad_avatar()] or an `<img>`) or

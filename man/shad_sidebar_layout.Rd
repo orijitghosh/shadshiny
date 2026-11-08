@@ -58,7 +58,7 @@ A sidebar-layout tag.
 \description{
 A collapsible application sidebar with a main content area.
 \verb{input$<inputId>} is a list \code{list(collapsed=, mobileOpen=, active=)}. Toggle
-with the ⌘/Ctrl+B shortcut, a \code{\link[=shad_sidebar_trigger]{shad_sidebar_trigger()}}, or
+with the Cmd+B / Ctrl+B shortcut, a \code{\link[=shad_sidebar_trigger]{shad_sidebar_trigger()}}, or
 \code{\link[=shad_sidebar_toggle]{shad_sidebar_toggle()}}.
 }
 \examples{

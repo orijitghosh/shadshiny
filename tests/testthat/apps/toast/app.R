@@ -1,4 +1,4 @@
-# Fixture: toast lifecycle — raise, variant, dismiss, loading -> success.
+# Fixture: toast lifecycle – raise, variant, dismiss, loading -> success.
 library(shiny)
 library(shadshiny)
 

@@ -1,8 +1,8 @@
 ---
 title: "Gallery: chat & AI kit"
 description: >
-  The streaming-transcript primitives — bubbles, messages, attachments,
-  markers and the stick-to-bottom scroller — rendered live with their source.
+  The streaming-transcript primitives – bubbles, messages, attachments,
+  markers and the stick-to-bottom scroller – rendered live with their source.
 ---
 
 ```{r setup, include = FALSE}
@@ -26,7 +26,7 @@ left (received) or right (sent).
 demo(
   columns = TRUE, {
   shad_bubble("Hey! Are we still on for 3pm?", align = "start")
-  shad_bubble("Absolutely — see you then.", variant = "tinted", align = "end")
+  shad_bubble("Absolutely – see you then.", variant = "tinted", align = "end")
 })
 ```
 
@@ -70,7 +70,7 @@ demo(
 
 ## Marker
 
-A slim inline annotation for the stream — a date break, a "streaming…" cue, or a
+A slim inline annotation for the stream – a date break, a "streaming…" cue, or a
 status note.
 
 ```{r}
@@ -114,7 +114,7 @@ demo(
   shad_message_scroller(
     "demo_scroller", height = "16rem", auto_scroll = TRUE,
     shad_message_scroller_item(
-      shad_message(shad_bubble("Welcome to support — how can I help?"),
+      shad_message(shad_bubble("Welcome to support – how can I help?"),
         align = "start", avatar = shad_avatar(fallback = "AI"), sender = "Assistant")
     ),
     shad_message_scroller_item(

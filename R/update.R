@@ -70,7 +70,7 @@ shad_set_html <- function(id, ui, selector = NULL,
 #'
 #' Each function sets the current value of a bound shadshiny input, mirroring
 #' Shiny's built-in `update*Input()` helpers. Changing the available *choices*
-#' of a component is a non-goal — re-render with [shiny::renderUI()] instead.
+#' of a component is a non-goal – re-render with [shiny::renderUI()] instead.
 #'
 #' [update_shad_select()] and [update_shad_combobox()] match `selected`
 #' against the choices as strings, and `NULL` clears the input. A value that is

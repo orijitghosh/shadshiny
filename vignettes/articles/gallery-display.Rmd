@@ -1,8 +1,8 @@
 ---
 title: "Gallery: display & typography"
 description: >
-  Every Tier 1 display component — buttons, badges, avatars, cards, alerts,
-  tables, progress, and the typography set — rendered live with its source.
+  Every Tier 1 display component – buttons, badges, avatars, cards, alerts,
+  tables, progress, and the typography set – rendered live with its source.
 ---
 
 ```{r setup, include = FALSE}
@@ -14,7 +14,7 @@ Everything on this page is a **real component**, rendered by the same code you
 see under each preview. Expand *Code* to copy it. The previews recolour with the
 light/dark switch in the navbar, exactly as they would in your app.
 
-These are the non-interactive building blocks — the display layer of Tier 1.
+These are the non-interactive building blocks – the display layer of Tier 1.
 For inputs see [Gallery: form inputs](gallery-inputs.html); for dialogs and
 menus see [Gallery: overlays](gallery-overlays.html).
 
@@ -202,7 +202,7 @@ demo(
 
 ## Item
 
-`shad_item()` is the flexible list row — media, title, description and actions —
+`shad_item()` is the flexible list row – media, title, description and actions –
 used for settings lists, results, and menus. Group them with
 `shad_item_group()`.
 

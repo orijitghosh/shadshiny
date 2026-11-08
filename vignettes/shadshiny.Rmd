@@ -13,7 +13,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE, purl = FALS
 
 shadshiny is a port of the [shadcn/ui](https://ui.shadcn.com) design system to
 Shiny. Components are plain `htmltools` tags backed by one bundled asset
-dependency — there is no npm step and no React. Bound components behave like
+dependency – there is no npm step and no React. Bound components behave like
 ordinary Shiny inputs.
 
 ## Install
@@ -99,7 +99,7 @@ shinyApp(ui, server)
 ## Reading and updating values
 
 - **Read:** `input$email`, `input$plan`, `input$tos`. Value shapes match what
-  the component holds — a string, a logical, a vector for multi-selects.
+  the component holds – a string, a logical, a vector for multi-selects.
 - **Update:** each valued component has an `update_shad_*()` twin
   (`update_shad_select()`, `update_shad_checkbox()`, …). They accept the same
   `inputId` and are Shiny-module safe.
@@ -122,7 +122,7 @@ shad_dialog(
 ```
 
 A dialog can also be built in the server and shown with `shad_show_dialog()`,
-the way `shiny::showModal()` works — useful when its content depends on what the
+the way `shiny::showModal()` works – useful when its content depends on what the
 user just did.
 
 ## Laying out a page
@@ -142,13 +142,13 @@ shad_container(
 ```
 
 For a whole app, `shad_page_navbar()` and `shad_page_sidebar()` replace
-`page_shad()` and assemble the shell — bar, navigation and scrolling main
-region — in one call.
+`page_shad()` and assemble the shell – bar, navigation and scrolling main
+region – in one call.
 
 ## Where to next
 
-- `vignette("theming")` — the token system, presets, and dark mode.
-- `vignette("layout")` — containers, grids, and the page shells.
-- `vignette("overlays-and-server")` — dialogs, confirm flows, and toasts.
-- `vignette("migrating-inputs")` — moving from base Shiny inputs.
-- `shad_run_example("kitchen-sink")` — a live tour of every component.
+- `vignette("theming")` – the token system, presets, and dark mode.
+- `vignette("layout")` – containers, grids, and the page shells.
+- `vignette("overlays-and-server")` – dialogs, confirm flows, and toasts.
+- `vignette("migrating-inputs")` – moving from base Shiny inputs.
+- `shad_run_example("kitchen-sink")` – a live tour of every component.

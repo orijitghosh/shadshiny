@@ -136,7 +136,7 @@ Invisibly \code{NULL}; called for its side effect.
 \description{
 Each function sets the current value of a bound shadshiny input, mirroring
 Shiny's built-in \code{update*Input()} helpers. Changing the available \emph{choices}
-of a component is a non-goal — re-render with \code{\link[shiny:renderUI]{shiny::renderUI()}} instead.
+of a component is a non-goal – re-render with \code{\link[shiny:renderUI]{shiny::renderUI()}} instead.
 }
 \details{
 \code{\link[=update_shad_select]{update_shad_select()}} and \code{\link[=update_shad_combobox]{update_shad_combobox()}} match \code{selected}

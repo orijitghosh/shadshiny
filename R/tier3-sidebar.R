@@ -4,7 +4,7 @@
 #'
 #' A collapsible application sidebar with a main content area.
 #' `input$<inputId>` is a list `list(collapsed=, mobileOpen=, active=)`. Toggle
-#' with the ⌘/Ctrl+B shortcut, a [shad_sidebar_trigger()], or
+#' with the Cmd+B / Ctrl+B shortcut, a [shad_sidebar_trigger()], or
 #' [shad_sidebar_toggle()].
 #'
 #' @param inputId Input id.

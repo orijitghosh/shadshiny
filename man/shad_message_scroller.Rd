@@ -20,7 +20,7 @@ shad_message_scroller_item(..., anchor = FALSE, class = NULL)
 \arguments{
 \item{id}{Element id (namespaced automatically in modules).}
 
-\item{...}{Rows — typically \code{\link[=shad_message_scroller_item]{shad_message_scroller_item()}} wrapping a
+\item{...}{Rows – typically \code{\link[=shad_message_scroller_item]{shad_message_scroller_item()}} wrapping a
 \code{\link[=shad_message]{shad_message()}}, \code{\link[=shad_bubble]{shad_bubble()}}, or \code{\link[=shad_marker]{shad_marker()}}.}
 
 \item{auto_scroll}{If \code{TRUE} (default), follow new content while at the

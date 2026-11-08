@@ -37,7 +37,7 @@ shad_sparkline(
 negative, otherwise bars grow from the floor.}
 
 \item{label}{Accessible name. When \code{NULL} (default) the chart is decorative
-and hidden from assistive technology — correct when the number it
+and hidden from assistive technology – correct when the number it
 illustrates is already on screen.}
 
 \item{class}{Extra CSS classes.}
@@ -54,7 +54,7 @@ path (or a row of bars) that stretches to fill its container. Built for
 }
 \details{
 Marks are painted with the theme's chart tokens, so dark mode and preset
-switches restyle them in CSS — nothing re-renders, and no Shiny session is
+switches restyle them in CSS – nothing re-renders, and no Shiny session is
 involved. Non-finite values (\code{NA}, \code{NaN}, \code{Inf}) break the series into
 separate runs rather than being interpolated across.
 }

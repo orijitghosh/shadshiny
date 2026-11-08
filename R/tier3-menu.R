@@ -18,7 +18,7 @@
 #' @examples
 #' shad_dropdown_menu("m", trigger = shad_button("Open"),
 #'   shad_menu_label("My Account"), shad_menu_separator(),
-#'   shad_menu_item("profile", "Profile", shortcut = "⇧⌘P"))
+#'   shad_menu_item("profile", "Profile", shortcut = "\u21e7\u2318P"))
 #' @export
 shad_dropdown_menu <- function(inputId, trigger, ...,
                                side = c("bottom", "top", "right", "left"),

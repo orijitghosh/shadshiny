@@ -25,14 +25,14 @@ Invisibly the overlay's input id.
 }
 \description{
 Build a \code{\link[=shad_dialog]{shad_dialog()}} (or alert dialog, sheet, drawer) in the server
-function and show it, the way \code{\link[shiny:showModal]{shiny::showModal()}} works — no need to place
+function and show it, the way \code{\link[shiny:showModal]{shiny::showModal()}} works – no need to place
 it in the UI up front and no \code{trigger}.
 }
 \details{
 The overlay is inserted at the end of \verb{<body>}, opens itself once its
 JavaScript instance exists, and by default removes itself from the document
-after it closes (\code{transient = TRUE}). Its inputs are live while it is open —
-read \verb{input$<id>} inside it as usual — so \code{transient = FALSE} is the right
+after it closes (\code{transient = TRUE}). Its inputs are live while it is open –
+read \verb{input$<id>} inside it as usual – so \code{transient = FALSE} is the right
 call when you need those values to survive the close.
 
 Because the tag is built in the server, its ids are namespaced by the module

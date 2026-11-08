@@ -1,4 +1,4 @@
-/* shadshiny — questionnaire behavior.
+/* shadshiny – questionnaire behavior.
    The root contains every fieldset once. The reducer owns answer state and
    every user action goes through dispatch(), so Shiny receives one stable
    JSON-safe value shape: {active, answers, skipped, complete}. */

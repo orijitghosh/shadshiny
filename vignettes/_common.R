@@ -4,7 +4,7 @@
 # Provides demo(): a framed LIVE preview of one or more shadshiny components,
 # with a collapsible, syntax-highlighted view of the exact source that made it.
 # Because every shad_*() constructor carries the asset dependency, rendering a
-# component in an article embeds the real CSS + JS — the previews below are the
+# component in an article embeds the real CSS + JS – the previews below are the
 # actual components, initialised client-side (dialogs, tabs, accordions and
 # carousels all work), and they follow the site's light/dark switch because
 # shadshiny keys dark mode off `[data-bs-theme="dark"]`, which pkgdown sets.

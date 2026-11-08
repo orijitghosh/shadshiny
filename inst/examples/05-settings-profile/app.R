@@ -1,4 +1,4 @@
-# shadshiny example 05 — Account settings ------------------------------------
+# shadshiny example 05 – Account settings ------------------------------------
 # A full settings surface with vertical tabs: profile editing, notification
 # preferences, a live theme/appearance panel, and a security section with a
 # 2FA dialog and destructive alert-dialogs.

@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/slider/slider.js */
-/* shadshiny — slider behavior (APG slider pattern).
+/* shadshiny – slider behavior (APG slider pattern).
    Markup:
      <div data-shad="slider" class="shad-slider"
           data-min="0" data-max="100" data-step="1" data-value="50"

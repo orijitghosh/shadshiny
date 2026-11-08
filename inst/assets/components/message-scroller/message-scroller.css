@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/message-scroller/message-scroller.css */
-/* shadshiny — message-scroller. Stick-to-bottom chat viewport frame. */
+/* shadshiny – message-scroller. Stick-to-bottom chat viewport frame. */
 
 .shad-message-scroller {
   position: relative;
@@ -32,7 +32,7 @@
 /* shad_chat_ui(): the welcome shows until the transcript has content */
 .shad-chat__transcript:not(:empty) + .shad-chat__welcome { display: none; }
 
-/* jump-to-latest button — shown while detached from the bottom */
+/* jump-to-latest button – shown while detached from the bottom */
 .shad-message-scroller__button {
   position: absolute;
   inset-block-end: var(--shad-space-4);

@@ -13,10 +13,10 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE, purl = FALS
 
 shadshiny ships two levels of chat. The **chat kit** (`shad_bubble()`,
 `shad_message()`, `shad_message_scroller()`, `shad_attachment()`,
-`shad_marker()`) is a set of transcript primitives you compose yourself — see
+`shad_marker()`) is a set of transcript primitives you compose yourself – see
 [Gallery: chat](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html). This guide is about the level
 above it: `shad_chat_ui()` / `shad_chat_server()`, a Shiny module that gives
-you the whole thing — scroller, composer, streaming, Markdown — for two calls.
+you the whole thing – scroller, composer, streaming, Markdown – for two calls.
 
 ## The whole app
 
@@ -41,7 +41,7 @@ shinyApp(ui, server)
 
 It is an ordinary Shiny module, so the `id` is the only wiring: pass the same
 string to both halves. Nesting it inside another module works without thought
-— all the namespacing is internal.
+– all the namespacing is internal.
 
 ## The UI half
 
@@ -61,7 +61,7 @@ shad_chat_ui(
 `welcome` renders while the transcript is empty and disappears on the first
 message. The composer is a `shad_textarea()` that grows with the content;
 **Enter sends, Shift+Enter inserts a newline**. The scroller sticks to the
-bottom while streaming unless the user has scrolled up — then it stays put,
+bottom while streaming unless the user has scrolled up – then it stays put,
 which is what you want when someone is reading back.
 
 ## The handler
@@ -70,7 +70,7 @@ which is what you want when someone is reading back.
 so far as a list of `list(role, content)` with `role` being `"user"` or
 `"assistant"`. It may return any of three things.
 
-**A string** — the complete reply, rendered at once:
+**A string** – the complete reply, rendered at once:
 
 ```{r}
 function(user_text, history) {
@@ -78,7 +78,7 @@ function(user_text, history) {
 }
 ```
 
-**A chunk function** — a function of no arguments returning the next piece of
+**A chunk function** – a function of no arguments returning the next piece of
 text, or `NULL` when done. This is the simple streaming protocol:
 
 ```{r}
@@ -92,7 +92,7 @@ function(user_text, history) {
 }
 ```
 
-**A coro generator** — drained the same way, which is what makes `ellmer` a
+**A coro generator** – drained the same way, which is what makes `ellmer` a
 one-liner. Live provider integrations like this one are experimental: they
 depend on the provider's package and API, and may change before a stable 1.0
 release.
@@ -112,7 +112,7 @@ turns along.
 
 Chunks are pulled on a short timer and appended to the partial reply, so the
 transcript renders progressively. Because the pump runs in the Shiny event
-loop, a chunk function that blocks blocks the whole session — never `Sys.sleep()`
+loop, a chunk function that blocks blocks the whole session – never `Sys.sleep()`
 inside one, and never do a synchronous HTTP call per chunk.
 
 ## The returned object
@@ -158,7 +158,7 @@ shad_code_block(
 
 ## Markdown
 
-Assistant replies render as Markdown by default — bold, italics, links, code
+Assistant replies render as Markdown by default – bold, italics, links, code
 spans, and fenced code blocks. Raw HTML inside that Markdown is escaped. User
 messages are also escaped and rendered literally, so neither side can inject
 markup into your page by default.
@@ -188,5 +188,5 @@ Runs offline against a fake token-streaming model, with the experimental
 
 ## See also
 
-- [Gallery: chat](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html) — the primitives, if you want
+- [Gallery: chat](https://orijitghosh.github.io/shadshiny/articles/gallery-chat.html) – the primitives, if you want
   to build a transcript by hand instead.

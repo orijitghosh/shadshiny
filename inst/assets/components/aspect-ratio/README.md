@@ -2,7 +2,7 @@
 # aspect-ratio (Tier 1, CSS-only)
 
 ## Anatomy
-`div.shad-aspect-ratio[style="--shad-ratio: W / H"]` — direct img/video/iframe children are absolutely filled with `object-fit: cover`.
+`div.shad-aspect-ratio[style="--shad-ratio: W / H"]` – direct img/video/iframe children are absolutely filled with `object-fit: cover`.
 
 ## API
 CSS custom prop `--shad-ratio` (default `16 / 9`).

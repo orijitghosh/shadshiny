@@ -20,7 +20,7 @@ button.shad-btn.shad-btn--{variant}[.shad-btn--{size}]
 | `data-disabled` / `disabled` / `aria-disabled="true"` | disabled styling |
 
 ## Methods / Events
-None — native `<button>`; `click` is the event surface. R wrapper: `shad_button(inputId, label, variant, size, icon, loading, disabled)` maps to Shiny's actionButton binding via class `action-button` if desired.
+None – native `<button>`; `click` is the event surface. R wrapper: `shad_button(inputId, label, variant, size, icon, loading, disabled)` maps to Shiny's actionButton binding via class `action-button` if desired.
 
 ## Keyboard
 Native button semantics (Enter/Space).

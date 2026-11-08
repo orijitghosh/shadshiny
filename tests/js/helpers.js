@@ -1,6 +1,6 @@
 /* Harness for the browser assets.
    -------------------------------------------------------------------------
-   The assets are plain scripts that assign to window.shad — no modules and no
+   The assets are plain scripts that assign to window.shad – no modules and no
    build step, which is the whole point of the library. So the harness does what
    the browser does: read the file and run it in the current jsdom window.
 

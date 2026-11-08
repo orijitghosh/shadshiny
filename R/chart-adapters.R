@@ -16,8 +16,8 @@
 
 #' The active shadshiny theme (reactive)
 #'
-#' Read the theme currently applied in the browser — its preset and dark-mode
-#' flag — inside a reactive context. The asset layer reports this as a hidden
+#' Read the theme currently applied in the browser – its preset and dark-mode
+#' flag – inside a reactive context. The asset layer reports this as a hidden
 #' input on load and whenever the theme changes, so a `renderPlot()` that calls
 #' `shad_current_theme()` re-executes on every dark toggle or preset switch.
 #'

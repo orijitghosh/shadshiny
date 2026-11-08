@@ -36,7 +36,7 @@ shad_command_close(id, session = shiny::getDefaultReactiveDomain())
 \item{inputId}{Input id.}
 
 \item{items}{The commands. Either a named character vector
-(\code{c(Home = "home")} — names are labels, values are what you observe), a
+(\code{c(Home = "home")} – names are labels, values are what you observe), a
 named list of such vectors (each name becomes a group heading, separated),
 or a list of \code{\link[=shad_command_item]{shad_command_item()}} / \code{\link[=shad_command_group]{shad_command_group()}} tags for full
 control. List entries may also be lists carrying \code{value}, \code{label}, \code{icon},
@@ -44,12 +44,12 @@ control. List entries may also be lists carrying \code{value}, \code{label}, \co
 
 \item{...}{Extra content appended after \code{items}.}
 
-\item{hotkey}{Key that opens the palette, e.g. \code{"mod+k"} (default; ⌘K on
-macOS, Ctrl+K elsewhere). \code{NULL} for no hotkey — open it from a trigger or
-the server instead. Write \code{+}-separated modifiers, then the key: \code{mod}
-(⌘ or Ctrl), \code{ctrl}, \code{meta} / \code{cmd}, \code{alt} / \code{option}, \code{shift}, and
+\item{hotkey}{Key that opens the palette, e.g. \code{"mod+k"} (default; Cmd+K
+on macOS, Ctrl+K elsewhere). \code{NULL} for no hotkey – open it from a trigger
+or the server instead. Write \code{+}-separated modifiers, then the key: \code{mod}
+(Cmd or Ctrl), \code{ctrl}, \code{meta} / \code{cmd}, \code{alt} / \code{option}, \code{shift}, and
 \code{space} for the space bar, as in \code{"mod+shift+p"} or \code{"/"}. Exactly the
-named modifiers must be held. A hotkey without Ctrl, ⌘ or Alt is left to
+named modifiers must be held. A hotkey without Ctrl, Cmd or Alt is left to
 text fields, so \code{"/"} still types a slash there. A hotkey naming an
 unknown modifier never fires, with a browser console warning.}
 
@@ -60,14 +60,14 @@ unknown modifier never fires, with a browser console warning.}
 \item{class}{Extra CSS classes.}
 
 \item{id}{The palette's input id. In a module, namespace it yourself with
-\code{ns()} — this is a UI-side attribute, not a server message.}
+\code{ns()} – this is a UI-side attribute, not a server message.}
 
 \item{label}{Trigger text.}
 
 \item{icon}{Leading icon name or tag.}
 
-\item{shortcut}{Hint shown at the end of the trigger, e.g. \code{"⌘K"}.
-\code{NULL} for none.}
+\item{shortcut}{Hint shown at the end of the trigger, e.g. \code{"Ctrl K"}, or
+\code{"\\u2318K"} for the macOS key symbols of Cmd+K. \code{NULL} for none.}
 
 \item{variant, size}{Passed to \code{\link[=shad_button]{shad_button()}}.}
 
@@ -77,18 +77,18 @@ unknown modifier never fires, with a browser console warning.}
 A command tag, hidden until opened.
 }
 \description{
-The ⌘K / Ctrl+K pattern: a modal, searchable list of everything the app can
-do. A thin shape over \code{\link[=shad_command]{shad_command()}} that takes its items as data, opens on
-the hotkey (or from \code{\link[=shad_command_trigger]{shad_command_trigger()}}, or from the server), and reports
-every activation.
+The Cmd+K / Ctrl+K pattern: a modal, searchable list of everything the app
+can do. A thin shape over \code{\link[=shad_command]{shad_command()}} that takes its items as data,
+opens on the hotkey (or from \code{\link[=shad_command_trigger]{shad_command_trigger()}}, or from the server),
+and reports every activation.
 }
 \details{
 Read selections from \verb{input$<inputId>_event}, a list of \code{value} and \code{nonce}.
 \verb{input$<inputId>} also holds the last value, but Shiny drops a repeat of the
-same value — which is wrong for navigation, where choosing "Settings" twice
+same value – which is wrong for navigation, where choosing "Settings" twice
 has to work twice. The \verb{_event} input fires every time.
 
-Refresh the items from the server with \code{\link[=update_shad_command]{update_shad_command()}} — a recent-docs
+Refresh the items from the server with \code{\link[=update_shad_command]{update_shad_command()}} – a recent-docs
 list, search results, whatever the session knows.
 }
 \examples{

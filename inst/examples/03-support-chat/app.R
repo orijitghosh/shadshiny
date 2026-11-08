@@ -1,4 +1,4 @@
-# shadshiny example 03 — Support chat / AI assistant -------------------------
+# shadshiny example 03 – Support chat / AI assistant -------------------------
 # A working messaging UI: a conversation list, a stick-to-bottom transcript
 # built from the chat/AI kit, a composer with attachments, and a simulated
 # assistant that "types" before replying.
@@ -16,7 +16,7 @@ library(shadshiny)
 convos <- data.frame(
   id      = c("c1", "c2", "c3", "c4"),
   name    = c("AI Assistant", "Olivia Martin", "Design team", "Billing bot"),
-  last    = c("Sure — here's the summary.", "Can you review the deck?",
+  last    = c("Sure – here's the summary.", "Can you review the deck?",
               "Sofia: shipped the icons 🎉", "Your invoice is ready."),
   unread  = c(0, 2, 0, 1),
   online  = c(TRUE, TRUE, FALSE, TRUE),
@@ -34,7 +34,7 @@ seed_msgs <- list(
   c2 = list(
     list(role = "assistant", sender = "Olivia Martin",
       text = "Can you review the deck before the 3pm call?"),
-    list(role = "user", text = "On it — give me 10 minutes.")),
+    list(role = "user", text = "On it – give me 10 minutes.")),
   c3 = list(
     list(role = "assistant", sender = "Sofia Davis",
       text = "Shipped the new icon set 🎉", attach = "icons-v2.zip")),

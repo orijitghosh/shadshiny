@@ -29,7 +29,7 @@ streams replies into the transcript.
 \details{
 \code{handler} is \verb{function(user_text, history)} returning one of:
 \itemize{
-\item a character string — the complete reply;
+\item a character string – the complete reply;
 \item a function of no arguments returning the next chunk, or \code{NULL} when
 done (the simple streaming protocol);
 \item a \pkg{coro} generator (e.g. an \pkg{ellmer} \code{chat$stream()}), drained

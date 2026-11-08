@@ -20,7 +20,7 @@ shad_message(
 shad_message_group(..., class = NULL)
 }
 \arguments{
-\item{...}{The message body — placed inside the bubble content. For
+\item{...}{The message body – placed inside the bubble content. For
 \code{state = "typing"} the body is replaced by an animated typing indicator.}
 
 \item{align}{\code{"start"} (received) or \code{"end"} (sent).}

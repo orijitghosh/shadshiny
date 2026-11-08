@@ -47,7 +47,7 @@ A bordered shell that wraps a \code{\link[=shad_input]{shad_input()}} or \code{\
 with leading/trailing addons (icons, prefixes, buttons) or block toolbars.
 The shell owns the border, shadow, and focus/invalid ring; the wrapped
 control drops its own chrome so the group reads as one field. The control
-keeps its native Shiny binding — read it with \verb{input$<inputId>} as usual.
+keeps its native Shiny binding – read it with \verb{input$<inputId>} as usual.
 }
 \examples{
 shad_input_group(

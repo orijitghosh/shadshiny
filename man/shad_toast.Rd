@@ -75,7 +75,7 @@ loading toast that resolves to success).
 }
 \details{
 Text is injected client-side via \code{textContent}; pass plain strings, not HTML.
-There is no R analogue of \code{shad.toast.promise()} — use the loading →
+There is no R analogue of \code{shad.toast.promise()} – use the loading →
 \code{\link[=shad_toast_update]{shad_toast_update()}} flow instead.
 }
 \examples{

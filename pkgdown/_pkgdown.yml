@@ -92,7 +92,7 @@ reference:
       - shad_page_sidebar
       - shad_page_navbar
 
-  - title: Tier 1 — display & typography
+  - title: Tier 1 – display & typography
     desc: Non-interactive display components and typographic helpers.
     contents:
       - shad_button
@@ -150,7 +150,7 @@ reference:
       - shad_button_group_separator
       - shad_button_group_text
 
-  - title: Tier 2 — form inputs
+  - title: Tier 2 – form inputs
     desc: Bound Shiny inputs. Read with `input$id`; update with `update_shad_*()`.
       The field composition family (`shad_fieldset()` and its parts) is
       experimental.
@@ -184,7 +184,7 @@ reference:
       - shad_input_group_button
 
   - title: Chat & AI kit
-    desc: Streaming transcript primitives — bubbles, messages, attachments,
+    desc: Streaming transcript primitives – bubbles, messages, attachments,
       markers, and a stick-to-bottom scroller.
     contents:
       - shad_message
@@ -199,7 +199,7 @@ reference:
       - shad_message_scroller
       - shad_message_scroller_item
 
-  - title: Tier 3 — overlays
+  - title: Tier 3 – overlays
     desc: Dialogs, popovers, menus, command palette, and toasts (UI side).
     contents:
       - shad_dialog
@@ -232,7 +232,7 @@ reference:
       - shad_command_separator
       - shad_command_palette
 
-  - title: Tier 3 — navigation & structure
+  - title: Tier 3 – navigation & structure
     desc: Tabs, accordion, pagination, carousel, and the sidebar layout family.
     contents:
       - shad_tabs
@@ -255,7 +255,7 @@ reference:
       - shad_sidebar_item
       - shad_sidebar_trigger
 
-  - title: Server — updates
+  - title: Server – updates
     desc: Update bound component values from the server. Shiny-side API, so
       there is nothing in shadcn/ui to compare it against.
       `bind_shad_task_button()` is experimental.
@@ -288,7 +288,7 @@ reference:
       - update_shad_form_field
       - update_shad_command
 
-  - title: Server — overlays & toast
+  - title: Server – overlays & toast
     desc: Open/close overlays and raise toast notifications from the server.
       Shiny-side API, so there is nothing in shadcn/ui to compare it against.
     contents:

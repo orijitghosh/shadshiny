@@ -18,7 +18,7 @@
 #' server with [shad_message_scroller_to_bottom()].
 #'
 #' @param id Element id (namespaced automatically in modules).
-#' @param ... Rows — typically [shad_message_scroller_item()] wrapping a
+#' @param ... Rows – typically [shad_message_scroller_item()] wrapping a
 #'   [shad_message()], [shad_bubble()], or [shad_marker()].
 #' @param auto_scroll If `TRUE` (default), follow new content while at the
 #'   bottom. `FALSE` never auto-follows.

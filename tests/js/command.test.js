@@ -140,7 +140,7 @@ describe("page scroll (regression)", () => {
   /* An inline palette is ordinary document flow. highlight() used
      scrollIntoView(), which scrolls EVERY scrollable ancestor, so a page
      containing one jumped down to the palette on load and again on every
-     keystroke -- which is what opened the kitchen sink at "Tier 3 — overlays".
+     keystroke -- which is what opened the kitchen sink at "Tier 3 – overlays".
      The highlight now scrolls only the list. */
   function watchScrolling() {
     const seen = [];
@@ -191,7 +191,7 @@ describe("dialog mode", () => {
     expect(inst.isOpen).toBe(false);
   });
 
-  test("data-dialog alone is enough — no hotkey needed", () => {
+  test("data-dialog alone is enough – no hotkey needed", () => {
     // shad_command(dialog = TRUE, hotkey = FALSE): opened from a trigger or the
     // server. Without data-dialog this rendered as a visible inline palette.
     const inst = setup("data-dialog");

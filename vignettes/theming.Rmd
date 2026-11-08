@@ -12,7 +12,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE, purl = FALS
 ```
 
 shadshiny's look is entirely token-driven. Every colour, radius, and surface is
-a CSS custom property, so theming means overriding properties — never editing
+a CSS custom property, so theming means overriding properties – never editing
 component CSS or hard-coding hex values.
 
 ## The token system
@@ -20,7 +20,7 @@ component CSS or hard-coding hex values.
 Colours are OKLCH `--shad-*` custom properties defined on the page root, for
 example `--shad-background`, `--shad-foreground`, `--shad-primary`,
 `--shad-muted`, `--shad-border`, `--shad-ring`. Components reference these
-tokens exclusively. To restyle, set the token — not the element.
+tokens exclusively. To restyle, set the token – not the element.
 
 ```css
 /* your own CSS, included via page_shad(..., tags$head(...)) or a www/ file */
@@ -47,7 +47,7 @@ page_shad(theme_preset = "green")
 ```
 
 Presets are applied through a `data-shad-theme` attribute on the page root, so
-they compose with — rather than replace — your custom token overrides.
+they compose with – rather than replace – your custom token overrides.
 
 Scope a preset to one subtree when the rest of the page should keep its current
 palette:
@@ -101,7 +101,7 @@ or data-table root (for example, `shad_data_table("tbl", data, dir = "auto")`).
 
 ## Changing theme at runtime
 
-`update_shad_theme()` swaps the preset and/or dark state live from the server —
+`update_shad_theme()` swaps the preset and/or dark state live from the server –
 ideal for a settings toolbar built from a `shad_select()` and a `shad_switch()`:
 
 ```{r}
@@ -140,7 +140,7 @@ ui <- page_shad(theme = brand, ...)
 ```
 
 Colours may be hex (`"#7c3aed"`), `rgb()`, a named CSS colour, or OKLCH
-(`"oklch(0.55 0.24 285)"`) — everything is normalised on the way in. `dark =`
+(`"oklch(0.55 0.24 285)"`) – everything is normalised on the way in. `dark =`
 takes a list of the same token names, applied only under `.dark`; tokens you
 don't name there inherit the light value, which is almost never what you want
 for `background` and `foreground`.
@@ -148,7 +148,7 @@ for `background` and `foreground`.
 The named arguments cover the common tokens (`primary`, `background`,
 `foreground`, `card`, `muted`, `accent`, `destructive`, `border`, `input`,
 `ring`, `radius`, `font_sans`, `font_mono`, and their `*_foreground` pairs).
-Anything else — including the `--shad-sidebar-*` family — goes through `...`
+Anything else – including the `--shad-sidebar-*` family – goes through `...`
 with the `--shad-` prefix dropped:
 
 ```{r}
@@ -199,7 +199,7 @@ observeEvent(input$brand_off, update_shad_theme(theme = NA))
 ### Reading the tokens back
 
 `shad_tokens(preset, dark)` returns the resolved token set, and
-`shad_chart_colors(n, preset, dark)` the chart ramp as hex — both useful when
+`shad_chart_colors(n, preset, dark)` the chart ramp as hex – both useful when
 you need to hand a colour to something that isn't CSS, like a plot. See
 `vignette("charts")`.
 

@@ -40,7 +40,7 @@ shad_style <- function(...) {
 
 #' Centred content container
 #'
-#' A max-width, horizontally centred column with inline padding — the outermost
+#' A max-width, horizontally centred column with inline padding – the outermost
 #' wrapper for page content.
 #'
 #' @param ... Children, or named HTML attributes for the root.
@@ -129,7 +129,7 @@ shad_stack <- function(..., direction = c("vertical", "horizontal"), gap = 4,
 #' responsive auto-fit track list.
 #'
 #' Pass `cols` as a single number for a fixed count, or as a named vector over
-#' the breakpoints `base`/`sm`/`md`/`lg` (40rem / 48rem / 64rem) — unnamed
+#' the breakpoints `base`/`sm`/`md`/`lg` (40rem / 48rem / 64rem) – unnamed
 #' entries are the base. Each breakpoint falls back to the one below it, so
 #' `cols = c(base = 1, md = 3)` is two rules, not four.
 #'

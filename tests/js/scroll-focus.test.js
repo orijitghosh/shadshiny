@@ -6,7 +6,7 @@
      1. No component calls scrollIntoView(). It walks every scrollable ancestor,
         so a component in ordinary document flow drags the whole page to itself.
         shad.util.keepInView(container, item) scrolls one container.
-     2. Pointer-driven focus() passes {preventScroll: true} — the user can
+     2. Pointer-driven focus() passes {preventScroll: true} – the user can
         already see what they clicked. Keyboard roving focus deliberately does
         not, because the user needs to see where focus landed. */
 import { describe, test, expect, beforeEach, vi } from "vitest";

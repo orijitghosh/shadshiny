@@ -37,8 +37,8 @@
 #' Native select
 #'
 #' A styled native HTML `<select>`. Unlike [shad_select()] (a custom listbox),
-#' this keeps full browser-native behaviour — mobile pickers, form
-#' participation, typeahead — and only bridges the value to Shiny.
+#' this keeps full browser-native behaviour – mobile pickers, form
+#' participation, typeahead – and only bridges the value to Shiny.
 #' `input$<inputId>` is the selected option value (a string).
 #'
 #' @param inputId Input id.

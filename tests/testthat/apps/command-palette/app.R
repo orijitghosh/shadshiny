@@ -1,4 +1,4 @@
-# Fixture: the mod+K command palette — trigger, hotkey, activation event, and
+# Fixture: the mod+K command palette – trigger, hotkey, activation event, and
 # server-side item refresh.
 library(shiny)
 library(shadshiny)

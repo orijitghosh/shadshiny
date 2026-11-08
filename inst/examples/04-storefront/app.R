@@ -1,4 +1,4 @@
-# shadshiny example 04 — Storefront / product page --------------------------
+# shadshiny example 04 – Storefront / product page --------------------------
 # A working e-commerce product detail page: image carousel, variant pickers,
 # a live quantity stepper, an add-to-cart sheet with an empty state, tabbed
 # description / specs / reviews, and a related-products carousel.
@@ -77,7 +77,7 @@ navbar <- tags$div(
   shad_avatar(fallback = "YOU", size = "sm"))
 
 ui <- page_shad(
-  title = "Northwind — Aero Headphones",
+  title = "Northwind – Aero Headphones",
   theme_preset = "stone",
   navbar,
 
@@ -168,7 +168,7 @@ ui <- page_shad(
             shad_p(paste("The Aero blends 40mm drivers with adaptive noise",
               "cancellation and a 30-hour battery, wrapped in recycled",
               "aluminium.")),
-            shad_blockquote("“The most comfortable headphones we tested this year.” — Audio Weekly"))),
+            shad_blockquote("“The most comfortable headphones we tested this year.” – Audio Weekly"))),
         shad_tab("specs", "Specifications",
           tags$div(style = "max-width:40rem;margin-top:1rem",
             shad_table(specs_tbl, striped = TRUE, hover = TRUE))),

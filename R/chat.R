@@ -77,7 +77,7 @@ shad_chat_ui <- function(id, placeholder = "Message...", height = "60vh",
 #'
 #' `handler` is `function(user_text, history)` returning one of:
 #' \itemize{
-#'   \item a character string — the complete reply;
+#'   \item a character string – the complete reply;
 #'   \item a function of no arguments returning the next chunk, or `NULL` when
 #'     done (the simple streaming protocol);
 #'   \item a \pkg{coro} generator (e.g. an \pkg{ellmer} `chat$stream()`), drained

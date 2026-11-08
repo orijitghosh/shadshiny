@@ -55,7 +55,7 @@ dt_data$class <- ifelse(dt_data$mpg >= 26, "economy",
                  ifelse(dt_data$hp >= 175, "sport", "thirsty"))
 
 ui <- page_shad(
-  title = "shadshiny — kitchen sink",
+  title = "shadshiny – kitchen sink",
 
   # -- sticky theme toolbar --------------------------------------------------
   tags$div(
@@ -79,9 +79,9 @@ ui <- page_shad(
   tags$div(style = "max-width:60rem;margin:0 auto;padding:0 1rem 6rem",
 
     # =====================================================================
-    # Tier 1 — display
+    # Tier 1 – display
     # =====================================================================
-    shad_h2("Tier 1 — display"),
+    shad_h2("Tier 1 – display"),
 
     section("s-button", "Button",
       cluster("Variants",
@@ -257,9 +257,9 @@ ui <- page_shad(
           shad_button("Zoom out", variant = "outline")))),
 
     # =====================================================================
-    # Tier 2 — form inputs
+    # Tier 2 – form inputs
     # =====================================================================
-    shad_h2("Tier 2 — form inputs"),
+    shad_h2("Tier 2 – form inputs"),
 
     section("s-input", "Input",
       tags$div(style = "display:grid;gap:1rem;width:22rem",
@@ -403,9 +403,9 @@ ui <- page_shad(
               variant = "default"))))),
 
     # =====================================================================
-    # Tier 3 — overlays
+    # Tier 3 – overlays
     # =====================================================================
-    shad_h2("Tier 3 — overlays"),
+    shad_h2("Tier 3 – overlays"),
 
     section("s-dialog", "Dialog / alert dialog",
       shad_dialog("dlg", trigger = shad_button("Dialog", variant = "outline"),
@@ -506,9 +506,9 @@ ui <- page_shad(
           shad_command_item("profile", "Profile", shortcut = "⌘P"))))),
 
     # =====================================================================
-    # Tier 3 — navigation & structure
+    # Tier 3 – navigation & structure
     # =====================================================================
-    shad_h2("Tier 3 — navigation & structure"),
+    shad_h2("Tier 3 – navigation & structure"),
 
     section("s-tabs", "Tabs",
       tags$div(style = "width:100%;max-width:30rem;display:grid;gap:1.5rem",
@@ -582,21 +582,21 @@ ui <- page_shad(
             style = "display:grid;place-items:center;aspect-ratio:1;font-size:2rem", i)))))))),
 
     section("s-layout", "Layout primitives",
-      cluster(width = "100%", direction = "vertical", "Grid — auto-fit (min_width)",
+      cluster(width = "100%", direction = "vertical", "Grid – auto-fit (min_width)",
         shad_grid(style = "width:100%", min_width = "9rem",
           lapply(1:4, function(i)
             shad_card(shad_card_content(style = "padding:1rem", paste("Cell", i)))))),
-      cluster(width = "100%", direction = "vertical", "Grid — responsive cols c(base = 1, md = 2, lg = 4)",
+      cluster(width = "100%", direction = "vertical", "Grid – responsive cols c(base = 1, md = 2, lg = 4)",
         shad_grid(style = "width:100%", cols = c(base = 1, md = 2, lg = 4),
           lapply(1:4, function(i)
             shad_card(shad_card_content(style = "padding:1rem", paste("Col", i)))))),
-      cluster(width = "100%", direction = "vertical", "Grid — template + spanning item",
+      cluster(width = "100%", direction = "vertical", "Grid – template + spanning item",
         shad_grid(style = "width:100%", template = "1fr 2fr",
           shad_card(shad_card_content(style = "padding:1rem", "1fr")),
           shad_card(shad_card_content(style = "padding:1rem", "2fr")),
           shad_grid_item(span = "full",
             shad_card(shad_card_content(style = "padding:1rem", "spans the row"))))),
-      cluster(width = "100%", direction = "vertical", "Stack — direction, justify, fill",
+      cluster(width = "100%", direction = "vertical", "Stack – direction, justify, fill",
         shad_stack(style = "width:100%", gap = 3,
           shad_stack(direction = "horizontal", gap = 2,
             shad_button("Save"), shad_button("Cancel", variant = "outline")),
@@ -661,7 +661,7 @@ ui <- page_shad(
         shad_message_scroller_item(
           shad_marker("Today", variant = "separator"), anchor = TRUE),
         shad_message_scroller_item(
-          shad_message("Hey — can you summarise the Q3 report?",
+          shad_message("Hey – can you summarise the Q3 report?",
             align = "end", avatar = "ME")),
         shad_message_scroller_item(
           shad_message(
@@ -759,7 +759,7 @@ ui <- page_shad(
     section("s-chart", "Chart container",
       tags$div(style = "width:100%;max-width:38rem",
         shad_chart_container(
-          title = "Revenue by month", description = "Live — follows the theme",
+          title = "Revenue by month", description = "Live – follows the theme",
           legend = TRUE, legend_labels = "Revenue", aspect = "wide",
           plotOutput("chart", height = "100%")))),
 
@@ -877,7 +877,7 @@ server <- function(input, output, session) {
   observeEvent(input$toast_loading, {
     id <- shad_toast_loading("Uploading…")
     # later::later() fires outside the reactive domain, so capture `session`
-    # here — getDefaultReactiveDomain() would be NULL inside the callback.
+    # here – getDefaultReactiveDomain() would be NULL inside the callback.
     later::later(function() shad_toast_update(id, message = "Uploaded",
       variant = "success", session = session), delay = 1.5)
   })
@@ -914,7 +914,7 @@ server <- function(input, output, session) {
   })
   output$sbar_body <- renderUI({
     switch(sbar_active(),
-      home = shad_muted("Dashboard overview — your main content."),
+      home = shad_muted("Dashboard overview – your main content."),
       inbox = shad_item_group(
         shad_item(title = "Welcome to Acme", description = "2 min ago",
                   media = "mail", media_variant = "icon"),
@@ -969,7 +969,7 @@ server <- function(input, output, session) {
   }, bg = "transparent")
 
   output$files_out <- renderPrint({
-    if (is.null(input$files_up)) cat("No files yet — drop some above.")
+    if (is.null(input$files_up)) cat("No files yet – drop some above.")
     else str(input$files_up)
   })
 

@@ -36,7 +36,7 @@ item. Compose contents from the \link{shad_menu_parts}.
 \examples{
 shad_dropdown_menu("m", trigger = shad_button("Open"),
   shad_menu_label("My Account"), shad_menu_separator(),
-  shad_menu_item("profile", "Profile", shortcut = "⇧⌘P"))
+  shad_menu_item("profile", "Profile", shortcut = "\u21e7\u2318P"))
 }
 \seealso{
 Other shadshiny tier-3 components:

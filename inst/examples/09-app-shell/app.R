@@ -1,4 +1,4 @@
-# 09 — App shell: the whole-page wrappers and the pieces that go with them.
+# 09 – App shell: the whole-page wrappers and the pieces that go with them.
 # Exercises shad_page_sidebar(), the layout primitives (shad_container(),
 # shad_stack(), shad_grid(), shad_grid_item()), shad_sparkline() /
 # shad_mini_donut(), shad_command_palette() + update_shad_command(), and
@@ -56,7 +56,7 @@ ui <- shad_page_sidebar(
   sidebar = sidebar,
   inputId = "shell",
   title = textOutput("page_title", inline = TRUE),
-  page_title = "Acme — app shell",
+  page_title = "Acme – app shell",
   theme_preset = "violet",
   header_end = shad_stack(
     direction = "horizontal", gap = 2, align = "center",

@@ -1,8 +1,8 @@
 ---
 title: "Gallery: data, dashboards & flow"
 description: >
-  The V2 kit — data table, value boxes, sparklines, donuts, chart containers,
-  timelines, stepper, tree, rating, number input and dropzone — rendered live
+  The V2 kit – data table, value boxes, sparklines, donuts, chart containers,
+  timelines, stepper, tree, rating, number input and dropzone – rendered live
   with their source.
 ---
 
@@ -13,8 +13,8 @@ for (p in c("_common.R", "../_common.R", "vignettes/_common.R"))
 
 The components on this page turn shadshiny from a component library into an
 application toolkit: a client-side data table, the dashboard shells, and the
-flow inputs. The previews are live — sort the table, drag the rating, hold the
-stepper — but with no Shiny server attached they won't echo values back.
+flow inputs. The previews are live – sort the table, drag the rating, hold the
+stepper – but with no Shiny server attached they won't echo values back.
 
 For the reactive side, see [Data tables](../articles/data-tables.html),
 [Dashboards & charts](../articles/charts.html), and
@@ -90,7 +90,7 @@ demo(
 *A shadshiny addition: no shadcn/ui counterpart.*
 
 `shad_value_box()` is the KPI card. `delta_direction = "auto"` (the default)
-reads the sign off the `delta` string, so `"+12.5%"` is up and `"-3%"` is down —
+reads the sign off the `delta` string, so `"+12.5%"` is up and `"-3%"` is down –
 pass `delta_direction` explicitly when the arrow shouldn't follow the sign (a
 falling error rate is good news).
 
@@ -111,7 +111,7 @@ demo({
 *A shadshiny addition: no shadcn/ui counterpart.*
 
 `shad_sparkline()` is a tiny inline chart with no axes, no labels, and no
-plotting stack — one SVG path (or a row of bars) that stretches to fill its
+plotting stack – one SVG path (or a row of bars) that stretches to fill its
 box. Every mark is painted with the theme's chart tokens, so the light/dark
 switch at the top of this page restyles these in CSS, with no re-render.
 
@@ -294,7 +294,7 @@ demo({
 *A shadshiny addition: no shadcn/ui counterpart.*
 
 `shad_dropzone()` bridges to a hidden `fileInput()`, so `input$<id>` is the
-**standard Shiny files data frame** (`name`, `size`, `type`, `datapath`) — every
+**standard Shiny files data frame** (`name`, `size`, `type`, `datapath`) – every
 `renderTable(input$files)` you already have keeps working.
 
 ```{r}
@@ -314,7 +314,7 @@ demo(
 Form messaging.*
 
 The pieces `shad_validator()` drives from the server. In an app you rarely place
-these by hand — the validator sets them for you — but they're plain components.
+these by hand – the validator sets them for you – but they're plain components.
 
 ```{r}
 demo(
@@ -332,9 +332,9 @@ demo(
 
 ## See also
 
-- [Data tables](../articles/data-tables.html) — the full table API.
-- [Dashboards & charts](../articles/charts.html) — plot theming and the
+- [Data tables](../articles/data-tables.html) – the full table API.
+- [Dashboards & charts](../articles/charts.html) – plot theming and the
   `shad_current_theme()` reactive bridge.
-- [Forms & validation](../articles/forms.html) — wiring `shad_validator()`.
+- [Forms & validation](../articles/forms.html) – wiring `shad_validator()`.
 - `shad_run_example("07-data-explorer")` and `shad_run_example("08-llm-chat")`
   are full apps built on this kit.

@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/resizable/resizable.js */
-/* shadshiny — resizable behavior (APG window splitter).
+/* shadshiny – resizable behavior (APG window splitter).
    Panels declare data-size (percent; normalized on init) and optional
    data-min (percent, default 10). Handles between panels drag with pointer
    and step with arrows (1%, Shift=10%), Home/End collapse/expand to min/max.

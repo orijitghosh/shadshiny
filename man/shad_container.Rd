@@ -21,7 +21,7 @@ shad_container(..., size = "md", padding = 4, class = NULL)
 A \verb{<div>} tag.
 }
 \description{
-A max-width, horizontally centred column with inline padding — the outermost
+A max-width, horizontally centred column with inline padding – the outermost
 wrapper for page content.
 }
 \examples{

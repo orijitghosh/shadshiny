@@ -48,7 +48,7 @@ responsive auto-fit track list.
 }
 \details{
 Pass \code{cols} as a single number for a fixed count, or as a named vector over
-the breakpoints \code{base}/\code{sm}/\code{md}/\code{lg} (40rem / 48rem / 64rem) — unnamed
+the breakpoints \code{base}/\code{sm}/\code{md}/\code{lg} (40rem / 48rem / 64rem) – unnamed
 entries are the base. Each breakpoint falls back to the one below it, so
 \code{cols = c(base = 1, md = 3)} is two rules, not four.
 

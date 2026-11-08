@@ -192,3 +192,28 @@ test_that("live chat-provider integrations are labelled experimental where shown
   expect_length(boundary, 1)
   expect_match(boundary, "chat stream providers", fixed = TRUE)
 })
+
+# The non-ASCII characters the PDF manual is known to typeset: those in man/
+# when CRAN's macOS builder (R 4.6.1, 2026-11-08) built the manual without a
+# LaTeX error. Others stop pdfLaTeX ("Unicode character ... not set up for use
+# with LaTeX"), as the Cmd and Shift key symbols U+2318 and U+21E7 did. Add a
+# character here only after a PDF manual with it has built.
+pdf_manual_characters <- c(
+  "\u2014", "\u2013", "\u2026", # em dash, en dash, ellipsis
+  "\u00b7", "\u00d7", "\u00b1", "\u2192" # middle dot, times, plus-minus, arrow
+)
+
+test_that("help pages use only characters the PDF manual can typeset", {
+  root <- contract_project_root()
+  rd_files <- list.files(file.path(root, "man"), pattern = "[.]Rd$")
+  expect_gt(length(rd_files), 100)
+  untypeset <- unlist(lapply(rd_files, function(file) {
+    chars <- strsplit(contract_read(file.path("man", file), root), "")[[1]]
+    codes <- vapply(chars, utf8ToInt, integer(1), USE.NAMES = FALSE)
+    odd <- setdiff(unique(chars[codes > 127L]), pdf_manual_characters)
+    if (length(odd)) {
+      sprintf("%s: U+%04X", file, vapply(odd, utf8ToInt, integer(1)))
+    }
+  }))
+  expect_identical(untypeset, NULL)
+})

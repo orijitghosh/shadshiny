@@ -1,5 +1,5 @@
 /* FILE: inst/assets/components/date-range-presets/date-range-presets.js */
-/* shadshiny — date-range-presets behavior (tiny). Slots inside a range-mode
+/* shadshiny – date-range-presets behavior (tiny). Slots inside a range-mode
    date-picker's __content; clicking a preset writes {start,end} into the
    picker's calendar, as a pick. Load AFTER date-picker.js.
    Markup (inside .shad-date-picker__content, BEFORE the calendar):

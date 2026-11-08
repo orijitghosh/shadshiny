@@ -44,8 +44,8 @@ A native-select tag.
 }
 \description{
 A styled native HTML \verb{<select>}. Unlike \code{\link[=shad_select]{shad_select()}} (a custom listbox),
-this keeps full browser-native behaviour — mobile pickers, form
-participation, typeahead — and only bridges the value to Shiny.
+this keeps full browser-native behaviour – mobile pickers, form
+participation, typeahead – and only bridges the value to Shiny.
 \verb{input$<inputId>} is the selected option value (a string).
 }
 \examples{

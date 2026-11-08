@@ -1,4 +1,4 @@
-# 08 — Streaming chat. Runs fully offline with a fake token-streaming "LLM".
+# 08 – Streaming chat. Runs fully offline with a fake token-streaming "LLM".
 # Swap the handler's generator for ellmer's `chat$stream(prompt)` to go live.
 # Live provider integrations are experimental.
 library(shiny)
