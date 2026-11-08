@@ -1,4 +1,4 @@
-file: shadshiny_0.3.0.9000.tar.gz
-sha256: 746aac9fdf45cb2e3e823248498a1f82681d94b2bf2fbbe03906810c2a2d4f02
-commit: 8353d78861eeaa30c14cf9c8749f633b61454375
+file: shadshiny_0.4.0.tar.gz
+sha256: b1853c1f023cf399c2829c0c1366f661cae6dec9c7b150d8f94b31deff1aed81
+commit: 61049c669fea701dbe4c9f325b4bac30cf6605a5
 r: R version 4.4.3 (2025-02-28 ucrt)
