@@ -69,3 +69,23 @@ Other shadshiny tier-1 components:
 [`shad_spinner()`](https://orijitghosh.github.io/shadshiny/reference/shad_spinner.md),
 [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md),
 [`shad_typography`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+
+## Examples
+
+``` r
+shad_code_block("fit <- lm(mpg ~ wt, data = mtcars)",
+                language = "r", filename = "model.R")
+#> <figure class="shad-code-block" data-shad-code-block>
+#>   <figcaption class="shad-code-block__header">
+#>     <span class="shad-code-block__title">model.R</span>
+#>     <span class="shad-code-block__language">r</span>
+#>     <span class="shad-code-block__controls">
+#>       <button type="button" class="shad-code-block__copy" aria-label="Copy code" data-shad-copy-code>Copy</button>
+#>       <span class="shad-code-block__status" role="status" aria-live="polite" aria-atomic="true" data-shad-copy-status></span>
+#>     </span>
+#>   </figcaption>
+#>   <pre class="shad-code-block__pre">
+#>     <code class="shad-code-block__code" data-language="r">fit &lt;- lm(mpg ~ wt, data = mtcars)</code>
+#>   </pre>
+#> </figure>
+```

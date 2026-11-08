@@ -50,3 +50,16 @@ Other shadshiny tier-1 components:
 [`shad_spinner()`](https://orijitghosh.github.io/shadshiny/reference/shad_spinner.md),
 [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md),
 [`shad_typography`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+
+## Examples
+
+``` r
+shad_kbd_group(shad_kbd("Ctrl"), shad_kbd("Shift"), shad_kbd("P"))
+#> <div class="shad-kbd-group" role="group">
+#>   <kbd class="shad-kbd">Ctrl</kbd>
+#>   <span class="shad-kbd-group__separator" aria-hidden="true">+</span>
+#>   <kbd class="shad-kbd">Shift</kbd>
+#>   <span class="shad-kbd-group__separator" aria-hidden="true">+</span>
+#>   <kbd class="shad-kbd">P</kbd>
+#> </div>
+```

@@ -41,3 +41,13 @@ Other shadshiny theming:
 [`shad_theme_plotly()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_plotly.md),
 [`shad_theme_scope()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_scope.md),
 [`shad_tokens()`](https://orijitghosh.github.io/shadshiny/reference/shad_tokens.md)
+
+## Examples
+
+``` r
+if (requireNamespace("echarts4r", quietly = TRUE)) {
+  chart <- echarts4r::e_charts(mtcars, wt)
+  chart <- echarts4r::e_scatter(chart, mpg)
+  chart <- shad_theme_echarts4r(chart, preset = "blue")
+}
+```

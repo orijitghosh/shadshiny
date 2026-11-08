@@ -37,3 +37,10 @@ Other shadshiny forms:
 [`shad_rules`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md),
 [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md),
 [`update_shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_form_field.md)
+
+## Examples
+
+``` r
+shad_form_counter(42, 280)
+#> <div class="shad-form-message shad-form-message--counter">42/280</div>
+```

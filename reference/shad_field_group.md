@@ -45,6 +45,28 @@ Other shadshiny forms:
 [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md),
 [`update_shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_form_field.md)
 
+## Examples
+
+``` r
+shad_field_group(
+  shad_input("first", "First name"),
+  shad_input("last", "Last name"),
+  orientation = "responsive"
+)
+#> <div class="shad-field-group" data-orientation="responsive">
+#>   <div class="shad-form-field" data-shad="form-field">
+#>     <label class="shad-label">First name</label>
+#>     <input id="first" class="shad-input" type="text"/>
+#>     <p class="shad-form-field__error" hidden></p>
+#>   </div>
+#>   <div class="shad-form-field" data-shad="form-field">
+#>     <label class="shad-label">Last name</label>
+#>     <input id="last" class="shad-input" type="text"/>
+#>     <p class="shad-form-field__error" hidden></p>
+#>   </div>
+#> </div>
+```
+
 ## On this page
 
 Developed by Arijit Ghosh.

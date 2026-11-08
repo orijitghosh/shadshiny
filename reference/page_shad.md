@@ -35,9 +35,11 @@ page_shad(
 
 - theme_preset:
 
-  One of `NULL` (default zinc), `"slate"`, `"stone"`, `"blue"`,
-  `"green"`, `"rose"`, `"violet"`, `"orange"`. Sets `data-shad-theme` on
-  the scope container.
+  `NULL` (the default neutral theme) or one of the colour presets: the
+  full neutral ramps `"slate"`, `"stone"`, `"zinc"`, `"mauve"`,
+  `"olive"`, `"mist"`, `"taupe"`, or the accents `"blue"`, `"green"`,
+  `"rose"`, `"violet"`, `"orange"`. Sets `data-shad-theme` on the scope
+  container.
 
 - dark:
 

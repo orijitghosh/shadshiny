@@ -37,7 +37,32 @@ Other shadshiny theming:
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-shad_theme_from_registry("https://tweakcn.com/r/themes/my-theme.json")
-} # }
+# A registry export as JSON text; a file path or URL works too.
+registry <- '{"cssVars": {
+  "light": {"--primary": "oklch(0.6 0.2 250)", "--radius": "0.5rem"},
+  "dark": {"--primary": "oklch(0.7 0.2 250)"}
+}}'
+shad_theme_from_registry(registry)
+#> $tokens
+#> $tokens$primary
+#> [1] "oklch(0.6 0.2 250)"
+#> 
+#> $tokens$radius
+#> [1] "0.5rem"
+#> 
+#> 
+#> $dark
+#> $tokens
+#> $tokens$primary
+#> [1] "oklch(0.7 0.2 250)"
+#> 
+#> 
+#> $dark
+#> NULL
+#> 
+#> attr(,"class")
+#> [1] "shad_theme"
+#> 
+#> attr(,"class")
+#> [1] "shad_theme"
 ```

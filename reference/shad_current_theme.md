@@ -39,9 +39,18 @@ Other shadshiny theming:
 
 ``` r
 if (interactive()) {
-  output$plot <- shiny::renderPlot({
-    th <- shad_current_theme()
-    plot(1:10, col = shad_chart_colors(1, th$preset, th$dark))
-  })
+  ui <- page_shad(
+    shad_select("preset", "Theme", selected = "slate",
+                choices = c("slate", "blue", "rose")),
+    shiny::plotOutput("plot")
+  )
+  server <- function(input, output, session) {
+    shiny::observe(update_shad_theme(preset = input$preset))
+    output$plot <- shiny::renderPlot({
+      th <- shad_current_theme()
+      plot(1:10, pch = 19, col = shad_chart_colors(1, th$preset, th$dark))
+    }, bg = "transparent")
+  }
+  shiny::shinyApp(ui, server)
 }
 ```

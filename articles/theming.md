@@ -22,10 +22,13 @@ these tokens exclusively. To restyle, set the token — not the element.
 Because everything keys off the same variables, one override cascades
 through every component consistently in both light and dark mode.
 
-## The seven presets
+## The twelve presets
 
-shadshiny ships seven palettes: **slate, stone, blue, green, rose,
-violet, orange**. Choose one at the page level:
+shadshiny ships twelve palettes. Seven are full neutral ramps that
+recolour every surface, border and text token: **slate, stone, zinc,
+mauve, olive, mist, taupe**. Five are accents that keep the neutral
+surfaces and change the primary colour, focus ring and chart series:
+**blue, green, rose, violet, orange**. Choose one at the page level:
 
 ``` r
 
@@ -108,8 +111,9 @@ and a
 
 ui <- page_shad(
   shad_select("preset", label = "Theme",
-              choices = c("slate", "stone", "blue", "green",
-                          "rose", "violet", "orange"),
+              choices = c("slate", "stone", "zinc", "mauve", "olive",
+                          "mist", "taupe", "blue", "green", "rose",
+                          "violet", "orange"),
               selected = "slate"),
   shad_switch("dark", label = "Dark mode")
 )
@@ -123,7 +127,7 @@ server <- function(input, output, session) {
 
 ## Custom themes
 
-The seven presets are a starting point, not a ceiling.
+The presets are a starting point, not a ceiling.
 [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
 builds a palette in R: name the tokens you care about, leave the rest to
 the base.

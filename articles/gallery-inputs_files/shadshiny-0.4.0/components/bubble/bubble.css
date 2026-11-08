@@ -1,0 +1,113 @@
+/* FILE: inst/assets/components/bubble/bubble.css */
+/* shadshiny — bubble. Chat message surface. CSS-only.
+   Variants: --default --secondary --muted --tinted --outline --ghost
+   --destructive. Alignment: --start (received) / --end (sent).
+   Reactions chips + bubble-group (consecutive same-sender). */
+
+.shad-bubble {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  max-width: 80%;
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+}
+
+/* alignment (also inherited from group modifier) */
+.shad-bubble--start { margin-inline-end: auto; }
+.shad-bubble--end   { margin-inline-start: auto; }
+
+.shad-bubble__content {
+  border-radius: var(--shad-radius-lg);
+  padding: var(--shad-space-2_5) var(--shad-space-4);
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+/* ---- variants ---- */
+.shad-bubble--default .shad-bubble__content {
+  background-color: var(--shad-primary);
+  color: var(--shad-primary-foreground);
+}
+.shad-bubble--secondary .shad-bubble__content {
+  background-color: var(--shad-secondary);
+  color: var(--shad-secondary-foreground);
+}
+.shad-bubble--muted .shad-bubble__content {
+  background-color: var(--shad-muted);
+  color: var(--shad-foreground);
+}
+.shad-bubble--tinted .shad-bubble__content {
+  background-color: color-mix(in oklab, var(--shad-primary) 10%, transparent);
+  color: var(--shad-foreground);
+}
+.shad-bubble--outline .shad-bubble__content {
+  background-color: var(--shad-background);
+  border: 1px solid var(--shad-border);
+  color: var(--shad-foreground);
+}
+.shad-bubble--destructive .shad-bubble__content {
+  background-color: color-mix(in oklab, var(--shad-destructive) 10%, transparent);
+  color: var(--shad-destructive);
+}
+/* ghost: full width, plain text (assistant prose) */
+.shad-bubble--ghost { max-width: 100%; width: 100%; }
+.shad-bubble--ghost .shad-bubble__content {
+  background-color: transparent;
+  color: var(--shad-foreground);
+  padding-inline: 0;
+}
+
+/* ---- reactions ---- */
+/* room for the overhanging chips */
+.shad-bubble:has(.shad-bubble__reactions) { margin-block-end: var(--shad-space-3); }
+
+.shad-bubble__reactions {
+  position: absolute;
+  inset-block-end: -0.8125rem;
+  display: flex;
+  z-index: 1;
+}
+.shad-bubble__reactions[data-side="start"],
+.shad-bubble__reactions:not([data-side]) { inset-inline-start: var(--shad-space-2); }
+.shad-bubble__reactions[data-side="end"] { inset-inline-end: var(--shad-space-2); }
+.shad-bubble__reactions[data-align="top"] {
+  inset-block-end: auto;
+  inset-block-start: -0.8125rem;
+}
+
+.shad-bubble__reaction {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+  height: 1.375rem;
+  padding-inline: var(--shad-space-1_5);
+  border-radius: var(--shad-radius-full);
+  border: 1px solid var(--shad-border);
+  background-color: var(--shad-background);
+  color: var(--shad-foreground);
+  font-size: var(--shad-text-xs);
+  line-height: 1;
+  box-shadow: var(--shad-shadow-2xs);
+  white-space: nowrap;
+}
+/* overlapping chips */
+.shad-bubble__reaction + .shad-bubble__reaction { margin-inline-start: -0.375rem; }
+
+/* ---- bubble-group: consecutive bubbles from one sender ---- */
+.shad-bubble-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--shad-space-0_5);
+  width: 100%;
+}
+.shad-bubble-group--end > .shad-bubble { margin-inline-start: auto; }
+.shad-bubble-group--start > .shad-bubble,
+.shad-bubble-group:not(.shad-bubble-group--end) > .shad-bubble { margin-inline-end: auto; }
+
+/* tighter inner corners between consecutive bubbles */
+.shad-bubble-group--end > .shad-bubble:not(:first-child) > .shad-bubble__content { border-start-end-radius: var(--shad-radius-sm); }
+.shad-bubble-group--end > .shad-bubble:not(:last-child) > .shad-bubble__content { border-end-end-radius: var(--shad-radius-sm); }
+.shad-bubble-group:not(.shad-bubble-group--end) > .shad-bubble:not(:first-child) > .shad-bubble__content { border-start-start-radius: var(--shad-radius-sm); }
+.shad-bubble-group:not(.shad-bubble-group--end) > .shad-bubble:not(:last-child) > .shad-bubble__content { border-end-start-radius: var(--shad-radius-sm); }

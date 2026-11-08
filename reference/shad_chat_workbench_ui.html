@@ -11,7 +11,7 @@ server-side file paths are rendered into this UI."><meta property="og:image" con
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,6 +116,45 @@ server-side file paths are rendered into this UI.</p>
     <p>A workbench UI tag.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">shad_chat_workbench_ui</span><span class="op">(</span><span class="st">"assistant"</span>, welcome <span class="op">=</span> <span class="st">"Ask me anything."</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div id="assistant-root" class="shad-chat-workbench" data-shad="chat-workbench"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div class="shad-message-scroller" data-shad="message-scroller" id="assistant-scroller" data-auto-scroll data-default-position="end" style="height:60vh;"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div class="shad-message-scroller__viewport" aria-live="polite" tabindex="0"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div class="shad-message-scroller__content"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;div class="shiny-html-output shad-chat-workbench__transcript" id="assistant-transcript"&gt;&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;button type="button" class="shad-message-scroller__button" aria-label="Jump to latest"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M12 5v14"/&gt;&lt;path d="m19 12-7 7-7-7"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Jump to latest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div class="shad-chat-workbench__welcome"&gt;Ask me anything.&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div class="shad-chat-prompt" data-shad="chat-prompt"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div class="form-group shiny-input-container"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;label class="control-label" id="assistant-files-label" for="assistant-files"&gt;Attach files&lt;/label&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div class="input-group"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;label class="input-group-btn input-group-prepend"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;span class="btn btn-default btn-file"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Browse...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             &lt;input id="assistant-files" class="shiny-input-file" name="assistant-files" type="file" style="position: absolute !important; top: -99999px !important; left: -99999px !important;" multiple="multiple"/&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/label&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;input type="text" class="form-control" placeholder="No file selected" readonly="readonly"/&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div id="assistant-files_progress" class="progress active shiny-file-input-progress"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;div class="progress-bar"&gt;&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;textarea id="assistant-text" class="shad-textarea" placeholder="Message..." rows="1"&gt;&lt;/textarea&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;button type="button" id="assistant-submit" class="shad-btn shad-btn--default shad-chat-prompt__send action-button"&gt;Send&lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;button type="button" id="assistant-cancel" class="shad-btn shad-btn--outline shad-chat-prompt__cancel action-button" disabled&gt;Cancel&lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/div&gt;</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

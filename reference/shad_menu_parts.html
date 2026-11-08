@@ -11,7 +11,7 @@ input value."><meta property="og:image" content="https://orijitghosh.github.io/s
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -162,6 +162,54 @@ input value.</p>
 <code><a href="shad_tooltip.html">shad_tooltip()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="shad_dropdown_menu.html">shad_dropdown_menu</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"view"</span>, trigger <span class="op">=</span> <span class="fu"><a href="shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"View"</span>, variant <span class="op">=</span> <span class="st">"outline"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_menu_label</span><span class="op">(</span><span class="st">"Panels"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_menu_checkbox_item</span><span class="op">(</span><span class="st">"sidebar"</span>, <span class="st">"Sidebar"</span>, checked <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_menu_separator</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_menu_radio_group</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"comfortable"</span>,</span></span>
+<span class="r-in"><span>    <span class="fu">shad_menu_radio_item</span><span class="op">(</span><span class="st">"compact"</span>, <span class="st">"Compact"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu">shad_menu_radio_item</span><span class="op">(</span><span class="st">"comfortable"</span>, <span class="st">"Comfortable"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_menu_separator</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_menu_sub</span><span class="op">(</span><span class="st">"More"</span>, <span class="fu">shad_menu_item</span><span class="op">(</span><span class="st">"reset"</span>, <span class="st">"Reset layout"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_menu_item</span><span class="op">(</span><span class="st">"close"</span>, <span class="st">"Close window"</span>, destructive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div data-shad="dropdown-menu" data-align="start" id="view" style="display:inline-block"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;button class="shad-btn shad-btn--outline shad-menu__trigger" type="button"&gt;View&lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div class="shad-menu__content shad-anim-pop" hidden&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div class="shad-menu__label"&gt;Panels&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;button type="button" class="shad-menu__item" data-type="checkbox" data-state="checked" data-value="sidebar"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;span class="shad-menu__indicator"&gt;&lt;svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M20 6 9 17l-5-5"/&gt;&lt;/svg&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Sidebar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div class="shad-menu__separator"&gt;&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;button type="button" class="shad-menu__item" data-type="radio" data-group="shad-menuradio-2" data-state="unchecked" data-value="compact"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;span class="shad-menu__indicator"&gt;&lt;svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"&gt;&lt;circle cx="12" cy="12" r="4"/&gt;&lt;/svg&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Compact</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;button type="button" class="shad-menu__item" data-type="radio" data-group="shad-menuradio-2" data-state="checked" data-value="comfortable"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;span class="shad-menu__indicator"&gt;&lt;svg class="shad-icon shad-icon--sm" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"&gt;&lt;circle cx="12" cy="12" r="4"/&gt;&lt;/svg&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Comfortable</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div class="shad-menu__separator"&gt;&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div data-shad-submenu&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;button type="button" class="shad-menu__item" data-shad-submenu-trigger aria-haspopup="menu" aria-expanded="false" data-state="closed"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         More</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;svg class="shad-menu__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="m9 18 6-6-6-6"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div class="shad-menu__content shad-anim-pop" hidden&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;button type="button" class="shad-menu__item" data-value="reset"&gt;Reset layout&lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;button type="button" class="shad-menu__item shad-menu__item--destructive" data-value="close"&gt;Close window&lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/div&gt;</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

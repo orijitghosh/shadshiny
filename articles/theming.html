@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,10 +112,14 @@ To restyle, set the token — not the element.</p>
 through every component consistently in both light and dark mode.</p>
 </div>
 <div class="section level2">
-<h2 id="the-seven-presets">The seven presets<a class="anchor" aria-label="anchor" href="#the-seven-presets"></a>
+<h2 id="the-twelve-presets">The twelve presets<a class="anchor" aria-label="anchor" href="#the-twelve-presets"></a>
 </h2>
-<p>shadshiny ships seven palettes: <strong>slate, stone, blue, green,
-rose, violet, orange</strong>. Choose one at the page level:</p>
+<p>shadshiny ships twelve palettes. Seven are full neutral ramps that
+recolour every surface, border and text token: <strong>slate, stone,
+zinc, mauve, olive, mist, taupe</strong>. Five are accents that keep the
+neutral surfaces and change the primary colour, focus ring and chart
+series: <strong>blue, green, rose, violet, orange</strong>. Choose one
+at the page level:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/orijitghosh/shadshiny" class="external-link">shadshiny</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/page_shad.html">page_shad</a></span><span class="op">(</span>theme_preset <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span></code></pre></div>
@@ -177,8 +181,9 @@ live from the server — ideal for a settings toolbar built from a
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/page_shad.html">page_shad</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/shad_select.html">shad_select</a></span><span class="op">(</span><span class="st">"preset"</span>, label <span class="op">=</span> <span class="st">"Theme"</span>,</span>
-<span>              choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"slate"</span>, <span class="st">"stone"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>,</span>
-<span>                          <span class="st">"rose"</span>, <span class="st">"violet"</span>, <span class="st">"orange"</span><span class="op">)</span>,</span>
+<span>              choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"slate"</span>, <span class="st">"stone"</span>, <span class="st">"zinc"</span>, <span class="st">"mauve"</span>, <span class="st">"olive"</span>,</span>
+<span>                          <span class="st">"mist"</span>, <span class="st">"taupe"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"rose"</span>,</span>
+<span>                          <span class="st">"violet"</span>, <span class="st">"orange"</span><span class="op">)</span>,</span>
 <span>              selected <span class="op">=</span> <span class="st">"slate"</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/shad_switch.html">shad_switch</a></span><span class="op">(</span><span class="st">"dark"</span>, label <span class="op">=</span> <span class="st">"Dark mode"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -192,7 +197,7 @@ live from the server — ideal for a settings toolbar built from a
 <div class="section level2">
 <h2 id="custom-themes">Custom themes<a class="anchor" aria-label="anchor" href="#custom-themes"></a>
 </h2>
-<p>The seven presets are a starting point, not a ceiling.
+<p>The presets are a starting point, not a ceiling.
 <code><a href="../reference/shad_theme.html">shad_theme()</a></code> builds a palette in R: name the tokens you
 care about, leave the rest to the base.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">

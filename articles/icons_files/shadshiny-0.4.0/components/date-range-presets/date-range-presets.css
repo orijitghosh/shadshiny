@@ -1,0 +1,78 @@
+/* FILE: inst/assets/components/date-range-presets/date-range-presets.css */
+/* shadshiny — date-range-presets. Preset rail that slots INSIDE a range-mode
+   date-picker's __content, beside the calendar. Load date-picker.css first. */
+
+/* content becomes a row when presets are present (:not([hidden]) keeps the
+   UA hidden rule winning while closed) */
+.shad-date-picker__content[hidden] { display: none; }
+.shad-date-picker__content:not([hidden]):has(.shad-date-range-presets) {
+  display: flex;
+  align-items: stretch;
+  background-color: var(--shad-popover);
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  box-shadow: var(--shad-shadow-md);
+  overflow: hidden;
+}
+.shad-date-picker__content:not([hidden]):has(.shad-date-range-presets) .shad-calendar {
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+}
+
+.shad-date-range-presets {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--shad-space-2);
+  border-inline-end: 1px solid var(--shad-border);
+  min-width: 8.5rem;
+  font-family: var(--shad-font-sans);
+}
+.shad-date-range-presets__item {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  padding: 0 var(--shad-space-2_5);
+  border: 0;
+  border-radius: var(--shad-radius-sm);
+  background: none;
+  font: inherit;
+  font-size: var(--shad-text-sm);
+  text-align: start;
+  color: var(--shad-foreground);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-date-range-presets__item:hover {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-date-range-presets__item:focus-visible {
+  outline: none;
+  box-shadow: var(--shad-focus-shadow);
+}
+/* a preset wholly outside the calendar's min/max */
+.shad-date-range-presets__item:disabled { opacity: 0.5; pointer-events: none; }
+.shad-date-range-presets__item[data-state="active"] {
+  background-color: var(--shad-primary);
+  color: var(--shad-primary-foreground);
+}
+.shad-date-range-presets__separator {
+  height: 1px;
+  margin: var(--shad-space-1) 0;
+  background-color: var(--shad-border);
+}
+
+/* stacked fallback for narrow screens */
+@media (max-width: 480px) {
+  .shad-date-picker__content:not([hidden]):has(.shad-date-range-presets) { flex-direction: column; }
+  .shad-date-range-presets {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-inline-end: 0;
+    border-block-end: 1px solid var(--shad-border);
+    min-width: 0;
+  }
+}

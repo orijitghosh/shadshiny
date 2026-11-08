@@ -15,9 +15,9 @@ shad_tokens(preset = NULL, dark = FALSE, overrides = NULL)
 
 - preset:
 
-  One of the seven presets (`"slate"`, `"stone"`, `"blue"`, `"green"`,
-  `"rose"`, `"violet"`, `"orange"`), or `NULL` for the base (zinc)
-  theme.
+  One of the twelve presets (`"slate"`, `"stone"`, `"zinc"`, `"mauve"`,
+  `"olive"`, `"mist"`, `"taupe"`, `"blue"`, `"green"`, `"rose"`,
+  `"violet"`, `"orange"`), or `NULL` for the base (neutral) theme.
 
 - dark:
 

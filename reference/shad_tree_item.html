@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,6 +128,38 @@ navigation.</p></dd>
 <code><a href="update_shad_tree.html">update_shad_tree()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">shad_tree_item</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"docs"</span>, <span class="st">"docs"</span>, expanded <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_tree_item</span><span class="op">(</span><span class="st">"docs/intro.md"</span>, <span class="st">"intro.md"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_tree_item</span><span class="op">(</span><span class="st">"docs/draft.md"</span>, <span class="st">"draft.md"</span>, disabled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;li class="shad-tree__item" role="treeitem" data-key="docs" aria-expanded="true"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div class="shad-tree__row"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;svg class="shad-tree__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M9 6l6 6-6 6"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="shad-tree__icon"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/&gt;&lt;/svg&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="shad-tree__label"&gt;docs&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;ul class="shad-tree__group" role="group"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;li class="shad-tree__item" role="treeitem" data-key="docs/intro.md"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div class="shad-tree__row"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="M9 6l6 6-6 6"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="shad-tree__icon"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/&gt;&lt;path d="M14 2v6h6"/&gt;&lt;/svg&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="shad-tree__label"&gt;intro.md&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/li&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;li class="shad-tree__item" role="treeitem" data-key="docs/draft.md" aria-disabled="true"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div class="shad-tree__row"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;svg class="shad-tree__chevron shad-tree__chevron--leaf" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="M9 6l6 6-6 6"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="shad-tree__icon"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/&gt;&lt;path d="M14 2v6h6"/&gt;&lt;/svg&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="shad-tree__label"&gt;draft.md&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/li&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/ul&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/li&gt;</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

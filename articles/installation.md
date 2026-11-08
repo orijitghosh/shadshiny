@@ -77,7 +77,7 @@ otherwise. Everything a normal Shiny page accepts still works.
 
 page_shad(
   title = "My app",         # browser tab title
-  theme_preset = "blue",    # one of the seven presets
+  theme_preset = "blue",    # one of the twelve presets
   dark = NULL,              # NULL = follow bslib/OS; TRUE/FALSE to force
   # ... your UI ...
 )

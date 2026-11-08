@@ -41,3 +41,13 @@ Other shadshiny theming:
 [`shad_theme_ggplot2()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_ggplot2.md),
 [`shad_theme_scope()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_scope.md),
 [`shad_tokens()`](https://orijitghosh.github.io/shadshiny/reference/shad_tokens.md)
+
+## Examples
+
+``` r
+if (requireNamespace("plotly", quietly = TRUE)) {
+  p <- plotly::plot_ly(mtcars, x = ~wt, y = ~mpg,
+                       type = "scatter", mode = "markers")
+  p <- shad_theme_plotly(p, preset = "green", dark = TRUE)
+}
+```

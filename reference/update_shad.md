@@ -162,3 +162,25 @@ Other shadshiny server API:
 [`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md),
 [`shad_toast()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md),
 [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  ui <- page_shad(
+    shad_switch("notify", "Email notifications", value = TRUE),
+    shad_slider("volume", "Volume", value = 20),
+    shad_select("size", "Size", choices = c("S", "M", "L")),
+    shad_button("Reset", inputId = "reset")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$reset, {
+      update_shad_switch("notify", FALSE)
+      update_shad_slider("volume", 50)
+      update_shad_select("size", "M")
+      update_shad_button("reset", label = "Reset again")
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+```

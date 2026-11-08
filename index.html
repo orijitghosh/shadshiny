@@ -16,8 +16,8 @@
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="shadcn/ui Components for Shiny">
-<meta name="description" content="A broad, experimental reimplementation of the shadcn/ui design system for Shiny applications: 73 accessible, themeable components -- including semantic field composition primitives and a full-featured data table, questionnaire workflow, layout and page-shell primitives, dashboard value boxes, sparklines and chart theming, keyboard/code/scroll/shimmer utility elements, and a server-side form validator, custom and registry-imported themes, and a streaming chat module -- implemented in framework-free CSS and vanilla JavaScript, wrapped as native R functions with Shiny input bindings. Coexists with Bootstrap 5 and bslib, including automatic dark-mode synchronization.">
-<meta property="og:description" content="A broad, experimental reimplementation of the shadcn/ui design system for Shiny applications: 73 accessible, themeable components -- including semantic field composition primitives and a full-featured data table, questionnaire workflow, layout and page-shell primitives, dashboard value boxes, sparklines and chart theming, keyboard/code/scroll/shimmer utility elements, and a server-side form validator, custom and registry-imported themes, and a streaming chat module -- implemented in framework-free CSS and vanilla JavaScript, wrapped as native R functions with Shiny input bindings. Coexists with Bootstrap 5 and bslib, including automatic dark-mode synchronization.">
+<meta name="description" content="A broad, experimental reimplementation of the shadcn/ui design system for Shiny applications. It provides 73 accessible, themeable components, written in plain CSS and JavaScript with no front-end framework and wrapped as R functions with Shiny input bindings. They include field composition primitives, a data table, a questionnaire workflow, layout and page-shell primitives, dashboard value boxes, sparklines and chart theming, keyboard, code, scroll and shimmer utilities, a server-side form validator, custom and registry-imported themes, and a streaming chat module. The components coexist with Bootstrap 5 and bslib, and follow their dark mode automatically.">
+<meta property="og:description" content="A broad, experimental reimplementation of the shadcn/ui design system for Shiny applications. It provides 73 accessible, themeable components, written in plain CSS and JavaScript with no front-end framework and wrapped as R functions with Shiny input bindings. They include field composition primitives, a data table, a questionnaire workflow, layout and page-shell primitives, dashboard value boxes, sparklines and chart theming, keyboard, code, scroll and shimmer utilities, a server-side form validator, custom and registry-imported themes, and a streaming chat module. The components coexist with Bootstrap 5 and bslib, and follow their dark mode automatically.">
 <meta property="og:image" content="https://orijitghosh.github.io/shadshiny/logo.svg">
 </head>
 <body>
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,7 +108,7 @@
 <li>
 <strong>Coexists with Bootstrap 5 / bslib.</strong> Dark mode keys off the same signals <code><a href="https://rstudio.github.io/bslib/reference/input_dark_mode.html" class="external-link">bslib::input_dark_mode()</a></code> uses, so theme sync needs no glue.</li>
 <li>
-<strong>OKLCH token theming.</strong> Seven presets out of the box, switchable at runtime, plus custom palettes via <code><a href="reference/shad_theme.html">shad_theme()</a></code> and the shadcn theme registry.</li>
+<strong>OKLCH token theming.</strong> Twelve presets out of the box, switchable at runtime, plus custom palettes via <code><a href="reference/shad_theme.html">shad_theme()</a></code> and the shadcn theme registry.</li>
 </ul>
 <blockquote>
 <p>shadshiny is an independent reimplementation. It ships no shadcn/ui or Radix source, only visually-compatible CSS/JS written for this package. See <a href="#attribution">Attribution</a>.</p>
@@ -739,7 +739,9 @@
 </h2>
 <p>Colours are OKLCH <code>--shad-*</code> custom properties, so never hard-code hex. Pick a preset at page level or swap it live:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/page_shad.html">page_shad</a></span><span class="op">(</span>theme_preset <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span>            <span class="co"># slate stone blue green rose violet orange</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/page_shad.html">page_shad</a></span><span class="op">(</span>theme_preset <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span>
+<span><span class="co"># neutral ramps: slate stone zinc mauve olive mist taupe</span></span>
+<span><span class="co"># accents:       blue green rose violet orange</span></span>
 <span></span>
 <span><span class="co"># server-side, e.g. from a shad_select + shad_switch toolbar</span></span>
 <span><span class="fu"><a href="reference/update_shad_theme.html">update_shad_theme</a></span><span class="op">(</span>preset <span class="op">=</span> <span class="va">input</span><span class="op">$</span><span class="va">preset</span>, dark <span class="op">=</span> <span class="va">input</span><span class="op">$</span><span class="va">dark</span><span class="op">)</span></span></code></pre></div>
@@ -809,7 +811,13 @@
 <div class="section level2">
 <h2 id="attribution">Attribution<a class="anchor" aria-label="anchor" href="#attribution"></a>
 </h2>
-<p>shadshiny is inspired by and visually compatible with <a href="https://ui.shadcn.com" class="external-link">shadcn/ui</a> (MIT) by shadcn, which itself builds on <a href="https://www.radix-ui.com" class="external-link">Radix UI</a> primitives. <strong>No upstream source code is vendored.</strong> All CSS and JavaScript in this package were reimplemented from scratch to be framework-free and Shiny-native. shadcn/ui and Radix are trademarks of their respective owners. shadshiny is released under the <a href="LICENSE">MIT License</a>.</p>
+<p>shadshiny is inspired by and visually compatible with <a href="https://ui.shadcn.com" class="external-link">shadcn/ui</a> (MIT) by shadcn, which itself builds on <a href="https://www.radix-ui.com" class="external-link">Radix UI</a> primitives. <strong>No shadcn/ui or Radix source code is vendored.</strong> All CSS and JavaScript in this package were reimplemented from scratch to be framework-free and Shiny-native.</p>
+<p>Two things do come from other projects:</p>
+<ul>
+<li>The colour token values, for the default theme and the presets, follow those published by shadcn/ui (MIT, copyright shadcn).</li>
+<li>The icons are from <a href="https://lucide.dev" class="external-link">Lucide</a> (ISC, copyright Lucide Icons and Contributors). Some of them derive from <a href="https://feathericons.com" class="external-link">Feather</a> (MIT, copyright Cole Bemis).</li>
+</ul>
+<p>Their licence notices ship with the package in <a href="inst/COPYRIGHTS"><code>inst/COPYRIGHTS</code></a>. shadcn/ui and Radix are trademarks of their respective owners. shadshiny is released under the <a href="LICENSE">MIT License</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

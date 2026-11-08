@@ -52,3 +52,26 @@ Invisibly `NULL`.
 Other shadshiny questionnaire:
 [`shad_question()`](https://orijitghosh.github.io/shadshiny/reference/shad_question.md),
 [`shad_questionnaire()`](https://orijitghosh.github.io/shadshiny/reference/shad_questionnaire.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  ui <- page_shad(
+    shad_questionnaire(
+      "survey",
+      shad_question("plan", "Choose a plan",
+                    choices = c(Free = "free", Pro = "pro")),
+      shad_question("notes", "Anything else?", type = "text",
+                    required = FALSE)
+    ),
+    shad_button("Start over", inputId = "restart")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$restart, {
+      update_shad_questionnaire("survey", reset = TRUE)
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+```

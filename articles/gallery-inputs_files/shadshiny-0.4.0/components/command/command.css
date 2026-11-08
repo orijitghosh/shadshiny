@@ -1,0 +1,122 @@
+/* FILE: inst/assets/components/command/command.css */
+/* shadshiny — command palette (cmdk-style). Works inline or inside a dialog. */
+
+.shad-command {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-lg);
+  background-color: var(--shad-popover);
+  color: var(--shad-popover-foreground);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  overflow: hidden;
+}
+/* palette-in-dialog: fixed centered card */
+.shad-command--dialog {
+  position: fixed;
+  top: 20%;
+  inset-inline: 0;
+  margin-inline: auto;
+  z-index: 1301;
+  width: calc(100% - 2rem);
+  max-width: 32rem;
+  box-shadow: var(--shad-shadow-lg);
+}
+.shad-command--dialog[data-state="open"] {
+  animation: shad-zoom-in var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-command--dialog[data-state="closed"] {
+  animation: shad-zoom-out var(--shad-duration-fast) var(--shad-ease-out) forwards;
+}
+.shad-command__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  background-color: var(--shad-overlay);
+}
+
+.shad-command__header {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  padding: 0 var(--shad-space-3);
+  border-bottom: 1px solid var(--shad-border);
+}
+.shad-command__search-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--shad-muted-foreground);
+  flex-shrink: 0;
+}
+.shad-command__input {
+  flex: 1;
+  height: 2.75rem;
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-size: var(--shad-text-sm);
+  color: var(--shad-foreground);
+}
+.shad-command__input::placeholder { color: var(--shad-muted-foreground); }
+
+.shad-command__list {
+  max-height: 18.75rem;
+  overflow-y: auto;
+  padding: var(--shad-space-1);
+  scroll-padding-block: var(--shad-space-1);
+}
+.shad-command__group-heading {
+  padding: var(--shad-space-2) var(--shad-space-2) var(--shad-space-1);
+  font-size: var(--shad-text-xs);
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-muted-foreground);
+}
+.shad-command__item {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  width: 100%;
+  padding: var(--shad-space-2);
+  border-radius: var(--shad-radius-sm);
+  font-size: var(--shad-text-sm);
+  cursor: default;
+  user-select: none;
+  outline: none;
+  color: inherit;
+  text-align: start;
+}
+.shad-command__item[data-highlighted] {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-command__item[data-disabled] {
+  color: var(--shad-muted-foreground);
+  pointer-events: none;
+}
+.shad-command__item[hidden] { display: none; }
+.shad-command__shortcut {
+  margin-inline-start: auto;
+  font-size: var(--shad-text-xs);
+  letter-spacing: 0.1em;
+  color: var(--shad-muted-foreground);
+}
+.shad-command__separator {
+  height: 1px;
+  margin: var(--shad-space-1) calc(-1 * var(--shad-space-1));
+  background-color: var(--shad-border);
+}
+.shad-command__empty {
+  padding: var(--shad-space-6);
+  text-align: center;
+  font-size: var(--shad-text-sm);
+  color: var(--shad-muted-foreground);
+}
+.shad-command__group[hidden] { display: none; }
+
+/* Trigger button (shad_command_trigger): reads like a search field rather than
+   a button -- label at the start, shortcut hint pushed to the end. */
+.shad-command__opener { justify-content: flex-start; min-width: 12rem; }
+.shad-command__opener > .shad-kbd { margin-inline-start: auto; }

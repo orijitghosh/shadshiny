@@ -1,0 +1,93 @@
+/* FILE: inst/assets/components/dropdown-menu/dropdown-menu.css */
+/* shadshiny — menu surface + items. SHARED: context-menu and menubar reuse
+   these .shad-menu* classes (documented dependency; load this file first). */
+
+.shad-menu__content {
+  position: fixed;
+  z-index: 1300;
+  min-width: 8rem;
+  max-height: var(--shad-available-height, 24rem);
+  overflow-y: auto;
+  padding: var(--shad-space-1);
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  background-color: var(--shad-popover);
+  color: var(--shad-popover-foreground);
+  box-shadow: var(--shad-shadow-md);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  outline: none;
+}
+.shad-menu__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  width: 100%;
+  padding: 0.375rem var(--shad-space-2);
+  border-radius: var(--shad-radius-sm);
+  font-size: var(--shad-text-sm);
+  cursor: default;
+  user-select: none;
+  outline: none;
+  color: inherit;
+  text-align: start;
+}
+/* highlight follows data-highlighted (set on pointermove/arrow), never :hover */
+.shad-menu__item[data-highlighted] {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-menu__item[data-disabled],
+.shad-menu__item[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.shad-menu__item--destructive { color: var(--shad-destructive); }
+.shad-menu__item--destructive[data-highlighted] {
+  background-color: color-mix(in oklab, var(--shad-destructive) 10%, transparent);
+  color: var(--shad-destructive);
+}
+/* checkbox/radio items: indicator gutter */
+.shad-menu__item[data-type="checkbox"],
+.shad-menu__item[data-type="radio"] {
+  padding-inline-start: var(--shad-space-8);
+}
+.shad-menu__indicator {
+  position: absolute;
+  inset-inline-start: var(--shad-space-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.875rem;
+  height: 0.875rem;
+}
+.shad-menu__item[data-state="unchecked"] .shad-menu__indicator { visibility: hidden; }
+.shad-menu__shortcut {
+  margin-inline-start: auto;
+  font-size: var(--shad-text-xs);
+  letter-spacing: 0.1em;
+  color: var(--shad-muted-foreground);
+}
+.shad-menu__label {
+  padding: 0.375rem var(--shad-space-2);
+  font-size: var(--shad-text-xs);
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-muted-foreground);
+}
+.shad-menu__separator {
+  height: 1px;
+  margin: var(--shad-space-1) calc(-1 * var(--shad-space-1));
+  background-color: var(--shad-border);
+}
+/* submenu trigger chevron */
+.shad-menu__item[data-shad-submenu-trigger] .shad-menu__chevron {
+  margin-inline-start: auto;
+  width: 1rem;
+  height: 1rem;
+}
+.shad-menu__item[data-shad-submenu-trigger][data-state="open"] {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}

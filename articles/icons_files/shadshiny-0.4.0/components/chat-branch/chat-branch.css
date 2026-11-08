@@ -1,0 +1,2 @@
+.shad-chat-branch { display: flex; align-items: center; gap: var(--shad-space-2); font-size: var(--shad-text-sm); }
+.shad-chat-branch button { background: none; border: 0; color: var(--shad-primary); cursor: pointer; }

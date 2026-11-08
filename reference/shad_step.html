@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,6 +104,60 @@
 <code><a href="update_shad_tree.html">update_shad_tree()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="shad_stepper.html">shad_stepper</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"checkout"</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_step</span><span class="op">(</span><span class="st">"Cart"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_step</span><span class="op">(</span><span class="st">"Payment"</span>, description <span class="op">=</span> <span class="st">"Card declined"</span>, error <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_step</span><span class="op">(</span><span class="st">"Review"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  active <span class="op">=</span> <span class="fl">2</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div class="shad-stepper" id="checkout" data-shad="stepper" data-orientation="horizontal" data-active="1" data-clickable&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;ol class="shad-stepper__list"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;li class="shad-stepper__item"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;button type="button" class="shad-stepper__trigger"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="shad-stepper__indicator"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;span class="shad-stepper__number"&gt;1&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;svg class="shad-stepper__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 12l5 5L20 7" pathLength="1"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;svg class="shad-stepper__x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"&gt;&lt;path d="M6 6l12 12M18 6L6 18"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="shad-stepper__meta"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;span class="shad-stepper__label"&gt;Cart&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;span class="shad-stepper__connector" aria-hidden="true"&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/li&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;li class="shad-stepper__item" data-state="error"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;button type="button" class="shad-stepper__trigger"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="shad-stepper__indicator"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;span class="shad-stepper__number"&gt;2&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;svg class="shad-stepper__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 12l5 5L20 7" pathLength="1"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;svg class="shad-stepper__x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"&gt;&lt;path d="M6 6l12 12M18 6L6 18"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="shad-stepper__meta"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;span class="shad-stepper__label"&gt;Payment&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;span class="shad-stepper__description"&gt;Card declined&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;span class="shad-stepper__connector" aria-hidden="true"&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/li&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;li class="shad-stepper__item"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;button type="button" class="shad-stepper__trigger"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="shad-stepper__indicator"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;span class="shad-stepper__number"&gt;3&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;svg class="shad-stepper__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 12l5 5L20 7" pathLength="1"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;svg class="shad-stepper__x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"&gt;&lt;path d="M6 6l12 12M18 6L6 18"/&gt;&lt;/svg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="shad-stepper__meta"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;span class="shad-stepper__label"&gt;Review&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/li&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/ol&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/div&gt;</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

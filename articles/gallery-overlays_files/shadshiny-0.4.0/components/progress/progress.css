@@ -1,0 +1,26 @@
+/* FILE: inst/assets/components/progress/progress.css */
+/* shadshiny — progress. Determinate via --shad-progress (0-100) or JS-free
+   inline style on the indicator; indeterminate via data-state. */
+
+.shad-progress {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 0.5rem;
+  overflow: hidden;
+  border-radius: var(--shad-radius-full);
+  background-color: color-mix(in oklab, var(--shad-primary) 20%, transparent);
+}
+.shad-progress__indicator {
+  width: 100%;
+  height: 100%;
+  background-color: var(--shad-primary);
+  border-radius: inherit;
+  /* determinate: translateX(-(100 - value)%) — set via inline style:
+     style="transform: translateX(-40%)" for value 60 */
+  transition: transform var(--shad-duration-slow) var(--shad-ease-out);
+}
+.shad-progress[data-state="indeterminate"] .shad-progress__indicator {
+  width: 40%;
+  animation: shad-progress-indeterminate 1.5s var(--shad-ease-in-out) infinite;
+}

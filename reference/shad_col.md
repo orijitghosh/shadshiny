@@ -121,8 +121,8 @@ shad_col("Amount", format = shad_fmt_number(prefix = "$"))
 #>         suffix))
 #>     .cell_num(disp, num)
 #> }
-#> <bytecode: 0x5f6e4d162398>
-#> <environment: 0x5f6e4d15f560>
+#> <bytecode: 0x632e575d6298>
+#> <environment: 0x632e575d5460>
 #> attr(,"class")
 #> [1] "shad_fmt"
 #> 
@@ -159,7 +159,7 @@ shad_col("Status", cell = function(v, row) shad_badge(v))
 #> $cell
 #> function (v, row) 
 #> shad_badge(v)
-#> <environment: 0x5f6e4d1747d0>
+#> <environment: 0x632e575c2fe8>
 #> 
 #> attr(,"class")
 #> [1] "shad_col"

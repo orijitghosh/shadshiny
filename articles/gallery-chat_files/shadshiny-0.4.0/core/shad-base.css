@@ -1,0 +1,395 @@
+/* FILE: inst/assets/core/shad-base.css */
+/* ==========================================================================
+   shadshiny — base layer
+   --------------------------------------------------------------------------
+   - Scoped reset-lite: applies ONLY to .shad-* classed elements, never bare
+     element selectors (Bootstrap Reboot owns those).
+   - DECISION: no @layer (see shad-tokens.css header) — Bootstrap is unlayered
+     and unlayered beats layered. Everything here is class-scoped instead.
+   - .shad-scope is an OPTIONAL wrapper (used by demos / non-bslib pages) that
+     establishes bg/fg/font. Inside a bslib app you normally skip it and let
+     the page own the canvas.
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ */
+/* Reset-lite (scoped)                                                 */
+/* Every shad-classed element gets border-box + margin 0 + inherit     */
+/* font. :where() keeps specificity at 0 so component rules always win.*/
+/* ------------------------------------------------------------------ */
+:where([class^="shad-"], [class*=" shad-"]),
+:where([class^="shad-"], [class*=" shad-"])::before,
+:where([class^="shad-"], [class*=" shad-"])::after {
+  box-sizing: border-box;
+}
+:where([class^="shad-"], [class*=" shad-"]) {
+  margin: 0;
+  font-family: inherit;
+  font-feature-settings: inherit;
+}
+/* form-ish shad elements: strip UA chrome (class-scoped, so Reboot-safe) */
+:where(button[class^="shad-"], button[class*=" shad-"]) {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: inherit;
+}
+:where(input[class^="shad-"], input[class*=" shad-"],
+       textarea[class^="shad-"], textarea[class*=" shad-"]) {
+  font: inherit;
+  color: inherit;
+}
+:where(ul[class^="shad-"], ul[class*=" shad-"],
+       ol[class^="shad-"], ol[class*=" shad-"]) {
+  list-style: none;
+  padding: 0;
+}
+:where(svg.shad-icon) {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  pointer-events: none;
+}
+/* icon default sizing: 16px inside components, like shadcn's size-4 */
+.shad-icon {
+  width: 1rem;
+  height: 1rem;
+}
+.shad-icon--sm { width: 0.875rem; height: 0.875rem; }
+.shad-icon--lg { width: 1.25rem; height: 1.25rem; }
+
+/* Directional icons opt in explicitly. The marker is intentionally narrow:
+   refresh, sort, play, and status icons must never be mirrored implicitly. */
+[dir="rtl"] .shad-icon--directional[data-direction="forward"],
+[dir="rtl"] .shad-icon--directional[data-direction="back"],
+[dir="rtl"] .shad-icon--directional[data-direction="start"],
+[dir="rtl"] .shad-icon--directional[data-direction="end"] {
+  transform: scaleX(-1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Scope / canvas                                                      */
+/* ------------------------------------------------------------------ */
+.shad-scope {
+  background-color: var(--shad-background);
+  color: var(--shad-foreground);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+/* :where() keeps these at one class, so component link colours win */
+.shad-scope :where(a) { color: var(--shad-foreground); }
+.shad-scope :where(a:hover) { color: var(--shad-muted-foreground); }
+
+/* ------------------------------------------------------------------ */
+/* Focus ring                                                          */
+/* Shared recipe: components include .shad-focusable OR copy the rule. */
+/* shadcn v4: outline none; border→ring color; 3px 50%-alpha halo.     */
+/* ------------------------------------------------------------------ */
+.shad-focusable:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+/* invalid controls get destructive ring + border (aria-invalid wiring) */
+.shad-focusable[aria-invalid="true"] {
+  border-color: var(--shad-destructive);
+}
+.shad-focusable[aria-invalid="true"]:focus-visible {
+  border-color: var(--shad-destructive);
+  box-shadow: var(--shad-focus-shadow-destructive);
+}
+
+/* ------------------------------------------------------------------ */
+/* Screen-reader-only utility                                          */
+/* ------------------------------------------------------------------ */
+.shad-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Typography utilities                                                */
+/* ------------------------------------------------------------------ */
+.shad-h1 {
+  font-family: var(--shad-font-sans);
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: var(--shad-font-weight-bold);
+  letter-spacing: -0.025em;
+  scroll-margin-top: 5rem;
+}
+.shad-h2 {
+  font-family: var(--shad-font-sans);
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: var(--shad-font-weight-semibold);
+  letter-spacing: -0.025em;
+  border-bottom: 1px solid var(--shad-border);
+  padding-bottom: var(--shad-space-2);
+  scroll-margin-top: 5rem;
+}
+.shad-h3 {
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-2xl);
+  line-height: var(--shad-leading-2xl);
+  font-weight: var(--shad-font-weight-semibold);
+  letter-spacing: -0.025em;
+  scroll-margin-top: 5rem;
+}
+.shad-h4 {
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-xl);
+  line-height: var(--shad-leading-xl);
+  font-weight: var(--shad-font-weight-semibold);
+  letter-spacing: -0.025em;
+  scroll-margin-top: 5rem;
+}
+.shad-p {
+  font-size: var(--shad-text-base);
+  line-height: 1.75rem;
+  text-wrap: pretty;
+}
+.shad-p + .shad-p { margin-top: var(--shad-space-6); }
+.shad-lead {
+  font-size: var(--shad-text-xl);
+  line-height: var(--shad-leading-xl);
+  color: var(--shad-muted-foreground);
+  text-wrap: pretty;
+}
+.shad-large {
+  font-size: var(--shad-text-lg);
+  line-height: var(--shad-leading-lg);
+  font-weight: var(--shad-font-weight-semibold);
+}
+.shad-small {
+  font-size: var(--shad-text-sm);
+  line-height: 1;
+  font-weight: var(--shad-font-weight-medium);
+}
+.shad-muted {
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-muted-foreground);
+}
+.shad-blockquote {
+  margin-top: var(--shad-space-6);
+  border-inline-start: 2px solid var(--shad-border);
+  padding-inline-start: var(--shad-space-6);
+  font-style: italic;
+}
+.shad-code {
+  position: relative;
+  border-radius: var(--shad-radius-sm);
+  background-color: var(--shad-muted);
+  padding: 0.2rem 0.3rem;
+  font-family: var(--shad-font-mono);
+  font-size: var(--shad-text-sm);
+  font-weight: var(--shad-font-weight-semibold);
+}
+.shad-kbd {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+  border-radius: var(--shad-radius-sm);
+  border: 1px solid var(--shad-border);
+  background-color: var(--shad-muted);
+  padding: 0.125rem 0.375rem;
+  font-family: var(--shad-font-mono);
+  font-size: var(--shad-text-xs);
+  font-weight: var(--shad-font-weight-medium);
+  color: var(--shad-muted-foreground);
+  box-shadow: var(--shad-shadow-2xs);
+}
+.shad-list {
+  margin: var(--shad-space-6) 0 0;
+  padding-inline-start: var(--shad-space-6);
+  list-style: disc;
+}
+.shad-list > li + li { margin-top: var(--shad-space-2); }
+
+/* ------------------------------------------------------------------ */
+/* Utility elements: keyboard groups, code blocks, and scroll fades    */
+/* ------------------------------------------------------------------ */
+.shad-kbd-group {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--shad-space-1);
+}
+.shad-kbd-group__separator {
+  color: var(--shad-muted-foreground);
+  user-select: none;
+}
+
+.shad-code-block {
+  min-inline-size: 0;
+  overflow: hidden;
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  background: var(--shad-muted);
+  color: var(--shad-foreground);
+}
+.shad-code-block__header {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  min-block-size: 2.5rem;
+  padding: var(--shad-space-2) var(--shad-space-4);
+  border-block-end: 1px solid var(--shad-border);
+  font-size: var(--shad-text-sm);
+}
+.shad-code-block__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: var(--shad-font-weight-medium);
+}
+.shad-code-block__language {
+  color: var(--shad-muted-foreground);
+  font-family: var(--shad-font-mono);
+  font-size: var(--shad-text-xs);
+}
+.shad-code-block__controls {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  margin-inline-start: auto;
+}
+.shad-code-block__copy {
+  cursor: pointer;
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-sm);
+  background: var(--shad-background);
+  padding: var(--shad-space-1) var(--shad-space-2);
+  color: var(--shad-foreground);
+  font: inherit;
+  font-size: var(--shad-text-xs);
+}
+.shad-code-block__copy:focus-visible,
+.shad-scroll-fade:focus-visible {
+  outline: 2px solid var(--shad-ring);
+  outline-offset: 2px;
+}
+.shad-code-block__status {
+  min-inline-size: 4.5rem;
+  color: var(--shad-muted-foreground);
+  font-size: var(--shad-text-xs);
+}
+.shad-code-block__pre {
+  display: flex;
+  max-block-size: 30rem;
+  margin: 0;
+  overflow: auto;
+  padding: var(--shad-space-4);
+  font-family: var(--shad-font-mono);
+  font-size: var(--shad-text-sm);
+  line-height: 1.5;
+  tab-size: 2;
+}
+.shad-code-block__gutter {
+  flex: 0 0 auto;
+  min-inline-size: 2.5rem;
+  margin-inline-end: var(--shad-space-4);
+  padding-inline-end: var(--shad-space-3);
+  border-inline-end: 1px solid var(--shad-border);
+  color: var(--shad-muted-foreground);
+  text-align: end;
+  user-select: none;
+  white-space: pre;
+}
+.shad-code-block__code {
+  display: block;
+  min-inline-size: max-content;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  white-space: pre;
+}
+
+.shad-scroll-fade {
+  display: block;
+  inline-size: 100%;
+  min-block-size: 2rem;
+  min-inline-size: 2rem;
+  overflow: auto;
+  border: 1px solid transparent;
+  outline: 0;
+  scrollbar-color: var(--shad-muted-foreground) transparent;
+}
+.shad-scroll-fade[data-axis="vertical"] {
+  overflow-x: hidden;
+  mask-image: linear-gradient(
+    to bottom, transparent, black var(--shad-space-4),
+    black calc(100% - var(--shad-space-4)), transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom, transparent, black var(--shad-space-4),
+    black calc(100% - var(--shad-space-4)), transparent
+  );
+}
+.shad-scroll-fade[data-axis="horizontal"] {
+  --shad-scroll-fade-inline-direction: to right;
+  overflow-y: hidden;
+  mask-image: linear-gradient(
+    var(--shad-scroll-fade-inline-direction), transparent, black var(--shad-space-4),
+    black calc(100% - var(--shad-space-4)), transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    var(--shad-scroll-fade-inline-direction), transparent, black var(--shad-space-4),
+    black calc(100% - var(--shad-space-4)), transparent
+  );
+}
+.shad-scroll-fade[data-axis="both"] {
+  --shad-scroll-fade-inline-direction: to right;
+  mask-image:
+    linear-gradient(to bottom, transparent, black var(--shad-space-4), black calc(100% - var(--shad-space-4)), transparent),
+    linear-gradient(var(--shad-scroll-fade-inline-direction), transparent, black var(--shad-space-4), black calc(100% - var(--shad-space-4)), transparent);
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent, black var(--shad-space-4), black calc(100% - var(--shad-space-4)), transparent),
+    linear-gradient(var(--shad-scroll-fade-inline-direction), transparent, black var(--shad-space-4), black calc(100% - var(--shad-space-4)), transparent);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+:where([dir="rtl"]) .shad-scroll-fade[data-axis="horizontal"],
+:where([dir="rtl"]) .shad-scroll-fade[data-axis="both"] {
+  --shad-scroll-fade-inline-direction: to left;
+}
+
+@media (forced-colors: active) {
+  .shad-code-block {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+  .shad-code-block__copy {
+    border-color: ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+  }
+  .shad-scroll-fade[data-axis="vertical"],
+  .shad-scroll-fade[data-axis="horizontal"],
+  .shad-scroll-fade[data-axis="both"] {
+    border-color: CanvasText;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .shad-code-block__copy:focus-visible,
+  .shad-scroll-fade:focus-visible {
+    outline-color: Highlight;
+  }
+}

@@ -76,3 +76,20 @@ Other shadshiny data table:
 [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md),
 [`shad_data_table_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table_server.md),
 [`shad_fmt`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  ui <- page_shad(
+    shad_button("Only four cylinders", inputId = "four"),
+    shad_data_table("cars", mtcars)
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$four, {
+      update_shad_data_table("cars", data = mtcars[mtcars$cyl == 4, ], page = 1)
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+```

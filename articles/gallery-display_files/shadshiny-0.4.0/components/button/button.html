@@ -1,0 +1,40 @@
+<!-- FILE: inst/assets/components/button/button.html -->
+<!-- shadshiny button — canonical anatomy: all variants, sizes, states -->
+
+<!-- variants -->
+<button type="button" class="shad-btn shad-btn--default">Button</button>
+<button type="button" class="shad-btn shad-btn--secondary">Secondary</button>
+<button type="button" class="shad-btn shad-btn--destructive">Destructive</button>
+<button type="button" class="shad-btn shad-btn--outline">Outline</button>
+<button type="button" class="shad-btn shad-btn--ghost">Ghost</button>
+<button type="button" class="shad-btn shad-btn--link">Link</button>
+
+<!-- sizes -->
+<button type="button" class="shad-btn shad-btn--default shad-btn--sm">Small</button>
+<button type="button" class="shad-btn shad-btn--default">Default</button>
+<button type="button" class="shad-btn shad-btn--default shad-btn--lg">Large</button>
+
+<!-- icon button (lucide chevron-right) -->
+<button type="button" class="shad-btn shad-btn--outline shad-btn--icon" aria-label="Next">
+  <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+</button>
+
+<!-- with leading icon (lucide mail) -->
+<button type="button" class="shad-btn shad-btn--default">
+  <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+  Login with Email
+</button>
+
+<!-- loading state -->
+<button type="button" class="shad-btn shad-btn--default" data-loading disabled>
+  <span class="shad-btn__spinner" aria-hidden="true">
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+  </span>
+  Please wait
+</button>
+
+<!-- disabled -->
+<button type="button" class="shad-btn shad-btn--default" disabled>Disabled</button>
+
+<!-- link styled as button -->
+<a class="shad-btn shad-btn--outline" href="#">Anchor button</a>

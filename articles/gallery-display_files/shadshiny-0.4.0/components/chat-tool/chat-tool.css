@@ -1,0 +1,3 @@
+.shad-chat-tool { margin-block: var(--shad-space-2); border: 1px solid var(--shad-border); border-radius: var(--shad-radius-md); padding: var(--shad-space-3); }
+.shad-chat-tool pre { overflow: auto; max-block-size: 16rem; }
+.shad-chat-tool__error { color: var(--shad-destructive); }

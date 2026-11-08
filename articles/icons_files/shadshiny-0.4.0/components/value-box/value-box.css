@@ -1,0 +1,111 @@
+/* FILE: inst/assets/components/value-box/value-box.css */
+/* shadshiny — value-box. CSS-only KPI/stat card. Grid-friendly (fills width). */
+
+.shad-value-box {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--shad-space-1_5);
+  width: 100%;
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-xl);
+  background-color: var(--shad-card);
+  color: var(--shad-card-foreground);
+  box-shadow: var(--shad-shadow-2xs);
+  padding: var(--shad-space-6);
+  font-family: var(--shad-font-sans);
+  text-decoration: none;
+}
+.shad-value-box:has(.shad-value-box__icon) { grid-template-columns: 1fr auto; }
+
+/* href variant: <a class="shad-value-box"> */
+a.shad-value-box {
+  cursor: pointer;
+  transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+a.shad-value-box:hover { border-color: var(--shad-ring); box-shadow: var(--shad-shadow-sm); }
+a.shad-value-box:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+
+.shad-value-box__label {
+  grid-column: 1;
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-muted-foreground);
+  font-weight: var(--shad-font-weight-medium);
+}
+.shad-value-box__icon {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+  display: inline-flex;
+  color: var(--shad-muted-foreground);
+}
+.shad-value-box__icon > svg { width: 1rem; height: 1rem; }
+
+.shad-value-box__value {
+  grid-column: 1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--shad-space-2);
+  font-size: var(--shad-text-2xl);
+  line-height: var(--shad-leading-2xl);
+  font-weight: var(--shad-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.025em;
+}
+
+/* delta chip */
+.shad-value-box__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-0_5);
+  padding: 0.125rem var(--shad-space-1_5);
+  border-radius: var(--shad-radius-full);
+  font-size: var(--shad-text-xs);
+  line-height: var(--shad-leading-xs);
+  font-weight: var(--shad-font-weight-medium);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.shad-value-box__delta > svg { width: 0.75rem; height: 0.75rem; }
+.shad-value-box__delta[data-trend="up"] {
+  color: oklch(0.527 0.154 150.069);
+  background-color: color-mix(in oklab, oklch(0.723 0.192 149.579) 12%, transparent);
+}
+.shad-value-box__delta[data-trend="down"] {
+  color: var(--shad-destructive);
+  background-color: color-mix(in oklab, var(--shad-destructive) 12%, transparent);
+}
+.shad-value-box__delta[data-trend="neutral"] {
+  color: var(--shad-muted-foreground);
+  background-color: var(--shad-muted);
+}
+:is(.dark, [data-bs-theme="dark"]) .shad-value-box__delta[data-trend="up"],
+:is(.dark, [data-bs-theme="dark"]) * .shad-value-box__delta[data-trend="up"] {
+  color: oklch(0.723 0.192 149.579);
+}
+
+.shad-value-box__caption {
+  grid-column: 1 / -1;
+  font-size: var(--shad-text-xs);
+  line-height: var(--shad-leading-xs);
+  color: var(--shad-muted-foreground);
+}
+
+/* sparkline slot: opaque child (svg/canvas/img) fills a fixed strip */
+.shad-value-box__sparkline {
+  grid-column: 1 / -1;
+  height: 2.5rem;
+  margin-top: var(--shad-space-1);
+}
+.shad-value-box__sparkline > * { width: 100% !important; height: 100% !important; display: block; }
+
+/* sizes */
+.shad-value-box--sm { padding: var(--shad-space-4); gap: var(--shad-space-1); }
+.shad-value-box--sm .shad-value-box__value { font-size: var(--shad-text-xl); line-height: var(--shad-leading-xl); }
+.shad-value-box--lg { padding: var(--shad-space-8); gap: var(--shad-space-2); }
+.shad-value-box--lg .shad-value-box__value { font-size: 1.875rem; line-height: 2.25rem; }

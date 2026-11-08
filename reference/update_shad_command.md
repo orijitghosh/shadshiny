@@ -52,3 +52,22 @@ Other shadshiny server API:
 [`shad_show_dialog()`](https://orijitghosh.github.io/shadshiny/reference/shad_show_dialog.md),
 [`shad_toast()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md),
 [`update_shad`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  ui <- page_shad(
+    shad_command_palette("palette", items = c(Home = "home")),
+    shad_switch("admin", "Admin mode")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$admin, {
+      items <- c(Home = "home")
+      if (isTRUE(input$admin)) items <- c(items, Users = "users")
+      update_shad_command("palette", items)
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+```

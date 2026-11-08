@@ -65,7 +65,7 @@ functions with native Shiny input bindings.
   signals
   [`bslib::input_dark_mode()`](https://rstudio.github.io/bslib/reference/input_dark_mode.html)
   uses, so theme sync needs no glue.
-- **OKLCH token theming.** Seven presets out of the box, switchable at
+- **OKLCH token theming.** Twelve presets out of the box, switchable at
   runtime, plus custom palettes via
   [`shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme.md)
   and the shadcn theme registry.
@@ -687,7 +687,9 @@ Pick a preset at page level or swap it live:
 
 ``` r
 
-page_shad(theme_preset = "green")            # slate stone blue green rose violet orange
+page_shad(theme_preset = "green")
+# neutral ramps: slate stone zinc mauve olive mist taupe
+# accents:       blue green rose violet orange
 
 # server-side, e.g. from a shad_select + shad_switch toolbar
 update_shad_theme(preset = input$preset, dark = input$dark)
@@ -738,9 +740,20 @@ other Lucide glyph via
 
 shadshiny is inspired by and visually compatible with
 [shadcn/ui](https://ui.shadcn.com) (MIT) by shadcn, which itself builds
-on [Radix UI](https://www.radix-ui.com) primitives. **No upstream source
-code is vendored.** All CSS and JavaScript in this package were
-reimplemented from scratch to be framework-free and Shiny-native.
+on [Radix UI](https://www.radix-ui.com) primitives. **No shadcn/ui or
+Radix source code is vendored.** All CSS and JavaScript in this package
+were reimplemented from scratch to be framework-free and Shiny-native.
+
+Two things do come from other projects:
+
+- The colour token values, for the default theme and the presets, follow
+  those published by shadcn/ui (MIT, copyright shadcn).
+- The icons are from [Lucide](https://lucide.dev) (ISC, copyright Lucide
+  Icons and Contributors). Some of them derive from
+  [Feather](https://feathericons.com) (MIT, copyright Cole Bemis).
+
+Their licence notices ship with the package in
+[`inst/COPYRIGHTS`](https://orijitghosh.github.io/shadshiny/inst/COPYRIGHTS).
 shadcn/ui and Radix are trademarks of their respective owners. shadshiny
 is released under the [MIT
 License](https://orijitghosh.github.io/shadshiny/LICENSE).

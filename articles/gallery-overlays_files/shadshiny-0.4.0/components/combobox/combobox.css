@@ -1,0 +1,177 @@
+/* FILE: inst/assets/components/combobox/combobox.css */
+/* shadshiny — combobox. Filterable input + listbox; multi w/ inline badges. */
+
+.shad-combobox { position: relative; display: inline-block; }
+
+/* trigger is a button styled like an outline select; in multi mode the root
+   draws that box instead, so the chips' remove buttons sit beside the
+   trigger rather than inside it */
+.shad-combobox__trigger {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--shad-space-1);
+  width: 100%;
+  min-width: 10rem;
+  min-height: 2.25rem;
+  padding: var(--shad-space-1) var(--shad-space-3);
+  border: 1px solid var(--shad-input);
+  border-radius: var(--shad-radius-md);
+  background-color: transparent;
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-foreground);
+  box-shadow: var(--shad-shadow-xs);
+  cursor: pointer;
+  text-align: start;
+  transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-combobox__trigger:focus-visible,
+.shad-combobox[data-state="open"] .shad-combobox__trigger {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-combobox__trigger[data-placeholder] .shad-combobox__value {
+  color: var(--shad-muted-foreground);
+}
+.shad-combobox__value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.shad-combobox__chevrons {
+  margin-inline-start: auto;
+  color: var(--shad-muted-foreground);
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+/* multi mode: the box moves to the root; chips and trigger wrap together */
+.shad-combobox[data-multiple] {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--shad-space-1);
+  min-width: 10rem;
+  min-height: 2.25rem;
+  padding: var(--shad-space-1) var(--shad-space-3);
+  border: 1px solid var(--shad-input);
+  border-radius: var(--shad-radius-md);
+  box-shadow: var(--shad-shadow-xs);
+  transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-combobox[data-multiple]:has(> .shad-combobox__trigger:focus-visible),
+.shad-combobox[data-multiple][data-state="open"] {
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-combobox[data-multiple] .shad-combobox__trigger {
+  flex: 1;
+  width: auto;
+  min-width: 1rem;
+  min-height: 1.5rem;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+.shad-combobox__chips { display: contents; }
+/* multi-select badges */
+.shad-combobox__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shad-space-1);
+  border-radius: var(--shad-radius-sm);
+  background-color: var(--shad-secondary);
+  color: var(--shad-secondary-foreground);
+  padding: 0 var(--shad-space-1_5);
+  font-size: var(--shad-text-xs);
+  line-height: 1.25rem;
+}
+.shad-combobox__badge-x {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: none;
+  color: var(--shad-muted-foreground);
+  cursor: pointer;
+}
+.shad-combobox__badge-x:hover { color: var(--shad-foreground); }
+.shad-combobox__badge-x:focus-visible { outline: 2px solid var(--shad-ring); }
+.shad-combobox__badge-x:disabled { cursor: not-allowed; }
+.shad-combobox__badge-x .shad-icon { width: 0.75rem; height: 0.75rem; pointer-events: auto; }
+
+/* panel */
+.shad-combobox__content {
+  position: fixed;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  min-width: 12rem;
+  max-height: min(20rem, var(--shad-available-height, 20rem));
+  overflow: hidden;
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  background-color: var(--shad-popover);
+  color: var(--shad-popover-foreground);
+  box-shadow: var(--shad-shadow-md);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+}
+.shad-combobox__search {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  padding: 0 var(--shad-space-3);
+  border-bottom: 1px solid var(--shad-border);
+  flex-shrink: 0;
+}
+.shad-combobox__search .shad-icon { color: var(--shad-muted-foreground); }
+.shad-combobox__input {
+  flex: 1;
+  height: 2.25rem;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--shad-foreground);
+  font: inherit;
+}
+.shad-combobox__input::placeholder { color: var(--shad-muted-foreground); }
+.shad-combobox__list {
+  overflow-y: auto;
+  padding: var(--shad-space-1);
+  scrollbar-width: thin;
+}
+.shad-combobox__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  padding: var(--shad-space-1_5) var(--shad-space-2);
+  border-radius: var(--shad-radius-sm);
+  cursor: default;
+  user-select: none;
+}
+.shad-combobox__item[data-highlighted] {
+  background-color: var(--shad-accent);
+  color: var(--shad-accent-foreground);
+}
+.shad-combobox__item[data-disabled] { pointer-events: none; opacity: 0.5; }
+.shad-combobox__item-check {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0;
+  flex-shrink: 0;
+}
+.shad-combobox__item[data-state="checked"] .shad-combobox__item-check { opacity: 1; }
+.shad-combobox__empty {
+  padding: var(--shad-space-6) 0;
+  text-align: center;
+  color: var(--shad-muted-foreground);
+  font-size: var(--shad-text-sm);
+}

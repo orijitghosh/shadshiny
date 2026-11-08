@@ -13,7 +13,7 @@ for shad_dialog_open()."><meta property="og:image" content="https://orijitghosh.
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,6 +110,23 @@ save).</p>
 <code><a href="update_shad_command.html">update_shad_command()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="page_shad.html">page_shad</a></span><span class="op">(</span><span class="fu"><a href="shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"Save"</span>, inputId <span class="op">=</span> <span class="st">"save"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">save</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="shad_show_dialog.html">shad_show_dialog</a></span><span class="op">(</span><span class="fu"><a href="shad_dialog.html">shad_dialog</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="st">"saved"</span>, title <span class="op">=</span> <span class="st">"Saved"</span>, <span class="st">"Your changes were saved."</span>,</span></span>
+<span class="r-in"><span>        footer <span class="op">=</span> <span class="fu"><a href="shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"Done"</span>, inputId <span class="op">=</span> <span class="st">"done"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">done</span>, <span class="fu">shad_remove_dialog</span><span class="op">(</span><span class="st">"saved"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

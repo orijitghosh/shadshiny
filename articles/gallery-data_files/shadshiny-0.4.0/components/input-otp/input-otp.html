@@ -1,0 +1,29 @@
+<!-- FILE: inst/assets/components/input-otp/input-otp.html -->
+<!-- 6 digits, 3+3 with separator -->
+<div class="shad-otp" data-shad="input-otp" data-length="6" data-pattern="\d">
+  <input class="shad-otp__input" type="text" inputmode="numeric" autocomplete="one-time-code" aria-label="One-time code" />
+  <div class="shad-otp__group">
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+  </div>
+  <div class="shad-otp__separator" aria-hidden="true">
+    <svg class="shad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>
+  </div>
+  <div class="shad-otp__group">
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+  </div>
+</div>
+
+<!-- 4 cells, single group, any character -->
+<div class="shad-otp" data-shad="input-otp" data-length="4">
+  <input class="shad-otp__input" type="text" autocomplete="one-time-code" aria-label="Code" />
+  <div class="shad-otp__group">
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+    <div class="shad-otp__cell" aria-hidden="true"></div>
+  </div>
+</div>

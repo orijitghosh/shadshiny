@@ -49,3 +49,23 @@ Other shadshiny flow:
 [`update_shad_number_input()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_number_input.md),
 [`update_shad_rating()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_rating.md),
 [`update_shad_tree()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_tree.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  ui <- page_shad(
+    shad_stepper("wizard", shad_step("Account"), shad_step("Profile"),
+                 shad_step("Review")),
+    shad_button("Continue", inputId = "forward")
+  )
+  server <- function(input, output, session) {
+    step <- shiny::reactiveVal(1)
+    shiny::observeEvent(input$forward, {
+      step(min(step() + 1, 3))
+      update_shad_stepper("wizard", active = step())
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+```

@@ -46,10 +46,10 @@ Other shadshiny theming:
 
 ``` r
 shad_theme_scope(shad_theme(primary = "#16a34a"), shad_button("Go"))
-#> <style>.shad-theme-1 {
+#> <style>.shad-theme-3 {
 #>   --shad-primary: #16a34a;
 #> }</style>
-#> <div class="shad-theme-1">
+#> <div class="shad-theme-3">
 #>   <button type="button" class="shad-btn shad-btn--default">Go</button>
 #> </div>
 ```

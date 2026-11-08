@@ -66,3 +66,36 @@ Other shadshiny dashboard:
 [`shad_sparkline()`](https://orijitghosh.github.io/shadshiny/reference/shad_sparkline.md),
 [`shad_timeline()`](https://orijitghosh.github.io/shadshiny/reference/shad_timeline.md),
 [`shad_value_box()`](https://orijitghosh.github.io/shadshiny/reference/shad_value_box.md)
+
+## Examples
+
+``` r
+shad_timeline(
+  shad_timeline_item("Deployed", time = "10:42", status = "active",
+                     description = "Version 2.1 is live."),
+  shad_timeline_item("Tests passed", time = "10:30", status = "muted",
+                     last = TRUE)
+)
+#> <ol class="shad-timeline">
+#>   <li class="shad-timeline__item" data-state="active">
+#>     <span class="shad-timeline__marker">
+#>       <span class="shad-timeline__dot"></span>
+#>       <span class="shad-timeline__connector" aria-hidden="true"></span>
+#>     </span>
+#>     <div class="shad-timeline__content">
+#>       <time class="shad-timeline__time">10:42</time>
+#>       <div class="shad-timeline__title">Deployed</div>
+#>       <div class="shad-timeline__description">Version 2.1 is live.</div>
+#>     </div>
+#>   </li>
+#>   <li class="shad-timeline__item" data-state="muted">
+#>     <span class="shad-timeline__marker">
+#>       <span class="shad-timeline__dot"></span>
+#>     </span>
+#>     <div class="shad-timeline__content">
+#>       <time class="shad-timeline__time">10:30</time>
+#>       <div class="shad-timeline__title">Tests passed</div>
+#>     </div>
+#>   </li>
+#> </ol>
+```

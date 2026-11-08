@@ -47,3 +47,21 @@ Other shadshiny forms:
 [`shad_form_summary()`](https://orijitghosh.github.io/shadshiny/reference/shad_form_summary.md),
 [`shad_rules`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md),
 [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  ui <- page_shad(
+    shad_form_field(shad_input("email"), label = "Email", inputId = "email"),
+    shad_button("Check", inputId = "check")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$check, {
+      ok <- grepl("@", input$email, fixed = TRUE)
+      update_shad_form_field("email", if (!ok) "Enter a valid email address.")
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+```

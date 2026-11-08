@@ -83,3 +83,18 @@ Other shadshiny utilities:
 [`shad_icon_names()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon_names.md),
 [`shad_icon_raw()`](https://orijitghosh.github.io/shadshiny/reference/shad_icon_raw.md),
 [`shadshiny_deps()`](https://orijitghosh.github.io/shadshiny/reference/shadshiny_deps.md)
+
+## Examples
+
+``` r
+# The bundled apps:
+list.files(system.file("examples", package = "shadshiny"))
+#>  [1] "00-static-parity"       "01-auth-onboarding"     "02-analytics-dashboard"
+#>  [4] "03-support-chat"        "04-storefront"          "05-settings-profile"   
+#>  [7] "06-docs-reader"         "07-data-explorer"       "08-llm-chat"           
+#> [10] "09-app-shell"           "kitchen-sink"          
+
+if (interactive()) {
+  shad_run_example("07-data-explorer")
+}
+```

@@ -1,0 +1,2 @@
+.shad-chat-prompt { display: grid; gap: var(--shad-space-3); padding-block: var(--shad-space-3); }
+.shad-chat-prompt .form-group { margin: 0; }

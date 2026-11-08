@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,6 +126,38 @@ set explicitly if composing dynamically).</p></dd>
 <code><a href="shad_value_box.html">shad_value_box()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="shad_timeline.html">shad_timeline</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">shad_timeline_item</span><span class="op">(</span><span class="st">"Deployed"</span>, time <span class="op">=</span> <span class="st">"10:42"</span>, status <span class="op">=</span> <span class="st">"active"</span>,</span></span>
+<span class="r-in"><span>                     description <span class="op">=</span> <span class="st">"Version 2.1 is live."</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_timeline_item</span><span class="op">(</span><span class="st">"Tests passed"</span>, time <span class="op">=</span> <span class="st">"10:30"</span>, status <span class="op">=</span> <span class="st">"muted"</span>,</span></span>
+<span class="r-in"><span>                     last <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ol class="shad-timeline"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;li class="shad-timeline__item" data-state="active"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="shad-timeline__marker"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;span class="shad-timeline__dot"&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;span class="shad-timeline__connector" aria-hidden="true"&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div class="shad-timeline__content"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;time class="shad-timeline__time"&gt;10:42&lt;/time&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div class="shad-timeline__title"&gt;Deployed&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div class="shad-timeline__description"&gt;Version 2.1 is live.&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/li&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;li class="shad-timeline__item" data-state="muted"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="shad-timeline__marker"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;span class="shad-timeline__dot"&gt;&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div class="shad-timeline__content"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;time class="shad-timeline__time"&gt;10:30&lt;/time&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div class="shad-timeline__title"&gt;Tests passed&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/li&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/ol&gt;</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

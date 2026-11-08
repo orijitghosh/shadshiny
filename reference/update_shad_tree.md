@@ -55,3 +55,29 @@ Other shadshiny flow:
 [`update_shad_number_input()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_number_input.md),
 [`update_shad_rating()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_rating.md),
 [`update_shad_stepper()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_stepper.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  ui <- page_shad(
+    shad_tree("files", shad_tree_item("data", "data", lazy = TRUE))
+  )
+  server <- function(input, output, session) {
+    # A lazy branch asks for its children the first time it opens.
+    shiny::observeEvent(input$files_expanded, {
+      event <- input$files_expanded
+      if (identical(event$key, "data") && isTRUE(event$expanded)) {
+        update_shad_tree("files", children = list(
+          value = "data",
+          items = htmltools::tagList(
+            shad_tree_item("data/a.csv", "a.csv"),
+            shad_tree_item("data/b.csv", "b.csv")
+          )
+        ))
+      }
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+```

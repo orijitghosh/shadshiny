@@ -1,0 +1,18 @@
+/* FILE: inst/assets/components/hover-card/hover-card.css */
+/* shadshiny — hover-card. Rich supplementary panel, popover surface. */
+
+.shad-hover-card__content {
+  position: fixed;
+  z-index: 1300;
+  width: 16rem;
+  padding: var(--shad-space-4);
+  border: 1px solid var(--shad-border);
+  border-radius: var(--shad-radius-md);
+  background-color: var(--shad-popover);
+  color: var(--shad-popover-foreground);
+  box-shadow: var(--shad-shadow-md);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  outline: none;
+}

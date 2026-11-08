@@ -1,0 +1,196 @@
+/* FILE: inst/assets/core/shad-animations.css */
+/* ==========================================================================
+   shadshiny — motion layer
+   --------------------------------------------------------------------------
+   Contract with shad-runtime.js Presence:
+   - Panels animate ENTER when data-state="open" is set (element visible).
+   - Panels animate EXIT when data-state="closed" is set while still visible;
+     Presence waits for animationend, then applies [hidden].
+   - FloatingEngine writes data-side / data-align onto positioned panels;
+     the .shad-anim-pop class reads them to pick transform-origin + the 8px
+     directional slide (mirrors Radix/shadcn side-aware motion).
+   - All animations collapse to ~0 under prefers-reduced-motion.
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ */
+/* Keyframes                                                           */
+/* ------------------------------------------------------------------ */
+@keyframes shad-fade-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes shad-fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+@keyframes shad-zoom-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shad-zoom-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
+}
+
+
+/* side-aware popover/menu/tooltip pop. --shad-enter-x/y set per data-side */
+@keyframes shad-pop-in {
+  from {
+    opacity: 0;
+    transform: translate(var(--shad-enter-x, 0), var(--shad-enter-y, 0)) scale(0.95);
+  }
+  to { opacity: 1; transform: translate(0, 0) scale(1); }
+}
+@keyframes shad-pop-out {
+  from { opacity: 1; transform: translate(0, 0) scale(1); }
+  to {
+    opacity: 0;
+    transform: translate(var(--shad-enter-x, 0), var(--shad-enter-y, 0)) scale(0.95);
+  }
+}
+
+/* full-distance slides for sheet/drawer */
+@keyframes shad-slide-in-from-top    { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+@keyframes shad-slide-out-to-top     { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+@keyframes shad-slide-in-from-bottom { from { transform: translateY(100%); }  to { transform: translateY(0); } }
+@keyframes shad-slide-out-to-bottom  { from { transform: translateY(0); } to { transform: translateY(100%); } }
+@keyframes shad-slide-in-from-left   { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes shad-slide-out-to-left    { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+@keyframes shad-slide-in-from-right  { from { transform: translateX(100%); }  to { transform: translateX(0); } }
+@keyframes shad-slide-out-to-right   { from { transform: translateX(0); } to { transform: translateX(100%); } }
+
+/* accordion / collapsible height. JS sets --shad-collapsible-height in px */
+@keyframes shad-collapse-down {
+  from { height: 0; }
+  to   { height: var(--shad-collapsible-height, auto); }
+}
+@keyframes shad-collapse-up {
+  from { height: var(--shad-collapsible-height, auto); }
+  to   { height: 0; }
+}
+
+@keyframes shad-spin { to { transform: rotate(360deg); } }
+
+@keyframes shad-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+@keyframes shad-progress-indeterminate {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+@keyframes shad-caret-blink {
+  0%, 70%, 100% { opacity: 1; }
+  20%, 50%      { opacity: 0; }
+}
+
+/* checkbox check draw (pathLength=1 normalized dash) */
+@keyframes shad-check-draw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion utility classes (consumed by component CSS + runtime)        */
+/* ------------------------------------------------------------------ */
+
+/* overlay scrim: plain fade */
+.shad-anim-overlay[data-state="open"] {
+  animation: shad-fade-in var(--shad-duration-normal) var(--shad-ease-out);
+}
+.shad-anim-overlay[data-state="closed"] {
+  animation: shad-fade-out var(--shad-duration-normal) var(--shad-ease-out) forwards;
+}
+
+/* centered dialog panel: fade + zoom */
+.shad-anim-dialog[data-state="open"] {
+  animation: shad-zoom-in var(--shad-duration-normal) var(--shad-ease-out);
+}
+.shad-anim-dialog[data-state="closed"] {
+  animation: shad-zoom-out var(--shad-duration-fast) var(--shad-ease-out) forwards;
+}
+
+/* floating panels (popover/menu/tooltip/select/hover-card):
+   fade + zoom + 8px slide from the trigger side, origin keyed to side */
+.shad-anim-pop[data-state="open"] {
+  animation: shad-pop-in var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-anim-pop[data-state="closed"] {
+  animation: shad-pop-out var(--shad-duration-fast) var(--shad-ease-out) forwards;
+}
+.shad-anim-pop[data-side="bottom"] { transform-origin: top center;    --shad-enter-y: -0.5rem; }
+.shad-anim-pop[data-side="top"]    { transform-origin: bottom center; --shad-enter-y: 0.5rem; }
+.shad-anim-pop[data-side="right"]  { transform-origin: left center;   --shad-enter-x: -0.5rem; }
+.shad-anim-pop[data-side="left"]   { transform-origin: right center;  --shad-enter-x: 0.5rem; }
+/* sharpen origin using align when present */
+.shad-anim-pop[data-side="bottom"][data-align="start"] { transform-origin: top left; }
+.shad-anim-pop[data-side="bottom"][data-align="end"]   { transform-origin: top right; }
+.shad-anim-pop[data-side="top"][data-align="start"]    { transform-origin: bottom left; }
+.shad-anim-pop[data-side="top"][data-align="end"]      { transform-origin: bottom right; }
+
+/* sheet panels: full-distance slide per side */
+.shad-anim-sheet[data-side="right"][data-state="open"]   { animation: shad-slide-in-from-right var(--shad-duration-slow) var(--shad-ease-out); }
+.shad-anim-sheet[data-side="right"][data-state="closed"] { animation: shad-slide-out-to-right var(--shad-duration-slow) var(--shad-ease-out) forwards; }
+.shad-anim-sheet[data-side="left"][data-state="open"]    { animation: shad-slide-in-from-left var(--shad-duration-slow) var(--shad-ease-out); }
+.shad-anim-sheet[data-side="left"][data-state="closed"]  { animation: shad-slide-out-to-left var(--shad-duration-slow) var(--shad-ease-out) forwards; }
+.shad-anim-sheet[data-side="top"][data-state="open"]     { animation: shad-slide-in-from-top var(--shad-duration-slow) var(--shad-ease-out); }
+.shad-anim-sheet[data-side="top"][data-state="closed"]   { animation: shad-slide-out-to-top var(--shad-duration-slow) var(--shad-ease-out) forwards; }
+.shad-anim-sheet[data-side="bottom"][data-state="open"]  { animation: shad-slide-in-from-bottom var(--shad-duration-slow) var(--shad-ease-out); }
+.shad-anim-sheet[data-side="bottom"][data-state="closed"]{ animation: shad-slide-out-to-bottom var(--shad-duration-slow) var(--shad-ease-out) forwards; }
+
+/* spinner utility (also used by button loading state) */
+.shad-animate-spin {
+  animation: shad-spin 1s linear infinite;
+}
+
+/* text shimmer: active content remains ordinary text when motion is reduced */
+@keyframes shad-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+.shad-shimmer {
+  display: inline-block;
+}
+.shad-shimmer[data-active] {
+  background-image: linear-gradient(
+    90deg,
+    var(--shad-muted-foreground) 0%,
+    var(--shad-foreground) 50%,
+    var(--shad-muted-foreground) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shad-shimmer 1.8s linear infinite;
+}
+.shad-shimmer:not([data-active]) {
+  color: inherit;
+}
+
+@media (forced-colors: active) {
+  .shad-shimmer[data-active] {
+    background: none;
+    color: CanvasText;
+    forced-color-adjust: auto;
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion: kill everything shad animates or transitions.       */
+/* Presence's timeout fallback still fires, so exits still unmount.    */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  :where([class^="shad-"], [class*=" shad-"]),
+  :where([class^="shad-"], [class*=" shad-"])::before,
+  :where([class^="shad-"], [class*=" shad-"])::after,
+  :where([class*="shad-"] svg *) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .shad-shimmer[data-active] {
+    background: none;
+    color: inherit;
+    animation: none !important;
+  }
+}

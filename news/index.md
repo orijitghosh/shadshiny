@@ -1,6 +1,37 @@
 # Changelog
 
-## shadshiny 0.3.0.9000 (development version)
+## shadshiny 0.4.0
+
+- Prepared for a first CRAN release. Every exported help page now has an
+  example; those that need a running app build one inside
+  `if (interactive())`. The
+  [`shad_theme_from_registry()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_from_registry.md)
+  and toast examples no longer use `\dontrun{}`, and the
+  [`shad_current_theme()`](https://orijitghosh.github.io/shadshiny/reference/shad_current_theme.md)
+  and
+  [`shad_chat_server()`](https://orijitghosh.github.io/shadshiny/reference/shad_chat_server.md)
+  examples are now complete apps: they called server functions outside a
+  session, so they failed when run. The package now ships a `COPYRIGHTS`
+  file with the licence notices for the Lucide icons (ISC; some derive
+  from Feather, MIT) and the shadcn/ui colour token values (MIT), and
+  DESCRIPTION points to it in a `Copyright:` field. The README and the
+  package help say the same.
+
+- Five more full-ramp colour presets from shadcn/ui: `"zinc"`,
+  `"mauve"`, `"olive"`, `"mist"` and `"taupe"`. Like `"slate"` and
+  `"stone"`, each one recolours every surface, border and text token, in
+  light and dark mode, and tunes the chart grid and labels to match. Use
+  them with `page_shad(theme_preset=)`,
+  [`shad_theme_preset()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_preset.md),
+  [`update_shad_theme()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_theme.md)
+  and
+  [`shad_tokens()`](https://orijitghosh.github.io/shadshiny/reference/shad_tokens.md).
+  Muted text is darkened in light mode, as in the other presets, so that
+  it keeps a 4.5:1 contrast. Tests now check that the CSS and
+  `shad-tokens.json` agree for every preset, and that the text in each
+  full-ramp preset stays at 4.5:1 on its surfaces. The bundle’s gzip
+  budget for the CSS rises from 22 KiB to 23 KiB, and for CSS and
+  JavaScript together from 64 KiB to 65 KiB.
 
 - Live integrations with external chat stream providers, such as
   streaming an `ellmer` chat, are experimental, and now say so wherever

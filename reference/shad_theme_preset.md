@@ -13,8 +13,9 @@ shad_theme_preset(preset, ...)
 
 - preset:
 
-  One of `"slate"`, `"stone"`, `"blue"`, `"green"`, `"rose"`,
-  `"violet"`, `"orange"`.
+  One of the full neutral ramps `"slate"`, `"stone"`, `"zinc"`,
+  `"mauve"`, `"olive"`, `"mist"`, `"taupe"`, or the accents `"blue"`,
+  `"green"`, `"rose"`, `"violet"`, `"orange"`.
 
 - ...:
 

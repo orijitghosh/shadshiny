@@ -1,0 +1,73 @@
+/* FILE: inst/assets/components/form-message/form-message.css */
+/* shadshiny — form-message. CSS-only validation messaging: field-level
+   success/warning/info messages (form-field already covers errors) plus a
+   form-level summary block. Load after form-field.css. */
+
+.shad-form-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--shad-space-1_5);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-muted-foreground);
+}
+.shad-form-message > svg {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  margin-top: 0.125rem;
+}
+.shad-form-message--error { color: var(--shad-destructive); }
+.shad-form-message--success { color: oklch(0.527 0.154 150.069); }
+:is(.dark, [data-bs-theme="dark"]) .shad-form-message--success,
+:is(.dark, [data-bs-theme="dark"]) * .shad-form-message--success { color: oklch(0.723 0.192 149.579); }
+.shad-form-message--warning { color: oklch(0.555 0.163 48.998); }
+:is(.dark, [data-bs-theme="dark"]) .shad-form-message--warning,
+:is(.dark, [data-bs-theme="dark"]) * .shad-form-message--warning { color: oklch(0.769 0.188 70.08); }
+
+/* character counter (right-aligned helper row) */
+.shad-form-message--counter {
+  justify-content: flex-end;
+  font-size: var(--shad-text-xs);
+  line-height: var(--shad-leading-xs);
+  font-variant-numeric: tabular-nums;
+}
+.shad-form-message--counter[data-state="over"] { color: var(--shad-destructive); }
+
+/* -- form-level summary ---------------------------------------------------- */
+.shad-form-summary {
+  display: grid;
+  gap: var(--shad-space-2);
+  padding: var(--shad-space-4);
+  border: 1px solid color-mix(in oklab, var(--shad-destructive) 40%, transparent);
+  border-radius: var(--shad-radius-lg);
+  background-color: color-mix(in oklab, var(--shad-destructive) 5%, transparent);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-destructive);
+}
+.shad-form-summary__title {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+  font-weight: var(--shad-font-weight-medium);
+}
+.shad-form-summary__title > svg { width: 1rem; height: 1rem; flex: none; }
+.shad-form-summary__list {
+  margin: 0;
+  padding-inline-start: var(--shad-space-5);
+  display: grid;
+  gap: var(--shad-space-1);
+}
+.shad-form-summary__list a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  border-radius: var(--shad-radius-sm);
+}
+.shad-form-summary__list a:focus-visible {
+  outline: none;
+  box-shadow: var(--shad-focus-shadow-destructive);
+}

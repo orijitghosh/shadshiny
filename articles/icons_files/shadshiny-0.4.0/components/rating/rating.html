@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- FILE: inst/assets/components/rating/rating.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shadshiny — rating</title>
+<link rel="stylesheet" href="../../tokens/shad-tokens.css">
+<link rel="stylesheet" href="../../core/shad-base.css">
+<link rel="stylesheet" href="rating.css">
+<style>body { margin: 2rem; background: var(--shad-background); font-family: var(--shad-font-sans); color: var(--shad-foreground); } .demo { max-width: 30rem; margin: 0 auto 2.5rem; display: flex; align-items: center; gap: 1rem; } .demo h2 { font-size: var(--shad-text-sm); width: 11rem; margin: 0; color: var(--shad-muted-foreground); font-weight: 500; }</style>
+</head>
+<body>
+<div class="demo">
+  <h2>Interactive</h2>
+  <div id="r1" data-shad="rating" class="shad-rating" data-value="3" aria-label="Product rating"></div>
+  <span class="shad-rating__value" id="r1val">3</span>
+</div>
+<div class="demo">
+  <h2>Half stars</h2>
+  <div data-shad="rating" class="shad-rating" data-value="3.5" data-half aria-label="Half-star rating"></div>
+</div>
+<div class="demo">
+  <h2>Read-only (display)</h2>
+  <div data-shad="rating" class="shad-rating" data-value="4.5" data-half data-readonly></div>
+</div>
+<div class="demo">
+  <h2>Sizes sm / lg, max 10</h2>
+  <div data-shad="rating" class="shad-rating" data-value="2" data-size="sm"></div>
+  <div data-shad="rating" class="shad-rating" data-value="7" data-max="10" data-size="lg"></div>
+</div>
+
+<script src="../../core/shad-runtime.js"></script>
+<script src="rating.js"></script>
+<script>
+shad.autoInit();
+document.getElementById("r1").addEventListener("shad:change", function (e) {
+  document.getElementById("r1val").textContent = e.detail.value;
+});
+</script>
+</body>
+</html>

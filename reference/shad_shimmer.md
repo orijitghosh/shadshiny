@@ -49,3 +49,12 @@ Other shadshiny tier-1 components:
 [`shad_spinner()`](https://orijitghosh.github.io/shadshiny/reference/shad_spinner.md),
 [`shad_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_table.md),
 [`shad_typography`](https://orijitghosh.github.io/shadshiny/reference/shad_typography.md)
+
+## Examples
+
+``` r
+shad_shimmer("Thinking...")
+#> <span class="shad-shimmer" data-active>Thinking...</span>
+shad_shimmer("Finished", active = FALSE)
+#> <span class="shad-shimmer">Finished</span>
+```

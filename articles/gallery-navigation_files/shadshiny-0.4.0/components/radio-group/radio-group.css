@@ -1,0 +1,56 @@
+/* FILE: inst/assets/components/radio-group/radio-group.css */
+/* shadshiny — radio group. data-state=checked|unchecked on items. */
+
+.shad-radio-group {
+  display: grid;
+  gap: var(--shad-space-3);
+}
+.shad-radio-group[data-orientation="horizontal"] {
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: var(--shad-space-6);
+}
+.shad-radio-row {
+  display: flex;
+  align-items: center;
+  gap: var(--shad-space-2);
+}
+.shad-radio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+  border: 1px solid var(--shad-input);
+  border-radius: var(--shad-radius-full);
+  background-color: transparent;
+  box-shadow: var(--shad-shadow-xs);
+  color: var(--shad-primary);
+  cursor: pointer;
+  padding: 0;
+  transition: border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-radio:focus-visible {
+  outline: none;
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-focus-shadow);
+}
+.shad-radio[data-state="checked"] { border-color: var(--shad-primary); }
+.shad-radio[data-disabled],
+.shad-radio:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.shad-radio__indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--shad-radius-full);
+  background-color: var(--shad-primary);
+  transform: scale(0);
+  transition: transform var(--shad-duration-fast) var(--shad-ease-out);
+}
+.shad-radio[data-state="checked"] .shad-radio__indicator { transform: scale(1); }

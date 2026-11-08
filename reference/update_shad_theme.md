@@ -45,3 +45,19 @@ Invisibly `NULL`, called for its side effect.
 Other shadshiny page & theming:
 [`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md),
 [`shad_theme_preset()`](https://orijitghosh.github.io/shadshiny/reference/shad_theme_preset.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  ui <- page_shad(
+    shad_select("preset", "Theme", selected = "slate",
+                choices = c("slate", "zinc", "mauve", "blue", "green")),
+    shad_switch("dark", "Dark mode")
+  )
+  server <- function(input, output, session) {
+    shiny::observe(update_shad_theme(preset = input$preset, dark = input$dark))
+  }
+  shiny::shinyApp(ui, server)
+}
+```

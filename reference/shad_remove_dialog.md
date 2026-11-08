@@ -45,3 +45,21 @@ Other shadshiny server API:
 [`shad_toast()`](https://orijitghosh.github.io/shadshiny/reference/shad_toast.md),
 [`update_shad`](https://orijitghosh.github.io/shadshiny/reference/update_shad.md),
 [`update_shad_command()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_command.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  ui <- page_shad(shad_button("Save", inputId = "save"))
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$save, {
+      shad_show_dialog(shad_dialog(
+        "saved", title = "Saved", "Your changes were saved.",
+        footer = shad_button("Done", inputId = "done")
+      ))
+    })
+    shiny::observeEvent(input$done, shad_remove_dialog("saved"))
+  }
+  shiny::shinyApp(ui, server)
+}
+```

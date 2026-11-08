@@ -107,9 +107,14 @@ Other shadshiny server API:
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-shad_toast("Saved", variant = "success")
-id <- shad_toast_loading("Uploading...")
-shad_toast_update(id, message = "Uploaded", variant = "success")
-} # }
+if (interactive()) {
+  ui <- page_shad(shad_button("Upload", inputId = "upload"))
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$upload, {
+      id <- shad_toast_loading("Uploading...")
+      shad_toast_update(id, message = "Uploaded", variant = "success")
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
 ```

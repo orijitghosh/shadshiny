@@ -18,7 +18,7 @@ Every app starts with
 [`page_shad()`](https://orijitghosh.github.io/shadshiny/reference/page_shad.md).
 It attaches the shadshiny asset bundle, establishes the theme scope, and
 otherwise behaves like a Shiny page. Pass a `theme_preset` to choose one
-of the seven palettes.
+of the twelve palettes.
 
 ``` r
 

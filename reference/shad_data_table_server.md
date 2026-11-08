@@ -95,3 +95,23 @@ Other shadshiny data table:
 [`shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/shad_data_table.md),
 [`shad_fmt`](https://orijitghosh.github.io/shadshiny/reference/shad_fmt.md),
 [`update_shad_data_table()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_data_table.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  rows <- data.frame(id = 1:500, score = rev(seq_len(500)))
+  ui <- page_shad(
+    shad_data_table("rows", data = NULL, page_size = 25, loading = TRUE)
+  )
+  server <- function(input, output, session) {
+    shad_data_table_server("rows", row_key = "id", source = function(request) {
+      first <- (request$page - 1L) * request$page_size + 1L
+      last <- min(first + request$page_size - 1L, nrow(rows))
+      list(data = rows[seq.int(first, last), , drop = FALSE],
+           total_rows = nrow(rows), filtered_rows = nrow(rows))
+    })
+  }
+  shiny::shinyApp(ui, server)
+}
+```

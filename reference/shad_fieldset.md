@@ -56,3 +56,39 @@ Other shadshiny forms:
 [`shad_rules`](https://orijitghosh.github.io/shadshiny/reference/shad_rules.md),
 [`shad_validator()`](https://orijitghosh.github.io/shadshiny/reference/shad_validator.md),
 [`update_shad_form_field()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_form_field.md)
+
+## Examples
+
+``` r
+shad_fieldset(
+  "Shipping address",
+  shad_input("street", "Street"),
+  shad_field_group(
+    shad_input("city", "City"),
+    shad_input("postcode", "Postcode"),
+    orientation = "horizontal"
+  ),
+  description = "Where should we send your order?"
+)
+#> <fieldset class="shad-fieldset" aria-describedby="shad-fieldset-description-1">
+#>   <legend class="shad-fieldset__legend">Shipping address</legend>
+#>   <p class="shad-fieldset__description" id="shad-fieldset-description-1">Where should we send your order?</p>
+#>   <div class="shad-form-field" data-shad="form-field">
+#>     <label class="shad-label">Street</label>
+#>     <input id="street" class="shad-input" type="text"/>
+#>     <p class="shad-form-field__error" hidden></p>
+#>   </div>
+#>   <div class="shad-field-group" data-orientation="horizontal">
+#>     <div class="shad-form-field" data-shad="form-field">
+#>       <label class="shad-label">City</label>
+#>       <input id="city" class="shad-input" type="text"/>
+#>       <p class="shad-form-field__error" hidden></p>
+#>     </div>
+#>     <div class="shad-form-field" data-shad="form-field">
+#>       <label class="shad-label">Postcode</label>
+#>       <input id="postcode" class="shad-input" type="text"/>
+#>       <p class="shad-form-field__error" hidden></p>
+#>     </div>
+#>   </div>
+#> </fieldset>
+```

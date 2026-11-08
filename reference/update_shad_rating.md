@@ -48,3 +48,18 @@ Other shadshiny flow:
 [`update_shad_number_input()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_number_input.md),
 [`update_shad_stepper()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_stepper.md),
 [`update_shad_tree()`](https://orijitghosh.github.io/shadshiny/reference/update_shad_tree.md)
+
+## Examples
+
+``` r
+if (interactive()) {
+  ui <- page_shad(
+    shad_rating("stars", "Your rating", value = 3),
+    shad_button("Lock rating", inputId = "lock")
+  )
+  server <- function(input, output, session) {
+    shiny::observeEvent(input$lock, update_shad_rating("stars", readonly = TRUE))
+  }
+  shiny::shinyApp(ui, server)
+}
+```

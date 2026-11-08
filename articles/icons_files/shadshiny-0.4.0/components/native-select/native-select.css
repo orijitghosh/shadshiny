@@ -1,0 +1,90 @@
+/* FILE: inst/assets/components/native-select/native-select.css */
+/* shadshiny — native-select. Real <select> styled with input tokens plus a
+   CSS-positioned chevron. Sizes: sm/default/lg. Invalid via aria-invalid on
+   the <select> OR data-invalid on the root. */
+
+.shad-native-select {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.shad-native-select__select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-width: 0;
+  height: 2.25rem;                 /* h-9, matches .shad-input */
+  border-radius: var(--shad-radius-md);
+  border: 1px solid var(--shad-input);
+  background-color: transparent;
+  padding-block: var(--shad-space-1);
+  padding-inline: var(--shad-space-3) var(--shad-space-8); /* room for chevron */
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-sm);
+  line-height: var(--shad-leading-sm);
+  color: var(--shad-foreground);
+  box-shadow: var(--shad-shadow-xs);
+  outline: none;
+  cursor: pointer;
+  transition: color var(--shad-duration-fast) var(--shad-ease-out),
+              border-color var(--shad-duration-fast) var(--shad-ease-out),
+              box-shadow var(--shad-duration-fast) var(--shad-ease-out);
+}
+
+/* dropdown list surface (honored by Firefox + Chromium) */
+.shad-native-select__select option,
+.shad-native-select__select optgroup {
+  background-color: var(--shad-background);
+  color: var(--shad-foreground);
+  font-family: var(--shad-font-sans);
+}
+.shad-native-select__select option:disabled {
+  color: var(--shad-muted-foreground);
+}
+
+/* chevron — decorative svg positioned over the padding gutter */
+.shad-native-select__chevron {
+  position: absolute;
+  inset-inline-end: var(--shad-space-3);
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--shad-muted-foreground);
+}
+
+/* focus ring */
+.shad-native-select__select:focus-visible {
+  border-color: var(--shad-ring);
+  box-shadow: var(--shad-shadow-xs), var(--shad-focus-shadow);
+}
+
+/* invalid — aria-invalid on the select or data-invalid on the root */
+.shad-native-select__select[aria-invalid="true"],
+.shad-native-select[data-invalid] .shad-native-select__select {
+  border-color: var(--shad-destructive);
+}
+.shad-native-select__select[aria-invalid="true"]:focus-visible,
+.shad-native-select[data-invalid] .shad-native-select__select:focus-visible {
+  border-color: var(--shad-destructive);
+  box-shadow: var(--shad-shadow-xs), var(--shad-focus-shadow-destructive);
+}
+
+/* disabled */
+.shad-native-select__select:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.shad-native-select:has(.shad-native-select__select:disabled) .shad-native-select__chevron {
+  opacity: 0.5;
+}
+
+/* ---- sizes (modifier on the root) ---- */
+.shad-native-select--sm .shad-native-select__select {
+  height: 2rem;
+  padding-inline-start: var(--shad-space-2_5);
+}
+.shad-native-select--lg .shad-native-select__select {
+  height: 2.5rem;
+  padding-inline-start: var(--shad-space-4);
+}

@@ -1,0 +1,28 @@
+/* FILE: inst/assets/components/tooltip/tooltip.css */
+/* shadshiny — tooltip. bg primary / fg primary-foreground, xs text. */
+
+.shad-tooltip__content {
+  position: fixed;
+  z-index: 1400;
+  max-width: 18rem;
+  width: max-content;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--shad-radius-md);
+  background-color: var(--shad-primary);
+  color: var(--shad-primary-foreground);
+  font-family: var(--shad-font-sans);
+  font-size: var(--shad-text-xs);
+  line-height: var(--shad-leading-xs);
+  text-wrap: balance;
+  pointer-events: none; /* tooltips never intercept the pointer */
+}
+/* arrow: rotated square, same fill as the bubble */
+.shad-tooltip__arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--shad-primary);
+  transform: rotate(45deg);
+  border-radius: 2px;
+  z-index: -1;
+}

@@ -15,7 +15,7 @@ separator's accessible name."><meta property="og:image" content="https://orijitg
 
     <a class="navbar-brand me-2" href="../index.html">shadshiny</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,6 +106,29 @@ separator's accessible name.</p>
 <code><a href="update_shad_form_field.html">update_shad_form_field()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="shad_fieldset.html">shad_fieldset</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"Sign in"</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="shad_input.html">shad_input</a></span><span class="op">(</span><span class="st">"email"</span>, <span class="st">"Email"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">shad_field_separator</span><span class="op">(</span><span class="st">"or"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="shad_button.html">shad_button</a></span><span class="op">(</span><span class="st">"Continue with a passkey"</span>, variant <span class="op">=</span> <span class="st">"outline"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;fieldset class="shad-fieldset"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;legend class="shad-fieldset__legend"&gt;Sign in&lt;/legend&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div class="shad-form-field" data-shad="form-field"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;label class="shad-label"&gt;Email&lt;/label&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;input id="email" class="shad-input" type="text"/&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;p class="shad-form-field__error" hidden&gt;&lt;/p&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div class="shad-field-separator"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="shad-field-separator__label"&gt;or&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div class="shad-field-separator__line" role="separator" aria-orientation="horizontal" aria-hidden="true"&gt;&lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/div&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;button type="button" class="shad-btn shad-btn--outline"&gt;Continue with a passkey&lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/fieldset&gt;</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
