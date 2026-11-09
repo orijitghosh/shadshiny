@@ -25,7 +25,7 @@ treatment.}
 \item{class}{Extra CSS classes.}
 }
 \value{
-A native \if{html}{\out{<fieldset>}} tag.
+A native \verb{<fieldset>} tag.
 }
 \description{
 Experimental.

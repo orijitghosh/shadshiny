@@ -3,8 +3,9 @@
 0 errors | 0 warnings | 2 notes
 
 * This is a new submission.
-  In the local check this note also listed the GitHub repository and
-  documentation site URLs as 404, because neither was public yet.
+  On win-builder this note also lists possibly misspelled words in
+  DESCRIPTION: reimplementation, sparklines, themeable, theming and
+  validator. They are spelled correctly; each is a standard technical term.
 * "checking for future file timestamps ... unable to verify current time":
   the local machine couldn't reach the time service.
 

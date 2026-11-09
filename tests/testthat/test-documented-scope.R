@@ -217,3 +217,17 @@ test_that("help pages use only characters the PDF manual can typeset", {
   }))
   expect_identical(untypeset, NULL)
 })
+
+# roxygen passes raw HTML in markdown through to the HTML help inside
+# \if{html}{\out{...}}, so a lone "<fieldset>" opens an element that never
+# closes. CRAN's HTML validation flagged two such pages (win-builder,
+# 2026-11-08). Write tags as code, in backticks.
+test_that("help pages contain no raw HTML", {
+  root <- contract_project_root()
+  rd_files <- list.files(file.path(root, "man"), pattern = "[.]Rd$")
+  expect_gt(length(rd_files), 100)
+  raw_html <- Filter(function(file) {
+    grepl("\\out{<", contract_read(file.path("man", file), root), fixed = TRUE)
+  }, rd_files)
+  expect_identical(raw_html, character())
+})

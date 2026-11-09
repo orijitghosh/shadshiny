@@ -31,14 +31,19 @@ contract_find_root <- function(start) {
   stop("could not locate shadshiny source root from: ", start, call. = FALSE)
 }
 
-contract_project_root <- function() {
+contract_project_root <- function(starts = unique(c(testthat::test_path(), getwd()))) {
   explicit <- Sys.getenv("SHADSHINY_SOURCE_ROOT", unset = "")
   if (nzchar(explicit)) return(contract_find_root(explicit))
 
-  starts <- unique(c(testthat::test_path(), getwd()))
   for (start in starts) {
     root <- tryCatch(contract_find_root(start), error = function(error) NULL)
     if (!is.null(root)) return(root)
+  }
+  # Some checks, CRAN's Windows one among them, run the tests with no copy of
+  # the sources nearby. The tests that read source files skip there. With
+  # NOT_CRAN=true a missing tree stays an error, so it cannot pass unnoticed.
+  if (!identical(Sys.getenv("NOT_CRAN"), "true")) {
+    testthat::skip("the shadshiny source tree is not available")
   }
   stop("could not locate shadshiny source root", call. = FALSE)
 }

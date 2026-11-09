@@ -18,7 +18,7 @@ shad_field_group(
 \item{class}{Extra CSS classes.}
 }
 \value{
-A \if{html}{\out{<div>}} field-group tag.
+A \verb{<div>} field-group tag.
 }
 \description{
 Experimental.

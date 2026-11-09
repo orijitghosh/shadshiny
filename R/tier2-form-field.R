@@ -72,7 +72,7 @@ shad_form_field <- function(..., label = NULL, description = NULL, error = NULL,
 #' @param variant "legend" (default) or "label" for the legend's visual
 #'   treatment.
 #' @param class Extra CSS classes.
-#' @returns A native <fieldset> tag.
+#' @returns A native `<fieldset>` tag.
 #' @family shadshiny forms
 #' @examples
 #' shad_fieldset(
@@ -128,7 +128,7 @@ shad_fieldset <- function(legend, ..., description = NULL,
 #' @param ... Child fields and/or named HTML attributes.
 #' @param orientation "vertical" (default), "horizontal", or "responsive".
 #' @param class Extra CSS classes.
-#' @returns A <div> field-group tag.
+#' @returns A `<div>` field-group tag.
 #' @family shadshiny forms
 #' @examples
 #' shad_field_group(

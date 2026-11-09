@@ -99,6 +99,28 @@ test_that("project root discovery honors an explicit source root", {
   )
 })
 
+# CRAN's Windows check (win-builder, 2026-11-08) runs the tests with no copy of
+# the package sources nearby, so the tests that read them have nothing to read.
+# They skip there. With NOT_CRAN=true a missing tree is still an error, so a
+# developer or CI run cannot skip them without saying so.
+test_that("project root discovery skips off-tree on CRAN and fails elsewhere", {
+  off_tree <- tempfile("contract-off-tree-")
+  dir.create(off_tree)
+  on.exit(unlink(off_tree, recursive = TRUE), add = TRUE)
+  skip_if(
+    !is.null(tryCatch(contract_find_root(off_tree), error = function(e) NULL)),
+    "the temporary directory sits inside a shadshiny source tree"
+  )
+  withr::local_envvar(SHADSHINY_SOURCE_ROOT = NA, NOT_CRAN = NA)
+  lenient <- tryCatch(contract_project_root(starts = off_tree), condition = identity)
+  expect_s3_class(lenient, "skip")
+
+  withr::local_envvar(NOT_CRAN = "true")
+  strict <- tryCatch(contract_project_root(starts = off_tree), condition = identity)
+  expect_s3_class(strict, "error")
+  expect_match(conditionMessage(strict), "could not locate shadshiny source root")
+})
+
 test_that("runtime discovery appends a unique shared menu provider", {
   root <- tempfile("contract-root-")
   components <- file.path(root, "inst", "assets", "components")
