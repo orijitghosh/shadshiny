@@ -41,9 +41,7 @@ shad_fieldset(
 
 ## Value
 
-A native
-
-tag.
+A native `<fieldset>` tag.
 
 ## See also
 

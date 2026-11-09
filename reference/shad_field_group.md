@@ -29,9 +29,7 @@ shad_field_group(
 
 ## Value
 
-A
-
-field-group tag.
+A `<div>` field-group tag.
 
 ## See also
 
@@ -66,9 +64,3 @@ shad_field_group(
 #>   </div>
 #> </div>
 ```
-
-## On this page
-
-Developed by Arijit Ghosh.
-
-Site built with [pkgdown](https://pkgdown.r-lib.org/) 2.2.1.
