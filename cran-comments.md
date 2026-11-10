@@ -11,12 +11,14 @@
 
 * win-builder: R-devel (2026-11-07 r90850 ucrt), Windows Server 2022 x64.
   The note above, and nothing else.
+* macOS builder: R 4.6.1 Patched (2026-07-27 r90311), macOS Tahoe 26.6,
+  arm64. Status OK, PDF manual included.
 * GitHub Actions: R release on macOS, Windows and Ubuntu; R-devel, R
   oldrel-1 and R 4.1 on Ubuntu. All pass.
 * Local: Windows 11 Pro, R 4.4.3, `R CMD check --as-cran --no-manual`. The
   same note, plus "unable to verify current time" because that machine
   couldn't reach the time service. It has no LaTeX, so the PDF manual was
-  built on win-builder only.
+  built on win-builder and the macOS builder only.
 
 ## Notes for the reviewer
 
