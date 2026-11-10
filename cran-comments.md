@@ -6,11 +6,14 @@
   The note also lists possibly misspelled words in DESCRIPTION:
   reimplementation, sparklines, themeable, theming and validator. They are
   spelled correctly; each is a standard technical term.
+  On the R-release run it also listed https://lucide.dev as possibly
+  invalid ("SSL connect error ... Connection was reset"). The URL is valid:
+  it returns 200, and the R-devel run checked it without complaint.
 
 ## Test environments
 
-* win-builder: R-devel (2026-11-07 r90850 ucrt), Windows Server 2022 x64.
-  The note above, and nothing else.
+* win-builder: R-devel (2026-11-07 r90850 ucrt) and R 4.6.2, Windows
+  Server 2022 x64. The note above, and nothing else.
 * macOS builder: R 4.6.1 Patched (2026-07-27 r90311), macOS Tahoe 26.6,
   arm64. Status OK, PDF manual included.
 * GitHub Actions: R release on macOS, Windows and Ubuntu; R-devel, R
