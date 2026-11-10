@@ -1,18 +1,22 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 1 note
 
 * This is a new submission.
-  On win-builder this note also lists possibly misspelled words in
-  DESCRIPTION: reimplementation, sparklines, themeable, theming and
-  validator. They are spelled correctly; each is a standard technical term.
-* "checking for future file timestamps ... unable to verify current time":
-  the local machine couldn't reach the time service.
+  The note also lists possibly misspelled words in DESCRIPTION:
+  reimplementation, sparklines, themeable, theming and validator. They are
+  spelled correctly; each is a standard technical term.
 
 ## Test environments
 
-* Local: Windows 11 Pro, R 4.4.3, `R CMD check --as-cran --no-manual` (no
-  LaTeX on that machine, so the PDF manual was not built there).
+* win-builder: R-devel (2026-11-07 r90850 ucrt), Windows Server 2022 x64.
+  The note above, and nothing else.
+* GitHub Actions: R release on macOS, Windows and Ubuntu; R-devel, R
+  oldrel-1 and R 4.1 on Ubuntu. All pass.
+* Local: Windows 11 Pro, R 4.4.3, `R CMD check --as-cran --no-manual`. The
+  same note, plus "unable to verify current time" because that machine
+  couldn't reach the time service. It has no LaTeX, so the PDF manual was
+  built on win-builder only.
 
 ## Notes for the reviewer
 
